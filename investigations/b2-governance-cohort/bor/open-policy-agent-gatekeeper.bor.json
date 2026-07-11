@@ -1,0 +1,215 @@
+{
+    "id": "bor-b2-open-policy-agent-gatekeeper",
+    "object_type": "BaselineObservationRecord",
+    "schema_version": "canonical-bor-v1",
+    "protocol_version": "protocol-v1",
+    "investigation_id": "b2-governance-cohort",
+    "cohort_member": {
+        "name": "Open Policy Agent + Gatekeeper",
+        "selection_basis": {
+            "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+            "registration_field": "cohort_rule.frozen_cohort[0]"
+        }
+    },
+    "constraints": {
+        "record_type": "baseline_observations_only",
+        "no_measurements_derived": true,
+        "no_classification_assigned": true,
+        "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+        "candidate_invariant_wording_changed": false,
+        "protocol_modified": false,
+        "i1_i5_registration_modified": false
+    },
+    "retrieval": {
+        "retrieved_at_utc": "2026-07-11T00:00:00Z",
+        "retrieval_method": "web documentation review"
+    },
+    "admitted_evidence_rule": {
+        "registration_id": "I2",
+        "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+    },
+    "evidence_sources": [
+        {
+            "source_id": "EV-OPA-GK-001",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "title": "Gatekeeper documentation: Introduction",
+            "publisher": "Open Policy Agent Gatekeeper project",
+            "version_or_channel": "v3.22.x documentation",
+            "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/",
+            "retrieved_at_utc": "2026-07-11T00:00:00Z"
+        },
+        {
+            "source_id": "EV-OPA-GK-002",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "title": "Gatekeeper documentation: How to use Gatekeeper",
+            "publisher": "Open Policy Agent Gatekeeper project",
+            "version_or_channel": "v3.22.x documentation",
+            "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/howto/",
+            "retrieved_at_utc": "2026-07-11T00:00:00Z"
+        },
+        {
+            "source_id": "EV-OPA-GK-003",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "title": "Gatekeeper documentation: Constraint Templates",
+            "publisher": "Open Policy Agent Gatekeeper project",
+            "version_or_channel": "v3.22.x documentation",
+            "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/constrainttemplates/",
+            "retrieved_at_utc": "2026-07-11T00:00:00Z"
+        },
+        {
+            "source_id": "EV-OPA-GK-004",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "title": "Gatekeeper documentation: Enforcement points in Gatekeeper",
+            "publisher": "Open Policy Agent Gatekeeper project",
+            "version_or_channel": "v3.22.x documentation",
+            "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/enforcement-points/",
+            "retrieved_at_utc": "2026-07-11T00:00:00Z"
+        }
+    ],
+    "observations": [
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-001",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-001",
+            "source_location": "Introduction > Goals, v3.22.x documentation",
+            "observation_text": "Gatekeeper is described as a validating and mutating webhook that enforces CRD-based policies executed by Open Policy Agent; Kubernetes admission controller webhooks execute whenever a resource is created, updated, or deleted.",
+            "rationale": "Records the documented system role and admission-context behavior without deriving a measurement or classification."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-002",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-001",
+            "source_location": "Introduction > Goals, v3.22.x documentation",
+            "observation_text": "Gatekeeper documentation states that audit functionality lets administrators see what resources are currently violating a given policy.",
+            "rationale": "Records a documented non-admission observation pathway without inferring architectural conclusions."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-003",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-001",
+            "source_location": "Introduction > Validation and mutation, v3.22.x documentation",
+            "observation_text": "Validation and mutation are configured with different policy resources and have different effects; validation uses ConstraintTemplate and Constraint resources, while mutation uses AssignMetadata, Assign, ModifySet, and AssignImage mutator resources.",
+            "rationale": "Records documented policy resource categories while avoiding component scoring."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-004",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-001",
+            "source_location": "Introduction > Validation and mutation, v3.22.x documentation",
+            "observation_text": "Validation evaluates resources and can deny, warn, dry-run, audit, or report violations without changing the resource.",
+            "rationale": "Records documented validation effects only."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-005",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-001",
+            "source_location": "Introduction > Validation and mutation, v3.22.x documentation",
+            "observation_text": "Mutation changes matching resources during admission before validation evaluates the final object.",
+            "rationale": "Records documented admission-time mutation sequencing without deriving measurements."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-006",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > How to use Gatekeeper, v3.22.x documentation",
+            "observation_text": "Gatekeeper uses the OPA Constraint Framework to describe and enforce policy.",
+            "rationale": "Records the documented policy framework reference for the system."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-007",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > How to use Gatekeeper, v3.22.x documentation",
+            "observation_text": "Validation policies use ConstraintTemplate and Constraint resources to evaluate Kubernetes objects; during admission, validation can deny, warn, or dry-run requests, and in audit mode it evaluates resources and reports violations.",
+            "rationale": "Records documented validation-policy inputs and outcomes without assigning invariant components."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-008",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > Constraint Templates, v3.22.x documentation",
+            "observation_text": "A ConstraintTemplate describes both the Rego that enforces the constraint and the schema of the constraint; the schema lets an administrator tune constraint behavior similarly to arguments to a function.",
+            "rationale": "Records documented contents and purpose of ConstraintTemplates only."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-009",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > Constraints, v3.22.x documentation",
+            "observation_text": "Constraints inform Gatekeeper that an administrator wants a ConstraintTemplate enforced and how it should be enforced.",
+            "rationale": "Records the documented relationship between constraints and templates without deriving architecture."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-010",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > The match field, v3.22.x documentation",
+            "observation_text": "The match field defines which resources a constraint applies to, including kinds, scope, namespaces, excludedNamespaces, labelSelector, namespaceSelector, and name matchers.",
+            "rationale": "Records documented constraint scoping mechanics."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-011",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > The parameters field, v3.22.x documentation",
+            "observation_text": "The parameters field describes the intent of a constraint and is referenced as input.parameters by the ConstraintTemplate's Rego source code; Gatekeeper populates input.parameters with values from the Constraint parameters field.",
+            "rationale": "Records documented parameter flow without converting it into a measurement."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-012",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-002",
+            "source_location": "How to use Gatekeeper > The enforcementAction field, v3.22.x documentation",
+            "observation_text": "The enforcementAction field defines the action for handling Constraint violations; the default is deny, and other supported actions include dryrun and warn.",
+            "rationale": "Records documented violation-handling configuration."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-013",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-003",
+            "source_location": "Constraint Templates > Constraint Templates, v3.22.x documentation",
+            "observation_text": "ConstraintTemplates define a way to validate Kubernetes objects in Gatekeeper's Kubernetes admission controller and are part of Gatekeeper's validation policy model; mutation policies use separate mutator resources.",
+            "rationale": "Records documented validation-model placement of ConstraintTemplates."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-014",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-003",
+            "source_location": "Constraint Templates > Constraint Templates, v3.22.x documentation",
+            "observation_text": "ConstraintTemplates include policy code in spec.targets[].rego or spec.targets[].code[] that defines policy violation logic, plus the schema of the accompanying Constraint object that instantiates the ConstraintTemplate.",
+            "rationale": "Records documented fields of ConstraintTemplates."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-015",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-003",
+            "source_location": "Constraint Templates > Built-in variables across all engines > Rego variables, v3.22.x documentation",
+            "observation_text": "Documented Rego variables include input.review for the request object under review, input.parameters for constraint parameters, data.lib for helper functions, and data.inventory for synced cluster resources used by policies.",
+            "rationale": "Records documented policy evaluation inputs and helper namespaces."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-016",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-003",
+            "source_location": "Constraint Templates > Field Precedence in ConstraintTemplate, v3.22.x documentation",
+            "observation_text": "ConstraintTemplates support multiple policy-code definition methods with precedence rules: legacy spec.targets[].rego takes precedence over Rego engines in spec.targets[].code[], and when multiple engines are defined in code, K8sNativeValidation (CEL) has higher priority than Rego with no fallback mechanism.",
+            "rationale": "Records documented field precedence without evaluating consequences."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-017",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-004",
+            "source_location": "Enforcement points in Gatekeeper > Understanding Enforcement Points, v3.22.x documentation",
+            "observation_text": "Gatekeeper enforcement points include validation.gatekeeper.sh for the validating webhook, gator.gatekeeper.sh for shift-left use through gator-cli, audit.gatekeeper.sh for auditing on-cluster resources and reporting violations, and vap.k8s.io for Kubernetes Validating Admission Policy.",
+            "rationale": "Records the documented enforcement-point names and contexts."
+        },
+        {
+            "observation_id": "BOR-B2-OPA-GK-OBS-018",
+            "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+            "source_reference": "EV-OPA-GK-004",
+            "source_location": "Enforcement points in Gatekeeper > How to use different enforcement points in constraint, v3.22.x documentation",
+            "observation_text": "By default, a constraint is enforced at all enforcement points with the common action in spec.enforcementAction; specific enforcement points can use different actions through enforcementAction: scoped and spec.scopedEnforcementActions.",
+            "rationale": "Records documented enforcement-point configuration behavior."
+        }
+    ]
+}

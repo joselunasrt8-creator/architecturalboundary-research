@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/architectural-boundary-research/schemas/der.schema.json",
+  "title": "der schema",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "protocol_version": { "type": "string" },
+    "investigation_id": { "type": "string" }
+  }
+}

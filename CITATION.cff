@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+title: Architectural Boundary Research
+message: If you use this repository, please cite the repository and associated papers.
+authors:
+  - family-names: Luna
+    given-names: Jose
+license: MIT

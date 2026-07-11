@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate repository topology and syntax
+        run: python3 scripts/validate.py
+      - name: Check registries
+        run: python3 scripts/check_registry.py
+      - name: Check whitespace
+        run: git diff --check

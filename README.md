@@ -21,15 +21,19 @@ Protocol
   ↓
 Investigation
   ↓
-Evidence
+BOR
+  ↓
+SRF
+  ↓
+DER
+  ↓
+MSR
   ↓
 Comparative Dataset
   ↓
 Analysis
   ↓
 Retained Classification
-  ↓
-Publication
 ```
 
 ## Repository Organization
@@ -37,7 +41,7 @@ Publication
 | Path | Purpose |
 | --- | --- |
 | `protocol/` | Versioned definitions of the investigation protocol, protocol figures, schemas, templates, and changelog. |
-| `investigations/` | Preregistered executions of the protocol. Each investigation follows the same registration → BOR → SRF → DER → MSR → dataset → analysis → artifacts layout. |
+| `investigations/` | Preregistered executions of the protocol. Each investigation follows the same preregistration → literature → BOR → SRF → DER → MSR → dataset → analysis → artifacts layout. |
 | `evidence/` | Cross-investigation evidence stores for observations, measurements, classifications, and traceability material. |
 | `datasets/` | Canonical, comparative, and published datasets derived from investigations. |
 | `schemas/` | Repository-level JSON schemas for protocol objects and investigation metadata. |
@@ -51,15 +55,15 @@ Publication
 
 ## Current Content Map
 
-- The B2 LaTeX manuscript was moved from the repository root to `papers/b2/` without rewriting manuscript content.
+- The B2 LaTeX manuscript was moved from the repository root to `papers/paper-b2/` without rewriting manuscript content.
 - `investigations/b1-three-system-pilot/` provides the lifecycle layout for the B1 pilot investigation.
 - `investigations/b2-governance-cohort/` provides the lifecycle anchor for the B2 governance cohort.
-- `investigations/templates/` is the reusable scaffold for future investigations.
+- `investigations/template/` is the reusable scaffold for future investigations.
 
 ## Adding a Future Investigation
 
-1. Copy `investigations/templates/` to `investigations/<investigation-id>/`.
-2. Complete `registration/README.md` before execution.
+1. Copy `investigations/template/` to `investigations/<investigation-id>/`.
+2. Complete `preregistration.md` before execution.
 3. Record observations in `bor/`, surfaces in `srf/`, derived evidence in `der/`, and measurements in `msr/`.
 4. Build investigation-local datasets in `dataset/` and analysis outputs in `analysis/`.
 5. Place figures and publication artifacts in `figures/` and `artifacts/`.

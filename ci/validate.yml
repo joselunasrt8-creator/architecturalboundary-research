@@ -1,0 +1,3 @@
+# Reference pointer only. The executable GitHub Actions workflow is:
+# .github/workflows/validate.yml
+canonical_workflow: ../.github/workflows/validate.yml

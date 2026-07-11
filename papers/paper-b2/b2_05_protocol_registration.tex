@@ -1,6 +1,6 @@
 \section{Protocol Registration}
 \label{sec:protocol-registration}
-This section records the Protocol v1.0 registration fields for the Paper~B2 execution. Protocol v1.0 defines the required fields; Paper~B2 fills them to support replication and to bound analytic discretion.
+This section records the Protocol v1.0 registration fields for the Paper~B2 execution. Protocol v1.0 defines the required fields; Paper~B2 fills them to support replication and to bound analytic discretion. The canonical machine-readable registration object is \texttt{investigations/b2-governance-cohort/preregistration/i1\_i5\_registration.json}.
 
 \subsection{Protocol version}
 \textbf{Protocol:} v1.0 (frozen; no modifications).
@@ -132,13 +132,13 @@ Every BOR must record:
   \item commit/version where applicable
 \end{itemize}
 
-\textbf{TODO(Cohort versions):} Populate BORs with the specific versions/releases (or documentation snapshots) admitted for each frozen system, per the Version-lock policy.
+\textbf{UNRESOLVED(Cohort versions):} Specific versions/releases, documentation snapshots, retrieval dates, source URLs, commits, and hashes are not populated in the canonical registration material. They must be supplied by BOR evidence records under the Version-lock policy, not invented in the registration object.
 
 
 \subsection{Analyst degrees of freedom}
 Protocol v1.0 may require discretionary choices (e.g., which artifacts best represent a system interface, or how to map heterogeneous documentation into a common derived-object schema). Paper~B2 constrains these degrees of freedom by pre-registering admissible evidence types, recording selection decisions in BOR entries, and requiring trace pointers from each derived object and measurement back to its supporting baseline observations.
 
-\textbf{TODO(DoF list):} Enumerate the concrete discretionary choices anticipated for this cohort and the rule used to resolve each choice.
+\textbf{UNRESOLVED(DoF list):} The canonical registration material states the general rule for constraining analyst discretion but does not enumerate cohort-specific discretionary choices. No cohort-specific choices are invented here.
 
 \subsection{Planned outputs}
 Protocol v1.0 outputs for this execution are reported in Sections~\ref{sec:bor}--\ref{sec:comparative-dataset}.

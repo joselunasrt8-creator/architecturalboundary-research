@@ -1,0 +1,175 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-open-policy-agent-gatekeeper",
+  "cohort_member": {
+    "name": "Open Policy Agent + Gatekeeper"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-open-policy-agent-gatekeeper",
+    "path": "investigations/b2-governance-cohort/bor/open-policy-agent-gatekeeper.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-execution-entry-points-admission-webhook",
+        "label": "admission webhook",
+        "description": "Gatekeeper validating/mutating webhook executes on create, update, or delete",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-001"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-execution-entry-points-audit",
+        "label": "audit",
+        "description": "Audit enforcement point evaluates on-cluster resources and reports violations",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-002",
+          "BOR-B2-OPA-GK-OBS-017"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-authorization-surfaces-constraint-template",
+        "label": "constraint template",
+        "description": "ConstraintTemplate contains policy code and schema",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-008",
+          "BOR-B2-OPA-GK-OBS-014"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-authorization-surfaces-constraint",
+        "label": "constraint",
+        "description": "Constraint instantiates a template and provides match/parameters/enforcement action",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-009",
+          "BOR-B2-OPA-GK-OBS-010",
+          "BOR-B2-OPA-GK-OBS-011",
+          "BOR-B2-OPA-GK-OBS-012"
+        ]
+      }
+    ],
+    "validation_surfaces": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-validation-surfaces-validation-policy",
+        "label": "validation policy",
+        "description": "Validation uses ConstraintTemplate and Constraint resources and can deny, warn, dry-run, audit, or report",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-003",
+          "BOR-B2-OPA-GK-OBS-004",
+          "BOR-B2-OPA-GK-OBS-007"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-validation-surfaces-constraint-schema",
+        "label": "constraint schema",
+        "description": "ConstraintTemplate schema shapes/tunes Constraint behavior",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-008"
+        ]
+      }
+    ],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-policy-evaluation-surfaces-opa-constraint-framework",
+        "label": "opa constraint framework",
+        "description": "Gatekeeper uses OPA Constraint Framework to describe and enforce policy",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-006"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-policy-evaluation-surfaces-policy-code",
+        "label": "policy code",
+        "description": "ConstraintTemplate policy code defines violation logic",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-014",
+          "BOR-B2-OPA-GK-OBS-015",
+          "BOR-B2-OPA-GK-OBS-016"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-protected-resources-kubernetes-resource",
+        "label": "kubernetes resource",
+        "description": "Kubernetes resources matched by constraints during admission or audit",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-001",
+          "BOR-B2-OPA-GK-OBS-010",
+          "BOR-B2-OPA-GK-OBS-017"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-execution-boundaries-admission-boundary",
+        "label": "admission boundary",
+        "description": "Mutation changes matching resources during admission before validation evaluates final object",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-005"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-execution-boundaries-enforcement-point-boundary",
+        "label": "enforcement point boundary",
+        "description": "Documented enforcement points include validation, gator, audit, and Kubernetes Validating Admission Policy",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-017",
+          "BOR-B2-OPA-GK-OBS-018"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-observable-execution-flow-match",
+        "label": "match",
+        "description": "Constraint match selects resources",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-010"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-observable-execution-flow-mutate",
+        "label": "mutate",
+        "description": "Mutation can change matching resources before validation",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-005"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-observable-execution-flow-validate",
+        "label": "validate",
+        "description": "Validation evaluates resources and can deny, warn, dry-run, audit, or report",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-004",
+          "BOR-B2-OPA-GK-OBS-007"
+        ]
+      },
+      {
+        "id": "srf-b2-open-policy-agent-gatekeeper-observable-execution-flow-enforce",
+        "label": "enforce",
+        "description": "Enforcement action controls handling of violations",
+        "observation_refs": [
+          "BOR-B2-OPA-GK-OBS-012",
+          "BOR-B2-OPA-GK-OBS-018"
+        ]
+      }
+    ]
+  }
+}

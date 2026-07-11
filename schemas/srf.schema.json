@@ -3,10 +3,108 @@
   "$id": "https://example.org/architectural-boundary-research/schemas/srf.schema.json",
   "title": "srf schema",
   "type": "object",
-  "additionalProperties": true,
+  "additionalProperties": false,
+  "required": [
+    "object_type",
+    "schema_version",
+    "protocol_version",
+    "investigation_id",
+    "id",
+    "cohort_member",
+    "bor_reference",
+    "constraints",
+    "surfaces"
+  ],
   "properties": {
-    "id": { "type": "string" },
+    "object_type": { "const": "ExecutionSurfaceRegistry" },
+    "schema_version": { "const": "canonical-srf-v1" },
     "protocol_version": { "type": "string" },
-    "investigation_id": { "type": "string" }
+    "investigation_id": { "type": "string" },
+    "id": { "type": "string", "pattern": "^srf-b2-[a-z0-9-]+$" },
+    "cohort_member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": { "name": { "type": "string", "minLength": 1 } }
+    },
+    "bor_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bor_id", "path"],
+      "properties": {
+        "bor_id": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "pattern": "^investigations/b2-governance-cohort/bor/[a-z0-9-]+\\.bor\\.json$" }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "bor_preserved",
+        "no_derivation_performed",
+        "no_measurements_derived",
+        "no_classification_assigned",
+        "no_cross_system_comparison",
+        "candidate_invariant_wording_changed",
+        "protocol_modified",
+        "i1_i5_registration_modified"
+      ],
+      "properties": {
+        "record_type": { "const": "execution_surfaces_only" },
+        "bor_preserved": { "const": true },
+        "no_derivation_performed": { "const": true },
+        "no_measurements_derived": { "const": true },
+        "no_classification_assigned": { "const": true },
+        "no_cross_system_comparison": { "const": true },
+        "candidate_invariant_wording_changed": { "const": false },
+        "protocol_modified": { "const": false },
+        "i1_i5_registration_modified": { "const": false }
+      }
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_entry_points",
+        "authorization_surfaces",
+        "validation_surfaces",
+        "policy_evaluation_surfaces",
+        "protected_resources",
+        "execution_boundaries",
+        "observable_execution_flow"
+      ],
+      "properties": {
+        "execution_entry_points": { "$ref": "#/$defs/surface_list" },
+        "authorization_surfaces": { "$ref": "#/$defs/surface_list" },
+        "validation_surfaces": { "$ref": "#/$defs/surface_list" },
+        "policy_evaluation_surfaces": { "$ref": "#/$defs/surface_list" },
+        "protected_resources": { "$ref": "#/$defs/surface_list" },
+        "execution_boundaries": { "$ref": "#/$defs/surface_list" },
+        "observable_execution_flow": { "$ref": "#/$defs/surface_list" }
+      }
+    }
+  },
+  "$defs": {
+    "surface_list": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/surface" }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "description", "observation_refs"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "observation_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    }
   }
 }

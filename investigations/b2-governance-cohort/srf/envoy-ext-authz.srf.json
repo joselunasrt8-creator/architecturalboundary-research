@@ -1,0 +1,106 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-envoy-ext-authz",
+  "cohort_member": {
+    "name": "Envoy ext_authz"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-envoy-ext-authz",
+    "path": "investigations/b2-governance-cohort/bor/envoy-ext-authz.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-envoy-ext-authz-execution-entry-points-incoming-http-request",
+        "label": "incoming http request",
+        "description": "Incoming HTTP request handled by Envoy external authorization filter",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-envoy-ext-authz-authorization-surfaces-external-service",
+        "label": "external service",
+        "description": "External gRPC or HTTP authorization service",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-envoy-ext-authz-policy-evaluation-surfaces-authorization-service-call",
+        "label": "authorization service call",
+        "description": "Filter calls external service to determine authorization",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-envoy-ext-authz-protected-resources-upstream-request",
+        "label": "upstream request",
+        "description": "Request path to upstream/downstream affected by authorization result and metadata propagation",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-envoy-ext-authz-execution-boundaries-envoy-to-external-service",
+        "label": "envoy to external service",
+        "description": "gRPC or HTTP service communication boundary for external authorization",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-envoy-ext-authz-observable-execution-flow-call",
+        "label": "call",
+        "description": "Filter calls external gRPC or HTTP service",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001"
+        ]
+      },
+      {
+        "id": "srf-b2-envoy-ext-authz-observable-execution-flow-deny",
+        "label": "deny",
+        "description": "Unauthorized request returns 403 Forbidden",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002"
+        ]
+      },
+      {
+        "id": "srf-b2-envoy-ext-authz-observable-execution-flow-metadata",
+        "label": "metadata",
+        "description": "Metadata may be sent to and propagated from the authorization service",
+        "observation_refs": [
+          "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003"
+        ]
+      }
+    ]
+  }
+}

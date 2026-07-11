@@ -1,0 +1,99 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-openfga",
+  "cohort_member": {
+    "name": "OpenFGA"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-openfga",
+    "path": "investigations/b2-governance-cohort/bor/openfga.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-openfga-execution-entry-points-write-authorization-model",
+        "label": "write authorization model",
+        "description": "Writing an authorization model creates a new version",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-004"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-openfga-authorization-surfaces-authorization-model",
+        "label": "authorization model",
+        "description": "Authorization model combines type definitions to define permission model",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-001"
+        ]
+      },
+      {
+        "id": "srf-b2-openfga-authorization-surfaces-configuration-language",
+        "label": "configuration language",
+        "description": "Configuration Language informs the API about object types and relationships",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-002",
+          "BOR-B2-OPENFGA-OBS-003"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [],
+    "protected_resources": [
+      {
+        "id": "srf-b2-openfga-protected-resources-object-type",
+        "label": "object type",
+        "description": "Object types and relations described by authorization model/configuration language",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-002",
+          "BOR-B2-OPENFGA-OBS-003"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-openfga-execution-boundaries-model-version-boundary",
+        "label": "model version boundary",
+        "description": "Authorization models are immutable after creation; writing creates a new version",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-004"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-openfga-observable-execution-flow-define",
+        "label": "define",
+        "description": "Authorization model defines object types, relationships, and relation conditions",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-001",
+          "BOR-B2-OPENFGA-OBS-002",
+          "BOR-B2-OPENFGA-OBS-003"
+        ]
+      },
+      {
+        "id": "srf-b2-openfga-observable-execution-flow-version",
+        "label": "version",
+        "description": "Writing model creates a new immutable version",
+        "observation_refs": [
+          "BOR-B2-OPENFGA-OBS-004"
+        ]
+      }
+    ]
+  }
+}

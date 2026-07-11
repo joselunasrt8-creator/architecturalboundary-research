@@ -1,0 +1,107 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-google-zanzibar",
+  "cohort_member": {
+    "name": "Google Zanzibar"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-google-zanzibar",
+    "path": "investigations/b2-governance-cohort/bor/google-zanzibar.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-google-zanzibar-execution-entry-points-check-request",
+        "label": "check request",
+        "description": "Check request evaluates whether a user has a relation to an object",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-005"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-google-zanzibar-authorization-surfaces-relation-tuples",
+        "label": "relation tuples",
+        "description": "Relation tuples identify object, relation, and user fields",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-003"
+        ]
+      },
+      {
+        "id": "srf-b2-google-zanzibar-authorization-surfaces-namespace-config",
+        "label": "namespace config",
+        "description": "Namespace configuration files define object types and relations",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-004"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-google-zanzibar-policy-evaluation-surfaces-acl-evaluation",
+        "label": "acl evaluation",
+        "description": "Global system for storing and evaluating access control lists",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-001"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-google-zanzibar-protected-resources-object",
+        "label": "object",
+        "description": "Objects named in relation tuples and Check requests",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-003",
+          "BOR-B2-ZANZIBAR-OBS-005"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-google-zanzibar-execution-boundaries-client-service-policy-model",
+        "label": "client service policy model",
+        "description": "Uniform data model and configuration language for Google client-service access policies",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-002"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-google-zanzibar-observable-execution-flow-store-model",
+        "label": "store model",
+        "description": "Access-control data is represented through tuples/configuration",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-002",
+          "BOR-B2-ZANZIBAR-OBS-003",
+          "BOR-B2-ZANZIBAR-OBS-004"
+        ]
+      },
+      {
+        "id": "srf-b2-google-zanzibar-observable-execution-flow-check",
+        "label": "check",
+        "description": "Check request evaluates user relation to object",
+        "observation_refs": [
+          "BOR-B2-ZANZIBAR-OBS-005"
+        ]
+      }
+    ]
+  }
+}

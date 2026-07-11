@@ -14,7 +14,7 @@ REQUIRED_TOP_LEVEL = [
 ]
 REQUIRED_PATHS = [
     "README.md", "ROADMAP.md", "LICENSE", "CONTRIBUTING.md", "CITATION.cff", "REPRODUCIBILITY.md", "MOVES.md",
-    "ci/README.md", "ci/validate.yml",
+    "ci/README.md", "ci/validate.yml", ".github/workflows/validate.yml",
     "docs/README.md", "docs/methodology.md", "docs/research_pipeline.md", "docs/glossary.md", "docs/figures/.gitkeep",
     "protocol/README.md", "protocol/changelog.md", "protocol/protocol-v1/README.md", "protocol/protocol-v1/protocol.md",
     "protocol/protocol-v1/terminology.md", "protocol/protocol-v1/decision_rules.md",

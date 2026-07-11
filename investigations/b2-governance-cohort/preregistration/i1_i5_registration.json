@@ -1,0 +1,126 @@
+{
+  "id": "b2-i1-i5-registration",
+  "investigation_id": "b2-governance-cohort",
+  "protocol_version": "protocol-v1",
+  "registration_status": "registered_with_unresolved_non_evidence_fields",
+  "candidate_invariant": {
+    "id": "I1",
+    "name": "explicit RLE boundary",
+    "claim_form": "For each system s in the frozen cohort, the system exhibits an explicit Reasoning->Legitimacy->Execution boundary.",
+    "scope": "cohort-bounded; no universal invariant claim",
+    "per_system_operational_definition": [
+      {
+        "component": "m_R",
+        "condition": "documented, named reasoning artifact type whose role is to express or compute authorization-relevant reasoning and can be referenced independently of a particular execution"
+      },
+      {
+        "component": "m_L",
+        "condition": "documented decision point that evaluates a request or proposed state change against reasoning artifacts and yields a legitimacy outcome"
+      },
+      {
+        "component": "m_E",
+        "condition": "documented enforcement mechanism that uses the legitimacy outcome to permit, deny, or otherwise gate the real-world action"
+      },
+      {
+        "component": "m_RL",
+        "condition": "documented separable interface or equivalent contract between reasoning artifacts and legitimacy evaluation"
+      },
+      {
+        "component": "m_LE",
+        "condition": "documented separable interface or equivalent contract between legitimacy outcome and execution or enforcement"
+      }
+    ]
+  },
+  "admitted_evidence_rule": {
+    "id": "I2",
+    "admitted_evidence_types_ordered": [
+      "Normative specifications (RFCs, formal specs, language specifications)",
+      "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "Official API references / configuration schema references",
+      "Official upstream source code only to resolve ambiguities in admitted documentation/specifications and only when a stable tag or commit is recorded"
+    ],
+    "non_admitted_evidence": [
+      "Blog posts",
+      "Marketing pages without architectural content",
+      "Third-party tutorials",
+      "Undocumented behavior including experimental flags"
+    ],
+    "inclusion_rule": "A system/feature claim is admissible only if supported by at least one admitted evidence item recorded in BORs with version and retrieval metadata."
+  },
+  "cohort_rule": {
+    "id": "I3",
+    "tolerance": "none",
+    "aggregation": "all-within-cohort",
+    "support_condition": "The cohort supports the candidate invariant only if every system in the frozen cohort is classified as supports under I5.",
+    "frozen_cohort": [
+      "Open Policy Agent + Gatekeeper",
+      "Kubernetes RBAC / Admission",
+      "AWS IAM",
+      "HashiCorp Vault",
+      "Envoy ext_authz",
+      "Istio AuthorizationPolicy",
+      "OpenFGA",
+      "Cedar / Amazon Verified Permissions",
+      "Google Zanzibar"
+    ],
+    "inclusion_criteria": [
+      "Official documentation available",
+      "Stable public architecture",
+      "Explicit authorization or governance workflow",
+      "Primary documentation accessible",
+      "Independent implementation"
+    ],
+    "exclusion_criteria": [
+      "Experimental projects",
+      "Incomplete documentation",
+      "Vendor marketing without architecture",
+      "Duplicate implementations of already represented architectures"
+    ]
+  },
+  "measurement_vector": {
+    "id": "I4",
+    "unit_of_analysis": "system s in the frozen cohort",
+    "components": [
+      { "name": "m_R", "type": "boolean_or_missing", "meaning": "explicit reasoning artifact present" },
+      { "name": "m_L", "type": "boolean_or_missing", "meaning": "explicit legitimacy decision point present" },
+      { "name": "m_E", "type": "boolean_or_missing", "meaning": "explicit execution/enforcement mechanism present" },
+      { "name": "m_RL", "type": "boolean_or_missing", "meaning": "explicit documented interface/contract between reasoning artifacts and legitimacy evaluation" },
+      { "name": "m_LE", "type": "boolean_or_missing", "meaning": "explicit documented interface/contract between legitimacy outcome and execution/enforcement" }
+    ],
+    "computation_constraint": "Each measurement must be computed solely from DER entries whose trace resolves to admitted BOR evidence under I2; unavailable measurements are recorded as missing, not coerced."
+  },
+  "deterministic_decision_rule": {
+    "id": "I5",
+    "per_system_classification": [
+      { "outcome": "indeterminate", "condition": "any of m_R, m_L, m_E, m_RL, or m_LE is missing" },
+      { "outcome": "supports", "condition": "m_R=m_L=m_E=m_RL=m_LE=1" },
+      { "outcome": "violates", "condition": "otherwise; at least one required component is present and equals 0" }
+    ],
+    "cohort_outcome": [
+      { "outcome": "indeterminate", "condition": "there exists a system with per-system classification indeterminate" },
+      { "outcome": "violates", "condition": "there exists a system with per-system classification violates" },
+      { "outcome": "supports", "condition": "all systems have per-system classification supports" }
+    ],
+    "precedence": ["indeterminate", "violates", "supports"],
+    "deterministic": true
+  },
+  "unresolved_fields": [
+    {
+      "field": "cohort_source_versions_or_documentation_snapshots",
+      "value": "UNRESOLVED",
+      "reason": "The inspected canonical registration text requires BOR version/retrieval metadata but does not itself provide specific source versions, retrieval dates, URLs, commits, or hashes."
+    },
+    {
+      "field": "concrete_degrees_of_freedom_list",
+      "value": "UNRESOLVED",
+      "reason": "The inspected canonical registration text states the general rule for constraining analyst discretion but does not enumerate cohort-specific discretionary choices."
+    }
+  ],
+  "provenance_references": [
+    "papers/paper-b2/b2_05_protocol_registration.tex",
+    "investigations/b2-governance-cohort/preregistration.md",
+    "protocol/protocol-v1/protocol.md",
+    "registry/investigations.json",
+    "registry/protocol_versions.json"
+  ]
+}

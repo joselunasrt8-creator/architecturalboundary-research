@@ -1,0 +1,14 @@
+{
+  "investigations": [
+    {
+      "id": "b1-three-system-pilot",
+      "path": "investigations/b1-three-system-pilot",
+      "protocol_version": "protocol-v1"
+    },
+    {
+      "id": "b2-governance-cohort",
+      "path": "investigations/b2-governance-cohort",
+      "protocol_version": "protocol-v1"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "protocol_versions": [
+    {
+      "id": "protocol-v1",
+      "path": "protocol/protocol-v1/protocol.md"
+    }
+  ]
+}

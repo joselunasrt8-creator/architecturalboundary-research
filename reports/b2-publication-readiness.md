@@ -1,124 +1,203 @@
-# B2-Run-2 Publication Readiness Audit
+# B2-Run-2 Publication Readiness Audit Rerun
 
 Audit date: 2026-07-11
-Repository: `/workspace/architecturalboundary-research`
-Objective: freeze B2 as the reference execution and determine whether B2 is complete enough to publish without altering Protocol v1.0 or scientific conclusions.
+Audited commit: `a5bcf9afff0dfcf21fb2687173cfffc05452eb12`
+Audited branch: `work`
+Requested basis: current `main` after PR #2 merge.
+Actual basis available in this environment: local checkout only; no configured remote and no local `main` ref were present, so the requested update from current `main` could not be performed.
 
-## Determination
+## Publication readiness determination
 
-**BLOCKED.** B2-Run-2 is not publication-ready as a fixed, inspectable scientific artifact. The current repository contains a B2 manuscript skeleton and some completed analysis/classification text, but the primary registered evidence chain is absent or placeholder-filled: BOR, SRF, ESM, DER, MSR, and Comparative Dataset are not complete enough to support the manuscript's conclusions.
+**BLOCKED.** This rerun cannot be treated as the canonical post-PR-2 publication-readiness determination because the requested post-PR-2 topology is not present in the audited checkout. The requested canonical manuscript root `papers/paper-b2/` is missing, and the requested dataset directories `datasets/canonical/`, `datasets/comparative/`, and `datasets/exports/` are missing. The repository still contains the pre-PR-2 B2 manuscript at `papers/b2/`, and repository validation still requires `papers/b2/main.tex`.
 
-This audit did **not** modify Protocol v1.0, scientific content, conclusions, evidence tables, or manuscript claims. It created only this audit report.
+This report therefore records two separate facts:
 
-## Path consistency verification
+1. **Requested-current-main audit status:** blocked by unavailable `main`/remote and missing requested canonical paths.
+2. **Available-checkout scientific state:** still blocked because the B2 evidence chain remains incomplete or placeholder-filled, with BOR/SRF-or-ESM/DER/MSR/Comparative Dataset not frozen, populated, and traceable.
 
-Review concern checked: whether this audit used `papers/b2/` while the canonical post-restructure path should be `papers/paper-b2/`. In the current checkout audited here, `papers/b2/` exists, `papers/paper-b2/` does not exist, `scripts/validate.py` requires `papers/b2/main.tex`, `README.md` states that the B2 manuscript was moved to `papers/b2/`, and `investigations/b2-governance-cohort/README.md` states that the manuscript source currently lives in `papers/b2/`. Therefore this report's `papers/b2/` references match the canonical discoverable B2 manuscript path in this branch. If another branch standardized on `papers/paper-b2/`, this audit must be replayed after that branch is merged or checked out; no path translation was inferred silently.
+No scientific content was changed. Protocol v1.0 was not modified. Evidence was not populated. Results were not reinterpreted. B3 was not started.
+
+## Canonical path check requested for this rerun
+
+| Requested path | Exists in audited checkout? | Finding |
+|---|---:|---|
+| `papers/paper-b2/` | **No** | Requested canonical B2 manuscript root is absent; LaTeX audit from `papers/paper-b2/main.tex` cannot run. |
+| `investigations/b2-governance-cohort/` | **Yes** | Investigation lifecycle anchor exists. |
+| `datasets/canonical/` | **No** | Requested canonical dataset directory is absent. |
+| `datasets/comparative/` | **No** | Requested comparative dataset directory is absent. |
+| `datasets/exports/` | **No** | Requested dataset export directory is absent. |
+| `registry/` | **Yes** | Registry directory exists. Present registry files are `candidate_invariants.json`, `investigations.json`, `protocol_versions.json`, and `retained_classifications.json`. |
+| `schemas/` | **Yes** | Schema directory exists with BOR/SRF/DER/MSR/dataset/investigation schemas. |
+| `releases/` | **Yes** | Release directory exists, but only placeholder documentation was found. |
+
+## Classification scale used
+
+Each object is classified as one of:
+
+- **COMPLETE:** directory/file exists; research object exists; object is populated; object is frozen; object is traceable to registered evidence.
+- **PARTIAL:** some structure or placeholder exists, but at least one of object existence, population, freeze, or traceability is missing.
+- **MISSING:** required canonical path or research object is absent in the audited checkout.
+
+The columns below distinguish directory presence, placeholder presence, research-object presence, population, freeze, and traceability.
 
 ## Artifact completion matrix
 
-| # | Object | Canonical path | Status | Evidence supporting status | Missing fields/files | Completion requires |
-|---|---|---|---|---|---|---|
-| 1 | Protocol registration I1-I5 | `papers/b2/b2_05_protocol_registration.tex` | **PARTIAL** | I1-I5 sections are present, including admitted evidence, tolerance, measurement vector, and deterministic I5 decision function. | Cohort versions/doc snapshots and concrete degrees-of-freedom list remain TODOs; registration is embedded in manuscript only, not accompanied by a frozen machine-readable registration artifact. | Structural work; data work; scientific judgment for DoF enumeration. |
-| 2 | Registration freeze | `papers/b2/b2_11a_registration_freeze.tex` | **PARTIAL** | A registration-freeze section exists and states that remaining work is limited to evidence/artifact closure and publication preparation. | Freeze date/source version are not concretely recorded; section itself lists unresolved closure requirements, including remaining TODOs and final PDF export. | Structural work; data work. |
-| 3 | Baseline Observation Records (BOR) | `papers/b2/b2_07_baseline_observation_records.tex`; expected machine-readable artifacts under `investigations/b2-governance-cohort/` or equivalent | **PARTIAL** | BOR manuscript section exists with per-system placeholder row IDs. | BOR observations are TODO placeholders; evidence IDs are TODO placeholders; no B2 BOR JSON/CSV artifact was found; source reference bundle pointer is missing; completeness check is unresolved. | Data work; structural work; scientific judgment for observations. |
-| 4 | Surface Record Files / Source Reference Files (SRF) | Expected B2 SRF files under `investigations/b2-governance-cohort/` or equivalent; referenced from `papers/b2/b2_07_baseline_observation_records.tex` | **MISSING** | Only schema/template-level SRF files exist outside the B2 execution; B2 BOR section asks for SRF pointers. | Per-source version, retrieval date, hashing scheme, source snapshots, and B2 SRF artifact files are absent. | Data work; structural work. |
-| 5 | Derived Evidence Records (DER) | `papers/b2/b2_09_derived_object_registry.tex`; expected machine-readable artifacts under `investigations/b2-governance-cohort/` or equivalent | **PARTIAL** | DER manuscript section exists with per-system placeholder row IDs. | DER type/object/BOR references are TODO placeholders; schema version/export pointer missing; no B2 DER JSON/CSV artifact found. | Data work; structural work; scientific judgment for derivations. |
-| 6 | Measurement Summary Records (MSR) | `papers/b2/b2_10_measurement_registry.tex`; expected machine-readable artifacts under `investigations/b2-governance-cohort/` or equivalent | **PARTIAL** | MSR manuscript section exists with per-system placeholder row IDs. | Measurement names, values, DER references, schema version/export pointer, tool versions/lockfiles, and rerun instructions are TODO placeholders; no B2 MSR JSON/CSV artifact found. | Data work; analysis execution; structural work. |
-| 7 | Comparative Dataset | `papers/b2/b2_11_comparative_dataset.tex`; expected machine-readable dataset under `datasets/` or `investigations/b2-governance-cohort/` | **PARTIAL** | Comparative Dataset manuscript section exists. Later analysis references DER-001--DER-009 rows and measurement vectors. | Main comparative table still says fields are blocked/unpopulated and contains TODO(R/L/E); schema/export pointer and traceability map are missing; no B2 dataset CSV/JSON found. | Data work; analysis execution; structural work. |
-| 8 | Analysis | `papers/b2/b2_12_analysis.tex` | **PARTIAL** | Analysis applies I4/I5 mechanically and reports 1 Supports, 8 Violates, 0 Indeterminate, cohort outcome Violates. | Analysis depends on comparative/MSR/DER/BOR identifiers that are not populated as registered evidence; therefore traceability is unresolved. | Analysis execution after data closure; structural trace repair. |
-| 9 | Retained Classification | `papers/b2/b2_14_retained_classification.tex`; registry expected at `registry/retained_classifications.json` | **PARTIAL** | Manuscript retained-classification section lists per-DER outcomes and cohort outcome Violates/Unsupported. | `registry/retained_classifications.json` is empty; classification table depends on unresolved dataset/MSR trace; duplicate LaTeX label exists for `sec:retained-classification`. | Structural work; data work; analysis execution after trace closure. |
-| 10 | Threats to validity | `papers/b2/b2_13_threats_to_validity.tex` | **PARTIAL** | Threats section exists and covers internal, construct, external, selection, observer, expectancy, and reproducibility threats. | Selection rationale, observer-bias mitigation, and replication package pointers remain TODOs. | Structural work; scientific judgment. |
-| 11 | B2 manuscript | `papers/b2/main.tex` plus `papers/b2/b2_01_abstract.tex` through `papers/b2/b2_16_conclusion.tex` | **PARTIAL** | All `\input{...}` targets in `main.tex` exist; manuscript sections are present. | Many TODOs remain, including abstract result/artifact pointers, citations, evidence sources, traceability, ESM, BOR, DER, MSR, dataset, threats, and conclusion trace completeness; `pdflatex` unavailable in environment; duplicate label exists. | Structural work; data work; analysis execution; scientific judgment for unresolved narrative claims. |
-| 12 | Publication artifacts | `releases/`, `scripts/publish.py`, `scripts/build.py`, expected PDF/replication package | **MISSING** | Publication/build scripts exist only as placeholders; `releases/README.md` exists. | No final PDF, no release bundle, no frozen replication package, no hashes/manifest, no configured publication pipeline. | Structural work; build execution after B2 closure. |
+| # | Object | Canonical path assessed | Status | Directory exists | Placeholder exists | Research object exists | Populated | Frozen | Traceable | Evidence and missing work |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | Protocol registration I1-I5 | Expected post-PR-2 path: `papers/paper-b2/b2_05_protocol_registration.tex`; present legacy path: `papers/b2/b2_05_protocol_registration.tex` | **PARTIAL** | Requested: No; legacy: Yes | Yes | Manuscript section exists at legacy path | Partially | Partially | Partially | I1-I5 text exists in legacy manuscript path, but requested canonical path is absent; cohort versions and concrete degrees-of-freedom list remain unresolved in the legacy manuscript. |
+| 2 | Registration freeze | Expected: `papers/paper-b2/b2_11a_registration_freeze.tex`; legacy: `papers/b2/b2_11a_registration_freeze.tex` | **PARTIAL** | Requested: No; legacy: Yes | Yes | Manuscript section exists at legacy path | Partially | No | Partially | Freeze section exists only at legacy path and still records remaining closure work; exact source ledger/freeze metadata are not complete. |
+| 3 | Baseline Observation Records (BOR) | Expected B2 BOR objects under `investigations/b2-governance-cohort/` and/or `datasets/canonical/`; legacy manuscript section `papers/b2/b2_07_baseline_observation_records.tex` | **PARTIAL** | Investigation dir: Yes; requested dataset dir: No | Yes | Placeholder manuscript table exists | No | No | No | BOR rows are placeholder observations/evidence IDs in the legacy manuscript; no populated frozen BOR research objects were found in requested canonical dataset locations. |
+| 4 | SRF / ESM | Expected SRF under `datasets/canonical/` or investigation artifacts; legacy ESM section `papers/b2/b2_08_execution_surface_matrix.tex` | **PARTIAL** | Investigation dir: Yes; requested dataset dir: No | Yes | Placeholder ESM manuscript table exists | No | No | No | User checklist names SRF while manuscript has ESM; no populated/frozen SRF or ESM research object was found. |
+| 5 | Derived Evidence Records (DER) | Expected DER objects under `investigations/b2-governance-cohort/` and/or `datasets/canonical/`; legacy manuscript section `papers/b2/b2_09_derived_object_registry.tex` | **PARTIAL** | Investigation dir: Yes; requested dataset dir: No | Yes | Placeholder manuscript table exists | No | No | No | DER type/object/BOR-reference values remain placeholders; no populated/frozen DER object was found. |
+| 6 | Measurement Summary Records (MSR) | Expected MSR objects under `investigations/b2-governance-cohort/` and/or `datasets/canonical/`; legacy manuscript section `papers/b2/b2_10_measurement_registry.tex` | **PARTIAL** | Investigation dir: Yes; requested dataset dir: No | Yes | Placeholder manuscript table exists | No | No | No | MSR names, values, DER references, export pointer, tooling metadata, and rerun instructions are not populated/frozen. |
+| 7 | Comparative Dataset | Expected: `datasets/comparative/` and `datasets/exports/`; legacy manuscript section `papers/b2/b2_11_comparative_dataset.tex` | **PARTIAL** | Requested dirs: No | Yes | Placeholder manuscript table exists | No | No | No | Comparative dataset directory/export paths are absent; legacy table still contains unpopulated TODO fields and lacks trace map/export. |
+| 8 | Analysis | Expected manuscript path `papers/paper-b2/b2_12_analysis.tex`; legacy path `papers/b2/b2_12_analysis.tex` | **PARTIAL** | Requested: No; legacy: Yes | No result placeholder in analysis table, but dependencies are placeholders | Manuscript analysis exists at legacy path | Text populated | No | No | Analysis applies I4/I5 in text, but it depends on non-populated BOR/DER/MSR/dataset objects, so it is not deterministically traceable. |
+| 9 | Retained Classification | Expected manuscript path `papers/paper-b2/b2_14_retained_classification.tex`; registry directory `registry/` | **PARTIAL** | Requested manuscript: No; registry dir: Yes | Registry empty | Manuscript table exists at legacy path; registry object not populated | Partially | No | No | Legacy retained classification table exists, but `registry/retained_classifications.json` is empty and traceability depends on incomplete dataset/MSR/DER/BOR objects. |
+| 10 | Threats to Validity | Expected manuscript path `papers/paper-b2/b2_13_threats_to_validity.tex`; legacy path `papers/b2/b2_13_threats_to_validity.tex` | **PARTIAL** | Requested: No; legacy: Yes | Yes | Manuscript section exists at legacy path | Partially | No | Not applicable / partial | Threat categories exist, but selection rationale, observer-bias mitigation, and replication package pointers remain unresolved. |
+| 11 | B2 manuscript | Requested: `papers/paper-b2/main.tex`; legacy: `papers/b2/main.tex` | **PARTIAL** | Requested: No; legacy: Yes | Yes | Legacy manuscript exists | Partially | No | No | Requested canonical LaTeX root is absent. Legacy inputs all exist, but TODOs remain and a duplicate label is present. |
+| 12 | Publication artifacts | `releases/`; build/report scripts requested under `scripts/` | **MISSING** | `releases/`: Yes | Yes | Final publication bundle not found | No | No | No | No final PDF, release manifest, hashes, replication package, or successful post-PR-2 report/dataset build pipeline was found. Requested scripts `check_registry.py`, `build_dataset.py`, and `build_report.py` are absent. |
+
+## Changed classifications from previous audit
+
+| Object | Previous report status | Rerun status | Change |
+|---|---|---|---|
+| Protocol registration I1-I5 | PARTIAL | PARTIAL | No status change; path basis changed from legacy manuscript-only assessment to requested canonical-path check plus legacy fallback evidence. |
+| Registration freeze | PARTIAL | PARTIAL | No status change; requested canonical manuscript path is missing. |
+| BOR | PARTIAL | PARTIAL | No status change; requested canonical dataset directories are missing and legacy BOR remains placeholder-filled. |
+| SRF / ESM | MISSING for SRF, partial ESM noted | PARTIAL | Changed because the rerun records the existing placeholder ESM section separately from missing SRF/canonical dataset objects. It remains not publishable. |
+| DER | PARTIAL | PARTIAL | No status change. |
+| MSR | PARTIAL | PARTIAL | No status change. |
+| Comparative Dataset | PARTIAL | PARTIAL | No status change; requested dataset directories are absent. |
+| Analysis | PARTIAL | PARTIAL | No status change. |
+| Retained Classification | PARTIAL | PARTIAL | No status change. |
+| Threats to Validity | PARTIAL | PARTIAL | No status change. |
+| B2 manuscript | PARTIAL | PARTIAL | No status change; requested canonical root is missing, legacy root exists. |
+| Publication artifacts | MISSING | MISSING | No status change. |
 
 ## Verification findings
 
+### Update from current main
+
+**Blocked.** The checkout has no configured remote and no local `main` ref. Therefore Task 1 could not be completed in this environment. This report must not be treated as a canonical post-PR-2 main-branch audit unless replayed in a checkout where PR #2's canonical topology is present.
+
+### LaTeX audit
+
+- Requested canonical audit target `papers/paper-b2/main.tex`: **missing**, so LaTeX input resolution from the requested path could not run.
+- Present legacy target `papers/b2/main.tex`: all `\input{...}` targets exist.
+- Duplicate label recorded in present legacy manuscript: `sec:retained-classification` appears in `papers/b2/b2_04_methodology.tex` and `papers/b2/b2_14_retained_classification.tex`.
+
 ### Traceability of conclusions to registered evidence
 
-**Fail / blocked.** The conclusion and analysis report a cohort-level **Violates** outcome from DER/MSR/dataset rows, but the underlying BOR, DER, MSR, and Comparative Dataset sections contain TODO placeholders or missing machine-readable artifacts. Because the evidence chain is not populated, every conclusion is not currently traceable to registered evidence.
+**Blocked.** The legacy analysis and retained-classification sections report outcomes, but the supporting BOR/SRF-or-ESM/DER/MSR/Comparative Dataset research objects are not populated, frozen, and traceable in the requested canonical locations. Therefore conclusions are not currently deterministically traceable to registered evidence in this audited checkout.
 
 ### I5 applied exactly as preregistered
 
-**Partially verifiable.** The analysis text uses the registered I5 branches: missing -> Indeterminate; all five components equal 1 -> Supports; otherwise -> Violates; cohort precedence Indeterminate > Violates > Supports. However, exact application cannot be fully certified because the Comparative Dataset and MSR source records used to compute the vectors are not complete/frozen.
+**Partially verifiable only at text level.** The legacy analysis text describes the registered I5 branches, but exact application cannot be certified because the completed Comparative Dataset/MSR/DER/BOR chain is absent.
 
 ### No unresolved placeholder presented as a result
 
-**Fail.** Multiple TODO placeholders remain in result-bearing manuscript sections, including the abstract, BOR, ESM, DER, MSR, Comparative Dataset, Threats, and Conclusion. The abstract still says results should be inserted after BOR/DER/MSR are populated, while later sections present a cohort result.
+**Fail.** Placeholder TODOs remain in publication-facing legacy manuscript sections, including BOR, ESM, DER, MSR, Comparative Dataset, Threats, and abstract/conclusion trace-completeness notes.
 
 ### Retained classifications match comparative dataset
 
-**Blocked.** The retained-classification table matches the analysis table's reported vectors/outcomes at the narrative level, but the Comparative Dataset section still contains unpopulated TODO(R/L/E) fields and lacks the traceability map/export. Therefore matching cannot be deterministically validated against a completed dataset artifact.
+**Blocked.** The retained-classification table cannot be deterministically checked against a completed comparative dataset because `datasets/comparative/` and `datasets/exports/` are absent and the legacy comparative table remains placeholder-filled.
 
-### Manuscript does not claim more than the evidence supports
+### Manuscript does not claim more than evidence supports
 
-**Blocked / likely overclaim in current state.** The manuscript claims a deterministic cohort outcome and retained status, but the registered evidence artifacts needed to support those claims are incomplete or absent. The scientific conclusion may be conservative in wording, but it is not publication-ready until trace closure exists.
+**Blocked.** The legacy manuscript reports a cohort outcome, but the evidence chain needed to support that result is not complete/frozen/traceable in this checkout.
 
-### Internal links and LaTeX inputs resolve
+### All report paths exist in audited checkout
 
-**Partial.** All `\input{...}` targets referenced by `papers/b2/main.tex` exist. A duplicate LaTeX label `sec:retained-classification` appears in both methodology and retained-classification files. Full LaTeX compilation could not be executed because `pdflatex` is not installed in this environment.
+**No.** This report intentionally records requested canonical paths that are missing in the audited checkout because path absence is itself the primary audit finding. Existing paths were separately distinguished from missing requested paths in the canonical path check and artifact matrix.
 
-### No scientific content silently changed during repository restructuring
+### No scientific files changed
 
-**Not fully verifiable from current working tree alone.** The B2 README states the LaTeX files were moved from the repository root into `papers/b2/`. This audit found no evidence of additional scientific edits made during this audit. Establishing that no prior restructuring changed scientific content requires comparing against the pre-move commit or archived B2-Run-1/B2-Run-2 source, which is not part of this audit's permitted mutation scope.
+**Confirmed for this rerun.** The intended and observed file change is limited to `reports/b2-publication-readiness.md`. No protocol, manuscript, dataset, schema, registry, or release file was edited.
 
 ## Exact blockers
 
-1. Populate or provide frozen BOR artifacts for every registered cohort member, including versioned evidence references and non-placeholder factual observations.
-2. Provide B2 SRF/source-reference files with version/retrieval/hash metadata for every admitted source.
-3. Populate/freeze ESM records or reconcile whether SRF vs ESM naming is intended; the manuscript currently uses ESM sections while the user checklist asks for SRF.
-4. Populate/freeze DER artifacts with derivation type, derived object content, and BOR/SRF trace links.
-5. Populate/freeze MSR artifacts with M1-M5 values, DER trace links, schema version/export pointer, and rerun/tooling metadata.
-6. Populate/freeze the Comparative Dataset with R/L/E or I4 fields, traceability map, schema/export pointer, and machine-readable dataset artifact.
-7. Re-run/confirm I4/I5 only after the dataset/MSR/DER/BOR chain is complete; do not reinterpret conclusions while closing trace gaps.
-8. Reconcile retained classifications against the completed Comparative Dataset and update the empty `registry/retained_classifications.json` or explicitly document why manuscript-only classification is canonical.
-9. Remove or resolve all TODO placeholders that are presented in publication-facing sections.
-10. Complete threats-to-validity placeholders: selection rationale, observer-bias mitigation, replication package pointer.
-11. Fix LaTeX duplicate label `sec:retained-classification` and verify all references after a real LaTeX build.
-12. Configure/build publication artifacts: final PDF, release manifest, hashes, and replication package.
+1. Replay this audit in a checkout that actually contains current `main` after PR #2, or configure a remote/local `main` ref so the branch can be updated.
+2. Ensure the requested canonical B2 root `papers/paper-b2/` exists before treating the audit as post-PR-2 canonical.
+3. Ensure `datasets/canonical/`, `datasets/comparative/`, and `datasets/exports/` exist or update the roadmap if those are no longer canonical.
+4. Provide the requested scripts `scripts/check_registry.py`, `scripts/build_dataset.py`, and `scripts/build_report.py`, or update the validation contract.
+5. Populate and freeze SRF/BOR research objects with admitted source metadata and factual observations.
+6. Populate and freeze DER objects traced to SRF/BOR.
+7. Populate and freeze MSR objects with I4 M1-M5 values traced to DER.
+8. Build and freeze the Comparative Dataset and export trace map.
+9. Re-run I5 mechanically from the completed dataset without changing Protocol v1.0 or reinterpreting results.
+10. Reconcile retained classifications against the completed Comparative Dataset and current canonical registry names.
+11. Remove publication-facing TODOs by linking to frozen artifacts or recording limitations; do not strengthen conclusions.
+12. Produce publication artifacts: PDF, release manifest, hashes, and replication package.
 
 ## Ordered closure sequence
 
-1. **Freeze scope ledger:** record B2-Run-2 source commit, freeze date, canonical artifact directory, and artifact naming convention without changing Protocol v1.0.
-2. **Close SRF/BOR evidence base:** add source-reference records and BOR factual observations for all nine cohort members.
-3. **Close ESM/DER:** populate execution-surface and derived-evidence records from BOR/SRF only.
-4. **Close MSR:** compute M1-M5 values solely from DER entries with trace back to admitted BOR evidence.
-5. **Close Comparative Dataset:** export machine-readable dataset and trace map from MSR/DER/BOR identifiers.
-6. **Re-execute registered I5 mechanically:** verify per-system and cohort outcomes from the completed dataset only.
-7. **Reconcile retained classification:** ensure manuscript table and registry/dataset agree exactly.
-8. **Resolve manuscript placeholders:** remove TODOs only by pointing to frozen artifacts or explicitly stating limitations; do not strengthen conclusions.
-9. **Validate structure/build:** run repository validation, LaTeX build, reference checks, and artifact hash/manifest checks.
-10. **Create publication bundle:** final PDF plus replication package and release manifest.
+1. **Topology reconciliation:** update/replay on current `main` with PR #2 present; verify canonical paths before scientific audit.
+2. **Scope/source ledger:** record exact B2-Run-2 source commit, freeze date, and canonical artifact roots.
+3. **SRF/BOR closure:** add/freeze source references and factual observations for each registered cohort member.
+4. **DER closure:** derive objects only from admitted and frozen SRF/BOR evidence.
+5. **MSR closure:** compute M1-M5 values only from DER objects with trace to admitted evidence.
+6. **Comparative Dataset closure:** build `datasets/comparative/` and `datasets/exports/` outputs plus trace map.
+7. **I5 rerun:** execute the preregistered decision function mechanically from the completed dataset.
+8. **Classification reconciliation:** align retained classification manuscript/registry/dataset outputs exactly.
+9. **Manuscript cleanup:** resolve placeholders and duplicate labels without changing scientific conclusions beyond evidence-supported text.
+10. **Publication build:** run validation/build/report scripts and create final release bundle.
 
 ## Commands used
 
 ```sh
-pwd && find .. -name AGENTS.md -print && rg --files -g '!**/.git/**' | sed -n '1,200p'
-find papers -maxdepth 2 -type d | sort; test -d papers/b2 && echo 'exists: papers/b2' || echo 'missing: papers/b2'; test -d papers/paper-b2 && echo 'exists: papers/paper-b2' || echo 'missing: papers/paper-b2'; rg -n "papers/(b2|paper-b2)|paper-b2|B2 Paper|b2-governance" README.md papers investigations reports registry scripts validation analysis evidence datasets releases REPRODUCIBILITY.md CONTRIBUTING.md || true
-find /workspace -name AGENTS.md -print; printf '\n--- b2 files ---\n'; find investigations/b2-governance-cohort papers/b2 -maxdepth 4 -type f | sort
-for f in investigations/b2-governance-cohort/README.md papers/b2/*.tex papers/b2/README.md registry/*.json; do echo '---' $f; sed -n '1,220p' "$f"; done
-printf '%s\n' '--- TODO/FIXME/placeholders ---'; rg -n "TODO|TBD|placeholder|Insert|pending|populate|MISSING|FIXME" papers/b2 investigations/b2-governance-cohort protocol registry analysis evidence datasets releases validation scripts README.md REPRODUCIBILITY.md; printf '\n--- b2 labels/inputs ---\n'; rg -n "\\label\{|\\input\{|\\ref\{" papers/b2; printf '\n--- artifact-ish files ---\n'; rg --files | rg '(^|/)(bor|srf|der|msr|dataset|analysis|classification|publication|artifact|comparative|baseline|surface|measurement|derived|retained|threat)' -i
-python scripts/validate.py; python scripts/build.py; (cd papers/b2 && pdflatex -interaction=nonstopmode -halt-on-error main.tex)
-printf '%s\n' '--- inputs ---'; rg -n -F '\input{' papers/b2/main.tex; printf '%s\n' '--- labels ---'; rg -n -F '\label{' papers/b2; printf '%s\n' '--- refs ---'; rg -n -F '\ref{' papers/b2
-python - <<'PY'
+git status --short --branch && git remote -v && git branch --show-current && git rev-parse HEAD && git rev-parse main || true && find /workspace -name AGENTS.md -print
+find papers investigations datasets registry schemas releases scripts -maxdepth 3 -type d | sort
+for p in papers/paper-b2 papers/b2 investigations/b2-governance-cohort datasets/canonical datasets/comparative datasets/exports registry schemas releases; do test -e "$p" && echo "exists: $p" || echo "missing: $p"; done
+rg --files | sed -n '1,220p'
+cat .git/config && git log --oneline --decorate --graph --all -20
+python3 scripts/validate.py
+python3 scripts/check_registry.py
+python3 scripts/build_dataset.py
+python3 scripts/build_report.py
+git diff --check
+python3 - <<'PY'
 from pathlib import Path
-root=Path('papers/b2')
-missing=[]
-for line in (root/'main.tex').read_text().splitlines():
-    if '\\input{' in line:
-        name=line.split('\\input{',1)[1].split('}',1)[0]
-        p=root/(name+'.tex')
-        if not p.exists(): missing.append(str(p))
-print('missing inputs:', missing if missing else 'none')
-labels=[]
-for p in root.glob('*.tex'):
-    for i,l in enumerate(p.read_text().splitlines(),1):
-        if '\\label{' in l:
-            labels.append(l.split('\\label{',1)[1].split('}',1)[0])
 from collections import Counter
-print('duplicate labels:', [k for k,v in Counter(labels).items() if v>1] or 'none')
+for root_s in ['papers/paper-b2', 'papers/b2']:
+    root=Path(root_s)
+    main=root/'main.tex'
+    print(f'main_exists={main.exists()} path={main}')
+    if not main.exists():
+        print('missing_inputs=not_checked_main_missing')
+        print('duplicate_labels=not_checked_main_missing')
+        continue
+    missing=[]
+    for line in main.read_text().splitlines():
+        if '\\input{' in line:
+            name=line.split('\\input{',1)[1].split('}',1)[0]
+            p=root/(name+'.tex')
+            if not p.exists(): missing.append(str(p))
+    print('missing_inputs=', missing or [])
+    labels=[]
+    for p in root.glob('*.tex'):
+        for i,l in enumerate(p.read_text().splitlines(),1):
+            if '\\label{' in l:
+                labels.append((l.split('\\label{',1)[1].split('}',1)[0], str(p), i))
+    c=Counter(k for k,_,__ in labels)
+    print('duplicate_labels=', {k:[x for x in labels if x[0]==k] for k,v in c.items() if v>1})
 PY
+git status --short
+git diff -- reports/b2-publication-readiness.md
+git diff --name-only
 ```
 
-## Confirmation of non-mutation
+## Validation results
 
-This audit created `reports/b2-publication-readiness.md` only. It did not edit Protocol v1.0, B2 manuscript content, schemas, registries, evidence, analysis, or classifications. No B3 work was started.
+| Command | Result |
+|---|---|
+| `python3 scripts/validate.py` | PASS: repository topology validation passed for the available checkout. |
+| `python3 scripts/check_registry.py` | FAIL: script file is absent in this checkout. |
+| `python3 scripts/build_dataset.py` | FAIL: script file is absent in this checkout. |
+| `python3 scripts/build_report.py` | FAIL: script file is absent in this checkout. |
+| `git diff --check` | PASS: no whitespace errors reported. |
+| LaTeX input audit from `papers/paper-b2/main.tex` | FAIL/BLOCKED: requested canonical main file is absent. |
+| LaTeX input audit from available `papers/b2/main.tex` | PASS for inputs; duplicate label `sec:retained-classification` recorded. |
+
+## Non-mutation confirmation
+
+This rerun replaced `reports/b2-publication-readiness.md` only. It did not edit Protocol v1.0, B2 manuscript scientific content, schemas, registries, evidence, datasets, analysis, retained classifications, or publication artifacts. No B3 work was started.

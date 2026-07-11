@@ -10,6 +10,10 @@ Objective: freeze B2 as the reference execution and determine whether B2 is comp
 
 This audit did **not** modify Protocol v1.0, scientific content, conclusions, evidence tables, or manuscript claims. It created only this audit report.
 
+## Path consistency verification
+
+Review concern checked: whether this audit used `papers/b2/` while the canonical post-restructure path should be `papers/paper-b2/`. In the current checkout audited here, `papers/b2/` exists, `papers/paper-b2/` does not exist, `scripts/validate.py` requires `papers/b2/main.tex`, `README.md` states that the B2 manuscript was moved to `papers/b2/`, and `investigations/b2-governance-cohort/README.md` states that the manuscript source currently lives in `papers/b2/`. Therefore this report's `papers/b2/` references match the canonical discoverable B2 manuscript path in this branch. If another branch standardized on `papers/paper-b2/`, this audit must be replayed after that branch is merged or checked out; no path translation was inferred silently.
+
 ## Artifact completion matrix
 
 | # | Object | Canonical path | Status | Evidence supporting status | Missing fields/files | Completion requires |
@@ -89,6 +93,7 @@ This audit did **not** modify Protocol v1.0, scientific content, conclusions, ev
 
 ```sh
 pwd && find .. -name AGENTS.md -print && rg --files -g '!**/.git/**' | sed -n '1,200p'
+find papers -maxdepth 2 -type d | sort; test -d papers/b2 && echo 'exists: papers/b2' || echo 'missing: papers/b2'; test -d papers/paper-b2 && echo 'exists: papers/paper-b2' || echo 'missing: papers/paper-b2'; rg -n "papers/(b2|paper-b2)|paper-b2|B2 Paper|b2-governance" README.md papers investigations reports registry scripts validation analysis evidence datasets releases REPRODUCIBILITY.md CONTRIBUTING.md || true
 find /workspace -name AGENTS.md -print; printf '\n--- b2 files ---\n'; find investigations/b2-governance-cohort papers/b2 -maxdepth 4 -type f | sort
 for f in investigations/b2-governance-cohort/README.md papers/b2/*.tex papers/b2/README.md registry/*.json; do echo '---' $f; sed -n '1,220p' "$f"; done
 printf '%s\n' '--- TODO/FIXME/placeholders ---'; rg -n "TODO|TBD|placeholder|Insert|pending|populate|MISSING|FIXME" papers/b2 investigations/b2-governance-cohort protocol registry analysis evidence datasets releases validation scripts README.md REPRODUCIBILITY.md; printf '\n--- b2 labels/inputs ---\n'; rg -n "\\label\{|\\input\{|\\ref\{" papers/b2; printf '\n--- artifact-ish files ---\n'; rg --files | rg '(^|/)(bor|srf|der|msr|dataset|analysis|classification|publication|artifact|comparative|baseline|surface|measurement|derived|retained|threat)' -i

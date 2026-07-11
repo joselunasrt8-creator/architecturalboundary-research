@@ -1,0 +1,116 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-hashicorp-vault",
+  "cohort_member": {
+    "name": "HashiCorp Vault"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-hashicorp-vault",
+    "path": "investigations/b2-governance-cohort/bor/hashicorp-vault.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-hashicorp-vault-execution-entry-points-vault-request",
+        "label": "vault request",
+        "description": "Vault request processing includes authentication enforcement",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-005"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-hashicorp-vault-authorization-surfaces-path-policy",
+        "label": "path policy",
+        "description": "Path-based Vault policies with path stanzas and capabilities",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-001",
+          "BOR-B2-VAULT-OBS-002",
+          "BOR-B2-VAULT-OBS-003"
+        ]
+      },
+      {
+        "id": "srf-b2-hashicorp-vault-authorization-surfaces-auth-method",
+        "label": "auth method",
+        "description": "Auth methods assign identity and policies to a user",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-004"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-hashicorp-vault-policy-evaluation-surfaces-request-processing",
+        "label": "request processing",
+        "description": "Vault enforces authentication as part of request processing",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-005"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-hashicorp-vault-protected-resources-vault-path",
+        "label": "vault path",
+        "description": "Vault paths matched by path-based policies",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-002",
+          "BOR-B2-VAULT-OBS-003"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-hashicorp-vault-execution-boundaries-auth-to-policy-assignment",
+        "label": "auth to policy assignment",
+        "description": "Auth methods assign identities and policies before access processing",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-004",
+          "BOR-B2-VAULT-OBS-005"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-hashicorp-vault-observable-execution-flow-authenticate",
+        "label": "authenticate",
+        "description": "Auth methods authenticate and assign identity/policies",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-004"
+        ]
+      },
+      {
+        "id": "srf-b2-hashicorp-vault-observable-execution-flow-process",
+        "label": "process",
+        "description": "Vault enforces authentication during request processing",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-005"
+        ]
+      },
+      {
+        "id": "srf-b2-hashicorp-vault-observable-execution-flow-match",
+        "label": "match",
+        "description": "Policies specify access to matching paths via capabilities",
+        "observation_refs": [
+          "BOR-B2-VAULT-OBS-003"
+        ]
+      }
+    ]
+  }
+}

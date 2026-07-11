@@ -1,0 +1,105 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-istio-authorizationpolicy",
+  "cohort_member": {
+    "name": "Istio AuthorizationPolicy"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-istio-authorizationpolicy",
+    "path": "investigations/b2-governance-cohort/bor/istio-authorizationpolicy.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-execution-entry-points-workload-access",
+        "label": "workload access",
+        "description": "Access control on workloads in the mesh",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-001"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-authorization-surfaces-authorization-policy",
+        "label": "authorization policy",
+        "description": "AuthorizationPolicy rules and actions",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-002",
+          "BOR-B2-ISTIO-AUTHPOL-OBS-004"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-policy-evaluation-surfaces-action-order",
+        "label": "action order",
+        "description": "CUSTOM, DENY, then ALLOW evaluation order when used together",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-003"
+        ]
+      },
+      {
+        "id": "srf-b2-istio-authorizationpolicy-policy-evaluation-surfaces-external-authorizer",
+        "label": "external authorizer",
+        "description": "CUSTOM action uses external authorizer defined as extension provider",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-005"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-protected-resources-mesh-workload",
+        "label": "mesh workload",
+        "description": "Workloads in the mesh controlled by AuthorizationPolicy",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-001"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-execution-boundaries-mesh-extension-provider",
+        "label": "mesh extension provider",
+        "description": "External authorizer boundary configured as mesh extension provider for CUSTOM",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-005"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-istio-authorizationpolicy-observable-execution-flow-match",
+        "label": "match",
+        "description": "Rules match source, operation, and condition fields",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-004"
+        ]
+      },
+      {
+        "id": "srf-b2-istio-authorizationpolicy-observable-execution-flow-order",
+        "label": "order",
+        "description": "CUSTOM, DENY, and ALLOW are evaluated in documented order when combined",
+        "observation_refs": [
+          "BOR-B2-ISTIO-AUTHPOL-OBS-003"
+        ]
+      }
+    ]
+  }
+}

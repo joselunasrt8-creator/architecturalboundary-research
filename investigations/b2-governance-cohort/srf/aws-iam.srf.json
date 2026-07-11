@@ -1,0 +1,105 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-aws-iam",
+  "cohort_member": {
+    "name": "AWS IAM"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-aws-iam",
+    "path": "investigations/b2-governance-cohort/bor/aws-iam.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-aws-iam-execution-entry-points-request",
+        "label": "request",
+        "description": "Principal request to AWS",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-004"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-aws-iam-authorization-surfaces-identity-policy",
+        "label": "identity policy",
+        "description": "Identity-based policies attached to IAM identities",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-002"
+        ]
+      },
+      {
+        "id": "srf-b2-aws-iam-authorization-surfaces-resource-policy",
+        "label": "resource policy",
+        "description": "Resource-based policies attached to resources",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-003"
+        ]
+      }
+    ],
+    "validation_surfaces": [],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-aws-iam-policy-evaluation-surfaces-enforcement-code",
+        "label": "enforcement code",
+        "description": "AWS enforcement code evaluates applicable policy types against request context",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-005"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-aws-iam-protected-resources-aws-resource",
+        "label": "aws resource",
+        "description": "AWS resources with associated IAM/resource policy evaluation",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-003",
+          "BOR-B2-AWS-IAM-OBS-005"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-aws-iam-execution-boundaries-request-context-boundary",
+        "label": "request context boundary",
+        "description": "Request information is gathered into a request context for policy evaluation",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-004"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-aws-iam-observable-execution-flow-context",
+        "label": "context",
+        "description": "AWS gathers request information into a request context",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-004"
+        ]
+      },
+      {
+        "id": "srf-b2-aws-iam-observable-execution-flow-evaluate",
+        "label": "evaluate",
+        "description": "Applicable policy types are processed against the request context",
+        "observation_refs": [
+          "BOR-B2-AWS-IAM-OBS-005"
+        ]
+      }
+    ]
+  }
+}

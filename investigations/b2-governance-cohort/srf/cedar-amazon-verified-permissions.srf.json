@@ -1,0 +1,115 @@
+{
+  "object_type": "ExecutionSurfaceRegistry",
+  "schema_version": "canonical-srf-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "srf-b2-cedar-amazon-verified-permissions",
+  "cohort_member": {
+    "name": "Cedar / Amazon Verified Permissions"
+  },
+  "bor_reference": {
+    "bor_id": "bor-b2-cedar-amazon-verified-permissions",
+    "path": "investigations/b2-governance-cohort/bor/cedar-amazon-verified-permissions.bor.json"
+  },
+  "constraints": {
+    "record_type": "execution_surfaces_only",
+    "bor_preserved": true,
+    "no_derivation_performed": true,
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_cross_system_comparison": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "surfaces": {
+    "execution_entry_points": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-execution-entry-points-authorization-request",
+        "label": "authorization request",
+        "description": "Authorization requests evaluated by Verified Permissions",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-003",
+          "BOR-B2-CEDAR-AVP-OBS-004"
+        ]
+      }
+    ],
+    "authorization_surfaces": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-authorization-surfaces-cedar-policy",
+        "label": "cedar policy",
+        "description": "Cedar policies describe access with principal, action, resource, and context elements",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-001"
+        ]
+      }
+    ],
+    "validation_surfaces": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-validation-surfaces-schema",
+        "label": "schema",
+        "description": "Verified Permissions schema defines entity types, actions, and authorization-request shape",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-004"
+        ]
+      }
+    ],
+    "policy_evaluation_surfaces": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-policy-evaluation-surfaces-cedar-engine",
+        "label": "cedar engine",
+        "description": "Cedar policy language engine performs authorization tasks",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-002"
+        ]
+      },
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-policy-evaluation-surfaces-policy-store",
+        "label": "policy store",
+        "description": "Policy stores contain Cedar policies evaluated against authorization requests",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-003"
+        ]
+      }
+    ],
+    "protected_resources": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-protected-resources-cedar-resource",
+        "label": "cedar resource",
+        "description": "Resource element in Cedar access description",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-001"
+        ]
+      }
+    ],
+    "execution_boundaries": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-execution-boundaries-policy-store-boundary",
+        "label": "policy store boundary",
+        "description": "Evaluation occurs against policies in a Verified Permissions policy store",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-003"
+        ]
+      }
+    ],
+    "observable_execution_flow": [
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-observable-execution-flow-request-shape",
+        "label": "request shape",
+        "description": "Authorization request uses schema-defined entity types/actions/shape",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-004"
+        ]
+      },
+      {
+        "id": "srf-b2-cedar-amazon-verified-permissions-observable-execution-flow-evaluate",
+        "label": "evaluate",
+        "description": "Cedar engine evaluates requests against policies in policy stores",
+        "observation_refs": [
+          "BOR-B2-CEDAR-AVP-OBS-002",
+          "BOR-B2-CEDAR-AVP-OBS-003"
+        ]
+      }
+    ]
+  }
+}

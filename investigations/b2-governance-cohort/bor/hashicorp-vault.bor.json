@@ -1,0 +1,93 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-hashicorp-vault",
+  "cohort_member": {
+    "name": "HashiCorp Vault",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[3]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-VAULT-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Policies",
+      "publisher": "HashiCorp Developer",
+      "version_or_channel": "Vault v1.x documentation; page retrieved state",
+      "url": "https://developer.hashicorp.com/vault/docs/concepts/policies",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-VAULT-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Auth Methods",
+      "publisher": "HashiCorp Developer",
+      "version_or_channel": "Vault v1.x documentation; page retrieved state",
+      "url": "https://developer.hashicorp.com/vault/docs/auth",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-VAULT-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-VAULT-001",
+      "source_location": "Policies > Policies, Vault v1.x documentation",
+      "observation_text": "Vault policies provide a declarative way to grant or forbid access to paths and operations in Vault.",
+      "rationale": "Records the documented policy purpose without deriving architecture."
+    },
+    {
+      "observation_id": "BOR-B2-VAULT-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-VAULT-001",
+      "source_location": "Policies > Policies, Vault v1.x documentation",
+      "observation_text": "Vault is path-based, and policies are also path-based.",
+      "rationale": "Records a documented addressing property only."
+    },
+    {
+      "observation_id": "BOR-B2-VAULT-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-VAULT-001",
+      "source_location": "Policies > Policy syntax, Vault v1.x documentation",
+      "observation_text": "Vault policy syntax uses path stanzas and capabilities to specify access to matching paths.",
+      "rationale": "Records documented policy syntax without measurement language."
+    },
+    {
+      "observation_id": "BOR-B2-VAULT-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-VAULT-002",
+      "source_location": "Auth Methods > Auth methods, Vault v1.x documentation",
+      "observation_text": "Vault auth methods perform authentication and are responsible for assigning identity and policies to a user.",
+      "rationale": "Records documented authentication method responsibility only."
+    },
+    {
+      "observation_id": "BOR-B2-VAULT-OBS-005",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-VAULT-002",
+      "source_location": "Auth Methods > Auth methods, Vault v1.x documentation",
+      "observation_text": "Vault enforces authentication as part of request processing.",
+      "rationale": "Records documented request-processing behavior without classification."
+    }
+  ]
+}

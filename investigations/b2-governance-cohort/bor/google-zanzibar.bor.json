@@ -1,0 +1,93 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-google-zanzibar",
+  "cohort_member": {
+    "name": "Google Zanzibar",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[8]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Normative specifications (RFCs, formal specs, language specifications)"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-ZANZIBAR-001",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "title": "Zanzibar: Google\u2019s Consistent, Global Authorization System",
+      "publisher": "USENIX / Google authors",
+      "version_or_channel": "USENIX ATC 2019 paper PDF; publication channel retrieved state",
+      "url": "https://www.usenix.org/system/files/atc19-pang.pdf",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-ZANZIBAR-002",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "title": "Zanzibar: Google\u2019s Consistent, Global Authorization System publication page",
+      "publisher": "Google Research",
+      "version_or_channel": "Google Research publication page; retrieved state",
+      "url": "https://research.google/pubs/zanzibar-googles-consistent-global-authorization-system/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-ZANZIBAR-OBS-001",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "source_reference": "EV-ZANZIBAR-002",
+      "source_location": "Google Research publication page > Abstract, retrieved state",
+      "observation_text": "Zanzibar is presented as a global system for storing and evaluating access control lists.",
+      "rationale": "Records the documented system description without classification."
+    },
+    {
+      "observation_id": "BOR-B2-ZANZIBAR-OBS-002",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "source_reference": "EV-ZANZIBAR-002",
+      "source_location": "Google Research publication page > Abstract, retrieved state",
+      "observation_text": "Zanzibar provides a uniform data model and configuration language for expressing access control policies from Google client services.",
+      "rationale": "Records documented data-model and configuration-language presence only."
+    },
+    {
+      "observation_id": "BOR-B2-ZANZIBAR-OBS-003",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "source_reference": "EV-ZANZIBAR-001",
+      "source_location": "USENIX ATC 2019 paper > Section 2.1 and Table 1, publication PDF",
+      "observation_text": "The Zanzibar paper describes relation tuples that identify object, relation, and user fields and gives examples with corresponding semantics.",
+      "rationale": "Records documented tuple fields without deriving architecture."
+    },
+    {
+      "observation_id": "BOR-B2-ZANZIBAR-OBS-004",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "source_reference": "EV-ZANZIBAR-001",
+      "source_location": "USENIX ATC 2019 paper > Section 2.3.1, publication PDF",
+      "observation_text": "The Zanzibar paper describes namespace configuration files that define object types and relations.",
+      "rationale": "Records documented configuration content only."
+    },
+    {
+      "observation_id": "BOR-B2-ZANZIBAR-OBS-005",
+      "source_type": "Normative specifications (RFCs, formal specs, language specifications)",
+      "source_reference": "EV-ZANZIBAR-001",
+      "source_location": "USENIX ATC 2019 paper > Section 2.4, publication PDF",
+      "observation_text": "The Zanzibar paper describes a Check request that evaluates whether a user has a relation to an object.",
+      "rationale": "Records documented API behavior without calculating or classifying."
+    }
+  ]
+}

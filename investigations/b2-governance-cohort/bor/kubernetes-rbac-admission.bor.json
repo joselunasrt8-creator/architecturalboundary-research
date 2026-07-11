@@ -1,0 +1,93 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-kubernetes-rbac-admission",
+  "cohort_member": {
+    "name": "Kubernetes RBAC / Admission",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[1]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-K8S-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Using RBAC Authorization",
+      "publisher": "Kubernetes project",
+      "version_or_channel": "v1.33 documentation channel; page retrieved state as of retrieval",
+      "url": "https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-K8S-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Admission Control in Kubernetes",
+      "publisher": "Kubernetes project",
+      "version_or_channel": "v1.33 documentation channel; page retrieved state as of retrieval",
+      "url": "https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-K8S-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-K8S-001",
+      "source_location": "Using RBAC Authorization > API objects, v1.33 documentation channel",
+      "observation_text": "Kubernetes RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions and permits dynamic policy configuration through the Kubernetes API.",
+      "rationale": "Records the documented RBAC policy API basis without deriving a component measurement."
+    },
+    {
+      "observation_id": "BOR-B2-K8S-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-K8S-001",
+      "source_location": "Using RBAC Authorization > Role and ClusterRole, v1.33 documentation channel",
+      "observation_text": "A Role contains rules that represent permissions within a namespace, and a ClusterRole is a non-namespaced resource.",
+      "rationale": "Records the documented RBAC resource types only."
+    },
+    {
+      "observation_id": "BOR-B2-K8S-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-K8S-001",
+      "source_location": "Using RBAC Authorization > RoleBinding and ClusterRoleBinding, v1.33 documentation channel",
+      "observation_text": "A role binding grants permissions defined in a role to users or sets of users, and it holds a list of subjects plus a reference to the role being granted.",
+      "rationale": "Records the documented binding relationship without classifying its architectural role."
+    },
+    {
+      "observation_id": "BOR-B2-K8S-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-K8S-002",
+      "source_location": "Admission Control in Kubernetes > What are admission controllers?, v1.33 documentation channel",
+      "observation_text": "An admission controller intercepts Kubernetes API server requests before resource persistence and after authentication and authorization.",
+      "rationale": "Records the documented admission request location without deriving downstream structure."
+    },
+    {
+      "observation_id": "BOR-B2-K8S-OBS-005",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-K8S-002",
+      "source_location": "Admission Control in Kubernetes > What are admission controllers?, v1.33 documentation channel",
+      "observation_text": "Admission controllers may validate, mutate, or do both; mutating controllers can modify admitted objects, and validating controllers may reject requests.",
+      "rationale": "Records documented admission effects only."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+name: B2 publication-readiness audit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact main commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Record audited object
+        run: |
+          mkdir -p reports
+          {
+            echo "repository=$GITHUB_REPOSITORY"
+            echo "branch=${GITHUB_REF_NAME:-main}"
+            echo "commit=$GITHUB_SHA"
+            echo "workflow_run_id=$GITHUB_RUN_ID"
+            echo "audit_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } | tee reports/b2-publication-readiness-context.txt
+
+      - name: Verify canonical audit paths
+        run: |
+          set -euo pipefail
+          required_paths=(
+            "papers/paper-b2/main.tex"
+            "investigations/b2-governance-cohort/"
+            "datasets/canonical/"
+            "datasets/comparative/"
+            "datasets/exports/"
+            "scripts/validate.py"
+            "scripts/check_registry.py"
+            "scripts/build_dataset.py"
+            "scripts/build_report.py"
+          )
+          missing=0
+          for path in "${required_paths[@]}"; do
+            if [ ! -e "$path" ]; then
+              echo "missing canonical audit path: $path" | tee -a reports/b2-publication-readiness.md
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            {
+              echo ""
+              echo "## Final Determination"
+              echo ""
+              echo "NULL_NOT_AUDITED"
+            } >> reports/b2-publication-readiness.md
+            exit 1
+          fi
+
+      - name: Run repository validators
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/check_registry.py
+          python3 scripts/build_dataset.py
+          python3 scripts/build_report.py
+          git diff --check
+
+      - name: Run B2 publication-readiness audit
+        run: |
+          python3 scripts/audit_b2_publication_readiness.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --commit "$GITHUB_SHA" \
+            --output reports/b2-publication-readiness.md
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b2-publication-readiness-audit
+          path: |
+            reports/b2-publication-readiness.md
+            reports/b2-publication-readiness-context.txt
+          if-no-files-found: warn

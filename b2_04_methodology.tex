@@ -1,0 +1,59 @@
+\section{Methodology}
+\label{sec:methodology}
+Paper~B2 is an empirical execution of the Invariance-Based Architectural Investigation Protocol v1.0 (``Protocol v1.0''), defined in Paper~0. Protocol v1.0 is treated as a frozen instrument in this study: the protocol text is not modified, and any discretionary choices required by the protocol are explicitly registered and traceable in the paper artifacts.
+
+\subsection{Unit of analysis}
+The unit of analysis is an individual governance/authorization system instance as represented by protocol-eligible evidence sources (e.g., vendor documentation, specifications, reference implementations, configuration schemas, and observable request/decision interfaces). The cohort is therefore a set of systems, not a set of deployed environments.
+
+\textbf{TODO(Evidence sources):} Specify which concrete source types are admitted for this execution (documentation URLs, versioned repositories, RFCs/specs), and record them in the Baseline Observation Records (BOR).
+
+\subsection{Protocol outputs as primary results}
+Protocol v1.0 requires the production of structured artifacts (BOR, execution surface matrix, derived object registry, measurement registry, and comparative dataset). In Paper~B2, these artifacts are treated as first-class results: analysis and conclusions must be traceable to the artifacts via explicit identifiers and pointers.
+
+\subsection{Cohort-bounded inference}
+All inferences in Paper~B2 are restricted to the evaluated cohort and the specific representations of each system admitted under the protocol. The study does not claim that any observed boundary pattern is universal, invariant across all governance systems, or stable under future system evolution.
+
+\subsection{Replication stance}
+The goal is to make the execution reproducible by:
+(1) registering protocol parameters and analyst degrees of freedom up front;
+(2) recording baseline observations without interpretation;
+(3) separating interpretation into derived objects and measurements; and
+(4) applying an explicit decision rule to arrive at cohort-bounded classifications.
+
+\textbf{TODO(Traceability):} Define the identifier scheme used across BOR/ESM/DER/MSR tables (e.g., BOR-OPA-001) and ensure all later sections reference those identifiers.
+
+\subsection{Governance systems cohort: an empirical investigation of the reasoning--legitimacy--execution boundary}
+\label{sec:cohort}
+The evaluated cohort is a purposive sample of governance/authorization systems selected to span: (i) differing decision formalisms (policy-as-code, rule engines, workflow approval, capability-style delegation); (ii) differing legitimacy mechanisms (role assignment, attestations, human approvals, external credentialing); and (iii) differing execution couplings (inline enforcement, sidecar/agent enforcement, audit-only). The cohort definition is bounded to concrete, versioned system representations admitted under Protocol v1.0 and registered in the Comparative Dataset.
+
+\paragraph{Inclusion criteria.}
+A system is included if: (1) it exposes an identifiable decision interface that produces an authorization/governance decision (allow/deny/obligate/approve, or equivalent); (2) it contains (or depends upon) an identifiable legitimacy mechanism that authorizes the decision-maker, inputs, or policy changes; and (3) there is protocol-eligible evidence sufficient to populate a minimally complete BOR and execution surface matrix.
+
+\paragraph{Exclusion criteria.}
+Systems are excluded if their governance function is purely informal (no inspectable interface or artifact), if admissible evidence is insufficient to establish the execution surface, or if the system is only available as a bespoke deployment without stable public artifacts.
+
+\paragraph{Cohort registration.}
+For each system instance, the BOR records the evidence sources (with version/date), the system boundary assumptions, and the specific interfaces observed. The Comparative Dataset enumerates the cohort and provides the canonical system identifiers used throughout Paper~B2.
+
+\subsection{Analysis pipeline}
+\label{sec:analysis-pipeline}
+Only two protocol phases remain in this execution: (i) \emph{Analysis} and (ii) \emph{Retained Classification}. Analysis proceeds by (a) constructing derived objects that represent the reasoning, legitimacy, and execution elements identified in the BOR and ESM; (b) registering measurements that operationalize boundary properties (e.g., where reasoning terminates and execution begins, and what legitimacy checks bind either side); and (c) producing cohort-comparable summaries from the Measurement Registry.
+
+\subsection{Retained classification (Protocol v1.0 decision rules only)}
+\label{sec:retained-classification}
+Retained Classification applies \emph{only} the pre-specified decision rules defined by Protocol v1.0 (and its Paper~0 requirements, including I5) to the derived objects and measurements. Paper~B2 does not introduce new decision rules during execution. Each system receives the protocol-defined three-way outcome (\emph{Supports}, \emph{Violates}, or \emph{Indeterminate}) for the candidate invariant and its associated reasoning--legitimacy--execution boundary.
+
+A classification is recorded as \emph{retained} only if: (1) the minimum evidence requirements for the relevant Protocol v1.0 rule are satisfied (as indicated by BOR/ESM references); (2) the rule application is traceable to specific derived objects and measurement identifiers; and (3) no unresolved ambiguity remains that would change the protocol outcome under plausible alternative readings of the same admitted evidence.
+
+\textbf{TODO(Protocol sufficiency check):} If any cohort members require discretionary interpretation beyond Protocol v1.0 (i.e., the instrument under-specifies the mapping from measurements to the three-way outcome), register the gap as an explicit limitation and mark the classification as \emph{provisional} rather than retained.
+
+\subsection{Protocol audit}
+\label{sec:protocol-audit}
+\paragraph{Definition of under-specification.}
+An under-specification exists when multiple protocol-compliant mappings from the same BOR $\rightarrow$ SRF $\rightarrow$ DER $\rightarrow$ MSR $\rightarrow$ Comparative Dataset evidence lead to different \emph{Supports}/\emph{Violates}/\emph{Indeterminate} outcomes without violating Protocol v1.0.
+
+\paragraph{Recording audit findings.}
+Each audit finding is recorded as an \texttt{AUD-*} artifact linked to the relevant BOR, SRF, DER, MSR, and Comparative Dataset identifiers, together with a concise description of the ambiguity and its impact on reproducibility.
+
+\paragraph{Governance rule.}
+Protocol audit findings are observations about the scientific instrument, not modifications to the current investigation. They do not alter Paper~B2. Any accepted changes resulting from these findings are considered only in a future Protocol v1.x revision.

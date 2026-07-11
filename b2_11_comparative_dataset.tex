@@ -1,0 +1,63 @@
+\section{Comparative Dataset}
+\label{sec:comparative-dataset}
+This section assembles a cohort-level comparative dataset derived from the system-specific registries (BOR/ESM/DER/MSR). The dataset is the cohort-facing view used for analysis and classification; each field must remain traceable to underlying registry entries.
+
+\textbf{TODO(Dataset schema):} Record the cohort dataset schema version and provide a machine-readable export pointer.
+
+\subsection{Cohort-level dataset (RLE boundary fields)}
+\textbf{Note (blocked on I4/I5).} The R/L/E fields are investigation-specific and must be populated only after the measurement operationalization (I4) and decision rule (I5) for this investigation are registered in Section~\ref{sec:protocol-registration}. Until then, this table remains intentionally unpopulated to avoid introducing new mapping logic.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}p{0.28\linewidth}p{0.18\linewidth}p{0.18\linewidth}p{0.18\linewidth}@{}}
+\toprule
+System & R field (Reasoning) & L field (Legitimacy) & E field (Execution) \\
+\midrule
+OPA+Gatekeeper & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+Kubernetes RBAC/Admission & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+AWS IAM & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+HashiCorp Vault & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+Envoy ext\_authz & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+Istio AuthorizationPolicy & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+OpenFGA & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+Cedar / AVP & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+Google Zanzibar & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
+\bottomrule
+\end{tabular}
+\caption{Cohort-level dataset fields for the candidate RLE boundary (blocked on registered I4/I5).}
+\end{table}
+
+\subsection{Comparative Dataset (metric extract from MSR)}
+The table below is a normalized aggregation of the frozen measurement catalog (MET-001 through MET-009) as recorded in MSR. Values are copied directly from MSR; if a value is absent in MSR, the corresponding field is left blank.
+
+\begin{center}
+\begin{longtable}{@{}p{0.22\linewidth}p{0.08\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.06\linewidth}p{0.08\linewidth}p{0.18\linewidth}@{}}
+\toprule
+System & DER & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & Trace (MSR IDs)\\
+\midrule
+\endfirsthead
+\toprule
+System & DER & M1 & M2 & M3 & M4 & M5 & M6 & M7 & M8 & M9 & Trace (MSR IDs)\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+Kubernetes RBAC/Admission & DER-001 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-001--MSR-009\\
+Kubernetes RBAC/Admission & DER-002 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & Supported & MSR-010--MSR-018\\
+HashiCorp Vault & DER-003 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & Partial & MSR-019--MSR-027\\
+AWS IAM & DER-004 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-028--MSR-036\\
+Google Zanzibar & DER-005 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-037--MSR-045\\
+Istio AuthorizationPolicy & DER-006 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-046--MSR-054\\
+Envoy ext\_authz & DER-007 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & Supported & MSR-055--MSR-063\\
+OpenFGA & DER-008 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-064--MSR-072\\
+Cedar / AVP & DER-009 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & Insufficient & MSR-073--MSR-081\\
+\end{longtable}
+\end{center}
+
+\subsection{Traceability map (dataset to registries)}
+\textbf{TODO(Traceability map):} Add a table mapping each dataset field (R/L/E and any auxiliary features) to the specific MSR and DER IDs used to compute it.
+
+\subsection{Dataset schema and export}
+\textbf{TODO(Dataset export):} Provide a pointer to the machine-readable cohort dataset (CSV/JSON) and its schema, including trace pointers back to BOR/ESM/DER/MSR entries.

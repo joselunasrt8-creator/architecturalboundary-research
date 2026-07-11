@@ -1,0 +1,37 @@
+\subsection{Registration Freeze}
+\label{sec:registration-freeze}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Execution ID: & B2-Run-2\\
+Protocol: & Invariance-Based Architectural Investigation Protocol v1.0\\
+Registration status: & Frozen\\
+Registration revision: & 1\\
+Freeze date: & 2026-07-10\\
+Source version: & Overleaf project history snapshot as of 2026-07-10 (Execution ID: B2-Run-2)\\
+Permitted post-freeze changes: & Typographical and formatting corrections only\\
+\bottomrule
+\end{tabular}
+
+\paragraph{Freeze rule.}
+The registered investigation fields I1--I5 are fixed before execution of
+Analysis and Retained Classification. Any change affecting the candidate
+invariant, admitted evidence, tolerance, measurement vector, missing-data
+handling, or decision function invalidates this execution and requires a new
+registered run.
+
+\paragraph{Execution record freeze checklist (post-result).}
+After the cohort outcome is determined, freeze the execution record by:
+\begin{enumerate}
+  \item Confirming every retained-classification row traces through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR.
+  \item Removing any remaining TODOs or language implying the result is pending.
+  \item Recording the B2-Run-2 freeze date and source version.
+  \item Compiling and exporting the final PDF.
+  \item Preserving B2-Run-1 and B2-Run-2 as separate citable executions.
+\end{enumerate}
+
+\paragraph{Cohort precedence rule (deterministic and conservative).}
+Because the candidate invariant is evaluated over the entire registered cohort,
+a single indeterminate system prevents a deterministic cohort-level conclusion.
+Therefore, cohort outcomes are ordered by evidential conservatism:
+\textit{Indeterminate} $\succ$ \textit{Violates} $\succ$ \textit{Supports}.
+This prevents a cohort conclusion from ignoring unresolved evidence.

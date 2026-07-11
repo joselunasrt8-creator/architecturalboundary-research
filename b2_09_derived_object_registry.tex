@@ -1,0 +1,37 @@
+\section{Derived Object Registry}
+\label{sec:der}
+The derived object registry (DER) records protocol-defined objects extracted from the baseline observations. DER entries are interpretive: they normalize heterogeneous evidence into a common set of object types (e.g., policy entity, principal, resource, evaluation component, enforcement hook, and execution surface).
+
+\textbf{Separation rule.} Each DER entry must cite its supporting BOR IDs and evidence pointers. No new observations may be introduced in DER; only derivations from previously recorded BOR facts are allowed.
+
+\textbf{TODO(DER schema):} Record the DER schema version used in this execution and provide a machine-readable export pointer.
+
+\subsection{DER table (cohort extract)}
+\begin{center}
+\begin{longtable}{@{}p{0.12\linewidth}p{0.16\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.26\linewidth}@{}}
+\toprule
+DER ID & System & Object type & Object label / description & Trace (BOR IDs) \\
+\midrule
+\endfirsthead
+\toprule
+DER ID & System & Object type & Object label / description & Trace (BOR IDs) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+DER-OPA-001 & OPA+Gatekeeper & \textbf{TODO(Type)} & \textbf{TODO(DER-OPA-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-K8S-001 & Kubernetes RBAC/Admission & \textbf{TODO(Type)} & \textbf{TODO(DER-K8S-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-IAM-001 & AWS IAM & \textbf{TODO(Type)} & \textbf{TODO(DER-IAM-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-VAULT-001 & HashiCorp Vault & \textbf{TODO(Type)} & \textbf{TODO(DER-VAULT-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-ENVOY-001 & Envoy ext\_authz & \textbf{TODO(Type)} & \textbf{TODO(DER-ENVOY-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-ISTIO-001 & Istio AuthorizationPolicy & \textbf{TODO(Type)} & \textbf{TODO(DER-ISTIO-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-FGA-001 & OpenFGA & \textbf{TODO(Type)} & \textbf{TODO(DER-FGA-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-CEDAR-001 & Cedar / AVP & \textbf{TODO(Type)} & \textbf{TODO(DER-CEDAR-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+DER-ZANZ-001 & Google Zanzibar & \textbf{TODO(Type)} & \textbf{TODO(DER-ZANZ-001):} Derived object. & \textbf{TODO(BOR refs)} \\
+\end{longtable}
+\end{center}
+
+\subsection{Full DER artifact pointer}
+\textbf{TODO(DER artifact pointer):} Provide a pointer to the full machine-readable DER artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.

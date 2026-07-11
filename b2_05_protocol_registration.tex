@@ -1,0 +1,144 @@
+\section{Protocol Registration}
+\label{sec:protocol-registration}
+This section records the Protocol v1.0 registration fields for the Paper~B2 execution. Protocol v1.0 defines the required fields; Paper~B2 fills them to support replication and to bound analytic discretion.
+
+\subsection{Protocol version}
+\textbf{Protocol:} v1.0 (frozen; no modifications).
+
+\subsection{Candidate invariant registration (I1--I5)}
+The candidate invariant evaluated in Paper~B2 is the existence of an explicit Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary, interpreted strictly as a cohort-bounded hypothesis under Protocol v1.0. No universal invariant claim is made.
+
+\subsubsection{I1 Candidate invariant (P): explicit RLE boundary}
+\textbf{Claim form (cohort-bounded).} For each system $s$ in the frozen cohort (Section~\ref{sec:cohort-lock}), the system exhibits an \emph{explicit} RLE boundary as defined below.
+
+\textbf{Operational definition (per system).} A system $s$ has an \emph{explicit RLE boundary} iff all of the following are true based only on admitted evidence (I2):
+\begin{enumerate}
+  \item \textbf{Reasoning artifact (R) is explicit.} There exists a documented, named artifact type whose role is to express or compute authorization-relevant reasoning (e.g., policy, rules, relations, checks), and the artifact can be referenced independently of any particular execution.
+  \item \textbf{Legitimacy step (L) is explicit.} There exists a documented decision point that evaluates a request (or proposed state change) against the reasoning artifact(s) and yields a legitimacy outcome (at minimum: allow/deny; may include obligations/metadata).
+  \item \textbf{Execution step (E) is explicit.} There exists a documented enforcement mechanism that uses (directly or indirectly) the legitimacy outcome to permit/deny (or otherwise gate) the real-world action.
+  \item \textbf{Boundary is explicit.} The interfaces between (R) and (L), and between (L) and (E), are documented as separable: each interface has named inputs/outputs (or an equivalent contract) such that (R), (L), and (E) are not merely inferred as conceptual phases but are grounded in concrete system interfaces.
+\end{enumerate}
+
+\subsubsection{I2 Admitted evidence (scope and inclusion)}
+\textbf{Admitted evidence types (ordered by preference).}
+\begin{enumerate}
+  \item Normative specifications (RFCs, formal specs, language specifications).
+  \item Official product documentation (vendor/project docs) and reference architecture descriptions.
+  \item Official API references / configuration schema references.
+  \item Source code in the official upstream repository \emph{only to resolve ambiguities in (1)--(3)}, and only when the referenced code location is stable (tag/commit recorded).
+\end{enumerate}
+
+\textbf{Non-admitted evidence.} Blog posts, marketing pages without architectural content, third-party tutorials, and undocumented behavior (including experimental flags) are not admitted.
+
+\textbf{Inclusion rule.} A system/feature claim is admissible only if it is supported by at least one admitted evidence item recorded in the BORs with version and retrieval metadata (Section~\ref{sec:cohort-lock}).
+
+\subsubsection{I3 Tolerance (cohort decision aggregation)}
+\textbf{Tolerance: none.} This execution uses an \emph{all-within-cohort} decision rule: the cohort supports the candidate invariant only if \emph{every} system in the frozen cohort is classified as \emph{supports} under I5.
+
+\subsubsection{I4 Operationalization (measurement vector)}
+\textbf{Unit of analysis.} The unit is a system $s$ in the frozen cohort.
+
+\textbf{Required measurement components (per system).} For each system $s$, the MSR must contain the following boolean measurements (values in $\{0,1\}$):
+\begin{itemize}
+  \item $m_R(s)$: explicit reasoning artifact present.
+  \item $m_L(s)$: explicit legitimacy decision point present.
+  \item $m_E(s)$: explicit execution/enforcement mechanism present.
+  \item $m_{RL}(s)$: explicit documented interface/contract between reasoning artifacts and legitimacy evaluation.
+  \item $m_{LE}(s)$: explicit documented interface/contract between legitimacy outcome and execution/enforcement.
+\end{itemize}
+
+\textbf{Computation rule (constraint).} Each $m_\bullet(s)$ must be computed solely from DER entries whose trace resolves to admitted BOR evidence (I2). If a measurement cannot be computed without introducing a new observation, it must be recorded as \emph{missing} (not coerced).
+
+\subsubsection{I5 Decision function (deterministic; prerequisite to Analysis)}
+\label{sec:i5-decision-function}
+\textbf{Per-system classification function.} Define $D(s)$ as:
+\begin{itemize}
+  \item \textbf{indeterminate} if any of $m_R(s),m_L(s),m_E(s),m_{RL}(s),m_{LE}(s)$ is missing.
+  \item \textbf{supports} if $m_R(s)=m_L(s)=m_E(s)=m_{RL}(s)=m_{LE}(s)=1$.
+  \item \textbf{violates} otherwise (i.e., at least one required component is present and equals 0).
+\end{itemize}
+
+\textbf{Cohort-level outcome function.} Define $C$ over the frozen cohort $S$ as:
+\begin{itemize}
+  \item \textbf{indeterminate} if there exists $s\in S$ with $D(s)=\text{indeterminate}$.
+  \item \textbf{violates} if there exists $s\in S$ with $D(s)=\text{violates}$.
+  \item \textbf{supports} otherwise (i.e., $\forall s\in S,\ D(s)=\text{supports}$).
+\end{itemize}
+
+\textbf{Tie-breaking / precedence.} The cohort-level function is ordered \emph{indeterminate $\succ$ violates $\succ$ supports} to prevent post hoc omission of missing measurements.
+
+\subsection{Cohort}
+The candidate cohort for Paper~B2 is:
+\begin{enumerate}
+  \item OPA + Gatekeeper
+  \item Kubernetes RBAC / Admission
+  \item AWS IAM
+  \item HashiCorp Vault
+  \item Envoy \texttt{ext\_authz}
+  \item Istio \texttt{AuthorizationPolicy}
+  \item OpenFGA
+  \item Cedar / Amazon Verified Permissions
+  \item Google Zanzibar
+\end{enumerate}
+
+\subsection{Cohort Lock}
+\label{sec:cohort-lock}
+This subsection freezes the Paper~B2 cohort under Protocol v1.0. No systems may be added after this point; any new systems require a future investigation (B3 or later).
+
+\subsubsection{Investigation identifier}
+\begin{itemize}
+  \item Paper B2
+  \item Governance Systems Cohort
+  \item Protocol Version: v1.0
+\end{itemize}
+
+\subsubsection{Included systems (frozen)}
+\begin{itemize}
+  \item Open Policy Agent + Gatekeeper
+  \item Kubernetes RBAC / Admission
+  \item HashiCorp Vault
+  \item AWS IAM
+  \item Google Zanzibar
+  \item Istio AuthorizationPolicy
+  \item Envoy \texttt{ext\_authz}
+  \item OpenFGA
+  \item Cedar / Amazon Verified Permissions
+\end{itemize}
+
+\subsubsection{Inclusion criteria}
+\begin{itemize}
+  \item Official documentation available
+  \item Stable public architecture
+  \item Explicit authorization or governance workflow
+  \item Primary documentation accessible
+  \item Independent implementation
+\end{itemize}
+
+\subsubsection{Exclusion criteria}
+\begin{itemize}
+  \item Experimental projects
+  \item Incomplete documentation
+  \item Vendor marketing without architecture
+  \item Duplicate implementations of already represented architectures
+\end{itemize}
+
+\subsubsection{Version-lock policy}
+Every BOR must record:
+\begin{itemize}
+  \item documentation version
+  \item publication date
+  \item retrieval date
+  \item source URL
+  \item commit/version where applicable
+\end{itemize}
+
+\textbf{TODO(Cohort versions):} Populate BORs with the specific versions/releases (or documentation snapshots) admitted for each frozen system, per the Version-lock policy.
+
+
+\subsection{Analyst degrees of freedom}
+Protocol v1.0 may require discretionary choices (e.g., which artifacts best represent a system interface, or how to map heterogeneous documentation into a common derived-object schema). Paper~B2 constrains these degrees of freedom by pre-registering admissible evidence types, recording selection decisions in BOR entries, and requiring trace pointers from each derived object and measurement back to its supporting baseline observations.
+
+\textbf{TODO(DoF list):} Enumerate the concrete discretionary choices anticipated for this cohort and the rule used to resolve each choice.
+
+\subsection{Planned outputs}
+Protocol v1.0 outputs for this execution are reported in Sections~\ref{sec:bor}--\ref{sec:comparative-dataset}.

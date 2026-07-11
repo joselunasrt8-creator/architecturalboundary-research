@@ -1,0 +1,37 @@
+\section{Measurement Registry}
+\label{sec:msr}
+The measurement registry (MSR) records protocol-defined measurements computed over derived objects.
+
+\textbf{Separation rule.} MSR entries must not introduce new observations. Each measurement must cite its DER inputs (and thereby inherits BOR traceability). Any aggregation or normalization performed for a measurement must be described as part of the measurement method.
+
+\textbf{TODO(MSR schema):} Record the MSR schema version used in this execution and provide a machine-readable export pointer.
+
+\subsection{MSR table (cohort extract)}
+\begin{center}
+\begin{longtable}{@{}p{0.12\linewidth}p{0.16\linewidth}p{0.18\linewidth}p{0.18\linewidth}p{0.28\linewidth}@{}}
+\toprule
+MSR ID & System & Measurement name & Value (or summary) & Trace (DER IDs) \\
+\midrule
+\endfirsthead
+\toprule
+MSR ID & System & Measurement name & Value (or summary) & Trace (DER IDs) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+MSR-OPA-001 & OPA+Gatekeeper & \textbf{TODO(Name)} & \textbf{TODO(MSR-OPA-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-K8S-001 & Kubernetes RBAC/Admission & \textbf{TODO(Name)} & \textbf{TODO(MSR-K8S-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-IAM-001 & AWS IAM & \textbf{TODO(Name)} & \textbf{TODO(MSR-IAM-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-VAULT-001 & HashiCorp Vault & \textbf{TODO(Name)} & \textbf{TODO(MSR-VAULT-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-ENVOY-001 & Envoy ext\_authz & \textbf{TODO(Name)} & \textbf{TODO(MSR-ENVOY-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-ISTIO-001 & Istio AuthorizationPolicy & \textbf{TODO(Name)} & \textbf{TODO(MSR-ISTIO-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-FGA-001 & OpenFGA & \textbf{TODO(Name)} & \textbf{TODO(MSR-FGA-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-CEDAR-001 & Cedar / AVP & \textbf{TODO(Name)} & \textbf{TODO(MSR-CEDAR-001):} Value. & \textbf{TODO(DER refs)} \\
+MSR-ZANZ-001 & Google Zanzibar & \textbf{TODO(Name)} & \textbf{TODO(MSR-ZANZ-001):} Value. & \textbf{TODO(DER refs)} \\
+\end{longtable}
+\end{center}
+
+\subsection{Full MSR artifact pointer}
+\textbf{TODO(MSR artifact pointer):} Provide a pointer to the full machine-readable MSR artifact, including tool versions/lockfiles and rerun instructions as required by Protocol v1.0.

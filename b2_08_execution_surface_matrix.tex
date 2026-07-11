@@ -1,0 +1,35 @@
+\section{Execution Surface Matrix}
+\label{sec:esm}
+The execution surface matrix (ESM) enumerates protocol-defined execution surfaces per system and records how (and where) execution can be initiated, constrained, or audited. The ESM is an input to later derivations and measurements; the matrix itself is descriptive.
+
+\textbf{TODO(ESM schema):} Record the ESM schema version used in this execution and provide a machine-readable export pointer.
+
+\subsection{ESM table (cohort extract)}
+\begin{center}
+\begin{longtable}{@{}p{0.12\linewidth}p{0.16\linewidth}p{0.20\linewidth}p{0.24\linewidth}p{0.20\linewidth}@{}}
+\toprule
+ESM ID & System & Execution surface & Gate / legitimacy check (as described) & Trace (BOR/Source) \\
+\midrule
+\endfirsthead
+\toprule
+ESM ID & System & Execution surface & Gate / legitimacy check (as described) & Trace (BOR/Source) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+ESM-OPA-001 & OPA+Gatekeeper & \textbf{TODO(ESM-OPA-001):} Name surface. & \textbf{TODO(GATE-OPA-001)} & \textbf{TODO(TRACE-OPA-001)} \\
+ESM-K8S-001 & Kubernetes RBAC/Admission & \textbf{TODO(ESM-K8S-001):} Name surface. & \textbf{TODO(GATE-K8S-001)} & \textbf{TODO(TRACE-K8S-001)} \\
+ESM-IAM-001 & AWS IAM & \textbf{TODO(ESM-IAM-001):} Name surface. & \textbf{TODO(GATE-IAM-001)} & \textbf{TODO(TRACE-IAM-001)} \\
+ESM-VAULT-001 & HashiCorp Vault & \textbf{TODO(ESM-VAULT-001):} Name surface. & \textbf{TODO(GATE-VAULT-001)} & \textbf{TODO(TRACE-VAULT-001)} \\
+ESM-ENVOY-001 & Envoy ext\_authz & \textbf{TODO(ESM-ENVOY-001):} Name surface. & \textbf{TODO(GATE-ENVOY-001)} & \textbf{TODO(TRACE-ENVOY-001)} \\
+ESM-ISTIO-001 & Istio AuthorizationPolicy & \textbf{TODO(ESM-ISTIO-001):} Name surface. & \textbf{TODO(GATE-ISTIO-001)} & \textbf{TODO(TRACE-ISTIO-001)} \\
+ESM-FGA-001 & OpenFGA & \textbf{TODO(ESM-FGA-001):} Name surface. & \textbf{TODO(GATE-FGA-001)} & \textbf{TODO(TRACE-FGA-001)} \\
+ESM-CEDAR-001 & Cedar / AVP & \textbf{TODO(ESM-CEDAR-001):} Name surface. & \textbf{TODO(GATE-CEDAR-001)} & \textbf{TODO(TRACE-CEDAR-001)} \\
+ESM-ZANZ-001 & Google Zanzibar & \textbf{TODO(ESM-ZANZ-001):} Name surface. & \textbf{TODO(GATE-ZANZ-001)} & \textbf{TODO(TRACE-ZANZ-001)} \\
+\end{longtable}
+\end{center}
+
+\subsection{Full ESM artifact pointer}
+\textbf{TODO(ESM artifact pointer):} Provide a pointer to the full machine-readable ESM artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.

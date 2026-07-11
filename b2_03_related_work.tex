@@ -1,0 +1,18 @@
+\section{Related Work}
+\label{sec:related-work}
+This section positions the Paper~B2 cohort relative to adjacent lines of work in authorization, policy enforcement, and governance architectures. It does not propose new theory; instead, it identifies concepts and terminology that will be used when instantiating Protocol v1.0 artifacts (e.g., baseline observations, derived objects, and measurements) for the evaluated systems.
+
+\subsection{Authorization and policy enforcement architectures}
+Across the candidate cohort, a common architectural concern is the separation of (i) policy authoring and reasoning, (ii) validity/legitimacy checks over policies and requests, and (iii) enforcement at execution points. Prior work on policy decision points (PDPs) and policy enforcement points (PEPs), admission control, sidecar- or proxy-mediated authorization, and relationship- or capability-based authorization provides vocabulary for describing where a system locates decision logic versus execution hooks.
+
+\textbf{TODO(Citations):} Insert citations covering PDP/PEP architectures, admission control patterns, and relationship-based authorization.
+
+\subsection{Governance systems and control planes}
+Governance and authorization systems frequently distinguish control-plane mechanisms (where configuration, policy, and intent are produced and distributed) from data-plane mechanisms (where requests are intercepted and acted upon). Kubernetes admission control and RBAC, service-mesh authorization, and cloud IAM are typical exemplars of this separation, but they vary substantially in how policy is represented, where evaluation happens, and what execution surface is exposed.
+
+\textbf{TODO(Citations):} Insert citations for Kubernetes governance/admission, service mesh authorization, and cloud IAM architectural overviews.
+
+\subsection{Protocolized and reproducible architectural investigation}
+Paper~0 defines Protocol v1.0 as the scientific instrument used in this work. Paper~B1 reports a pilot execution of the frozen protocol over a three-system cohort. Paper~B2 follows the same protocol without modification and treats the governance/authorization cohort as a distinct empirical investigation. Comparisons to B1 are therefore interpretive only and must be grounded in protocol outputs rather than post-hoc alterations.
+
+\textbf{TODO(Citations):} Add bibliographic entries for Paper~0 and Paper~B1.

@@ -1,0 +1,62 @@
+\section{Baseline Observation Records}
+\label{sec:bor}
+This section records Protocol v1.0 baseline observations for each system prior to any boundary evaluation.
+
+\textbf{Separation rule.} BOR entries are factual statements only (``what is described/implemented''), each paired with an evidence pointer. All interpretation (e.g., mapping an interface to an ``execution surface'') must be recorded later in the DER/MSR and referenced via trace pointers.
+
+\textbf{TODO(BOR evidence bundle):} Provide a BOR source reference file (SRF) pointer for each cohort member, including version, retrieval date, and hashing scheme.
+
+\subsection{BOR table schema}
+\begin{center}
+\begin{longtable}{@{}p{0.12\linewidth}p{0.16\linewidth}p{0.46\linewidth}p{0.20\linewidth}@{}}
+\toprule
+BOR ID & System & Observation (factual only) & Evidence pointer \\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (factual only) & Evidence pointer \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+% --- OPA + Gatekeeper ---
+BOR-OPA-001 & OPA+Gatekeeper & \textbf{TODO(BOR-OPA-001):} Insert factual observation. & \textbf{TODO(EVID-OPA-001)} \\
+BOR-OPA-002 & OPA+Gatekeeper & \textbf{TODO(BOR-OPA-002):} Insert factual observation. & \textbf{TODO(EVID-OPA-002)} \\
+
+% --- Kubernetes RBAC / Admission ---
+BOR-K8S-001 & Kubernetes RBAC/Admission & \textbf{TODO(BOR-K8S-001):} Insert factual observation. & \textbf{TODO(EVID-K8S-001)} \\
+BOR-K8S-002 & Kubernetes RBAC/Admission & \textbf{TODO(BOR-K8S-002):} Insert factual observation. & \textbf{TODO(EVID-K8S-002)} \\
+
+% --- AWS IAM ---
+BOR-IAM-001 & AWS IAM & \textbf{TODO(BOR-IAM-001):} Insert factual observation. & \textbf{TODO(EVID-IAM-001)} \\
+BOR-IAM-002 & AWS IAM & \textbf{TODO(BOR-IAM-002):} Insert factual observation. & \textbf{TODO(EVID-IAM-002)} \\
+
+% --- HashiCorp Vault ---
+BOR-VAULT-001 & HashiCorp Vault & \textbf{TODO(BOR-VAULT-001):} Insert factual observation. & \textbf{TODO(EVID-VAULT-001)} \\
+BOR-VAULT-002 & HashiCorp Vault & \textbf{TODO(BOR-VAULT-002):} Insert factual observation. & \textbf{TODO(EVID-VAULT-002)} \\
+
+% --- Envoy ext_authz ---
+BOR-ENVOY-001 & Envoy ext\_authz & \textbf{TODO(BOR-ENVOY-001):} Insert factual observation. & \textbf{TODO(EVID-ENVOY-001)} \\
+BOR-ENVOY-002 & Envoy ext\_authz & \textbf{TODO(BOR-ENVOY-002):} Insert factual observation. & \textbf{TODO(EVID-ENVOY-002)} \\
+
+% --- Istio AuthorizationPolicy ---
+BOR-ISTIO-001 & Istio AuthorizationPolicy & \textbf{TODO(BOR-ISTIO-001):} Insert factual observation. & \textbf{TODO(EVID-ISTIO-001)} \\
+BOR-ISTIO-002 & Istio AuthorizationPolicy & \textbf{TODO(BOR-ISTIO-002):} Insert factual observation. & \textbf{TODO(EVID-ISTIO-002)} \\
+
+% --- OpenFGA ---
+BOR-FGA-001 & OpenFGA & \textbf{TODO(BOR-FGA-001):} Insert factual observation. & \textbf{TODO(EVID-FGA-001)} \\
+BOR-FGA-002 & OpenFGA & \textbf{TODO(BOR-FGA-002):} Insert factual observation. & \textbf{TODO(EVID-FGA-002)} \\
+
+% --- Cedar / Amazon Verified Permissions ---
+BOR-CEDAR-001 & Cedar / AVP & \textbf{TODO(BOR-CEDAR-001):} Insert factual observation. & \textbf{TODO(EVID-CEDAR-001)} \\
+BOR-CEDAR-002 & Cedar / AVP & \textbf{TODO(BOR-CEDAR-002):} Insert factual observation. & \textbf{TODO(EVID-CEDAR-002)} \\
+
+% --- Google Zanzibar ---
+BOR-ZANZ-001 & Google Zanzibar & \textbf{TODO(BOR-ZANZ-001):} Insert factual observation. & \textbf{TODO(EVID-ZANZ-001)} \\
+BOR-ZANZ-002 & Google Zanzibar & \textbf{TODO(BOR-ZANZ-002):} Insert factual observation. & \textbf{TODO(EVID-ZANZ-002)} \\
+\end{longtable}
+\end{center}
+
+\textbf{TODO(BOR completeness check):} Confirm that BOR entries cover all protocol-required baseline fields (system identity, interfaces, policy representation, decision/evaluation locus, enforcement locus, audit/logging surfaces, and versioning) for each cohort member.

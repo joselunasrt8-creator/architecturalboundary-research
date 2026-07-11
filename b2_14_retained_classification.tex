@@ -1,0 +1,53 @@
+\section{Retained Classification}
+\label{sec:retained-classification}
+This section records the retained classifications for the investigated boundary/boundaries.
+
+\subsection{Investigated boundary set}
+\begin{itemize}
+  \item \textbf{B2-BND-001:} Candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary (Protocol v1.0 execution over the B2 cohort).
+\end{itemize}
+
+\subsection{Per-DER retained classification (Protocol v1.0; frozen I4/I5)}
+\textbf{Note.} For this run, protocol outcomes are issued by mechanically applying the registered I4/I5 mapping (Section~\ref{sec:i5-decision-function}) to each existing Comparative Dataset row (Section~\ref{sec:comparative-dataset}).
+
+\begin{center}
+\begin{longtable}{@{}p{0.10\linewidth}p{0.10\linewidth}p{0.18\linewidth}p{0.14\linewidth}p{0.12\linewidth}p{0.28\linewidth}@{}}
+\toprule
+Boundary & DER & System & Protocol outcome & Status label & Evidence summary (trace-first) \\
+\midrule
+\endfirsthead
+\toprule
+Boundary & DER & System & Protocol outcome & Status label & Evidence summary (trace-first) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+B2-BND-001 & DER-001 & Kubernetes RBAC/Admission & Violates & Unsupported & Comparative Dataset: DER-001; MSR trace: MSR-001--MSR-009. \\
+B2-BND-001 & DER-002 & Kubernetes RBAC/Admission & Supports & Unsupported & Comparative Dataset: DER-002; MSR trace: MSR-010--MSR-018. \\
+B2-BND-001 & DER-003 & HashiCorp Vault & Violates & Unsupported & Comparative Dataset: DER-003; MSR trace: MSR-019--MSR-027. \\
+B2-BND-001 & DER-004 & AWS IAM & Violates & Unsupported & Comparative Dataset: DER-004; MSR trace: MSR-028--MSR-036. \\
+B2-BND-001 & DER-005 & Google Zanzibar & Violates & Unsupported & Comparative Dataset: DER-005; MSR trace: MSR-037--MSR-045. \\
+B2-BND-001 & DER-006 & Istio AuthorizationPolicy & Violates & Unsupported & Comparative Dataset: DER-006; MSR trace: MSR-046--MSR-054. \\
+B2-BND-001 & DER-007 & Envoy ext\_authz & Violates & Unsupported & Comparative Dataset: DER-007; MSR trace: MSR-055--MSR-063. \\
+B2-BND-001 & DER-008 & OpenFGA & Violates & Unsupported & Comparative Dataset: DER-008; MSR trace: MSR-064--MSR-072. \\
+B2-BND-001 & DER-009 & Cedar / AVP & Violates & Unsupported & Comparative Dataset: DER-009; MSR trace: MSR-073--MSR-081. \\
+\end{longtable}
+\end{center}
+
+\subsection{Cohort outcome (precedence rule)}
+Applying the frozen cohort precedence rule over the above per-DER protocol outcomes yields the single cohort outcome: \textbf{Violates}.
+
+\subsection{Status label key (interpretation layer)}
+The \textit{Status label} is a cohort-bounded interpretation (Section~\ref{sec:analysis}), chosen from:
+\begin{itemize}
+  \item Fundamental Architectural Invariant
+  \item Conditional Architectural Invariant
+  \item Domain-Specific Pattern
+  \item Implementation Artifact
+  \item Unsupported
+\end{itemize}
+
+\subsection{Reason for retention or rejection}
+For B2-BND-001, the Protocol v1.0 cohort outcome is \emph{Violates}; therefore, the candidate boundary is rejected as an invariant for this cohort.

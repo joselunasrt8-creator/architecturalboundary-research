@@ -1,0 +1,48 @@
+\section{Threats to Validity}
+\label{sec:threats}
+This section catalogs threats that can invalidate the Paper~B2 investigation even when Protocol v1.0 is followed. Threats are stated conservatively and are bounded to the evaluated cohort and the admitted evidence representations.
+
+\subsection{Internal validity}
+\begin{itemize}
+  \item \textbf{Extraction and transcription errors:} BOR entries may contain mistakes when transcribing facts from sources.
+  \item \textbf{Pipeline drift:} If any extraction/normalization tooling is used, changes in tool versions or parameters can alter DER/MSR outputs.
+  \item \textbf{Trace breakage:} Missing or ambiguous trace pointers can allow unsupported conclusions.
+\end{itemize}
+
+\subsection{Construct validity}
+\begin{itemize}
+  \item \textbf{Operationalization mismatch:} The protocol's operational definition of ``Reasoning,'' ``Legitimacy,'' and ``Execution'' may not align with each system's native terminology.
+  \item \textbf{Proxy measurement error:} Measurements may be imperfect proxies for boundary separation.
+  \item \textbf{Schema pressure:} Normalizing heterogeneous systems into shared DER object types can obscure meaningful differences.
+\end{itemize}
+
+\subsection{External validity}
+\begin{itemize}
+  \item \textbf{Cohort limitations:} Findings are restricted to the selected governance/authorization cohort and its admitted representations.
+  \item \textbf{Temporal validity:} Systems evolve; observations tied to specific versions or documentation snapshots may not generalize to future releases.
+  \item \textbf{Deployment variance:} Paper~B2 analyzes system representations, not a randomized sample of real deployments.
+\end{itemize}
+
+\subsection{Selection bias}
+The cohort is not randomly sampled. Inclusion may over-represent widely documented or widely deployed systems and under-represent niche or proprietary governance stacks.
+
+\textbf{TODO(Selection rationale):} Record the cohort selection rationale and any explicit coverage goals (e.g., control-plane governance, service-mesh enforcement, relationship-based authorization).
+
+\subsection{Observer bias}
+Analysts may preferentially record observations that fit pre-existing intuitions about layered architectures.
+
+\textbf{TODO(Observer-bias mitigation):} Specify whether the BOR extraction is double-coded, and define a reconciliation procedure.
+
+\subsection{Researcher expectancy}
+Because the candidate boundary is pre-specified, analysts may unintentionally steer derivations toward confirming structures.
+
+\textbf{Mitigation stance.} Paper~B2 reduces expectancy risk by: (i) separating BOR (facts) from DER (derivations) and MSR (measurements), and (ii) requiring trace pointers for each conclusion.
+
+\subsection{Reproducibility limitations}
+\begin{itemize}
+  \item \textbf{Source stability:} Vendor documentation may change; stable snapshots and hashes are required.
+  \item \textbf{Tooling determinism:} If automated extraction/measurement is used, it must be pinned (lockfiles) and rerunnable.
+  \item \textbf{Inter-analyst agreement:} Some derivations may be under-specified without a formal coder agreement plan.
+\end{itemize}
+
+\textbf{TODO(Replication package):} Point to the replication package contents (source snapshots/hashes, scripts, lockfiles, and rerun instructions) consistent with Protocol v1.0 requirements.

@@ -1,0 +1,88 @@
+\section{Analysis}
+\label{sec:analysis}
+This section interprets the protocol artifacts (BOR/ESM/DER/MSR and the cohort comparative dataset) to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
+
+\subsection{Program status: prospective execution and traceability milestone}
+Conceptually, the research program now has the following executed sequence:
+\begin{quote}
+Paper~0 $\rightarrow$ Protocol~v1.0 $\rightarrow$ B1 (pilot execution) $\rightarrow$ B2-Run-1 (execution; preregistration incomplete) $\rightarrow$ AUD-001 $\rightarrow$ B2-Run-2 (prospectively preregistered execution) $\rightarrow$ Empirical result.
+\end{quote}
+
+If the execution and traceability are correct, then B2-Run-2 establishes: (i) a protocol that can be executed prospectively; (ii) a fully traceable evidence pipeline from BOR through the Comparative Dataset; (iii) a preregistered decision rule that yields a deterministic cohort result; and (iv) a hypothesis tested without modification after observing the evidence.
+
+\textbf{Constraints (frozen artifacts; no new decision logic).} Analysis in Paper~B2 is performed by synthesizing values already present in the Comparative Dataset (and its trace links to MSR/DER/SRF/BOR). The analysis must: (i) not modify BOR, SRF, DER, MSR, or the Comparative Dataset; (ii) not introduce new observations, measurements, metrics, thresholds, or decision rules; (iii) ensure every claim is traceable through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR; and (iv) if a protocol-defined conclusion cannot be reached uniquely from the registered decision rules for this investigation, record the ambiguity rather than resolving it.
+
+\subsection{Inputs and notation}
+\begin{itemize}
+  \item \textbf{Observations:} BOR-\emph{*} (Section~\ref{sec:bor})
+  \item \textbf{Execution surfaces:} ESM-\emph{*} (Section~\ref{sec:esm})
+  \item \textbf{Derivations:} DER-\emph{*} (Section~\ref{sec:der})
+  \item \textbf{Measurements:} MSR-\emph{*} (Section~\ref{sec:msr})
+\end{itemize}
+
+\textbf{Frozen decision rule (I5).} Paper~B2 applies the registered decision function from Section~\ref{sec:i5-decision-function}: for a unit with measurement vector $(m_R,m_L,m_E,m_{RL},m_{LE})$, the outcome is \emph{Indeterminate} if any component is missing; \emph{Supports} iff all five components equal 1; \emph{Violates} otherwise. Cohort precedence is \emph{Indeterminate} $\succ$ \emph{Violates} $\succ$ \emph{Supports}.
+
+\subsection{Per-DER execution of frozen I4/I5 over the Comparative Dataset}
+\label{sec:per-der-i5-execution}
+\textbf{Mechanical mapping (I4).} For each Comparative Dataset row (Section~\ref{sec:comparative-dataset}), we construct the I4 measurement vector as:
+\begin{itemize}
+  \item $m_R \leftarrow$ M1
+  \item $m_L \leftarrow$ M2
+  \item $m_E \leftarrow$ M3
+  \item $m_{RL} \leftarrow$ M4
+  \item $m_{LE} \leftarrow$ M5
+\end{itemize}
+No other dataset fields are used for I5 classification.
+
+\begin{center}
+\begin{longtable}{@{}p{0.18\linewidth}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.10\linewidth}p{0.22\linewidth}@{}}
+\toprule
+System & DER & $(m_R,m_L,m_E,m_{RL},m_{LE})$ & I5 branch applied & Outcome & Supporting IDs (Comparative Dataset / MSR) \\
+\midrule
+\endfirsthead
+\toprule
+System & DER & $(m_R,m_L,m_E,m_{RL},m_{LE})$ & I5 branch applied & Outcome & Supporting IDs (Comparative Dataset / MSR) \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+Kubernetes RBAC/Admission & DER-001 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-001; MSR-001--MSR-009\\
+Kubernetes RBAC/Admission & DER-002 & (1,1,1,1,1) & supports (all ones) & Supports & Comparative Dataset row: DER-002; MSR-010--MSR-018\\
+HashiCorp Vault & DER-003 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-003; MSR-019--MSR-027\\
+AWS IAM & DER-004 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-004; MSR-028--MSR-036\\
+Google Zanzibar & DER-005 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-005; MSR-037--MSR-045\\
+Istio AuthorizationPolicy & DER-006 & (1,1,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-006; MSR-046--MSR-054\\
+Envoy ext\_authz & DER-007 & (1,1,1,1,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-007; MSR-055--MSR-063\\
+OpenFGA & DER-008 & (1,1,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-008; MSR-064--MSR-072\\
+Cedar / AVP & DER-009 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-009; MSR-073--MSR-081\\
+\end{longtable}
+\end{center}
+
+\subsection{Run result (B2-Run-2)}
+\paragraph{Observed measurements (data).}
+Across the nine Comparative Dataset rows (DER-001--DER-009), exactly one row (DER-002) has the complete measurement vector $(1,1,1,1,1)$. The remaining eight rows have at least one component equal to 0.
+
+\paragraph{Application of the frozen I5 decision rule (mechanical).}
+Applying the registered I5 rule to the observed vectors yields:
+\begin{itemize}
+  \item Supports: 1/9
+  \item Violates: 8/9
+  \item Indeterminate: 0/9
+\end{itemize}
+
+\paragraph{Cohort conclusion (outcome under the preregistered rule).}
+Because there is at least one \emph{Violates} outcome and there are no \emph{Indeterminate} outcomes, the cohort outcome is \textbf{Violates}.
+
+\subsection{Scientific meaning (interpretation layer)}
+The evidence does not support the preregistered claim that every candidate in the governance cohort exhibits the complete explicit R$\rightarrow$L$\rightarrow$E structure required by I5. This does not imply that reasoning, legitimacy, and execution are irrelevant; it implies that the strict all-components invariant, as preregistered, does not hold across this cohort.
+
+\subsection{Cohort outcome (precedence rule)}
+Across the nine Comparative Dataset rows (DER-001--DER-009), there exists at least one \emph{Violates} outcome and there are no \emph{Indeterminate} outcomes. Therefore, the cohort outcome under the frozen precedence rule is \textbf{Violates}.
+
+\subsection{Interpretation layer: candidate boundary status categories}
+Given the cohort outcome \emph{Violates}, the candidate RLE boundary is retained with status label \textbf{Unsupported} for this cohort.
+
+\subsection{Counterexamples and boundary conditions}
+A minimal counterexample is any violating row in Table~\ref{sec:per-der-i5-execution} (e.g., DER-001).

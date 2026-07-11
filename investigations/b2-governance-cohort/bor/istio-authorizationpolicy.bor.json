@@ -1,0 +1,93 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-istio-authorizationpolicy",
+  "cohort_member": {
+    "name": "Istio AuthorizationPolicy",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[5]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official API references / configuration schema references"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-ISTIO-001",
+      "source_type": "Official API references / configuration schema references",
+      "title": "Authorization Policy reference",
+      "publisher": "Istio project",
+      "version_or_channel": "latest Istio documentation; reference page retrieved state",
+      "url": "https://istio.io/latest/docs/reference/config/security/authorization-policy/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-ISTIO-002",
+      "source_type": "Official API references / configuration schema references",
+      "title": "External Authorization task",
+      "publisher": "Istio project",
+      "version_or_channel": "latest Istio documentation; task page retrieved state",
+      "url": "https://istio.io/latest/docs/tasks/security/authorization/authz-custom/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-ISTIO-AUTHPOL-OBS-001",
+      "source_type": "Official API references / configuration schema references",
+      "source_reference": "EV-ISTIO-001",
+      "source_location": "Authorization Policy > AuthorizationPolicy, latest documentation",
+      "observation_text": "Istio AuthorizationPolicy enables access control on workloads in the mesh.",
+      "rationale": "Records the documented resource purpose without classification."
+    },
+    {
+      "observation_id": "BOR-B2-ISTIO-AUTHPOL-OBS-002",
+      "source_type": "Official API references / configuration schema references",
+      "source_reference": "EV-ISTIO-001",
+      "source_location": "Authorization Policy > Action, latest documentation",
+      "observation_text": "AuthorizationPolicy supports CUSTOM, DENY, ALLOW, and AUDIT actions.",
+      "rationale": "Records documented action names only."
+    },
+    {
+      "observation_id": "BOR-B2-ISTIO-AUTHPOL-OBS-003",
+      "source_type": "Official API references / configuration schema references",
+      "source_reference": "EV-ISTIO-001",
+      "source_location": "Authorization Policy > AuthorizationPolicy, latest documentation",
+      "observation_text": "When CUSTOM, DENY, and ALLOW actions are used for a workload at the same time, Istio documentation states that CUSTOM is evaluated first, then DENY, and then ALLOW.",
+      "rationale": "Records documented evaluation order without comparative or measurement claims."
+    },
+    {
+      "observation_id": "BOR-B2-ISTIO-AUTHPOL-OBS-004",
+      "source_type": "Official API references / configuration schema references",
+      "source_reference": "EV-ISTIO-001",
+      "source_location": "Authorization Policy > Rule, latest documentation",
+      "observation_text": "AuthorizationPolicy rules can match source, operation, and condition fields.",
+      "rationale": "Records documented rule fields only."
+    },
+    {
+      "observation_id": "BOR-B2-ISTIO-AUTHPOL-OBS-005",
+      "source_type": "Official API references / configuration schema references",
+      "source_reference": "EV-ISTIO-002",
+      "source_location": "External Authorization > Define the external authorizer, latest documentation",
+      "observation_text": "For the CUSTOM action, Istio documentation says an external authorizer must be defined in mesh configuration as an extension provider.",
+      "rationale": "Records documented custom authorizer configuration without deriving downstream objects."
+    }
+  ]
+}

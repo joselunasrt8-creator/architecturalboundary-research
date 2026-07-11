@@ -1,0 +1,85 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-envoy-ext-authz",
+  "cohort_member": {
+    "name": "Envoy ext_authz",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[4]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-ENVOY-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "External Authorization HTTP filter",
+      "publisher": "Envoy Proxy project",
+      "version_or_channel": "latest Envoy documentation; 1.39.0-dev documentation channel observed in page title at retrieval",
+      "url": "https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-ENVOY-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "External Authorization proto API",
+      "publisher": "Envoy Proxy project",
+      "version_or_channel": "latest Envoy API reference; v3 API documentation retrieved state",
+      "url": "https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-ENVOY-001",
+      "source_location": "External Authorization > External Authorization, latest documentation",
+      "observation_text": "The Envoy external authorization filter calls an external gRPC or HTTP service to determine whether an incoming HTTP request is authorized.",
+      "rationale": "Records the documented filter behavior without classifying it."
+    },
+    {
+      "observation_id": "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-ENVOY-001",
+      "source_location": "External Authorization > External Authorization, latest documentation",
+      "observation_text": "If the request is unauthorized, Envoy returns a 403 Forbidden response.",
+      "rationale": "Records the documented response behavior only."
+    },
+    {
+      "observation_id": "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-ENVOY-001",
+      "source_location": "External Authorization > External Authorization, latest documentation",
+      "observation_text": "The filter can send custom metadata to the authorization service and propagate metadata returned by that service to the upstream or downstream.",
+      "rationale": "Records documented metadata handling without downstream analysis."
+    },
+    {
+      "observation_id": "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-ENVOY-002",
+      "source_location": "External Authorization proto API > ExtAuthz, v3 API reference",
+      "observation_text": "The ext_authz filter API defines gRPC and HTTP service configuration options for external authorization service communication.",
+      "rationale": "Records documented API configuration options without deriving structure."
+    }
+  ]
+}

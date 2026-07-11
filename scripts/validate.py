@@ -5,9 +5,16 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+try:
+    from jsonschema import Draft202012Validator
+except ModuleNotFoundError:  # pragma: no cover - restricted local environments only
+    sys.path.insert(0, str(ROOT))
+    from tools.jsonschema_fallback import Draft202012Validator
+
 REQUIRED_TOP_LEVEL = [
     "analysis", "ci", "datasets", "docs", "evidence", "figures", "investigations",
     "papers", "protocol", "registry", "releases", "schemas", "scripts", "validation",
@@ -108,6 +115,18 @@ def validate_registered_paths() -> None:
                 raise SystemExit(f"{relative} references missing path: {registered}")
 
 
+def validate_bor_schemas() -> None:
+    schema = require_json("schemas/bor.schema.json")
+    validator = Draft202012Validator(schema)
+    for path in sorted((ROOT / "investigations/b2-governance-cohort/bor").glob("*.bor.json")):
+        with path.open(encoding="utf-8") as handle:
+            data = json.load(handle)
+        errors = sorted(validator.iter_errors(data), key=lambda error: list(error.path))
+        if errors:
+            detail = "; ".join(error.message for error in errors)
+            raise SystemExit(f"BOR schema validation failed for {path.relative_to(ROOT)}: {detail}")
+
+
 def validate_move_ledger() -> None:
     require_path("MOVES.md")
     text = (ROOT / "MOVES.md").read_text(encoding="utf-8")
@@ -129,6 +148,7 @@ def main() -> None:
     for relative in [*SCHEMAS, *REGISTRIES]:
         require_json(relative)
     validate_yaml_syntax()
+    validate_bor_schemas()
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

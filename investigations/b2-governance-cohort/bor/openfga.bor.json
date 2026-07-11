@@ -1,0 +1,94 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-openfga",
+  "cohort_member": {
+    "name": "OpenFGA",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[6]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-OPENFGA-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "OpenFGA Concepts",
+      "publisher": "OpenFGA project",
+      "version_or_channel": "OpenFGA documentation current channel retrieved state",
+      "url": "https://openfga.dev/docs/concepts",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-OPENFGA-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Configuration Language",
+      "publisher": "OpenFGA project",
+      "version_or_channel": "OpenFGA documentation current channel retrieved state",
+      "url": "https://openfga.dev/docs/configuration-language",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-OPENFGA-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Immutable Authorization Models",
+      "publisher": "OpenFGA project",
+      "version_or_channel": "OpenFGA documentation current channel retrieved state",
+      "url": "https://openfga.dev/docs/getting-started/immutable-models",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-OPENFGA-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-OPENFGA-001",
+      "source_location": "Concepts > What Is An Authorization Model?, current documentation",
+      "observation_text": "An OpenFGA authorization model combines one or more type definitions and is used to define the permission model of a system.",
+      "rationale": "Records the documented authorization model concept without measurement."
+    },
+    {
+      "observation_id": "BOR-B2-OPENFGA-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-OPENFGA-002",
+      "source_location": "Configuration Language > Configuration Language, current documentation",
+      "observation_text": "OpenFGA Configuration Language builds a representation of a system authorization model and informs the OpenFGA API about object types and relationships.",
+      "rationale": "Records documented language purpose only."
+    },
+    {
+      "observation_id": "BOR-B2-OPENFGA-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-OPENFGA-002",
+      "source_location": "Configuration Language > The type system, current documentation",
+      "observation_text": "The Configuration Language describes possible relations for an object type and conditions under which an entity is related to that object.",
+      "rationale": "Records documented model content without classification."
+    },
+    {
+      "observation_id": "BOR-B2-OPENFGA-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-OPENFGA-003",
+      "source_location": "Immutable Authorization Models > Immutable Authorization Models, current documentation",
+      "observation_text": "OpenFGA authorization models are immutable after creation, and writing an authorization model creates a new version.",
+      "rationale": "Records documented model version behavior only."
+    }
+  ]
+}

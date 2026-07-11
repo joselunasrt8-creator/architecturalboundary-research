@@ -1,0 +1,93 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-aws-iam",
+  "cohort_member": {
+    "name": "AWS IAM",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[2]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-AWS-IAM-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Policies and permissions in IAM",
+      "publisher": "Amazon Web Services",
+      "version_or_channel": "AWS IAM User Guide; continuously updated documentation retrieved state",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-AWS-IAM-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Policy evaluation logic",
+      "publisher": "Amazon Web Services",
+      "version_or_channel": "AWS IAM User Guide; continuously updated documentation retrieved state",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-AWS-IAM-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-AWS-IAM-001",
+      "source_location": "Policies and permissions in IAM > Policies and permissions, retrieved state",
+      "observation_text": "AWS IAM policies are objects that define permissions when associated with an identity or resource, and most policies are stored as JSON documents.",
+      "rationale": "Records the documented IAM policy object format without measurement language."
+    },
+    {
+      "observation_id": "BOR-B2-AWS-IAM-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-AWS-IAM-001",
+      "source_location": "Policies and permissions in IAM > Policy types, retrieved state",
+      "observation_text": "Identity-based policies are permissions policies attached to IAM identities such as users, groups, or roles.",
+      "rationale": "Records one documented policy category without comparative conclusions."
+    },
+    {
+      "observation_id": "BOR-B2-AWS-IAM-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-AWS-IAM-001",
+      "source_location": "Policies and permissions in IAM > Policy types, retrieved state",
+      "observation_text": "Resource-based policies are permissions policies attached to resources, and supported examples include IAM role trust policies and Amazon S3 bucket policies.",
+      "rationale": "Records a documented policy attachment category only."
+    },
+    {
+      "observation_id": "BOR-B2-AWS-IAM-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-AWS-IAM-002",
+      "source_location": "Policy evaluation logic > Policy evaluation logic, retrieved state",
+      "observation_text": "When a principal makes a request, AWS gathers request information into a request context and uses it to evaluate applicable policies.",
+      "rationale": "Records the documented request-context processing step without deriving a measurement."
+    },
+    {
+      "observation_id": "BOR-B2-AWS-IAM-OBS-005",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-AWS-IAM-002",
+      "source_location": "Policy evaluation logic > Policy evaluation logic, retrieved state",
+      "observation_text": "AWS enforcement code evaluates applicable policy types and processes the policies against the request context to determine whether a request is allowed or denied.",
+      "rationale": "Records the documented evaluation outcome wording without classification."
+    }
+  ]
+}

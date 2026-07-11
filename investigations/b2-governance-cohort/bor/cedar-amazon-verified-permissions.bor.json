@@ -1,0 +1,94 @@
+{
+  "object_type": "BaselineObservationRecord",
+  "schema_version": "canonical-bor-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "bor-b2-cedar-amazon-verified-permissions",
+  "cohort_member": {
+    "name": "Cedar / Amazon Verified Permissions",
+    "selection_basis": {
+      "registration_object": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+      "registration_field": "cohort_rule.frozen_cohort[7]"
+    }
+  },
+  "constraints": {
+    "record_type": "baseline_observations_only",
+    "no_measurements_derived": true,
+    "no_classification_assigned": true,
+    "no_srf_der_msr_comparative_dataset_or_analysis_created": true,
+    "candidate_invariant_wording_changed": false,
+    "protocol_modified": false,
+    "i1_i5_registration_modified": false
+  },
+  "retrieval": {
+    "retrieved_at_utc": "2026-07-11T00:00:00Z",
+    "retrieval_method": "web documentation review"
+  },
+  "admitted_evidence_rule": {
+    "registration_id": "I2",
+    "admitted_type_used": "Official product documentation (vendor/project docs) and reference architecture descriptions"
+  },
+  "evidence_sources": [
+    {
+      "source_id": "EV-CEDAR-AVP-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Amazon Verified Permissions Documentation",
+      "publisher": "Amazon Web Services",
+      "version_or_channel": "AWS Verified Permissions documentation current channel retrieved state",
+      "url": "https://docs.aws.amazon.com/verifiedpermissions/",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-CEDAR-AVP-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Differences between Amazon Verified Permissions and the Cedar policy language",
+      "publisher": "Amazon Web Services",
+      "version_or_channel": "AWS Verified Permissions User Guide; current channel retrieved state",
+      "url": "https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/terminology-differences-avp-cedar.html",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    },
+    {
+      "source_id": "EV-CEDAR-AVP-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "title": "Amazon Verified Permissions and Cedar policy language terms and concepts",
+      "publisher": "Amazon Web Services",
+      "version_or_channel": "AWS Verified Permissions User Guide; current channel retrieved state",
+      "url": "https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/terminology.html",
+      "retrieved_at_utc": "2026-07-11T00:00:00Z"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "BOR-B2-CEDAR-AVP-OBS-001",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-CEDAR-AVP-001",
+      "source_location": "Amazon Verified Permissions Documentation > Documentation overview, current channel",
+      "observation_text": "Amazon Verified Permissions uses policies written in the Cedar policy language to describe access with principal, action, resource, and context elements.",
+      "rationale": "Records documented AVP policy terminology without deriving a measurement."
+    },
+    {
+      "observation_id": "BOR-B2-CEDAR-AVP-OBS-002",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-CEDAR-AVP-002",
+      "source_location": "Differences between Amazon Verified Permissions and the Cedar policy language > Differences, current channel",
+      "observation_text": "Amazon Verified Permissions uses the Cedar policy language engine to perform authorization tasks.",
+      "rationale": "Records documented engine relationship only."
+    },
+    {
+      "observation_id": "BOR-B2-CEDAR-AVP-OBS-003",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-CEDAR-AVP-003",
+      "source_location": "Terms and concepts > Policy, current channel",
+      "observation_text": "Verified Permissions policy stores contain Cedar policies, and the service evaluates authorization requests against those policies.",
+      "rationale": "Records documented policy-store behavior without classification."
+    },
+    {
+      "observation_id": "BOR-B2-CEDAR-AVP-OBS-004",
+      "source_type": "Official product documentation (vendor/project docs) and reference architecture descriptions",
+      "source_reference": "EV-CEDAR-AVP-003",
+      "source_location": "Terms and concepts > Schema, current channel",
+      "observation_text": "A Verified Permissions schema defines entity types, actions, and the shape of authorization requests for an application.",
+      "rationale": "Records documented schema purpose only."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-envoy-ext-authz-external-authorization-boundary",
+  "source_srf_ids": [
+    "srf-b2-envoy-ext-authz"
+  ],
+  "source_surface_ids": [
+    "srf-b2-envoy-ext-authz-execution-entry-points-incoming-http-request",
+    "srf-b2-envoy-ext-authz-authorization-surfaces-external-service",
+    "srf-b2-envoy-ext-authz-policy-evaluation-surfaces-authorization-service-call",
+    "srf-b2-envoy-ext-authz-protected-resources-upstream-request",
+    "srf-b2-envoy-ext-authz-execution-boundaries-envoy-to-external-service",
+    "srf-b2-envoy-ext-authz-observable-execution-flow-call",
+    "srf-b2-envoy-ext-authz-observable-execution-flow-deny",
+    "srf-b2-envoy-ext-authz-observable-execution-flow-metadata"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+    "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+    "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+    "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared Envoy ext_authz SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed Envoy ext_authz execution surfaces, the referenced SRF supports the bounded evidence statement that Envoy ext_authz handles incoming HTTP requests through a filter that calls a configured external gRPC or HTTP authorization service, returns 403 Forbidden for unauthorized requests, and defines an explicit Envoy-to-external-service communication boundary with metadata propagation surfaces affecting upstream or downstream request handling.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "Canonical Reference DER: second reference execution of the frozen SRF to DER contract for one selected B2 SRF. Remaining DER records will be produced separately."
+  }
+}

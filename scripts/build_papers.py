@@ -112,14 +112,28 @@ def build_paper(paper: Paper, *, keep_build: bool = False) -> BuildResult:
         return BuildResult(paper=paper, ok=False, warnings=warnings, failure=first.stdout)
 
     bib_files = bib_files_for(paper)
-    if bib_files:
+    aux_file = output_dir / "main.aux"
+    aux_uses_citations = (
+        aux_file.is_file()
+        and "\\citation{" in aux_file.read_text(errors="replace")
+    )
+
+    if bib_files and aux_uses_citations:
         for bib_file in bib_files:
             shutil.copy2(bib_file, output_dir / bib_file.name)
 
         bib = run_command(["bibtex", "main"], output_dir)
-        warnings = merge_warnings(warnings, collect_pattern_warnings(bib.stdout, BIBTEX_WARNING_PATTERNS))
+        warnings = merge_warnings(
+            warnings,
+            collect_pattern_warnings(bib.stdout, BIBTEX_WARNING_PATTERNS),
+        )
         if bib.returncode != 0:
-            return BuildResult(paper=paper, ok=False, warnings=warnings, failure=bib.stdout)
+            return BuildResult(
+                paper=paper,
+                ok=False,
+                warnings=warnings,
+                failure=bib.stdout,
+            )
 
     for _ in range(2):
         repeat = run_command(latex_cmd, paper.source_dir)

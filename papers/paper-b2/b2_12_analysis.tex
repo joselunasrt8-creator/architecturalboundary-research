@@ -1,15 +1,15 @@
 \section{Analysis}
 \label{sec:analysis}
-This section interprets the protocol artifacts (BOR/ESM/DER/MSR and the cohort comparative dataset) to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
+This section is a deferred analysis placeholder. The current repository state contains BOR and SRF artifacts plus two canonical DER reference executions, but no MSR records, comparative dataset values, analysis results, or retained classifications from which to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
 
-\textbf{Constraints (frozen artifacts; no new decision logic).} Analysis in Paper~B2 is performed by synthesizing values already present in the Comparative Dataset (and its trace links to MSR/DER/SRF/BOR). The analysis must: (i) not modify BOR, SRF, DER, MSR, or the Comparative Dataset; (ii) not introduce new observations, measurements, metrics, thresholds, or decision rules; (iii) ensure every claim is traceable through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR; and (iv) if a protocol-defined conclusion cannot be reached uniquely from the registered decision rules for this investigation, record the ambiguity rather than resolving it.
+\textbf{Constraints (frozen artifacts; no new decision logic).} Analysis in Paper~B2 may be performed only after values are present in the Comparative Dataset (and its trace links to MSR/DER/SRF/BOR). The analysis must: (i) not modify BOR, SRF, DER, MSR, or the Comparative Dataset; (ii) not introduce new observations, measurements, metrics, thresholds, or decision rules; (iii) ensure every claim is traceable through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR; and (iv) if a protocol-defined conclusion cannot be reached uniquely from the registered decision rules for this investigation, record the ambiguity rather than resolving it.
 
 \subsection{Inputs and notation}
 \begin{itemize}
   \item \textbf{Observations:} BOR-\emph{*} (Section~\ref{sec:bor})
   \item \textbf{Execution surfaces:} ESM-\emph{*} (Section~\ref{sec:esm})
-  \item \textbf{Derivations:} DER-\emph{*} (Section~\ref{sec:der})
-  \item \textbf{Measurements:} MSR-\emph{*} (Section~\ref{sec:msr})
+  \item \textbf{Derivations:} two canonical reference DERs (Section~\ref{sec:der}); remaining DER execution incomplete
+  \item \textbf{Measurements:} not started (Section~\ref{sec:msr})
 \end{itemize}
 
 \textbf{TODO(Decision rule I5):} Insert the exact registered decision rule once I5 is finalized in Section~\ref{sec:protocol-registration}.
@@ -82,23 +82,14 @@ For each cohort member, the assessment proceeds in four explicitly separated ste
 \subsection{Cohort-level comparison}
 Cohort-level comparisons must be expressed in terms of shared dataset fields and measurements rather than informal narrative. Where systems differ in representational choices, those differences must be made explicit as derivations (DER) and the analysis must indicate sensitivity to those choices.
 
+
 \subsubsection{Cohort-wide summary (metric extract)}
-Using the Comparative Dataset metric extract (Section~\ref{sec:comparative-dataset}), the cohort exhibits the following patterns across the nine candidate objects (DER-001--DER-009):
-\begin{itemize}
-  \item \textbf{Decision component present (MET-001):} 9/9 candidates.
-  \item \textbf{Execution component present (MET-002):} 4/9 candidates (DER-002, DER-006, DER-007, DER-008).
-  \item \textbf{Policy enforcement/policy evaluation surface present (MET-003):} 9/9 candidates.
-  \item \textbf{Decision and execution separated (MET-004):} 2/9 candidates (DER-002, DER-007).
-  \item \textbf{Authorization before execution (MET-005):} 1/9 candidates (DER-002); DER-007 explicitly records non-evidence for this ordering (MET-005=0).
-  \item \textbf{Execution surface explicitly documented (MET-006):} 9/9 candidates.
-  \item \textbf{Policy evaluation surface explicitly documented (MET-007):} 8/9 candidates; Cedar/AVP (DER-009) is the sole candidate with MET-007=0.
-  \item \textbf{Audit/decision-trace surface present (MET-008):} 1/9 candidates (DER-003).
-\end{itemize}
+No cohort-wide metric extract is reported in this synchronization because MSR execution and the Comparative Dataset have not started. The current two canonical DER reference executions are bounded evidence objects only and do not support metric-level synthesis.
 
 \subsubsection{Evidence sufficiency (MET-009)}
-Evidence sufficiency values (MET-009) in the Comparative Dataset are: \emph{Supported} (2/9; DER-002, DER-007), \emph{Partial} (6/9; DER-001, DER-003, DER-004, DER-005, DER-006, DER-008), and \emph{Insufficient} (1/9; DER-009).
+No MET-009 evidence sufficiency values are reported because no MSR records or Comparative Dataset rows have been created.
 
-\textbf{TODO(Cohort synthesis; blocked on I4/I5):} Any cohort-level statement about the candidate RLE boundary (as opposed to individual frozen metrics) must be derived only after the investigation's registered I4/I5 mapping from the Comparative Dataset to \{Supports, Violates, Indeterminate\} is finalized.
+\textbf{TODO(Cohort synthesis; blocked on remaining DER/MSR/I4/I5):} Any cohort-level statement about the candidate RLE boundary must be derived only after remaining DER execution, MSR execution, Comparative Dataset construction, and the investigation's registered I4/I5 mapping to \{Supports, Violates, Indeterminate\} are finalized.
 
 \subsection{Interpretation layer: candidate boundary status categories}
 In addition to the Protocol v1.0 per-system outcome labels \{Supports, Violates, Indeterminate\}, Paper~B2 records a cohort-bounded interpretation of what the evidence suggests about the candidate boundary's status within this domain:
@@ -110,7 +101,7 @@ In addition to the Protocol v1.0 per-system outcome labels \{Supports, Violates,
   \item Unsupported
 \end{itemize}
 
-\textbf{TODO(Boundary status):} Assign one status label for the candidate boundary based on the cohort-level synthesis, and justify it using only BOR/DER/MSR-backed statements.
+\textbf{TODO(Boundary status):} Assign one status label for the candidate boundary only after cohort-level synthesis exists, and justify it using only BOR/DER/MSR-backed statements.
 
 \subsection{Counterexamples and boundary conditions}
 Violations or indeterminate outcomes should be treated as potential counterexamples or boundary conditions.

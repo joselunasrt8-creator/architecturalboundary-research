@@ -28,7 +28,7 @@ REQUIRED_PATHS = [
     "protocol/protocol-v1/schemas/README.md", "protocol/protocol-v1/templates/README.md",
     "papers/paper-0-protocol/README.md", "papers/paper-b1/README.md", "papers/paper-b2/main.tex",
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
-    "scripts/build_dataset.py", "scripts/build_report.py", "scripts/check_registry.py",
+    "scripts/build_dataset.py", "scripts/build_report.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
 INVESTIGATIONS = ["investigations/template", "investigations/b1-three-system-pilot", "investigations/b2-governance-cohort"]
 INVESTIGATION_ITEMS = [
@@ -235,6 +235,9 @@ def main() -> None:
     validate_latex_inputs()
     validate_move_ledger()
     subprocess.run(["python3", "scripts/check_registry.py"], cwd=ROOT, check=True)
+    publication_build = subprocess.run(["python3", "scripts/build_papers.py"], cwd=ROOT)
+    if publication_build.returncode != 0:
+        raise SystemExit(f"publication validation failed with exit code {publication_build.returncode}")
     print("repository topology validation passed")
 
 

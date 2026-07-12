@@ -18,7 +18,17 @@ jobs:
           python-version: "3.x"
       - name: Install deterministic Python dependencies
         run: python3 -m pip install -r requirements.txt
-      - name: Validate repository topology and syntax
+      - name: Install TeX Live publication dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            texlive-bibtex-extra \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended
+      - name: Validate repository topology, syntax, and publications
         run: python3 scripts/validate.py
       - name: Check registries
         run: python3 scripts/check_registry.py
@@ -26,5 +36,13 @@ jobs:
         run: python3 scripts/build_dataset.py
       - name: Check report build entry point
         run: python3 scripts/build_report.py
+      - name: Build publication PDFs
+        run: python3 scripts/build_papers.py
+      - name: Upload publication PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-pdfs
+          path: releases/papers/*.pdf
+          if-no-files-found: error
       - name: Check whitespace
         run: git diff --check

@@ -1,17 +1,16 @@
 \section{Derived Object Registry}
 \label{sec:der}
-This section completes the manuscript DER for the B2 governance cohort by registering derived objects
-\emph{only} when they can be traced to documented Source Reference Files (SRFs).
+This section records the completed manuscript DER synchronization for the B2 governance cohort by registering the canonical DER executions that are already present in the machine-readable repository.
 
 \textbf{Separation rule.} DER entries are derivations only: no new observations, measurements, classifications, hypotheses, or conclusions may be introduced here. Every object must include an explicit trace pointer to SRF observations.
 
 \textbf{TODO(DER schema):} Record the DER schema version used in this execution and provide a machine-readable export pointer.
 
 \subsection{DER table (cohort extract)}
-\textbf{DER completion status (manuscript build).} The registry below records two canonical reference DERs: Envoy \texttt{ext\_authz} at \texttt{investigations/b2-governance-cohort/der/envoy-ext-authz.der.json} and OpenFGA at \texttt{investigations/b2-governance-cohort/der/openfga.der.json}. These are bounded evidence artifacts produced from the frozen SRF$\to$DER contract; they are not analysis, measurements, retained classifications, cohort conclusions, or an indication that B2 DER execution is complete. Remaining DER execution has not yet been completed.
+\textbf{DER completion status (manuscript build).} The registry below records all nine canonical B2 DER executions present under \texttt{investigations/b2-governance-cohort/der/}. These are bounded evidence artifacts produced from the frozen SRF$\to$DER contract; they are not analysis, measurements, retained classifications, cohort conclusions, or an indication that any later lifecycle stage has begun. BOR, SRF, and DER are complete; MSR, Comparative Dataset, Analysis, and Retained Classification remain not started.
 
 \begin{center}
-\begin{longtable}{@{}p{0.12\linewidth}p{0.20\linewidth}p{0.20\linewidth}p{0.28\linewidth}p{0.18\linewidth}@{}}
+\begin{longtable}{@{}p{0.24\linewidth}p{0.20\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.14\linewidth}@{}}
 \toprule
 DER ID & System & Canonical object type & Object label / description & Trace (SRF) \\
 \midrule
@@ -24,24 +23,24 @@ DER ID & System & Canonical object type & Object label / description & Trace (SR
 \endfoot
 \bottomrule
 \endlastfoot
-DER-OPA-000 & OPA+Gatekeeper & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-OPA)} \\
-DER-K8S-000 & Kubernetes RBAC/Admission & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-K8S)} \\
-DER-IAM-000 & AWS IAM & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-IAM)} \\
-DER-VAULT-000 & HashiCorp Vault & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-VAULT)} \\
-\texttt{der-b2-envoy-ext-authz-external-authorization-boundary} & Envoy ext\_authz & Canonical reference DER & Bounded Envoy ext\_authz evidence artifact derived only from the canonical SRF and BOR observation references; remaining DER execution is incomplete. & \texttt{srf-b2-envoy-ext-authz} \\
-DER-ISTIO-000 & Istio AuthorizationPolicy & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-ISTIO)} \\
-\texttt{der-b2-openfga-authorization-model-version-boundary} & OpenFGA & Canonical reference DER & Bounded OpenFGA evidence artifact derived only from the canonical SRF and BOR observation references; remaining DER execution is incomplete. & \texttt{srf-b2-openfga} \\
-DER-CEDAR-000 & Cedar / AVP & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-CEDAR)} \\
-DER-ZANZ-000 & Google Zanzibar & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-ZANZ)} \\
+\texttt{der-b2-aws-iam-request-context-policy-evaluation-boundary} & AWS IAM & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-aws-iam} \\
+\texttt{der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary} & Cedar / Amazon Verified Permissions & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-cedar-amazon-verified-permissions} \\
+\texttt{der-b2-envoy-ext-authz-external-authorization-boundary} & Envoy ext\_authz & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-envoy-ext-authz} \\
+\texttt{der-b2-google-zanzibar-relation-tuple-check-boundary} & Google Zanzibar & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-google-zanzibar} \\
+\texttt{der-b2-hashicorp-vault-authenticated-path-policy-boundary} & HashiCorp Vault & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-hashicorp-vault} \\
+\texttt{der-b2-istio-authorizationpolicy-workload-action-order-boundary} & Istio AuthorizationPolicy & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-istio-authorizationpolicy} \\
+\texttt{der-b2-kubernetes-rbac-admission-api-server-admission-boundary} & Kubernetes RBAC Admission & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-kubernetes-rbac-admission} \\
+\texttt{der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary} & Open Policy Agent Gatekeeper & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-open-policy-agent-gatekeeper} \\
+\texttt{der-b2-openfga-authorization-model-version-boundary} & OpenFGA & Canonical DER & Bounded evidence artifact derived only from the canonical SRF and BOR observation references. & \texttt{srf-b2-openfga} \\
 \end{longtable}
 \end{center}
 
 \subsection{Full DER artifact pointer}
-\textbf{DER artifact pointer.} The Envoy \texttt{ext\_authz} canonical reference DER is recorded at \texttt{investigations/b2-governance-cohort/der/envoy-ext-authz.der.json}; the OpenFGA canonical reference DER is recorded at \texttt{investigations/b2-governance-cohort/der/openfga.der.json}. No additional canonical DER artifacts are registered by this change, and B2 DER execution remains incomplete.
+\textbf{DER artifact pointer.} The canonical DER artifacts are recorded at \texttt{investigations/b2-governance-cohort/der/aws-iam.der.json}, \texttt{investigations/b2-governance-cohort/der/cedar-amazon-verified-permissions.der.json}, \texttt{investigations/b2-governance-cohort/der/envoy-ext-authz.der.json}, \texttt{investigations/b2-governance-cohort/der/google-zanzibar.der.json}, \texttt{investigations/b2-governance-cohort/der/hashicorp-vault.der.json}, \texttt{investigations/b2-governance-cohort/der/istio-authorizationpolicy.der.json}, \texttt{investigations/b2-governance-cohort/der/kubernetes-rbac-admission.der.json}, \texttt{investigations/b2-governance-cohort/der/open-policy-agent-gatekeeper.der.json}, and \texttt{investigations/b2-governance-cohort/der/openfga.der.json}. No MSR, Comparative Dataset, Analysis, or Retained Classification artifact is created by this manuscript synchronization.
 
 \subsection{DER completion summary (this section)}
 \begin{enumerate}
-\item \textbf{What was added.} The DER table records per-system derivation status and the existence of the Envoy \texttt{ext\_authz} and OpenFGA canonical reference DERs while preserving SRF-only traceability.
-\item \textbf{Explicitly-labeled assumptions.} The section assumes SRFs are the exclusive derivation basis. The Envoy \texttt{ext\_authz} and OpenFGA rows record only bounded canonical reference DERs and do not infer measurements, analysis results, retained classifications, cohort conclusions, or DER completion for other systems.
-\item \textbf{Other cohort DERs.} No additional canonical DER artifacts are registered by this change, remaining DER execution has not yet been completed, and other cohort DER status is not reassessed here.
+\item \textbf{What was synchronized.} The DER table now records all nine completed canonical DER executions while preserving SRF-only traceability.
+\item \textbf{Explicitly-labeled assumptions.} The section assumes SRFs are the exclusive derivation basis. DER rows record only bounded canonical evidence objects and do not infer measurements, analysis results, retained classifications, or cohort conclusions.
+\item \textbf{Lifecycle boundary.} DER execution is complete. MSR execution, Comparative Dataset construction, Analysis, and Retained Classification remain not started.
 \end{enumerate}

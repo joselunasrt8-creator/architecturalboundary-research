@@ -7,57 +7,40 @@ The execution surface matrix (ESM) records, per system, the externally-reachable
 \textbf{TODO(ESM schema):} Record the ESM/SRF schema version used in this execution and provide a machine-readable export pointer.
 
 \subsection{ESM/SRF surface registry (governance cohort)}
-\textbf{Completion status.} This manuscript synchronization registers two canonical SRF artifacts: Envoy \texttt{ext\_authz} at \texttt{investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json} and OpenFGA at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. The status of other cohort SRFs is unchanged by this synchronization and is not reassessed here. These SRFs remain observational/surface-level only and do not introduce derived objects, measurements, analysis, or retained classifications.
+\textbf{Completion status.} This manuscript synchronization records all nine canonical SRF artifacts present under \texttt{investigations/b2-governance-cohort/srf/}. These SRFs remain observational/surface-level only and do not introduce derived objects, measurements, analysis, or retained classifications.
 
 \begin{center}
-\begin{longtable}{@{}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.16\linewidth}p{0.14\linewidth}@{}}
+\begin{longtable}{@{}p{0.20\linewidth}p{0.22\linewidth}p{0.16\linewidth}p{0.20\linewidth}p{0.14\linewidth}@{}}
 \toprule
-SRF ID & System & Surface kind & Surface label / description & Observation vs interpretation & Trace (BOR ID) \\
+SRF ID & System & Surface kind & Observation vs interpretation & Trace (BOR ID) \\
 \midrule
 \endfirsthead
 \toprule
-SRF ID & System & Surface kind & Surface label / description & Observation vs interpretation & Trace (BOR ID) \\
+SRF ID & System & Surface kind & Observation vs interpretation & Trace (BOR ID) \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 \bottomrule
 \endlastfoot
-% --- OPA + Gatekeeper ---
-SRF-OPA-000 & OPA+Gatekeeper & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-OPA-001, BOR-OPA-002 \\
-
-% --- Kubernetes RBAC / Admission ---
-SRF-K8S-000 & Kubernetes RBAC/Admission & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-K8S-001, BOR-K8S-002 \\
-
-% --- AWS IAM ---
-SRF-IAM-000 & AWS IAM & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-IAM-001, BOR-IAM-002 \\
-
-% --- HashiCorp Vault ---
-SRF-VAULT-000 & HashiCorp Vault & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-VAULT-001, BOR-VAULT-002 \\
-
-% --- Envoy ext_authz ---
-\texttt{srf-b2-envoy-ext-authz} & Envoy ext\_authz & Surface registry artifact & Canonical SRF exists for Envoy ext\_authz execution surfaces. & Observation only; no DER/MSR/classification & \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-001}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-002}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-003}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-004} \\
-
-% --- Istio AuthorizationPolicy ---
-SRF-ISTIO-000 & Istio AuthorizationPolicy & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ISTIO-001, BOR-ISTIO-002 \\
-
-% --- OpenFGA ---
-\texttt{srf-b2-openfga} & OpenFGA & Surface registry artifact & Canonical SRF exists for OpenFGA execution surfaces. & Observation only; no DER/MSR/classification & \texttt{BOR-B2-OPENFGA-OBS-001}, \texttt{BOR-B2-OPENFGA-OBS-002}, \texttt{BOR-B2-OPENFGA-OBS-003}, \texttt{BOR-B2-OPENFGA-OBS-004} \\
-
-% --- Cedar / Amazon Verified Permissions ---
-SRF-CEDAR-000 & Cedar / AVP & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-CEDAR-001, BOR-CEDAR-002 \\
-
-% --- Google Zanzibar ---
-SRF-ZANZ-000 & Google Zanzibar & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ZANZ-001, BOR-ZANZ-002 \\
+\texttt{srf-b2-aws-iam} & AWS IAM & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-aws-iam} \\
+\texttt{srf-b2-cedar-amazon-verified-permissions} & Cedar / Amazon Verified Permissions & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-cedar-amazon-verified-permissions} \\
+\texttt{srf-b2-envoy-ext-authz} & Envoy ext\_authz & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-envoy-ext-authz} \\
+\texttt{srf-b2-google-zanzibar} & Google Zanzibar & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-google-zanzibar} \\
+\texttt{srf-b2-hashicorp-vault} & HashiCorp Vault & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-hashicorp-vault} \\
+\texttt{srf-b2-istio-authorizationpolicy} & Istio AuthorizationPolicy & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-istio-authorizationpolicy} \\
+\texttt{srf-b2-kubernetes-rbac-admission} & Kubernetes RBAC Admission & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-kubernetes-rbac-admission} \\
+\texttt{srf-b2-open-policy-agent-gatekeeper} & Open Policy Agent Gatekeeper & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-open-policy-agent-gatekeeper} \\
+\texttt{srf-b2-openfga} & OpenFGA & Surface registry artifact & Observation only; no DER/MSR/classification & \texttt{bor-b2-openfga} \\
 \end{longtable}
 \end{center}
 
 \subsection{Full ESM/SRF artifact pointer}
-\textbf{ESM/SRF artifact pointer.} The Envoy \texttt{ext\_authz} canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json}; the OpenFGA canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. No other cohort SRF status is reassessed by this manuscript synchronization.
+\textbf{ESM/SRF artifact pointer.} The canonical SRF artifacts are recorded under \texttt{investigations/b2-governance-cohort/srf/}. This manuscript synchronization does not create DER, MSR, Comparative Dataset, Analysis, or Retained Classification content from SRF rows.
 
 \subsection{ESM/SRF completion summary (this section)}
 \begin{enumerate}
-\item \textbf{What was added.} A cohort-wide surface registry table with explicit separation between observation and interpretation fields, plus per-system trace anchors to BOR IDs.
-\item \textbf{Explicitly-labeled assumptions.} None beyond Protocol v1.0 constraints; where BOR content is missing, the table records ``Blocked'' rather than inferring any surfaces.
-\item \textbf{Other cohort SRFs.} Their manuscript status is unchanged by this synchronization and is not reassessed here.
+\item \textbf{What was synchronized.} The surface registry table now records all nine canonical SRF artifacts with explicit BOR trace anchors.
+\item \textbf{Explicitly-labeled assumptions.} None beyond Protocol v1.0 constraints; the table records canonical SRF existence without inferring measurements, analysis, or retained classifications.
+\item \textbf{Lifecycle boundary.} SRF is complete and feeds the completed DER registry; later lifecycle stages remain not started.
 \end{enumerate}

@@ -45,6 +45,32 @@ PLACEHOLDER_PATTERNS = re.compile(
 )
 LABEL_PATTERN = re.compile(r"\\label\{([^}]+)\}")
 
+EXPECTED_B2_OBJECTS = {
+    "aws-iam": "AWS IAM",
+    "cedar-amazon-verified-permissions": "Cedar / Amazon Verified Permissions",
+    "envoy-ext-authz": "Envoy ext_authz",
+    "google-zanzibar": "Google Zanzibar",
+    "hashicorp-vault": "HashiCorp Vault",
+    "istio-authorizationpolicy": "Istio AuthorizationPolicy",
+    "kubernetes-rbac-admission": "Kubernetes RBAC Admission",
+    "open-policy-agent-gatekeeper": "Open Policy Agent Gatekeeper",
+    "openfga": "OpenFGA",
+}
+NOT_STARTED_LIFECYCLE_STAGES = {
+    "MSR": "investigations/b2-governance-cohort/msr",
+    "Comparative Dataset": "datasets/comparative",
+    "Analysis": "investigations/b2-governance-cohort/analysis",
+    "Retained Classification": "registry/retained_classifications.json",
+}
+
+
+@dataclass
+class LifecycleCheck:
+    name: str
+    status: str
+    findings: list[str] = field(default_factory=list)
+    blockers: list[str] = field(default_factory=list)
+
 
 @dataclass
 class ObjectCheck:
@@ -179,17 +205,105 @@ def command_output(command: list[str]) -> tuple[int, str]:
     return proc.returncode, proc.stdout.strip()
 
 
-def determine(checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]]) -> str:
+
+def read_json(path: Path) -> dict:
+    import json
+
+    return json.loads(read_text(path))
+
+
+def lifecycle_json_files(stage: str) -> list[Path]:
+    base = ROOT / "investigations" / "b2-governance-cohort" / stage
+    suffix = f".{stage}.json"
+    return sorted(base.glob(f"*{suffix}")) if base.is_dir() else []
+
+
+def complete_artifact_stage(stage: str, expected_object_type: str) -> LifecycleCheck:
+    name = stage.upper()
+    check = LifecycleCheck(name=name, status="MISSING")
+    files = lifecycle_json_files(stage)
+    expected_count = len(EXPECTED_B2_OBJECTS)
+    check.findings.append(f"canonical JSON files: {len(files)}/{expected_count}")
+    if len(files) != expected_count:
+        check.blockers.append("object is not populated")
+        if files:
+            check.status = "PARTIAL"
+        return check
+
+    ids: set[str] = set()
+    for path in files:
+        try:
+            data = read_json(path)
+        except Exception as exc:  # noqa: BLE001 - audit must report malformed artifacts as blockers.
+            check.status = "PARTIAL"
+            check.blockers.append(f"malformed JSON: {rel(path)} ({exc})")
+            continue
+        if data.get("object_type") != expected_object_type:
+            check.status = "PARTIAL"
+            check.blockers.append(f"unexpected object_type in {rel(path)}")
+        artifact_id = data.get("id")
+        if not artifact_id:
+            check.status = "PARTIAL"
+            check.blockers.append(f"missing id in {rel(path)}")
+        else:
+            ids.add(artifact_id)
+    if check.blockers:
+        return check
+    check.status = "COMPLETE"
+    check.findings.append(f"canonical IDs: {len(ids)}")
+    return check
+
+
+def inspect_lifecycle() -> list[LifecycleCheck]:
+    bor = complete_artifact_stage("bor", "BaselineObservationRecord")
+    srf = complete_artifact_stage("srf", "ExecutionSurfaceRegistry")
+    der = complete_artifact_stage("der", "DerivedEvidenceRecord")
+
+    bor_ids = {read_json(path).get("id") for path in lifecycle_json_files("bor") if path.is_file()}
+    srf_ids = {read_json(path).get("id") for path in lifecycle_json_files("srf") if path.is_file()}
+
+    if srf.status == "COMPLETE":
+        for path in lifecycle_json_files("srf"):
+            data = read_json(path)
+            bor_id = data.get("bor_reference", {}).get("bor_id")
+            if bor_id not in bor_ids:
+                srf.status = "PARTIAL"
+                srf.blockers.append(f"broken BOR lineage: {rel(path)} -> {bor_id}")
+    if der.status == "COMPLETE":
+        for path in lifecycle_json_files("der"):
+            data = read_json(path)
+            for srf_id in data.get("source_srf_ids", []):
+                if srf_id not in srf_ids:
+                    der.status = "PARTIAL"
+                    der.blockers.append(f"broken SRF lineage: {rel(path)} -> {srf_id}")
+
+    lifecycle = [bor, srf, der]
+    for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():
+        path = ROOT / relative
+        files = object_files([relative]) if path.exists() else []
+        substantive = substantive_files(files)
+        check = LifecycleCheck(name=name, status="NOT STARTED")
+        check.findings.append(f"substantive files: {len(substantive)}")
+        if substantive:
+            check.status = "PARTIAL"
+            check.blockers.append("unexpected populated artifact for not-started lifecycle stage")
+        lifecycle.append(check)
+    return lifecycle
+
+
+def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]]) -> str:
     if precondition_failures:
         return "NULL_NOT_AUDITED"
     if duplicate_labels:
+        return "BLOCKED"
+    if any(check.blockers for check in lifecycle_checks):
         return "BLOCKED"
     if all(check.classification == "COMPLETE" for check in checks):
         return "READY"
     return "BLOCKED"
 
 
-def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], final: str) -> str:
+def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], final: str) -> str:
     branch = os.environ.get("GITHUB_REF_NAME", "main")
     lines = [
         "# B2 Publication-Readiness Audit",
@@ -204,6 +318,9 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
         "## Commands Executed Before Audit",
     ]
     lines.extend(f"- `{command}`" for command in COMMANDS_EXECUTED)
+    lines.extend(["", "## Lifecycle Status", "", "| Stage | Status |", "| --- | --- |"])
+    for check in lifecycle_checks:
+        lines.append(f"| {check.name} | {check.status} |")
     lines.extend(["", "## Artifact Matrix", "", "| Artifact | Classification | Path exists | Placeholder exists | Research object exists | Populated | Frozen | Traceable |", "| --- | --- | --- | --- | --- | --- | --- | --- |"])
     for check in checks:
         lines.append(
@@ -222,10 +339,13 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
             lines.append(f"  - `{label}` in {', '.join(f'`{path}`' for path in paths)}")
     else:
         lines.append("- Duplicate LaTeX label check passed.")
+    for check in lifecycle_checks:
+        lines.append(f"- {check.name}: {', '.join(check.findings)}")
     for check in checks:
         lines.append(f"- {check.name}: {', '.join(check.findings)}")
     lines.extend(["", "## Exact Blockers"])
-    blockers = [f"{check.name}: {blocker}" for check in checks for blocker in check.blockers]
+    blockers = [f"{check.name}: {blocker}" for check in lifecycle_checks for blocker in check.blockers]
+    blockers.extend(f"{check.name}: {blocker}" for check in checks for blocker in check.blockers)
     if precondition_failures:
         blockers.extend(f"Missing precondition: {path}" for path in precondition_failures)
     if duplicate_labels:
@@ -274,10 +394,11 @@ def main() -> int:
     timestamp = datetime.now(timezone.utc).isoformat()
     workflow_run = os.environ.get("GITHUB_RUN_ID", "LOCAL_UNVERIFIED")
     precondition_failures = verify_preconditions()
+    lifecycle_checks = [] if precondition_failures else inspect_lifecycle()
     checks = [] if precondition_failures else build_checks()
     duplicates = {} if precondition_failures else duplicate_latex_labels()
-    final = determine(checks, precondition_failures, duplicates)
-    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, checks, precondition_failures, duplicates, final)
+    final = determine(checks, lifecycle_checks, precondition_failures, duplicates)
+    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, lifecycle_checks, checks, precondition_failures, duplicates, final)
     output.write_text(report, encoding="utf-8")
     print(f"B2 audit report written to {rel(output)}")
     print(f"final determination: {final}")

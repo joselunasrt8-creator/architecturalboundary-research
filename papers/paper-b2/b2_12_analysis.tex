@@ -1,6 +1,6 @@
 \section{Analysis}
 \label{sec:analysis}
-This section is a deferred analysis placeholder. The current repository state contains BOR and SRF artifacts plus two canonical DER reference executions, but no MSR records, comparative dataset values, analysis results, or retained classifications from which to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
+This section is a deferred analysis placeholder. The current repository state contains complete BOR, SRF, and DER artifacts, but no MSR records, comparative dataset values, analysis results, or retained classifications from which to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
 
 \textbf{Constraints (frozen artifacts; no new decision logic).} Analysis in Paper~B2 may be performed only after values are present in the Comparative Dataset (and its trace links to MSR/DER/SRF/BOR). The analysis must: (i) not modify BOR, SRF, DER, MSR, or the Comparative Dataset; (ii) not introduce new observations, measurements, metrics, thresholds, or decision rules; (iii) ensure every claim is traceable through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR; and (iv) if a protocol-defined conclusion cannot be reached uniquely from the registered decision rules for this investigation, record the ambiguity rather than resolving it.
 
@@ -8,7 +8,7 @@ This section is a deferred analysis placeholder. The current repository state co
 \begin{itemize}
   \item \textbf{Observations:} BOR-\emph{*} (Section~\ref{sec:bor})
   \item \textbf{Execution surfaces:} ESM-\emph{*} (Section~\ref{sec:esm})
-  \item \textbf{Derivations:} two canonical reference DERs (Section~\ref{sec:der}); remaining DER execution incomplete
+  \item \textbf{Derivations:} complete canonical DER executions for all nine cohort systems (Section~\ref{sec:der})
   \item \textbf{Measurements:} not started (Section~\ref{sec:msr})
 \end{itemize}
 
@@ -84,12 +84,12 @@ Cohort-level comparisons must be expressed in terms of shared dataset fields and
 
 
 \subsubsection{Cohort-wide summary (metric extract)}
-No cohort-wide metric extract is reported in this synchronization because MSR execution and the Comparative Dataset have not started. The current two canonical DER reference executions are bounded evidence objects only and do not support metric-level synthesis.
+No cohort-wide metric extract is reported in this synchronization because MSR execution and the Comparative Dataset have not started. The completed canonical DER executions are bounded evidence objects only and do not support metric-level synthesis.
 
 \subsubsection{Evidence sufficiency (MET-009)}
 No MET-009 evidence sufficiency values are reported because no MSR records or Comparative Dataset rows have been created.
 
-\textbf{TODO(Cohort synthesis; blocked on remaining DER/MSR/I4/I5):} Any cohort-level statement about the candidate RLE boundary must be derived only after remaining DER execution, MSR execution, Comparative Dataset construction, and the investigation's registered I4/I5 mapping to \{Supports, Violates, Indeterminate\} are finalized.
+\textbf{TODO(Cohort synthesis; blocked on MSR/Comparative Dataset/I4/I5):} Any cohort-level statement about the candidate RLE boundary must be derived only after MSR execution, Comparative Dataset construction, and the investigation's registered I4/I5 mapping to \{Supports, Violates, Indeterminate\} are finalized.
 
 \subsection{Interpretation layer: candidate boundary status categories}
 In addition to the Protocol v1.0 per-system outcome labels \{Supports, Violates, Indeterminate\}, Paper~B2 records a cohort-bounded interpretation of what the evidence suggests about the candidate boundary's status within this domain:

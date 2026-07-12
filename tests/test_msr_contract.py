@@ -32,7 +32,14 @@ def der(name: str, did: str, surface: str, obs: str) -> dict:
 
 def msr(name: str, did: str, obs: str) -> dict:
     comps = ["m_R", "m_L", "m_E", "m_RL", "m_LE"]
-    return {"object_type":"MeasurementStudyRecord","schema_version":"canonical-msr-v1","protocol_version":"protocol-v1","investigation_id":"b2-governance-cohort","system_id":name,"id":f"msr-b2-{name}","source_der_ids":[did],"measurement_registry_ref":{"registration_id":"b2-i1-i5-registration","measurement_vector_id":"I4","path":"investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"},"measurements":[{"measurement_id":c,"rule_id":f"I4.{c}","operationalization_ref":"investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components","value_type":"boolean_or_missing","allowed_domain":[0,1,None],"value":1,"status":"observed","source_der_ids":[did],"evidence_trace_refs":[obs]} for c in comps],"status":"reference_execution","provenance":{"created_from":[f"investigations/b2-governance-cohort/der/{name}.der.json","investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"],"method":"DER -> registered I4 measurement rule -> MSR","notes":"Synthetic fixture."}}
+    meanings = {
+        "m_R": "explicit reasoning artifact present",
+        "m_L": "explicit legitimacy decision point present",
+        "m_E": "explicit execution/enforcement mechanism present",
+        "m_RL": "explicit documented interface/contract between reasoning artifacts and legitimacy evaluation",
+        "m_LE": "explicit documented interface/contract between legitimacy outcome and execution/enforcement",
+    }
+    return {"object_type":"MeasurementStudyRecord","schema_version":"canonical-msr-v1","protocol_version":"protocol-v1","investigation_id":"b2-governance-cohort","system_id":name,"id":f"msr-b2-{name}","source_der_ids":[did],"measurement_registry_ref":{"registration_id":"b2-i1-i5-registration","measurement_vector_id":"I4","path":"investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"},"measurements":[{"measurement_id":c,"rule_id":f"I4.{c}","operationalization_ref":"investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components","value_type":"boolean_or_missing","allowed_domain":[0,1,None],"value":1,"status":"observed","source_der_ids":[did],"evidence_trace_refs":[obs],"basis":{"source_der_id":did,"source_claim_ref":"derived_claim.claim","registered_condition":meanings[c],"determination":"satisfied"}} for c in comps],"status":"reference_execution","provenance":{"created_from":[f"investigations/b2-governance-cohort/der/{name}.der.json","investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"],"method":"DER -> registered I4 measurement rule -> MSR","notes":"Synthetic fixture."}}
 
 
 @pytest.fixture
@@ -70,10 +77,11 @@ def test_negative_msr_contract_paths(repo):
     base = msr("alpha", "der-b2-alpha-boundary", "obs-alpha")
     cases = []
     d=json.loads(json.dumps(base)); d["source_der_ids"]=["missing"]; cases.append((d,"references missing DER id"))
-    d=json.loads(json.dumps(base)); d["measurements"][0]["source_der_ids"]=["der-b2-beta-boundary"]; cases.append((d,"measurement uses undeclared DER"))
+    d=json.loads(json.dumps(base)); d["measurements"][0]["source_der_ids"]=["der-b2-beta-boundary"]; cases.append((d,"measurement basis uses undeclared DER"))
     d=json.loads(json.dumps(base)); d["system_id"]="beta"; cases.append((d,"references DER from another system"))
     d=json.loads(json.dumps(base)); d["measurements"][0]["rule_id"]="I4.unknown"; cases.append((d,"schema validation failed"))
     d=json.loads(json.dumps(base)); d["measurements"][0]["value"]=2; cases.append((d,"schema validation failed"))
+    d=json.loads(json.dumps(base)); d["measurements"][0]["value"]=0; cases.append((d,"measurement result conflicts with basis determination"))
     d=json.loads(json.dumps(base)); d["measurements"][1]["measurement_id"]="m_R"; d["measurements"][1]["rule_id"]="I4.m_R"; cases.append((d,"contains duplicate measurement"))
     d=json.loads(json.dumps(base)); d["measurements"]=d["measurements"][:-1]; cases.append((d,"schema validation failed"))
     d=json.loads(json.dumps(base)); d["provenance"]["created_from"]=["investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"]; cases.append((d,"schema validation failed"))

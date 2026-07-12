@@ -13,6 +13,12 @@
         1,
         null
       ],
+      "basis": {
+        "determination": "unavailable",
+        "registered_condition": "explicit reasoning artifact present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-envoy-ext-authz-external-authorization-boundary"
+      },
       "evidence_trace_refs": [
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
@@ -35,6 +41,12 @@
         1,
         null
       ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit legitimacy decision point present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-envoy-ext-authz-external-authorization-boundary"
+      },
       "evidence_trace_refs": [
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
@@ -57,6 +69,12 @@
         1,
         null
       ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit execution/enforcement mechanism present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-envoy-ext-authz-external-authorization-boundary"
+      },
       "evidence_trace_refs": [
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
@@ -79,6 +97,12 @@
         1,
         null
       ],
+      "basis": {
+        "determination": "unavailable",
+        "registered_condition": "explicit documented interface/contract between reasoning artifacts and legitimacy evaluation",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-envoy-ext-authz-external-authorization-boundary"
+      },
       "evidence_trace_refs": [
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
@@ -101,6 +125,12 @@
         1,
         null
       ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit documented interface/contract between legitimacy outcome and execution/enforcement",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-envoy-ext-authz-external-authorization-boundary"
+      },
       "evidence_trace_refs": [
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
         "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",

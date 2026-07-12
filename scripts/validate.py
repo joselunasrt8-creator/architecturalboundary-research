@@ -451,6 +451,30 @@ def validate_der_contract() -> None:
 
 
 
+B2_REFERENCE_DETERMINATIONS = {
+    "der-b2-openfga-authorization-model-version-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "unavailable",
+        "I4.m_E": "unavailable",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "unavailable",
+    },
+    "der-b2-envoy-ext-authz-external-authorization-boundary": {
+        "I4.m_R": "unavailable",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "unavailable",
+        "I4.m_LE": "satisfied",
+    },
+}
+
+DETERMINATION_RESULT = {
+    "satisfied": ("observed", 1),
+    "not_satisfied": ("observed", 0),
+    "unavailable": ("missing", None),
+}
+
+
 def b2_measurement_rules() -> set[str]:
     registration = require_json("investigations/b2-governance-cohort/preregistration/i1_i5_registration.json")
     if not isinstance(registration, dict):
@@ -477,6 +501,27 @@ def b2_measurement_rules() -> set[str]:
     return rules
 
 
+def b2_measurement_conditions() -> dict[str, str]:
+    registration = require_json("investigations/b2-governance-cohort/preregistration/i1_i5_registration.json")
+    if not isinstance(registration, dict):
+        raise SystemExit("B2 I1-I5 registration must be an object")
+    vector = registration.get("measurement_vector")
+    if not isinstance(vector, dict):
+        raise SystemExit("B2 measurement vector I4 is not registered")
+    components = vector.get("components")
+    if not isinstance(components, list):
+        raise SystemExit("B2 measurement vector components must be a list")
+    conditions: dict[str, str] = {}
+    for component in components:
+        if not isinstance(component, dict):
+            raise SystemExit("B2 measurement vector component must be an object")
+        name = component.get("name")
+        meaning = component.get("meaning")
+        if isinstance(name, str) and isinstance(meaning, str) and meaning:
+            conditions[f"I4.{name}"] = meaning
+    return conditions
+
+
 def der_records_for(investigation_dir: Path) -> dict[str, tuple[dict[str, object], Path]]:
     records: dict[str, tuple[dict[str, object], Path]] = {}
     for path in sorted((investigation_dir / "der").glob("*.der.json")):
@@ -497,6 +542,7 @@ def der_records_for(investigation_dir: Path) -> dict[str, tuple[dict[str, object
 def validate_msr_contract() -> None:
     """Validate B2 MSR files as bounded DER-derived measurement records."""
     rules = b2_measurement_rules()
+    conditions = b2_measurement_conditions()
     required_measurements = {rule.split(".", 1)[1] for rule in rules}
     for investigation_dir in sorted((ROOT / "investigations").iterdir()):
         if not investigation_dir.is_dir():
@@ -529,9 +575,8 @@ def validate_msr_contract() -> None:
                 der, _ = der_records[der_id]
                 if der.get("investigation_id") != msr["investigation_id"]:
                     raise SystemExit(f"{msr_relative} references DER from another investigation: {der_id}")
-                expected_system_suffix = str(msr["system_id"])
-                der_path_name = der_records[der_id][1].stem.removesuffix(".der")
-                if der_path_name != expected_system_suffix:
+                expected_srf_id = f"srf-b2-{msr['system_id']}"
+                if der.get("source_srf_ids") != [expected_srf_id]:
                     raise SystemExit(f"{msr_relative} references DER from another system: {der_id}")
 
             seen_measurements: set[str] = set()
@@ -548,6 +593,17 @@ def validate_msr_contract() -> None:
                     raise SystemExit(f"{msr_relative} missing measurement has non-null value: {mid}")
                 if entry["status"] == "observed" and entry["value"] not in (0, 1):
                     raise SystemExit(f"{msr_relative} observed measurement has invalid value: {mid}")
+                basis = entry["basis"]
+                if basis["source_der_id"] not in entry["source_der_ids"]:
+                    raise SystemExit(f"{msr_relative} measurement basis uses undeclared DER: {mid}")
+                if basis["registered_condition"] != conditions[entry["rule_id"]]:
+                    raise SystemExit(f"{msr_relative} measurement basis does not match registered condition: {mid}")
+                expected_status, expected_value = DETERMINATION_RESULT[basis["determination"]]
+                if entry["status"] != expected_status or entry["value"] != expected_value:
+                    raise SystemExit(f"{msr_relative} measurement result conflicts with basis determination: {mid}")
+                reference_expected = B2_REFERENCE_DETERMINATIONS.get(basis["source_der_id"], {}).get(entry["rule_id"])
+                if reference_expected is not None and basis["determination"] != reference_expected:
+                    raise SystemExit(f"{msr_relative} measurement determination conflicts with canonical reference execution: {mid}")
                 entry_der_ids = set(entry["source_der_ids"])
                 if not entry_der_ids <= declared_der_ids:
                     raise SystemExit(f"{msr_relative} measurement uses undeclared DER: {mid}")

@@ -8,7 +8,7 @@ This section completes the manuscript DER for the B2 governance cohort by regist
 \textbf{TODO(DER schema):} Record the DER schema version used in this execution and provide a machine-readable export pointer.
 
 \subsection{DER table (cohort extract)}
-\textbf{DER completion status (manuscript build).} The B2.08 surface registry records SRF enumeration as blocked because BOR observations are not yet populated with evidence-bearing facts. Accordingly, the registry below records canonical object derivation as \emph{blocked} for each investigated system, with explicit trace placeholders.
+\textbf{DER completion status (manuscript build).} The registry below records one canonical reference DER for OpenFGA at \texttt{investigations/b2-governance-cohort/der/openfga.der.json}. This is a bounded evidence artifact produced from the frozen SRF$\to$DER contract; it is not an analysis, measurement, retained classification, cohort conclusion, or indication that remaining cohort DER execution is complete. Other investigated systems remain pending DER execution, with explicit trace placeholders.
 
 \begin{center}
 \begin{longtable}{@{}p{0.12\linewidth}p{0.20\linewidth}p{0.20\linewidth}p{0.28\linewidth}p{0.18\linewidth}@{}}
@@ -30,18 +30,18 @@ DER-IAM-000 & AWS IAM & Derivation blocked & No canonical objects derived (SRF e
 DER-VAULT-000 & HashiCorp Vault & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-VAULT)} \\
 DER-ENVOY-000 & Envoy ext\_authz & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-ENVOY)} \\
 DER-ISTIO-000 & Istio AuthorizationPolicy & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-ISTIO)} \\
-DER-FGA-000 & OpenFGA & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-FGA)} \\
+DER-FGA-001 & OpenFGA & Canonical reference DER & One bounded OpenFGA evidence artifact exists; remaining cohort DERs have not yet been executed. & \texttt{investigations/b2-governance-cohort/der/openfga.der.json} \\
 DER-CEDAR-000 & Cedar / AVP & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-CEDAR)} \\
 DER-ZANZ-000 & Google Zanzibar & Derivation blocked & No canonical objects derived (SRF enumeration blocked until BOR is completed). & \textbf{TODO(SRF-ZANZ)} \\
 \end{longtable}
 \end{center}
 
 \subsection{Full DER artifact pointer}
-\textbf{TODO(DER artifact pointer):} Provide a pointer to the full machine-readable DER artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.
+\textbf{DER artifact pointer.} The OpenFGA canonical reference DER is recorded at \texttt{investigations/b2-governance-cohort/der/openfga.der.json}. Remaining cohort DER artifacts have not yet been executed.
 
 \subsection{DER completion summary (this section)}
 \begin{enumerate}
-\item \textbf{What was added.} The DER table was completed into a comparison-ready registry that enforces SRF-only traceability and records per-system derivation status.
-\item \textbf{Explicitly-labeled assumptions.} The section assumes SRFs are the exclusive derivation basis; because SRF enumeration is blocked until BOR observations are completed with evidence-bearing facts, this is recorded explicitly as ``Derivation blocked'' rather than inferring any canonical objects.
-\item \textbf{Systems lacking sufficient SRF information.} All investigated systems in this cohort lack SRF observations sufficient to derive canonical architectural objects because SRF enumeration is blocked pending BOR completion: OPA+Gatekeeper, Kubernetes RBAC/Admission, AWS IAM, HashiCorp Vault, Envoy ext\_authz, Istio AuthorizationPolicy, OpenFGA, Cedar / AVP, and Google Zanzibar.
+\item \textbf{What was added.} The DER table records per-system derivation status and the existence of the OpenFGA canonical reference DER while preserving SRF-only traceability.
+\item \textbf{Explicitly-labeled assumptions.} The section assumes SRFs are the exclusive derivation basis. The OpenFGA row records only the bounded canonical reference DER and does not infer measurements, analysis results, retained classifications, cohort conclusions, or DER completion for other systems.
+\item \textbf{Systems still pending DER execution.} Remaining investigated systems have not yet produced canonical DER artifacts: OPA+Gatekeeper, Kubernetes RBAC/Admission, AWS IAM, HashiCorp Vault, Envoy ext\_authz, Istio AuthorizationPolicy, Cedar / AVP, and Google Zanzibar.
 \end{enumerate}

@@ -7,7 +7,7 @@ The execution surface matrix (ESM) records, per system, the externally-reachable
 \textbf{TODO(ESM schema):} Record the ESM/SRF schema version used in this execution and provide a machine-readable export pointer.
 
 \subsection{ESM/SRF surface registry (governance cohort)}
-\textbf{Completion status.} The BOR entries for this cohort are currently placeholders (TODO) and therefore do not provide manuscript-usable observational content. To preserve Protocol v1.0 integrity, the registry below records per-system surface enumeration as \emph{blocked} until BORs are completed with evidence.
+\textbf{Completion status.} The registry below records OpenFGA as represented by the canonical SRF artifact at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}; remaining cohort entries continue to record surface enumeration as \emph{blocked} until BORs are completed with evidence. The OpenFGA SRF remains observational/surface-level only and does not introduce derived objects, measurements, analysis, or retained classifications.
 
 \begin{center}
 \begin{longtable}{@{}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.16\linewidth}p{0.14\linewidth}@{}}
@@ -42,7 +42,7 @@ SRF-ENVOY-000 & Envoy ext\_authz & Surface enumeration & Blocked: BOR observatio
 SRF-ISTIO-000 & Istio AuthorizationPolicy & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ISTIO-001, BOR-ISTIO-002 \\
 
 % --- OpenFGA ---
-SRF-FGA-000 & OpenFGA & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-FGA-001, BOR-FGA-002 \\
+SRF-FGA-001 & OpenFGA & Surface registry artifact & Canonical SRF exists for OpenFGA execution surfaces. & Observation only; no DER/MSR/classification & \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json} \\
 
 % --- Cedar / Amazon Verified Permissions ---
 SRF-CEDAR-000 & Cedar / AVP & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-CEDAR-001, BOR-CEDAR-002 \\
@@ -53,11 +53,11 @@ SRF-ZANZ-000 & Google Zanzibar & Surface enumeration & Blocked: BOR observations
 \end{center}
 
 \subsection{Full ESM/SRF artifact pointer}
-\textbf{TODO(ESM/SRF artifact pointer):} Provide a pointer to the full machine-readable ESM/SRF artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.
+\textbf{ESM/SRF artifact pointer.} The OpenFGA canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. Remaining cohort SRF artifacts are outside this manuscript synchronization.
 
 \subsection{ESM/SRF completion summary (this section)}
 \begin{enumerate}
 \item \textbf{What was added.} A cohort-wide surface registry table with explicit separation between observation and interpretation fields, plus per-system trace anchors to BOR IDs.
 \item \textbf{Explicitly-labeled assumptions.} None beyond Protocol v1.0 constraints; where BOR content is missing, the table records ``Blocked'' rather than inferring any surfaces.
-\item \textbf{Systems lacking sufficient BOR information to enumerate surfaces.} All investigated systems in this cohort (OPA+Gatekeeper; Kubernetes RBAC/Admission; AWS IAM; HashiCorp Vault; Envoy ext\_authz; Istio AuthorizationPolicy; OpenFGA; Cedar / AVP; Google Zanzibar).
+\item \textbf{Systems still pending SRF enumeration in this manuscript extract.} OPA+Gatekeeper; Kubernetes RBAC/Admission; AWS IAM; HashiCorp Vault; Envoy ext\_authz; Istio AuthorizationPolicy; Cedar / AVP; and Google Zanzibar.
 \end{enumerate}

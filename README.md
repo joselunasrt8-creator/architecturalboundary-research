@@ -78,3 +78,23 @@ Retained Classification
 - Prefer evidence over intuition.
 - Promote only recurring patterns to Candidate Architectural Invariants.
 - Treat empirical recurrence and formal proof as separate stages of the research program.
+
+## Publication Build
+
+Reproducible publication builds are driven by `scripts/build_papers.py`. The script discovers every buildable manuscript at `papers/**/main.tex`, compiles each paper independently with `pdflatex` and `bibtex`, reports fatal errors and publication warnings separately, and emits generated PDFs to `releases/papers/`.
+
+Local publication build:
+
+```bash
+python3 scripts/build_papers.py
+```
+
+Full repository validation, including publication readiness:
+
+```bash
+python3 scripts/validate.py
+```
+
+New research manuscripts must originate in this repository by copying `papers/_template/` to `papers/<paper-id>/`; Overleaf and other external editors are non-canonical review surfaces only.
+
+See [Publication Build and Release Artifacts](docs/publication.md) for the repository-first authoring workflow, required TeX Live packages, CI behavior, bibliography/reference warning categories, and release artifact locations.

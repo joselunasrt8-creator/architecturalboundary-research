@@ -28,7 +28,7 @@ REQUIRED_PATHS = [
     "protocol/protocol-v1/schemas/README.md", "protocol/protocol-v1/templates/README.md",
     "papers/paper-0-protocol/README.md", "papers/paper-b1/README.md", "papers/paper-b2/main.tex",
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
-    "scripts/build_dataset.py", "scripts/build_report.py", "scripts/check_registry.py",
+    "scripts/build_dataset.py", "scripts/build_report.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
 INVESTIGATIONS = ["investigations/template", "investigations/b1-three-system-pilot", "investigations/b2-governance-cohort"]
 INVESTIGATION_ITEMS = [
@@ -47,6 +47,9 @@ REGISTRIES = [
 ]
 MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 TEX_INPUT = re.compile(r"\\(?:input|include|bibliography)\{([^}]+)\}")
+PAPER_TEMPLATE = ROOT / "papers" / "_template"
+STANDARD_PAPER_REQUIRED = ["README.md", "main.tex", "references.bib", "sections"]
+LEGACY_PAPER_STRUCTURE_EXEMPTIONS = {"paper-0-protocol", "paper-b2"}
 
 
 def require_path(relative: str) -> None:
@@ -104,6 +107,45 @@ def validate_latex_inputs() -> None:
             if not any(candidate.exists() for candidate in candidates):
                 raise SystemExit(f"broken LaTeX reference in {path.relative_to(ROOT)}: {raw}")
 
+
+
+def validate_repository_first_paper_template() -> None:
+    for relative in [
+        "README.md",
+        "main.tex",
+        "references.bib",
+        "sections/abstract.tex",
+        "sections/introduction.tex",
+        "sections/methodology.tex",
+        "sections/evidence.tex",
+        "sections/analysis.tex",
+        "sections/conclusion.tex",
+    ]:
+        candidate = PAPER_TEMPLATE / relative
+        if not candidate.exists():
+            raise SystemExit(f"paper template missing required path: {candidate.relative_to(ROOT)}")
+    readme = (PAPER_TEMPLATE / "README.md").read_text(encoding="utf-8")
+    required_phrases = ["repository is the canonical source", "Overleaf", "main.tex", "references.bib", "sections/"]
+    for phrase in required_phrases:
+        if phrase not in readme:
+            raise SystemExit(f"paper template README missing repository-first guidance: {phrase}")
+
+
+def validate_standard_paper_structure() -> None:
+    for main_tex in sorted((ROOT / "papers").rglob("main.tex")):
+        paper_dir = main_tex.parent
+        relative_parts = paper_dir.relative_to(ROOT / "papers").parts
+        if any(part.startswith((".", "_")) for part in relative_parts):
+            continue
+        if paper_dir.name in LEGACY_PAPER_STRUCTURE_EXEMPTIONS:
+            continue
+        for required in STANDARD_PAPER_REQUIRED:
+            candidate = paper_dir / required
+            if not candidate.exists():
+                raise SystemExit(f"standard paper structure missing {required}: {paper_dir.relative_to(ROOT)}")
+        section_files = sorted((paper_dir / "sections").glob("*.tex"))
+        if not section_files:
+            raise SystemExit(f"standard paper structure requires section files: {(paper_dir / 'sections').relative_to(ROOT)}")
 
 def validate_registered_paths() -> None:
     for relative in ["registry/investigations.json", "registry/protocol_versions.json"]:
@@ -233,8 +275,13 @@ def main() -> None:
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()
+    validate_repository_first_paper_template()
+    validate_standard_paper_structure()
     validate_move_ledger()
     subprocess.run(["python3", "scripts/check_registry.py"], cwd=ROOT, check=True)
+    publication_build = subprocess.run(["python3", "scripts/build_papers.py"], cwd=ROOT)
+    if publication_build.returncode != 0:
+        raise SystemExit(f"publication validation failed with exit code {publication_build.returncode}")
     print("repository topology validation passed")
 
 

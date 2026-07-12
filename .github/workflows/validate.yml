@@ -23,6 +23,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             latexmk \
+            lmodern \
             texlive-bibtex-extra \
             texlive-fonts-recommended \
             texlive-latex-base \

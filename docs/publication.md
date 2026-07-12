@@ -40,6 +40,7 @@ Local and CI builds require these executable tools:
 The GitHub Actions workflow installs the following Ubuntu TeX Live packages as the minimal repository CI set for the current manuscripts:
 
 - `latexmk`
+- `lmodern`
 - `texlive-bibtex-extra`
 - `texlive-fonts-recommended`
 - `texlive-latex-base`

@@ -1,0 +1,42 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary",
+  "source_srf_ids": [
+    "srf-b2-cedar-amazon-verified-permissions"
+  ],
+  "source_surface_ids": [
+    "srf-b2-cedar-amazon-verified-permissions-execution-entry-points-authorization-request",
+    "srf-b2-cedar-amazon-verified-permissions-authorization-surfaces-cedar-policy",
+    "srf-b2-cedar-amazon-verified-permissions-validation-surfaces-schema",
+    "srf-b2-cedar-amazon-verified-permissions-policy-evaluation-surfaces-cedar-engine",
+    "srf-b2-cedar-amazon-verified-permissions-policy-evaluation-surfaces-policy-store",
+    "srf-b2-cedar-amazon-verified-permissions-protected-resources-cedar-resource",
+    "srf-b2-cedar-amazon-verified-permissions-execution-boundaries-policy-store-boundary",
+    "srf-b2-cedar-amazon-verified-permissions-observable-execution-flow-request-shape",
+    "srf-b2-cedar-amazon-verified-permissions-observable-execution-flow-evaluate"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-CEDAR-AVP-OBS-003",
+    "BOR-B2-CEDAR-AVP-OBS-004",
+    "BOR-B2-CEDAR-AVP-OBS-001",
+    "BOR-B2-CEDAR-AVP-OBS-002"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared Cedar / Amazon Verified Permissions SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed Cedar / Amazon Verified Permissions execution surfaces, the referenced SRF supports the bounded evidence statement that documents Cedar policies describing access with principal, action, resource, and context elements, authorization requests shaped by schema-defined entity types and actions, Cedar-engine evaluation, and policy-store evaluation boundaries for requests evaluated against stored Cedar policies.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/cedar-amazon-verified-permissions.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "DER execution artifact produced from the frozen B2 SRF to DER contract. This record contains direct derivation only and does not perform MSR, comparative dataset construction, analysis, or retained classification."
+  }
+}

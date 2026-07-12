@@ -1,0 +1,41 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-aws-iam-request-context-policy-evaluation-boundary",
+  "source_srf_ids": [
+    "srf-b2-aws-iam"
+  ],
+  "source_surface_ids": [
+    "srf-b2-aws-iam-execution-entry-points-request",
+    "srf-b2-aws-iam-authorization-surfaces-identity-policy",
+    "srf-b2-aws-iam-authorization-surfaces-resource-policy",
+    "srf-b2-aws-iam-policy-evaluation-surfaces-enforcement-code",
+    "srf-b2-aws-iam-protected-resources-aws-resource",
+    "srf-b2-aws-iam-execution-boundaries-request-context-boundary",
+    "srf-b2-aws-iam-observable-execution-flow-context",
+    "srf-b2-aws-iam-observable-execution-flow-evaluate"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-AWS-IAM-OBS-004",
+    "BOR-B2-AWS-IAM-OBS-002",
+    "BOR-B2-AWS-IAM-OBS-003",
+    "BOR-B2-AWS-IAM-OBS-005"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared AWS IAM SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed AWS IAM execution surfaces, the referenced SRF supports the bounded evidence statement that documents principal requests to AWS, identity-based and resource-based policy surfaces, AWS resources subject to policy evaluation, request-context gathering, and enforcement-code processing of applicable policy types against the request context.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/aws-iam.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "DER execution artifact produced from the frozen B2 SRF to DER contract. This record contains direct derivation only and does not perform MSR, comparative dataset construction, analysis, or retained classification."
+  }
+}

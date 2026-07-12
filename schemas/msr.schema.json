@@ -1,12 +1,114 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/architectural-boundary-research/schemas/msr.schema.json",
-  "title": "msr schema",
+  "title": "Measurement Study Record schema",
   "type": "object",
-  "additionalProperties": true,
+  "additionalProperties": false,
+  "required": [
+    "object_type",
+    "schema_version",
+    "protocol_version",
+    "investigation_id",
+    "system_id",
+    "id",
+    "source_der_ids",
+    "measurement_registry_ref",
+    "measurements",
+    "status",
+    "provenance"
+  ],
   "properties": {
-    "id": { "type": "string" },
-    "protocol_version": { "type": "string" },
-    "investigation_id": { "type": "string" }
+    "object_type": { "const": "MeasurementStudyRecord" },
+    "schema_version": { "const": "canonical-msr-v1" },
+    "protocol_version": { "const": "protocol-v1" },
+    "investigation_id": { "type": "string", "minLength": 1 },
+    "system_id": { "type": "string", "minLength": 1 },
+    "id": { "type": "string", "pattern": "^msr-b2-[a-z0-9-]+$" },
+    "source_der_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "measurement_registry_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registration_id", "measurement_vector_id", "path"],
+      "properties": {
+        "registration_id": { "const": "b2-i1-i5-registration" },
+        "measurement_vector_id": { "const": "I4" },
+        "path": { "const": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json" }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/measurement" }
+    },
+    "status": { "enum": ["reference_execution"] },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_from", "method", "notes"],
+      "properties": {
+        "created_from": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "method": { "const": "DER -> registered I4 measurement rule -> MSR" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement_id",
+        "rule_id",
+        "operationalization_ref",
+        "value_type",
+        "allowed_domain",
+        "value",
+        "status",
+        "source_der_ids",
+        "evidence_trace_refs"
+      ],
+      "properties": {
+        "measurement_id": { "enum": ["m_R", "m_L", "m_E", "m_RL", "m_LE"] },
+        "rule_id": { "pattern": "^I4\\.(m_R|m_L|m_E|m_RL|m_LE)$" },
+        "operationalization_ref": { "const": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components" },
+        "value_type": { "const": "boolean_or_missing" },
+        "allowed_domain": {
+          "type": "array",
+          "prefixItems": [{ "const": 0 }, { "const": 1 }, { "const": null }],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "value": { "type": ["integer", "null"], "enum": [0, 1, null] },
+        "status": { "enum": ["observed", "missing"] },
+        "source_der_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidence_trace_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "status": { "const": "missing" } } }, "then": { "properties": { "value": { "const": null } } } },
+        { "if": { "properties": { "status": { "const": "observed" } } }, "then": { "properties": { "value": { "enum": [0, 1] } } } }
+      ]
+    }
   }
 }

@@ -1,0 +1,137 @@
+{
+  "id": "msr-b2-envoy-ext-authz-reference-execution",
+  "investigation_id": "b2-governance-cohort",
+  "measurement_registry_ref": {
+    "measurement_vector_id": "I4",
+    "path": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+    "registration_id": "b2-i1-i5-registration"
+  },
+  "measurements": [
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "evidence_trace_refs": [
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+      ],
+      "measurement_id": "m_R",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_R",
+      "source_der_ids": [
+        "der-b2-envoy-ext-authz-external-authorization-boundary"
+      ],
+      "status": "missing",
+      "value": null,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "evidence_trace_refs": [
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+      ],
+      "measurement_id": "m_L",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_L",
+      "source_der_ids": [
+        "der-b2-envoy-ext-authz-external-authorization-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "evidence_trace_refs": [
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+      ],
+      "measurement_id": "m_E",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_E",
+      "source_der_ids": [
+        "der-b2-envoy-ext-authz-external-authorization-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "evidence_trace_refs": [
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+      ],
+      "measurement_id": "m_RL",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_RL",
+      "source_der_ids": [
+        "der-b2-envoy-ext-authz-external-authorization-boundary"
+      ],
+      "status": "missing",
+      "value": null,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "evidence_trace_refs": [
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-001",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-002",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-003",
+        "BOR-B2-ENVOY-EXT-AUTHZ-OBS-004"
+      ],
+      "measurement_id": "m_LE",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_LE",
+      "source_der_ids": [
+        "der-b2-envoy-ext-authz-external-authorization-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    }
+  ],
+  "object_type": "MeasurementStudyRecord",
+  "protocol_version": "protocol-v1",
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/der/envoy-ext-authz.der.json",
+      "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"
+    ],
+    "method": "DER -> registered I4 measurement rule -> MSR",
+    "notes": "Canonical MSR reference execution only; not cohort-wide measurement completion, analysis, or retained classification."
+  },
+  "schema_version": "canonical-msr-v1",
+  "source_der_ids": [
+    "der-b2-envoy-ext-authz-external-authorization-boundary"
+  ],
+  "status": "reference_execution",
+  "system_id": "envoy-ext-authz"
+}

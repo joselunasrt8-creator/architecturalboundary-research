@@ -18,6 +18,8 @@ jobs:
           python-version: "3.x"
       - name: Install deterministic Python dependencies
         run: python3 -m pip install -r requirements.txt
+      - name: Run test suite
+        run: python3 -m pytest -q
       - name: Install TeX Live publication dependencies
         run: |
           sudo apt-get update

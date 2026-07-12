@@ -249,6 +249,197 @@ def validate_srf_registry() -> None:
     if missing:
         raise SystemExit(f"BORs missing SRF records: {', '.join(missing)}")
 
+
+
+def validate_json_object_against_schema(data: object, schema_relative: str, source_relative: str) -> None:
+    """Validate one JSON object against a repository schema with deterministic errors."""
+    schema = require_json(schema_relative)
+    validator = Draft202012Validator(schema)
+    errors = sorted(validator.iter_errors(data), key=lambda error: list(error.path))
+    if errors:
+        detail = "; ".join(error.message for error in errors)
+        raise SystemExit(f"{source_relative} schema validation failed: {detail}")
+
+
+def markdown_heading_slugs(path: Path) -> set[str]:
+    slugs: set[str] = set()
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("#"):
+            continue
+        heading = stripped.lstrip("#").strip().lower()
+        slug = re.sub(r"[^a-z0-9\s-]", "", heading)
+        slug = re.sub(r"[\s-]+", "-", slug).strip("-")
+        if slug:
+            slugs.add(slug)
+    return slugs
+
+
+def is_allowed_derivation_source(relative: Path) -> bool:
+    parts = relative.parts
+    if parts and parts[0] == "protocol":
+        return True
+    return len(parts) >= 3 and parts[0] == "investigations" and parts[2] == "preregistration"
+
+
+def resolve_repo_file(reference: str, *, purpose: str, allowed_derivation_source: bool = False) -> Path:
+    """Resolve a repository-relative file reference and reject host-dependent paths."""
+    raw_path, fragment = reference.split("#", 1) if "#" in reference else (reference, "")
+    if not raw_path:
+        raise SystemExit(f"{purpose} reference is empty")
+    candidate = Path(raw_path)
+    if candidate.is_absolute():
+        raise SystemExit(f"{purpose} reference must be repository-relative: {reference}")
+    if ".." in candidate.parts:
+        raise SystemExit(f"{purpose} reference escapes repository: {reference}")
+    resolved = (ROOT / candidate).resolve()
+    try:
+        relative = resolved.relative_to(ROOT.resolve())
+    except ValueError:
+        raise SystemExit(f"{purpose} reference escapes repository: {reference}") from None
+    if allowed_derivation_source and not is_allowed_derivation_source(relative):
+        raise SystemExit(f"{purpose} reference is not an allowed protocol or preregistration source: {reference}")
+    if not resolved.exists():
+        raise SystemExit(f"{purpose} reference does not exist: {reference}")
+    if not resolved.is_file():
+        raise SystemExit(f"{purpose} reference is not a file: {reference}")
+    if fragment:
+        if resolved.suffix.lower() != ".md":
+            raise SystemExit(f"{purpose} fragment references require a Markdown file: {reference}")
+        if fragment not in markdown_heading_slugs(resolved):
+            raise SystemExit(f"{purpose} fragment does not resolve to a Markdown heading: {reference}")
+    return resolved
+
+
+def load_validated_srf(path: Path) -> dict[str, object]:
+    """Load an SRF only after validating it against the canonical SRF schema."""
+    relative = str(path.relative_to(ROOT))
+    data = require_json(relative)
+    if not isinstance(data, dict):
+        raise SystemExit(f"SRF must be an object: {relative}")
+    validate_json_object_against_schema(data, "schemas/srf.schema.json", relative)
+    return data
+
+
+def srf_records_for(investigation_dir: Path) -> dict[str, tuple[dict[str, object], Path]]:
+    """Collect schema-valid SRF records for one investigation by ID."""
+    records: dict[str, tuple[dict[str, object], Path]] = {}
+    srf_dir = investigation_dir / "srf"
+    for path in sorted(srf_dir.glob("*.srf.json")):
+        data = load_validated_srf(path)
+        srf_id = data["id"]
+        if not isinstance(srf_id, str):
+            raise SystemExit(f"SRF id must be a string: {path.relative_to(ROOT)}")
+        if srf_id in records:
+            raise SystemExit(f"duplicate SRF id: {srf_id}")
+        records[srf_id] = (data, path)
+    return records
+
+
+def collect_selected_srf_lineage(
+    der: dict[str, object],
+    srf_records: dict[str, tuple[dict[str, object], Path]],
+    der_relative: str,
+) -> tuple[set[str], set[str], set[Path]]:
+    """Collect only surfaces and observations reachable through declared source SRFs."""
+    selected_surface_ids: set[str] = set()
+    selected_observation_refs: set[str] = set()
+    selected_srf_paths: set[Path] = set()
+    for srf_id in der["source_srf_ids"]:
+        if srf_id not in srf_records:
+            raise SystemExit(f"{der_relative} references unknown SRF id: {srf_id}")
+        srf, srf_path = srf_records[srf_id]
+        if srf.get("investigation_id") != der["investigation_id"]:
+            raise SystemExit(f"{der_relative} references SRF from a different investigation: {srf_id}")
+        selected_srf_paths.add(srf_path.resolve())
+        surfaces = srf["surfaces"]
+        if not isinstance(surfaces, dict):
+            raise SystemExit(f"SRF surfaces must be an object: {srf_path.relative_to(ROOT)}")
+        for entries in surfaces.values():
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                surface_id = entry.get("id")
+                if isinstance(surface_id, str) and surface_id:
+                    selected_surface_ids.add(surface_id)
+                refs = entry.get("observation_refs")
+                if isinstance(refs, list):
+                    selected_observation_refs.update(ref for ref in refs if isinstance(ref, str) and ref)
+    return selected_surface_ids, selected_observation_refs, selected_srf_paths
+
+
+def validate_der_provenance(
+    der: dict[str, object],
+    selected_srf_paths: set[Path],
+    derivation_source: Path,
+    der_relative: str,
+) -> None:
+    provenance = der["provenance"]
+    if not isinstance(provenance, dict):
+        raise SystemExit(f"{der_relative} provenance must be an object")
+    created_from = provenance["created_from"]
+    resolved = {resolve_repo_file(ref, purpose="DER provenance") for ref in created_from}
+    required = {path.resolve() for path in selected_srf_paths}
+    required.add(derivation_source.resolve())
+    missing = sorted(str(path.relative_to(ROOT)) for path in required - resolved)
+    if missing:
+        raise SystemExit(f"{der_relative} provenance missing required source(s): {', '.join(missing)}")
+    unrelated = sorted(str(path.relative_to(ROOT)) for path in resolved - required)
+    if unrelated:
+        raise SystemExit(f"{der_relative} provenance contains unrelated source(s): {', '.join(unrelated)}")
+
+
+def validate_der_contract() -> None:
+    """Validate DER files when present without treating absent DERs as completed execution."""
+    for investigation_dir in sorted((ROOT / "investigations").iterdir()):
+        if not investigation_dir.is_dir():
+            continue
+        der_dir = investigation_dir / "der"
+        if not der_dir.is_dir():
+            continue
+        der_paths = sorted(der_dir.glob("*.der.json"))
+        if not der_paths:
+            continue
+
+        srf_records = srf_records_for(investigation_dir)
+        der_ids: set[str] = set()
+        for path in der_paths:
+            der_relative = str(path.relative_to(ROOT))
+            data = require_json(der_relative)
+            if not isinstance(data, dict):
+                raise SystemExit(f"DER must be an object: {der_relative}")
+            validate_json_object_against_schema(data, "schemas/der.schema.json", der_relative)
+
+            der_id = data["id"]
+            if der_id in der_ids:
+                raise SystemExit(f"duplicate DER id in {investigation_dir.relative_to(ROOT)}: {der_id}")
+            der_ids.add(der_id)
+
+            expected_investigation = investigation_dir.name
+            if data["investigation_id"] != expected_investigation:
+                raise SystemExit(f"{der_relative} investigation_id does not match directory: {data['investigation_id']}")
+
+            selected_surfaces, selected_observations, selected_srf_paths = collect_selected_srf_lineage(
+                data, srf_records, der_relative
+            )
+            for surface_id in data["source_surface_ids"]:
+                if surface_id not in selected_surfaces:
+                    raise SystemExit(f"{der_relative} references undeclared SRF surface id: {surface_id}")
+
+            for observation_ref in data["source_observation_refs"]:
+                if observation_ref not in selected_observations:
+                    raise SystemExit(f"{der_relative} references undeclared SRF observation ref: {observation_ref}")
+
+            source_reference = data["derivation_rule"]["derivation_source_reference"]
+            derivation_source = resolve_repo_file(
+                source_reference,
+                purpose="DER derivation source",
+                allowed_derivation_source=True,
+            )
+            validate_der_provenance(data, selected_srf_paths, derivation_source, der_relative)
+
 def validate_move_ledger() -> None:
     require_path("MOVES.md")
     text = (ROOT / "MOVES.md").read_text(encoding="utf-8")
@@ -272,6 +463,7 @@ def main() -> None:
     validate_yaml_syntax()
     validate_bor_schemas()
     validate_srf_registry()
+    validate_der_contract()
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

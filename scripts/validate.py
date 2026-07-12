@@ -703,6 +703,7 @@ def main() -> None:
     validate_srf_registry()
     validate_der_contract()
     validate_msr_contract()
+    subprocess.run(["python3", "scripts/build_dataset.py", "--check"], cwd=ROOT, check=True)
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

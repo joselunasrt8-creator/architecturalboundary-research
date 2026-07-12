@@ -2,10 +2,10 @@
 \label{sec:comparative-dataset}
 This section assembles a cohort-level comparative dataset derived from the system-specific registries (BOR/ESM/DER/MSR). The dataset is the cohort-facing view used for analysis and classification; each field must remain traceable to underlying registry entries.
 
-\textbf{TODO(Dataset schema):} Record the cohort dataset schema version and provide a machine-readable export pointer.
+\textbf{Dataset schema.} The canonical machine-readable export uses schema version \texttt{canonical-dataset-v1} at \texttt{schemas/dataset.schema.json} and is generated at \texttt{investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json}.
 
 \subsection{Cohort-level dataset (RLE boundary fields)}
-\textbf{Note (blocked on I4/I5).} The R/L/E fields are investigation-specific and must be populated only after the measurement operationalization (I4) and decision rule (I5) for this investigation are registered in Section~\ref{sec:protocol-registration}. Until then, this table remains intentionally unpopulated to avoid introducing new mapping logic.
+\textbf{Lifecycle note.} The machine-readable Comparative Dataset contains the registered I4 fields only (\texttt{m\_R}, \texttt{m\_L}, \texttt{m\_E}, \texttt{m\_RL}, \texttt{m\_LE}) and no I5 outcomes, analysis labels, or retained classifications.
 
 \begin{table}[ht]
 \centering
@@ -29,7 +29,7 @@ Google Zanzibar & \textbf{TODO(R)} & \textbf{TODO(L)} & \textbf{TODO(E)} \\
 
 
 \subsection{Comparative Dataset (metric extract from MSR)}
-\textbf{Status.} DER execution has completed for all nine cohort systems. Two canonical MSR reference executions exist, cohort-wide measurement remains incomplete, dataset construction has not begun, no comparative analysis has been performed, and no retained classifications have been assigned. The completed canonical DERs remain bounded evidence objects only; they are not measurements, metric extracts, analysis inputs, or retained classifications.
+\textbf{Status.} BOR, SRF, DER, and canonical MSR execution have completed for all nine cohort systems. The canonical Comparative Dataset is complete as a deterministic projection of the nine MSRs. No comparative analysis has been performed, and no retained classifications have been assigned.
 
 \begin{center}
 \begin{longtable}{@{}p{0.22\linewidth}p{0.20\linewidth}p{0.42\linewidth}@{}}
@@ -45,20 +45,20 @@ System & Dataset status & Trace status \\
 \endfoot
 \bottomrule
 \endlastfoot
-AWS IAM & Not started & Canonical DER execution exists at \texttt{der-b2-aws-iam-request-context-policy-evaluation-boundary}; MSR and comparative dataset entries have not begun. \\
-Cedar / Amazon Verified Permissions & Not started & Canonical DER execution exists at \texttt{der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary}; MSR and comparative dataset entries have not begun. \\
-Envoy ext\_authz & Not started & Canonical DER execution exists at \texttt{der-b2-envoy-ext-authz-external-authorization-boundary}; a reference MSR exists, but comparative dataset construction has not begun. \\
-Google Zanzibar & Not started & Canonical DER execution exists at \texttt{der-b2-google-zanzibar-relation-tuple-check-boundary}; MSR and comparative dataset entries have not begun. \\
-HashiCorp Vault & Not started & Canonical DER execution exists at \texttt{der-b2-hashicorp-vault-authenticated-path-policy-boundary}; MSR and comparative dataset entries have not begun. \\
-Istio AuthorizationPolicy & Not started & Canonical DER execution exists at \texttt{der-b2-istio-authorizationpolicy-workload-action-order-boundary}; MSR and comparative dataset entries have not begun. \\
-Kubernetes RBAC Admission & Not started & Canonical DER execution exists at \texttt{der-b2-kubernetes-rbac-admission-api-server-admission-boundary}; MSR and comparative dataset entries have not begun. \\
-Open Policy Agent Gatekeeper & Not started & Canonical DER execution exists at \texttt{der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary}; MSR and comparative dataset entries have not begun. \\
-OpenFGA & Not started & Canonical DER execution exists at \texttt{der-b2-openfga-authorization-model-version-boundary}; a reference MSR exists, but comparative dataset construction has not begun. \\
+AWS IAM & Complete & Canonical DER execution exists at \texttt{der-b2-aws-iam-request-context-policy-evaluation-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Cedar / Amazon Verified Permissions & Complete & Canonical DER execution exists at \texttt{der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Envoy ext\_authz & Complete & Canonical DER execution exists at \texttt{der-b2-envoy-ext-authz-external-authorization-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Google Zanzibar & Complete & Canonical DER execution exists at \texttt{der-b2-google-zanzibar-relation-tuple-check-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+HashiCorp Vault & Complete & Canonical DER execution exists at \texttt{der-b2-hashicorp-vault-authenticated-path-policy-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Istio AuthorizationPolicy & Complete & Canonical DER execution exists at \texttt{der-b2-istio-authorizationpolicy-workload-action-order-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Kubernetes RBAC Admission & Complete & Canonical DER execution exists at \texttt{der-b2-kubernetes-rbac-admission-api-server-admission-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+Open Policy Agent Gatekeeper & Complete & Canonical DER execution exists at \texttt{der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary}; Canonical MSR and Comparative Dataset row exist. \\
+OpenFGA & Complete & Canonical DER execution exists at \texttt{der-b2-openfga-authorization-model-version-boundary}; Canonical MSR and Comparative Dataset row exist. \\
 \end{longtable}
 \end{center}
 
 \subsection{Traceability map (dataset to registries)}
-\textbf{TODO(Traceability map):} Add a table mapping each dataset field (R/L/E and any auxiliary features) to the specific MSR and DER IDs used to compute it.
+\textbf{Traceability map.} Each dataset row contains \texttt{system\_id}, \texttt{msr\_id}, the five registered I4 values, and row-level lineage with the source MSR path, source DER identifiers, and measurement-vector reference. The committed JSON artifact is the canonical traceability map.
 
 \subsection{Dataset schema and export}
-\textbf{TODO(Dataset export):} Provide a pointer to the machine-readable cohort dataset (CSV/JSON) and its schema, including trace pointers back to BOR/ESM/DER/MSR entries.
+\textbf{Dataset export.} The canonical export is \texttt{investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json}; its schema is \texttt{schemas/dataset.schema.json}. Freshness is enforced by \texttt{scripts/build\_dataset.py --check}.

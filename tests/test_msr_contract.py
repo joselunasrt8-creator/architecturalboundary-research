@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -11,6 +12,47 @@ spec = importlib.util.spec_from_file_location("repository_validate_msr", SCRIPT)
 repository_validate = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = repository_validate
 spec.loader.exec_module(repository_validate)
+
+
+B2_NEW_MSR_SYSTEMS = [
+    "aws-iam",
+    "cedar-amazon-verified-permissions",
+    "google-zanzibar",
+    "hashicorp-vault",
+    "istio-authorizationpolicy",
+    "kubernetes-rbac-admission",
+    "open-policy-agent-gatekeeper",
+]
+
+
+def copy_b2_execution_subset(target: Path) -> None:
+    for relative in [
+        "protocol/protocol-v1/protocol.md",
+        "schemas/bor.schema.json",
+        "schemas/srf.schema.json",
+        "schemas/der.schema.json",
+        "schemas/msr.schema.json",
+        "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+    ]:
+        destination = target / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / relative, destination)
+    for stage in ["bor", "srf", "der", "msr"]:
+        shutil.copytree(
+            ROOT / "investigations" / "b2-governance-cohort" / stage,
+            target / "investigations" / "b2-governance-cohort" / stage,
+        )
+
+
+def mutate_determination(entry: dict) -> None:
+    if entry["basis"]["determination"] == "unavailable":
+        entry["basis"]["determination"] = "satisfied"
+        entry["status"] = "observed"
+        entry["value"] = 1
+    else:
+        entry["basis"]["determination"] = "not_satisfied"
+        entry["status"] = "observed"
+        entry["value"] = 0
 
 
 def write_json(path: Path, data: dict) -> None:
@@ -90,3 +132,19 @@ def test_negative_msr_contract_paths(repo):
     for data, expected in cases:
         (repo / "investigations/b2-governance-cohort/msr/alpha.msr.json").unlink(missing_ok=True)
         fails(repo, data, expected)
+
+
+@pytest.mark.parametrize("system", B2_NEW_MSR_SYSTEMS)
+def test_new_b2_reference_determinations_are_enforced(tmp_path, monkeypatch, system):
+    copy_b2_execution_subset(tmp_path)
+    monkeypatch.setattr(repository_validate, "ROOT", tmp_path)
+    msr_path = tmp_path / "investigations" / "b2-governance-cohort" / "msr" / f"{system}.msr.json"
+    base = json.loads(msr_path.read_text(encoding="utf-8"))
+
+    for index, _measurement in enumerate(base["measurements"]):
+        mutated = json.loads(json.dumps(base))
+        mutate_determination(mutated["measurements"][index])
+        write_json(msr_path, mutated)
+        with pytest.raises(SystemExit, match="measurement determination conflicts with canonical reference execution"):
+            repository_validate.validate_msr_contract()
+        write_json(msr_path, base)

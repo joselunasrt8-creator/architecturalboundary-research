@@ -452,12 +452,19 @@ def validate_der_contract() -> None:
 
 
 B2_REFERENCE_DETERMINATIONS = {
-    "der-b2-openfga-authorization-model-version-boundary": {
+    "der-b2-aws-iam-request-context-policy-evaluation-boundary": {
         "I4.m_R": "satisfied",
-        "I4.m_L": "unavailable",
-        "I4.m_E": "unavailable",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
         "I4.m_RL": "satisfied",
-        "I4.m_LE": "unavailable",
+        "I4.m_LE": "satisfied",
+    },
+    "der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "satisfied",
     },
     "der-b2-envoy-ext-authz-external-authorization-boundary": {
         "I4.m_R": "unavailable",
@@ -465,6 +472,48 @@ B2_REFERENCE_DETERMINATIONS = {
         "I4.m_E": "satisfied",
         "I4.m_RL": "unavailable",
         "I4.m_LE": "satisfied",
+    },
+    "der-b2-google-zanzibar-relation-tuple-check-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "unavailable",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "unavailable",
+    },
+    "der-b2-hashicorp-vault-authenticated-path-policy-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "satisfied",
+    },
+    "der-b2-istio-authorizationpolicy-workload-action-order-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "satisfied",
+    },
+    "der-b2-kubernetes-rbac-admission-api-server-admission-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "satisfied",
+    },
+    "der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "satisfied",
+    },
+    "der-b2-openfga-authorization-model-version-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "unavailable",
+        "I4.m_E": "unavailable",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "unavailable",
     },
 }
 

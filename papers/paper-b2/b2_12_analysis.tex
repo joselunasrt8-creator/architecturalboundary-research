@@ -2,14 +2,6 @@
 \label{sec:analysis}
 This section interprets the protocol artifacts (BOR/ESM/DER/MSR and the cohort comparative dataset) to evaluate the candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary.
 
-\subsection{Program status: prospective execution and traceability milestone}
-Conceptually, the research program now has the following executed sequence:
-\begin{quote}
-Paper~0 $\rightarrow$ Protocol~v1.0 $\rightarrow$ B1 (pilot execution) $\rightarrow$ B2-Run-1 (execution; preregistration incomplete) $\rightarrow$ AUD-001 $\rightarrow$ B2-Run-2 (prospectively preregistered execution) $\rightarrow$ Empirical result.
-\end{quote}
-
-If the execution and traceability are correct, then B2-Run-2 establishes: (i) a protocol that can be executed prospectively; (ii) a fully traceable evidence pipeline from BOR through the Comparative Dataset; (iii) a preregistered decision rule that yields a deterministic cohort result; and (iv) a hypothesis tested without modification after observing the evidence.
-
 \textbf{Constraints (frozen artifacts; no new decision logic).} Analysis in Paper~B2 is performed by synthesizing values already present in the Comparative Dataset (and its trace links to MSR/DER/SRF/BOR). The analysis must: (i) not modify BOR, SRF, DER, MSR, or the Comparative Dataset; (ii) not introduce new observations, measurements, metrics, thresholds, or decision rules; (iii) ensure every claim is traceable through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR; and (iv) if a protocol-defined conclusion cannot be reached uniquely from the registered decision rules for this investigation, record the ambiguity rather than resolving it.
 
 \subsection{Inputs and notation}
@@ -20,69 +12,107 @@ If the execution and traceability are correct, then B2-Run-2 establishes: (i) a 
   \item \textbf{Measurements:} MSR-\emph{*} (Section~\ref{sec:msr})
 \end{itemize}
 
-\textbf{Frozen decision rule (I5).} Paper~B2 applies the registered decision function from Section~\ref{sec:i5-decision-function}: for a unit with measurement vector $(m_R,m_L,m_E,m_{RL},m_{LE})$, the outcome is \emph{Indeterminate} if any component is missing; \emph{Supports} iff all five components equal 1; \emph{Violates} otherwise. Cohort precedence is \emph{Indeterminate} $\succ$ \emph{Violates} $\succ$ \emph{Supports}.
+\textbf{TODO(Decision rule I5):} Insert the exact registered decision rule once I5 is finalized in Section~\ref{sec:protocol-registration}.
 
-\subsection{Per-DER execution of frozen I4/I5 over the Comparative Dataset}
-\label{sec:per-der-i5-execution}
-\textbf{Mechanical mapping (I4).} For each Comparative Dataset row (Section~\ref{sec:comparative-dataset}), we construct the I4 measurement vector as:
+\subsection{Per-system assessment (trace-first)}
+For each cohort member, the assessment proceeds in four explicitly separated steps:
+\begin{enumerate}
+  \item \textbf{Observation summary (BOR):} list the minimal BOR IDs that define the system's decision/evaluation locus, enforcement locus, and policy representation.
+  \item \textbf{Derivation summary (DER/ESM):} list the derived objects and execution surfaces used to represent the candidate boundary.
+  \item \textbf{Measurement summary (MSR):} list the measurements computed from DER inputs.
+  \item \textbf{Conclusion (I5):} apply the registered decision rule to yield \{Supports, Violates, Indeterminate\}.
+\end{enumerate}
+
+\textbf{TODO(Per-system reports):} Populate the following entries with explicit BOR/DER/MSR identifiers and a one-paragraph conclusion per system.
+
+\subsubsection{OPA + Gatekeeper}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{Kubernetes RBAC / Admission}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{AWS IAM}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{HashiCorp Vault}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{Envoy \texttt{ext\_authz}}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{Istio \texttt{AuthorizationPolicy}}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{OpenFGA}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{Cedar / Amazon Verified Permissions}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsubsection{Google Zanzibar}
+\textbf{Observations:} \textbf{TODO(BOR refs)}.\par
+\textbf{Derivations/Surfaces:} \textbf{TODO(DER/ESM refs)}.\par
+\textbf{Measurements:} \textbf{TODO(MSR refs)}.\par
+\textbf{Conclusion (I5):} \textbf{TODO(Supports/Violates/Indeterminate)}.
+
+\subsection{Cohort-level comparison}
+Cohort-level comparisons must be expressed in terms of shared dataset fields and measurements rather than informal narrative. Where systems differ in representational choices, those differences must be made explicit as derivations (DER) and the analysis must indicate sensitivity to those choices.
+
+\subsubsection{Cohort-wide summary (metric extract)}
+Using the Comparative Dataset metric extract (Section~\ref{sec:comparative-dataset}), the cohort exhibits the following patterns across the nine candidate objects (DER-001--DER-009):
 \begin{itemize}
-  \item $m_R \leftarrow$ M1
-  \item $m_L \leftarrow$ M2
-  \item $m_E \leftarrow$ M3
-  \item $m_{RL} \leftarrow$ M4
-  \item $m_{LE} \leftarrow$ M5
-\end{itemize}
-No other dataset fields are used for I5 classification.
-
-\begin{center}
-\begin{longtable}{@{}p{0.18\linewidth}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.10\linewidth}p{0.22\linewidth}@{}}
-\toprule
-System & DER & $(m_R,m_L,m_E,m_{RL},m_{LE})$ & I5 branch applied & Outcome & Supporting IDs (Comparative Dataset / MSR) \\
-\midrule
-\endfirsthead
-\toprule
-System & DER & $(m_R,m_L,m_E,m_{RL},m_{LE})$ & I5 branch applied & Outcome & Supporting IDs (Comparative Dataset / MSR) \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
-\bottomrule
-\endlastfoot
-Kubernetes RBAC/Admission & DER-001 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-001; MSR-001--MSR-009\\
-Kubernetes RBAC/Admission & DER-002 & (1,1,1,1,1) & supports (all ones) & Supports & Comparative Dataset row: DER-002; MSR-010--MSR-018\\
-HashiCorp Vault & DER-003 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-003; MSR-019--MSR-027\\
-AWS IAM & DER-004 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-004; MSR-028--MSR-036\\
-Google Zanzibar & DER-005 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-005; MSR-037--MSR-045\\
-Istio AuthorizationPolicy & DER-006 & (1,1,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-006; MSR-046--MSR-054\\
-Envoy ext\_authz & DER-007 & (1,1,1,1,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-007; MSR-055--MSR-063\\
-OpenFGA & DER-008 & (1,1,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-008; MSR-064--MSR-072\\
-Cedar / AVP & DER-009 & (1,0,1,0,0) & violates (otherwise) & Violates & Comparative Dataset row: DER-009; MSR-073--MSR-081\\
-\end{longtable}
-\end{center}
-
-\subsection{Run result (B2-Run-2)}
-\paragraph{Observed measurements (data).}
-Across the nine Comparative Dataset rows (DER-001--DER-009), exactly one row (DER-002) has the complete measurement vector $(1,1,1,1,1)$. The remaining eight rows have at least one component equal to 0.
-
-\paragraph{Application of the frozen I5 decision rule (mechanical).}
-Applying the registered I5 rule to the observed vectors yields:
-\begin{itemize}
-  \item Supports: 1/9
-  \item Violates: 8/9
-  \item Indeterminate: 0/9
+  \item \textbf{Decision component present (MET-001):} 9/9 candidates.
+  \item \textbf{Execution component present (MET-002):} 4/9 candidates (DER-002, DER-006, DER-007, DER-008).
+  \item \textbf{Policy enforcement/policy evaluation surface present (MET-003):} 9/9 candidates.
+  \item \textbf{Decision and execution separated (MET-004):} 2/9 candidates (DER-002, DER-007).
+  \item \textbf{Authorization before execution (MET-005):} 1/9 candidates (DER-002); DER-007 explicitly records non-evidence for this ordering (MET-005=0).
+  \item \textbf{Execution surface explicitly documented (MET-006):} 9/9 candidates.
+  \item \textbf{Policy evaluation surface explicitly documented (MET-007):} 8/9 candidates; Cedar/AVP (DER-009) is the sole candidate with MET-007=0.
+  \item \textbf{Audit/decision-trace surface present (MET-008):} 1/9 candidates (DER-003).
 \end{itemize}
 
-\paragraph{Cohort conclusion (outcome under the preregistered rule).}
-Because there is at least one \emph{Violates} outcome and there are no \emph{Indeterminate} outcomes, the cohort outcome is \textbf{Violates}.
+\subsubsection{Evidence sufficiency (MET-009)}
+Evidence sufficiency values (MET-009) in the Comparative Dataset are: \emph{Supported} (2/9; DER-002, DER-007), \emph{Partial} (6/9; DER-001, DER-003, DER-004, DER-005, DER-006, DER-008), and \emph{Insufficient} (1/9; DER-009).
 
-\subsection{Scientific meaning (interpretation layer)}
-The evidence does not support the preregistered claim that every candidate in the governance cohort exhibits the complete explicit R$\rightarrow$L$\rightarrow$E structure required by I5. This does not imply that reasoning, legitimacy, and execution are irrelevant; it implies that the strict all-components invariant, as preregistered, does not hold across this cohort.
-
-\subsection{Cohort outcome (precedence rule)}
-Across the nine Comparative Dataset rows (DER-001--DER-009), there exists at least one \emph{Violates} outcome and there are no \emph{Indeterminate} outcomes. Therefore, the cohort outcome under the frozen precedence rule is \textbf{Violates}.
+\textbf{TODO(Cohort synthesis; blocked on I4/I5):} Any cohort-level statement about the candidate RLE boundary (as opposed to individual frozen metrics) must be derived only after the investigation's registered I4/I5 mapping from the Comparative Dataset to \{Supports, Violates, Indeterminate\} is finalized.
 
 \subsection{Interpretation layer: candidate boundary status categories}
-Given the cohort outcome \emph{Violates}, the candidate RLE boundary is retained with status label \textbf{Unsupported} for this cohort.
+In addition to the Protocol v1.0 per-system outcome labels \{Supports, Violates, Indeterminate\}, Paper~B2 records a cohort-bounded interpretation of what the evidence suggests about the candidate boundary's status within this domain:
+\begin{itemize}
+  \item Fundamental Architectural Invariant
+  \item Conditional Architectural Invariant
+  \item Domain-Specific Pattern
+  \item Implementation Artifact
+  \item Unsupported
+\end{itemize}
+
+\textbf{TODO(Boundary status):} Assign one status label for the candidate boundary based on the cohort-level synthesis, and justify it using only BOR/DER/MSR-backed statements.
 
 \subsection{Counterexamples and boundary conditions}
-A minimal counterexample is any violating row in Table~\ref{sec:per-der-i5-execution} (e.g., DER-001).
+Violations or indeterminate outcomes should be treated as potential counterexamples or boundary conditions.
+
+\textbf{TODO(Counterexamples):} If any system violates the boundary under I5, provide a minimal counterexample description with explicit BOR/DER/MSR trace pointers.

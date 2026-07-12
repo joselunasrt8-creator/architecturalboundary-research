@@ -1,0 +1,765 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[hidelinks]{hyperref}
+
+\title{Paper B2 --- BOR-002 (Kubernetes RBAC / Admission)}
+\author{Jose Luna}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\section*{BOR-002}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-002\\
+System: & Kubernetes RBAC / Admission\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-K8S-RBAC-001 & Using RBAC Authorization & v1.35 (static snapshot, as displayed) & Last modified January 16, 2026 at 12:49 AM PST & \url{https://v1-35.docs.kubernetes.io/docs/reference/access-authn-authz/rbac/}\\
+SRC-K8S-ADM-001 & Admission Control in Kubernetes & v1.35 (static snapshot, as displayed) & version not specified (last-modified not captured in BOR-002) & \url{https://v1-35.docs.kubernetes.io/docs/reference/access-authn-authz/admission-controllers/}\\
+SRC-K8S-VAP-001 & Validating Admission Policy & version not specified (page is not a version-snapshot in URL) & version not specified (last-modified not captured in BOR-002) & \url{https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/}\\
+SRC-K8S-API-001 & Admissionregistration API Reference & version not specified & Last modified May 13, 2026 at 6:59 PM PST & \url{https://kubernetes.io/docs/reference/kubernetes-api/admissionregistration/}\\
+\bottomrule
+\end{longtable}
+\subsection*{Methodological status (Program B)}
+
+This Baseline Observation Record has progressed from a structural scaffold to a populated observational artifact. Primary sources have been designated and registered, observations have been recorded verbatim, and each observation is linked to its supporting evidence. No architectural derivations, measurements, classifications, or interpretations are included.
+
+This artifact is frozen under Protocol~v1.0 (Revision~1) and serves as part of the empirical dataset from which later protocol artifacts will be derived.
+
+\noindent\textbf{Protocol sequence (post-BOR):}
+\begin{center}
+BOR (Observations)\par
+$\downarrow$\par
+SRF\par
+$\downarrow$\par
+DER (Derived Architectural Objects)\par
+$\downarrow$\par
+MSR (Measurements)\par
+$\downarrow$\par
+Comparative dataset\par
+$\downarrow$\par
+Analysis\par
+$\downarrow$\par
+Retained classification
+\end{center}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-K8S-001 & Kubernetes RBAC/Admission & ``RBAC authorization uses the \texttt{rbac.authorization.k8s.io} API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API.'' & SRC-K8S-RBAC-001\\
+BOR-K8S-002 & Kubernetes RBAC/Admission & ``The RBAC API declares four kinds of Kubernetes object: Role, ClusterRole, RoleBinding and ClusterRoleBinding.'' & SRC-K8S-RBAC-001\\
+BOR-K8S-003 & Kubernetes RBAC/Admission & ``An admission controller is a piece of code that intercepts requests to the Kubernetes API server prior to persistence of the resource, but after the request is authenticated and authorized.'' & SRC-K8S-ADM-001\\
+BOR-K8S-004 & Kubernetes RBAC/Admission & ``Admission controllers are code within the Kubernetes API server that check the data arriving in a request to modify a resource.'' & SRC-K8S-ADM-001\\
+BOR-K8S-005 & Kubernetes RBAC/Admission & ``Admission controllers do not (and cannot) block requests to read (get, watch or list) objects, because reads bypass the admission control layer.'' & SRC-K8S-ADM-001\\
+BOR-K8S-006 & Kubernetes RBAC/Admission & ``The \texttt{--enable-admission-plugins} flag takes a comma-delimited list of admission control plugins to invoke prior to modifying objects in the cluster.'' & SRC-K8S-ADM-001\\
+BOR-K8S-007 & Kubernetes RBAC/Admission & ``The admission control process proceeds in two phases. In the first phase, mutating admission controllers are run. In the second phase, validating admission controllers are run.'' & SRC-K8S-ADM-001\\
+BOR-K8S-008 & Kubernetes RBAC/Admission & ``Validating admission policies use the Common Expression Language (CEL) to declare the validation rules of a policy.'' & SRC-K8S-VAP-001\\
+BOR-K8S-009 & Kubernetes RBAC/Admission & ``ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.'' & SRC-K8S-API-001\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{BOR-003}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-003\\
+System: & HashiCorp Vault\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.36\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-VAULT-001 & Architecture & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/internals/architecture}\\
+SRC-VAULT-002 & Policies & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/concepts/policies}\\
+SRC-VAULT-003 & Authentication (concepts) & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/concepts/auth}\\
+SRC-VAULT-004 & Auth methods & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/auth}\\
+SRC-VAULT-005 & Tokens & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/concepts/tokens}\\
+SRC-VAULT-006 & Audit logging (audit devices) & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/docs/audit}\\
+SRC-VAULT-007 & HTTP API & v2.x (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://developer.hashicorp.com/vault/api-docs}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-09.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-VAULT-001 & HashiCorp Vault & ``Vault’s encryption layer, referred to as the barrier, is responsible for encrypting and decrypting Vault data.'' & SRC-VAULT-001\\
+BOR-VAULT-002 & HashiCorp Vault & ``Vault operates in an allowed-access mode, meaning the action is not allowed unless access is granted via a policy explicitly.'' & SRC-VAULT-001\\
+BOR-VAULT-003 & HashiCorp Vault & ``Policies are deny by default, so an empty policy grants no permission in the system.'' & SRC-VAULT-002\\
+BOR-VAULT-004 & HashiCorp Vault & ``Before a client can interact with Vault, it must authenticate against an auth method. Upon authentication, a token is generated.'' & SRC-VAULT-003\\
+BOR-VAULT-005 & HashiCorp Vault & ``All auth methods are mounted underneath the \texttt{auth/} prefix.'' & SRC-VAULT-004\\
+BOR-VAULT-006 & HashiCorp Vault & ``Tokens are the core method for authentication within Vault.'' & SRC-VAULT-005\\
+BOR-VAULT-007 & HashiCorp Vault & ``When a parent token is revoked, all of its child tokens -- and all of their leases -- are revoked as well.'' & SRC-VAULT-005\\
+BOR-VAULT-008 & HashiCorp Vault & ``Vault sends the audit log entry of every API request and response to all enabled audit devices and guarantees that it saves to at least one of the enabled devices.'' & SRC-VAULT-006\\
+BOR-VAULT-009 & HashiCorp Vault & ``By default, Vault only writes a keyed hash (HMAC-SHA256) of most string values to audit logs.'' & SRC-VAULT-006\\
+BOR-VAULT-010 & HashiCorp Vault & ``Vault has an HTTP API that can be used to control every aspect of Vault.'' & SRC-VAULT-007\\
+\bottomrule
+\end{longtable}
+\newpage
+\section*{BOR-004}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-004\\
+System: & AWS IAM\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.36\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-AWS-IAM-001 & Control access to AWS resources using policies & version not specified (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html}\\
+SRC-AWS-IAM-002 & Identity-based policies and resource-based policies & version not specified (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html}\\
+SRC-AWS-IAM-003 & Policy evaluation logic & version not specified (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html}\\
+SRC-AWS-IAM-004 & Policy evaluation for requests within a single account & version not specified (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-basics.html}\\
+SRC-AWS-IAM-005 & How AWS enforcement code logic evaluates requests to allow or deny access & version not specified (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-09.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-AWS-IAM-001 & AWS IAM & ``Every IAM user starts with no permissions.'' & SRC-AWS-IAM-001\\
+BOR-AWS-IAM-002 & AWS IAM & ``By default, users can do nothing, not even view their own access keys.'' & SRC-AWS-IAM-001\\
+BOR-AWS-IAM-003 & AWS IAM & ``it does not grant any permissions. It sets the maximum permissions that an identity-based policy can grant to an IAM entity.'' & SRC-AWS-IAM-001\\
+BOR-AWS-IAM-004 & AWS IAM & ``Resource-based policies allow you to specify who can access that resource.'' & SRC-AWS-IAM-002\\
+BOR-AWS-IAM-005 & AWS IAM & ``AWS first checks all policies for a \texttt{Deny}. If one exists, then the request is denied.'' & SRC-AWS-IAM-002\\
+BOR-AWS-IAM-006 & AWS IAM & ``If at least one policy statement allows the action in the request, the request is allowed.'' & SRC-AWS-IAM-002\\
+BOR-AWS-IAM-007 & AWS IAM & ``An explicit deny in any of the policies overrides the allow.'' & SRC-AWS-IAM-004\\
+BOR-AWS-IAM-008 & AWS IAM & ``The resulting permissions are the union of the permissions of the two types.'' & SRC-AWS-IAM-003\\
+BOR-AWS-IAM-009 & AWS IAM & ``the resulting permissions are the intersection of the two categories.'' & SRC-AWS-IAM-003\\
+\bottomrule
+\end{longtable}
+\newpage
+\section*{BOR-005}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-005\\
+System: & Google Zanzibar\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.36\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ZANZIBAR-001 & Zanzibar: Google’s Consistent, Global Authorization System & USENIX ATC '19 (paper PDF) & July 10--12, 2019 (conference proceedings; as published in paper front matter) & \url{https://www.usenix.org/system/files/atc19-pang.pdf}\\
+SRC-ZANZIBAR-002 & Zanzibar: Google’s Consistent, Global Authorization System (Google Research publication page) & 2019 (as displayed) & 2019 (as displayed) & \url{https://research.google/pubs/zanzibar-googles-consistent-global-authorization-system/}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-09.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-ZANZIBAR-001 & Google Zanzibar & ``This paper presents the design, implementation, and deployment of Zanzibar, a global system for storing and evaluating access control lists.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-002 & Google Zanzibar & ``Zanzibar provides a uniform data model and configuration language for expressing a wide range of access control policies from hundreds of client services at Google'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-003 & Google Zanzibar & ``Its authorization decisions respect causal ordering of user actions and thus provide external consistency amid changes to access control lists and object contents.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-004 & Google Zanzibar & ``Zanzibar scales to trillions of access control lists and millions of authorization requests per second to support services used by billions of people.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-005 & Google Zanzibar & ``At runtime, Zanzibar allows clients to create, modify, and evaluate access control lists (ACLs) through a remote procedure call (RPC) interface.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-006 & Google Zanzibar & ``A simple ACL takes the form of “user U has relation R to object O”.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-007 & Google Zanzibar & ``The language allows clients to define arbitrary relations between users and objects, such as owner, editor, commenter, and viewer.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-008 & Google Zanzibar & ``It includes set-algebraic operators such as intersection and union for specifying potentially complex access control policies in terms of those user-object relations.'' & SRC-ZANZIBAR-001\\
+BOR-ZANZIBAR-009 & Google Zanzibar & ``Group memberships are an important class of ACL where the object is a group and the relation is semantically equivalent to member.'' & SRC-ZANZIBAR-001\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{BOR-006}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-006\\
+System: & Istio AuthorizationPolicy\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.20\textwidth}p{0.36\textwidth}p{0.16\textwidth}p{0.16\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ISTIO-AUTHZ-001 & Security (concepts): Authorization & Istio 1.30.2 (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://istio.io/latest/docs/concepts/security/}\\
+SRC-ISTIO-AP-001 & Authorization Policy (reference) & Istio 1.30.2 (latest) (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://istio.io/latest/docs/reference/config/security/authorization-policy/}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-09.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-ISTIO-001 & Istio AuthorizationPolicy & ``Istio’s authorization features provide mesh-, namespace-, and workload-wide access control for your workloads in the mesh.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-002 & Istio AuthorizationPolicy & ``A simple API: it includes a single \texttt{AuthorizationPolicy} CRD, which is easy to use and maintain.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-003 & Istio AuthorizationPolicy & ``High performance: Istio authorization (\texttt{ALLOW} and \texttt{DENY}) is enforced natively on Envoy.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-004 & Istio AuthorizationPolicy & ``The authorization policy enforces access control to the inbound traffic in the server side Envoy proxy.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-005 & Istio AuthorizationPolicy & ``For workloads without authorization policies applied, Istio allows all requests.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-006 & Istio AuthorizationPolicy & ``Authorization policies support \texttt{ALLOW}, \texttt{DENY} and \texttt{CUSTOM} actions.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-007 & Istio AuthorizationPolicy & ``Istio checks for matching policies in layers, in this order: \texttt{CUSTOM}, \texttt{DENY}, and then \texttt{ALLOW}.'' & SRC-ISTIO-AUTHZ-001\\
+BOR-ISTIO-008 & Istio AuthorizationPolicy & ``AuthorizationPolicy enables access control on workloads.'' & SRC-ISTIO-AP-001\\
+BOR-ISTIO-009 & Istio AuthorizationPolicy & ``The action to take if the request is matched with the rules. Default is ALLOW if not specified.'' & SRC-ISTIO-AP-001\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{BOR-007}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-007\\
+System: & Envoy ext\_authz\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ENVOY-EXTAUTHZ-NETDOC-001 & External Authorization (network filter) & envoy 1.39.0-dev-187301 (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/network_filters/ext_authz_filter}\\
+SRC-ENVOY-EXTAUTHZ-HTTPDOC-001 & External Authorization (HTTP filter) & envoy 1.39.0-dev-187301 (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html}\\
+SRC-ENVOY-EXTAUTHZ-NETPROTO-001 & Network External Authorization (proto) & envoy 1.39.0-dev-187301 (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/ext_authz/v3/ext_authz.proto}\\
+SRC-ENVOY-EXTAUTHZ-HTTPPROTO-001 & External Authorization (proto) & envoy 1.39.0-dev-187301 (as displayed) & version not specified (no publication/last-modified date displayed on page) & \url{https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-10.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-ENVOY-001 & Envoy ext\_authz & ``The external authorization network filter calls an external authorization service to check if the incoming request is authorized or not.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-002 & Envoy ext\_authz & ``If the request is deemed unauthorized by the network filter then the connection will be closed.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-003 & Envoy ext\_authz & ``This filter should be configured with the type URL `type.googleapis.com/envoy.extensions.filters.network.ext\_authz.v3.ExtAuthz`.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-004 & Envoy ext\_authz & ``The content of the request that are passed to an authorization service is specified by CheckRequest.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-005 & Envoy ext\_authz & ``This means the upstream connection may be established before authorization completes.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-006 & Envoy ext\_authz & ``To ensure upstream connections are only established after authorization succeeds, configure the TCP proxy filter to delay upstream connection establishment using upstream\_connect\_mode.'' & SRC-ENVOY-EXTAUTHZ-NETDOC-001\\
+BOR-ENVOY-007 & Envoy ext\_authz & ``The external authorization filter calls an external gRPC or HTTP service to determine whether an incoming HTTP request is authorized.'' & SRC-ENVOY-EXTAUTHZ-HTTPDOC-001\\
+BOR-ENVOY-008 & Envoy ext\_authz & ``If the request is unauthorized, Envoy returns a `403 (Forbidden)` response.'' & SRC-ENVOY-EXTAUTHZ-HTTPDOC-001\\
+BOR-ENVOY-009 & Envoy ext\_authz & ``The content of the request passed to the authorization service is specified by CheckRequest.'' & SRC-ENVOY-EXTAUTHZ-HTTPDOC-001\\
+BOR-ENVOY-010 & Envoy ext\_authz & ``This field will not be populated if the request does not complete.'' & SRC-ENVOY-EXTAUTHZ-HTTPDOC-001\\
+BOR-ENVOY-011 & Envoy ext\_authz & ``This extension has the qualified name `envoy.filters.network.ext\_authz`'' & SRC-ENVOY-EXTAUTHZ-NETPROTO-001\\
+BOR-ENVOY-012 & Envoy ext\_authz & ``External Authorization filter calls out to an external service over the gRPC Authorization API defined by CheckRequest.'' & SRC-ENVOY-EXTAUTHZ-NETPROTO-001\\
+BOR-ENVOY-013 & Envoy ext\_authz & ``This extension has the qualified name `envoy.filters.http.ext\_authz`'' & SRC-ENVOY-EXTAUTHZ-HTTPPROTO-001\\
+BOR-ENVOY-014 & Envoy ext\_authz & ``This extension must be configured with one of the following type URLs:'' & SRC-ENVOY-EXTAUTHZ-HTTPPROTO-001\\
+BOR-ENVOY-015 & Envoy ext\_authz & ``Only one of grpc\_service , http\_service may be set.'' & SRC-ENVOY-EXTAUTHZ-HTTPPROTO-001\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{BOR-008}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-008\\
+System: & OpenFGA\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-OPENFGA-001 & Concepts & version not specified (as displayed) & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/concepts}\\
+SRC-OPENFGA-002 & Configuration Language & version not specified (as displayed) & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/configuration-language}\\
+SRC-OPENFGA-003 & Perform a Check & version not specified (as displayed) & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/getting-started/perform-check}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-10.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-OPENFGA-001 & OpenFGA & ``The OpenFGA service answers authorization checks by determining whether a relationship exists between an object and a user.'' & SRC-OPENFGA-001\\
+BOR-OPENFGA-002 & OpenFGA & ``An authorization model combines one or more type definitions.'' & SRC-OPENFGA-001\\
+BOR-OPENFGA-003 & OpenFGA & ``A store is an OpenFGA entity used to organize authorization check data.'' & SRC-OPENFGA-001\\
+BOR-OPENFGA-004 & OpenFGA & ``The DSL adds syntactic sugar on top of JSON for ease of use, but compiles down to JSON before being sent to OpenFGA's API.'' & SRC-OPENFGA-002\\
+BOR-OPENFGA-005 & OpenFGA & ``\texttt{true} if the relationship exists.'' & SRC-OPENFGA-003\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{BOR-009}
+
+\subsection*{BOR Metadata}
+\begin{tabular}{@{}ll@{}}
+\toprule
+BOR ID: & BOR-009\\
+System: & Amazon Verified Permissions\\
+Protocol: & v1.0\\
+Status: & Frozen\\
+Revision: & 1\\
+Modification: & None permitted\\
+Retrieval date: & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Methodological status (Program B)}
+
+This Baseline Observation Record has progressed from a structural scaffold to a populated observational artifact. Primary sources have been designated and registered, observations have been recorded verbatim, and each observation is linked to its supporting evidence. No architectural derivations, measurements, classifications, or interpretations are included.
+
+This artifact is frozen under Protocol~v1.0 (Revision~1) and serves as part of the empirical dataset from which later protocol artifacts will be derived.
+
+\noindent\textbf{Protocol sequence (post-BOR):}
+\begin{center}
+BOR (Observations)\par
+$\downarrow$\par
+SRF\par
+$\downarrow$\par
+DER (Derived Architectural Objects)\par
+$\downarrow$\par
+MSR (Measurements)\par
+$\downarrow$\par
+Comparative dataset\par
+$\downarrow$\par
+Analysis\par
+$\downarrow$\par
+Retained classification
+\end{center}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.12\textwidth}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endfirsthead
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-AVP-001 & What is Amazon Verified Permissions? (User Guide) & version not specified (as displayed) & version not specified (last-modified not displayed in BOR-009 snapshot) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html}\\
+SRC-AVP-002 & Verified Permissions terminology (User Guide) & version not specified (as displayed) & version not specified (last-modified not displayed in BOR-009 snapshot) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-terms.html}\\
+SRC-AVP-003 & Verified Permissions schema (User Guide) & version not specified (as displayed) & version not specified (last-modified not displayed in BOR-009 snapshot) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-schema.html}\\
+SRC-AVP-004 & Cedar documentation: Introduction & version not specified (as displayed) & version not specified (last-modified not displayed in BOR-009 snapshot) & \url{https://docs.cedarpolicy.com/}\\
+\bottomrule
+\end{longtable}
+Retrieval date (all designated primary sources): 2026-07-10.
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}p{0.18\textwidth}p{0.22\textwidth}p{0.44\textwidth}p{0.16\textwidth}@{}}
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endfirsthead
+\toprule
+BOR ID & System & Observation (verbatim quotation) & Evidence\\
+\midrule
+\endhead
+BOR-AVP-001 & Amazon Verified Permissions & ``Amazon Verified Permissions is a scalable permissions management and fine-grained authorization service for the applications that you build.'' & SRC-AVP-001\\
+BOR-AVP-002 & Amazon Verified Permissions & ``Amazon Verified Permissions uses the Cedar policy language.'' & SRC-AVP-001\\
+BOR-AVP-003 & Amazon Verified Permissions & ``A policy store is a container for all of your policies.'' & SRC-AVP-002\\
+BOR-AVP-004 & Amazon Verified Permissions & ``A schema defines the structure of the entities in your policy store.'' & SRC-AVP-003\\
+BOR-AVP-005 & Amazon Verified Permissions & ``An action is the type of operation that a principal can perform on a resource.'' & SRC-AVP-002\\
+BOR-AVP-006 & Cedar & ``Cedar is a language for writing and enforcing authorization policies in your applications.'' & SRC-AVP-004\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{SRF (Execution Surface Matrix)}
+
+The SRF is a derived artifact that normalizes observed execution surfaces from the frozen BOR corpus into a common representation. It introduces no new observations and no interpretation.
+
+\noindent\textbf{SRF rule:} Every SRF row must reference one or more BOR IDs and must be reconstructible entirely from the frozen BOR corpus.
+
+\begin{longtable}{@{}p{0.10\textwidth}p{0.14\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.20\textwidth}p{0.14\textwidth}p{0.06\textwidth}@{}}
+\toprule
+SRF ID & System & Execution Surface & Observed Trigger & Observed Decision Point & Observed Execution Target & BOR Evidence\\
+\midrule
+\endfirsthead
+\toprule
+SRF ID & System & Execution Surface & Observed Trigger & Observed Decision Point & Observed Execution Target & BOR Evidence\\
+\midrule
+\endhead
+% SRF rows are populated only where the fields are supported by BOR evidence.
+SRF-001 & Kubernetes RBAC / Admission & RBAC authorization &  & drive authorization decisions &  & BOR-K8S-001\\
+SRF-002 & Kubernetes RBAC / Admission & Admission controller & requests to the Kubernetes API server & intercepts requests prior to persistence of the resource (after the request is authenticated and authorized) & persistence of the resource & BOR-K8S-003\\
+SRF-003 & HashiCorp Vault & Policy enforcement & client interaction with Vault & action is not allowed unless access is granted via a policy explicitly &  & BOR-VAULT-002\\
+SRF-004 & AWS IAM & Policy evaluation & request & first checks all policies for a \texttt{Deny}; if one exists, the request is denied &  & BOR-AWS-IAM-005\\
+SRF-005 & Google Zanzibar & RPC interface (ACL create/modify/evaluate) & remote procedure call (RPC) interface & evaluate access control lists (ACLs) &  & BOR-ZANZIBAR-005\\
+SRF-006 & Istio AuthorizationPolicy & Server-side Envoy proxy (inbound traffic) & inbound traffic & authorization policy enforces access control & Envoy proxy & BOR-ISTIO-004\\
+SRF-007 & Envoy ext\_authz & External authorization filter & incoming request & check if the incoming request is authorized or not & external authorization service & BOR-ENVOY-001\\
+SRF-008 & OpenFGA & OpenFGA service & authorization checks & determining whether a relationship exists between an object and a user & OpenFGA service & BOR-OPENFGA-001\\
+SRF-009 & Amazon Verified Permissions & Amazon Verified Permissions service &  &  &  & BOR-AVP-001\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{DER (Derived Object Registry)}
+
+The DER is a derived artifact that proposes candidate architectural objects based on the SRF (and supporting BOR evidence). DER entries are explicitly hypothetical and remain fully traceable.
+
+\noindent\textbf{DER rule:} Every DER row must reference one or more SRF IDs and supporting BOR IDs. DER introduces no measurements and no classification.
+
+\begin{longtable}{@{}p{0.10\textwidth}p{0.14\textwidth}p{0.18\textwidth}p{0.22\textwidth}p{0.12\textwidth}p{0.16\textwidth}p{0.08\textwidth}@{}}
+\toprule
+DER ID & System & Candidate Object & Derivation Rule & Supporting SRF IDs & Supporting BOR IDs & Status\\
+\midrule
+\endfirsthead
+\toprule
+DER ID & System & Candidate Object & Derivation Rule & Supporting SRF IDs & Supporting BOR IDs & Status\\
+\midrule
+\endhead
+DER-001 & Kubernetes RBAC / Admission & RBAC authorization component & Reify SRF-001 execution surface (RBAC authorization) as a candidate architectural object responsible for authorization decisions. & SRF-001 & BOR-K8S-001 & Candidate\\
+DER-002 & Kubernetes RBAC / Admission & Admission controller layer & Reify SRF-002 execution surface (admission controller) as a candidate architectural object that intercepts API server requests prior to resource persistence. & SRF-002 & BOR-K8S-003 & Candidate\\
+DER-003 & HashiCorp Vault & Policy enforcement point & Reify SRF-003 execution surface (policy enforcement) as a candidate object representing the policy-based allowed-access decision point. & SRF-003 & BOR-VAULT-002 & Candidate\\
+DER-004 & AWS IAM & Policy evaluation engine & Reify SRF-004 execution surface (policy evaluation) as a candidate object representing the request evaluation logic that checks for \texttt{Deny}. & SRF-004 & BOR-AWS-IAM-005 & Candidate\\
+DER-005 & Google Zanzibar & ACL evaluation service interface & Reify SRF-005 execution surface (RPC interface for ACL create/modify/evaluate) as a candidate object representing the runtime evaluation interface. & SRF-005 & BOR-ZANZIBAR-005 & Candidate\\
+DER-006 & Istio AuthorizationPolicy & Envoy-side authorization enforcement & Reify SRF-006 execution surface (server-side Envoy proxy inbound enforcement) as a candidate object representing the authorization enforcement point. & SRF-006 & BOR-ISTIO-004 & Candidate\\
+DER-007 & Envoy ext\_authz & External authorization filter & Reify SRF-007 execution surface (external authorization filter) as a candidate object that delegates authorization checks to an external service. & SRF-007 & BOR-ENVOY-001 & Candidate\\
+DER-008 & OpenFGA & Relationship-check authorization service & Reify SRF-008 execution surface (OpenFGA service) as a candidate object that answers authorization checks by determining whether a relationship exists. & SRF-008 & BOR-OPENFGA-001 & Candidate\\
+DER-009 & Amazon Verified Permissions & Verified Permissions authorization service & Reify SRF-009 execution surface (Amazon Verified Permissions service) as a candidate architectural object in the cohort. & SRF-009 & BOR-AVP-001 & Candidate\\
+\bottomrule
+\end{longtable}
+
+\newpage
+\section*{MSR (Measurement Registry)}
+
+\subsection*{Frozen measurement catalog (B2, Revision 1)}
+
+The following investigation-specific metrics are frozen for Paper~B2 (Revision~1) and are applied consistently to DER candidate objects.
+
+\begin{longtable}{@{}p{0.14\textwidth}p{0.56\textwidth}p{0.30\textwidth}@{}}
+\toprule
+Metric ID & Measurement & Allowed values\\
+\midrule
+\endfirsthead
+\toprule
+Metric ID & Measurement & Allowed values\\
+\midrule
+\endhead
+MET-001 & Independent Decision Component Present & \{0,1\}\\
+MET-002 & Independent Execution Component Present & \{0,1\}\\
+MET-003 & Independent Authorization / Policy Enforcement Component Present & \{0,1\}\\
+MET-004 & Decision and Execution Are Separated & \{0,1\}\\
+MET-005 & Authorization Occurs Before Execution & \{0,1\}\\
+MET-006 & Execution Surface Is Explicitly Documented & \{0,1\}\\
+MET-007 & Policy Evaluation Surface Is Explicitly Documented & \{0,1\}\\
+MET-008 & Audit / Decision Trace Surface Present & \{0,1\}\\
+MET-009 & Evidence Sufficiency & \{Supported, Partial, Insufficient\}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{MSR table (to be populated)}
+
+MSR applies only the frozen metric catalog to DER candidate objects. MSR introduces no new observations and no classification.
+
+\noindent\textbf{MSR rule:} Every MSR row must reference one or more DER IDs and supporting BOR IDs. Metrics applied must be drawn only from MET-001 through MET-009.
+
+\begin{longtable}{@{}p{0.10\textwidth}p{0.14\textwidth}p{0.10\textwidth}p{0.10\textwidth}p{0.08\textwidth}p{0.12\textwidth}p{0.14\textwidth}p{0.22\textwidth}@{}}
+\toprule
+MSR ID & System & DER ID & Metric & Value & Supporting DER IDs & Supporting BOR IDs & Rationale\\
+\midrule
+\endfirsthead
+\toprule
+MSR ID & System & DER ID & Metric & Value & Supporting DER IDs & Supporting BOR IDs & Rationale\\
+\midrule
+\endhead
+% MSR rows populated from DER-001 through DER-009, using MET-001 through MET-009 only.
+MSR-001 & Kubernetes RBAC / Admission & DER-001 & MET-001 & 1 &  & BOR-K8S-001 & BOR-K8S-001 states RBAC authorization drives authorization decisions; DER-001 reifies this as an authorization decision component.\\
+MSR-002 & Kubernetes RBAC / Admission & DER-001 & MET-002 & 0 &  & BOR-K8S-001 & BOR-K8S-001 evidences authorization decisions but does not evidence a distinct execution component/target.\\
+MSR-003 & Kubernetes RBAC / Admission & DER-001 & MET-003 & 1 &  & BOR-K8S-001 & RBAC authorization is evidenced as the mechanism used to drive authorization decisions (policy enforcement/authorization surface).\\
+MSR-004 & Kubernetes RBAC / Admission & DER-001 & MET-004 & 0 &  & BOR-K8S-001 & BOR-K8S-001 does not evidence a distinct execution target separate from the authorization decision surface.\\
+MSR-005 & Kubernetes RBAC / Admission & DER-001 & MET-005 & 0 &  & BOR-K8S-001 & BOR-K8S-001 does not specify an ordering relation between authorization and a separate execution step.\\
+MSR-006 & Kubernetes RBAC / Admission & DER-001 & MET-006 & 1 &  & BOR-K8S-001 & BOR-K8S-001 explicitly documents the RBAC authorization surface used for authorization decisions.\\
+MSR-007 & Kubernetes RBAC / Admission & DER-001 & MET-007 & 1 &  & BOR-K8S-001 & BOR-K8S-001 explicitly documents an authorization-decision surface (``drive authorization decisions'').\\
+MSR-008 & Kubernetes RBAC / Admission & DER-001 & MET-008 & 0 &  & BOR-K8S-001 & BOR-K8S-001 does not evidence an audit/decision-trace surface.\\
+MSR-009 & Kubernetes RBAC / Admission & DER-001 & MET-009 & Partial &  & BOR-K8S-001 & Evidence supports the existence of an authorization decision surface, but does not support several metrics requiring an explicit execution target or ordering.\\
+
+MSR-010 & Kubernetes RBAC / Admission & DER-002 & MET-001 & 1 &  & BOR-K8S-003, BOR-K8S-004 & BOR-K8S-003/004 describe admission controllers checking/intercepting API server requests, evidencing a decision component.\\
+MSR-011 & Kubernetes RBAC / Admission & DER-002 & MET-002 & 1 &  & BOR-K8S-003 & BOR-K8S-003 identifies an execution target: resource persistence (requests intercepted prior to persistence).\\
+MSR-012 & Kubernetes RBAC / Admission & DER-002 & MET-003 & 1 &  & BOR-K8S-003, BOR-K8S-004 & Admission controllers are evidenced as a request-checking control point for resource modification requests.\\
+MSR-013 & Kubernetes RBAC / Admission & DER-002 & MET-004 & 1 &  & BOR-K8S-003 & BOR-K8S-003 distinguishes the admission interception/check from the persistence action (prior to persistence), evidencing separation of decision vs persistence execution.\\
+MSR-014 & Kubernetes RBAC / Admission & DER-002 & MET-005 & 1 &  & BOR-K8S-003 & BOR-K8S-003 states interception occurs prior to persistence, evidencing authorization/control before execution (persistence).\\
+MSR-015 & Kubernetes RBAC / Admission & DER-002 & MET-006 & 1 &  & BOR-K8S-003 & BOR-K8S-003 explicitly documents the admission controller execution surface (intercepts API server requests).\\
+MSR-016 & Kubernetes RBAC / Admission & DER-002 & MET-007 & 1 &  & BOR-K8S-003, BOR-K8S-004 & BOR-K8S-003/004 explicitly describe the check/decision point performed by admission controllers.\\
+MSR-017 & Kubernetes RBAC / Admission & DER-002 & MET-008 & 0 &  & BOR-K8S-003, BOR-K8S-004 & BOR-K8S-003/004 do not evidence an audit/decision-trace surface.\\
+MSR-018 & Kubernetes RBAC / Admission & DER-002 & MET-009 & Supported &  & BOR-K8S-003, BOR-K8S-004 & Evidence explicitly supports trigger (API requests), decision/check surface, and execution target (persistence), enabling direct measurement for multiple metrics.\\
+
+MSR-019 & HashiCorp Vault & DER-003 & MET-001 & 1 &  & BOR-VAULT-002 & BOR-VAULT-002 evidences a policy-gated decision point (action not allowed unless granted by policy).\\
+MSR-020 & HashiCorp Vault & DER-003 & MET-002 & 0 &  & BOR-VAULT-002 & BOR-VAULT-002 does not evidence a distinct execution component/target separate from the policy decision.\\
+MSR-021 & HashiCorp Vault & DER-003 & MET-003 & 1 &  & BOR-VAULT-002 & BOR-VAULT-002 explicitly evidences policy-based enforcement (allowed-access mode).\\
+MSR-022 & HashiCorp Vault & DER-003 & MET-004 & 0 &  & BOR-VAULT-002 & BOR-VAULT-002 does not document a decision/execution separation with an explicit execution target.\\
+MSR-023 & HashiCorp Vault & DER-003 & MET-005 & 0 &  & BOR-VAULT-002 & BOR-VAULT-002 does not specify ordering between authorization and a distinct execution step.\\
+MSR-024 & HashiCorp Vault & DER-003 & MET-006 & 1 &  & BOR-VAULT-002 & BOR-VAULT-002 explicitly documents the policy enforcement surface governing client interaction.\\
+MSR-025 & HashiCorp Vault & DER-003 & MET-007 & 1 &  & BOR-VAULT-002 & BOR-VAULT-002 explicitly documents the policy decision point (access granted via policy explicitly).\\
+MSR-026 & HashiCorp Vault & DER-003 & MET-008 & 1 &  & BOR-VAULT-008, BOR-VAULT-009 & BOR-VAULT-008/009 evidence an audit logging surface for API requests/responses (decision/trace evidence surface).\\
+MSR-027 & HashiCorp Vault & DER-003 & MET-009 & Partial &  & BOR-VAULT-002, BOR-VAULT-008, BOR-VAULT-009 & Evidence supports policy enforcement and audit logging, but does not support metrics requiring an explicit execution target or decision/execution separation.\\
+
+MSR-028 & AWS IAM & DER-004 & MET-001 & 1 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 evidences a policy evaluation decision point (checks for Deny; denies request if present).\\
+MSR-029 & AWS IAM & DER-004 & MET-002 & 0 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 does not evidence a distinct execution component/target separate from policy evaluation.\\
+MSR-030 & AWS IAM & DER-004 & MET-003 & 1 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 documents authorization/policy evaluation behavior used to deny requests.\\
+MSR-031 & AWS IAM & DER-004 & MET-004 & 0 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 does not document a separate execution target distinct from the evaluation decision point.\\
+MSR-032 & AWS IAM & DER-004 & MET-005 & 0 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 does not specify authorization ordering relative to an explicit execution step.\\
+MSR-033 & AWS IAM & DER-004 & MET-006 & 1 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 explicitly documents the request-evaluation surface (policy evaluation logic).\\
+MSR-034 & AWS IAM & DER-004 & MET-007 & 1 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 explicitly documents the evaluation decision point (checking for Deny).\\
+MSR-035 & AWS IAM & DER-004 & MET-008 & 0 &  & BOR-AWS-IAM-005 & BOR-AWS-IAM-005 does not evidence an audit/decision-trace surface.\\
+MSR-036 & AWS IAM & DER-004 & MET-009 & Partial &  & BOR-AWS-IAM-005 & Evidence supports a policy evaluation decision point, but does not support metrics requiring an explicit execution target, separation, or ordering.\\
+
+MSR-037 & Google Zanzibar & DER-005 & MET-001 & 1 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 evidences a runtime evaluation interface for ACL evaluation, implying a decision surface.\\
+MSR-038 & Google Zanzibar & DER-005 & MET-002 & 0 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 does not evidence a distinct execution component/target separate from the evaluation interface.\\
+MSR-039 & Google Zanzibar & DER-005 & MET-003 & 1 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 explicitly documents ACL creation/modification/evaluation as an access control policy surface.\\
+MSR-040 & Google Zanzibar & DER-005 & MET-004 & 0 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 does not document a separate execution target distinct from the evaluation interface.\\
+MSR-041 & Google Zanzibar & DER-005 & MET-005 & 0 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 does not specify authorization ordering relative to an explicit execution step.\\
+MSR-042 & Google Zanzibar & DER-005 & MET-006 & 1 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 explicitly documents the runtime RPC execution surface for ACL operations.\\
+MSR-043 & Google Zanzibar & DER-005 & MET-007 & 1 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 explicitly documents a policy evaluation surface (evaluate ACLs).\\
+MSR-044 & Google Zanzibar & DER-005 & MET-008 & 0 &  & BOR-ZANZIBAR-005 & BOR-ZANZIBAR-005 does not evidence an audit/decision-trace surface.\\
+MSR-045 & Google Zanzibar & DER-005 & MET-009 & Partial &  & BOR-ZANZIBAR-005 & Evidence supports an evaluation interface, but does not support metrics requiring an explicit execution target, separation, ordering, or audit surface.\\
+
+MSR-046 & Istio AuthorizationPolicy & DER-006 & MET-001 & 1 &  & BOR-ISTIO-004 & BOR-ISTIO-004 evidences an authorization enforcement decision surface (policy enforces access control).\\
+MSR-047 & Istio AuthorizationPolicy & DER-006 & MET-002 & 1 &  & BOR-ISTIO-004 & BOR-ISTIO-004 identifies an execution target/context: inbound traffic in the server-side Envoy proxy.\\
+MSR-048 & Istio AuthorizationPolicy & DER-006 & MET-003 & 1 &  & BOR-ISTIO-004 & BOR-ISTIO-004 explicitly documents authorization/policy enforcement on inbound traffic.\\
+MSR-049 & Istio AuthorizationPolicy & DER-006 & MET-004 & 0 &  & BOR-ISTIO-004 & BOR-ISTIO-004 locates enforcement within the Envoy proxy and does not evidence a distinct decision component separate from the execution component.\\
+MSR-050 & Istio AuthorizationPolicy & DER-006 & MET-005 & 0 &  & BOR-ISTIO-004 & BOR-ISTIO-004 does not specify ordering of authorization relative to an explicit execution step.\\
+MSR-051 & Istio AuthorizationPolicy & DER-006 & MET-006 & 1 &  & BOR-ISTIO-004 & BOR-ISTIO-004 explicitly documents the execution surface (server-side Envoy proxy handling inbound traffic).\\
+MSR-052 & Istio AuthorizationPolicy & DER-006 & MET-007 & 1 &  & BOR-ISTIO-004 & BOR-ISTIO-004 explicitly documents the authorization policy enforcement decision point.\\
+MSR-053 & Istio AuthorizationPolicy & DER-006 & MET-008 & 0 &  & BOR-ISTIO-004 & BOR-ISTIO-004 does not evidence an audit/decision-trace surface.\\
+MSR-054 & Istio AuthorizationPolicy & DER-006 & MET-009 & Partial &  & BOR-ISTIO-004 & Evidence supports enforcement in Envoy, but does not support a decision/execution separation, ordering, or audit surface.\\
+
+MSR-055 & Envoy ext\_authz & DER-007 & MET-001 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 evidences an authorization check decision surface (check if incoming request is authorized).\\
+MSR-056 & Envoy ext\_authz & DER-007 & MET-002 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 identifies an execution target/service invoked by the filter: an external authorization service.\\
+MSR-057 & Envoy ext\_authz & DER-007 & MET-003 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 explicitly documents authorization/policy enforcement behavior (authorization check).\\
+MSR-058 & Envoy ext\_authz & DER-007 & MET-004 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 evidences a separation between the filter (enforcement point) and the external authorization service (decision provider).\\
+MSR-059 & Envoy ext\_authz & DER-007 & MET-005 & 0 &  & BOR-ENVOY-005 & BOR-ENVOY-005 states the upstream connection may be established before authorization completes, so ``authorization before execution'' is not evidenced.\\
+MSR-060 & Envoy ext\_authz & DER-007 & MET-006 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 explicitly documents the ext\_authz execution surface (network filter calling an external auth service).\\
+MSR-061 & Envoy ext\_authz & DER-007 & MET-007 & 1 &  & BOR-ENVOY-001 & BOR-ENVOY-001 explicitly documents the authorization decision point (authorized or not).\\
+MSR-062 & Envoy ext\_authz & DER-007 & MET-008 & 0 &  & BOR-ENVOY-001 & BOR-ENVOY-001 does not evidence an audit/decision-trace surface.\\
+MSR-063 & Envoy ext\_authz & DER-007 & MET-009 & Supported &  & BOR-ENVOY-001, BOR-ENVOY-005 & Evidence supports the call-out decision surface and its execution target, and additionally provides ordering-related evidence (authorization may complete after upstream establishment).\\
+
+MSR-064 & OpenFGA & DER-008 & MET-001 & 1 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 evidences an authorization decision surface (answers authorization checks).\\
+MSR-065 & OpenFGA & DER-008 & MET-002 & 1 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 identifies an execution target/component: the OpenFGA service performing the check.\\
+MSR-066 & OpenFGA & DER-008 & MET-003 & 1 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 explicitly documents authorization checks as the policy enforcement/authorization function.\\
+MSR-067 & OpenFGA & DER-008 & MET-004 & 0 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 evidences a single service that answers checks; it does not evidence decision/execution separation into distinct components.\\
+MSR-068 & OpenFGA & DER-008 & MET-005 & 0 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 does not specify ordering of authorization relative to a distinct execution step.\\
+MSR-069 & OpenFGA & DER-008 & MET-006 & 1 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 explicitly documents the service execution surface for authorization checks.\\
+MSR-070 & OpenFGA & DER-008 & MET-007 & 1 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 explicitly documents the evaluation/decision surface (determining whether a relationship exists).\\
+MSR-071 & OpenFGA & DER-008 & MET-008 & 0 &  & BOR-OPENFGA-001 & BOR-OPENFGA-001 does not evidence an audit/decision-trace surface.\\
+MSR-072 & OpenFGA & DER-008 & MET-009 & Partial &  & BOR-OPENFGA-001 & Evidence supports a decision/evaluation surface, but does not support metrics requiring explicit separation, ordering, or audit surface.\\
+
+MSR-073 & Amazon Verified Permissions & DER-009 & MET-001 & 1 &  & BOR-AVP-001 & BOR-AVP-001 evidences an authorization service (permissions management and fine-grained authorization), supporting a decision component.\\
+MSR-074 & Amazon Verified Permissions & DER-009 & MET-002 & 0 &  & BOR-AVP-001 & BOR-AVP-001 does not evidence a distinct execution component/target for authorization decisions.\\
+MSR-075 & Amazon Verified Permissions & DER-009 & MET-003 & 1 &  & BOR-AVP-001 & BOR-AVP-001 explicitly characterizes the system as a fine-grained authorization service (policy enforcement/authorization surface).\\
+MSR-076 & Amazon Verified Permissions & DER-009 & MET-004 & 0 &  & BOR-AVP-001 & BOR-AVP-001 does not document a decision/execution separation with an explicit execution target.\\
+MSR-077 & Amazon Verified Permissions & DER-009 & MET-005 & 0 &  & BOR-AVP-001 & BOR-AVP-001 does not specify authorization ordering relative to an explicit execution step.\\
+MSR-078 & Amazon Verified Permissions & DER-009 & MET-006 & 1 &  & BOR-AVP-001 & BOR-AVP-001 documents an authorization service execution surface at a high level (service providing permissions management/fine-grained authorization).\\
+MSR-079 & Amazon Verified Permissions & DER-009 & MET-007 & 0 &  & BOR-AVP-001 & BOR-AVP-001 does not specify an explicit policy evaluation surface or decision point details beyond describing the service.\\
+MSR-080 & Amazon Verified Permissions & DER-009 & MET-008 & 0 &  & BOR-AVP-001 & BOR-AVP-001 does not evidence an audit/decision-trace surface.\\
+MSR-081 & Amazon Verified Permissions & DER-009 & MET-009 & Insufficient &  & BOR-AVP-001 & Evidence is high-level (authorization service) and does not support explicit measurement of several surfaces (decision/evaluation details, ordering, separation, audit).\\
+\bottomrule
+\end{longtable}
+
+\section*{Comparative Dataset}
+
+The Comparative Dataset is a normalized aggregation of the finalized MSR and introduces no new observations, metrics, calculations, or interpretations. Values are copied directly from MSR; if a value is absent in MSR, the corresponding field is left blank.
+
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{longtable}{@{}p{0.17\textwidth}p{0.07\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.05\textwidth}p{0.18\textwidth}@{}}
+\toprule
+System & DER ID & MET-001 & MET-002 & MET-003 & MET-004 & MET-005 & MET-006 & MET-007 & MET-008 & MET-009 & Traceability (supporting MSR IDs)\\
+\midrule
+\endfirsthead
+\toprule
+System & DER ID & MET-001 & MET-002 & MET-003 & MET-004 & MET-005 & MET-006 & MET-007 & MET-008 & MET-009 & Traceability (supporting MSR IDs)\\
+\midrule
+\endhead
+Kubernetes RBAC / Admission & DER-001 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-001--MSR-009\\
+Kubernetes RBAC / Admission & DER-002 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & Supported & MSR-010--MSR-018\\
+HashiCorp Vault & DER-003 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & Partial & MSR-019--MSR-027\\
+AWS IAM & DER-004 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-028--MSR-036\\
+Google Zanzibar & DER-005 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-037--MSR-045\\
+Istio AuthorizationPolicy & DER-006 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-046--MSR-054\\
+Envoy ext\_authz & DER-007 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & Supported & MSR-055--MSR-063\\
+OpenFGA & DER-008 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & Partial & MSR-064--MSR-072\\
+Amazon Verified Permissions & DER-009 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & Insufficient & MSR-073--MSR-081\\
+\bottomrule
+\end{longtable}
+}
+
+\section*{Analysis}
+
+\subsection*{Cohort-wide Summary}
+This subsection summarizes cohort-level patterns present in the Comparative Dataset. \textbf{TODO (Protocol~v1.0):} Derive any statements solely from the Comparative Dataset and the frozen protocol rules; introduce no new observations, metrics, calculations, or interpretations.
+
+\subsection*{Metric-level Consistency}
+This subsection evaluates how consistently each frozen metric (MET-001 through MET-009) is satisfied across the cohort, using only the Comparative Dataset. \textbf{TODO (Protocol~v1.0):} Populate only from the Comparative Dataset under existing protocol rules; do not introduce new decision criteria.
+
+\subsection*{Evidence Sufficiency}
+This subsection reports evidence sufficiency as recorded in MET-009 in the Comparative Dataset. \textbf{TODO (Protocol~v1.0):} Use only Comparative Dataset values; do not reinterpret or revise evidence sufficiency.
+
+\subsection*{Protocol-defined Boundary Evaluation}
+This subsection evaluates any protocol-defined boundary hypotheses already specified in Protocol~v1.0 (Paper~0), using only the Comparative Dataset. \textbf{TODO (Protocol~v1.0):} If no boundary hypotheses exist in the frozen protocol, leave this subsection as a placeholder and do not add new hypotheses or decision rules.
+
+\section*{Retained Classification}
+
+This table records protocol outcomes for each investigated candidate object. Outcomes must be supported solely by the Comparative Dataset under the frozen Protocol~v1.0. No new rules, hypotheses, metrics, measurements, or classifications are introduced here.
+
+\begin{longtable}{@{}p{0.13\textwidth}p{0.35\textwidth}p{0.12\textwidth}p{0.22\textwidth}p{0.18\textwidth}@{}}
+\toprule
+Candidate (DER ID) & Candidate Object & Outcome & Supporting Comparative Dataset Row(s) & Notes\\
+\midrule
+\endfirsthead
+\toprule
+Candidate (DER ID) & Candidate Object & Outcome & Supporting Comparative Dataset Row(s) & Notes\\
+\midrule
+\endhead
+DER-001 & RBAC authorization component &  &  & \\
+DER-002 & Admission controller layer &  &  & \\
+DER-003 & Policy enforcement point &  &  & \\
+DER-004 & Policy evaluation engine &  &  & \\
+DER-005 & ACL evaluation service interface &  &  & \\
+DER-006 & Envoy-side authorization enforcement &  &  & \\
+DER-007 & External authorization filter &  &  & \\
+DER-008 & Relationship-check authorization service &  &  & \\
+DER-009 & Verified Permissions authorization service &  &  & \\
+\bottomrule
+\end{longtable}
+
+\end{document}
+

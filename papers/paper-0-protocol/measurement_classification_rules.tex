@@ -1,0 +1,39 @@
+This section defines rules for measurement and classification so that different studies implement comparable decision logic.
+
+\subsection*{M1. Operational definitions}
+Every measured quantity must have:
+\begin{enumerate}[leftmargin=*]
+  \item a formal definition, or an operational definition precise enough to implement,
+  \item declared preconditions (what must be true about the representation for the measurement to be valid),
+  \item units and normalization choices,
+  \item a reference implementation or executable specification.
+\end{enumerate}
+
+\subsection*{M2. Determinism and randomness}
+If any pipeline step uses randomness (e.g., sampling, approximate algorithms), the protocol requires fixed seeds and reporting of the seed values.
+
+\subsection*{M3. Handling missing or ambiguous data}
+If the architectural representation is incomplete (e.g., failed build, missing deployment descriptors), the system must be labeled \textit{indeterminate} unless a documented imputation rule is applied. Imputation rules must be declared in advance and sensitivity-tested.
+
+\subsection*{C1. Three-way classification}
+Use exactly three labels:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Supports}: measurements satisfy the invariant under the decision rule.
+  \item \textbf{Violates}: measurements contradict the invariant.
+  \item \textbf{Indeterminate}: measurement preconditions fail, outputs are unstable, or representation is out of scope.
+\end{enumerate}
+
+\subsection*{C2. Decision rule reporting}
+Decision rules must be explicit functions from measurement vectors to labels. Thresholds must be justified and reported. If thresholds are tuned using the same dataset, report this as an exploratory analysis and rerun on a held-out set when possible.
+
+\subsection*{C3. Counterexample minimality}
+When reporting a violation, provide the smallest reproducible counterexample representation (e.g., a minimized subgraph) when feasible, together with the extraction path from raw artifacts.
+
+\subsection*{C4. Sensitivity and robustness}
+At minimum, vary:
+\begin{enumerate}[leftmargin=*]
+  \item normalization rules that could affect the measurement,
+  \item alternative extraction settings,
+  \item plausible threshold ranges.
+\end{enumerate}
+Report whether classification outcomes are stable under these variations.

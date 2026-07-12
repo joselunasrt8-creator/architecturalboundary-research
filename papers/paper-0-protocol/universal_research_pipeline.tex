@@ -1,0 +1,28 @@
+This section defines the universal research pipeline that every invariant investigation must follow. Each step produces explicit artifacts (Section~5).
+
+\subsection*{P0. Declare the study}
+Record the candidate invariant statement (I1--I5), research questions, inclusion/exclusion criteria, and a preregistered analysis plan when feasible.
+
+\subsection*{P1. Select the population and sample}
+Define the target population (e.g., ``public Java microservice systems with Kubernetes deployment manifests'') and the sampling method (random, stratified, convenience). Record sampling bias risks.
+
+\subsection*{P2. Acquire raw inputs}
+Acquire the raw system artifacts (repositories, configuration, build metadata, traces). Record the acquisition date, commit hashes, and licenses.
+
+\subsection*{P3. Build and validate extractors}
+Implement or configure extractors that transform raw inputs into architectural representations. Validate extractors on a small gold set and record known failure modes.
+
+\subsection*{P4. Normalize architectural representations}
+Apply normalization rules so representations are comparable (e.g., naming normalization, dependency edge semantics, handling generated code). Every normalization rule must be explicit and deterministic.
+
+\subsection*{P5. Measure}
+Compute the measurement vector $m(s)$ for each system $s$ using versioned tooling. Store intermediate outputs when measurements are multi-stage.
+
+\subsection*{P6. Classify}
+Apply decision rules to map measurements to outcomes: \textit{supports}, \textit{violates}, or \textit{indeterminate}. Indeterminate must be used when measurement preconditions are not met.
+
+\subsection*{P7. Analyze and report}
+Report aggregate statistics, counterexamples, sensitivity analyses, and robustness checks. Provide traceability from each reported exception back to the exact system artifacts and representation.
+
+\subsection*{P8. Package for replication}
+Publish a replication package including all required artifacts, toolchain definitions, and instructions to rerun the full pipeline end-to-end.

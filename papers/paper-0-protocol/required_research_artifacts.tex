@@ -1,0 +1,31 @@
+To enable replication and meta-analysis, each study must publish (or make available under controlled access) the following artifacts.
+
+\subsection*{A1. Study manifest}
+A machine-readable manifest (e.g., YAML/JSON) containing: protocol version, candidate invariant statement (I1--I5), sampling description, and the list of systems with identifiers.
+
+\subsection*{A2. System registry}
+For each system: source location, acquisition date, commit hashes, build instructions, and any required credentials (or a description of access constraints).
+
+\subsection*{A3. Raw inputs archive}
+An immutable snapshot of the raw inputs, or a reproducible procedure to fetch them exactly (e.g., by commit hash). If redistribution is not permitted, provide cryptographic hashes and a retrieval script.
+
+\subsection*{A4. Extractors and normalizers}
+Source code (or container images) for extractors and normalizers, including configuration files and documented assumptions.
+
+\subsection*{A5. Architectural representations}
+For each system, the normalized representation in a documented schema (e.g., graph format with node/edge types). Include schema version and validation rules.
+
+\subsection*{A6. Measurement outputs}
+Per-system measurement vectors, intermediate outputs, and logs sufficient to diagnose measurement failures.
+
+\subsection*{A7. Classification outputs}
+Per-system classification labels with justification pointers (which measurements / thresholds caused the label).
+
+\subsection*{A8. Analysis notebooks and figures}
+Scripts/notebooks used to compute aggregates, plots, and statistical tests.
+
+\subsection*{A9. Toolchain lockfile}
+A pinned, executable environment definition (e.g., container image digest, Nix, or language-specific lockfiles) to rerun extraction and measurement.
+
+\subsection*{A10. Replication instructions}
+A minimal ``one-command'' rerun path when feasible, plus step-by-step instructions and expected outputs.

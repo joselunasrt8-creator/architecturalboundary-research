@@ -1,0 +1,27 @@
+The protocol enforces a separation between \emph{observation} (what is measured from artifacts) and \emph{theory} (how results are interpreted).
+
+\subsection*{Observation layer}
+The observation layer produces:
+\begin{enumerate}[leftmargin=*]
+  \item a declared population and sampling procedure,
+  \item a normalized architectural representation for each system,
+  \item a set of measurements computed by versioned tooling,
+  \item a classification of each system with respect to the candidate invariant.
+\end{enumerate}
+All of these outputs must be mechanically reproducible from the archived inputs.
+
+\subsection*{Theory layer}
+The theory layer may propose explanations (e.g., economic, organizational, performance, or evolvability mechanisms), but these are not required to reproduce the observation layer outputs.
+
+\subsection*{Prohibited mixing}
+To minimize hindsight bias, the protocol discourages modifying the measurement definition after seeing results. Any post-hoc changes must be recorded as a new protocol revision (Section~7) and rerun on the full dataset.
+
+\subsection*{Candidate invariant statement template}
+A candidate invariant must be stated before running the pipeline, using the following fields:
+\begin{enumerate}[label=I\arabic*., leftmargin=*]
+  \item \textbf{Property}: formal or operational definition of $P$.
+  \item \textbf{Scope}: population, architectural representation, and constraints.
+  \item \textbf{Tolerance}: if ``almost all,'' specify acceptable violation rate and how it is computed.
+  \item \textbf{Measurement}: algorithm(s) and parameters used to evaluate $P$.
+  \item \textbf{Decision rule}: how measurements map to support / violation / indeterminate.
+\end{enumerate}

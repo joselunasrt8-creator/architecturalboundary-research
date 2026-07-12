@@ -1,35 +1,63 @@
 \section{Execution Surface Matrix}
 \label{sec:esm}
-The execution surface matrix (ESM) enumerates protocol-defined execution surfaces per system and records how (and where) execution can be initiated, constrained, or audited. The ESM is an input to later derivations and measurements; the matrix itself is descriptive.
+The execution surface matrix (ESM) records, per system, the externally-reachable and internally-invoked surfaces at which a request can be initiated, admitted, authorized, constrained, audited, or rejected. This section is an \emph{SRF-aligned} surface registry: it is descriptive, traceable to BORs, and intended to feed later derivations.
 
-\textbf{TODO(ESM schema):} Record the ESM schema version used in this execution and provide a machine-readable export pointer.
+\textbf{Separation rule.} Each row distinguishes (a) \emph{observation} (directly stated in BOR) from (b) \emph{interpretation} (a normalization or naming choice). No derived objects, measurements, or pattern classifications may be introduced here.
 
-\subsection{ESM table (cohort extract)}
+\textbf{TODO(ESM schema):} Record the ESM/SRF schema version used in this execution and provide a machine-readable export pointer.
+
+\subsection{ESM/SRF surface registry (governance cohort)}
+\textbf{Completion status.} The BOR entries for this cohort are currently placeholders (TODO) and therefore do not provide manuscript-usable observational content. To preserve Protocol v1.0 integrity, the registry below records per-system surface enumeration as \emph{blocked} until BORs are completed with evidence.
+
 \begin{center}
-\begin{longtable}{@{}p{0.12\linewidth}p{0.16\linewidth}p{0.20\linewidth}p{0.24\linewidth}p{0.20\linewidth}@{}}
+\begin{longtable}{@{}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.16\linewidth}p{0.14\linewidth}@{}}
 \toprule
-ESM ID & System & Execution surface & Gate / legitimacy check (as described) & Trace (BOR/Source) \\
+SRF ID & System & Surface kind & Surface label / description & Observation vs interpretation & Trace (BOR ID) \\
 \midrule
 \endfirsthead
 \toprule
-ESM ID & System & Execution surface & Gate / legitimacy check (as described) & Trace (BOR/Source) \\
+SRF ID & System & Surface kind & Surface label / description & Observation vs interpretation & Trace (BOR ID) \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 \bottomrule
 \endlastfoot
-ESM-OPA-001 & OPA+Gatekeeper & \textbf{TODO(ESM-OPA-001):} Name surface. & \textbf{TODO(GATE-OPA-001)} & \textbf{TODO(TRACE-OPA-001)} \\
-ESM-K8S-001 & Kubernetes RBAC/Admission & \textbf{TODO(ESM-K8S-001):} Name surface. & \textbf{TODO(GATE-K8S-001)} & \textbf{TODO(TRACE-K8S-001)} \\
-ESM-IAM-001 & AWS IAM & \textbf{TODO(ESM-IAM-001):} Name surface. & \textbf{TODO(GATE-IAM-001)} & \textbf{TODO(TRACE-IAM-001)} \\
-ESM-VAULT-001 & HashiCorp Vault & \textbf{TODO(ESM-VAULT-001):} Name surface. & \textbf{TODO(GATE-VAULT-001)} & \textbf{TODO(TRACE-VAULT-001)} \\
-ESM-ENVOY-001 & Envoy ext\_authz & \textbf{TODO(ESM-ENVOY-001):} Name surface. & \textbf{TODO(GATE-ENVOY-001)} & \textbf{TODO(TRACE-ENVOY-001)} \\
-ESM-ISTIO-001 & Istio AuthorizationPolicy & \textbf{TODO(ESM-ISTIO-001):} Name surface. & \textbf{TODO(GATE-ISTIO-001)} & \textbf{TODO(TRACE-ISTIO-001)} \\
-ESM-FGA-001 & OpenFGA & \textbf{TODO(ESM-FGA-001):} Name surface. & \textbf{TODO(GATE-FGA-001)} & \textbf{TODO(TRACE-FGA-001)} \\
-ESM-CEDAR-001 & Cedar / AVP & \textbf{TODO(ESM-CEDAR-001):} Name surface. & \textbf{TODO(GATE-CEDAR-001)} & \textbf{TODO(TRACE-CEDAR-001)} \\
-ESM-ZANZ-001 & Google Zanzibar & \textbf{TODO(ESM-ZANZ-001):} Name surface. & \textbf{TODO(GATE-ZANZ-001)} & \textbf{TODO(TRACE-ZANZ-001)} \\
+% --- OPA + Gatekeeper ---
+SRF-OPA-000 & OPA+Gatekeeper & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-OPA-001, BOR-OPA-002 \\
+
+% --- Kubernetes RBAC / Admission ---
+SRF-K8S-000 & Kubernetes RBAC/Admission & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-K8S-001, BOR-K8S-002 \\
+
+% --- AWS IAM ---
+SRF-IAM-000 & AWS IAM & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-IAM-001, BOR-IAM-002 \\
+
+% --- HashiCorp Vault ---
+SRF-VAULT-000 & HashiCorp Vault & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-VAULT-001, BOR-VAULT-002 \\
+
+% --- Envoy ext_authz ---
+SRF-ENVOY-000 & Envoy ext\_authz & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ENVOY-001, BOR-ENVOY-002 \\
+
+% --- Istio AuthorizationPolicy ---
+SRF-ISTIO-000 & Istio AuthorizationPolicy & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ISTIO-001, BOR-ISTIO-002 \\
+
+% --- OpenFGA ---
+SRF-FGA-000 & OpenFGA & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-FGA-001, BOR-FGA-002 \\
+
+% --- Cedar / Amazon Verified Permissions ---
+SRF-CEDAR-000 & Cedar / AVP & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-CEDAR-001, BOR-CEDAR-002 \\
+
+% --- Google Zanzibar ---
+SRF-ZANZ-000 & Google Zanzibar & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ZANZ-001, BOR-ZANZ-002 \\
 \end{longtable}
 \end{center}
 
-\subsection{Full ESM artifact pointer}
-\textbf{TODO(ESM artifact pointer):} Provide a pointer to the full machine-readable ESM artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.
+\subsection{Full ESM/SRF artifact pointer}
+\textbf{TODO(ESM/SRF artifact pointer):} Provide a pointer to the full machine-readable ESM/SRF artifact (including schema, validation rules, and hashes) as required by Protocol v1.0.
+
+\subsection{ESM/SRF completion summary (this section)}
+\begin{enumerate}
+\item \textbf{What was added.} A cohort-wide surface registry table with explicit separation between observation and interpretation fields, plus per-system trace anchors to BOR IDs.
+\item \textbf{Explicitly-labeled assumptions.} None beyond Protocol v1.0 constraints; where BOR content is missing, the table records ``Blocked'' rather than inferring any surfaces.
+\item \textbf{Systems lacking sufficient BOR information to enumerate surfaces.} All investigated systems in this cohort (OPA+Gatekeeper; Kubernetes RBAC/Admission; AWS IAM; HashiCorp Vault; Envoy ext\_authz; Istio AuthorizationPolicy; OpenFGA; Cedar / AVP; Google Zanzibar).
+\end{enumerate}

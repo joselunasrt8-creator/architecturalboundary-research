@@ -1,0 +1,23 @@
+This paper is \textbf{Paper 0}: it defines Protocol v1.0 and does not claim any architectural invariant results. Subsequent papers (Paper 1, Paper 2, \ldots) apply a specific protocol version to a specific candidate invariant and must reference Paper 0 (or the latest protocol specification they follow).
+
+\subsection*{Version identifiers}
+Protocol versions use semantic versioning \texttt{MAJOR.MINOR.PATCH}.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{MAJOR}: breaks artifact schemas, required steps, or label semantics.
+  \item \textbf{MINOR}: adds optional artifacts or clarifies rules without breaking comparability.
+  \item \textbf{PATCH}: fixes errors/ambiguities without changing required outputs.
+\end{itemize}
+
+\subsection*{Change control}
+Every study must record:
+\begin{enumerate}[leftmargin=*]
+  \item the protocol version used,
+  \item any deviations (with rationale),
+  \item any extensions (new artifacts or metrics), clearly marked as non-core.
+\end{enumerate}
+
+\subsection*{Backward compatibility and comparability}
+Two studies are considered directly comparable if they use the same MAJOR version and their MINOR versions differ only by additive, non-breaking changes. If comparability is partial, the study must state which artifact fields and decision rules align.
+
+\subsection*{Deprecation}
+When a rule or artifact field is deprecated, it remains supported for at least one MINOR release and must be automatically convertible to its replacement via a documented migration script.

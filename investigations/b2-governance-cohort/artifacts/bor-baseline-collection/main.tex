@@ -1,0 +1,432 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{B2 Baseline Observation Collection\\Governance Systems Cohort\\Protocol v1.0}
+\author{Jose Luna}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Mission}
+Act as an independent empirical computer science researcher executing Protocol v1.0.
+The objective of to this document is to produce complete, evidence-backed Baseline Observation Records (BORs) for the Governance Systems cohort.
+
+\section*{Scientific principles (BOR-only)}
+\begin{itemize}[leftmargin=*]
+  \item Record observations exactly as supported by evidence.
+  \item Separate observation from interpretation.
+  \item Prefer official specifications and primary documentation.
+  \item Record retrieval dates and version information.
+  \item If evidence is unavailable, record \emph{Observation Not Available} rather than infer.
+\end{itemize}
+
+\section*{BOR schema (protocol-local)}
+Each observation row records: Observation ID; Field; Observation text; Primary source reference; Evidence location; Status (Observed / Not Available).
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ============================================================
+\section*{BOR-OPA (Open Policy Agent + Gatekeeper)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-OPA\\
+System & Open Policy Agent (OPA) + Gatekeeper\\
+Protocol & v1.0\\
+Status & Frozen (BOR-only collection)\\
+Retrieval date & 2026-07-11\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Doc channel/version & Last-modified / publication date & Official URL\\
+\midrule
+\endhead
+SRC-OPA-001 & Open Policy Agent Documentation (\textit{What is OPA?}) & current (docs as of 2026; as retrieved) & Observation Not Available & \url{https://www.openpolicyagent.org/docs/}\\
+SRC-OPA-002 & Open Policy Agent Documentation (Management APIs and Architecture) & current (docs as of 2026; as retrieved) & Observation Not Available & \url{https://www.openpolicyagent.org/docs/}\\
+SRC-OPA-003 & Open Policy Agent Documentation (Decision Logs) & current (docs as of 2026; as retrieved) & Observation Not Available & \url{https://www.openpolicyagent.org/docs/}\\
+SRC-GK-001 & Gatekeeper Documentation (Introduction) & v3.22.x (as displayed) & Observation Not Available & \url{https://open-policy-agent.github.io/gatekeeper/}\\
+SRC-GK-002 & Gatekeeper Repository Documentation (AGENTS.md) & Observation Not Available & Observation Not Available & \url{https://github.com/open-policy-agent/gatekeeper}\\
+SRC-K8S-PUB-001 & Kubernetes Blog: \textit{OPA Gatekeeper: Policy and Governance for Kubernetes} & August 2019 (as published) & August 2019 (as published) & \url{https://kubernetes.io/blog/}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{1.1in}L{1.35in}L{2.35in}L{1.2in}L{1.5in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text & Source ID & Evidence location & Status\\
+\midrule
+\endhead
+BOR-OPA-001 & System identity & ``The Open Policy Agent (OPA...) is an open source, general-purpose policy engine that unifies policy enforcement across the stack.'' & SRC-OPA-001 & What is OPA? (L99--L102) & Observed\\
+BOR-OPA-002 & Primary documentation source & Open Policy Agent \textit{Documentation} (openpolicyagent.org), including \textit{What is OPA?} & SRC-OPA-001 & What is OPA? (document cited in BOR-OPA-001) & Observed\\
+BOR-OPA-003 & Version or documentation channel & ``Version: v3.22.x'' & SRC-GK-001 & Introduction header (L79--L81) & Observed\\
+BOR-OPA-004 & Retrieval date & 2026-07-11 & SRC-OPA-001 & Observation Not Available & Observed\\
+BOR-OPA-005 & Interfaces & ``OPA exposes a set of APIs that enable unified, logically centralized policy management.'' & SRC-OPA-002 & Management APIs intro (L102--L104) & Observed\\
+BOR-OPA-006 & Policy representation & ``OPA policies are expressed in a high-level declarative language called Rego.'' & SRC-OPA-001 & Policy Language (L194--L197) & Observed\\
+BOR-OPA-007 & Decision / evaluation locus & ``During the validation process, Gatekeeper acts as a bridge between the API server and OPA.'' & SRC-K8S-PUB-001 & Kubernetes Blog (L1040--L1041) & Observed\\
+BOR-OPA-008 & Enforcement locus & ``The API server will enforce all policies executed by OPA.'' & SRC-K8S-PUB-001 & Kubernetes Blog (L1041--L1042) & Observed\\
+BOR-OPA-009 & Audit / logging surfaces & ``OPA can periodically report decision logs to remote HTTP servers... or to the console output''; ``Gatekeeper's audit functionality allows administrators to see what resources are currently violating any given policy.'' & SRC-OPA-003; SRC-GK-001 & Decision Logs (L104--L107); Gatekeeper Introduction (L100--L103) & Observed\\
+BOR-OPA-010 & Versioning metadata & ``OPA is proud to be a graduated Cloud Native Computing Foundation (CNCF) project.'' & SRC-OPA-001 & What is OPA? (L106--L109) & Observed\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-K8S (Kubernetes RBAC / Admission)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-K8S\\
+System & Kubernetes RBAC / Admission\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-K8S-RBAC-001 & Using RBAC Authorization & v1.35 (static snapshot, as displayed) & January 16, 2026 (as displayed) & \url{https://v1-35.docs.kubernetes.io/docs/reference/access-authn-authz/rbac/}\\
+SRC-K8S-ADM-001 & Admission Control in Kubernetes & v1.35 (static snapshot, as displayed) & Observation Not Available & \url{https://v1-35.docs.kubernetes.io/docs/reference/access-authn-authz/admission-controllers/}\\
+SRC-K8S-VAP-001 & Validating Admission Policy & Observation Not Available & Observation Not Available & \url{https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/}\\
+SRC-K8S-API-001 & Admissionregistration API Reference & Observation Not Available & May 13, 2026 (as displayed) & \url{https://kubernetes.io/docs/reference/kubernetes-api/admissionregistration/}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{1.0in}L{1.1in}L{2.15in}L{1.1in}L{1.25in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source ID & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-K8S-001 & Decision / evaluation locus & ``RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API.'' & SRC-K8S-RBAC-001 & Using RBAC Authorization (evidence packet: L946--L954) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-002 & Policy representation & ``The RBAC API declares four kinds of Kubernetes object: Role, ClusterRole, RoleBinding and ClusterRoleBinding.'' & SRC-K8S-RBAC-001 & Using RBAC Authorization (evidence packet: L971--L974) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-003 & Interfaces & ``An admission controller is a piece of code that intercepts requests to the Kubernetes API server prior to persistence of the resource, but after the request is authenticated and authorized.'' & SRC-K8S-ADM-001 & Admission Control in Kubernetes (evidence packet: L1--L4) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-004 & Decision / evaluation locus & ``Admission controllers are code within the Kubernetes API server that check the data arriving in a request to modify a resource.'' & SRC-K8S-ADM-001 & Admission Control in Kubernetes (overview section; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-005 & Enforcement locus & ``Admission controllers do not (and cannot) block requests to read (get, watch or list) objects, because reads bypass the admission control layer.'' & SRC-K8S-ADM-001 & Admission Control in Kubernetes (overview section; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-006 & Interfaces & ``The \verb|--enable-admission-plugins| flag takes a comma-delimited list of admission control plugins to invoke prior to modifying objects in the cluster.'' & SRC-K8S-ADM-001 & Admission Control in Kubernetes (configuration section; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-007 & Interfaces & ``The admission control process proceeds in two phases. In the first phase, mutating admission controllers are run. In the second phase, validating admission controllers are run.'' & SRC-K8S-ADM-001 & Admission Control in Kubernetes (process section; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-008 & Policy representation & ``Validating admission policies use the Common Expression Language (CEL) to declare the validation rules of a policy.'' & SRC-K8S-VAP-001 & Validating Admission Policy (overview section; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-009 & Decision / evaluation locus & ``ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.'' & SRC-K8S-API-001 & Admissionregistration API Reference (ValidatingAdmissionPolicy; exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-K8S-010 & Audit / logging surfaces & Observation Not Available & SRC-K8S-ADM-001 & Search exhaustion: reviewed \textit{Admission Control in Kubernetes} for audit/logging coverage; no audit/logging section located. & 2026-07-09 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-AWS-IAM (AWS IAM)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-AWS-IAM\\
+System & AWS IAM\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-AWS-IAM-001 & Control access to AWS resources using policies & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html}\\
+SRC-AWS-IAM-002 & Identity-based policies and resource-based policies & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html}\\
+SRC-AWS-IAM-003 & Policy evaluation logic & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html}\\
+SRC-AWS-IAM-004 & Policy evaluation for requests within a single account & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-basics.html}\\
+SRC-AWS-IAM-005 & How AWS enforcement code logic evaluates requests to allow or deny access & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{1.0in}L{1.1in}L{2.15in}L{1.1in}L{1.25in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source ID & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-AWS-IAM-001 & Decision / evaluation locus & ``AWS first checks all policies for a Deny. If one exists, then the request is denied.'' & SRC-AWS-IAM-002 & Identity- vs resource-based policies (evidence packet: L28--L31) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-AWS-IAM-002 & Decision / evaluation locus & ``If at least one policy statement allows the action in the request, the request is allowed.'' & SRC-AWS-IAM-002 & Identity- vs resource-based policies (evidence packet: L28--L31) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-AWS-IAM-003 & Policy representation & ``Resource-based policies allow you to specify who can access that resource.'' & SRC-AWS-IAM-002 & Identity- vs resource-based policies (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-AWS-IAM-004 & Policy representation & ``Every IAM user starts with no permissions.'' & SRC-AWS-IAM-001 & Control access using policies (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-AWS-IAM-005 & Enforcement locus & Observation Not Available & SRC-AWS-IAM-005 & Search exhaustion: reviewed \textit{How AWS enforcement code logic evaluates requests to allow or deny access} for an explicit enforcement-locus statement; none located. & 2026-07-09 & Official Documentation & High & Not Available\\
+BOR-AWS-IAM-006 & Interfaces & Observation Not Available & SRC-AWS-IAM-001 & Search exhaustion: reviewed \textit{Control access to AWS resources using policies} for an explicit primary interface description (Console/CLI/SDK/API); none located. & 2026-07-09 & Official Documentation & High & Not Available\\
+BOR-AWS-IAM-007 & Audit / logging surfaces & Observation Not Available & SRC-AWS-IAM-001 & Search exhaustion: reviewed \textit{Control access to AWS resources using policies} for CloudTrail/audit logging coverage; none located. & 2026-07-09 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-VAULT (HashiCorp Vault)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-VAULT\\
+System & HashiCorp Vault\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-VAULT-001 & Architecture & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/internals/architecture}\\
+SRC-VAULT-002 & Policies (concepts) & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/concepts/policies}\\
+SRC-VAULT-003 & Authentication (concepts) & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/concepts/auth}\\
+SRC-VAULT-004 & Auth methods & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/auth}\\
+SRC-VAULT-005 & Tokens (concepts) & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/concepts/tokens}\\
+SRC-VAULT-006 & Audit logging (audit devices) & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/audit}\\
+SRC-VAULT-007 & HTTP API & Observation Not Available & Observation Not Available & \url{https://developer.hashicorp.com/vault/api-docs}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-VAULT-001 & Enforcement locus & ``Vault operates in an allowed-access mode, meaning the action is not allowed unless access is granted via a policy explicitly.'' & Architecture & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/internals/architecture} & Architecture page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-VAULT-002 & Policy representation & ``Policies are deny by default, so an empty policy grants no permission in the system.'' & Policies (concepts) & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/concepts/policies} & Policies page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-VAULT-003 & Interfaces & ``Vault has an HTTP API that can be used to control every aspect of Vault.'' & HTTP API & Observation Not Available & \url{https://developer.hashicorp.com/vault/api-docs} & HTTP API page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-VAULT-004 & Decision / evaluation locus & ``Before a client can interact with Vault, it must authenticate against an auth method. Upon authentication, a token is generated.'' & Authentication (concepts) & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/concepts/auth} & Authentication page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-VAULT-005 & Audit / logging surfaces & ``Vault sends the audit log entry of every API request and response to all enabled audit devices'' & Audit logging (audit devices) & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/audit} & Audit logging page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-VAULT-006 & Audit / logging surfaces & ``By default, Vault only writes a keyed hash (HMAC-SHA256) of most string values to audit logs.'' & Audit logging (audit devices) & Observation Not Available & \url{https://developer.hashicorp.com/vault/docs/audit} & Audit logging page (exact section not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-ENVOY-EXTAUTHZ (Envoy ext\_authz)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-ENVOY-EXTAUTHZ\\
+System & Envoy ext\_authz\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ENVOY-EXTAUTHZ-NETDOC-001 & External Authorization (network filter) & Observation Not Available & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/network_filters/ext_authz_filter}\\
+SRC-ENVOY-EXTAUTHZ-HTTPDOC-001 & External Authorization (HTTP filter) & Observation Not Available & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html}\\
+SRC-ENVOY-EXTAUTHZ-NETPROTO-001 & Network External Authorization (proto) & Observation Not Available & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/ext_authz/v3/ext_authz.proto}\\
+SRC-ENVOY-EXTAUTHZ-HTTPPROTO-001 & External Authorization (proto) & Observation Not Available & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-ENVOY-001 & Interfaces & ``The external authorization network filter calls an external authorization service to check if the incoming request is authorized or not.'' & External Authorization (network filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/network_filters/ext_authz_filter} & Network filter page (overview section; exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-ENVOY-002 & Enforcement locus & ``If the request is deemed unauthorized by the network filter then the connection will be closed.'' & External Authorization (network filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/network_filters/ext_authz_filter} & Network filter page (overview section; exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-ENVOY-003 & Interfaces & ``The external authorization filter calls an external gRPC or HTTP service to determine whether an incoming HTTP request is authorized.'' & External Authorization (HTTP filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html} & HTTP filter page (overview section; evidence packet: L123--L130) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-ENVOY-004 & Enforcement locus & ``If the request is unauthorized, Envoy returns a `403 (Forbidden)` response.'' & External Authorization (HTTP filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html} & HTTP filter page (overview section; evidence packet: L123--L126) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-ENVOY-005 & Decision / evaluation locus & ``The content of the request passed to the authorization service is specified by CheckRequest.'' & External Authorization (HTTP filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html} & HTTP filter page (request content section; exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-ENVOY-006 & Audit / logging surfaces & Observation Not Available & External Authorization (HTTP filter) & Observation Not Available & \url{https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_authz_filter.html} & Search exhaustion: reviewed \textit{External Authorization (HTTP filter)} for audit/logging requirements or a built-in audit trail; none located. & 2026-07-10 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-ISTIO-AUTHZ (Istio AuthorizationPolicy)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-ISTIO-AUTHZ\\
+System & Istio AuthorizationPolicy\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ISTIO-AUTHZ-001 & Security (concepts): Authorization & Observation Not Available & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/}\\
+SRC-ISTIO-AP-001 & Authorization Policy (reference) & Observation Not Available & Observation Not Available & \url{https://istio.io/latest/docs/reference/config/security/authorization-policy/}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-ISTIO-001 & System identity & ``Istio’s authorization features provide mesh-, namespace-, and workload-wide access control for your workloads in the mesh.'' & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Authorization concepts page (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-ISTIO-002 & Policy representation & ``it includes a single AuthorizationPolicy CRD'' & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Authorization concepts page (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-ISTIO-003 & Enforcement locus & ``Istio authorization (ALLOW and DENY) is enforced natively on Envoy.'' & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Authorization concepts page (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-ISTIO-004 & Enforcement locus & ``The authorization policy enforces access control to the inbound traffic in the server side Envoy proxy.'' & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Authorization concepts page (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-ISTIO-005 & Decision / evaluation locus & ``Authorization policies support ALLOW, DENY and CUSTOM actions.'' & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Authorization concepts page (exact location not recorded in packet) & 2026-07-09 & Official Documentation & High & Observed\\
+BOR-ISTIO-006 & Audit / logging surfaces & Observation Not Available & Security (concepts): Authorization & Observation Not Available & \url{https://istio.io/latest/docs/concepts/security/} & Search exhaustion: reviewed \textit{Security (concepts): Authorization} for AUDIT/logging output details; none located. & 2026-07-09 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-OPENFGA (OpenFGA)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-OPENFGA\\
+System & OpenFGA\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-OPENFGA-001 & Concepts & as displayed & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/concepts}\\
+SRC-OPENFGA-002 & Configuration Language & as displayed & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/configuration-language}\\
+SRC-OPENFGA-003 & Perform a Check & as displayed & Last updated on Jul 6, 2026 (as displayed) & \url{https://openfga.dev/docs/getting-started/perform-check}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-OPENFGA-001 & Decision / evaluation locus & ``The OpenFGA service answers authorization checks by determining whether a relationship exists between an object and a user.'' & Concepts & as displayed & \url{https://openfga.dev/docs/concepts} & Concepts page (evidence packet: L115--L119) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-OPENFGA-002 & Policy representation & ``An authorization model combines one or more type definitions.'' & Concepts & as displayed & \url{https://openfga.dev/docs/concepts} & Concepts page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-OPENFGA-003 & Policy representation & ``The DSL adds syntactic sugar on top of JSON'' & Configuration Language & as displayed & \url{https://openfga.dev/docs/configuration-language} & Configuration Language page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-OPENFGA-004 & Interfaces & ``true if the relationship exists.'' & Perform a Check & as displayed & \url{https://openfga.dev/docs/getting-started/perform-check} & Perform a Check page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-OPENFGA-005 & Audit / logging surfaces & Observation Not Available & Concepts & as displayed & \url{https://openfga.dev/docs/concepts} & Search exhaustion: reviewed \textit{Concepts} for audit logging guarantees or built-in audit outputs; none located. & 2026-07-10 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-CEDAR-AVP (Cedar / Amazon Verified Permissions)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-CEDAR-AVP\\
+System & Cedar / Amazon Verified Permissions\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-10\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-AVP-001 & What is Amazon Verified Permissions? (User Guide) & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html}\\
+SRC-AVP-002 & Verified Permissions terminology (User Guide) & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-terms.html}\\
+SRC-AVP-003 & Verified Permissions schema (User Guide) & latest (as displayed) & Observation Not Available & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-schema.html}\\
+SRC-CEDAR-001 & Cedar documentation: Introduction & as displayed & Observation Not Available & \url{https://docs.cedarpolicy.com/}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-AVP-001 & System identity & ``Amazon Verified Permissions is a scalable permissions management and fine-grained authorization service for the applications that you build.'' & What is Amazon Verified Permissions? (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html} & What is AVP? page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-AVP-002 & Policy representation & ``Amazon Verified Permissions uses the Cedar policy language.'' & What is Amazon Verified Permissions? (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html} & What is AVP? page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-AVP-003 & Policy representation & ``A policy store is a container for all of your policies.'' & Verified Permissions terminology (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-terms.html} & Terminology page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-AVP-004 & Policy representation & ``A schema defines the structure of the entities in your policy store.'' & Verified Permissions schema (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/avp-schema.html} & Schema page (exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-CEDAR-001 & Policy representation & ``Cedar is a language for writing and enforcing authorization policies in your applications.'' & Cedar documentation: Introduction & as displayed & \url{https://docs.cedarpolicy.com/} & Introduction (landing page text; exact location not recorded in packet) & 2026-07-10 & Official Documentation & High & Observed\\
+BOR-AVP-005 & Interfaces & Observation Not Available & What is Amazon Verified Permissions? (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html} & Search exhaustion: reviewed \textit{What is Amazon Verified Permissions?} for a primary interface description (Console/CLI/SDK/API); none located. & 2026-07-10 & Official Documentation & High & Not Available\\
+BOR-AVP-006 & Audit / logging surfaces & Observation Not Available & What is Amazon Verified Permissions? (User Guide) & latest (as displayed) & \url{https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/what-is-avp.html} & Search exhaustion: reviewed \textit{What is Amazon Verified Permissions?} for CloudTrail/audit logging coverage; none located. & 2026-07-10 & Official Documentation & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR-ZANZIBAR (Google Zanzibar)}
+\subsection*{BOR metadata}
+\begin{tabular}{@{}L{2.2in}L{4.2in}@{}}
+\toprule
+BOR ID & BOR-ZANZIBAR\\
+System & Google Zanzibar\\
+Protocol & v1.0\\
+Status & Frozen (Revision 1)\\
+Retrieval date & 2026-07-09\\
+\bottomrule
+\end{tabular}
+
+\subsection*{Designated primary sources (source identifiers)}
+\begin{longtable}{@{}L{1.6in}L{2.9in}L{1.0in}L{0.9in}L{1.9in}@{}}
+\toprule
+Source ID & Documentation title & Documentation version & Last-modified / publication date (as published) & Official URL\\
+\midrule
+\endhead
+SRC-ZANZIBAR-001 & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF & July 2019 (as published in paper front matter) & \url{https://www.usenix.org/system/files/atc19-pang.pdf}\\
+SRC-ZANZIBAR-002 & Zanzibar: Google’s Consistent, Global Authorization System (Google Research publication page) & as displayed & 2019 (as displayed) & \url{https://research.google/pubs/zanzibar-googles-consistent-global-authorization-system/}\\
+\bottomrule
+\end{longtable}
+
+\subsection*{Baseline observations (factual only)}
+\begin{longtable}{@{}L{0.95in}L{1.05in}L{2.05in}L{1.55in}L{0.95in}L{1.55in}L{1.10in}L{0.75in}L{0.95in}L{0.75in}L{0.8in}@{}}
+\toprule
+Obs ID & Field & Observation text (verbatim quotation) & Source title & Doc channel/version & Official URL & Evidence location & Retrieval date & Classification & Confidence & Status\\
+\midrule
+\endhead
+BOR-ZANZIBAR-001 & System identity & ``This paper presents the design, implementation, and deployment of Zanzibar'' & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF (July 2019) & \url{https://www.usenix.org/system/files/atc19-pang.pdf} & Paper abstract/intro (exact location not recorded in packet) & 2026-07-09 & Official Publication & High & Observed\\
+BOR-ZANZIBAR-002 & Policy representation & ``Zanzibar provides a uniform data model and configuration language for expressing a wide range of access control policies'' & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF (July 2019) & \url{https://www.usenix.org/system/files/atc19-pang.pdf} & Paper introduction (exact location not recorded in packet) & 2026-07-09 & Official Publication & High & Observed\\
+BOR-ZANZIBAR-003 & Interfaces & ``At runtime, Zanzibar allows clients to create, modify, and evaluate access control lists (ACLs) through a remote procedure call (RPC) interface.'' & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF (July 2019) & \url{https://www.usenix.org/system/files/atc19-pang.pdf} & Runtime interface description (exact location not recorded in packet) & 2026-07-09 & Official Publication & High & Observed\\
+BOR-ZANZIBAR-004 & Policy representation & ``A simple ACL takes the form of ``user U has relation R to object O''.'' & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF (July 2019) & \url{https://www.usenix.org/system/files/atc19-pang.pdf} & ACL form description (exact location not recorded in packet) & 2026-07-09 & Official Publication & High & Observed\\
+BOR-ZANZIBAR-005 & Audit / logging surfaces & Observation Not Available & Zanzibar: Google’s Consistent, Global Authorization System (USENIX ATC '19 paper PDF) & proceedings PDF (July 2019) & \url{https://www.usenix.org/system/files/atc19-pang.pdf} & Search exhaustion: reviewed the paper for audit/logging surfaces; none located. & 2026-07-09 & Official Publication & High & Not Available\\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+\section*{BOR completion report (evidence gaps)}
+The following required BOR fields contain one or more \emph{Observation Not Available} entries and may require additional primary sources before SRF generation if those fields are required inputs:
+\begin{itemize}[leftmargin=*]
+  \item OPA+Gatekeeper: No \emph{Observation Not Available} entries recorded in BOR-OPA baseline observations (section is frozen).
+  \item Kubernetes: Audit/logging surfaces.
+  \item AWS IAM: Interfaces; Enforcement locus; Audit/logging surfaces.
+  \item Envoy ext\_authz: Audit/logging surfaces.
+  \item Istio AuthorizationPolicy: Audit/logging surfaces.
+  \item OpenFGA: Audit/logging surfaces.
+  \item Cedar/AVP: Interfaces; Audit/logging surfaces.
+  \item Zanzibar: Audit/logging surfaces.
+\end{itemize}
+
+\section*{Readiness assessment for B2.08 --- Surface Record Framework (SRF)}
+\textbf{Status: Not ready for SRF generation.} This document is limited to BOR-only collection. Several systems contain required fields recorded as \emph{Observation Not Available} with admitted-source search exhaustion documented (primarily audit/logging surfaces, and selected interface/enforcement fields), so downstream SRF work would require either (a) treating those unavailable fields as acceptable inputs under Protocol v1.0, or (b) collecting additional primary sources.
+
+This document intentionally contains no derived objects, measurements, cross-system comparisons, or classifications.
+
+\end{document}
+

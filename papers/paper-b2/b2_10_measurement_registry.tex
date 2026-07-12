@@ -1,13 +1,15 @@
 \section{Measurement Registry}
 \label{sec:msr}
-The measurement registry (MSR) records protocol-defined measurements computed over derived objects. The current repository state contains exactly two canonical MSR reference executions, for OpenFGA and Envoy ext\_authz; cohort-wide MSR execution remains incomplete.
+The measurement registry (MSR) records protocol-defined measurements computed over derived objects. The current repository state contains complete canonical MSR executions for all nine B2 cohort systems. Comparative Dataset construction, Analysis, and Retained Classification remain not started.
 
 \textbf{Separation rule.} MSR entries must not introduce new observations. Each measurement must cite its DER inputs (and thereby inherits BOR traceability). Any aggregation or normalization performed for a measurement must be described as part of the measurement method.
 
-\textbf{MSR schema.} Reference executions use machine-readable schema \texttt{schemas/msr.schema.json} with schema version \texttt{canonical-msr-v1}.
+\textbf{MSR schema.} Canonical executions use machine-readable schema \texttt{schemas/msr.schema.json} with schema version \texttt{canonical-msr-v1}.
+
+\textbf{Measurement boundary.} The MSR layer uses only the registered I4 measurement vector: \texttt{m\_R}, \texttt{m\_L}, \texttt{m\_E}, \texttt{m\_RL}, and \texttt{m\_LE}, each with \texttt{boolean\_or\_missing} semantics. These records do not state cohort conclusions, architectural invariants, or retained classifications.
 
 \subsection{MSR table (cohort extract)}
-\textbf{MSR status.} Canonical MSR reference execution has begun for exactly two systems. Cohort-wide MSR execution remains incomplete; the nine completed canonical DER executions are not themselves measurements and do not populate the Comparative Dataset.
+\textbf{MSR status.} Canonical MSR execution is complete for all nine systems. Completion of this layer does not populate the Comparative Dataset and does not perform Analysis or Retained Classification.
 
 \begin{center}
 \begin{longtable}{@{}p{0.18\linewidth}p{0.20\linewidth}p{0.38\linewidth}@{}}
@@ -23,17 +25,17 @@ System & MSR status & Trace status \\
 \endfoot
 \bottomrule
 \endlastfoot
-AWS IAM & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Cedar / Amazon Verified Permissions & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Envoy ext\_authz & Reference MSR exists & \texttt{msr-b2-envoy-ext-authz-reference-execution} traces to \texttt{der-b2-envoy-ext-authz-external-authorization-boundary}. \\
-Google Zanzibar & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-HashiCorp Vault & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Istio AuthorizationPolicy & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Kubernetes RBAC Admission & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Open Policy Agent Gatekeeper & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-OpenFGA & Reference MSR exists & \texttt{msr-b2-openfga-reference-execution} traces to \texttt{der-b2-openfga-authorization-model-version-boundary}. \\
+AWS IAM & Canonical MSR exists & \texttt{msr-b2-aws-iam-reference-execution} traces to \texttt{der-b2-aws-iam-request-context-policy-evaluation-boundary}. \\
+Cedar / Amazon Verified Permissions & Canonical MSR exists & \texttt{msr-b2-cedar-amazon-verified-permissions-reference-execution} traces to \texttt{der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary}. \\
+Envoy ext\_authz & Canonical MSR exists & \texttt{msr-b2-envoy-ext-authz-reference-execution} traces to \texttt{der-b2-envoy-ext-authz-external-authorization-boundary}. \\
+Google Zanzibar & Canonical MSR exists & \texttt{msr-b2-google-zanzibar-reference-execution} traces to \texttt{der-b2-google-zanzibar-relation-tuple-check-boundary}. \\
+HashiCorp Vault & Canonical MSR exists & \texttt{msr-b2-hashicorp-vault-reference-execution} traces to \texttt{der-b2-hashicorp-vault-authenticated-path-policy-boundary}. \\
+Istio AuthorizationPolicy & Canonical MSR exists & \texttt{msr-b2-istio-authorizationpolicy-reference-execution} traces to \texttt{der-b2-istio-authorizationpolicy-workload-action-order-boundary}. \\
+Kubernetes RBAC Admission & Canonical MSR exists & \texttt{msr-b2-kubernetes-rbac-admission-reference-execution} traces to \texttt{der-b2-kubernetes-rbac-admission-api-server-admission-boundary}. \\
+Open Policy Agent Gatekeeper & Canonical MSR exists & \texttt{msr-b2-open-policy-agent-gatekeeper-reference-execution} traces to \texttt{der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary}. \\
+OpenFGA & Canonical MSR exists & \texttt{msr-b2-openfga-reference-execution} traces to \texttt{der-b2-openfga-authorization-model-version-boundary}. \\
 \end{longtable}
 \end{center}
 
 \subsection{Full MSR artifact pointer}
-\textbf{Reference MSR artifact pointers.} The two canonical reference executions are stored at \texttt{investigations/b2-governance-cohort/msr/openfga.msr.json} and \texttt{investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json}. These records validate the MSR contract only and do not complete cohort-wide MSR execution.
+\textbf{Canonical MSR artifact pointers.} The complete canonical MSR set is stored under \texttt{investigations/b2-governance-cohort/msr/}. The MSR layer is complete; Comparative Dataset construction, Analysis, and Retained Classification remain not started.

@@ -1,0 +1,172 @@
+{
+  "object_type": "MeasurementStudyRecord",
+  "schema_version": "canonical-msr-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "system_id": "hashicorp-vault",
+  "id": "msr-b2-hashicorp-vault-reference-execution",
+  "source_der_ids": [
+    "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+  ],
+  "measurement_registry_ref": {
+    "registration_id": "b2-i1-i5-registration",
+    "measurement_vector_id": "I4",
+    "path": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"
+  },
+  "measurements": [
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit reasoning artifact present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      },
+      "evidence_trace_refs": [
+        "BOR-B2-VAULT-OBS-005",
+        "BOR-B2-VAULT-OBS-001",
+        "BOR-B2-VAULT-OBS-002",
+        "BOR-B2-VAULT-OBS-003",
+        "BOR-B2-VAULT-OBS-004"
+      ],
+      "measurement_id": "m_R",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_R",
+      "source_der_ids": [
+        "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit legitimacy decision point present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      },
+      "evidence_trace_refs": [
+        "BOR-B2-VAULT-OBS-005",
+        "BOR-B2-VAULT-OBS-001",
+        "BOR-B2-VAULT-OBS-002",
+        "BOR-B2-VAULT-OBS-003",
+        "BOR-B2-VAULT-OBS-004"
+      ],
+      "measurement_id": "m_L",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_L",
+      "source_der_ids": [
+        "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit execution/enforcement mechanism present",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      },
+      "evidence_trace_refs": [
+        "BOR-B2-VAULT-OBS-005",
+        "BOR-B2-VAULT-OBS-001",
+        "BOR-B2-VAULT-OBS-002",
+        "BOR-B2-VAULT-OBS-003",
+        "BOR-B2-VAULT-OBS-004"
+      ],
+      "measurement_id": "m_E",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_E",
+      "source_der_ids": [
+        "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit documented interface/contract between reasoning artifacts and legitimacy evaluation",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      },
+      "evidence_trace_refs": [
+        "BOR-B2-VAULT-OBS-005",
+        "BOR-B2-VAULT-OBS-001",
+        "BOR-B2-VAULT-OBS-002",
+        "BOR-B2-VAULT-OBS-003",
+        "BOR-B2-VAULT-OBS-004"
+      ],
+      "measurement_id": "m_RL",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_RL",
+      "source_der_ids": [
+        "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    },
+    {
+      "allowed_domain": [
+        0,
+        1,
+        null
+      ],
+      "basis": {
+        "determination": "satisfied",
+        "registered_condition": "explicit documented interface/contract between legitimacy outcome and execution/enforcement",
+        "source_claim_ref": "derived_claim.claim",
+        "source_der_id": "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      },
+      "evidence_trace_refs": [
+        "BOR-B2-VAULT-OBS-005",
+        "BOR-B2-VAULT-OBS-001",
+        "BOR-B2-VAULT-OBS-002",
+        "BOR-B2-VAULT-OBS-003",
+        "BOR-B2-VAULT-OBS-004"
+      ],
+      "measurement_id": "m_LE",
+      "operationalization_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/components",
+      "rule_id": "I4.m_LE",
+      "source_der_ids": [
+        "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+      ],
+      "status": "observed",
+      "value": 1,
+      "value_type": "boolean_or_missing"
+    }
+  ],
+  "status": "reference_execution",
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/der/hashicorp-vault.der.json",
+      "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"
+    ],
+    "method": "DER -> registered I4 measurement rule -> MSR",
+    "notes": "Canonical MSR execution for the B2 cohort measurement layer only; not comparative dataset construction, analysis, or retained classification."
+  }
+}

@@ -36,6 +36,8 @@ Analysis
 Retained Classification
 ```
 
+Current B2 lifecycle state: BOR complete, SRF complete, DER complete, and MSR complete. Comparative Dataset, Analysis, and Retained Classification remain Not Started.
+
 ## Repository Organization
 
 | Path | Purpose |

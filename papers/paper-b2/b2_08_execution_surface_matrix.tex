@@ -7,7 +7,7 @@ The execution surface matrix (ESM) records, per system, the externally-reachable
 \textbf{TODO(ESM schema):} Record the ESM/SRF schema version used in this execution and provide a machine-readable export pointer.
 
 \subsection{ESM/SRF surface registry (governance cohort)}
-\textbf{Completion status.} This manuscript synchronization registers OpenFGA as represented by the canonical SRF artifact at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. The status of other cohort SRFs is unchanged by this synchronization and is not reassessed here. The OpenFGA SRF remains observational/surface-level only and does not introduce derived objects, measurements, analysis, or retained classifications.
+\textbf{Completion status.} This manuscript synchronization registers two canonical SRF artifacts: Envoy \texttt{ext\_authz} at \texttt{investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json} and OpenFGA at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. The status of other cohort SRFs is unchanged by this synchronization and is not reassessed here. These SRFs remain observational/surface-level only and do not introduce derived objects, measurements, analysis, or retained classifications.
 
 \begin{center}
 \begin{longtable}{@{}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.22\linewidth}p{0.16\linewidth}p{0.14\linewidth}@{}}
@@ -36,7 +36,7 @@ SRF-IAM-000 & AWS IAM & Surface enumeration & Blocked: BOR observations not yet 
 SRF-VAULT-000 & HashiCorp Vault & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-VAULT-001, BOR-VAULT-002 \\
 
 % --- Envoy ext_authz ---
-SRF-ENVOY-000 & Envoy ext\_authz & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ENVOY-001, BOR-ENVOY-002 \\
+\texttt{srf-b2-envoy-ext-authz} & Envoy ext\_authz & Surface registry artifact & Canonical SRF exists for Envoy ext\_authz execution surfaces. & Observation only; no DER/MSR/classification & \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-001}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-002}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-003}, \texttt{BOR-B2-ENVOY-EXT-AUTHZ-OBS-004} \\
 
 % --- Istio AuthorizationPolicy ---
 SRF-ISTIO-000 & Istio AuthorizationPolicy & Surface enumeration & Blocked: BOR observations not yet populated. & Observation required & BOR-ISTIO-001, BOR-ISTIO-002 \\
@@ -53,7 +53,7 @@ SRF-ZANZ-000 & Google Zanzibar & Surface enumeration & Blocked: BOR observations
 \end{center}
 
 \subsection{Full ESM/SRF artifact pointer}
-\textbf{ESM/SRF artifact pointer.} The OpenFGA canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. No other cohort SRF status is reassessed by this manuscript synchronization.
+\textbf{ESM/SRF artifact pointer.} The Envoy \texttt{ext\_authz} canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json}; the OpenFGA canonical SRF is recorded at \texttt{investigations/b2-governance-cohort/srf/openfga.srf.json}. No other cohort SRF status is reassessed by this manuscript synchronization.
 
 \subsection{ESM/SRF completion summary (this section)}
 \begin{enumerate}

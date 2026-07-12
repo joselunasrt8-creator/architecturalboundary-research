@@ -1,12 +1,84 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/architectural-boundary-research/schemas/der.schema.json",
-  "title": "der schema",
+  "title": "Derived Evidence Record schema",
   "type": "object",
-  "additionalProperties": true,
+  "additionalProperties": false,
+  "required": [
+    "object_type",
+    "schema_version",
+    "protocol_version",
+    "investigation_id",
+    "id",
+    "source_srf_ids",
+    "source_surface_ids",
+    "source_observation_refs",
+    "derivation_rule",
+    "derived_claim",
+    "provenance"
+  ],
   "properties": {
-    "id": { "type": "string" },
-    "protocol_version": { "type": "string" },
-    "investigation_id": { "type": "string" }
+    "object_type": { "const": "DerivedEvidenceRecord" },
+    "schema_version": { "const": "canonical-der-v1" },
+    "protocol_version": { "type": "string", "minLength": 1 },
+    "investigation_id": { "type": "string", "minLength": 1 },
+    "id": { "type": "string", "pattern": "^der-[a-z0-9][a-z0-9-]*$" },
+    "source_srf_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "source_surface_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "source_observation_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "derivation_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registered_derivation_reference", "description"],
+      "properties": {
+        "registered_derivation_reference": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "derived_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim", "interpretation_boundary"],
+      "properties": {
+        "claim": { "type": "string", "minLength": 1 },
+        "interpretation_boundary": {
+          "type": "string",
+          "enum": ["direct_derivation_only", "explicit_interpretation_recorded"]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_from", "notes"],
+      "properties": {
+        "created_from": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true
+    }
   }
 }

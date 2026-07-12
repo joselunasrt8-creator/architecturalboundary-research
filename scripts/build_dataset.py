@@ -10,6 +10,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[1]
 INVESTIGATION_ID = "b2-governance-cohort"
@@ -44,6 +45,19 @@ def validate_with_schema(data: dict[str, object], schema_path: Path, label: str)
     if errors:
         detail = "; ".join(error.message for error in errors)
         raise SystemExit(f"{label} schema validation failed: {detail}")
+
+
+def validate_full_msr_contract() -> None:
+    """Run the repository's full MSR contract before dataset projection."""
+    try:
+        from scripts import validate as repository_validate
+    except ModuleNotFoundError:  # pragma: no cover - direct path execution fallback
+        sys.path.insert(0, str(ROOT))
+        from scripts import validate as repository_validate
+    if not isinstance(repository_validate, ModuleType):
+        raise SystemExit("repository MSR validator could not be loaded")
+    repository_validate.ROOT = ROOT
+    repository_validate.validate_msr_contract()
 
 
 def load_validated_msr(path: Path) -> dict[str, object]:
@@ -93,6 +107,7 @@ def project_row(msr: dict[str, object], path: Path) -> dict[str, object]:
 
 
 def build_dataset() -> dict[str, object]:
+    validate_full_msr_contract()
     paths = sorted(MSR_DIR.glob("*.msr.json"))
     if len(paths) != COHORT_SIZE:
         raise SystemExit(f"expected exactly {COHORT_SIZE} B2 MSRs, found {len(paths)}")

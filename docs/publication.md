@@ -2,11 +2,33 @@
 
 This repository uses a deterministic, repository-first publication pipeline for buildable LaTeX papers under `papers/`.
 
+The repository is the canonical source for all future research manuscripts. Overleaf must not be used to originate new manuscripts or to re-establish a canonical source outside version control. External editors may only hold non-canonical review copies; authoritative manuscript changes must return as repository commits before publication.
+
 ## Paper discovery
 
-A paper is buildable when it contains a `main.tex` file somewhere under `papers/`. The build entry point discovers `papers/**/main.tex` in sorted path order, builds each discovered paper independently, and does not hard-code paper names. Future papers are included automatically once their manuscript directory contains `main.tex`.
+A paper is buildable when it contains a `main.tex` file somewhere under `papers/`, excluding hidden or template paths whose path components begin with `.` or `_`. The build entry point discovers `papers/**/main.tex` in sorted path order, builds each discovered paper independently, and does not hard-code paper names. Future papers are included automatically once their manuscript directory contains `main.tex`.
 
-Paper directories that only contain planning or placeholder material, such as a README without `main.tex`, are not compiled and are not treated as build failures.
+Paper directories that only contain planning or placeholder material, such as a README without `main.tex`, are not compiled and are not treated as build failures. The repository template at `papers/_template/` is intentionally excluded from builds until copied to a real paper directory.
+
+
+## Repository-first authoring workflow
+
+New research manuscripts must be created in this repository:
+
+1. Copy `papers/_template/` to `papers/<paper-id>/`.
+2. Edit `README.md`, `main.tex`, `references.bib`, and `sections/*.tex` in the copied repository directory.
+3. Keep section-level manuscript text in repository files so review diffs, validation, and publication builds operate on the same object.
+4. Run `python3 scripts/build_papers.py` to build the paper deterministically.
+5. Run `python3 scripts/validate.py` before opening a PR.
+
+Every new paper must include:
+
+- `main.tex`
+- section files under `sections/`
+- `references.bib`
+- `README.md`
+
+Overleaf must never become the canonical source again. If authors use Overleaf or another external editor for comments or review, the external copy is disposable and non-authoritative; only committed repository files define the manuscript.
 
 ## Required TeX tools and packages
 

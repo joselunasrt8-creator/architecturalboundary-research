@@ -53,9 +53,15 @@ class BuildResult:
     failure: str | None = None
 
 
+def is_publication_source(path: Path) -> bool:
+    """Return True when a main.tex path belongs to a real paper, not a template/hidden tree."""
+    relative_parts = path.relative_to(PAPERS_DIR).parts
+    return not any(part.startswith((".", "_")) for part in relative_parts)
+
+
 def discover_papers() -> list[Paper]:
     """Discover buildable papers by sorted main.tex paths under papers/."""
-    mains = sorted(path for path in PAPERS_DIR.rglob(MAIN_TEX) if path.is_file())
+    mains = sorted(path for path in PAPERS_DIR.rglob(MAIN_TEX) if path.is_file() and is_publication_source(path))
     return [Paper(path.parent) for path in mains]
 
 

@@ -95,4 +95,6 @@ Full repository validation, including publication readiness:
 python3 scripts/validate.py
 ```
 
-See [Publication Build and Release Artifacts](docs/publication.md) for required TeX Live packages, CI behavior, bibliography/reference warning categories, and release artifact locations.
+New research manuscripts must originate in this repository by copying `papers/_template/` to `papers/<paper-id>/`; Overleaf and other external editors are non-canonical review surfaces only.
+
+See [Publication Build and Release Artifacts](docs/publication.md) for the repository-first authoring workflow, required TeX Live packages, CI behavior, bibliography/reference warning categories, and release artifact locations.

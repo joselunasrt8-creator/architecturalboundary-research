@@ -1,12 +1,105 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/architectural-boundary-research/schemas/dataset.schema.json",
-  "title": "dataset schema",
+  "title": "Comparative Dataset schema",
   "type": "object",
-  "additionalProperties": true,
+  "additionalProperties": false,
+  "required": [
+    "object_type",
+    "schema_version",
+    "protocol_version",
+    "investigation_id",
+    "id",
+    "measurement_vector_ref",
+    "cohort_size",
+    "row_ordering",
+    "source_msr_ids",
+    "rows",
+    "provenance",
+    "generation"
+  ],
   "properties": {
-    "id": { "type": "string" },
-    "protocol_version": { "type": "string" },
-    "investigation_id": { "type": "string" }
+    "object_type": { "const": "ComparativeDataset" },
+    "schema_version": { "const": "canonical-dataset-v1" },
+    "protocol_version": { "const": "protocol-v1" },
+    "investigation_id": { "const": "b2-governance-cohort" },
+    "id": { "const": "dataset-b2-governance-cohort-i4" },
+    "measurement_vector_ref": {
+      "const": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+    },
+    "cohort_size": { "const": 9 },
+    "row_ordering": { "const": "system_id ascending" },
+    "source_msr_ids": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^msr-b2-[a-z0-9-]+-reference-execution$" }
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "$ref": "#/$defs/row" }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "created_from"],
+      "properties": {
+        "method": { "const": "MSR -> deterministic comparative projection" },
+        "created_from": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["builder", "mode", "repository_root"],
+      "properties": {
+        "builder": { "const": "scripts/build_dataset.py" },
+        "mode": { "const": "deterministic-rebuild" },
+        "repository_root": { "const": "." }
+      }
+    }
+  },
+  "$defs": {
+    "measurement_value": { "type": ["integer", "null"], "enum": [0, 1, null] },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system_id", "msr_id", "m_R", "m_L", "m_E", "m_RL", "m_LE", "lineage"],
+      "properties": {
+        "system_id": { "type": "string", "minLength": 1 },
+        "msr_id": { "type": "string", "pattern": "^msr-b2-[a-z0-9-]+-reference-execution$" },
+        "m_R": { "$ref": "#/$defs/measurement_value" },
+        "m_L": { "$ref": "#/$defs/measurement_value" },
+        "m_E": { "$ref": "#/$defs/measurement_value" },
+        "m_RL": { "$ref": "#/$defs/measurement_value" },
+        "m_LE": { "$ref": "#/$defs/measurement_value" },
+        "lineage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["msr_path", "source_der_ids", "measurement_registry_ref"],
+          "properties": {
+            "msr_path": { "type": "string", "pattern": "^investigations/b2-governance-cohort/msr/[a-z0-9-]+\\.msr\\.json$" },
+            "source_der_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "measurement_registry_ref": {
+              "const": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+            }
+          }
+        }
+      }
+    }
   }
 }

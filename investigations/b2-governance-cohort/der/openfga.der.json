@@ -1,0 +1,40 @@
+{
+    "object_type": "DerivedEvidenceRecord",
+    "schema_version": "canonical-der-v1",
+    "protocol_version": "protocol-v1",
+    "investigation_id": "b2-governance-cohort",
+    "id": "der-b2-openfga-authorization-model-version-boundary",
+    "source_srf_ids": [
+        "srf-b2-openfga"
+    ],
+    "source_surface_ids": [
+        "srf-b2-openfga-authorization-surfaces-authorization-model",
+        "srf-b2-openfga-authorization-surfaces-configuration-language",
+        "srf-b2-openfga-execution-entry-points-write-authorization-model",
+        "srf-b2-openfga-execution-boundaries-model-version-boundary",
+        "srf-b2-openfga-observable-execution-flow-define",
+        "srf-b2-openfga-observable-execution-flow-version",
+        "srf-b2-openfga-protected-resources-object-type"
+    ],
+    "source_observation_refs": [
+        "BOR-B2-OPENFGA-OBS-001",
+        "BOR-B2-OPENFGA-OBS-002",
+        "BOR-B2-OPENFGA-OBS-003",
+        "BOR-B2-OPENFGA-OBS-004"
+    ],
+    "derivation_rule": {
+        "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+        "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared OpenFGA SRF surfaces and their BOR observation references."
+    },
+    "derived_claim": {
+        "claim": "Given the observed OpenFGA execution surfaces, the referenced SRF supports the bounded evidence statement that OpenFGA documents an authorization model/configuration language for object types and relationships, a write authorization model entry point that creates a new version, and a model version boundary where authorization models are immutable after creation.",
+        "interpretation_boundary": "direct_derivation_only"
+    },
+    "provenance": {
+        "created_from": [
+            "investigations/b2-governance-cohort/srf/openfga.srf.json",
+            "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+        ],
+        "notes": "Canonical Reference DER: first reference execution of the frozen SRF to DER contract for one selected B2 SRF. Remaining DER records will be produced separately."
+    }
+}

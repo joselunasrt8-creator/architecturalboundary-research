@@ -1,0 +1,11 @@
+Architectural research often seeks statements that generalize: invariants, regularities, and constraints that appear to hold across systems, styles, and domains. However, many proposed invariants are difficult to compare because studies differ in (i) how systems are sampled, (ii) how architectural representations are normalized, (iii) how measurements are computed, and (iv) how exceptions are reported.
+
+This paper does not argue for any specific architectural invariant. Instead, it defines a reproducible protocol for investigating candidate architectural invariants. The intended outcome is that different studies---even when focused on different candidate invariants---produce comparable artifacts and defensible claims.
+
+We treat an ``architectural invariant'' as a hypothesis of the form:
+
+\begin{quote}
+Within a specified scope (population, architectural representation, and constraints), property $P$ holds for all (or almost all) systems; deviations are explained, quantified, and reproducible.
+\end{quote}
+
+The protocol is designed for empirical software architecture work that relies on system artifacts (code, build, deployment descriptors, run-time traces) and produces structured evidence suitable for replication and meta-analysis.

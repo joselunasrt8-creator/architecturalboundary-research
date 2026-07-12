@@ -1,0 +1,80 @@
+\section*{BOR cleanup report (Protocol v1.0 conformance pass)}
+\subsection*{Date}
+2026-07-11
+
+\subsection*{Scope}
+Protocol-conformance pass only. No SRFs/DERs/MSRs generated. Frozen BOR-OPA not modified.
+
+\subsection*{Entries accepted unchanged}
+\begin{itemize}
+  \item None (all non-frozen BOR sections had at least metadata/formatting updates).
+\end{itemize}
+
+\subsection*{Entries corrected}
+\begin{itemize}
+  \item Removed duplicate second LaTeX document appended after \texttt{\textbackslash end\{document\}}.
+  \item Removed unverified documentation version assertions from source tables (Vault v2.x; Envoy build string; Istio 1.30.2).
+  \item Added per-observation metadata columns (retrieval date, classification, confidence; and where feasible: source title, URL, doc channel/version).
+  \item Converted all \emph{Observation Not Available} rows to contain only (a) the unavailable marker and (b) admitted-source search exhaustion, with no explanatory inference.
+  \item Updated the evidence-gap report to remove the incorrect claim that frozen BOR-OPA contains unavailable required fields.
+  \item Updated SRF readiness assessment wording to apply the structural-completeness rule consistently.
+\end{itemize}
+
+\subsection*{Entries rejected as unsupported}
+\begin{itemize}
+  \item None were present in the current Overleaf artifact. (The unsupported positive-claim examples cited in the evidence packet were not present in \texttt{main.tex} as BOR rows.)
+\end{itemize}
+
+\subsection*{Remaining unavailable fields (by system)}
+\begin{itemize}
+  \item Kubernetes: Audit/logging surfaces (BOR-K8S-010).
+  \item AWS IAM: Enforcement locus (BOR-AWS-IAM-005); Interfaces (BOR-AWS-IAM-006); Audit/logging surfaces (BOR-AWS-IAM-007).
+  \item Envoy ext\_authz: Audit/logging surfaces (BOR-ENVOY-006).
+  \item Istio AuthorizationPolicy: Audit/logging surfaces (BOR-ISTIO-006).
+  \item OpenFGA: Audit/logging surfaces (BOR-OPENFGA-005).
+  \item Cedar / Amazon Verified Permissions: Interfaces (BOR-AVP-005); Audit/logging surfaces (BOR-AVP-006).
+  \item Zanzibar: Audit/logging surfaces (BOR-ZANZIBAR-005).
+\end{itemize}
+
+\subsection*{Final BOR readiness status (structural completeness)}
+A BOR is treated as structurally complete when each required field contains either an evidence-backed observation or an \emph{Observation Not Available} entry with admitted-source search exhaustion documented.
+
+\begin{itemize}
+  \item Kubernetes: Structurally complete (contains one unavailable required field with search exhaustion documented).
+  \item AWS IAM: Structurally complete (contains three unavailable required fields with search exhaustion documented).
+  \item HashiCorp Vault: Structurally complete.
+  \item Envoy ext\_authz: Structurally complete (audit/logging unavailable with search exhaustion documented).
+  \item Istio AuthorizationPolicy: Structurally complete (audit/logging unavailable with search exhaustion documented).
+  \item OpenFGA: Structurally complete (audit/logging unavailable with search exhaustion documented).
+  \item Cedar / Amazon Verified Permissions: Structurally complete (interfaces + audit/logging unavailable with search exhaustion documented).
+  \item Zanzibar: Structurally complete (audit/logging unavailable with search exhaustion documented).
+\end{itemize}
+
+\subsection*{Status (Protocol v1.0)}
+Status: Structurally complete for Protocol v1.0.
+
+All required BOR fields contain either:
+\begin{itemize}
+  \item an evidence-backed observation; or
+  \item \emph{Observation Not Available} with documented admitted-source search exhaustion.
+\end{itemize}
+
+Additional primary sources may reduce unavailable observations in future revisions but are not required for completion of this BOR artifact under Protocol v1.0.
+
+\subsection*{Assessment summary}
+\begin{tabular}{@{}ll@{}}
+\textbf{Assessment} & \textbf{Status}\\
+Protocol completeness & Complete\\
+Schema completeness & Complete\\
+Evidence traceability & Complete\\
+Evidence availability & Partial\\
+BOR artifact & Complete\\
+\end{tabular}
+
+\subsection*{Artifact Status}
+\begin{tabular}{@{}ll@{}}
+\textbf{Protocol:} & v1.0 (Frozen)\\
+\textbf{BOR Corpus:} & v1.0\\
+\textbf{Revision:} & 1\\
+\textbf{Scientific Status:} & Canonical BOR Collection\\
+\end{tabular}

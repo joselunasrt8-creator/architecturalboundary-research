@@ -1,0 +1,14 @@
+\subsection*{Why a protocol?}
+Two teams can test the same candidate invariant and still reach incompatible conclusions due to differences in sampling, representation choices, measurement implementations, or reporting thresholds. A protocol reduces these degrees of freedom.
+
+\subsection*{Design goals}
+\begin{enumerate}[label=G\arabic*., leftmargin=*]
+  \item \textbf{Reproducibility}: an independent team can rerun the pipeline and obtain the same measurements and classifications.
+  \item \textbf{Falsifiability}: the protocol encourages reporting of counterexamples and boundary conditions, not only confirmations.
+  \item \textbf{Comparability}: results can be compared across studies because the same artifact schema and reporting template are used.
+  \item \textbf{Theory-independence}: the protocol standardizes observation and measurement while leaving theoretical interpretation to the researcher.
+  \item \textbf{Traceability}: every reported claim links to concrete systems, representations, tool versions, and parameter settings.
+\end{enumerate}
+
+\subsection*{Scope}
+The protocol targets investigations where architectural information can be extracted or constructed in a machine-checkable form (e.g., dependency graphs, component-and-connector models, service call graphs). It is not limited to a specific style (microservices, layered systems, event-driven architectures) but requires the study to declare its scope precisely.

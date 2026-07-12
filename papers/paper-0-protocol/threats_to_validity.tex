@@ -1,0 +1,31 @@
+This section catalogs threats that can invalidate an invariant investigation even when the protocol is followed.
+
+\subsection*{Construct validity}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Representation mismatch}: the chosen architectural representation may omit relevant structures (e.g., dynamic behavior) or encode them incorrectly.
+  \item \textbf{Measurement proxy error}: computed metrics may be only weak proxies for the intended property $P$.
+\end{itemize}
+
+\subsection*{Internal validity}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Extractor bugs}: errors in extraction/normalization can create spurious support or violations.
+  \item \textbf{Pipeline drift}: differences in tool versions, dependencies, or environment can change measurements.
+  \item \textbf{Post-hoc tuning}: thresholds or normalization rules adjusted after seeing outcomes can inflate apparent support.
+\end{itemize}
+
+\subsection*{External validity}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Sampling bias}: convenience samples (e.g., popular GitHub repos) may not represent the target population.
+  \item \textbf{Ecological validity}: industrial systems may differ systematically from open-source systems.
+  \item \textbf{Temporal validity}: systems evolve; invariants may hold only for particular eras, toolchains, or deployment platforms.
+\end{itemize}
+
+\subsection*{Conclusion validity}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Multiple comparisons}: testing many candidate invariants increases false discovery risk.
+  \item \textbf{Unstable classifications}: small representation changes that flip labels indicate fragility.
+  \item \textbf{Overgeneralization}: ``almost always'' claims must quantify violation rates and characterize counterexamples.
+\end{itemize}
+
+\subsection*{Mitigations required by the protocol}
+The required artifacts (Section~5), three-way classification (Section~6), and versioned toolchains (Section~7) mitigate many threats by enforcing traceability, explicit scoping, and rerunability.

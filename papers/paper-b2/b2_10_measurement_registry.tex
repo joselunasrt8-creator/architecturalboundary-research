@@ -1,13 +1,13 @@
 \section{Measurement Registry}
 \label{sec:msr}
-The measurement registry (MSR) records protocol-defined measurements computed over derived objects. No Paper~B2 MSR records have been created in the current repository state.
+The measurement registry (MSR) records protocol-defined measurements computed over derived objects. The current repository state contains exactly two canonical MSR reference executions, for OpenFGA and Envoy ext\_authz; cohort-wide MSR execution remains incomplete.
 
 \textbf{Separation rule.} MSR entries must not introduce new observations. Each measurement must cite its DER inputs (and thereby inherits BOR traceability). Any aggregation or normalization performed for a measurement must be described as part of the measurement method.
 
-\textbf{TODO(MSR schema):} Record the MSR schema version used in this execution and provide a machine-readable export pointer.
+\textbf{MSR schema.} Reference executions use machine-readable schema \texttt{schemas/msr.schema.json} with schema version \texttt{canonical-msr-v1}.
 
 \subsection{MSR table (cohort extract)}
-\textbf{MSR status.} MSR execution has not started. The nine completed canonical DER executions are not measurements and do not populate MSR rows.
+\textbf{MSR status.} Canonical MSR reference execution has begun for exactly two systems. Cohort-wide MSR execution remains incomplete; the nine completed canonical DER executions are not themselves measurements and do not populate the Comparative Dataset.
 
 \begin{center}
 \begin{longtable}{@{}p{0.18\linewidth}p{0.20\linewidth}p{0.38\linewidth}@{}}
@@ -25,15 +25,15 @@ System & MSR status & Trace status \\
 \endlastfoot
 AWS IAM & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
 Cedar / Amazon Verified Permissions & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-Envoy ext\_authz & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
+Envoy ext\_authz & Reference MSR exists & \texttt{msr-b2-envoy-ext-authz-reference-execution} traces to \texttt{der-b2-envoy-ext-authz-external-authorization-boundary}. \\
 Google Zanzibar & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
 HashiCorp Vault & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
 Istio AuthorizationPolicy & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
 Kubernetes RBAC Admission & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
 Open Policy Agent Gatekeeper & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
-OpenFGA & Not started & Canonical DER execution exists; measurement derivation has not begun. \\
+OpenFGA & Reference MSR exists & \texttt{msr-b2-openfga-reference-execution} traces to \texttt{der-b2-openfga-authorization-model-version-boundary}. \\
 \end{longtable}
 \end{center}
 
 \subsection{Full MSR artifact pointer}
-\textbf{TODO(MSR artifact pointer):} Provide a pointer to the full machine-readable MSR artifact, including tool versions/lockfiles and rerun instructions as required by Protocol v1.0.
+\textbf{Reference MSR artifact pointers.} The two canonical reference executions are stored at \texttt{investigations/b2-governance-cohort/msr/openfga.msr.json} and \texttt{investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json}. These records validate the MSR contract only and do not complete cohort-wide MSR execution.

@@ -51,7 +51,8 @@ def test_verified_valid_repository_state_is_audited(tmp_path):
     assert "| BOR | COMPLETE |" in text
     assert "| SRF | COMPLETE |" in text
     assert "| DER | COMPLETE |" in text
-    assert "| MSR | NOT STARTED |" in text
+    assert "| Canonical MSR reference executions | REFERENCE EXECUTIONS: 2 |" in text
+    assert "| Cohort-wide MSR | INCOMPLETE |" in text
     assert "| Comparative Dataset | NOT STARTED |" in text
     assert "| Analysis | NOT STARTED |" in text
     assert "| Retained Classification | NOT STARTED |" in text

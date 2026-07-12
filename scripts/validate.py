@@ -449,6 +449,186 @@ def validate_der_contract() -> None:
                     f"B2 DER execution incomplete; missing DER source SRF id(s): {', '.join(missing_der)}"
                 )
 
+
+
+B2_REFERENCE_DETERMINATIONS = {
+    "der-b2-openfga-authorization-model-version-boundary": {
+        "I4.m_R": "satisfied",
+        "I4.m_L": "unavailable",
+        "I4.m_E": "unavailable",
+        "I4.m_RL": "satisfied",
+        "I4.m_LE": "unavailable",
+    },
+    "der-b2-envoy-ext-authz-external-authorization-boundary": {
+        "I4.m_R": "unavailable",
+        "I4.m_L": "satisfied",
+        "I4.m_E": "satisfied",
+        "I4.m_RL": "unavailable",
+        "I4.m_LE": "satisfied",
+    },
+}
+
+DETERMINATION_RESULT = {
+    "satisfied": ("observed", 1),
+    "not_satisfied": ("observed", 0),
+    "unavailable": ("missing", None),
+}
+
+
+def b2_measurement_rules() -> set[str]:
+    registration = require_json("investigations/b2-governance-cohort/preregistration/i1_i5_registration.json")
+    if not isinstance(registration, dict):
+        raise SystemExit("B2 I1-I5 registration must be an object")
+    vector = registration.get("measurement_vector")
+    if not isinstance(vector, dict) or vector.get("id") != "I4":
+        raise SystemExit("B2 measurement vector I4 is not registered")
+    components = vector.get("components")
+    if not isinstance(components, list):
+        raise SystemExit("B2 measurement vector components must be a list")
+    rules: set[str] = set()
+    for component in components:
+        if not isinstance(component, dict):
+            raise SystemExit("B2 measurement vector component must be an object")
+        name = component.get("name")
+        if not isinstance(name, str) or not name:
+            raise SystemExit("B2 measurement vector component missing name")
+        if component.get("type") != "boolean_or_missing":
+            raise SystemExit(f"B2 measurement rule has unsupported type: {name}")
+        rules.add(f"I4.{name}")
+    expected = {"I4.m_R", "I4.m_L", "I4.m_E", "I4.m_RL", "I4.m_LE"}
+    if rules != expected:
+        raise SystemExit(f"B2 measurement rules do not match registered I4 components: {sorted(rules)}")
+    return rules
+
+
+def b2_measurement_conditions() -> dict[str, str]:
+    registration = require_json("investigations/b2-governance-cohort/preregistration/i1_i5_registration.json")
+    if not isinstance(registration, dict):
+        raise SystemExit("B2 I1-I5 registration must be an object")
+    vector = registration.get("measurement_vector")
+    if not isinstance(vector, dict):
+        raise SystemExit("B2 measurement vector I4 is not registered")
+    components = vector.get("components")
+    if not isinstance(components, list):
+        raise SystemExit("B2 measurement vector components must be a list")
+    conditions: dict[str, str] = {}
+    for component in components:
+        if not isinstance(component, dict):
+            raise SystemExit("B2 measurement vector component must be an object")
+        name = component.get("name")
+        meaning = component.get("meaning")
+        if isinstance(name, str) and isinstance(meaning, str) and meaning:
+            conditions[f"I4.{name}"] = meaning
+    return conditions
+
+
+def der_records_for(investigation_dir: Path) -> dict[str, tuple[dict[str, object], Path]]:
+    records: dict[str, tuple[dict[str, object], Path]] = {}
+    for path in sorted((investigation_dir / "der").glob("*.der.json")):
+        relative = str(path.relative_to(ROOT))
+        data = require_json(relative)
+        if not isinstance(data, dict):
+            raise SystemExit(f"DER must be an object: {relative}")
+        validate_json_object_against_schema(data, "schemas/der.schema.json", relative)
+        der_id = data["id"]
+        if not isinstance(der_id, str):
+            raise SystemExit(f"DER id must be a string: {relative}")
+        if der_id in records:
+            raise SystemExit(f"duplicate DER id in {investigation_dir.relative_to(ROOT)}: {der_id}")
+        records[der_id] = (data, path)
+    return records
+
+
+def validate_msr_contract() -> None:
+    """Validate B2 MSR files as bounded DER-derived measurement records."""
+    rules = b2_measurement_rules()
+    conditions = b2_measurement_conditions()
+    required_measurements = {rule.split(".", 1)[1] for rule in rules}
+    for investigation_dir in sorted((ROOT / "investigations").iterdir()):
+        if not investigation_dir.is_dir():
+            continue
+        msr_dir = investigation_dir / "msr"
+        if not msr_dir.is_dir():
+            continue
+        msr_paths = sorted(msr_dir.glob("*.msr.json"))
+        if not msr_paths:
+            continue
+        der_records = der_records_for(investigation_dir)
+        srf_records = srf_records_for(investigation_dir)
+        msr_ids: set[str] = set()
+        for path in msr_paths:
+            msr_relative = str(path.relative_to(ROOT))
+            msr = require_json(msr_relative)
+            if not isinstance(msr, dict):
+                raise SystemExit(f"MSR must be an object: {msr_relative}")
+            validate_json_object_against_schema(msr, "schemas/msr.schema.json", msr_relative)
+            if msr["id"] in msr_ids:
+                raise SystemExit(f"duplicate MSR id in {investigation_dir.relative_to(ROOT)}: {msr['id']}")
+            msr_ids.add(msr["id"])
+            if msr["investigation_id"] != investigation_dir.name:
+                raise SystemExit(f"{msr_relative} investigation_id does not match directory: {msr['investigation_id']}")
+
+            declared_der_ids = set(msr["source_der_ids"])
+            for der_id in declared_der_ids:
+                if der_id not in der_records:
+                    raise SystemExit(f"{msr_relative} references missing DER id: {der_id}")
+                der, _ = der_records[der_id]
+                if der.get("investigation_id") != msr["investigation_id"]:
+                    raise SystemExit(f"{msr_relative} references DER from another investigation: {der_id}")
+                expected_srf_id = f"srf-b2-{msr['system_id']}"
+                if der.get("source_srf_ids") != [expected_srf_id]:
+                    raise SystemExit(f"{msr_relative} references DER from another system: {der_id}")
+
+            seen_measurements: set[str] = set()
+            for entry in msr["measurements"]:
+                mid = entry["measurement_id"]
+                if mid in seen_measurements:
+                    raise SystemExit(f"{msr_relative} contains duplicate measurement: {mid}")
+                seen_measurements.add(mid)
+                if entry["rule_id"] not in rules or entry["rule_id"] != f"I4.{mid}":
+                    raise SystemExit(f"{msr_relative} uses unknown measurement rule: {entry['rule_id']}")
+                if entry["allowed_domain"] != [0, 1, None]:
+                    raise SystemExit(f"{msr_relative} has invalid value domain for {mid}")
+                if entry["status"] == "missing" and entry["value"] is not None:
+                    raise SystemExit(f"{msr_relative} missing measurement has non-null value: {mid}")
+                if entry["status"] == "observed" and entry["value"] not in (0, 1):
+                    raise SystemExit(f"{msr_relative} observed measurement has invalid value: {mid}")
+                basis = entry["basis"]
+                if basis["source_der_id"] not in entry["source_der_ids"]:
+                    raise SystemExit(f"{msr_relative} measurement basis uses undeclared DER: {mid}")
+                if basis["registered_condition"] != conditions[entry["rule_id"]]:
+                    raise SystemExit(f"{msr_relative} measurement basis does not match registered condition: {mid}")
+                expected_status, expected_value = DETERMINATION_RESULT[basis["determination"]]
+                if entry["status"] != expected_status or entry["value"] != expected_value:
+                    raise SystemExit(f"{msr_relative} measurement result conflicts with basis determination: {mid}")
+                reference_expected = B2_REFERENCE_DETERMINATIONS.get(basis["source_der_id"], {}).get(entry["rule_id"])
+                if reference_expected is not None and basis["determination"] != reference_expected:
+                    raise SystemExit(f"{msr_relative} measurement determination conflicts with canonical reference execution: {mid}")
+                entry_der_ids = set(entry["source_der_ids"])
+                if not entry_der_ids <= declared_der_ids:
+                    raise SystemExit(f"{msr_relative} measurement uses undeclared DER: {mid}")
+                selected_observations: set[str] = set()
+                for der_id in entry_der_ids:
+                    der = der_records[der_id][0]
+                    _surfaces, observations, _paths = collect_selected_srf_lineage(der, srf_records, msr_relative)
+                    selected_observations.update(observations)
+                for ref in entry["evidence_trace_refs"]:
+                    if ref not in selected_observations:
+                        raise SystemExit(f"{msr_relative} evidence trace is outside declared DER lineage: {ref}")
+
+            missing = sorted(required_measurements - seen_measurements)
+            if missing:
+                raise SystemExit(f"{msr_relative} missing required measurement(s): {', '.join(missing)}")
+
+            provenance = msr["provenance"]
+            resolved = {resolve_repo_file(ref, purpose="MSR provenance") for ref in provenance["created_from"]}
+            required = {der_records[der_id][1].resolve() for der_id in declared_der_ids}
+            registry_path = resolve_repo_file(msr["measurement_registry_ref"]["path"], purpose="MSR measurement registry")
+            required.add(registry_path.resolve())
+            missing_sources = sorted(str(item.relative_to(ROOT)) for item in required - resolved)
+            if missing_sources:
+                raise SystemExit(f"{msr_relative} provenance missing required source(s): {', '.join(missing_sources)}")
+
 def validate_move_ledger() -> None:
     require_path("MOVES.md")
     text = (ROOT / "MOVES.md").read_text(encoding="utf-8")
@@ -473,6 +653,7 @@ def main() -> None:
     validate_bor_schemas()
     validate_srf_registry()
     validate_der_contract()
+    validate_msr_contract()
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()
@@ -481,7 +662,9 @@ def main() -> None:
     validate_move_ledger()
     subprocess.run(["python3", "scripts/check_registry.py"], cwd=ROOT, check=True)
     publication_build = subprocess.run(["python3", "scripts/build_papers.py"], cwd=ROOT)
-    if publication_build.returncode != 0:
+    if publication_build.returncode == 2:
+        print("publication validation unavailable: missing TeX toolchain")
+    elif publication_build.returncode != 0:
         raise SystemExit(f"publication validation failed with exit code {publication_build.returncode}")
     print("repository topology validation passed")
 

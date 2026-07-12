@@ -57,7 +57,6 @@ EXPECTED_B2_OBJECTS = {
     "openfga": "OpenFGA",
 }
 NOT_STARTED_LIFECYCLE_STAGES = {
-    "MSR": "investigations/b2-governance-cohort/msr",
     "Comparative Dataset": "datasets/comparative",
     "Analysis": "investigations/b2-governance-cohort/analysis",
     "Retained Classification": "registry/retained_classifications.json",
@@ -277,7 +276,20 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
                     der.status = "PARTIAL"
                     der.blockers.append(f"broken SRF lineage: {rel(path)} -> {srf_id}")
 
-    lifecycle = [bor, srf, der]
+    msr_files = lifecycle_json_files("msr")
+    msr = LifecycleCheck(name="Canonical MSR reference executions", status="PARTIAL")
+    msr.findings.append(f"canonical JSON files: {len(msr_files)}/2 reference executions")
+    if len(msr_files) == 2:
+        msr.status = "REFERENCE EXECUTIONS: 2"
+    elif not msr_files:
+        msr.status = "NOT STARTED"
+    else:
+        msr.blockers.append("unexpected number of MSR reference executions")
+    cohort_msr = LifecycleCheck(name="Cohort-wide MSR", status="INCOMPLETE")
+    cohort_msr.findings.append(f"canonical JSON files: {len(msr_files)}/{len(EXPECTED_B2_OBJECTS)} cohort systems")
+    if len(msr_files) >= len(EXPECTED_B2_OBJECTS):
+        cohort_msr.status = "COMPLETE"
+    lifecycle = [bor, srf, der, msr, cohort_msr]
     for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():
         path = ROOT / relative
         files = object_files([relative]) if path.exists() else []

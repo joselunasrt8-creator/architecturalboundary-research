@@ -111,7 +111,11 @@ def build_paper(paper: Paper, *, keep_build: bool = False) -> BuildResult:
     if first.returncode != 0:
         return BuildResult(paper=paper, ok=False, warnings=warnings, failure=first.stdout)
 
-    if bib_files_for(paper):
+    bib_files = bib_files_for(paper)
+    if bib_files:
+        for bib_file in bib_files:
+            shutil.copy2(bib_file, output_dir / bib_file.name)
+
         bib = run_command(["bibtex", "main"], output_dir)
         warnings = merge_warnings(warnings, collect_pattern_warnings(bib.stdout, BIBTEX_WARNING_PATTERNS))
         if bib.returncode != 0:

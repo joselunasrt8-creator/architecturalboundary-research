@@ -48,6 +48,13 @@ def test_verified_valid_repository_state_is_audited(tmp_path):
     assert "Exact workflow run: `12345`" in text
     assert "NULL_NOT_AUDITED" not in text
     assert "| manuscript |" in text
+    assert "| BOR | COMPLETE |" in text
+    assert "| SRF | COMPLETE |" in text
+    assert "| DER | COMPLETE |" in text
+    assert "| MSR | NOT STARTED |" in text
+    assert "| Comparative Dataset | NOT STARTED |" in text
+    assert "| Analysis | NOT STARTED |" in text
+    assert "| Retained Classification | NOT STARTED |" in text
 
 
 def test_missing_canonical_path_returns_null_not_audited(tmp_path):
@@ -77,8 +84,45 @@ def test_stale_or_absent_evidence_objects_are_blocked(tmp_path):
     result = run_audit(repo)
     text = report(repo)
     assert result.returncode == 0
-    assert "BOR | PARTIAL" in text or "BOR | MISSING" in text
+    assert "| BOR | MISSING |" in text
     assert "BOR: object is not populated" in text
+    assert "BLOCKED" in text
+
+
+def test_missing_srf_objects_are_blocked(tmp_path):
+    repo = copy_repo(tmp_path)
+    shutil.rmtree(repo / "investigations" / "b2-governance-cohort" / "srf")
+    (repo / "investigations" / "b2-governance-cohort" / "srf").mkdir()
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "| SRF | MISSING |" in text
+    assert "SRF: object is not populated" in text
+    assert "BLOCKED" in text
+
+
+def test_missing_der_objects_are_blocked(tmp_path):
+    repo = copy_repo(tmp_path)
+    shutil.rmtree(repo / "investigations" / "b2-governance-cohort" / "der")
+    (repo / "investigations" / "b2-governance-cohort" / "der").mkdir()
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "| DER | MISSING |" in text
+    assert "DER: object is not populated" in text
+    assert "BLOCKED" in text
+
+
+def test_broken_der_lineage_is_blocked(tmp_path):
+    repo = copy_repo(tmp_path)
+    target = repo / "investigations" / "b2-governance-cohort" / "der" / "openfga.der.json"
+    text = target.read_text(encoding="utf-8")
+    target.write_text(text.replace("srf-b2-openfga", "srf-b2-missing"), encoding="utf-8")
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "| DER | PARTIAL |" in text
+    assert "DER: broken SRF lineage" in text
     assert "BLOCKED" in text
 
 

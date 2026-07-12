@@ -103,6 +103,17 @@ def der_record(**overrides) -> dict:
     return data
 
 
+def beta_der_record() -> dict:
+    data = der_record(
+        id="der-b2-synthetic-beta-boundary",
+        source_srf_ids=["srf-b2-beta"],
+        source_surface_ids=["surface-beta"],
+        source_observation_refs=["obs-beta"],
+    )
+    data["provenance"]["created_from"] = [srf_path("beta"), "protocol/protocol-v1/protocol.md"]
+    return data
+
+
 @pytest.fixture
 def synthetic_repo(tmp_path, monkeypatch):
     (tmp_path / "protocol/protocol-v1").mkdir(parents=True)
@@ -129,6 +140,10 @@ def test_valid_der_with_complete_srf_lineage_passes(synthetic_repo):
         synthetic_repo / "investigations/b2-governance-cohort/der/synthetic.der.json",
         der_record(),
     )
+    write_json(
+        synthetic_repo / "investigations/b2-governance-cohort/der/beta.der.json",
+        beta_der_record(),
+    )
     repository_validate.validate_der_contract()
 
 
@@ -141,6 +156,15 @@ def test_valid_der_can_declare_multiple_srfs_and_reference_both(synthetic_repo):
     data["provenance"]["created_from"] = [srf_path("alpha"), srf_path("beta"), "protocol/protocol-v1/protocol.md"]
     write_json(synthetic_repo / "investigations/b2-governance-cohort/der/synthetic.der.json", data)
     repository_validate.validate_der_contract()
+
+
+def test_b2_der_execution_must_cover_every_srf(synthetic_repo):
+    write_json(
+        synthetic_repo / "investigations/b2-governance-cohort/der/synthetic.der.json",
+        der_record(),
+    )
+    with pytest.raises(SystemExit, match="B2 DER execution incomplete"):
+        repository_validate.validate_der_contract()
 
 
 def test_missing_der_id_is_invalid(synthetic_repo):
@@ -253,6 +277,10 @@ def test_repository_contained_preregistration_derivation_source_is_valid(synthet
     )
     data["provenance"]["created_from"] = [srf_path("alpha"), "investigations/b2-governance-cohort/preregistration/derivation.md"]
     write_json(synthetic_repo / "investigations/b2-governance-cohort/der/synthetic.der.json", data)
+    write_json(
+        synthetic_repo / "investigations/b2-governance-cohort/der/beta.der.json",
+        beta_der_record(),
+    )
     repository_validate.validate_der_contract()
 
 

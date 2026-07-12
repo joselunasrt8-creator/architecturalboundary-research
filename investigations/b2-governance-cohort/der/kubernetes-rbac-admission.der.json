@@ -1,0 +1,44 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-kubernetes-rbac-admission-api-server-admission-boundary",
+  "source_srf_ids": [
+    "srf-b2-kubernetes-rbac-admission"
+  ],
+  "source_surface_ids": [
+    "srf-b2-kubernetes-rbac-admission-execution-entry-points-api-server-request",
+    "srf-b2-kubernetes-rbac-admission-authorization-surfaces-rbac-api",
+    "srf-b2-kubernetes-rbac-admission-authorization-surfaces-role-binding",
+    "srf-b2-kubernetes-rbac-admission-validation-surfaces-validating-admission",
+    "srf-b2-kubernetes-rbac-admission-policy-evaluation-surfaces-rbac-rules",
+    "srf-b2-kubernetes-rbac-admission-protected-resources-namespaced-or-cluster-resource",
+    "srf-b2-kubernetes-rbac-admission-execution-boundaries-admission-boundary",
+    "srf-b2-kubernetes-rbac-admission-observable-execution-flow-authorize",
+    "srf-b2-kubernetes-rbac-admission-observable-execution-flow-admit",
+    "srf-b2-kubernetes-rbac-admission-observable-execution-flow-validate-or-mutate"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-K8S-OBS-004",
+    "BOR-B2-K8S-OBS-001",
+    "BOR-B2-K8S-OBS-003",
+    "BOR-B2-K8S-OBS-005",
+    "BOR-B2-K8S-OBS-002"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared Kubernetes RBAC and admission SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed Kubernetes RBAC and admission execution surfaces, the referenced SRF supports the bounded evidence statement that documents Kubernetes API-server requests, RBAC API policy configuration through Roles, ClusterRoles, and RoleBindings, admission interception after authentication and authorization before persistence, and validating or mutating admission controllers that may reject or change requests.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/kubernetes-rbac-admission.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "DER execution artifact produced from the frozen B2 SRF to DER contract. This record contains direct derivation only and does not perform MSR, comparative dataset construction, analysis, or retained classification."
+  }
+}

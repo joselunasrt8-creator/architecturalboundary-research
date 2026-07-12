@@ -1,0 +1,42 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-google-zanzibar-relation-tuple-check-boundary",
+  "source_srf_ids": [
+    "srf-b2-google-zanzibar"
+  ],
+  "source_surface_ids": [
+    "srf-b2-google-zanzibar-execution-entry-points-check-request",
+    "srf-b2-google-zanzibar-authorization-surfaces-relation-tuples",
+    "srf-b2-google-zanzibar-authorization-surfaces-namespace-config",
+    "srf-b2-google-zanzibar-policy-evaluation-surfaces-acl-evaluation",
+    "srf-b2-google-zanzibar-protected-resources-object",
+    "srf-b2-google-zanzibar-execution-boundaries-client-service-policy-model",
+    "srf-b2-google-zanzibar-observable-execution-flow-store-model",
+    "srf-b2-google-zanzibar-observable-execution-flow-check"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-ZANZIBAR-OBS-005",
+    "BOR-B2-ZANZIBAR-OBS-003",
+    "BOR-B2-ZANZIBAR-OBS-004",
+    "BOR-B2-ZANZIBAR-OBS-001",
+    "BOR-B2-ZANZIBAR-OBS-002"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared Google Zanzibar SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed Google Zanzibar execution surfaces, the referenced SRF supports the bounded evidence statement that documents relation tuples with object, relation, and user fields, namespace configuration defining object types and relations, a uniform policy model for client-service access policies, and Check requests that evaluate whether a user has a relation to an object.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/google-zanzibar.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "DER execution artifact produced from the frozen B2 SRF to DER contract. This record contains direct derivation only and does not perform MSR, comparative dataset construction, analysis, or retained classification."
+  }
+}

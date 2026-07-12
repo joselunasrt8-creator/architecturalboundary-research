@@ -405,6 +405,7 @@ def validate_der_contract() -> None:
 
         srf_records = srf_records_for(investigation_dir)
         der_ids: set[str] = set()
+        der_source_srf_ids: set[str] = set()
         for path in der_paths:
             der_relative = str(path.relative_to(ROOT))
             data = require_json(der_relative)
@@ -439,6 +440,14 @@ def validate_der_contract() -> None:
                 allowed_derivation_source=True,
             )
             validate_der_provenance(data, selected_srf_paths, derivation_source, der_relative)
+            der_source_srf_ids.update(data["source_srf_ids"])
+
+        if investigation_dir.name == "b2-governance-cohort":
+            missing_der = sorted(set(srf_records) - der_source_srf_ids)
+            if missing_der:
+                raise SystemExit(
+                    f"B2 DER execution incomplete; missing DER source SRF id(s): {', '.join(missing_der)}"
+                )
 
 def validate_move_ledger() -> None:
     require_path("MOVES.md")

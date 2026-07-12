@@ -1,0 +1,42 @@
+{
+  "object_type": "DerivedEvidenceRecord",
+  "schema_version": "canonical-der-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "der-b2-istio-authorizationpolicy-workload-action-order-boundary",
+  "source_srf_ids": [
+    "srf-b2-istio-authorizationpolicy"
+  ],
+  "source_surface_ids": [
+    "srf-b2-istio-authorizationpolicy-execution-entry-points-workload-access",
+    "srf-b2-istio-authorizationpolicy-authorization-surfaces-authorization-policy",
+    "srf-b2-istio-authorizationpolicy-policy-evaluation-surfaces-action-order",
+    "srf-b2-istio-authorizationpolicy-policy-evaluation-surfaces-external-authorizer",
+    "srf-b2-istio-authorizationpolicy-protected-resources-mesh-workload",
+    "srf-b2-istio-authorizationpolicy-execution-boundaries-mesh-extension-provider",
+    "srf-b2-istio-authorizationpolicy-observable-execution-flow-match",
+    "srf-b2-istio-authorizationpolicy-observable-execution-flow-order"
+  ],
+  "source_observation_refs": [
+    "BOR-B2-ISTIO-AUTHPOL-OBS-001",
+    "BOR-B2-ISTIO-AUTHPOL-OBS-002",
+    "BOR-B2-ISTIO-AUTHPOL-OBS-004",
+    "BOR-B2-ISTIO-AUTHPOL-OBS-003",
+    "BOR-B2-ISTIO-AUTHPOL-OBS-005"
+  ],
+  "derivation_rule": {
+    "derivation_source_reference": "protocol/protocol-v1/protocol.md#srf-to-der-contract",
+    "description": "Apply the Protocol v1 SRF to DER contract by deriving a bounded evidence statement only from the declared Istio AuthorizationPolicy SRF surfaces and their BOR observation references."
+  },
+  "derived_claim": {
+    "claim": "Given the observed Istio AuthorizationPolicy execution surfaces, the referenced SRF supports the bounded evidence statement that documents mesh workload access controlled by AuthorizationPolicy rules and actions, rule matching over source, operation, and condition fields, the documented CUSTOM, DENY, then ALLOW evaluation order when used together, and the CUSTOM external-authorizer boundary configured as a mesh extension provider.",
+    "interpretation_boundary": "direct_derivation_only"
+  },
+  "provenance": {
+    "created_from": [
+      "investigations/b2-governance-cohort/srf/istio-authorizationpolicy.srf.json",
+      "protocol/protocol-v1/protocol.md#srf-to-der-contract"
+    ],
+    "notes": "DER execution artifact produced from the frozen B2 SRF to DER contract. This record contains direct derivation only and does not perform MSR, comparative dataset construction, analysis, or retained classification."
+  }
+}

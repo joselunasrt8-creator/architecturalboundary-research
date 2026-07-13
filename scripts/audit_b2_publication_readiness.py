@@ -217,7 +217,12 @@ def lifecycle_json_files(stage: str) -> list[Path]:
     return sorted(base.glob(f"*{suffix}")) if base.is_dir() else []
 
 
-def complete_single_json_stage(name: str, relative: str, expected_object_type: str) -> LifecycleCheck:
+def complete_single_json_stage(
+    name: str,
+    relative: str,
+    expected_object_type: str,
+    identity_field: str = "id",
+) -> LifecycleCheck:
     check = LifecycleCheck(name=name, status="MISSING")
     path = ROOT / relative
     check.findings.append(f"canonical JSON files: {1 if path.is_file() else 0}/1")
@@ -234,12 +239,12 @@ def complete_single_json_stage(name: str, relative: str, expected_object_type: s
         check.status = "PARTIAL"
         check.blockers.append(f"unexpected object_type in {relative}")
         return check
-    if not data.get("id"):
+    if not data.get(identity_field):
         check.status = "PARTIAL"
-        check.blockers.append(f"missing id in {relative}")
+        check.blockers.append(f"missing {identity_field} in {relative}")
         return check
     check.status = "COMPLETE"
-    check.findings.append("canonical IDs: 1")
+    check.findings.append(f"canonical {identity_field}s: 1")
     return check
 
 
@@ -323,6 +328,7 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
         "Cohort Conclusion",
         "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json",
         "CanonicalCohortConclusion",
+        identity_field="cohort_conclusion_id",
     )
     lifecycle = [bor, srf, der, msr, dataset, analysis, retained, cohort]
     for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():

@@ -33,8 +33,9 @@ REQUIRED_PRECONDITIONS = [
     "scripts/build_cohort_conclusion.py",
 ]
 
-COMMANDS_EXECUTED = [
+COMMANDS_EXECUTED_BEFORE_AUDIT = [
     "python3 -m pytest -q",
+    "sudo apt-get install TeX Live publication dependencies (CI)",
     "python3 scripts/validate.py",
     "python3 scripts/check_registry.py",
     "python3 scripts/build_dataset.py --check",
@@ -43,9 +44,8 @@ COMMANDS_EXECUTED = [
     "python3 scripts/build_retained_classification.py --check",
     "python3 scripts/build_cohort_conclusion.py --check",
     "python3 scripts/build_publication_manifest.py --check",
-    "python3 scripts/audit_b2_publication_readiness.py",
     "python3 scripts/build_papers.py",
-    "git diff --check",
+    "Verify publication PDF artifacts (exact expected set and non-empty files)",
 ]
 
 PLACEHOLDER_PATTERNS = re.compile(
@@ -103,7 +103,10 @@ class ObjectCheck:
 
 
 def rel(path: Path) -> str:
-    return str(path.relative_to(ROOT))
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 def read_text(path: Path) -> str:
@@ -380,7 +383,45 @@ def stale_language_findings(paths: list[Path]) -> list[str]:
                 findings.append(f"{rel(path)}:{lineno}: {line.strip()}")
     return findings
 
-def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str]) -> str:
+def expected_publication_pdfs() -> list[Path]:
+    from importlib import util
+    import sys
+
+    module_path = ROOT / "scripts" / "build_papers.py"
+    module_name = "build_papers_for_audit"
+    spec = util.spec_from_file_location(module_name, module_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("unable to load scripts/build_papers.py for publication PDF discovery")
+    module = util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return sorted(ROOT / "releases" / "papers" / f"{paper.name}.pdf" for paper in module.discover_papers())
+
+
+def verify_publication_pdfs() -> tuple[list[str], list[str]]:
+    expected = expected_publication_pdfs()
+    actual = sorted((ROOT / "releases" / "papers").glob("*.pdf"))
+    expected_set = {path.resolve() for path in expected}
+    actual_set = {path.resolve() for path in actual}
+    findings = ["expected publication PDFs:"]
+    findings.extend(f"  - `{rel(path)}`" for path in expected)
+    blockers: list[str] = []
+    for path in expected:
+        if path.resolve() not in actual_set:
+            blockers.append(f"missing expected publication PDF: {rel(path)}")
+        elif path.stat().st_size == 0:
+            blockers.append(f"empty publication PDF: {rel(path)}")
+        else:
+            findings.append(f"verified non-empty publication PDF: `{rel(path)}`")
+    for path in actual:
+        if path.resolve() not in expected_set:
+            blockers.append(f"unexpected publication PDF: {rel(path)}")
+    if not expected:
+        blockers.append("no expected publication PDFs discovered from papers/*/main.tex")
+    return findings, blockers
+
+
+def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str], pdf_blockers: list[str]) -> str:
     if precondition_failures:
         return "NULL_NOT_AUDITED"
     if duplicate_labels:
@@ -389,9 +430,11 @@ def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck],
         return "BLOCKED"
     if any(check.blockers for check in lifecycle_checks):
         return "BLOCKED"
-    if all(check.classification == "COMPLETE" for check in checks):
-        return "READY"
-    return "BLOCKED"
+    if not all(check.classification == "COMPLETE" for check in checks):
+        return "BLOCKED"
+    if pdf_blockers:
+        return "SOURCE_READY"
+    return "READY"
 
 
 def ci_branch() -> str:
@@ -413,7 +456,7 @@ def default_commit() -> str:
     return os.environ.get("GITHUB_SHA") or command_output(["git", "rev-parse", "HEAD"])[1] or "LOCAL_UNVERIFIED"
 
 
-def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str], archived_stale: list[str], final: str) -> str:
+def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str], archived_stale: list[str], pdf_findings: list[str], pdf_blockers: list[str], final: str) -> str:
     branch = ci_branch()
     workflow_run_url = ci_workflow_run_url(repository, workflow_run)
     lines = [
@@ -429,7 +472,7 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
         "",
         "## Commands Executed Before Audit",
     ]
-    lines.extend(f"- `{command}`" for command in COMMANDS_EXECUTED)
+    lines.extend(f"- `{command}`" for command in COMMANDS_EXECUTED_BEFORE_AUDIT)
     lines.extend(["", "## Lifecycle Status", "", "| Stage | Status |", "| --- | --- |"])
     for check in lifecycle_checks:
         lines.append(f"| {check.name} | {check.status} |")
@@ -458,6 +501,8 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
         lines.append("- Active stale publication-state language check passed.")
     if archived_stale:
         lines.append(f"- Archived-only stale-language findings ignored for readiness: {len(archived_stale)}.")
+    lines.append("- Publication PDF verification:")
+    lines.extend(pdf_findings if pdf_findings else ["  - Not evaluated because canonical preconditions failed."])
     for check in lifecycle_checks:
         lines.append(f"- {check.name}: {', '.join(check.findings)}")
     for check in checks:
@@ -470,12 +515,15 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
     if duplicate_labels:
         blockers.extend(f"Duplicate LaTeX label: {label}" for label in duplicate_labels)
     blockers.extend(f"Active stale publication-state language: {finding}" for finding in active_stale)
+    blockers.extend(pdf_blockers)
     lines.extend(f"- {blocker}" for blocker in blockers) if blockers else lines.append("- None.")
     lines.extend(["", "## Ordered Closure Sequence"])
     if final == "NULL_NOT_AUDITED":
         lines.extend(["1. Restore all canonical precondition paths on `main`.", "2. Re-run this workflow from GitHub Actions against `main`."])
     elif final == "BLOCKED":
         lines.extend(["1. Close precondition and duplicate-label blockers.", "2. Replace placeholder-only objects with populated, traceable research objects.", "3. Ensure registration freeze evidence is explicit.", "4. Re-run validators and this audit workflow."])
+    elif final == "SOURCE_READY":
+        lines.extend(["1. Build publication PDFs in CI with TeX dependencies installed.", "2. Verify the exact expected PDF set and non-empty file sizes.", "3. Re-run this audit after PDF verification completes."])
     else:
         lines.append("1. Preserve the audited commit and publish the report artifact with release materials.")
     lines.extend(["", "## Final Determination", "", final, ""])
@@ -505,6 +553,7 @@ def main() -> int:
     parser.add_argument("--repository", default=default_repository())
     parser.add_argument("--commit", default=default_commit())
     parser.add_argument("--output", default=str(REPORT_DEFAULT))
+    parser.add_argument("--verify-pdfs", action="store_true", help="require exact generated publication PDFs before READY")
     args = parser.parse_args()
 
     output = Path(args.output)
@@ -520,12 +569,19 @@ def main() -> int:
     duplicates = {} if precondition_failures else duplicate_latex_labels()
     active_stale = [] if precondition_failures else stale_language_findings(ACTIVE_STALE_SCAN_ROOTS)
     archived_stale = [] if precondition_failures else stale_language_findings(ARCHIVED_STALE_SCAN_ROOTS)
-    final = determine(checks, lifecycle_checks, precondition_failures, duplicates, active_stale)
-    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, lifecycle_checks, checks, precondition_failures, duplicates, active_stale, archived_stale, final)
+    pdf_findings, pdf_blockers = ([], []) if precondition_failures else verify_publication_pdfs()
+    if not args.verify_pdfs and pdf_blockers:
+        pdf_findings.append("local/source audit mode: PDF blockers prevent READY but are reported as SOURCE_READY rather than fatal")
+    final = determine(checks, lifecycle_checks, precondition_failures, duplicates, active_stale, pdf_blockers)
+    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, lifecycle_checks, checks, precondition_failures, duplicates, active_stale, archived_stale, pdf_findings, pdf_blockers, final)
     output.write_text(report, encoding="utf-8")
     print(f"B2 audit report written to {rel(output)}")
     print(f"final determination: {final}")
-    return 1 if final == "NULL_NOT_AUDITED" else 0
+    if final == "NULL_NOT_AUDITED":
+        return 1
+    if args.verify_pdfs and final != "READY":
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

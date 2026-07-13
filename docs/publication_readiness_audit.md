@@ -1,91 +1,35 @@
-# B2 Publication-Readiness Audit
+# B2 Publication-Readiness Audit Contract
 
-## Audited Object
-- Repository: `joselunasrt8-creator/architecturalboundary-research`
-- Branch: `work`
-- Exact audited commit: `27d6e82d7f00620b22f39cd64cdf28f8d488dbf2`
-- Exact workflow run: `LOCAL_UNVERIFIED`
-- Exact workflow run URL: `LOCAL_UNVERIFIED`
-- Audit timestamp: `2026-07-13T05:49:25.311110+00:00`
+This document is stable explanatory documentation. It is not a generated readiness result and must not be treated as canonical release evidence.
 
-## Commands Executed Before Audit
-- `python3 -m pytest -q`
-- `python3 scripts/validate.py`
-- `python3 scripts/check_registry.py`
-- `python3 scripts/build_dataset.py --check`
-- `python3 scripts/build_analysis.py --check`
-- `python3 scripts/build_report.py`
-- `python3 scripts/build_retained_classification.py --check`
-- `python3 scripts/build_cohort_conclusion.py --check`
-- `python3 scripts/build_publication_manifest.py --check`
-- `python3 scripts/audit_b2_publication_readiness.py`
-- `python3 scripts/build_papers.py`
-- `git diff --check`
+## Canonical artifact
 
-## Lifecycle Status
+The canonical B2 publication-readiness determination is generated in CI at:
 
-| Stage | Status |
-| --- | --- |
-| BOR | COMPLETE |
-| SRF | COMPLETE |
-| DER | COMPLETE |
-| Canonical MSR | COMPLETE |
-| Comparative Dataset | COMPLETE |
-| Analysis | COMPLETE |
-| Retained Classification | COMPLETE |
-| Cohort Conclusion | COMPLETE |
+```text
+reports/b2-publication-readiness.md
+```
 
-## Artifact Matrix
+The CI workflow uploads that generated report as the workflow artifact named:
 
-| Artifact | Classification | Path exists | Placeholder exists | Research object exists | Populated | Frozen | Traceable |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| I1-I5 registration | COMPLETE | True | False | True | True | True | True |
-| registration freeze | COMPLETE | True | False | True | True | True | True |
-| BOR | COMPLETE | True | False | True | True | False | True |
-| SRF / ESM | COMPLETE | True | False | True | True | False | True |
-| DER | COMPLETE | True | False | True | True | True | True |
-| MSR | COMPLETE | True | False | True | True | False | True |
-| Comparative Dataset | COMPLETE | True | False | True | True | False | True |
-| Analysis | COMPLETE | True | False | True | True | True | True |
-| Retained Classification | COMPLETE | True | False | True | True | True | True |
-| Cohort Conclusion | COMPLETE | True | False | True | True | True | True |
-| Threats to Validity | COMPLETE | True | False | True | True | False | True |
-| manuscript | COMPLETE | True | False | True | True | True | True |
-| publication artifacts | COMPLETE | True | False | True | True | True | True |
+```text
+b2-publication-readiness-audit
+```
 
-## Verification Findings
-- Canonical path preconditions passed.
-- Duplicate LaTeX label check passed.
-- Active stale publication-state language check passed.
-- Archived-only stale-language findings ignored for readiness: 7.
-- BOR: canonical JSON files: 9/9, canonical IDs: 9
-- SRF: canonical JSON files: 9/9, canonical IDs: 9
-- DER: canonical JSON files: 9/9, canonical IDs: 9
-- Canonical MSR: canonical JSON files: 9/9, canonical IDs: 9
-- Comparative Dataset: canonical JSON files: 1/1, canonical ids: 1
-- Analysis: canonical JSON files: 1/1, canonical ids: 1
-- Retained Classification: canonical JSON files: 1/1, canonical ids: 1
-- Cohort Conclusion: canonical JSON files: 1/1, canonical cohort_conclusion_ids: 1
-- I1-I5 registration: files inspected: 2, substantive files: 2
-- registration freeze: files inspected: 1, substantive files: 1
-- BOR: files inspected: 11, substantive files: 10
-- SRF / ESM: files inspected: 11, substantive files: 10
-- DER: files inspected: 11, substantive files: 11
-- MSR: files inspected: 11, substantive files: 11
-- Comparative Dataset: files inspected: 2, substantive files: 1
-- Analysis: files inspected: 3, substantive files: 3
-- Retained Classification: files inspected: 2, substantive files: 2
-- Cohort Conclusion: files inspected: 3, substantive files: 3
-- Threats to Validity: files inspected: 1, substantive files: 1
-- manuscript: files inspected: 1, substantive files: 1
-- publication artifacts: files inspected: 5, substantive files: 2
+## Required canonical identity fields
 
-## Exact Blockers
-- None.
+Canonical audit evidence must include all of the following fields from the CI execution that generated the report:
 
-## Ordered Closure Sequence
-1. Preserve the audited commit and publish the report artifact with release materials.
+- repository
+- branch
+- exact commit SHA
+- workflow run ID
+- workflow run URL
+- timestamp
+- final determination
 
-## Final Determination
+Local executions may be useful for source-state diagnosis, but local reports are non-canonical and may use `LOCAL_UNVERIFIED` identity markers. Those markers must not appear in committed canonical documentation or in a CI-generated canonical audit artifact.
 
-READY
+## READY boundary
+
+The final CI audit may emit `READY` only after publication rendering has succeeded and the exact expected PDF set has been verified as present and non-empty. If source checks pass but rendered PDFs are absent or invalid, the audit reports source readiness without claiming final rendered-publication readiness.

@@ -175,6 +175,7 @@ def test_active_manuscript_stale_state_language_blocks_readiness(tmp_path):
 
 def test_archived_stale_language_does_not_block_readiness(tmp_path):
     repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo)
     archived = repo / "investigations" / "b2-governance-cohort" / "artifacts" / "archived-note.md"
     archived.parent.mkdir(parents=True, exist_ok=True)
     archived.write_text("TODO archived historical note only.\n", encoding="utf-8")
@@ -184,3 +185,155 @@ def test_archived_stale_language_does_not_block_readiness(tmp_path):
     assert "final determination: READY" in result.stdout
     assert "Archived-only stale-language findings ignored" in text
     assert "Active stale publication-state language:" not in text
+
+
+def write_expected_pdfs(repo: Path, *, empty: str | None = None, extra: bool = False, missing: str | None = None):
+    release = repo / "releases" / "papers"
+    release.mkdir(parents=True, exist_ok=True)
+    for pdf in release.glob("*.pdf"):
+        pdf.unlink()
+    for name in ["paper-0-protocol.pdf", "paper-b2.pdf"]:
+        if name == missing:
+            continue
+        (release / name).write_bytes(b"" if name == empty else b"%PDF-1.4\nnon-empty\n")
+    if extra:
+        (release / "unexpected.pdf").write_bytes(b"%PDF-1.4\nextra\n")
+
+
+def test_ci_generated_audit_records_github_identity(tmp_path):
+    repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo)
+    env = os.environ.copy()
+    env.update({
+        "GITHUB_REPOSITORY": "owner/repo",
+        "GITHUB_SHA": "deadbeef",
+        "GITHUB_RUN_ID": "98765",
+        "GITHUB_REF_NAME": "feature/pr-34",
+        "GITHUB_SERVER_URL": "https://github.example.test",
+    })
+    result = subprocess.run(
+        ["python3", "scripts/audit_b2_publication_readiness.py", "--output", "reports/b2-publication-readiness.md", "--verify-pdfs"],
+        cwd=repo,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=env,
+    )
+    text = report(repo)
+    assert result.returncode == 0
+    assert "Repository: `owner/repo`" in text
+    assert "Branch: `feature/pr-34`" in text
+    assert "Exact audited commit: `deadbeef`" in text
+    assert "Exact workflow run: `98765`" in text
+    assert "Exact workflow run URL: `https://github.example.test/owner/repo/actions/runs/98765`" in text
+    assert "LOCAL_UNVERIFIED" not in text
+    assert "READY" in text
+
+
+def test_missing_expected_pdf_fails_final_ready(tmp_path):
+    repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo, missing="paper-b2.pdf")
+    result = subprocess.run(
+        ["python3", "scripts/audit_b2_publication_readiness.py", "--repository", "owner/repo", "--commit", "abc", "--output", "reports/b2-publication-readiness.md", "--verify-pdfs"],
+        cwd=repo,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env={**os.environ, "GITHUB_RUN_ID": "12345", "GITHUB_REF_NAME": "main"},
+    )
+    text = report(repo)
+    assert result.returncode == 1
+    assert "missing expected publication PDF: releases/papers/paper-b2.pdf" in text
+    assert "SOURCE_READY" in text
+    assert "\nREADY\n" not in text
+
+
+def test_empty_expected_pdf_fails_final_ready(tmp_path):
+    repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo, empty="paper-b2.pdf")
+    result = subprocess.run(
+        ["python3", "scripts/audit_b2_publication_readiness.py", "--repository", "owner/repo", "--commit", "abc", "--output", "reports/b2-publication-readiness.md", "--verify-pdfs"],
+        cwd=repo,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env={**os.environ, "GITHUB_RUN_ID": "12345", "GITHUB_REF_NAME": "main"},
+    )
+    text = report(repo)
+    assert result.returncode == 1
+    assert "empty publication PDF: releases/papers/paper-b2.pdf" in text
+    assert "SOURCE_READY" in text
+
+
+def test_unexpected_pdf_fails_final_ready(tmp_path):
+    repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo, extra=True)
+    result = subprocess.run(
+        ["python3", "scripts/audit_b2_publication_readiness.py", "--repository", "owner/repo", "--commit", "abc", "--output", "reports/b2-publication-readiness.md", "--verify-pdfs"],
+        cwd=repo,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env={**os.environ, "GITHUB_RUN_ID": "12345", "GITHUB_REF_NAME": "main"},
+    )
+    text = report(repo)
+    assert result.returncode == 1
+    assert "unexpected publication PDF: releases/papers/unexpected.pdf" in text
+    assert "SOURCE_READY" in text
+
+
+def test_local_missing_pdfs_do_not_produce_false_ready(tmp_path):
+    repo = copy_repo(tmp_path)
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "SOURCE_READY" in text
+    assert "missing expected publication PDF" in text
+    assert "final determination: SOURCE_READY" in result.stdout
+
+
+def test_successful_ci_rendering_permits_ready(tmp_path):
+    repo = copy_repo(tmp_path)
+    write_expected_pdfs(repo)
+    result = subprocess.run(
+        ["python3", "scripts/audit_b2_publication_readiness.py", "--repository", "owner/repo", "--commit", "abc", "--output", "reports/b2-publication-readiness.md", "--verify-pdfs"],
+        cwd=repo,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env={**os.environ, "GITHUB_RUN_ID": "12345", "GITHUB_REF_NAME": "main"},
+    )
+    text = report(repo)
+    assert result.returncode == 0
+    assert "verified non-empty publication PDF: `releases/papers/paper-0-protocol.pdf`" in text
+    assert "verified non-empty publication PDF: `releases/papers/paper-b2.pdf`" in text
+    assert "final determination: READY" in result.stdout
+
+
+def test_committed_documentation_has_no_stale_local_identity():
+    text = (ROOT / "docs" / "publication_readiness_audit.md").read_text(encoding="utf-8")
+    assert "Branch: `work`" not in text
+    assert "27d6e82" not in text
+    assert "Audit timestamp:" not in text
+    assert "Exact workflow run: `LOCAL_UNVERIFIED`" not in text
+    assert "b2-publication-readiness-audit" in text
+    assert "reports/b2-publication-readiness.md" in text
+
+
+def test_validate_workflow_runs_audit_after_pdf_build_and_verification():
+    text = (ROOT / ".github" / "workflows" / "validate.yml").read_text(encoding="utf-8")
+    build = text.index("name: Build publication PDFs")
+    verify = text.index("name: Verify publication PDF artifacts")
+    audit_step = text.index("name: Run CI-bound B2 publication-readiness audit")
+    upload_pdf = text.index("name: Upload publication PDFs")
+    assert build < verify < audit_step < upload_pdf
+    pre_audit = text[:audit_step]
+    assert "python3 scripts/build_papers.py" in pre_audit
+    assert "find releases/papers" in pre_audit
+
+
+def test_audit_command_list_contains_only_pre_audit_commands():
+    assert "python3 scripts/build_papers.py" in audit.COMMANDS_EXECUTED_BEFORE_AUDIT
+    assert "git diff --check" not in audit.COMMANDS_EXECUTED_BEFORE_AUDIT
+    assert "python3 scripts/audit_b2_publication_readiness.py --verify-pdfs" not in audit.COMMANDS_EXECUTED_BEFORE_AUDIT
+    assert audit.COMMANDS_EXECUTED_BEFORE_AUDIT.index("python3 scripts/build_papers.py") < audit.COMMANDS_EXECUTED_BEFORE_AUDIT.index("Verify publication PDF artifacts (exact expected set and non-empty files)")

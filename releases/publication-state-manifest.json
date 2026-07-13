@@ -38,8 +38,8 @@
       },
       {
         "path": ".github/workflows/validate.yml",
-        "sha256": "9c7626e1258c33f9349e7f16f85512e8c2bc401549753052284c2644be7226cc",
-        "size_bytes": 3075
+        "sha256": "343c051bba7a031c6e0b07fd97cecc1aee077c28f9f897289c3cffd75e0aee9f",
+        "size_bytes": 4167
       }
     ],
     "dependency_contracts": [
@@ -225,8 +225,8 @@
       },
       {
         "path": "docs/publication.md",
-        "sha256": "38996ecfc177f43d7645f2164d4aa3fe8758c6b77447d720e13dcaadc98c5cfe",
-        "size_bytes": 4500
+        "sha256": "11cbbe284e39b70d3c57b1dfcf1e9f89a975a0d245f5e9dc4d204f0f6d65496b",
+        "size_bytes": 5030
       },
       {
         "path": "docs/research_pipeline.md",

@@ -47,31 +47,53 @@ jobs:
         run: python3 scripts/build_cohort_conclusion.py --check
       - name: Check publication-state manifest
         run: python3 scripts/build_publication_manifest.py --check
+      - name: Build publication PDFs
+        run: python3 scripts/build_papers.py
+      - name: Verify publication PDF artifacts
+        run: |
+          set -euo pipefail
+          mapfile -t expected < <(python3 - <<'PY'
+          import importlib.util
+          import sys
+          from pathlib import Path
+          root = Path.cwd()
+          spec = importlib.util.spec_from_file_location("build_papers", root / "scripts" / "build_papers.py")
+          module = importlib.util.module_from_spec(spec)
+          sys.modules["build_papers"] = module
+          spec.loader.exec_module(module)
+          for paper in module.discover_papers():
+              print(f"releases/papers/{paper.name}.pdf")
+          PY
+          )
+          mapfile -t actual < <(find releases/papers -maxdepth 1 -type f -name '*.pdf' -print | sort)
+          if [ "${#expected[@]}" -eq 0 ]; then
+            echo "no expected publication PDFs discovered" >&2
+            exit 1
+          fi
+          if [ "${#actual[@]}" -ne "${#expected[@]}" ]; then
+            printf 'expected PDFs:\n%s\n' "${expected[@]}" >&2
+            printf 'actual PDFs:\n%s\n' "${actual[@]}" >&2
+            exit 1
+          fi
+          for i in "${!expected[@]}"; do
+            if [ "${actual[$i]}" != "${expected[$i]}" ]; then
+              echo "publication PDF set mismatch at index $i: expected ${expected[$i]}, got ${actual[$i]}" >&2
+              exit 1
+            fi
+            if [ ! -s "${expected[$i]}" ]; then
+              echo "empty publication PDF: ${expected[$i]}" >&2
+              exit 1
+            fi
+            echo "verified non-empty publication PDF: ${expected[$i]}"
+          done
       - name: Run CI-bound B2 publication-readiness audit
         run: |
           mkdir -p reports
           python3 scripts/audit_b2_publication_readiness.py \
             --repository "$GITHUB_REPOSITORY" \
             --commit "$GITHUB_SHA" \
-            --output reports/b2-publication-readiness.md
-      - name: Build publication PDFs
-        run: python3 scripts/build_papers.py
-      - name: Verify publication PDF artifacts
-        run: |
-          set -euo pipefail
-          shopt -s nullglob
-          pdfs=(releases/papers/*.pdf)
-          if [ "${#pdfs[@]}" -eq 0 ]; then
-            echo "no publication PDFs produced" >&2
-            exit 1
-          fi
-          for pdf in "${pdfs[@]}"; do
-            if [ ! -s "$pdf" ]; then
-              echo "empty publication PDF: $pdf" >&2
-              exit 1
-            fi
-            echo "verified non-empty publication PDF: $pdf"
-          done
+            --output reports/b2-publication-readiness.md \
+            --verify-pdfs
       - name: Upload publication PDFs
         uses: actions/upload-artifact@v4
         with:

@@ -18,4 +18,6 @@ Comparative Dataset
 Analysis
   ↓
 Retained Classification
+  ↓
+Canonical Cohort Conclusion
 ```

@@ -8,7 +8,7 @@ This section records the retained classification artifact produced for the inves
 \end{itemize}
 
 \subsection{Execution rule}
-The retained-classification artifact is generated only from the canonical B2 Analysis artifact and the frozen preregistered I5 deterministic decision rule. The transformation preserves missing I4 measurements as \emph{Indeterminate} per-system outcomes and does not issue the B2 cohort conclusion.
+The retained-classification artifact is generated only from the canonical B2 Analysis artifact and the frozen preregistered I5 deterministic decision rule. The transformation preserves missing I4 measurements as \emph{Indeterminate} per-system outcomes; the separate cohort-conclusion artifact applies the registered cohort rule to this retained-classification source.
 
 \subsection{Per-system retained classification (Protocol v1.0)}
 \begin{center}
@@ -38,4 +38,4 @@ B2-BND-001 & OpenFGA & Indeterminate & \texttt{m\_L}, \texttt{m\_E}, \texttt{m\_
 \end{center}
 
 \subsection{Cohort-conclusion boundary}
-The artifact records retained classifications and the I5 cohort classification field required by the retained-classification stage, but this manuscript section does not issue the B2 cohort conclusion. The conclusion stage remains deferred.
+The artifact records retained classifications and the I5 cohort classification field required by the retained-classification stage. The B2 cohort conclusion is issued by the separate canonical artifact at \texttt{investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json}.

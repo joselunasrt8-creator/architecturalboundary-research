@@ -14,6 +14,7 @@ REQUIRED = {
     "classifications.json": "classifications",
     "protocol_versions.json": "protocol_versions",
     "retained_classifications.json": "retained_classifications",
+    "cohort_conclusions.json": "cohort_conclusions",
     "candidate_invariants.json": "candidate_invariants",
 }
 

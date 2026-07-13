@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/architecturalboundary/cohort_conclusion.schema.json",
+  "title": "Canonical B2 Cohort Conclusion Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "object_type", "schema_version", "protocol_version", "investigation_id", "cohort_conclusion_id",
+    "source_retained_classification_ids", "source_retained_classification_refs", "cohort_size",
+    "protocol_decision_rule_ref", "deterministic_conclusion", "lineage", "provenance", "generation"
+  ],
+  "properties": {
+    "object_type": {"const": "CanonicalCohortConclusion"},
+    "schema_version": {"const": "canonical-cohort-conclusion-v1"},
+    "protocol_version": {"const": "protocol-v1"},
+    "investigation_id": {"const": "b2-governance-cohort"},
+    "cohort_conclusion_id": {"const": "cohort-conclusion-b2-governance-cohort-i5"},
+    "source_retained_classification_ids": {"type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true, "items": {"const": "retained-classification-b2-governance-cohort-i5"}},
+    "source_retained_classification_refs": {"type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true, "items": {"const": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json"}},
+    "cohort_size": {"const": 9},
+    "protocol_decision_rule_ref": {"const": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5/cohort_outcome"},
+    "deterministic_conclusion": {"type": "object", "additionalProperties": false, "required": ["outcome", "precedence", "basis_retained_classification_ids", "basis_system_ids"], "properties": {"outcome": {"enum": ["supports", "violates", "indeterminate"]}, "precedence": {"type": "array", "items": {"enum": ["indeterminate", "violates", "supports"]}, "minItems": 3, "maxItems": 3}, "basis_retained_classification_ids": {"type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true, "items": {"const": "retained-classification-b2-governance-cohort-i5"}}, "basis_system_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}}},
+    "lineage": {"type": "object", "additionalProperties": false, "required": ["retained_classification_path", "analysis_path", "dataset_path", "registration_path", "msr_paths", "der_paths", "srf_paths", "bor_paths"], "properties": {"retained_classification_path": {"const": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json"}, "analysis_path": {"type": "string"}, "dataset_path": {"type": "string"}, "registration_path": {"type": "string"}, "msr_paths": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}, "der_paths": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}, "srf_paths": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}, "bor_paths": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}}},
+    "provenance": {"type": "object", "additionalProperties": false, "required": ["method", "created_from"], "properties": {"method": {"const": "CanonicalRetainedClassification -> frozen I5 deterministic cohort conclusion"}, "created_from": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}}},
+    "generation": {"type": "object", "additionalProperties": false, "required": ["builder", "mode", "repository_root"], "properties": {"builder": {"const": "scripts/build_cohort_conclusion.py"}, "mode": {"const": "deterministic-rebuild"}, "repository_root": {"const": "."}}}
+  }
+}

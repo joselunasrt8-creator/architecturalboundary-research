@@ -30,6 +30,7 @@ REQUIRED_PRECONDITIONS = [
     "scripts/build_dataset.py",
     "scripts/build_analysis.py",
     "scripts/build_report.py",
+    "scripts/build_cohort_conclusion.py",
 ]
 
 COMMANDS_EXECUTED = [
@@ -38,6 +39,7 @@ COMMANDS_EXECUTED = [
     "python3 scripts/build_dataset.py",
     "python3 scripts/build_analysis.py",
     "python3 scripts/build_report.py",
+    "python3 scripts/build_cohort_conclusion.py --check",
     "git diff --check",
 ]
 
@@ -58,9 +60,7 @@ EXPECTED_B2_OBJECTS = {
     "open-policy-agent-gatekeeper": "Open Policy Agent Gatekeeper",
     "openfga": "OpenFGA",
 }
-NOT_STARTED_LIFECYCLE_STAGES = {
-    "Retained Classification": "registry/retained_classifications.json",
-}
+NOT_STARTED_LIFECYCLE_STAGES = {}
 
 
 @dataclass
@@ -217,7 +217,12 @@ def lifecycle_json_files(stage: str) -> list[Path]:
     return sorted(base.glob(f"*{suffix}")) if base.is_dir() else []
 
 
-def complete_single_json_stage(name: str, relative: str, expected_object_type: str) -> LifecycleCheck:
+def complete_single_json_stage(
+    name: str,
+    relative: str,
+    expected_object_type: str,
+    identity_field: str = "id",
+) -> LifecycleCheck:
     check = LifecycleCheck(name=name, status="MISSING")
     path = ROOT / relative
     check.findings.append(f"canonical JSON files: {1 if path.is_file() else 0}/1")
@@ -234,12 +239,12 @@ def complete_single_json_stage(name: str, relative: str, expected_object_type: s
         check.status = "PARTIAL"
         check.blockers.append(f"unexpected object_type in {relative}")
         return check
-    if not data.get("id"):
+    if not data.get(identity_field):
         check.status = "PARTIAL"
-        check.blockers.append(f"missing id in {relative}")
+        check.blockers.append(f"missing {identity_field} in {relative}")
         return check
     check.status = "COMPLETE"
-    check.findings.append("canonical IDs: 1")
+    check.findings.append(f"canonical {identity_field}s: 1")
     return check
 
 
@@ -314,7 +319,18 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
         "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
         "CanonicalAnalysis",
     )
-    lifecycle = [bor, srf, der, msr, dataset, analysis]
+    retained = complete_single_json_stage(
+        "Retained Classification",
+        "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json",
+        "CanonicalRetainedClassification",
+    )
+    cohort = complete_single_json_stage(
+        "Cohort Conclusion",
+        "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json",
+        "CanonicalCohortConclusion",
+        identity_field="cohort_conclusion_id",
+    )
+    lifecycle = [bor, srf, der, msr, dataset, analysis, retained, cohort]
     for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():
         path = ROOT / relative
         files = object_files([relative]) if path.exists() else []
@@ -410,6 +426,7 @@ def build_checks() -> list[ObjectCheck]:
         inspect_object("Comparative Dataset", ["datasets/comparative", "papers/paper-b2/b2_11_comparative_dataset.tex"]),
         inspect_object("Analysis", ["investigations/b2-governance-cohort/analysis", "papers/paper-b2/b2_12_analysis.tex"]),
         inspect_object("Retained Classification", ["registry/retained_classifications.json", "papers/paper-b2/b2_14_retained_classification.tex"]),
+        inspect_object("Cohort Conclusion", ["registry/cohort_conclusions.json", "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json", "papers/paper-b2/b2_16_conclusion.tex"]),
         inspect_object("Threats to Validity", ["papers/paper-b2/b2_13_threats_to_validity.tex"]),
         inspect_object("manuscript", ["papers/paper-b2/main.tex"]),
         inspect_object("publication artifacts", ["datasets/canonical", "datasets/exports", "releases"]),

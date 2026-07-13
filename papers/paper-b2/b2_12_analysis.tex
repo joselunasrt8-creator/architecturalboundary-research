@@ -2,14 +2,14 @@
 \label{sec:analysis}
 The B2 Analysis stage is complete as a deterministic transformation of the canonical Comparative Dataset into the repository's canonical analysis artifact. The analysis artifact is \texttt{investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json}. It consumes only \texttt{investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json}, verifies the dataset identity and row contract before analysis, and reports registered I4 measurement distributions plus a trace-preserving per-system measurement matrix.
 
-\textbf{Boundary of this stage.} This section does not perform I5 retained classification and does not issue the B2 cohort conclusion. Those outputs remain deferred. The completed analysis preserves the frozen BOR, SRF, DER, MSR, and Comparative Dataset artifacts and introduces no new measurements, explanatory variables, thresholds, or decision rules.
+\textbf{Boundary of this stage.} This section does not perform I5 retained classification and does not issue the B2 cohort conclusion; those outputs are produced by later canonical lifecycle artifacts. The completed analysis preserves the frozen BOR, SRF, DER, MSR, and Comparative Dataset artifacts and introduces no new measurements, explanatory variables, thresholds, or decision rules.
 
 \subsection{Inputs and notation}
 \begin{itemize}
   \item \textbf{Canonical input:} \texttt{b2-governance-cohort-i4.dataset.json} (Section~\ref{sec:comparative-dataset}).
   \item \textbf{Registered measurements:} $m_R$, $m_L$, $m_E$, $m_{RL}$, and $m_{LE}$ from I4.
   \item \textbf{Canonical output:} \texttt{b2-governance-cohort-i4.analysis.json}.
-  \item \textbf{Deferred outputs:} retained classifications and cohort conclusion.
+  \item \textbf{Downstream outputs:} retained classifications and cohort conclusion.
 \end{itemize}
 
 \subsection{Dataset verification}
@@ -35,7 +35,7 @@ $m_{LE}$ & 7 & 0 & 2 \\
 The analysis artifact also carries a per-system measurement matrix with the original MSR identifiers and lineage from the Comparative Dataset. This matrix is a trace-preserving restatement of dataset values for analysis consumption; it is not an I5 retained-classification table.
 
 \subsection{Retained-classification boundary}
-The registered I5 decision rule remains available in the preregistration, but this Analysis stage does not apply it to produce retained classifications. Any future retained-classification artifact must be produced as a separate lifecycle stage from the completed analysis artifact and must preserve traceability back through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR.
+The registered I5 decision rule remains available in the preregistration, but this Analysis stage does not apply it to produce retained classifications. The retained-classification artifact is produced as a separate lifecycle stage from the completed analysis artifact and preserves traceability back through Comparative Dataset $\rightarrow$ MSR $\rightarrow$ DER $\rightarrow$ SRF $\rightarrow$ BOR.
 
 \subsection{Cohort conclusion boundary}
-No cohort-level conclusion about the candidate RLE boundary is issued here. Cohort conclusion remains blocked until the retained-classification stage is complete and explicitly reconciled with the registered cohort rule.
+No cohort-level conclusion about the candidate RLE boundary is issued here. The cohort conclusion is issued only by the canonical cohort-conclusion artifact after the retained-classification stage.

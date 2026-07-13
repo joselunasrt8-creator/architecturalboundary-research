@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/architecturalboundary/analysis.schema.json",
+  "title": "Canonical B2 Analysis Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "object_type",
+    "schema_version",
+    "protocol_version",
+    "investigation_id",
+    "id",
+    "analysis_stage",
+    "input_dataset_ref",
+    "measurement_vector_ref",
+    "cohort_size",
+    "row_ordering",
+    "measurement_fields",
+    "dataset_verification",
+    "measurement_distributions",
+    "system_measurement_matrix",
+    "deferred_outputs",
+    "provenance",
+    "generation"
+  ],
+  "properties": {
+    "object_type": {"const": "CanonicalAnalysis"},
+    "schema_version": {"const": "canonical-analysis-v1"},
+    "protocol_version": {"const": "protocol-v1"},
+    "investigation_id": {"const": "b2-governance-cohort"},
+    "id": {"type": "string", "minLength": 1},
+    "analysis_stage": {"const": "B2 Analysis"},
+    "input_dataset_ref": {"type": "string", "minLength": 1},
+    "measurement_vector_ref": {"type": "string", "minLength": 1},
+    "cohort_size": {"type": "integer", "const": 9},
+    "row_ordering": {"const": "system_id ascending"},
+    "measurement_fields": {"type": "array", "items": {"enum": ["m_R", "m_L", "m_E", "m_RL", "m_LE"]}, "minItems": 5, "maxItems": 5, "uniqueItems": true},
+    "dataset_verification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["object_type", "schema_version", "cohort_size_matches_rows", "row_ordering_verified", "source_msr_ids_match_rows", "only_registered_measurement_fields"],
+      "properties": {
+        "object_type": {"const": "ComparativeDataset"},
+        "schema_version": {"const": "canonical-dataset-v1"},
+        "cohort_size_matches_rows": {"const": true},
+        "row_ordering_verified": {"const": true},
+        "source_msr_ids_match_rows": {"const": true},
+        "only_registered_measurement_fields": {"const": true}
+      }
+    },
+    "measurement_distributions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["m_R", "m_L", "m_E", "m_RL", "m_LE"],
+      "properties": {
+        "m_R": {"$ref": "#/$defs/distribution"},
+        "m_L": {"$ref": "#/$defs/distribution"},
+        "m_E": {"$ref": "#/$defs/distribution"},
+        "m_RL": {"$ref": "#/$defs/distribution"},
+        "m_LE": {"$ref": "#/$defs/distribution"}
+      }
+    },
+    "system_measurement_matrix": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"$ref": "#/$defs/systemRow"}},
+    "deferred_outputs": {"type": "array", "items": {"enum": ["retained_classification", "cohort_conclusion"]}, "minItems": 2, "maxItems": 2, "uniqueItems": true},
+    "provenance": {"type": "object", "additionalProperties": false, "required": ["method", "created_from"], "properties": {"method": {"const": "ComparativeDataset -> deterministic measurement distribution analysis"}, "created_from": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}}},
+    "generation": {"type": "object", "additionalProperties": false, "required": ["builder", "mode", "repository_root"], "properties": {"builder": {"const": "scripts/build_analysis.py"}, "mode": {"const": "deterministic-rebuild"}, "repository_root": {"const": "."}}}
+  },
+  "$defs": {
+    "distribution": {"type": "object", "additionalProperties": false, "required": ["observed_1", "observed_0", "missing"], "properties": {"observed_1": {"type": "integer", "minimum": 0}, "observed_0": {"type": "integer", "minimum": 0}, "missing": {"type": "integer", "minimum": 0}}},
+    "systemRow": {"type": "object", "additionalProperties": false, "required": ["system_id", "msr_id", "measurements", "lineage"], "properties": {"system_id": {"type": "string", "minLength": 1}, "msr_id": {"type": "string", "minLength": 1}, "measurements": {"type": "object", "additionalProperties": false, "required": ["m_R", "m_L", "m_E", "m_RL", "m_LE"], "properties": {"m_R": {"type": ["integer", "null"], "enum": [0, 1, null]}, "m_L": {"type": ["integer", "null"], "enum": [0, 1, null]}, "m_E": {"type": ["integer", "null"], "enum": [0, 1, null]}, "m_RL": {"type": ["integer", "null"], "enum": [0, 1, null]}, "m_LE": {"type": ["integer", "null"], "enum": [0, 1, null]}}}, "lineage": {"type": "object"}}}
+  }
+}

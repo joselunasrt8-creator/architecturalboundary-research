@@ -1,0 +1,233 @@
+{
+  "object_type": "CanonicalAnalysis",
+  "schema_version": "canonical-analysis-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "analysis-b2-governance-cohort-i4-measurement-distribution",
+  "analysis_stage": "B2 Analysis",
+  "input_dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+  "measurement_vector_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4",
+  "cohort_size": 9,
+  "row_ordering": "system_id ascending",
+  "measurement_fields": [
+    "m_R",
+    "m_L",
+    "m_E",
+    "m_RL",
+    "m_LE"
+  ],
+  "dataset_verification": {
+    "object_type": "ComparativeDataset",
+    "schema_version": "canonical-dataset-v1",
+    "cohort_size_matches_rows": true,
+    "row_ordering_verified": true,
+    "source_msr_ids_match_rows": true,
+    "only_registered_measurement_fields": true
+  },
+  "measurement_distributions": {
+    "m_R": {
+      "observed_1": 8,
+      "observed_0": 0,
+      "missing": 1
+    },
+    "m_L": {
+      "observed_1": 8,
+      "observed_0": 0,
+      "missing": 1
+    },
+    "m_E": {
+      "observed_1": 7,
+      "observed_0": 0,
+      "missing": 2
+    },
+    "m_RL": {
+      "observed_1": 8,
+      "observed_0": 0,
+      "missing": 1
+    },
+    "m_LE": {
+      "observed_1": 7,
+      "observed_0": 0,
+      "missing": 2
+    }
+  },
+  "system_measurement_matrix": [
+    {
+      "system_id": "aws-iam",
+      "msr_id": "msr-b2-aws-iam-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/aws-iam.msr.json",
+        "source_der_ids": [
+          "der-b2-aws-iam-request-context-policy-evaluation-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "cedar-amazon-verified-permissions",
+      "msr_id": "msr-b2-cedar-amazon-verified-permissions-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/cedar-amazon-verified-permissions.msr.json",
+        "source_der_ids": [
+          "der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "envoy-ext-authz",
+      "msr_id": "msr-b2-envoy-ext-authz-reference-execution",
+      "measurements": {
+        "m_R": null,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": null,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json",
+        "source_der_ids": [
+          "der-b2-envoy-ext-authz-external-authorization-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "google-zanzibar",
+      "msr_id": "msr-b2-google-zanzibar-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": null,
+        "m_RL": 1,
+        "m_LE": null
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/google-zanzibar.msr.json",
+        "source_der_ids": [
+          "der-b2-google-zanzibar-relation-tuple-check-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "hashicorp-vault",
+      "msr_id": "msr-b2-hashicorp-vault-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/hashicorp-vault.msr.json",
+        "source_der_ids": [
+          "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "istio-authorizationpolicy",
+      "msr_id": "msr-b2-istio-authorizationpolicy-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/istio-authorizationpolicy.msr.json",
+        "source_der_ids": [
+          "der-b2-istio-authorizationpolicy-workload-action-order-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "kubernetes-rbac-admission",
+      "msr_id": "msr-b2-kubernetes-rbac-admission-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/kubernetes-rbac-admission.msr.json",
+        "source_der_ids": [
+          "der-b2-kubernetes-rbac-admission-api-server-admission-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "open-policy-agent-gatekeeper",
+      "msr_id": "msr-b2-open-policy-agent-gatekeeper-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/open-policy-agent-gatekeeper.msr.json",
+        "source_der_ids": [
+          "der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    },
+    {
+      "system_id": "openfga",
+      "msr_id": "msr-b2-openfga-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": null,
+        "m_E": null,
+        "m_RL": 1,
+        "m_LE": null
+      },
+      "lineage": {
+        "msr_path": "investigations/b2-governance-cohort/msr/openfga.msr.json",
+        "source_der_ids": [
+          "der-b2-openfga-authorization-model-version-boundary"
+        ],
+        "measurement_registry_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/measurement_vector/I4"
+      }
+    }
+  ],
+  "deferred_outputs": [
+    "retained_classification",
+    "cohort_conclusion"
+  ],
+  "provenance": {
+    "method": "ComparativeDataset -> deterministic measurement distribution analysis",
+    "created_from": [
+      "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json"
+    ]
+  },
+  "generation": {
+    "builder": "scripts/build_analysis.py",
+    "mode": "deterministic-rebuild",
+    "repository_root": "."
+  }
+}

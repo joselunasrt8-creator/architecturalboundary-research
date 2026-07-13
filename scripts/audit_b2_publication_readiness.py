@@ -28,6 +28,7 @@ REQUIRED_PRECONDITIONS = [
     "scripts/validate.py",
     "scripts/check_registry.py",
     "scripts/build_dataset.py",
+    "scripts/build_analysis.py",
     "scripts/build_report.py",
 ]
 
@@ -35,6 +36,7 @@ COMMANDS_EXECUTED = [
     "python3 scripts/validate.py",
     "python3 scripts/check_registry.py",
     "python3 scripts/build_dataset.py",
+    "python3 scripts/build_analysis.py",
     "python3 scripts/build_report.py",
     "git diff --check",
 ]
@@ -57,8 +59,6 @@ EXPECTED_B2_OBJECTS = {
     "openfga": "OpenFGA",
 }
 NOT_STARTED_LIFECYCLE_STAGES = {
-    "Comparative Dataset": "datasets/comparative",
-    "Analysis": "investigations/b2-governance-cohort/analysis",
     "Retained Classification": "registry/retained_classifications.json",
 }
 
@@ -217,6 +217,32 @@ def lifecycle_json_files(stage: str) -> list[Path]:
     return sorted(base.glob(f"*{suffix}")) if base.is_dir() else []
 
 
+def complete_single_json_stage(name: str, relative: str, expected_object_type: str) -> LifecycleCheck:
+    check = LifecycleCheck(name=name, status="MISSING")
+    path = ROOT / relative
+    check.findings.append(f"canonical JSON files: {1 if path.is_file() else 0}/1")
+    if not path.is_file():
+        check.blockers.append("object is not populated")
+        return check
+    try:
+        data = read_json(path)
+    except Exception as exc:  # noqa: BLE001 - audit must report malformed artifacts as blockers.
+        check.status = "PARTIAL"
+        check.blockers.append(f"malformed JSON: {relative} ({exc})")
+        return check
+    if data.get("object_type") != expected_object_type:
+        check.status = "PARTIAL"
+        check.blockers.append(f"unexpected object_type in {relative}")
+        return check
+    if not data.get("id"):
+        check.status = "PARTIAL"
+        check.blockers.append(f"missing id in {relative}")
+        return check
+    check.status = "COMPLETE"
+    check.findings.append("canonical IDs: 1")
+    return check
+
+
 def complete_artifact_stage(stage: str, expected_object_type: str) -> LifecycleCheck:
     name = stage.upper()
     check = LifecycleCheck(name=name, status="MISSING")
@@ -278,7 +304,17 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
 
     msr = complete_artifact_stage("msr", "MeasurementStudyRecord")
     msr.name = "Canonical MSR"
-    lifecycle = [bor, srf, der, msr]
+    dataset = complete_single_json_stage(
+        "Comparative Dataset",
+        "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "ComparativeDataset",
+    )
+    analysis = complete_single_json_stage(
+        "Analysis",
+        "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
+        "CanonicalAnalysis",
+    )
+    lifecycle = [bor, srf, der, msr, dataset, analysis]
     for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():
         path = ROOT / relative
         files = object_files([relative]) if path.exists() else []

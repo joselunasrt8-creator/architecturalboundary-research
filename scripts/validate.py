@@ -38,7 +38,7 @@ INVESTIGATION_ITEMS = [
 ]
 SCHEMAS = [
     "schemas/bor.schema.json", "schemas/srf.schema.json", "schemas/der.schema.json",
-    "schemas/msr.schema.json", "schemas/dataset.schema.json", "schemas/investigation.schema.json",
+    "schemas/msr.schema.json", "schemas/dataset.schema.json", "schemas/analysis.schema.json", "schemas/investigation.schema.json",
 ]
 REGISTRIES = [
     "registry/architectural_boundaries.json", "registry/investigations.json", "registry/terminology.json",
@@ -704,6 +704,7 @@ def main() -> None:
     validate_der_contract()
     validate_msr_contract()
     subprocess.run(["python3", "scripts/build_dataset.py", "--check"], cwd=ROOT, check=True)
+    subprocess.run(["python3", "scripts/build_analysis.py", "--check"], cwd=ROOT, check=True)
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

@@ -52,8 +52,8 @@ def test_verified_valid_repository_state_is_audited(tmp_path):
     assert "| SRF | COMPLETE |" in text
     assert "| DER | COMPLETE |" in text
     assert "| Canonical MSR | COMPLETE |" in text
-    assert "| Comparative Dataset | NOT STARTED |" in text
-    assert "| Analysis | NOT STARTED |" in text
+    assert "| Comparative Dataset | COMPLETE |" in text
+    assert "| Analysis | COMPLETE |" in text
     assert "| Retained Classification | NOT STARTED |" in text
 
 
@@ -128,13 +128,14 @@ def test_broken_der_lineage_is_blocked(tmp_path):
 
 def test_placeholder_only_object_is_partial_and_blocked(tmp_path):
     repo = copy_repo(tmp_path)
-    target = repo / "investigations" / "b2-governance-cohort" / "analysis" / "README.md"
-    target.write_text("# Analysis\n\nTODO placeholder.\n", encoding="utf-8")
+    target = repo / "investigations" / "b2-governance-cohort" / "analysis" / "b2-governance-cohort-i4.analysis.json"
+    target.unlink()
+    (repo / "investigations" / "b2-governance-cohort" / "analysis" / "README.md").write_text("# Analysis\n\nTODO placeholder.\n", encoding="utf-8")
     result = run_audit(repo)
     text = report(repo)
     assert result.returncode == 0
-    assert "Analysis | PARTIAL" in text
-    assert "Analysis: placeholder text remains" in text
+    assert "| Analysis | MISSING |" in text
+    assert "Analysis: object is not populated" in text
 
 
 def test_duplicate_latex_labels_block_readiness(tmp_path):

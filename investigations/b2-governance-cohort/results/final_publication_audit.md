@@ -1,139 +1,45 @@
-# Program B2 Final Publication Audit
+# Final B2 Publication Audit
 
-Audit date: 2026-07-11
+## Determination
 
-Scope: Program B2 (`investigations/b2-governance-cohort` and `papers/paper-b2`). This report treats Protocol v1.0, BOR, SRF, DER, MSR, Comparative Dataset, Literature Review, and Operational Definitions as frozen unless a reproducibility defect is identified.
+**READY for publication-readiness validation, subject to preserved limitations.** The canonical B2 lifecycle is complete: BOR, SRF, DER, MSR, Comparative Dataset, I4 Analysis, I5 Retained Classification, and Canonical Cohort Conclusion are all represented by committed machine-readable artifacts.
 
-Determination: **BLOCKED**
+The canonical cohort outcome is **INDETERMINATE** with basis systems `envoy-ext-authz`, `google-zanzibar`, and `openfga`. This audit does not change Protocol v1.0, the frozen cohort, I4 measurements, I5 decision rule, BOR/SRF/DER/MSR content, comparative dataset values, per-system retained classifications, or the cohort outcome.
 
-Reason: Protocol-required BOR, SRF, DER, MSR, and Comparative Dataset machine-readable artifacts are present, and Analysis/Retained Classification machine-readable artifacts are present and the manuscript still contains unresolved publication-readiness TODOs. Under the user's stop rule, cohort-conclusion execution is not run or expanded in this audit.
+## Registry/Object Correspondence Matrix
 
-## 1. Protocol Conformance Report
+| Registry | Canonical artifact | Object type | ID correspondence | Investigation | Protocol | Source/lineage status |
+| --- | --- | --- | --- | --- | --- | --- |
+| `registry/retained_classifications.json` | `investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json` | `CanonicalRetainedClassification` | registry/artifact retained-classification identity validated by `scripts/check_registry.py` | `b2-governance-cohort` | `protocol-v1` | dataset, analysis, and I5 decision-rule refs resolve |
+| `registry/cohort_conclusions.json` | `investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json` | `CanonicalCohortConclusion` | registry/artifact cohort-conclusion identity validated by `scripts/check_registry.py` | `b2-governance-cohort` | `protocol-v1` | retained-classification refs resolve; cohort size, outcome, and basis systems are recomputed |
 
-### Required artifact checklist
+No duplicate retained-classification IDs, duplicate cohort-conclusion IDs, missing registered artifacts, or orphaned canonical B2 result artifacts are accepted by the registry checker.
 
-| Required output | Repository evidence | Status | Completeness finding |
-|---|---|---:|---|
-| Protocol Registration | `investigations/b2-governance-cohort/preregistration/i1_i5_registration.json`; index at `investigations/b2-governance-cohort/preregistration.md`; manuscript section `papers/paper-b2/b2_05_protocol_registration.tex` | Complete enough for audit | Registration artifact exists. |
-| BOR | Nine JSON files under `investigations/b2-governance-cohort/bor/*.bor.json`; manuscript section `papers/paper-b2/b2_07_baseline_observation_records.tex` | Present, but manuscript extract incomplete | Machine-readable BOR files exist. Manuscript BOR section still contains TODO placeholders. |
-| SRF | Nine JSON files under `investigations/b2-governance-cohort/srf/*.srf.json`; manuscript section `papers/paper-b2/b2_08_execution_surface_matrix.tex` | Present, but manuscript extract incomplete | Machine-readable SRF files exist. Manuscript SRF/ESM section still contains TODO placeholders. |
-| DER | Nine JSON files under `investigations/b2-governance-cohort/der/*.der.json`; manuscript section `papers/paper-b2/b2_09_derived_object_registry.tex` | Complete | Machine-readable DER files exist for all nine systems. |
-| MSR | Nine JSON files under `investigations/b2-governance-cohort/msr/*.msr.json`; manuscript section `papers/paper-b2/b2_10_measurement_registry.tex` | Complete | Machine-readable MSR files exist for all nine systems. |
-| Comparative Dataset | Manuscript section `papers/paper-b2/b2_11_comparative_dataset.tex`; dataset export at `investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json`; schema at `schemas/dataset.schema.json` | Complete | The machine-readable export exists and is freshness-checked as a deterministic projection of the nine canonical MSRs. |
-| Analysis | `investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json`; manuscript section `papers/paper-b2/b2_12_analysis.tex` | Complete | The canonical analysis artifact exists and is freshness-checked. |
-| Threats to Validity | Manuscript section `papers/paper-b2/b2_13_threats_to_validity.tex` | Present, but publication-incomplete | Section exists but has unresolved TODOs for selection rationale, observer-bias mitigation, and replication package. |
-| Retained Classification | `investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json`; registry file `registry/retained_classifications.json`; manuscript section `papers/paper-b2/b2_14_retained_classification.tex` | Complete | The canonical retained-classification artifact exists and is freshness-checked from Analysis plus frozen I5. |
+## Publication-State Findings
 
-### Missing or incomplete exact sections
+| Finding | Classification | Disposition |
+| --- | --- | --- |
+| Previous manuscript lifecycle placeholders | STALE | Replaced with synchronized text pointing to canonical artifacts and explicit limitations. |
+| Historical stop-rule wording in the prior audit draft | STALE | Superseded by this final audit artifact after cohort-conclusion completion. |
+| Preregistration unresolved fields | ACTIVE_LIMITATION | Preserved in the frozen preregistration and classified below without mutation. |
+| Historical/noncanonical notes in archived artifact-collection material | ARCHIVED_ONLY | Not used as active publication state. |
+| Test fixture strings containing stale language | FALSE_POSITIVE | Present only as negative test inputs. |
 
-1. `papers/paper-b2/b2_12_analysis.tex`
-   - Analysis is complete, but this section must still avoid issuing cohort-conclusion text.
-2. `papers/paper-b2/b2_14_retained_classification.tex`
-   - Retained Classification is complete, but this section must still avoid issuing the B2 cohort conclusion.
-3. `papers/paper-b2/b2_13_threats_to_validity.tex`
-   - Selection rationale, observer-bias mitigation, and replication package pointers remain TODO.
+## Preregistration Unresolved-Field Classification
 
-Protocol conformance result: **blocked before cohort-conclusion acceptance**.
+The frozen preregistration remains immutable. Downstream artifacts resolve deterministic execution where possible; unresolved registration metadata remains a limitation rather than a blocker unless it would alter the I4/I5 mapping.
 
-## 2. Evidence Integrity Report
+| Field category | Classification | Rationale |
+| --- | --- | --- |
+| BOR retrieval metadata and source-version details | RESOLVED_DOWNSTREAM | Canonical BOR objects record retrieval/source metadata used by downstream SRF/DER/MSR artifacts. |
+| Documentation snapshot stability | STILL_UNRESOLVED_BUT_NON_BLOCKING | Vendor/project documentation can evolve; the committed BOR lineage bounds the evidence used for this execution. |
+| Degrees-of-freedom declarations | RESOLVED_DOWNSTREAM | The I4 measurement vector and I5 decision rule are frozen and enforced by deterministic build/check scripts. |
+| Frozen preregistration status text | HISTORICAL_STATUS_ONLY | The preregistration accurately records its registration-time state and is not rewritten after completion. |
 
-### Checks performed
+## Canonical Result Consistency
 
-- Verified that each BOR observation's `source_reference` resolves to an evidence source declared in the same BOR file.
-- Verified that each SRF `observation_refs` entry resolves to a BOR observation in the referenced BOR file.
-- Searched publication manuscript sections for unresolved TODO / blocked markers.
-- Inspected DER, MSR, and Comparative Dataset repository directories for machine-readable artifacts.
+The machine-readable retained classification contains 9 systems: 6 `supports`, 3 `indeterminate`, and 0 `violates`. The machine-readable cohort conclusion applies I5 precedence and therefore records the cohort conclusion as `indeterminate` with basis systems exactly `envoy-ext-authz`, `google-zanzibar`, and `openfga`.
 
-### Integrity findings
+## Deterministic Validation Surface
 
-| Integrity condition | Finding |
-|---|---|
-| Every observation traces to cited primary evidence | No broken BOR `source_reference` values were found in the JSON BOR files. |
-| Every derivation references BOR observations | Validated by repository DER contract checks. |
-| Every measurement references DER objects | Validated by repository MSR contract checks. |
-| No interpretation appears inside BOR | No classification fields were found in BOR constraints, and BOR files identify themselves as baseline-observation-only records. This audit did not rewrite BOR text. |
-| No unsupported claims exist | **Blocked for publication.** Analysis and retained-classification stages are complete; this audit still does not certify any cohort conclusion. |
-
-### Inconsistencies and reproducibility defects
-
-1. Analysis and retained-classification artifacts are completed, but the cohort conclusion remains unissued and must not be treated as accepted.
-2. Remaining manuscript TODOs outside the canonical dataset path must be resolved before publication readiness is claimed.
-
-## 3. Retained Classification Table
-
-The canonical retained-classification artifact is accepted as complete for lifecycle purposes. The table below is retained as historical audit context and does not issue the B2 cohort conclusion.
-
-| Boundary | DER | System | Manuscript protocol outcome | Manuscript status label | Audit status |
-|---|---|---|---|---|---|
-| B2-BND-001 | DER-001 | Kubernetes RBAC/Admission | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-002 | Kubernetes RBAC/Admission | Supports | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-003 | HashiCorp Vault | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-004 | AWS IAM | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-005 | Google Zanzibar | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-006 | Istio AuthorizationPolicy | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-007 | Envoy ext_authz | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-008 | OpenFGA | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-| B2-BND-001 | DER-009 | Cedar / AVP | Violates | Unsupported | Not independently accepted; upstream artifacts incomplete |
-
-## 4. Cohort Summary
-
-Because the protocol conformance audit is blocked, this section separates already-recorded manuscript content from audit conclusions.
-
-### Observations
-
-- BOR JSON files exist for nine cohort members.
-- SRF JSON files exist for nine cohort members.
-- DER, MSR, and comparative dataset machine-readable exports exist for the nine-system cohort.
-
-### Derived Findings
-
-- No new derived findings are introduced by this audit.
-- No new derived findings are introduced from the completed Comparative Dataset in this audit.
-
-### Interpretation
-
-- The audit cannot certify cohort synthesis as publication-ready because the B2 cohort conclusion remains unissued.
-- Any already-written manuscript interpretation must remain separated from the completed Comparative Dataset until a bounded Analysis stage is executed.
-
-### Conclusions
-
-- **No new scientific conclusion is added.**
-- Publication readiness is blocked by artifact completeness and traceability defects, not by a newly discovered contrary observation.
-
-## 5. Threats to Validity Review
-
-The threats section is directionally appropriate but not publication-complete.
-
-| Threat area | Audit finding |
-|---|---|
-| Internal validity | Existing text covers extraction/transcription error, pipeline drift, and trace breakage. The DER/MSR/Comparative Dataset machine-readable chain is now present and freshness-checked, but analysis-stage trace claims remain unexecuted. |
-| Construct validity | Existing text covers operationalization mismatch, proxy measurement error, and schema pressure. No unsupported strengthening is recommended. |
-| External validity | Existing text correctly restricts findings to the selected governance/authorization cohort and admitted representations. |
-| Reproducibility | Existing text identifies source stability, tooling determinism, and inter-analyst agreement; replication package pointer remains TODO. |
-| Selection bias | Section acknowledges non-random sampling but the selection rationale remains TODO. |
-| Observer bias | Section acknowledges risk, but double-coding / reconciliation procedure remains TODO. |
-| Protocol limitations | The current audit preserves the protocol-execution boundary: classification cannot be publication-certified before a separate Analysis and Retained Classification stage. |
-
-## 6. Publication Readiness Report
-
-| Publication item | Status | Issue |
-|---|---:|---|
-| Terminology consistency | Needs review | DER/MSR/dataset identifiers are machine-readable; downstream analysis/classification text is accepted only up to the retained-classification boundary. |
-| Figure numbering | Not fully audited | No figure-number defect was established in this audit. |
-| Table numbering | Needs review | Several tables are present, but unresolved TODO tables prevent final numbering/readiness certification. |
-| Citations | Needs review | BOR evidence sources are cited in JSON; publication citation completeness remains outside this dataset synchronization. |
-| References | Needs review | Bibliography was not validated as complete because publication is blocked earlier. |
-| Appendix references | Needs review | Appendix/cross-link completeness was not certified because required artifacts are incomplete. |
-| Cross-links | Needs review | Analysis and retained-classification artifacts are complete, while cohort conclusion remains unissued. |
-| Protocol references | Present | Protocol references exist for the completed BOR/SRF/DER/MSR/Comparative Dataset pipeline. |
-| Classification consistency | Blocked | Retained Classification is complete; cohort conclusion remains unissued. |
-
-## Final determination
-
-**BLOCKED**
-
-Objective blocking issues required before publication:
-
-1. Keep the B2 cohort conclusion unissued until that stage is explicitly executed.
-2. Resolve remaining manuscript TODO / blocked placeholders without adding unsupported evidence.
-3. Complete the threats-to-validity TODOs for selection rationale, observer-bias mitigation, and replication package pointer.
+Publication readiness is checked by the repository validation surface, including `python3 scripts/check_registry.py`, lifecycle builders in `--check` mode, `python3 scripts/audit_b2_publication_readiness.py`, and `python3 scripts/validate.py`.

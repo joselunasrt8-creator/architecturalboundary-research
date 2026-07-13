@@ -5,7 +5,7 @@ Paper~B2 is an empirical execution of the Invariance-Based Architectural Investi
 \subsection{Unit of analysis}
 The unit of analysis is an individual governance/authorization system instance as represented by protocol-eligible evidence sources (e.g., vendor documentation, specifications, reference implementations, configuration schemas, and observable request/decision interfaces). The cohort is therefore a set of systems, not a set of deployed environments.
 
-\textbf{TODO(Evidence sources):} Specify which concrete source types are admitted for this execution (documentation URLs, versioned repositories, RFCs/specs), and record them in the Baseline Observation Records (BOR).
+\textbf{Evidence sources.} Concrete admitted source types and retrieval metadata are recorded in the Baseline Observation Records (BOR); the frozen registration constrains admitted evidence to official documentation/specifications and stable upstream sources only where needed to resolve documented ambiguity.
 
 \subsection{Protocol outputs as primary results}
 Protocol v1.0 requires the production of structured artifacts (BOR, execution surface matrix, derived object registry, measurement registry, and comparative dataset). In Paper~B2, these artifacts are treated as first-class results: analysis and conclusions must be traceable to the artifacts via explicit identifiers and pointers.
@@ -20,7 +20,7 @@ The goal is to make the execution reproducible by:
 (3) separating interpretation into derived objects and measurements; and
 (4) applying an explicit decision rule to arrive at cohort-bounded classifications.
 
-\textbf{TODO(Traceability):} Define the identifier scheme used across BOR/ESM/DER/MSR tables (e.g., BOR-OPA-001) and ensure all later sections reference those identifiers.
+\textbf{Traceability.} The identifier scheme is the committed machine-readable artifact ID chain: \texttt{bor-b2-*}, \texttt{srf-b2-*}, \texttt{der-b2-*}, \texttt{msr-b2-*}, followed by canonical dataset, analysis, retained-classification, and cohort-conclusion identifiers.
 
 \subsection{Governance systems cohort: an empirical investigation of the reasoning--legitimacy--execution boundary}
 \label{sec:cohort}
@@ -37,15 +37,15 @@ For each system instance, the BOR records the evidence sources (with version/dat
 
 \subsection{Analysis pipeline}
 \label{sec:analysis-pipeline}
-After the completed canonical DER executions, the remaining execution work begins with MSR before Comparative Dataset, Analysis, and Retained Classification stages can be completed. Analysis proceeds only after derived objects remain separated from measurements, measurements operationalize boundary properties (e.g., where reasoning terminates and execution begins, and what legitimacy checks bind either side), and cohort-comparable summaries are produced from the Measurement Registry.
+After the completed canonical DER executions, MSR, Comparative Dataset, Analysis, Retained Classification, and Cohort Conclusion stages have been completed. Analysis proceeds from separated derived objects and measurements that operationalize boundary properties (e.g., where reasoning terminates and execution begins, and what legitimacy checks bind either side), with cohort-comparable summaries produced from the Measurement Registry.
 
 \subsection{Retained classification (Protocol v1.0 decision rules only)}
-\label{sec:retained-classification}
+\label{sec:retained-classification-method}
 Retained Classification applies \emph{only} the pre-specified decision rules defined by Protocol v1.0 (and its Paper~0 requirements, including I5) to the derived objects and measurements. Paper~B2 does not introduce new decision rules during execution. Each system receives the protocol-defined three-way outcome (\emph{Supports}, \emph{Violates}, or \emph{Indeterminate}) for the candidate invariant and its associated reasoning--legitimacy--execution boundary.
 
 A classification is recorded as \emph{retained} only if: (1) the minimum evidence requirements for the relevant Protocol v1.0 rule are satisfied (as indicated by BOR/ESM references); (2) the rule application is traceable to specific derived objects and measurement identifiers; and (3) no unresolved ambiguity remains that would change the protocol outcome under plausible alternative readings of the same admitted evidence.
 
-\textbf{TODO(Protocol sufficiency check):} If any cohort members require discretionary interpretation beyond Protocol v1.0 (i.e., the instrument under-specifies the mapping from measurements to the three-way outcome), register the gap as an explicit limitation and mark the classification as \emph{provisional} rather than retained.
+\textbf{Protocol sufficiency check.} The retained classification is non-provisional and applies the frozen I5 decision rule exactly; unresolved registration fields remain documented limitations only where they do not alter the deterministic I4-to-I5 mapping.
 
 \subsection{Protocol audit}
 \label{sec:protocol-audit}

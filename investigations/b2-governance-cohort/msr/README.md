@@ -33,10 +33,10 @@ Complete
 ↓
 
 Analysis
-Not Started
+Completed
 
 ↓
 
 Retained Classification
-Not Started
+Completed
 ```

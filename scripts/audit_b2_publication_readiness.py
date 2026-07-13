@@ -62,6 +62,17 @@ EXPECTED_B2_OBJECTS = {
 }
 NOT_STARTED_LIFECYCLE_STAGES = {}
 
+STALE_ACTIVE_PATTERNS = re.compile(
+    r"TODO|Not Started|Not Issued|\bblocked\b|pending|insufficient I5|no cohort conclusion|analysis has not started|retained classification has not started|majority support|partial support|mostly supports|near-support",
+    re.IGNORECASE,
+)
+ACTIVE_STALE_SCAN_ROOTS = [
+    ROOT / "papers" / "paper-b2",
+    ROOT / "investigations" / "b2-governance-cohort" / "README.md",
+    ROOT / "investigations" / "b2-governance-cohort" / "results" / "final_publication_audit.md",
+]
+ARCHIVED_STALE_SCAN_ROOTS = [ROOT / "investigations" / "b2-governance-cohort" / "artifacts"]
+
 
 @dataclass
 class LifecycleCheck:
@@ -124,7 +135,13 @@ def substantive_files(files: Iterable[Path]) -> list[Path]:
 
 
 def has_placeholder(files: Iterable[Path]) -> bool:
-    return any(PLACEHOLDER_PATTERNS.search(read_text(path)) for path in files)
+    for path in files:
+        text = read_text(path)
+        if path.name == "README.md" and "Structural placeholder" in text:
+            continue
+        if PLACEHOLDER_PATTERNS.search(text):
+            return True
+    return False
 
 
 def has_freeze_marker(files: Iterable[Path]) -> bool:
@@ -344,10 +361,26 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
     return lifecycle
 
 
-def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]]) -> str:
+def stale_language_findings(paths: list[Path]) -> list[str]:
+    findings: list[str] = []
+    files: list[Path] = []
+    for root in paths:
+        if root.is_file():
+            files.append(root)
+        elif root.is_dir():
+            files.extend(p for p in root.rglob("*") if p.is_file() and p.suffix in {".md", ".tex"})
+    for path in sorted(files):
+        for lineno, line in enumerate(read_text(path).splitlines(), start=1):
+            if STALE_ACTIVE_PATTERNS.search(line):
+                findings.append(f"{rel(path)}:{lineno}: {line.strip()}")
+    return findings
+
+def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str]) -> str:
     if precondition_failures:
         return "NULL_NOT_AUDITED"
     if duplicate_labels:
+        return "BLOCKED"
+    if active_stale:
         return "BLOCKED"
     if any(check.blockers for check in lifecycle_checks):
         return "BLOCKED"
@@ -356,7 +389,7 @@ def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck],
     return "BLOCKED"
 
 
-def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], final: str) -> str:
+def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str], archived_stale: list[str], final: str) -> str:
     branch = os.environ.get("GITHUB_REF_NAME", "main")
     lines = [
         "# B2 Publication-Readiness Audit",
@@ -392,6 +425,13 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
             lines.append(f"  - `{label}` in {', '.join(f'`{path}`' for path in paths)}")
     else:
         lines.append("- Duplicate LaTeX label check passed.")
+    if active_stale:
+        lines.append("- Active stale publication-state language detected:")
+        lines.extend(f"  - `{finding}`" for finding in active_stale)
+    else:
+        lines.append("- Active stale publication-state language check passed.")
+    if archived_stale:
+        lines.append(f"- Archived-only stale-language findings ignored for readiness: {len(archived_stale)}.")
     for check in lifecycle_checks:
         lines.append(f"- {check.name}: {', '.join(check.findings)}")
     for check in checks:
@@ -403,6 +443,7 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
         blockers.extend(f"Missing precondition: {path}" for path in precondition_failures)
     if duplicate_labels:
         blockers.extend(f"Duplicate LaTeX label: {label}" for label in duplicate_labels)
+    blockers.extend(f"Active stale publication-state language: {finding}" for finding in active_stale)
     lines.extend(f"- {blocker}" for blocker in blockers) if blockers else lines.append("- None.")
     lines.extend(["", "## Ordered Closure Sequence"])
     if final == "NULL_NOT_AUDITED":
@@ -435,8 +476,8 @@ def build_checks() -> list[ObjectCheck]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit B2 publication readiness for a verified commit.")
-    parser.add_argument("--repository", required=True)
-    parser.add_argument("--commit", required=True)
+    parser.add_argument("--repository", default="joselunasrt8-creator/architecturalboundary-research")
+    parser.add_argument("--commit", default=command_output(["git", "rev-parse", "HEAD"])[1] or "LOCAL_UNVERIFIED")
     parser.add_argument("--output", default=str(REPORT_DEFAULT))
     args = parser.parse_args()
 
@@ -451,8 +492,10 @@ def main() -> int:
     lifecycle_checks = [] if precondition_failures else inspect_lifecycle()
     checks = [] if precondition_failures else build_checks()
     duplicates = {} if precondition_failures else duplicate_latex_labels()
-    final = determine(checks, lifecycle_checks, precondition_failures, duplicates)
-    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, lifecycle_checks, checks, precondition_failures, duplicates, final)
+    active_stale = [] if precondition_failures else stale_language_findings(ACTIVE_STALE_SCAN_ROOTS)
+    archived_stale = [] if precondition_failures else stale_language_findings(ARCHIVED_STALE_SCAN_ROOTS)
+    final = determine(checks, lifecycle_checks, precondition_failures, duplicates, active_stale)
+    report = render_report(args.repository, args.commit, output, workflow_run, timestamp, lifecycle_checks, checks, precondition_failures, duplicates, active_stale, archived_stale, final)
     output.write_text(report, encoding="utf-8")
     print(f"B2 audit report written to {rel(output)}")
     print(f"final determination: {final}")

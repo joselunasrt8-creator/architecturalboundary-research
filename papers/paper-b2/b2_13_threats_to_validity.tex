@@ -26,12 +26,12 @@ This section catalogs threats that can invalidate the Paper~B2 investigation eve
 \subsection{Selection bias}
 The cohort is not randomly sampled. Inclusion may over-represent widely documented or widely deployed systems and under-represent niche or proprietary governance stacks.
 
-\textbf{TODO(Selection rationale):} Record the cohort selection rationale and any explicit coverage goals (e.g., control-plane governance, service-mesh enforcement, relationship-based authorization).
+\textbf{Selection rationale.} The cohort is purposive and coverage-oriented: it spans cloud IAM, policy-as-code, Kubernetes admission/RBAC, service-mesh authorization, relationship-based authorization, and secret/access governance systems represented by admitted public documentation.
 
 \subsection{Observer bias}
 Analysts may preferentially record observations that fit pre-existing intuitions about layered architectures.
 
-\textbf{TODO(Observer-bias mitigation):} Specify whether the BOR extraction is double-coded, and define a reconciliation procedure.
+\textbf{Observer-bias mitigation.} BOR, SRF, DER, MSR, dataset, analysis, retained-classification, and cohort-conclusion artifacts are separated and machine-validated; lack of a formal double-coding process remains an explicit limitation rather than a hidden claim of inter-analyst agreement.
 
 \subsection{Researcher expectancy}
 Because the candidate boundary is pre-specified, analysts may unintentionally steer derivations toward confirming structures.
@@ -42,7 +42,7 @@ Because the candidate boundary is pre-specified, analysts may unintentionally st
 \begin{itemize}
   \item \textbf{Source stability:} Vendor documentation may change; stable snapshots and hashes are required.
   \item \textbf{Tooling determinism:} If automated extraction/measurement is used, it must be pinned (lockfiles) and rerunnable.
-  \item \textbf{Inter-analyst agreement:} Some derivations may be under-specified without a formal coder agreement plan.
+  \item \textbf{Inter-analyst agreement:} Some derivations may lack formal coder-agreement support without a dedicated reconciliation plan.
 \end{itemize}
 
-\textbf{TODO(Replication package):} Point to the replication package contents (source snapshots/hashes, scripts, lockfiles, and rerun instructions) consistent with Protocol v1.0 requirements.
+\textbf{Replication package.} The replication surface is the repository itself: canonical JSON artifacts, schemas, build scripts, registry checks, publication manifest generation, and validation commands recorded for deterministic rerun.

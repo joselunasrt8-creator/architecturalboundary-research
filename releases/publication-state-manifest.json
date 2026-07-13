@@ -203,8 +203,8 @@
       },
       {
         "path": "scripts/check_registry.py",
-        "sha256": "bf31dfe4c800836b0d35da1544d03c63c8eb48a1315c13ad550cb00dab978979",
-        "size_bytes": 5572
+        "sha256": "e29c3f908238f0e2af35c2d8bf7bc03a6f921a312dff19c06d92c90f2004ce05",
+        "size_bytes": 11838
       },
       {
         "path": "scripts/validate.py",

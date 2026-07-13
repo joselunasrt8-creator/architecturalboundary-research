@@ -160,3 +160,27 @@ def test_null_not_audited_behavior_skips_scientific_determination(tmp_path):
     assert "NULL_NOT_AUDITED" in text
     assert "## Artifact Matrix\n\n| Artifact |" in text
     assert "READY" not in text
+
+
+def test_active_manuscript_stale_state_language_blocks_readiness(tmp_path):
+    repo = copy_repo(tmp_path)
+    target = repo / "papers" / "paper-b2" / "b2_16_conclusion.tex"
+    target.write_text(target.read_text(encoding="utf-8") + "\nTODO active stale lifecycle marker.\n", encoding="utf-8")
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "Active stale publication-state language" in text
+    assert "BLOCKED" in text
+
+
+def test_archived_stale_language_does_not_block_readiness(tmp_path):
+    repo = copy_repo(tmp_path)
+    archived = repo / "investigations" / "b2-governance-cohort" / "artifacts" / "archived-note.md"
+    archived.parent.mkdir(parents=True, exist_ok=True)
+    archived.write_text("TODO archived historical note only.\n", encoding="utf-8")
+    result = run_audit(repo)
+    text = report(repo)
+    assert result.returncode == 0
+    assert "final determination: READY" in result.stdout
+    assert "Archived-only stale-language findings ignored" in text
+    assert "Active stale publication-state language:" not in text

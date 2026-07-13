@@ -39,6 +39,8 @@ jobs:
         run: python3 scripts/build_dataset.py
       - name: Check report build entry point
         run: python3 scripts/build_report.py
+      - name: Check publication-state manifest
+        run: python3 scripts/build_publication_manifest.py --check
       - name: Build publication PDFs
         run: python3 scripts/build_papers.py
       - name: Upload publication PDFs

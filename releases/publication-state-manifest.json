@@ -1,0 +1,462 @@
+{
+  "object_type": "PublicationStateManifest",
+  "schema_version": "publication-state-manifest-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "manifest_path": "releases/publication-state-manifest.json",
+  "hash_algorithm": "sha256",
+  "publication_state": {
+    "protocol_version": "protocol-v1",
+    "dataset_path": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+    "schema_paths": [
+      "schemas/analysis.schema.json",
+      "schemas/bor.schema.json",
+      "schemas/cohort_conclusion.schema.json",
+      "schemas/dataset.schema.json",
+      "schemas/der.schema.json",
+      "schemas/investigation.schema.json",
+      "schemas/msr.schema.json",
+      "schemas/retained_classification.schema.json",
+      "schemas/srf.schema.json"
+    ],
+    "research_object_manifest_hash": "2c818a8e7f2b759033e9d7ddbdf38929d4bab771aa01aff6a203a97f5dd74b0b",
+    "dependency_contract_hash": "73eb7492c2e4646a00f45c82eccac18dc1efe9f02d68974a8108b68a9fedb389",
+    "build_environment_identifier": "repository-local; runtime supplied by CI or caller; see .github/workflows/validate.yml",
+    "publication_artifact_count": 0
+  },
+  "sections": {
+    "ci_workflows": [
+      {
+        "path": ".github/workflows/b2-publication-readiness.yml",
+        "sha256": "ea1a6bc2ee8e0870f65c8e6fa36d44f1dd928634a98549f1e4f16930b51f3211",
+        "size_bytes": 2604
+      },
+      {
+        "path": ".github/workflows/validate.yml",
+        "sha256": "8e45eff1dbce97037879ad376c3cbd183a0ff6f409d6cfee7f49553ad71c13dd",
+        "size_bytes": 1686
+      }
+    ],
+    "dependency_contracts": [
+      {
+        "path": "requirements.txt",
+        "sha256": "990976cba5ef886b0c6b68fe8f54c8d0f7c5ea845ccd6fac20c7aaf54311ff76",
+        "size_bytes": 33
+      }
+    ],
+    "protocol_sources": [
+      {
+        "path": "protocol/README.md",
+        "sha256": "dc18fd671e62bf05345d68dd08caec576a61e266ca8700ce1d4ff5fa35750d2f",
+        "size_bytes": 117
+      },
+      {
+        "path": "protocol/changelog.md",
+        "sha256": "1311a3da8e7577fd7b5f597b1a0d8e3136f17cc865efde79caf6fa1598dffe2d",
+        "size_bytes": 133
+      },
+      {
+        "path": "protocol/protocol-v1/README.md",
+        "sha256": "dc43ab695183405465a69208c697d6e377eac0ab650e1f6f3b0ce6f81f3ea0db",
+        "size_bytes": 233
+      },
+      {
+        "path": "protocol/protocol-v1/decision_rules.md",
+        "sha256": "5f5f89c93e430ffe95113b05e5b7ccaf9c3c8e94bd4d6d01151887a4891fb8c8",
+        "size_bytes": 170
+      },
+      {
+        "path": "protocol/protocol-v1/protocol.md",
+        "sha256": "ea25f011b9530594104db8951f2c54a89f7d417589f29370afed861af3e84d77",
+        "size_bytes": 3062
+      },
+      {
+        "path": "protocol/protocol-v1/terminology.md",
+        "sha256": "a02727288f3926ed58acc5e176cf88e6d3ce41763786e5fea3944f8f217baf29",
+        "size_bytes": 180
+      }
+    ],
+    "registries": [
+      {
+        "path": "registry/architectural_boundaries.json",
+        "sha256": "2a667b7254a6aded653ffa5c9113ceaa910bbb435061d2f133d428c53b11dd72",
+        "size_bytes": 37
+      },
+      {
+        "path": "registry/candidate_invariants.json",
+        "sha256": "87b2f2d5181042bf192000ff4675b283d0a2fd39e2a09242ad341216ce81ac23",
+        "size_bytes": 33
+      },
+      {
+        "path": "registry/classifications.json",
+        "sha256": "a6c4b7e4fb85a928c8971d6df2bf1c7e2a58f443ae6d019f9ba21f306207b8dc",
+        "size_bytes": 91
+      },
+      {
+        "path": "registry/cohort_conclusions.json",
+        "sha256": "22e4e08a0205738eb0d2deff5a82538a3c03e9e765f93802ed73b4464d3d8f8f",
+        "size_bytes": 590
+      },
+      {
+        "path": "registry/investigations.json",
+        "sha256": "4f8f09d88ce1d65d9a3d82bc28741039c9b0ac515a4caf51d25012825a7895d3",
+        "size_bytes": 315
+      },
+      {
+        "path": "registry/protocol_versions.json",
+        "sha256": "8fdde2e3f3aa04b3af1dde1cae5a928729997fc0b00690965b25de8472658e17",
+        "size_bytes": 121
+      },
+      {
+        "path": "registry/retained_classifications.json",
+        "sha256": "70cf38f31dc9c6081c66d017f486640db179b5707d480ecb228d26ab1e5c4b0c",
+        "size_bytes": 453
+      },
+      {
+        "path": "registry/terminology.json",
+        "sha256": "6701aef396597848469970113ed047ea68f143fd2ef2aa1f4cd23d6d37db0cbf",
+        "size_bytes": 78
+      }
+    ],
+    "schemas": [
+      {
+        "path": "schemas/analysis.schema.json",
+        "sha256": "ad0a0dbf5778147696ce11467c5ef040ddbfa67cb714150cc6c1cf1ff229fc7c",
+        "size_bytes": 4315
+      },
+      {
+        "path": "schemas/bor.schema.json",
+        "sha256": "994f9074d5154a7672fb5b616b92b98a6c4c548a5574768d12728e7bf45fd573",
+        "size_bytes": 375
+      },
+      {
+        "path": "schemas/cohort_conclusion.schema.json",
+        "sha256": "169a0890b1bb7f096d88b82f74b3d0b192b12b5141b952d9c0408707ea27db2e",
+        "size_bytes": 3717
+      },
+      {
+        "path": "schemas/dataset.schema.json",
+        "sha256": "77742e682958b0ac6e9f806ccc03cf5524100fdd5594766797f2bc8a8cb0a56a",
+        "size_bytes": 3640
+      },
+      {
+        "path": "schemas/der.schema.json",
+        "sha256": "ea9659607b2ca2dc7ecde55c9c423c2a8720030b4e8d62e8666910ece1c6001b",
+        "size_bytes": 2507
+      },
+      {
+        "path": "schemas/investigation.schema.json",
+        "sha256": "31bf1098c3778e76dfa577ba4c3419b58c9af348985f57478ee5b0356ca577e2",
+        "size_bytes": 395
+      },
+      {
+        "path": "schemas/msr.schema.json",
+        "sha256": "1a8da98e745ffd2551b085c4afff99f6b5e808d6d46b36b296f01b574ccc703c",
+        "size_bytes": 5932
+      },
+      {
+        "path": "schemas/retained_classification.schema.json",
+        "sha256": "37b8d803b893bb6649cb9b32f43fcd1544dad16e8243a86cd7c7788c3c562f2f",
+        "size_bytes": 5217
+      },
+      {
+        "path": "schemas/srf.schema.json",
+        "sha256": "519cb5af39a91f27733a7dc8d7055909c9f0f3d580dc6aed777e1b2644bb61bf",
+        "size_bytes": 3715
+      }
+    ],
+    "builder_scripts": [
+      {
+        "path": "scripts/build_analysis.py",
+        "sha256": "44967c127ba3be2552a6fb49329494a0bc7e97e3587e601ad27d54725e9f61b8",
+        "size_bytes": 8097
+      },
+      {
+        "path": "scripts/build_cohort_conclusion.py",
+        "sha256": "5dc7169945a61e02cadbc4b1eafefedafa7c764fae4dda034d06b4e2d5b0498c",
+        "size_bytes": 7809
+      },
+      {
+        "path": "scripts/build_dataset.py",
+        "sha256": "e2fa62be78255b80a24b6ebc949cd435aacce7ba59fd5d5ef6c1f436e4814d6e",
+        "size_bytes": 8209
+      },
+      {
+        "path": "scripts/build_papers.py",
+        "sha256": "38a194edae4f34f6f5cbc8cc8d85be8495bb46fe8574c007fe845e5d4f5a9454",
+        "size_bytes": 7211
+      },
+      {
+        "path": "scripts/build_publication_manifest.py",
+        "sha256": "b193b5c23745587235276e7dabcd0628e557e9df9e4f2b9d94246abf33c676b3",
+        "size_bytes": 8711
+      },
+      {
+        "path": "scripts/build_retained_classification.py",
+        "sha256": "d7ebc91f51036517e99ffcec21496418c695a5b0425099f7b5eb71f49fa8e9e0",
+        "size_bytes": 9779
+      },
+      {
+        "path": "scripts/check_registry.py",
+        "sha256": "bf31dfe4c800836b0d35da1544d03c63c8eb48a1315c13ad550cb00dab978979",
+        "size_bytes": 5572
+      },
+      {
+        "path": "scripts/validate.py",
+        "sha256": "d75472c6569dd0a03e5be13b441def8b6c91f99919d1265bc610af8b7718c84e",
+        "size_bytes": 36154
+      }
+    ],
+    "publication_sources": [
+      {
+        "path": "README.md",
+        "sha256": "c446a6bfbdc18235abed15ccaa1ebd7e8b553dc03e93467ca1c1b9ef02af78c0",
+        "size_bytes": 4955
+      },
+      {
+        "path": "REPRODUCIBILITY.md",
+        "sha256": "80c7517ca642d12ee428b818da02f127f654de1fe8613ce01abccc2d43666050",
+        "size_bytes": 556
+      },
+      {
+        "path": "docs/publication.md",
+        "sha256": "38996ecfc177f43d7645f2164d4aa3fe8758c6b77447d720e13dcaadc98c5cfe",
+        "size_bytes": 4500
+      },
+      {
+        "path": "docs/research_pipeline.md",
+        "sha256": "c02152edd8de06c07ac8afdf1d536a4d7f537c06454113fd5bb2e5db37d00225",
+        "size_bytes": 207
+      }
+    ],
+    "bor_records": [
+      {
+        "path": "investigations/b2-governance-cohort/bor/aws-iam.bor.json",
+        "sha256": "91b7a9269ce5e9fb725471acc630d601104fbb8e1e46efb989c30b02a0bebd48",
+        "size_bytes": 5072
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/cedar-amazon-verified-permissions.bor.json",
+        "sha256": "208bee5a8c2ce222ec7b01301eddbf41306c59af256ea29f0c25770adc755cda",
+        "size_bytes": 5046
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/envoy-ext-authz.bor.json",
+        "sha256": "7106716844df1900476416d806c741c05a71b9b62d70eae8119d31dad7ccd71b",
+        "size_bytes": 4465
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/google-zanzibar.bor.json",
+        "sha256": "d23ebbc16535587a2f43b3e88832aa6d9cf6aa8654c8d1cf52c5194f775bea1a",
+        "size_bytes": 4727
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/hashicorp-vault.bor.json",
+        "sha256": "18ebfc417cfd59fbdfa6d67a500179638e867046f2bc3fcef224f5ca6d78e358",
+        "size_bytes": 4498
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/istio-authorizationpolicy.bor.json",
+        "sha256": "6b620fbcfb08d656ef5d0881ab6c6be783a9b206ebd2d16abd6ef0727ea08384",
+        "size_bytes": 4518
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/kubernetes-rbac-admission.bor.json",
+        "sha256": "8d85bbca1a8584ec0e7dc7aa5c5a759b79373115b6c2c3d2c6c211dda2d03a73",
+        "size_bytes": 5141
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/open-policy-agent-gatekeeper.bor.json",
+        "sha256": "ab7f970fae14541baa6c1f67cef83a6298ca3852dad42b4cdb8c062aed6014de",
+        "size_bytes": 15709
+      },
+      {
+        "path": "investigations/b2-governance-cohort/bor/openfga.bor.json",
+        "sha256": "8dc320b76a79a9083d3013418cc92d806422b5bc28e204ae9a7b5e706b9cc116",
+        "size_bytes": 4723
+      }
+    ],
+    "srf_records": [
+      {
+        "path": "investigations/b2-governance-cohort/srf/aws-iam.srf.json",
+        "sha256": "4e0341d9e1ad4633d92f19552de69c6048fef4aec144af37709248b071188f5f",
+        "size_bytes": 3298
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/cedar-amazon-verified-permissions.srf.json",
+        "sha256": "6ed4ab2ee1e9a9335c92275aa1099a983400a3c827c64e6cfed0e7f35d379b65",
+        "size_bytes": 4090
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json",
+        "sha256": "c910a481b6927222fe6f4cd07fd724fab3ce1e65cdd5f503c03d43f5868c0fda",
+        "size_bytes": 3576
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/google-zanzibar.srf.json",
+        "sha256": "6d0c5b5ac99708683d19aa9242cbfaf9dac85018bdaed1b0f421e21d17dcbc51",
+        "size_bytes": 3527
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/hashicorp-vault.srf.json",
+        "sha256": "d1bb579ce4a6798244456ace43473391e977b361d87788ded34d762f3cd818e2",
+        "size_bytes": 3754
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/istio-authorizationpolicy.srf.json",
+        "sha256": "8c65727681dee058ba505c77ce19345f39118a121bec29c3f1db3fe481a61a46",
+        "size_bytes": 3594
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/kubernetes-rbac-admission.srf.json",
+        "sha256": "2a317628b8b74547369d207f00d1b64b685fb395a698fa23a0fac75a637c8580",
+        "size_bytes": 4215
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/open-policy-agent-gatekeeper.srf.json",
+        "sha256": "38abbaf8aa6accfc01bfc6c7f92b3db58685a0768785254b14fbcf6320a3e0da",
+        "size_bytes": 6332
+      },
+      {
+        "path": "investigations/b2-governance-cohort/srf/openfga.srf.json",
+        "sha256": "4713c40a42464e5479b6a59b242546d4e24943972d225f65ebb6355f7939c839",
+        "size_bytes": 3252
+      }
+    ],
+    "der_records": [
+      {
+        "path": "investigations/b2-governance-cohort/der/aws-iam.der.json",
+        "sha256": "fb0c5445a53d18374a64afdca5965398f0f6d7abeade625463ddb07d52471800",
+        "size_bytes": 2116
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/cedar-amazon-verified-permissions.der.json",
+        "sha256": "4424581f19821d540aa81b442e3b2b2ff4a4faa39a82dc8772446272290831e9",
+        "size_bytes": 2588
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/envoy-ext-authz.der.json",
+        "sha256": "b0bfd532d0a033276b1ea864007e3c1c5b735143593f1064899bf52d99371a67",
+        "size_bytes": 2302
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/google-zanzibar.der.json",
+        "sha256": "8201f053bdecef009691925e69addd696c7d94ad79cd035df2660d1ee7ce9493",
+        "size_bytes": 2261
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/hashicorp-vault.der.json",
+        "sha256": "5e10d9c2a17615a9d4952b308b0bcc44d540da13fe6e34a683187e0b713088eb",
+        "size_bytes": 2298
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/istio-authorizationpolicy.der.json",
+        "sha256": "42ea56f9dcc01600aa3d261fc6c5cd01a33c55fffa66d79bb78fe41f89c763d7",
+        "size_bytes": 2469
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/kubernetes-rbac-admission.der.json",
+        "sha256": "8df571393339fff3882a2f5c75da709e73793599797851c80a803081f4815deb",
+        "size_bytes": 2566
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/open-policy-agent-gatekeeper.der.json",
+        "sha256": "2f5e2cfd8a72fdcbbe460c04fe23cbf9a5c36350484b8bda4a0abc2a1f11d35e",
+        "size_bytes": 3464
+      },
+      {
+        "path": "investigations/b2-governance-cohort/der/openfga.der.json",
+        "sha256": "257a2f2926e1d682758d019b10f47d1d142d7379114b5ab10d68ef4a93ad7f97",
+        "size_bytes": 2144
+      }
+    ],
+    "msr_records": [
+      {
+        "path": "investigations/b2-governance-cohort/msr/aws-iam.msr.json",
+        "sha256": "33d4cdfa540387e59198339c80326117b887c2f42f32d69d07bacb25b8cc7e6c",
+        "size_bytes": 5754
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/cedar-amazon-verified-permissions.msr.json",
+        "sha256": "007c499aedcf6340c68c341f52b3c92a78d794136fd276ac7c2d7d7919dc300a",
+        "size_bytes": 6048
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json",
+        "sha256": "9edb93cde1f945d459b27cbd97c98abe38369a4a83f444c69d3fbae3966b434b",
+        "size_bytes": 5889
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/google-zanzibar.msr.json",
+        "sha256": "5438ba1d7a53eb769527e7a81279a286ad648098e3d3568cfa3ad0847562e227",
+        "size_bytes": 5926
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/hashicorp-vault.msr.json",
+        "sha256": "c70138294ccfdf1f91e7e7094a44dca180ebbb43e96a7750c4287dd9833691a3",
+        "size_bytes": 5898
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/istio-authorizationpolicy.msr.json",
+        "sha256": "bde2fab9677595bf0331bcb751766b845a4b935f4586ab14392d23d98b13fa95",
+        "size_bytes": 6194
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/kubernetes-rbac-admission.msr.json",
+        "sha256": "32640414dd53642e9f9c68510f8075cc640df561c75dfc7ef42ca76cb7c562b0",
+        "size_bytes": 5933
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/open-policy-agent-gatekeeper.msr.json",
+        "sha256": "7f3c691ea7c0bc553cdcb09610d6754f43bd8aefeceada60761df276b617ad24",
+        "size_bytes": 8107
+      },
+      {
+        "path": "investigations/b2-governance-cohort/msr/openfga.msr.json",
+        "sha256": "04d7ce8eef2377a7edbabf0e594ad59badfc7f959dca7acc24fe54959ea6f625",
+        "size_bytes": 5676
+      }
+    ],
+    "preregistration": [
+      {
+        "path": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+        "sha256": "92b34a856f6e59f77215dbc639c3a28203ccfcce58ded2f3c5f1ed0baba794bd",
+        "size_bytes": 6119
+      }
+    ],
+    "comparative_dataset": [
+      {
+        "path": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "sha256": "d687d64ae19dd44a18c0c597c43118fd95ad4ef83d6ad3aa026c2ab498ac12a5",
+        "size_bytes": 7115
+      }
+    ],
+    "analysis": [
+      {
+        "path": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
+        "sha256": "f2ab4fa318b420e164d2c1c84f93b6c60ff33bb2485050ff27a618f05e9e58f0",
+        "size_bytes": 7416
+      }
+    ],
+    "retained_classification": [
+      {
+        "path": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json",
+        "sha256": "1848116b6273389a25862a7cd3c51572f31a266df872510671969fb0dd12c14e",
+        "size_bytes": 16677
+      }
+    ],
+    "cohort_conclusion": [
+      {
+        "path": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json",
+        "sha256": "64dd314e979521330f1ab7da302e615eddea0829f6a69ab0ae63bd465ea98a9d",
+        "size_bytes": 4894
+      }
+    ],
+    "publication_pdfs": []
+  },
+  "generation": {
+    "builder": "scripts/build_publication_manifest.py",
+    "mode": "deterministic-rebuild",
+    "repository_root": "."
+  }
+}

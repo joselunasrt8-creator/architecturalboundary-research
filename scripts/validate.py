@@ -28,7 +28,7 @@ REQUIRED_PATHS = [
     "protocol/protocol-v1/schemas/README.md", "protocol/protocol-v1/templates/README.md",
     "papers/paper-0-protocol/README.md", "papers/paper-b1/README.md", "papers/paper-b2/main.tex",
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
-    "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/check_registry.py", "scripts/build_papers.py",
+    "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/build_publication_manifest.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
 INVESTIGATIONS = ["investigations/template", "investigations/b1-three-system-pilot", "investigations/b2-governance-cohort"]
 INVESTIGATION_ITEMS = [
@@ -737,6 +737,7 @@ def main() -> None:
     subprocess.run(["python3", "scripts/build_analysis.py", "--check"], cwd=ROOT, check=True)
     validate_b2_retained_classification_freshness()
     validate_b2_cohort_conclusion_freshness()
+    subprocess.run(["python3", "scripts/build_publication_manifest.py", "--check"], cwd=ROOT, check=True)
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

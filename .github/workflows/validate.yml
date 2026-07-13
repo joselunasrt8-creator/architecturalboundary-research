@@ -35,19 +35,54 @@ jobs:
         run: python3 scripts/validate.py
       - name: Check registries
         run: python3 scripts/check_registry.py
-      - name: Check dataset build entry point
-        run: python3 scripts/build_dataset.py
+      - name: Check dataset freshness
+        run: python3 scripts/build_dataset.py --check
+      - name: Check analysis freshness
+        run: python3 scripts/build_analysis.py --check
       - name: Check report build entry point
         run: python3 scripts/build_report.py
+      - name: Check retained-classification freshness
+        run: python3 scripts/build_retained_classification.py --check
+      - name: Check cohort-conclusion freshness
+        run: python3 scripts/build_cohort_conclusion.py --check
       - name: Check publication-state manifest
         run: python3 scripts/build_publication_manifest.py --check
+      - name: Run CI-bound B2 publication-readiness audit
+        run: |
+          mkdir -p reports
+          python3 scripts/audit_b2_publication_readiness.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --commit "$GITHUB_SHA" \
+            --output reports/b2-publication-readiness.md
       - name: Build publication PDFs
         run: python3 scripts/build_papers.py
+      - name: Verify publication PDF artifacts
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          pdfs=(releases/papers/*.pdf)
+          if [ "${#pdfs[@]}" -eq 0 ]; then
+            echo "no publication PDFs produced" >&2
+            exit 1
+          fi
+          for pdf in "${pdfs[@]}"; do
+            if [ ! -s "$pdf" ]; then
+              echo "empty publication PDF: $pdf" >&2
+              exit 1
+            fi
+            echo "verified non-empty publication PDF: $pdf"
+          done
       - name: Upload publication PDFs
         uses: actions/upload-artifact@v4
         with:
           name: publication-pdfs
           path: releases/papers/*.pdf
+          if-no-files-found: error
+      - name: Upload CI-bound audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: b2-publication-readiness-audit
+          path: reports/b2-publication-readiness.md
           if-no-files-found: error
       - name: Check whitespace
         run: git diff --check

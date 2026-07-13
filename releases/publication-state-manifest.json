@@ -38,8 +38,8 @@
       },
       {
         "path": ".github/workflows/validate.yml",
-        "sha256": "8e45eff1dbce97037879ad376c3cbd183a0ff6f409d6cfee7f49553ad71c13dd",
-        "size_bytes": 1686
+        "sha256": "9c7626e1258c33f9349e7f16f85512e8c2bc401549753052284c2644be7226cc",
+        "size_bytes": 3075
       }
     ],
     "dependency_contracts": [

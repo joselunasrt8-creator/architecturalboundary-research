@@ -34,12 +34,17 @@ REQUIRED_PRECONDITIONS = [
 ]
 
 COMMANDS_EXECUTED = [
+    "python3 -m pytest -q",
     "python3 scripts/validate.py",
     "python3 scripts/check_registry.py",
-    "python3 scripts/build_dataset.py",
-    "python3 scripts/build_analysis.py",
+    "python3 scripts/build_dataset.py --check",
+    "python3 scripts/build_analysis.py --check",
     "python3 scripts/build_report.py",
+    "python3 scripts/build_retained_classification.py --check",
     "python3 scripts/build_cohort_conclusion.py --check",
+    "python3 scripts/build_publication_manifest.py --check",
+    "python3 scripts/audit_b2_publication_readiness.py",
+    "python3 scripts/build_papers.py",
     "git diff --check",
 ]
 
@@ -389,8 +394,28 @@ def determine(checks: list[ObjectCheck], lifecycle_checks: list[LifecycleCheck],
     return "BLOCKED"
 
 
+def ci_branch() -> str:
+    return os.environ.get("GITHUB_REF_NAME") or command_output(["git", "branch", "--show-current"])[1] or "LOCAL_UNVERIFIED"
+
+
+def ci_workflow_run_url(repository: str, workflow_run: str) -> str:
+    if workflow_run == "LOCAL_UNVERIFIED":
+        return "LOCAL_UNVERIFIED"
+    server_url = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+    return f"{server_url}/{repository}/actions/runs/{workflow_run}"
+
+
+def default_repository() -> str:
+    return os.environ.get("GITHUB_REPOSITORY", "joselunasrt8-creator/architecturalboundary-research")
+
+
+def default_commit() -> str:
+    return os.environ.get("GITHUB_SHA") or command_output(["git", "rev-parse", "HEAD"])[1] or "LOCAL_UNVERIFIED"
+
+
 def render_report(repository: str, commit: str, output: Path, workflow_run: str, timestamp: str, lifecycle_checks: list[LifecycleCheck], checks: list[ObjectCheck], precondition_failures: list[str], duplicate_labels: dict[str, list[str]], active_stale: list[str], archived_stale: list[str], final: str) -> str:
-    branch = os.environ.get("GITHUB_REF_NAME", "main")
+    branch = ci_branch()
+    workflow_run_url = ci_workflow_run_url(repository, workflow_run)
     lines = [
         "# B2 Publication-Readiness Audit",
         "",
@@ -399,6 +424,7 @@ def render_report(repository: str, commit: str, output: Path, workflow_run: str,
         f"- Branch: `{branch}`",
         f"- Exact audited commit: `{commit}`",
         f"- Exact workflow run: `{workflow_run}`",
+        f"- Exact workflow run URL: `{workflow_run_url}`",
         f"- Audit timestamp: `{timestamp}`",
         "",
         "## Commands Executed Before Audit",
@@ -476,8 +502,8 @@ def build_checks() -> list[ObjectCheck]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit B2 publication readiness for a verified commit.")
-    parser.add_argument("--repository", default="joselunasrt8-creator/architecturalboundary-research")
-    parser.add_argument("--commit", default=command_output(["git", "rev-parse", "HEAD"])[1] or "LOCAL_UNVERIFIED")
+    parser.add_argument("--repository", default=default_repository())
+    parser.add_argument("--commit", default=default_commit())
     parser.add_argument("--output", default=str(REPORT_DEFAULT))
     args = parser.parse_args()
 

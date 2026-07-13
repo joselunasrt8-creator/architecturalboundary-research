@@ -1,3 +1,11 @@
 {
-  "retained_classifications": []
+  "retained_classifications": [
+    {
+      "investigation_id": "b2-governance-cohort",
+      "artifact_path": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json",
+      "schema": "schemas/retained_classification.schema.json",
+      "status": "complete",
+      "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+    }
+  ]
 }

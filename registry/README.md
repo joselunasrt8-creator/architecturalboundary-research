@@ -8,3 +8,5 @@ Machine-readable JSON registry contracts are canonical in this repository. The r
 - `classifications.json` for classification contracts.
 
 Legacy lifecycle indexes remain as JSON-only companions: `protocol_versions.json`, `retained_classifications.json`, and `candidate_invariants.json`.
+
+`retained_classifications.json` indexes canonical retained-classification artifacts; the artifact itself remains authoritative for per-system outputs, lineage, and freshness.

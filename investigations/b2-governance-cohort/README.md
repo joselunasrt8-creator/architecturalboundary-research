@@ -11,7 +11,7 @@ Lifecycle workspace for the B2 governance systems cohort investigation. The manu
 - MSR: Complete
 - Comparative Dataset: Complete
 - Analysis: Complete
-- Retained Classification: Not Started
+- Retained Classification: Complete
 - Cohort Conclusion: Not Issued
 
-The Analysis stage is bounded to the deterministic I4 measurement-distribution artifact in `analysis/b2-governance-cohort-i4.analysis.json`. Retained classifications and the final cohort conclusion remain deferred to a later stage.
+The Analysis stage is bounded to the deterministic I4 measurement-distribution artifact in `analysis/b2-governance-cohort-i4.analysis.json`. The Retained Classification stage is bounded to the deterministic I5 artifact in `results/b2-governance-cohort-i5.retained-classification.json`. The final cohort conclusion remains deferred to a later stage.

@@ -6,7 +6,7 @@ Scope: Program B2 (`investigations/b2-governance-cohort` and `papers/paper-b2`).
 
 Determination: **BLOCKED**
 
-Reason: Protocol-required BOR, SRF, DER, MSR, and Comparative Dataset machine-readable artifacts are present, but Analysis and Retained Classification remain not started and the manuscript still contains unresolved publication-readiness TODOs. Under the user's stop rule, classification execution is not run or expanded in this audit.
+Reason: Protocol-required BOR, SRF, DER, MSR, and Comparative Dataset machine-readable artifacts are present, and Analysis/Retained Classification machine-readable artifacts are present and the manuscript still contains unresolved publication-readiness TODOs. Under the user's stop rule, cohort-conclusion execution is not run or expanded in this audit.
 
 ## 1. Protocol Conformance Report
 
@@ -20,20 +20,20 @@ Reason: Protocol-required BOR, SRF, DER, MSR, and Comparative Dataset machine-re
 | DER | Nine JSON files under `investigations/b2-governance-cohort/der/*.der.json`; manuscript section `papers/paper-b2/b2_09_derived_object_registry.tex` | Complete | Machine-readable DER files exist for all nine systems. |
 | MSR | Nine JSON files under `investigations/b2-governance-cohort/msr/*.msr.json`; manuscript section `papers/paper-b2/b2_10_measurement_registry.tex` | Complete | Machine-readable MSR files exist for all nine systems. |
 | Comparative Dataset | Manuscript section `papers/paper-b2/b2_11_comparative_dataset.tex`; dataset export at `investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json`; schema at `schemas/dataset.schema.json` | Complete | The machine-readable export exists and is freshness-checked as a deterministic projection of the nine canonical MSRs. |
-| Analysis | Manuscript section `papers/paper-b2/b2_12_analysis.tex` | Not started | The upstream Comparative Dataset exists, but no analysis execution or cohort outcome is accepted by this audit. |
+| Analysis | `investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json`; manuscript section `papers/paper-b2/b2_12_analysis.tex` | Complete | The canonical analysis artifact exists and is freshness-checked. |
 | Threats to Validity | Manuscript section `papers/paper-b2/b2_13_threats_to_validity.tex` | Present, but publication-incomplete | Section exists but has unresolved TODOs for selection rationale, observer-bias mitigation, and replication package. |
-| Retained Classification | Manuscript section `papers/paper-b2/b2_14_retained_classification.tex`; registry file `registry/retained_classifications.json` | Not started | No retained classification is independently accepted by this audit. |
+| Retained Classification | `investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json`; registry file `registry/retained_classifications.json`; manuscript section `papers/paper-b2/b2_14_retained_classification.tex` | Complete | The canonical retained-classification artifact exists and is freshness-checked from Analysis plus frozen I5. |
 
 ### Missing or incomplete exact sections
 
 1. `papers/paper-b2/b2_12_analysis.tex`
-   - Analysis remains a deferred placeholder and does not issue cohort outcomes.
+   - Analysis is complete, but this section must still avoid issuing cohort-conclusion text.
 2. `papers/paper-b2/b2_14_retained_classification.tex`
-   - Retained Classification remains not started for accepted lifecycle purposes.
+   - Retained Classification is complete, but this section must still avoid issuing the B2 cohort conclusion.
 3. `papers/paper-b2/b2_13_threats_to_validity.tex`
    - Selection rationale, observer-bias mitigation, and replication package pointers remain TODO.
 
-Protocol conformance result: **blocked before analysis/classification acceptance**.
+Protocol conformance result: **blocked before cohort-conclusion acceptance**.
 
 ## 2. Evidence Integrity Report
 
@@ -52,16 +52,16 @@ Protocol conformance result: **blocked before analysis/classification acceptance
 | Every derivation references BOR observations | Validated by repository DER contract checks. |
 | Every measurement references DER objects | Validated by repository MSR contract checks. |
 | No interpretation appears inside BOR | No classification fields were found in BOR constraints, and BOR files identify themselves as baseline-observation-only records. This audit did not rewrite BOR text. |
-| No unsupported claims exist | **Blocked for publication.** Analysis and retained-classification stages remain not started; this audit therefore does not certify any cohort outcome. |
+| No unsupported claims exist | **Blocked for publication.** Analysis and retained-classification stages are complete; this audit still does not certify any cohort conclusion. |
 
 ### Inconsistencies and reproducibility defects
 
-1. Analysis and retained-classification sections remain outside the completed lifecycle and must not be treated as accepted cohort outcomes.
+1. Analysis and retained-classification artifacts are completed, but the cohort conclusion remains unissued and must not be treated as accepted.
 2. Remaining manuscript TODOs outside the canonical dataset path must be resolved before publication readiness is claimed.
 
 ## 3. Retained Classification Table
 
-Classification execution is **not accepted by this audit** because Analysis and Retained Classification remain not started. The table below records only the classifications already stated in the manuscript, without adding new evidence, new outcomes, or new hypotheses.
+The canonical retained-classification artifact is accepted as complete for lifecycle purposes. The table below is retained as historical audit context and does not issue the B2 cohort conclusion.
 
 | Boundary | DER | System | Manuscript protocol outcome | Manuscript status label | Audit status |
 |---|---|---|---|---|---|
@@ -92,7 +92,7 @@ Because the protocol conformance audit is blocked, this section separates alread
 
 ### Interpretation
 
-- The audit cannot certify cohort synthesis as publication-ready because Analysis and Retained Classification remain not started.
+- The audit cannot certify cohort synthesis as publication-ready because the B2 cohort conclusion remains unissued.
 - Any already-written manuscript interpretation must remain separated from the completed Comparative Dataset until a bounded Analysis stage is executed.
 
 ### Conclusions
@@ -118,15 +118,15 @@ The threats section is directionally appropriate but not publication-complete.
 
 | Publication item | Status | Issue |
 |---|---:|---|
-| Terminology consistency | Needs review | DER/MSR/dataset identifiers are machine-readable, but downstream analysis/classification text is not accepted in this audit. |
+| Terminology consistency | Needs review | DER/MSR/dataset identifiers are machine-readable; downstream analysis/classification text is accepted only up to the retained-classification boundary. |
 | Figure numbering | Not fully audited | No figure-number defect was established in this audit. |
 | Table numbering | Needs review | Several tables are present, but unresolved TODO tables prevent final numbering/readiness certification. |
 | Citations | Needs review | BOR evidence sources are cited in JSON; publication citation completeness remains outside this dataset synchronization. |
 | References | Needs review | Bibliography was not validated as complete because publication is blocked earlier. |
 | Appendix references | Needs review | Appendix/cross-link completeness was not certified because required artifacts are incomplete. |
-| Cross-links | Needs review | Analysis and classification sections remain not started for accepted lifecycle purposes. |
+| Cross-links | Needs review | Analysis and retained-classification artifacts are complete, while cohort conclusion remains unissued. |
 | Protocol references | Present | Protocol references exist for the completed BOR/SRF/DER/MSR/Comparative Dataset pipeline. |
-| Classification consistency | Blocked | Retained Classification remains not started. |
+| Classification consistency | Blocked | Retained Classification is complete; cohort conclusion remains unissued. |
 
 ## Final determination
 
@@ -134,6 +134,6 @@ The threats section is directionally appropriate but not publication-complete.
 
 Objective blocking issues required before publication:
 
-1. Keep Analysis and Retained Classification marked not started until those stages are explicitly executed.
+1. Keep the B2 cohort conclusion unissued until that stage is explicitly executed.
 2. Resolve remaining manuscript TODO / blocked placeholders without adding unsupported evidence.
 3. Complete the threats-to-validity TODOs for selection rationale, observer-bias mitigation, and replication package pointer.

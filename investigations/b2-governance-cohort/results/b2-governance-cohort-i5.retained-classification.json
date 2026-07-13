@@ -1,0 +1,386 @@
+{
+  "object_type": "CanonicalRetainedClassification",
+  "schema_version": "canonical-retained-classification-v1",
+  "protocol_version": "protocol-v1",
+  "investigation_id": "b2-governance-cohort",
+  "id": "retained-classification-b2-governance-cohort-i5",
+  "classification_stage": "B2 Retained Classification",
+  "input_analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
+  "input_dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+  "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5",
+  "cohort_size": 9,
+  "row_ordering": "system_id ascending",
+  "measurement_fields": [
+    "m_R",
+    "m_L",
+    "m_E",
+    "m_RL",
+    "m_LE"
+  ],
+  "per_system_classifications": [
+    {
+      "system_id": "aws-iam",
+      "msr_id": "msr-b2-aws-iam-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/aws-iam",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/aws-iam.msr.json",
+        "source_der_ids": [
+          "der-b2-aws-iam-request-context-policy-evaluation-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/aws-iam.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/aws-iam.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/aws-iam.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "cedar-amazon-verified-permissions",
+      "msr_id": "msr-b2-cedar-amazon-verified-permissions-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/cedar-amazon-verified-permissions",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/cedar-amazon-verified-permissions.msr.json",
+        "source_der_ids": [
+          "der-b2-cedar-amazon-verified-permissions-policy-store-evaluation-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/cedar-amazon-verified-permissions.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/cedar-amazon-verified-permissions.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/cedar-amazon-verified-permissions.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "envoy-ext-authz",
+      "msr_id": "msr-b2-envoy-ext-authz-reference-execution",
+      "measurements": {
+        "m_R": null,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": null,
+        "m_LE": 1
+      },
+      "classification": "indeterminate",
+      "missing_measurements": [
+        "m_R",
+        "m_RL"
+      ],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/envoy-ext-authz",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json",
+        "source_der_ids": [
+          "der-b2-envoy-ext-authz-external-authorization-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/envoy-ext-authz.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/envoy-ext-authz.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "google-zanzibar",
+      "msr_id": "msr-b2-google-zanzibar-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": null,
+        "m_RL": 1,
+        "m_LE": null
+      },
+      "classification": "indeterminate",
+      "missing_measurements": [
+        "m_E",
+        "m_LE"
+      ],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/google-zanzibar",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/google-zanzibar.msr.json",
+        "source_der_ids": [
+          "der-b2-google-zanzibar-relation-tuple-check-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/google-zanzibar.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/google-zanzibar.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/google-zanzibar.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "hashicorp-vault",
+      "msr_id": "msr-b2-hashicorp-vault-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/hashicorp-vault",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/hashicorp-vault.msr.json",
+        "source_der_ids": [
+          "der-b2-hashicorp-vault-authenticated-path-policy-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/hashicorp-vault.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/hashicorp-vault.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/hashicorp-vault.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "istio-authorizationpolicy",
+      "msr_id": "msr-b2-istio-authorizationpolicy-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/istio-authorizationpolicy",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/istio-authorizationpolicy.msr.json",
+        "source_der_ids": [
+          "der-b2-istio-authorizationpolicy-workload-action-order-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/istio-authorizationpolicy.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/istio-authorizationpolicy.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/istio-authorizationpolicy.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "kubernetes-rbac-admission",
+      "msr_id": "msr-b2-kubernetes-rbac-admission-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/kubernetes-rbac-admission",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/kubernetes-rbac-admission.msr.json",
+        "source_der_ids": [
+          "der-b2-kubernetes-rbac-admission-api-server-admission-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/kubernetes-rbac-admission.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/kubernetes-rbac-admission.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/kubernetes-rbac-admission.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "open-policy-agent-gatekeeper",
+      "msr_id": "msr-b2-open-policy-agent-gatekeeper-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": 1,
+        "m_E": 1,
+        "m_RL": 1,
+        "m_LE": 1
+      },
+      "classification": "supports",
+      "missing_measurements": [],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/open-policy-agent-gatekeeper",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/open-policy-agent-gatekeeper.msr.json",
+        "source_der_ids": [
+          "der-b2-open-policy-agent-gatekeeper-admission-audit-enforcement-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/open-policy-agent-gatekeeper.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/open-policy-agent-gatekeeper.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/open-policy-agent-gatekeeper.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    },
+    {
+      "system_id": "openfga",
+      "msr_id": "msr-b2-openfga-reference-execution",
+      "measurements": {
+        "m_R": 1,
+        "m_L": null,
+        "m_E": null,
+        "m_RL": 1,
+        "m_LE": null
+      },
+      "classification": "indeterminate",
+      "missing_measurements": [
+        "m_L",
+        "m_E",
+        "m_LE"
+      ],
+      "lineage": {
+        "analysis_ref": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json#/system_measurement_matrix/openfga",
+        "dataset_ref": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+        "msr_path": "investigations/b2-governance-cohort/msr/openfga.msr.json",
+        "source_der_ids": [
+          "der-b2-openfga-authorization-model-version-boundary"
+        ],
+        "der_paths": [
+          "investigations/b2-governance-cohort/der/openfga.der.json"
+        ],
+        "srf_paths": [
+          "investigations/b2-governance-cohort/srf/openfga.srf.json"
+        ],
+        "bor_paths": [
+          "investigations/b2-governance-cohort/bor/openfga.bor.json"
+        ],
+        "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5"
+      }
+    }
+  ],
+  "cohort_classification": {
+    "outcome": "indeterminate",
+    "precedence": [
+      "indeterminate",
+      "violates",
+      "supports"
+    ],
+    "basis": [
+      "envoy-ext-authz",
+      "google-zanzibar",
+      "openfga"
+    ]
+  },
+  "lineage": {
+    "analysis_path": "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
+    "dataset_path": "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+    "registration_path": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json",
+    "msr_paths": [
+      "investigations/b2-governance-cohort/msr/aws-iam.msr.json",
+      "investigations/b2-governance-cohort/msr/cedar-amazon-verified-permissions.msr.json",
+      "investigations/b2-governance-cohort/msr/envoy-ext-authz.msr.json",
+      "investigations/b2-governance-cohort/msr/google-zanzibar.msr.json",
+      "investigations/b2-governance-cohort/msr/hashicorp-vault.msr.json",
+      "investigations/b2-governance-cohort/msr/istio-authorizationpolicy.msr.json",
+      "investigations/b2-governance-cohort/msr/kubernetes-rbac-admission.msr.json",
+      "investigations/b2-governance-cohort/msr/open-policy-agent-gatekeeper.msr.json",
+      "investigations/b2-governance-cohort/msr/openfga.msr.json"
+    ],
+    "der_paths": [
+      "investigations/b2-governance-cohort/der/aws-iam.der.json",
+      "investigations/b2-governance-cohort/der/cedar-amazon-verified-permissions.der.json",
+      "investigations/b2-governance-cohort/der/envoy-ext-authz.der.json",
+      "investigations/b2-governance-cohort/der/google-zanzibar.der.json",
+      "investigations/b2-governance-cohort/der/hashicorp-vault.der.json",
+      "investigations/b2-governance-cohort/der/istio-authorizationpolicy.der.json",
+      "investigations/b2-governance-cohort/der/kubernetes-rbac-admission.der.json",
+      "investigations/b2-governance-cohort/der/open-policy-agent-gatekeeper.der.json",
+      "investigations/b2-governance-cohort/der/openfga.der.json"
+    ],
+    "srf_paths": [
+      "investigations/b2-governance-cohort/srf/aws-iam.srf.json",
+      "investigations/b2-governance-cohort/srf/cedar-amazon-verified-permissions.srf.json",
+      "investigations/b2-governance-cohort/srf/envoy-ext-authz.srf.json",
+      "investigations/b2-governance-cohort/srf/google-zanzibar.srf.json",
+      "investigations/b2-governance-cohort/srf/hashicorp-vault.srf.json",
+      "investigations/b2-governance-cohort/srf/istio-authorizationpolicy.srf.json",
+      "investigations/b2-governance-cohort/srf/kubernetes-rbac-admission.srf.json",
+      "investigations/b2-governance-cohort/srf/open-policy-agent-gatekeeper.srf.json",
+      "investigations/b2-governance-cohort/srf/openfga.srf.json"
+    ],
+    "bor_paths": [
+      "investigations/b2-governance-cohort/bor/aws-iam.bor.json",
+      "investigations/b2-governance-cohort/bor/cedar-amazon-verified-permissions.bor.json",
+      "investigations/b2-governance-cohort/bor/envoy-ext-authz.bor.json",
+      "investigations/b2-governance-cohort/bor/google-zanzibar.bor.json",
+      "investigations/b2-governance-cohort/bor/hashicorp-vault.bor.json",
+      "investigations/b2-governance-cohort/bor/istio-authorizationpolicy.bor.json",
+      "investigations/b2-governance-cohort/bor/kubernetes-rbac-admission.bor.json",
+      "investigations/b2-governance-cohort/bor/open-policy-agent-gatekeeper.bor.json",
+      "investigations/b2-governance-cohort/bor/openfga.bor.json"
+    ]
+  },
+  "provenance": {
+    "method": "CanonicalAnalysis -> frozen I5 deterministic retained classification",
+    "created_from": [
+      "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
+      "investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json",
+      "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json"
+    ]
+  },
+  "generation": {
+    "builder": "scripts/build_retained_classification.py",
+    "mode": "deterministic-rebuild",
+    "repository_root": "."
+  }
+}

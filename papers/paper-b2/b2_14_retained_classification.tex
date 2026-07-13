@@ -1,58 +1,41 @@
 \section{Retained Classification}
 \label{sec:retained-classification}
-This section records the retained classifications for the investigated boundary/boundaries.
+This section records the retained classification artifact produced for the investigated boundary. The source of record is the canonical machine-readable artifact at \texttt{investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json}.
 
 \subsection{Investigated boundary set}
 \begin{itemize}
   \item \textbf{B2-BND-001:} Candidate Reasoning\,$\rightarrow$\,Legitimacy\,$\rightarrow$\,Execution (RLE) boundary (Protocol v1.0 execution over the B2 cohort).
 \end{itemize}
 
-\subsection{Per-system retained classification (Protocol v1.0)}
-\textbf{Note.} The \textit{Protocol outcome} field can be populated only by applying decision rules already registered for this investigation under Protocol v1.0 (I5). When an outcome is recorded, it must be exactly \{Supports, Violates, Indeterminate\}. In Paper~B2, I5 was not preregistered at sufficient specificity to uniquely map the Comparative Dataset to protocol outcomes; therefore, no protocol outcomes are issued in this section. Rows are marked \emph{Not classified---registered I5 unavailable} in the evidence notes and are governed by audit finding \texttt{AUD-001} (Section~\ref{sec:protocol-audit-finding}).
+\subsection{Execution rule}
+The retained-classification artifact is generated only from the canonical B2 Analysis artifact and the frozen preregistered I5 deterministic decision rule. The transformation preserves missing I4 measurements as \emph{Indeterminate} per-system outcomes and does not issue the B2 cohort conclusion.
 
+\subsection{Per-system retained classification (Protocol v1.0)}
 \begin{center}
-\begin{longtable}{@{}p{0.10\linewidth}p{0.18\linewidth}p{0.16\linewidth}p{0.14\linewidth}p{0.10\linewidth}p{0.24\linewidth}@{}}
+\begin{longtable}{@{}p{0.10\linewidth}p{0.23\linewidth}p{0.16\linewidth}p{0.18\linewidth}p{0.25\linewidth}@{}}
 \toprule
-Boundary & System & Protocol outcome & Confidence & Status label & Evidence summary (trace-first) \\
+Boundary & System & Protocol outcome & Missing measurements & Trace source \\
 \midrule
 \endfirsthead
 \toprule
-Boundary & System & Protocol outcome & Confidence & Status label & Evidence summary (trace-first) \\
+Boundary & System & Protocol outcome & Missing measurements & Trace source \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 \bottomrule
 \endlastfoot
-B2-BND-001 & OPA+Gatekeeper &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & Kubernetes RBAC/Admission &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & AWS IAM &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & HashiCorp Vault &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & Envoy ext\_authz &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & Istio AuthorizationPolicy &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & OpenFGA &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & Cedar / AVP &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
-B2-BND-001 & Google Zanzibar &  &  &  & Not classified---registered I5 unavailable (see \texttt{AUD-001}). \\
+B2-BND-001 & AWS IAM & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & Cedar / Amazon Verified Permissions & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & Envoy ext\_authz & Indeterminate & \texttt{m\_R}, \texttt{m\_RL} & Canonical retained-classification artifact. \\
+B2-BND-001 & Google Zanzibar & Indeterminate & \texttt{m\_E}, \texttt{m\_LE} & Canonical retained-classification artifact. \\
+B2-BND-001 & HashiCorp Vault & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & Istio AuthorizationPolicy & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & Kubernetes RBAC/Admission & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & OPA+Gatekeeper & Supports & None & Canonical retained-classification artifact. \\
+B2-BND-001 & OpenFGA & Indeterminate & \texttt{m\_L}, \texttt{m\_E}, \texttt{m\_LE} & Canonical retained-classification artifact. \\
 \end{longtable}
 \end{center}
 
-\subsection{Status label key (interpretation layer)}
-The \textit{Status label} is a cohort-bounded interpretation (Section~\ref{sec:analysis}), chosen from:
-\begin{itemize}
-  \item Fundamental Architectural Invariant
-  \item Conditional Architectural Invariant
-  \item Domain-Specific Pattern
-  \item Implementation Artifact
-  \item Unsupported
-\end{itemize}
-
-\subsection{Protocol audit finding (AUD-001)}
-\label{sec:protocol-audit-finding}
-\textbf{AUD-001 --- Protocol v1.0 execution under-specification.}
-\textbf{Finding:} The Paper~B2 registration did not contain a complete investigation-specific I4 measurement mapping and I5 decision function capable of uniquely mapping the Comparative Dataset to \{Supports, Violates, Indeterminate\}.
-\textbf{Impact:} Metric-level synthesis is reproducible. Candidate RLE classification is not uniquely reproducible.
-\textbf{B2 consequence:} No retained RLE classification is issued. All candidate classification rows remain unclassified due to the missing preregistered mapping.
-\textbf{Future disposition:} Define I4/I5 prospectively in Protocol v1.x or the registration for Paper~B3, then execute the full investigation again under those frozen rules.
-
-\subsection{Reason for retention or rejection}
-For B2-BND-001, Paper~B2 does not provide a retention or rejection rationale because no protocol outcome labels can be issued without the preregistered I4/I5 mapping (see \texttt{AUD-001}).
+\subsection{Cohort-conclusion boundary}
+The artifact records retained classifications and the I5 cohort classification field required by the retained-classification stage, but this manuscript section does not issue the B2 cohort conclusion. The conclusion stage remains deferred.

@@ -87,12 +87,19 @@ The executable workflow is `.github/workflows/validate.yml`. On every push and p
 
 1. checks out the repository
 2. installs Python dependencies
-3. installs TeX Live publication dependencies
-4. runs repository validation, including LaTeX publication readiness
-5. runs registry, dataset, and report entry-point checks
-6. builds publication PDFs
-7. uploads `releases/papers/*.pdf` as the `publication-pdfs` workflow artifact
-8. checks whitespace with `git diff --check`
+3. runs the test suite
+4. installs TeX Live publication dependencies
+5. runs repository and registry validation
+6. runs deterministic B2 freshness checks
+7. checks the publication-state manifest
+8. builds publication PDFs
+9. verifies the exact expected PDF set and confirms every PDF is non-empty
+10. runs the CI-bound B2 publication-readiness audit
+11. uploads `releases/papers/*.pdf` as the `publication-pdfs` workflow artifact
+12. uploads `reports/b2-publication-readiness.md` as the `b2-publication-readiness-audit` workflow artifact
+13. checks whitespace with `git diff --check`
+
+Release preparation remains bounded to a release candidate until final `main` CI validation succeeds, rendered PDFs are available, and a permanent tag is created against the verified `main` SHA. GitHub Release publication is a separate act from readiness preparation.
 
 ## Release artifact locations
 

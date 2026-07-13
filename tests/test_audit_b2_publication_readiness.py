@@ -54,7 +54,7 @@ def test_verified_valid_repository_state_is_audited(tmp_path):
     assert "| Canonical MSR | COMPLETE |" in text
     assert "| Comparative Dataset | COMPLETE |" in text
     assert "| Analysis | COMPLETE |" in text
-    assert "| Retained Classification | NOT STARTED |" in text
+    assert "| Retained Classification | COMPLETE |" in text
 
 
 def test_missing_canonical_path_returns_null_not_audited(tmp_path):

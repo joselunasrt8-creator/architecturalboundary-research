@@ -30,6 +30,7 @@ REQUIRED_PRECONDITIONS = [
     "scripts/build_dataset.py",
     "scripts/build_analysis.py",
     "scripts/build_report.py",
+    "scripts/build_cohort_conclusion.py",
 ]
 
 COMMANDS_EXECUTED = [
@@ -38,6 +39,7 @@ COMMANDS_EXECUTED = [
     "python3 scripts/build_dataset.py",
     "python3 scripts/build_analysis.py",
     "python3 scripts/build_report.py",
+    "python3 scripts/build_cohort_conclusion.py --check",
     "git diff --check",
 ]
 
@@ -58,9 +60,7 @@ EXPECTED_B2_OBJECTS = {
     "open-policy-agent-gatekeeper": "Open Policy Agent Gatekeeper",
     "openfga": "OpenFGA",
 }
-NOT_STARTED_LIFECYCLE_STAGES = {
-    "Retained Classification": "registry/retained_classifications.json",
-}
+NOT_STARTED_LIFECYCLE_STAGES = {}
 
 
 @dataclass
@@ -314,7 +314,17 @@ def inspect_lifecycle() -> list[LifecycleCheck]:
         "investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json",
         "CanonicalAnalysis",
     )
-    lifecycle = [bor, srf, der, msr, dataset, analysis]
+    retained = complete_single_json_stage(
+        "Retained Classification",
+        "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json",
+        "CanonicalRetainedClassification",
+    )
+    cohort = complete_single_json_stage(
+        "Cohort Conclusion",
+        "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json",
+        "CanonicalCohortConclusion",
+    )
+    lifecycle = [bor, srf, der, msr, dataset, analysis, retained, cohort]
     for name, relative in NOT_STARTED_LIFECYCLE_STAGES.items():
         path = ROOT / relative
         files = object_files([relative]) if path.exists() else []
@@ -410,6 +420,7 @@ def build_checks() -> list[ObjectCheck]:
         inspect_object("Comparative Dataset", ["datasets/comparative", "papers/paper-b2/b2_11_comparative_dataset.tex"]),
         inspect_object("Analysis", ["investigations/b2-governance-cohort/analysis", "papers/paper-b2/b2_12_analysis.tex"]),
         inspect_object("Retained Classification", ["registry/retained_classifications.json", "papers/paper-b2/b2_14_retained_classification.tex"]),
+        inspect_object("Cohort Conclusion", ["registry/cohort_conclusions.json", "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json", "papers/paper-b2/b2_16_conclusion.tex"]),
         inspect_object("Threats to Validity", ["papers/paper-b2/b2_13_threats_to_validity.tex"]),
         inspect_object("manuscript", ["papers/paper-b2/main.tex"]),
         inspect_object("publication artifacts", ["datasets/canonical", "datasets/exports", "releases"]),

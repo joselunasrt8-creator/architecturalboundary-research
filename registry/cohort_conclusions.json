@@ -1,0 +1,12 @@
+{
+  "cohort_conclusions": [
+    {
+      "investigation_id": "b2-governance-cohort",
+      "artifact_path": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json",
+      "schema": "schemas/cohort_conclusion.schema.json",
+      "status": "complete",
+      "decision_rule_ref": "investigations/b2-governance-cohort/preregistration/i1_i5_registration.json#/deterministic_decision_rule/I5/cohort_outcome",
+      "source_retained_classification": "investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json"
+    }
+  ]
+}

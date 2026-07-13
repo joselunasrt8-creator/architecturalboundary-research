@@ -28,7 +28,7 @@ REQUIRED_PATHS = [
     "protocol/protocol-v1/schemas/README.md", "protocol/protocol-v1/templates/README.md",
     "papers/paper-0-protocol/README.md", "papers/paper-b1/README.md", "papers/paper-b2/main.tex",
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
-    "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_report.py", "scripts/check_registry.py", "scripts/build_papers.py",
+    "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
 INVESTIGATIONS = ["investigations/template", "investigations/b1-three-system-pilot", "investigations/b2-governance-cohort"]
 INVESTIGATION_ITEMS = [
@@ -38,12 +38,12 @@ INVESTIGATION_ITEMS = [
 ]
 SCHEMAS = [
     "schemas/bor.schema.json", "schemas/srf.schema.json", "schemas/der.schema.json",
-    "schemas/msr.schema.json", "schemas/dataset.schema.json", "schemas/analysis.schema.json", "schemas/retained_classification.schema.json", "schemas/investigation.schema.json",
+    "schemas/msr.schema.json", "schemas/dataset.schema.json", "schemas/analysis.schema.json", "schemas/retained_classification.schema.json", "schemas/cohort_conclusion.schema.json", "schemas/investigation.schema.json",
 ]
 REGISTRIES = [
     "registry/architectural_boundaries.json", "registry/investigations.json", "registry/terminology.json",
     "registry/classifications.json", "registry/protocol_versions.json", "registry/retained_classifications.json",
-    "registry/candidate_invariants.json",
+    "registry/cohort_conclusions.json", "registry/candidate_invariants.json",
 ]
 MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 TEX_INPUT = re.compile(r"\\(?:input|include|bibliography)\{([^}]+)\}")
@@ -123,6 +123,21 @@ def validate_b2_retained_classification_freshness() -> None:
         raise SystemExit(f"B2 retained-classification freshness check failed: {detail}")
     if result.stdout.strip():
         print(result.stdout.strip())
+
+def validate_b2_cohort_conclusion_freshness() -> None:
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/build_cohort_conclusion.py"), "--check"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout).strip()
+        raise SystemExit(f"B2 cohort-conclusion freshness check failed: {detail}")
+    if result.stdout.strip():
+        print(result.stdout.strip())
+
 
 def validate_repository_first_paper_template() -> None:
     for relative in [
@@ -721,6 +736,7 @@ def main() -> None:
     subprocess.run(["python3", "scripts/build_dataset.py", "--check"], cwd=ROOT, check=True)
     subprocess.run(["python3", "scripts/build_analysis.py", "--check"], cwd=ROOT, check=True)
     validate_b2_retained_classification_freshness()
+    validate_b2_cohort_conclusion_freshness()
     validate_registered_paths()
     validate_markdown_links()
     validate_latex_inputs()

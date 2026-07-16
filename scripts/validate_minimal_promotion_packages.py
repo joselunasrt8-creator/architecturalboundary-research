@@ -7,13 +7,13 @@ import copy
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "schemas/minimal_promotion_package.schema.json"
-PACKAGE_DIR = ROOT / "investigations/b2-governance-cohort/promotion-packages"
+SCHEMA_RELATIVE_PATH = Path("schemas/minimal_promotion_package.schema.json")
 SUPPORTED_SCHEMA_VERSIONS = frozenset({"minimal-promotion-package-schema-v1"})
 SHA256_METHOD = "repository file bytes without transformation"
 PACKAGE_METHOD = (
@@ -77,7 +77,7 @@ def _artifact_references(value: Any) -> Iterable[dict[str, Any]]:
             yield from _artifact_references(child)
 
 
-def _validate_repository_path(raw: Any, field: str) -> Path:
+def _validate_repository_path(raw: Any, field: str) -> PurePosixPath:
     if not isinstance(raw, str) or not raw or "\\" in raw:
         _fail(f"{field}: path must be a non-empty POSIX repository-relative path")
     pure = PurePosixPath(raw)
@@ -88,12 +88,43 @@ def _validate_repository_path(raw: Any, field: str) -> Path:
     lowered = {part.lower() for part in pure.parts}
     if lowered & MUTABLE_PATH_PARTS or raw.startswith(("refs/heads/", "branches/")):
         _fail(f"{field}: mutable workspace path is prohibited: {raw}")
-    resolved = (ROOT / pure).resolve()
+    return pure
+
+
+def _git(root: Path, arguments: list[str]) -> subprocess.CompletedProcess[bytes]:
+    """Run one read-only local Git query without exposing environment-specific stderr."""
     try:
-        resolved.relative_to(ROOT.resolve())
-    except ValueError:
-        _fail(f"{field}: path resolves outside the repository: {raw}")
-    return resolved
+        return subprocess.run(
+            ["git", *arguments],
+            cwd=root,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+    except OSError as error:
+        _fail(f"git: repository-local object access unavailable: {error.__class__.__name__}")
+
+
+def _require_commit(root: Path, commit: str, field: str) -> None:
+    result = _git(root, ["cat-file", "-e", f"{commit}^{{commit}}"])
+    if result.returncode != 0:
+        _fail(f"{field}: commit object does not exist: {commit}")
+
+
+def _blob_at_commit(root: Path, commit: str, path: PurePosixPath, field: str) -> bytes:
+    """Read exactly commit:path, distinguishing absent paths from non-blob objects."""
+    object_name = f"{commit}:{path.as_posix()}"
+    object_type = _git(root, ["cat-file", "-t", object_name])
+    if object_type.returncode != 0:
+        _fail(f"{field}: path does not exist at recorded commit: {path.as_posix()}")
+    kind = object_type.stdout.strip()
+    if kind != b"blob":
+        rendered = kind.decode("ascii", errors="replace") or "unknown"
+        _fail(f"{field}: path is not a file at recorded commit ({rendered}): {path.as_posix()}")
+    blob = _git(root, ["cat-file", "blob", object_name])
+    if blob.returncode != 0:  # pragma: no cover - object disappeared between two local read-only queries
+        _fail(f"{field}: file blob cannot be read at recorded commit: {path.as_posix()}")
+    return blob.stdout
 
 
 def _validate_digest(digest: Any, field: str, *, package: bool = False) -> None:
@@ -120,7 +151,8 @@ def validate_package(package: Any, *, root: Path = ROOT) -> None:
     """Validate one already-parsed package without mutation or external access."""
     if not isinstance(package, dict):
         _fail("<package>: package must be a JSON object")
-    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    root = root.resolve()
+    schema = json.loads((root / SCHEMA_RELATIVE_PATH).read_text(encoding="utf-8"))
     errors = sorted(Draft202012Validator(schema).iter_errors(package), key=lambda error: (list(error.absolute_path), error.message))
     if errors:
         error = errors[0]
@@ -133,6 +165,11 @@ def validate_package(package: Any, *, root: Path = ROOT) -> None:
         _fail(f"package_purpose: {package['package_purpose']!r} is incompatible with cohort_outcome {package['cohort_outcome']!r}")
     if package["hash_algorithm"] != "sha256":
         _fail("hash_algorithm: only sha256 is supported")
+    if package["source_commit_sha"] != package["producer_commit"]:
+        _fail("producer_commit: must equal the producer repository source_commit_sha")
+    _require_commit(root, package["source_commit_sha"], "source_commit_sha")
+    verified_commits = {package["source_commit_sha"]}
+    blobs: dict[tuple[str, str], bytes] = {}
 
     for field, category in EVIDENCE_FIELDS.items():
         value = package[field]
@@ -144,11 +181,17 @@ def validate_package(package: Any, *, root: Path = ROOT) -> None:
         field = f"artifact_reference[{index}]"
         path = _validate_repository_path(reference["repository_relative_path"], f"{field}.repository_relative_path")
         _validate_digest(reference["digest"], f"{field}.digest")
-        if not path.is_file():
-            _fail(f"{field}.repository_relative_path: referenced artifact does not exist")
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        commit = reference["source_commit"]
+        if commit not in verified_commits:
+            _require_commit(root, commit, f"{field}.source_commit")
+            verified_commits.add(commit)
+        blob_key = (commit, path.as_posix())
+        if blob_key not in blobs:
+            blobs[blob_key] = _blob_at_commit(root, commit, path, f"{field}.repository_relative_path")
+        blob = blobs[blob_key]
+        actual = hashlib.sha256(blob).hexdigest()
         if actual != reference["digest"]["digest"]:
-            _fail(f"{field}.digest: artifact SHA-256 mismatch for {path.relative_to(root)}")
+            _fail(f"{field}.digest: artifact SHA-256 mismatch at recorded commit for {path.as_posix()}")
 
     required_classes = REQUIRED_CLASSES.get(package["package_purpose"], frozenset())
     present_required = {ref["artifact_class"] for ref in references if ref["required_for_purpose"]}
@@ -168,25 +211,41 @@ def validate_package(package: Any, *, root: Path = ROOT) -> None:
         _fail("non_authority_statement: documented producer boundary statement is required")
 
 
-def validate_path(path: Path) -> None:
+def validate_path(path: Path, *, root: Path = ROOT) -> None:
     try:
         package = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
-        _fail(f"{path}: cannot read package JSON: {error}")
-    validate_package(package)
+        _fail(f"package input cannot be read as JSON: {error.__class__.__name__}")
+    validate_package(package, root=root)
+
+
+def discover_packages(root: Path = ROOT) -> list[Path]:
+    """Discover regular, non-symlink canonical package files in stable order."""
+    investigations = root.resolve() / "investigations"
+    if not investigations.is_dir() or investigations.is_symlink():
+        return []
+    packages: list[Path] = []
+    for investigation in investigations.iterdir():
+        if not investigation.is_dir() or investigation.is_symlink():
+            continue
+        package_dir = investigation / "promotion-packages"
+        if not package_dir.is_dir() or package_dir.is_symlink():
+            continue
+        packages.extend(path for path in package_dir.glob("*.json") if path.is_file() and not path.is_symlink())
+    return sorted(packages, key=lambda path: path.relative_to(root.resolve()).as_posix())
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("paths", nargs="*", type=Path, help="package paths (defaults to repository promotion packages)")
     args = parser.parse_args(argv)
-    paths = args.paths or sorted(PACKAGE_DIR.glob("*.json"))
+    paths = args.paths or discover_packages(ROOT)
     if not paths:
         print("no Minimal Promotion Packages found", file=sys.stderr)
         return 1
     for path in paths:
         try:
-            validate_path(path if path.is_absolute() else ROOT / path)
+            validate_path(path if path.is_absolute() else ROOT / path, root=ROOT)
         except PackageValidationError as error:
             print(f"{path}: {error}", file=sys.stderr)
             return 1

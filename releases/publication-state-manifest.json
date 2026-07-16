@@ -72,8 +72,8 @@
       },
       {
         "path": "protocol/protocol-v1/protocol.md",
-        "sha256": "ea25f011b9530594104db8951f2c54a89f7d417589f29370afed861af3e84d77",
-        "size_bytes": 3062
+        "sha256": "b77a4d7a7b271cdf29e9b07875671d253051acc5376771765c11ba059007d3af",
+        "size_bytes": 3766
       },
       {
         "path": "protocol/protocol-v1/terminology.md",

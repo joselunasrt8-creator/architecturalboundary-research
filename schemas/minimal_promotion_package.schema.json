@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/architecturalboundary/minimal-promotion-package.schema.json",
   "title": "Minimal Promotion Package",
   "description": "Executable representation of docs/minimal_promotion_package.md. The documentation remains normative; this schema does not imply producer or consumer authority, promotion decision, candidate invariant, formal theorem, publication-readiness eligibility, automation, synchronization, or downstream acceptance.",
   "type": "object",
@@ -47,8 +46,6 @@
     "withdrawal_reason",
     "package_content_reference",
     "package_content_digest",
-    "package_hash_algorithm",
-    "package_canonicalization_method",
     "producer_repository",
     "producer_commit"
   ],
@@ -58,14 +55,15 @@
     },
     "package_id": {
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+      "pattern": "^[a-z](?:[a-z0-9-]*[a-z0-9])?$"
     },
     "package_version": {
       "type": "string",
       "pattern": "^v[0-9]+(\\.[0-9]+)*$"
     },
     "package_status": {
-      "$ref": "#/$defs/packageStatus"
+      "$ref": "#/$defs/packageStatus",
+      "description": "Records status_at_emission for the immutable package document. It is immutable after package emission and is not the derived effective_status from append-only lifecycle records."
     },
     "package_purpose": {
       "enum": [
@@ -238,14 +236,6 @@
     "package_content_digest": {
       "$ref": "#/$defs/digest"
     },
-    "package_hash_algorithm": {
-      "type": "string",
-      "minLength": 1
-    },
-    "package_canonicalization_method": {
-      "type": "string",
-      "minLength": 1
-    },
     "producer_repository": {
       "type": "string",
       "minLength": 1
@@ -336,8 +326,7 @@
         "source_commit",
         "lineage_role",
         "required_for_purpose",
-        "digest",
-        "hash_algorithm"
+        "digest"
       ],
       "properties": {
         "artifact_class": {
@@ -399,10 +388,6 @@
         },
         "digest": {
           "$ref": "#/$defs/digest"
-        },
-        "hash_algorithm": {
-          "type": "string",
-          "minLength": 1
         }
       }
     },
@@ -523,7 +508,7 @@
       "properties": {
         "package_id": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+          "pattern": "^[a-z](?:[a-z0-9-]*[a-z0-9])?$"
         },
         "package_version": {
           "type": "string",
@@ -619,5 +604,77 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "cohort_outcome": {
+            "const": "supports"
+          }
+        },
+        "required": [
+          "cohort_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "package_purpose": {
+            "enum": [
+              "candidate_invariant_review",
+              "bounded_formal_question",
+              "vocabulary_alignment",
+              "model_obligation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "cohort_outcome": {
+            "const": "indeterminate"
+          }
+        },
+        "required": [
+          "cohort_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "package_purpose": {
+            "enum": [
+              "indeterminate_evidence_review",
+              "bounded_formal_question",
+              "vocabulary_alignment",
+              "model_obligation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "cohort_outcome": {
+            "const": "violates"
+          }
+        },
+        "required": [
+          "cohort_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "package_purpose": {
+            "enum": [
+              "counterexample_review",
+              "bounded_formal_question"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

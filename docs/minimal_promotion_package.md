@@ -277,21 +277,126 @@ The consumer owns:
 
 No producer package may require the consumer to accept a promotion, create a formal object, or preserve the producer's terminology as canonical authority.
 
-## Package status and lifecycle fields
+## Immutable package identity
 
-Package status is separate from package purpose.
-A package must use `package_status` and lifecycle fields to represent correction, withdrawal, and supersession state.
-Allowed package-status meanings are:
+Package identity is deterministic, repository-scoped, and version-qualified.
+The `package_id` value is unique within this producer repository across all Minimal Promotion Packages and lifecycle records, regardless of package purpose, investigation, target repository, lifecycle state, or historical status.
+No two unrelated proposal lineages may reuse the same `package_id`.
 
-- `current`: the producer currently stands behind the package;
-- `corrected`: a later package version or append-only correction record corrects the package;
-- `withdrawn`: the producer no longer stands behind the package;
-- `superseded`: a later package replaces the package for current producer-side proposal purposes; and
-- `superseding`: the package replaces an earlier package for current producer-side proposal purposes.
+The identifier syntax is documentation-level and intentionally schema-free: `package_id` must be a stable ASCII lowercase slug composed only of `a-z`, `0-9`, and hyphen characters, must begin with a letter, must end with a letter or digit, and must contain enough semantic context to avoid collision within this repository.
+A package identifier must not encode mutable lifecycle state, mutable publication state, mutable branch names, or consumer decisions.
 
-`supersession_lineage` records superseded and superseding package identifiers.
+Identity has two levels:
+
+1. `package_id` identifies the continuing producer-side proposal lineage.
+2. The ordered pair (`package_id`, `package_version`) identifies one immutable emitted package version.
+
+For deterministic replay, artifact verification, and historical citation, identity is the pair (`package_id`, `package_version`).
+`package_id` alone is a lineage locator and must not be used to cite a historical package version when multiple versions exist.
+
+Corrections preserve `package_id` when the producer is correcting the same proposal lineage.
+The correction emits a new `package_version` under the same `package_id`, or records an independent append-only lifecycle record that names the corrected (`package_id`, `package_version`).
+A correction must not allocate a new `package_id` unless the corrected material changes the proposal into a different lineage rather than correcting the existing one; in that case the old lineage must be withdrawn or superseded rather than silently replaced.
+
+Supersession does not preserve `package_id` when the new package is the producer's preferred replacement proposal lineage.
+A superseding package uses a distinct `package_id` and records the relationship to the superseded (`package_id`, `package_version`) in `supersession_lineage`.
+If the producer only corrects errors while preserving the same proposal lineage, the change is a correction, not supersession.
+
+The immutable identity rule is: an emitted (`package_id`, `package_version`) may be referenced forever, may acquire append-only lifecycle records, and may derive a non-current, corrected, withdrawn, or superseded effective status, but it must never be rewritten, reused for different content, or erased from historical lineage.
+
+## Version semantics
+
+`package_version` identifies an immutable emission within a `package_id` lineage.
+Version syntax is documentation-level and schema-free: versions must use `v` followed by a non-negative integer sequence separated by dots, such as `v1`, `v1.1`, or `v2.0`.
+Numeric ordering is semantic, not lexical: `v1.10` follows `v1.9`.
+A package lineage must not reuse a version value once emitted.
+
+Version increments are producer-owned and must be monotonic within a `package_id` lineage:
+
+- the first emitted package version for a lineage is `v1`;
+- a correction that preserves the same proposal lineage increments the version under the same `package_id`;
+- a correction increment must identify the corrected prior version and explain the correction in `correction_reason`;
+- a withdrawal does not modify the withdrawn package version and does not require a new package version; withdrawal is represented by an append-only lifecycle record unless the producer also emits a new explanatory package version;
+- supersession starts a distinct `package_id` lineage and therefore starts its own version sequence at `v1`; and
+- no version increment may be used to change a historical package without preserving the prior version as an addressable historical package.
+
+Major/minor meaning is intentionally not assigned in this documentation contract because no schema or release-management automation is introduced here.
+The only required interpretation is deterministic ordering and immutable historical addressability.
+
+The relationship between version and immutable identity is strict: (`package_id`, `package_version`) names a single emitted package version; later correction, withdrawal, or supersession records may alter current producer preference but never alter the contents, provenance, or historical meaning of that version.
+
+## Lifecycle model
+
+The lifecycle model uses a single status enum plus lineage and reason fields.
+This contract chooses a single enum because each package-version view must have exactly one producer-side lifecycle classification for deterministic replay, while `supersession_lineage`, `correction_reason`, and `withdrawal_reason` carry the orthogonal explanatory details without creating conflicting state combinations.
+Multiple orthogonal status booleans are prohibited because they could allow ambiguous combinations such as simultaneously `current` and `withdrawn`.
+
+The stored package document records `package_status` as `status_at_emission`.
+After emission, that stored value must not be mutated.
+Later correction, withdrawal, or supersession is represented only by independent append-only lifecycle records.
+The current producer-side lifecycle state is `effective_status`, derived by applying the immutable package's `status_at_emission` and all applicable append-only lifecycle records in lineage order.
+When this contract refers to lifecycle transitions, it refers to transitions in derived `effective_status`, not edits to the stored historical package document.
+
+Allowed status enum values for both `status_at_emission` and derived `effective_status` are:
+
+- `current`: the producer currently stands behind this package version as an active proposal version for its lineage;
+- `corrected`: this package version has been corrected by a later package version or by an append-only correction lifecycle record;
+- `withdrawn`: the producer no longer stands behind this package version;
+- `superseded`: a distinct package lineage has replaced this package version for current producer-side proposal purposes; and
+- `superseding`: this package version replaces one or more earlier package versions from distinct package lineages for current producer-side proposal purposes.
+
+Allowed transitions are append-only derived `effective_status` transitions from `current` to one of `corrected`, `withdrawn`, or `superseded`.
+A newly emitted correction version normally records `status_at_emission = current` unless it also supersedes another package lineage, in which case it records `status_at_emission = superseding`.
+A newly emitted superseding package records `status_at_emission = superseding`.
+A package whose derived `effective_status` is `superseding` may later derive `corrected`, `withdrawn`, or `superseded` status from a later append-only lifecycle record if later history requires it.
+
+Terminal states are `withdrawn` and `superseded`: once a package version derives either effective state, it must not later derive `current` or `superseding`.
+`corrected` is terminal for the corrected historical version: the corrected version remains addressable with its original `status_at_emission`, but the producer's active proposal for that same lineage moves to the later correction version or to the correction lifecycle record.
+
+Prohibited effective-status transitions are:
+
+- from `withdrawn` to any other status;
+- from `superseded` to any other status;
+- from `corrected` back to `current` or `superseding`;
+- from `current` directly to another `current` without a new version or lifecycle record;
+- from `superseding` to `current` merely to remove supersession context; and
+- any transition that changes package purpose, candidate claim, evidence references, or provenance without preserving the prior (`package_id`, `package_version`).
+
+`supersession_lineage` records superseded and superseding package identifiers and versions.
 `correction_reason` records why a correction exists or states that no correction applies.
 `withdrawal_reason` records why withdrawal exists or states that no withdrawal applies.
+These fields explain derived lifecycle state; they do not mutate historical package documents, create independent authority, create registry entries, create synchronization behavior, or create consumer decisions.
+
+## Historical lineage and immutability
+
+History is append-only.
+Historical package versions must never disappear from the documentation lineage, even when corrected, withdrawn, or superseded.
+
+Correction lineage records a directed relationship from the correcting package version or correction lifecycle record to each corrected (`package_id`, `package_version`).
+The corrected version remains preserved for audit and replay, and the correction states the affected fields, artifacts, provenance, or limitations without rewriting the corrected version.
+
+Withdrawal lineage records a directed relationship from the withdrawal lifecycle record to each withdrawn (`package_id`, `package_version`).
+Withdrawal preserves the historical fact that the proposal existed, the evidence it referenced, and any downstream decisions already made outside this repository.
+Withdrawal never erases history and never deletes evidence.
+
+Supersession lineage records a directed relationship from each superseding (`package_id`, `package_version`) to each superseded (`package_id`, `package_version`).
+Supersession changes the producer's preferred current lineage only; it does not invalidate the superseded package as a historical object, modify its evidence, or imply consumer acceptance of the superseding package.
+
+Package versions are immutable.
+Corrections never rewrite history.
+Withdrawals never erase history.
+Supersession changes preferred lineage only.
+Historical evidence remains preserved through repository-relative artifact references, source commit SHAs, artifact hashes, and release or publication manifests when applicable.
+
+## Lifecycle records architecture
+
+Corrections, withdrawals, and supersessions are independent lifecycle records, not package instances.
+This contract chooses independent lifecycle records for lifecycle notices because a notice changes producer standing or lineage metadata, not the empirical package content itself.
+Representing a lifecycle notice as a package instance is prohibited because it would blur Package ≠ Decision, risk treating lifecycle notices as new proposals, and create ambiguity about whether withdrawal or supersession has its own evidence package.
+
+A lifecycle record must identify the affected (`package_id`, `package_version`), lifecycle action, reason, authoring context, source commit SHA, and any affected artifact references when relevant.
+It must not duplicate or replace the affected package, must not create a registry entry, and must not become a consumer decision.
+When a lifecycle action also accompanies changed proposal content, the changed proposal content is emitted separately as a new immutable package version or distinct superseding package lineage, and the independent lifecycle record links the old and new immutable identities.
 
 ## Correction policy
 
@@ -300,27 +405,40 @@ A historical emitted package must not be edited, even when repository mechanics 
 
 Correction must occur through either:
 
-1. a new package version that references the corrected package and states the correction; or
-2. an append-only correction record that references the corrected package and states the correction.
+1. a new package version that preserves `package_id`, increments `package_version`, references the corrected version, and states the correction; or
+2. an append-only correction lifecycle record that references the corrected (`package_id`, `package_version`) and states the correction.
 
-A correction notice must identify the corrected package, state the correction, identify affected artifact references or provenance, and indicate whether the corrected package remains current, corrected, superseded, or withdrawn.
+A correction notice must identify the corrected package version, state the correction, identify affected artifact references or provenance, and indicate whether the corrected package version remains current, corrected, superseded, or withdrawn.
 A correction must not silently rewrite the historical meaning of the original package.
 
 ## Withdrawal policy
 
 Withdrawal means the producer no longer stands behind a prior proposal.
-A withdrawal notice must identify the withdrawn package, state the withdrawal rationale in `withdrawal_reason`, identify affected artifacts when relevant, and preserve the historical fact that the package existed.
+A withdrawal notice must identify the withdrawn (`package_id`, `package_version`), state the withdrawal rationale in `withdrawal_reason`, identify affected artifacts when relevant, and preserve the historical fact that the package existed.
 
-Withdrawal does not delete downstream decisions and does not require a consumer to take any action.
+Withdrawal does not delete package history, erase evidence, delete downstream decisions, or require a consumer to take any action.
 The consumer owns any response to the withdrawal under its own authority.
 
 ## Supersession policy
 
-Supersession means a later package replaces an earlier package for current producer-side proposal purposes.
-A supersession notice must identify both the superseded and superseding packages in `supersession_lineage`, state the reason for supersession, and identify material changes in artifact references, scope, limitations, uncertainty, outcome evidence, target surface, claim boundary, or provenance.
+Supersession means a distinct later package lineage replaces an earlier package lineage for current producer-side proposal purposes.
+A supersession notice must identify both the superseded and superseding (`package_id`, `package_version`) pairs in `supersession_lineage`, state the reason for supersession, and identify material changes in artifact references, scope, limitations, uncertainty, outcome evidence, target surface, claim boundary, or provenance.
 
-Supersession does not invalidate the historical existence of the superseded package.
+Supersession does not invalidate the historical existence of the superseded package, does not preserve `package_id`, and does not rewrite the superseded package version.
 It also does not imply downstream acceptance of the superseding package.
+
+## Documentation audit and schema-readiness assessment
+
+This documentation revision determines immutable identity, version semantics, lifecycle semantics, and lineage semantics without introducing schemas, validators, package instances, registries, workflows, automation, adapters, synchronization, candidate invariants, formal objects, or B2 conclusion changes.
+The remaining schema-readiness ambiguities are mechanical rather than architectural:
+
+- exact field names for future lifecycle records beyond the already required `supersession_lineage`, `correction_reason`, and `withdrawal_reason`;
+- exact timestamp format for lifecycle records;
+- exact hash canonicalization rules for future machine validation; and
+- exact storage location for future package-version documents and independent lifecycle records, if a later effort chooses to create them.
+
+Readiness determination: `SCHEMA_READY_WITH_REVISIONS`.
+The contract is architecturally complete for identity, versioning, lifecycle, stored-versus-derived status, lineage, and immutability, but future schema work must still make mechanical representation choices without reinterpreting the architecture.
 
 ## Non-authority semantics
 

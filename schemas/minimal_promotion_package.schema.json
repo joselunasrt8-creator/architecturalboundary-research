@@ -1,0 +1,623 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/architecturalboundary/minimal-promotion-package.schema.json",
+  "title": "Minimal Promotion Package",
+  "description": "Executable representation of docs/minimal_promotion_package.md. The documentation remains normative; this schema does not imply producer or consumer authority, promotion decision, candidate invariant, formal theorem, publication-readiness eligibility, automation, synchronization, or downstream acceptance.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "package_id",
+    "package_version",
+    "package_status",
+    "package_purpose",
+    "source_repository",
+    "source_commit_sha",
+    "created_at",
+    "hash_algorithm",
+    "protocol_version",
+    "investigation_id",
+    "registration_ref_and_hash",
+    "decision_rule_ref",
+    "cohort_rule_ref",
+    "source_artifact_refs_and_hashes",
+    "retained_classification_ref_and_hash",
+    "cohort_conclusion_ref_and_hash",
+    "per_system_classification_summary",
+    "cohort_outcome",
+    "basis_systems",
+    "missing_measurement_summary",
+    "supporting_evidence_summary",
+    "indeterminate_evidence_summary",
+    "negative_evidence_summary",
+    "known_limitations",
+    "known_counterexamples",
+    "replication_status",
+    "replay_capability",
+    "replay_execution_status",
+    "validation_commands",
+    "publication_state",
+    "proposed_foundation_repository",
+    "proposed_foundation_surface",
+    "candidate_claim",
+    "excluded_claims",
+    "non_authority_statement",
+    "supersession_lineage",
+    "correction_reason",
+    "withdrawal_reason",
+    "package_content_reference",
+    "package_content_digest",
+    "package_hash_algorithm",
+    "package_canonicalization_method",
+    "producer_repository",
+    "producer_commit"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "minimal-promotion-package-schema-v1"
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+    },
+    "package_status": {
+      "$ref": "#/$defs/packageStatus"
+    },
+    "package_purpose": {
+      "enum": [
+        "candidate_invariant_review",
+        "bounded_formal_question",
+        "counterexample_review",
+        "vocabulary_alignment",
+        "model_obligation",
+        "indeterminate_evidence_review"
+      ]
+    },
+    "source_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_commit_sha": {
+      "$ref": "#/$defs/commitSha"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hash_algorithm": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "investigation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "registration_ref_and_hash": {
+      "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+    },
+    "decision_rule_ref": {
+      "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+    },
+    "cohort_rule_ref": {
+      "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+    },
+    "source_artifact_refs_and_hashes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifactReference"
+      }
+    },
+    "retained_classification_ref_and_hash": {
+      "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+    },
+    "cohort_conclusion_ref_and_hash": {
+      "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+    },
+    "per_system_classification_summary": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "cohort_outcome": {
+      "enum": [
+        "supports",
+        "indeterminate",
+        "violates"
+      ]
+    },
+    "basis_systems": {
+      "$ref": "#/$defs/stringArrayOrNotApplicable"
+    },
+    "missing_measurement_summary": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "supporting_evidence_summary": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "indeterminate_evidence_summary": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "negative_evidence_summary": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "known_limitations": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "known_counterexamples": {
+      "$ref": "#/$defs/evidenceSummaryOrNotApplicable"
+    },
+    "replication_status": {
+      "enum": [
+        "not_attempted",
+        "internally_replicated",
+        "independently_replicated",
+        "partially_replicated",
+        "failed",
+        "blocked",
+        "unavailable"
+      ]
+    },
+    "replay_capability": {
+      "enum": [
+        "fully_replayable",
+        "partially_replayable",
+        "blocked",
+        "unavailable"
+      ]
+    },
+    "replay_execution_status": {
+      "enum": [
+        "not_attempted",
+        "succeeded",
+        "partially_succeeded",
+        "failed"
+      ]
+    },
+    "validation_commands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/validationCommand"
+      }
+    },
+    "publication_state": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/artifactReference"
+        },
+        {
+          "$ref": "#/$defs/publicationStateBinding"
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "proposed_foundation_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposed_foundation_surface": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidate_claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "excluded_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "non_authority_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersession_lineage": {
+      "$ref": "#/$defs/packageReferenceArrayOrNotApplicable"
+    },
+    "correction_reason": {
+      "$ref": "#/$defs/stringOrNotApplicable"
+    },
+    "withdrawal_reason": {
+      "$ref": "#/$defs/stringOrNotApplicable"
+    },
+    "package_content_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_content_digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "package_hash_algorithm": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_canonicalization_method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_commit": {
+      "$ref": "#/$defs/commitSha"
+    }
+  },
+  "$defs": {
+    "packageStatus": {
+      "enum": [
+        "current",
+        "corrected",
+        "withdrawn",
+        "superseded",
+        "superseding"
+      ]
+    },
+    "commitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "notApplicable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "rationale"
+      ],
+      "properties": {
+        "value": {
+          "const": "not_applicable"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "digest",
+        "hash_algorithm",
+        "canonicalization_method"
+      ],
+      "properties": {
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash_algorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonicalization_method": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifactClass": {
+      "enum": [
+        "Protocol",
+        "Registration",
+        "BOR",
+        "SRF",
+        "DER",
+        "MSR",
+        "Comparative Dataset",
+        "Analysis",
+        "Retained Classification",
+        "Cohort Conclusion",
+        "Publication Manifest",
+        "Release Summary",
+        "Publication Readiness Audit"
+      ]
+    },
+    "artifactReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_class",
+        "repository_relative_path",
+        "artifact_identifier",
+        "lifecycle_stage",
+        "source_commit",
+        "lineage_role",
+        "required_for_purpose",
+        "digest",
+        "hash_algorithm"
+      ],
+      "properties": {
+        "artifact_class": {
+          "$ref": "#/$defs/artifactClass"
+        },
+        "repository_relative_path": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "^(/|[A-Za-z]:|https?://)"
+          }
+        },
+        "artifact_identifier": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "$ref": "#/$defs/notApplicable"
+            }
+          ]
+        },
+        "lifecycle_stage": {
+          "enum": [
+            "registered",
+            "canonical",
+            "corrected",
+            "superseded",
+            "withdrawn",
+            "release-candidate",
+            "released"
+          ]
+        },
+        "source_commit": {
+          "$ref": "#/$defs/commitSha"
+        },
+        "lineage_role": {
+          "enum": [
+            "protocol source",
+            "registration source",
+            "observation input",
+            "surface record",
+            "derived evidence",
+            "measurement summary",
+            "dataset projection",
+            "analysis result",
+            "retained classification",
+            "cohort conclusion",
+            "publication-state binding",
+            "correction context",
+            "supersession context",
+            "withdrawal context",
+            "limitation evidence"
+          ]
+        },
+        "required_for_purpose": {
+          "type": "boolean"
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "hash_algorithm": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifactReferenceOrNotApplicable": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/artifactReference"
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "evidenceSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "systems",
+        "artifacts",
+        "measurements",
+        "lineage_refs",
+        "interpretation_limits",
+        "summary"
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "supporting evidence",
+            "indeterminate evidence",
+            "negative evidence",
+            "missing measurements",
+            "known limitations",
+            "known counterexamples",
+            "per-system classification"
+          ]
+        },
+        "systems": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactReference"
+          }
+        },
+        "measurements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "lineage_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactReference"
+          }
+        },
+        "interpretation_limits": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evidenceSummaryOrNotApplicable": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/evidenceSummary"
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "stringArrayOrNotApplicable": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "stringOrNotApplicable": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "packageReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "package_id"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+        },
+        "package_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+        },
+        "content_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "producer_repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer_commit": {
+          "$ref": "#/$defs/commitSha"
+        }
+      }
+    },
+    "packageReferenceArrayOrNotApplicable": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/packageReference"
+          }
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "validationCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "working_directory",
+        "expected_exit_status",
+        "scope",
+        "canonicality",
+        "execution_context"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "working_directory": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expected_exit_status": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonicality": {
+          "enum": [
+            "canonical",
+            "non-canonical"
+          ]
+        },
+        "execution_context": {
+          "enum": [
+            "ci",
+            "local",
+            "ci-and-local"
+          ]
+        }
+      }
+    },
+    "publicationStateBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publication_manifest_ref",
+        "publication_readiness_is_not_formalization_eligibility"
+      ],
+      "properties": {
+        "publication_manifest_ref": {
+          "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+        },
+        "release_summary_ref": {
+          "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+        },
+        "publication_readiness_audit_ref": {
+          "$ref": "#/$defs/artifactReferenceOrNotApplicable"
+        },
+        "publication_readiness_is_not_formalization_eligibility": {
+          "const": true
+        }
+      }
+    }
+  }
+}

@@ -427,18 +427,181 @@ A supersession notice must identify both the superseded and superseding (`packag
 Supersession does not invalidate the historical existence of the superseded package, does not preserve `package_id`, and does not rewrite the superseded package version.
 It also does not imply downstream acceptance of the superseding package.
 
+
+## Structured artifact reference model
+
+A structured artifact reference is the reusable documentation-level object used whenever a package names a producer artifact as evidence, lineage, publication context, or proposal context.
+It defines semantics only and does not define JSON, serialization, validation tooling, registries, or package instances.
+
+The model applies to references to Protocol, Registration, BOR, SRF, DER, MSR, Comparative Dataset, Analysis, Retained Classification, Cohort Conclusion, and Publication Manifest artifacts.
+Each artifact reference must have deterministic meaning for the following conceptual fields:
+
+| Conceptual field | Semantics |
+| --- | --- |
+| artifact class | The bounded class of the referenced artifact, chosen from Protocol, Registration, BOR, SRF, DER, MSR, Comparative Dataset, Analysis, Retained Classification, Cohort Conclusion, or Publication Manifest. The class describes the role of the referenced artifact; it does not create a new schema or registry class. |
+| repository-relative path | The path from the producer repository root to the referenced artifact. It must not be an absolute local path, mutable workspace path, or external-only URL. |
+| artifact identifier | The artifact's own stable identifier when the artifact defines one. If the artifact has no internal identifier, the package must use the not-applicable convention and rely on repository-relative path, source commit, and artifact hash for determinism. |
+| source commit | The producer repository commit SHA at which the referenced artifact content is resolved. Branch names, tags without commit resolution, and working-tree state are not substitutes for this field. |
+| lifecycle stage | The artifact's producer-owned stage at the referenced commit, such as registered, canonical, corrected, superseded, withdrawn, release-candidate, or released when those terms are applicable to that artifact class. Lifecycle stage is descriptive provenance and must not imply consumer acceptance. |
+| hash algorithm | The named digest algorithm used to compute the artifact hash. The name must be specific enough that a future schema can distinguish algorithms without reinterpretation. |
+| artifact hash | The digest of the referenced artifact content at the source commit under the stated hash algorithm. The hash binds the reference to content, not to mutable filesystem state. |
+| lineage role | The reason the artifact is included in the package lineage, such as protocol source, registration source, observation input, surface record, derived evidence, measurement summary, dataset projection, analysis result, retained classification, cohort conclusion, publication-state binding, correction context, supersession context, withdrawal context, or limitation evidence. |
+| required-for-purpose flag | A deterministic yes/no statement indicating whether the reference is required for the declared `package_purpose`. Required references are part of the minimum evidence chain for the purpose; non-required references provide context, limitation evidence, lineage explanation, or publication-state binding. |
+
+A package may contain multiple references to the same artifact class when the declared purpose requires them, for example per-system BOR, SRF, DER, or MSR artifacts.
+Each reference remains independently content-addressed by its source commit, path, algorithm, and hash.
+A structured artifact reference does not make upstream provenance a runtime dependency: it preserves replayable provenance while leaving package consumption, formalization, and downstream admissibility under consumer authority.
+
+## Package reference semantics
+
+A package reference is a documentation-level reference to one immutable emitted package version or to a package lineage when historical precision is intentionally not required.
+A package reference that cites evidence, correction, withdrawal, supersession, or historical state must identify the immutable pair (`package_id`, `package_version`).
+A lineage-only package reference may use `package_id` alone only when the statement concerns the continuing producer-side proposal lineage rather than a specific emitted package version.
+
+A content-addressed reference identifies content by digest.
+For package content, the digest binds the referenced emitted package document or lifecycle record to the hash algorithm and computed hash recorded with the reference.
+For artifact content, the digest binds the referenced artifact content to the structured artifact reference.
+Digest semantics are content semantics: a matching digest means the bytes used for replay match the recorded reference under the stated algorithm; it does not mean the scientific interpretation is correct, the package is accepted, or the consumer must act.
+
+A repository reference identifies the producer repository and source commit used to resolve package and artifact paths.
+Repository references provide provenance and replay context; they do not create synchronization, mutable dependency, external registry membership, or downstream runtime dependency.
+
+Immutable package identity remains (`package_id`, `package_version`).
+Content-addressed and repository references strengthen replay and provenance for that identity, but they do not replace it.
+If identity and digest disagree, the package must be treated as unresolved until the producer records a correction, withdrawal, or supersession; a consumer must not infer a corrected identity from digest data alone.
+
+## Replay status
+
+Replay means reconstructing the proposal's evidence chain from repository-contained references, source commits, artifact hashes, and lineage metadata.
+Replay does not mean recomputing downstream formalization results, reproducing consumer decisions, or independently replicating empirical observations outside the repository.
+
+`replay_status` must use one of the following documentation-level finite states:
+
+| State | Semantics |
+| --- | --- |
+| `replayable` | The package records sufficient repository, commit, path, hash, lifecycle, lineage, and validation-command semantics for a reader to reconstruct the evidence chain for the declared purpose. |
+| `replay_not_attempted` | The package has not been replayed by the producer or package author, even though the recorded metadata may be sufficient. The absence of an attempt must not be represented as success. |
+| `replay_blocked` | Replay was attempted or assessed and cannot proceed because a required reference, commit, artifact, hash, lineage link, or command precondition is unavailable or inconsistent. The blocking reason must be stated. |
+| `partially_replayable` | Some required evidence-chain segments can be replayed and others cannot. The package must identify replayable and non-replayable segments and must not summarize the package as fully replayable. |
+| `replay_unavailable` | Replay is unavailable because the package purpose or historical state lacks necessary repository-contained artifacts or immutable provenance. The unavailability reason must be stated. |
+
+Replay status is package-context metadata.
+It does not create validators, automation, or synchronization requirements, and it does not authorize consumer formalization.
+
+## Replication status
+
+Replication means an empirical confirmation activity beyond repository replay.
+It must be distinguished from replay, because repository replay verifies the recorded evidence chain while replication evaluates whether comparable observations or conclusions can be obtained through another empirical effort.
+
+`replication_status` must use one of the following documentation-level finite states:
+
+| State | Semantics |
+| --- | --- |
+| `not_replicated` | No independent empirical replication is claimed. Repository replay may still be available. |
+| `replication_not_attempted` | Replication has not been attempted, and the package makes no replication claim. |
+| `internal_replication_partial` | The producer has performed a bounded repeat or extension within the producer repository or method family, but it is not independent external replication. Scope and limits must be stated. |
+| `independently_replicated` | An empirically independent effort has replicated the relevant observation or conclusion under stated scope. The package must reference the evidence without converting it into consumer authority. |
+| `replication_failed` | A replication attempt produced negative or non-confirming evidence. The failed scope and relationship to the package claim must be stated as negative evidence or limitation. |
+| `replication_blocked` | Replication cannot currently proceed because required access, measurements, artifacts, systems, or method details are unavailable. The blocker must be stated. |
+| `replication_unavailable` | Replication is not possible for the declared scope, for example because the observed system state no longer exists. The reason must be stated. |
+
+Terminology is deterministic:
+
+- repository replay is reconstruction of the producer evidence chain from immutable repository references;
+- consumer replay is a consumer's own reconstruction of that same producer evidence chain under consumer authority;
+- independent empirical replication is a new empirical effort that does not merely resolve producer references; and
+- external replication is independent empirical replication performed outside the producer repository or producer-controlled process.
+
+A package must not label repository replay as replication.
+A package must not label consumer replay as external replication.
+Replication evidence may inform review context, but it does not establish formalization eligibility or downstream acceptance.
+
+## Validation command semantics
+
+`validation_commands` describes commands relevant to checking the package or referenced artifacts.
+It is documentation metadata only and does not prescribe tooling, create automation, require CI execution, or define validators.
+
+Each validation command entry must have deterministic semantics for:
+
+| Conceptual field | Semantics |
+| --- | --- |
+| command | The exact shell command or command sequence as documented for human or CI execution. |
+| working directory | The repository-relative directory from which the command is expected to run. |
+| expected exit status | The expected numeric process exit status for success, usually zero unless the command intentionally demonstrates failure behavior. |
+| scope | The artifact, package field, repository area, publication state, or evidence-chain segment the command is intended to check. |
+| canonicality | Whether the command is canonical for repository acceptance or non-canonical supporting context. Non-canonical commands may inform review but must not replace canonical validation. |
+| execution context | Whether the command is intended for CI, local execution, or both. CI/local distinction records context only and does not create a workflow requirement. |
+
+A validation command may be unavailable, non-canonical, or local-only if the package states that status deterministically.
+Validation-command documentation must not hide replay blockers, missing artifacts, or failed checks.
+
+## Publication-state binding
+
+A package binds publication state by referencing the existing publication-state manifest as a structured artifact reference with artifact class `Publication Manifest`, repository-relative path `releases/publication-state-manifest.json`, a source commit, lifecycle stage, hash algorithm, artifact hash, lineage role `publication-state binding`, and required-for-purpose status determined by the package purpose and available publication artifacts.
+If a release summary or publication-readiness audit is also referenced, each is a separate structured artifact reference with its own path, commit, hash, lifecycle stage, and lineage role.
+
+The publication-state binding records the producer's publication-readiness context for the referenced investigation or cohort.
+It does not copy publication-state manifest content into the package and does not create a new publication manifest.
+If the manifest is not applicable or unavailable for the package scope, the package must use the not-applicable convention and state the deterministic reason.
+
+Publication readiness is not formalization eligibility.
+Publication readiness is not scientific support.
+A publication-ready artifact set may be useful review context, but `cohort_outcome`, complete outcome evidence, limitations, replay status, replication status, and consumer authority continue to govern package interpretation.
+
+## Evidence summary structure
+
+Evidence summaries must be structured by conceptual category rather than prose-only narrative.
+The categories below define documentation semantics only and do not define JSON.
+Each category must identify the relevant systems, artifacts, measurements, lineage references, and interpretation limits at the level needed to prevent cherry-picking.
+
+| Category | Semantics |
+| --- | --- |
+| supporting evidence | Observations, measurements, classifications, or cohort conclusions that support the package's bounded claim or question within the registered scope. Supporting evidence must state its basis systems and must not omit contrary or missing evidence. |
+| indeterminate evidence | Evidence that does not support a definitive supporting or negative interpretation because measurements, observations, or classification criteria are incomplete, mixed, or insufficient. Indeterminacy must be preserved rather than resolved by assertion. |
+| negative evidence | Observations, measurements, classifications, or conclusions that contradict, violate, or weaken the package's bounded claim or question. Negative evidence must remain visible even when the declared purpose is not counterexample review. |
+| missing measurements | Measurements or observations required for stronger interpretation but absent, unavailable, incomplete, or not collected. Missing measurements must identify affected systems or artifact classes when known. |
+| known limitations | Scope boundaries, methodological limits, unavailable artifacts, non-generalized findings, lifecycle constraints, and assumptions that limit interpretation or downstream relevance. |
+| known counterexamples | Specific systems, artifacts, observations, or external facts that counter the package's claim or possible stronger claims. Counterexamples must be distinguished from general negative evidence when they identify concrete contrary instances. |
+
+Every category must be populated, declared empty, or declared not applicable using the not-applicable convention.
+A package must not merge categories in a way that hides complete outcome evidence or changes the cohort outcome interpretation.
+
+## Not-applicable convention
+
+A field or category that is intentionally absent must be represented by the exact documentation-level value `not_applicable` plus a rationale that explains why the field is not applicable to the declared package purpose, artifact class, lifecycle state, or evidence context.
+The rationale must be specific enough that another reader can distinguish intentional absence from omission, unavailable data, failed replay, or unknown status.
+
+`not_applicable` must not be used for unknown, missing, blocked, unavailable, unattempted, or failed information when a finite state or limitation category exists for that condition.
+For example, replay failure must use `replay_blocked`, not `not_applicable`; absent replication attempts must use a replication status, not `not_applicable`; and an artifact without an internal identifier may use `not_applicable` only for the artifact identifier while still recording path, commit, algorithm, and hash.
+
+This convention preserves deterministic interpretation without defining schemas.
+Future schemas may encode the same semantics mechanically, but they must not reinterpret intentional absence as missing data.
+
 ## Documentation audit and schema-readiness assessment
 
-This documentation revision determines immutable identity, version semantics, lifecycle semantics, and lineage semantics without introducing schemas, validators, package instances, registries, workflows, automation, adapters, synchronization, candidate invariants, formal objects, or B2 conclusion changes.
-The remaining schema-readiness ambiguities are mechanical rather than architectural:
+This documentation revision determines immutable identity, version semantics, lifecycle semantics, lineage semantics, structured artifact reference semantics, package reference semantics, replay status, replication status, validation-command semantics, publication-state binding, evidence-summary categories, and the not-applicable convention without introducing schemas, validators, package instances, registries, workflows, automation, adapters, synchronization, candidate invariants, formal objects, investigation changes, B2 changes, or candidate-invariant status changes.
+The revision remains compatible with the prior identity and lifecycle decisions: immutable package identity remains (`package_id`, `package_version`), lifecycle changes remain append-only producer records, source commits and artifact hashes preserve immutable provenance, and consumer authority remains separate from producer proposals.
 
-- exact field names for future lifecycle records beyond the already required `supersession_lineage`, `correction_reason`, and `withdrawal_reason`;
-- exact timestamp format for lifecycle records;
-- exact hash canonicalization rules for future machine validation; and
+Schema-readiness assessment:
+
+- complete-outcome evidence remains required through explicit supporting, indeterminate, negative, missing-measurement, limitation, and counterexample categories;
+- no cherry-picking remains required because empty and not-applicable categories must be explicit;
+- replayability now has finite documentation states distinct from replication;
+- immutable provenance is preserved by structured artifact references, package references, repository references, source commits, and digest semantics;
+- producer ownership and consumer authority remain separated; and
+- upstream provenance remains replay context rather than runtime dependency.
+
+Remaining ambiguities are mechanical representation choices for a future schema effort, not semantic blockers:
+
+- exact JSON object shapes, property names, and cardinality constraints for artifact references, package references, validation command entries, evidence categories, and not-applicable rationales;
+- exact timestamp format for lifecycle records and package creation fields;
+- exact digest canonicalization rules for future machine validation of text, JSON, TeX, and generated artifacts;
+- exact enumeration spelling strategy if a future schema chooses different wire names while preserving these documented states; and
 - exact storage location for future package-version documents and independent lifecycle records, if a later effort chooses to create them.
 
 Readiness determination: `SCHEMA_READY_WITH_REVISIONS`.
-The contract is architecturally complete for identity, versioning, lifecycle, stored-versus-derived status, lineage, and immutability, but future schema work must still make mechanical representation choices without reinterpreting the architecture.
+The contract is semantically ready for future schema design, but schema work still requires mechanical representation decisions and digest canonicalization rules.
+Those future decisions must preserve the documentation semantics defined here and must not reinterpret publication readiness as formalization eligibility or scientific support.
 
 ## Non-authority semantics
 

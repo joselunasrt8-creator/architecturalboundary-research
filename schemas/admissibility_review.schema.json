@@ -1,0 +1,476 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/architectural-boundary-research/schemas/admissibility_review.schema.json",
+  "title": "Admissibility Review",
+  "description": "Executable representation of the documentation-defined Admissibility Review record for a Minimal Promotion Package. The documentation remains normative. Promotion Package != Admissibility Review; Admissibility Review != Promotion Decision; Admissibility Review != Canonical Research Object; Admissibility Review != Implementation Conformance. This schema records bounded consumer-side admissibility review context only and does not authorize Promotion Decisions, Canonical Research Objects, Canonical Fixtures, Validators, Registries, Automation, Synchronization, or Implementation Conformance.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "admissibility_id",
+    "package_reference",
+    "reviewed_empirical_outcome",
+    "package_purpose",
+    "producer_identity",
+    "producer_repository",
+    "producer_commit",
+    "provenance_snapshot",
+    "submitted_evidence",
+    "limitations_snapshot",
+    "admissibility_result",
+    "record_lifecycle",
+    "review_timestamp",
+    "review_authority",
+    "review_rationale",
+    "reconsideration_conditions",
+    "prior_record_reference",
+    "superseding_record_reference",
+    "withdrawal_record_reference",
+    "invalidation_record_reference"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "admissibility-review-schema-v1"
+    },
+    "admissibility_id": {
+      "type": "string",
+      "pattern": "^[a-z](?:[a-z0-9-]*[a-z0-9])?$",
+      "description": "Stable identifier for this Admissibility Review record. It is not a package identifier, promotion decision identifier, canonical research object identifier, registry entry, validator output, or implementation conformance claim."
+    },
+    "package_reference": {
+      "$ref": "#/$defs/packageReference",
+      "description": "Reference to exactly one immutable producer Minimal Promotion Package version. The reference preserves producer identity and provenance without redefining producer authority."
+    },
+    "reviewed_empirical_outcome": {
+      "$ref": "#/$defs/empiricalOutcome",
+      "description": "The empirical outcome reviewed from the referenced producer package context; this does not create a Promotion Decision, candidate invariant, theorem, canonical research object, or implementation conformance result."
+    },
+    "package_purpose": {
+      "$ref": "#/$defs/packagePurpose",
+      "description": "The documented producer package purpose under review. The purpose remains a producer proposal taxonomy and does not authorize formalization or downstream acceptance."
+    },
+    "producer_identity": {
+      "$ref": "#/$defs/producerIdentity",
+      "description": "Producer identity for provenance only; it does not transfer or redefine authority boundaries."
+    },
+    "producer_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_commit": {
+      "$ref": "#/$defs/commitSha"
+    },
+    "provenance_snapshot": {
+      "$ref": "#/$defs/provenanceSnapshot"
+    },
+    "submitted_evidence": {
+      "type": "array",
+      "description": "Submitted evidence references preserved for review context only; they do not become canonical research objects, canonical fixtures, validators, registries, automation, synchronization inputs, or implementation conformance evidence by virtue of this record.",
+      "items": {
+        "$ref": "#/$defs/artifactReference"
+      }
+    },
+    "limitations_snapshot": {
+      "$ref": "#/$defs/limitationsSnapshot"
+    },
+    "admissibility_result": {
+      "enum": [
+        "admissible",
+        "admissible_with_limitations",
+        "inadmissible",
+        "deferred"
+      ],
+      "description": "Admissibility Review result only. This is independent of record_lifecycle and is not a Promotion Decision, formalization acceptance, canonicalization, validator result, registry status, workflow trigger, synchronization state, or implementation conformance status."
+    },
+    "record_lifecycle": {
+      "enum": [
+        "active",
+        "superseded",
+        "withdrawn",
+        "invalidated"
+      ],
+      "description": "Lifecycle state of the Admissibility Review record. It remains independent of admissibility_result and does not mutate the referenced immutable producer package."
+    },
+    "review_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "review_authority": {
+      "$ref": "#/$defs/reviewAuthority"
+    },
+    "review_rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Rationale for admissibility review only; it must not be read as a Promotion Decision, theorem work, canonical research object creation, validator definition, registry action, automation, synchronization, or implementation conformance finding."
+    },
+    "reconsideration_conditions": {
+      "$ref": "#/$defs/stringArrayOrNotApplicable"
+    },
+    "prior_record_reference": {
+      "$ref": "#/$defs/admissibilityRecordReferenceOrNotApplicable"
+    },
+    "superseding_record_reference": {
+      "$ref": "#/$defs/admissibilityRecordReferenceOrNotApplicable"
+    },
+    "withdrawal_record_reference": {
+      "$ref": "#/$defs/admissibilityRecordReferenceOrNotApplicable"
+    },
+    "invalidation_record_reference": {
+      "$ref": "#/$defs/admissibilityRecordReferenceOrNotApplicable"
+    }
+  },
+  "$defs": {
+    "notApplicable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "rationale"
+      ],
+      "properties": {
+        "value": {
+          "const": "not_applicable"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "commitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "digest",
+        "hash_algorithm",
+        "canonicalization_method"
+      ],
+      "properties": {
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash_algorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonicalization_method": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "packagePurpose": {
+      "enum": [
+        "candidate_invariant_review",
+        "bounded_formal_question",
+        "counterexample_review",
+        "vocabulary_alignment",
+        "model_obligation",
+        "indeterminate_evidence_review"
+      ]
+    },
+    "empiricalOutcome": {
+      "enum": [
+        "supports",
+        "indeterminate",
+        "violates"
+      ]
+    },
+    "packageReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "package_id",
+        "package_version",
+        "content_reference",
+        "digest",
+        "producer_repository",
+        "producer_commit"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string",
+          "pattern": "^[a-z](?:[a-z0-9-]*[a-z0-9])?$"
+        },
+        "package_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+        },
+        "content_reference": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Immutable content reference for the reviewed package document."
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "producer_repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer_commit": {
+          "$ref": "#/$defs/commitSha"
+        }
+      },
+      "description": "Producer package reference model for exactly one immutable Minimal Promotion Package version, aligned with the Minimal Promotion Package packageReference identity fields while adding the documented content_reference and digest binding required for Admissibility Review."
+    },
+    "producerIdentity": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "producer_repository",
+        "producer_commit"
+      ],
+      "properties": {
+        "producer_repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer_commit": {
+          "$ref": "#/$defs/commitSha"
+        },
+        "producer_package_reference": {
+          "$ref": "#/$defs/packageReference"
+        }
+      },
+      "description": "Producer identity and package reference provenance only; this does not redefine producer authority or create consumer authority."
+    },
+    "artifactClass": {
+      "enum": [
+        "Protocol",
+        "Registration",
+        "BOR",
+        "SRF",
+        "DER",
+        "MSR",
+        "Comparative Dataset",
+        "Analysis",
+        "Retained Classification",
+        "Cohort Conclusion",
+        "Publication Manifest",
+        "Release Summary",
+        "Publication Readiness Audit",
+        "Minimal Promotion Package"
+      ]
+    },
+    "artifactReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_class",
+        "repository_relative_path",
+        "artifact_identifier",
+        "lifecycle_stage",
+        "source_commit",
+        "lineage_role",
+        "required_for_review",
+        "digest"
+      ],
+      "properties": {
+        "artifact_class": {
+          "$ref": "#/$defs/artifactClass"
+        },
+        "repository_relative_path": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "^(/|[A-Za-z]:|https?://)"
+          }
+        },
+        "artifact_identifier": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "$ref": "#/$defs/notApplicable"
+            }
+          ]
+        },
+        "lifecycle_stage": {
+          "enum": [
+            "registered",
+            "canonical",
+            "corrected",
+            "superseded",
+            "withdrawn",
+            "release-candidate",
+            "released"
+          ],
+          "description": "Producer-owned artifact lifecycle stage used as provenance; it does not imply consumer acceptance."
+        },
+        "source_commit": {
+          "$ref": "#/$defs/commitSha"
+        },
+        "lineage_role": {
+          "enum": [
+            "protocol source",
+            "registration source",
+            "observation input",
+            "surface record",
+            "derived evidence",
+            "measurement summary",
+            "dataset projection",
+            "analysis result",
+            "retained classification",
+            "cohort conclusion",
+            "publication-state binding",
+            "promotion package",
+            "review provenance",
+            "limitation evidence"
+          ]
+        },
+        "required_for_review": {
+          "type": "boolean"
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "description": "Immutable artifact reference snapshot. It preserves provenance without fetching upstream repositories or creating validators, registries, automation, synchronization, canonical fixtures, canonical research objects, or implementation conformance claims."
+    },
+    "provenanceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_references",
+        "hashes",
+        "producer_commit",
+        "package_version",
+        "investigation_reference",
+        "retained_classification_reference",
+        "cohort_conclusion_reference"
+      ],
+      "properties": {
+        "artifact_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactReference"
+          }
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/digest"
+          }
+        },
+        "producer_commit": {
+          "$ref": "#/$defs/commitSha"
+        },
+        "package_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+(\\.[0-9]+)*$"
+        },
+        "investigation_reference": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "retained_classification_reference": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "cohort_conclusion_reference": {
+          "$ref": "#/$defs/artifactReference"
+        }
+      },
+      "description": "Immutable provenance snapshot for the reviewed package and producer artifacts. This is referential and must not fetch upstream repositories or create runtime dependencies."
+    },
+    "limitationsSnapshot": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "limitations",
+        "limitation_references"
+      ],
+      "properties": {
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "limitation_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactReference"
+          }
+        }
+      },
+      "description": "Snapshot of documented limitations at review time. Limitations constrain review interpretation without creating downstream obligations or implementation conformance requirements."
+    },
+    "reviewAuthority": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "authority_name",
+        "authority_scope",
+        "non_authority_statement"
+      ],
+      "properties": {
+        "authority_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "non_authority_statement": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Authority to record admissibility review only. It does not authorize Promotion Decisions, Canonical Research Objects, Canonical Fixtures, Validators, Registries, Automation, Synchronization, or Implementation Conformance."
+    },
+    "admissibilityRecordReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admissibility_id",
+        "schema_version",
+        "digest"
+      ],
+      "properties": {
+        "admissibility_id": {
+          "type": "string",
+          "pattern": "^[a-z](?:[a-z0-9-]*[a-z0-9])?$"
+        },
+        "schema_version": {
+          "const": "admissibility-review-schema-v1"
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "admissibilityRecordReferenceOrNotApplicable": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/admissibilityRecordReference"
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    },
+    "stringArrayOrNotApplicable": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        {
+          "$ref": "#/$defs/notApplicable"
+        }
+      ]
+    }
+  }
+}

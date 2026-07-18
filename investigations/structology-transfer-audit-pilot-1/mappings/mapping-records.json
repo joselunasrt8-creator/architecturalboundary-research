@@ -5,74 +5,50 @@
   "mapping_records": [
     {
       "object_type": "Mapping Record",
-      "object_id": "MR-PILOT-001",
+      "object_id": "MR-REHEARSAL-001",
       "structology_concept": "Boundary",
-      "domain_observation_ids": [
-        "DO-PILOT-001",
-        "DO-PILOT-004"
-      ],
+      "domain_observation_ids": ["DO-REHEARSAL-001", "DO-REHEARSAL-004"],
       "mapping_rationale": "A repository boundary can separate one history/object namespace from another while still allowing exchange through explicit transfer operations.",
       "preserved_meaning": "A bounded locus is distinguishable from other loci and can mediate exchanges.",
       "changed_meaning": "Git boundaries are tool-defined repository/object/reference scopes, not necessarily conceptual, organizational, or architectural boundaries.",
       "uncertainty": "medium",
-      "alternatives": [
-        "Treat branch boundaries rather than repository boundaries as the primary boundary",
-        "Treat remotes as relationship edges instead of boundaries"
-      ],
+      "alternatives": ["Treat branch boundaries rather than repository boundaries as the primary boundary", "Treat remotes as relationship edges instead of boundaries"],
       "artificial_mapping_recorded": false
     },
     {
       "object_type": "Mapping Record",
-      "object_id": "MR-PILOT-002",
+      "object_id": "MR-REHEARSAL-002",
       "structology_concept": "Continuity",
-      "domain_observation_ids": [
-        "DO-PILOT-002",
-        "DO-PILOT-003"
-      ],
+      "domain_observation_ids": ["DO-REHEARSAL-002", "DO-REHEARSAL-003"],
       "mapping_rationale": "Parent links and refs preserve navigable historical continuity across commits while allowing reference movement.",
       "preserved_meaning": "A lineage or continuity relation can be followed through recorded state transitions.",
       "changed_meaning": "Git continuity is explicit graph ancestry and ref movement, not a generalized continuity principle.",
       "uncertainty": "medium",
-      "alternatives": [
-        "Map continuity only to commit ancestry",
-        "Map continuity to branch naming conventions"
-      ],
+      "alternatives": ["Map continuity only to commit ancestry", "Map continuity to branch naming conventions"],
       "artificial_mapping_recorded": false
     },
     {
       "object_type": "Mapping Record",
-      "object_id": "MR-PILOT-003",
+      "object_id": "MR-REHEARSAL-003",
       "structology_concept": "Transfer",
-      "domain_observation_ids": [
-        "DO-PILOT-004",
-        "DO-PILOT-005"
-      ],
+      "domain_observation_ids": ["DO-REHEARSAL-004", "DO-REHEARSAL-005"],
       "mapping_rationale": "Distributed workflows move and integrate changes between repositories or branches using explicit operations.",
       "preserved_meaning": "A recognizable movement of structured state occurs across a domain boundary or relation.",
       "changed_meaning": "Git transfer has concrete transport and merge mechanics that may not match Structology transfer semantics.",
       "uncertainty": "medium",
-      "alternatives": [
-        "Map transfer only to fetch/push and not merge",
-        "Map merge to reconciliation rather than transfer"
-      ],
+      "alternatives": ["Map transfer only to fetch/push and not merge", "Map merge to reconciliation rather than transfer"],
       "artificial_mapping_recorded": false
     },
     {
       "object_type": "Mapping Record",
-      "object_id": "MR-PILOT-004",
+      "object_id": "MR-REHEARSAL-004",
       "structology_concept": "State",
-      "domain_observation_ids": [
-        "DO-PILOT-002",
-        "DO-PILOT-005"
-      ],
+      "domain_observation_ids": ["DO-REHEARSAL-002", "DO-REHEARSAL-005"],
       "mapping_rationale": "Commits and merges can be rehearsed as state-bearing events because commits record snapshots and merges integrate divergent histories.",
       "preserved_meaning": "A domain condition can be identified before or after a recorded change.",
       "changed_meaning": "Git state is snapshot/history specific and does not necessarily express broader Structology state semantics.",
       "uncertainty": "high",
-      "alternatives": [
-        "Map state only to commit snapshots",
-        "Map state to working tree/index/HEAD rather than committed history"
-      ],
+      "alternatives": ["Map state only to commit snapshots", "Map state to working tree/index/HEAD rather than committed history"],
       "artificial_mapping_recorded": false
     }
   ]

@@ -1,7 +1,7 @@
 {
   "domain_candidate": {
     "object_type": "Domain Candidate",
-    "object_id": "DC-PILOT-001",
+    "object_id": "DC-REHEARSAL-001",
     "domain_name": "Git distributed version control repository model",
     "domain_version_binding": {
       "implementation_observed": "git version 2.43.0",
@@ -36,10 +36,20 @@
   },
   "domain_profile": {
     "object_type": "Domain Profile",
-    "object_id": "DP-PILOT-001",
-    "domain_candidate_id": "DC-PILOT-001",
+    "object_id": "DP-REHEARSAL-001",
+    "domain_candidate_id": "DC-REHEARSAL-001",
     "domain_scope": "Conceptual repository model: repositories, commits, object identity, refs, branches, merges, and distributed workflows.",
-    "out_of_scope": ["Git hosting-provider governance", "GitHub-specific pull request semantics", "runtime implementation internals", "performance characteristics"],
-    "evidence_constraints": ["Public documentation and locally observed git version only", "No claims about all version-control systems", "No direct conclusion support from observations"]
+    "out_of_scope": [
+      "Git hosting-provider governance",
+      "GitHub-specific pull request semantics",
+      "runtime implementation internals",
+      "performance characteristics"
+    ],
+    "evidence_constraints": [
+      "Public documentation and locally observed git version only",
+      "No claims about all version-control systems",
+      "No direct conclusion support from observations"
+    ],
+    "rehearsal_status": "candidate selected for instrument rehearsal only; not canonical pilot evidence"
   }
 }

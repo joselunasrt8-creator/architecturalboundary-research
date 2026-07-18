@@ -1,11 +1,12 @@
 {
   "object_type": "Calibration Observations",
   "calibration_set_id": "COS-PILOT-001",
-  "pilot_execution_id": "CDSTA-v0.1-PILOT-001",
+  "pilot_execution_id": "CDSTA-v0.1-REHEARSAL-001",
   "observations_about_methodology_only": [
-    {"object_type":"Calibration Observation","object_id":"CO-PILOT-001","observation":"The methodology requires immutable references but the execution instructions did not specify an acceptable fallback when authoritative artifacts are absent from the workspace.","category":"missing rule","methodology_changed":false},
-    {"object_type":"Calibration Observation","object_id":"CO-PILOT-002","observation":"The lifecycle relationship among Deviation Records, Failure Records, Failure Assessment, and Audit Conclusion is executable but would benefit from explicit ordering guidance.","category":"ambiguous lifecycle","methodology_changed":false},
+    {"object_type":"Calibration Observation","object_id":"CO-PILOT-001","observation":"The methodology requires immutable references but the execution instructions did not specify an acceptable fallback when authoritative artifacts are absent or not yet frozen.","category":"missing rule","methodology_changed":false},
+    {"object_type":"Calibration Observation","object_id":"CO-PILOT-002","observation":"The lifecycle relationship among Deviation Records, Failure Records, Failure Assessment, execution validity, transfer determination, and final conclusion requires explicit ordering guidance.","category":"ambiguous lifecycle","methodology_changed":false},
     {"object_type":"Calibration Observation","object_id":"CO-PILOT-003","observation":"The instruction to use definitions exactly is difficult to replay unless the definitions are packaged with content hashes or repository paths.","category":"difficult replay","methodology_changed":false},
-    {"object_type":"Calibration Observation","object_id":"CO-PILOT-004","observation":"Artificial mapping disclosure was practical and improved reviewability, but the threshold separating artificial mapping from high-uncertainty natural mapping was not explicit in the execution inputs.","category":"unclear wording","methodology_changed":false}
+    {"object_type":"Calibration Observation","object_id":"CO-PILOT-004","observation":"Forced-fit indicators should remain assessment criteria or instrument-test inputs tied to actual concept mappings, not Structology concepts under investigation.","category":"layer separation","methodology_changed":false},
+    {"object_type":"Calibration Observation","object_id":"CO-PILOT-005","observation":"Source provenance should require replay-safe excerpts, normalized observation bases, hashes, or immutable snapshots rather than live URLs alone.","category":"provenance rule","methodology_changed":false}
   ]
 }

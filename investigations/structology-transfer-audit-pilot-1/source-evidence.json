@@ -1,0 +1,38 @@
+{
+  "object_type": "Source Evidence Set",
+  "source_evidence_set_id": "SES-REHEARSAL-001",
+  "retrieval_utc_date": "2026-07-18",
+  "replay_safety_note": "Live URLs are not treated as immutable. Each source includes a bounded normalized observation basis and SHA-256 hash of that basis for replay comparison; no archived snapshot was available in this workspace.",
+  "sources": [
+    {
+      "source_id": "SRC-GIT-BOOK-DISTRIBUTED",
+      "source_url": "https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows",
+      "retrieval_date": "2026-07-18",
+      "document_version_identity": "live documentation page retrieved by URL on retrieval date; no frozen upstream version exposed in artifact",
+      "section_or_anchor": "Distributed Workflows",
+      "bounded_normalized_observation_basis": "Distributed workflows involve multiple repositories exchanging changes using Git operations such as pushing, fetching, pulling, and integrating work.",
+      "normalized_basis_sha256": "79cdf5f92cd4d4d7ccb45eae3e7fde648a9de5c962dd03a798272de8519be048",
+      "immutable_snapshot_reference": null
+    },
+    {
+      "source_id": "SRC-GIT-DOCS-GLOSSARY",
+      "source_url": "https://git-scm.com/docs/gitglossary",
+      "retrieval_date": "2026-07-18",
+      "document_version_identity": "live documentation page retrieved by URL on retrieval date; no frozen upstream version exposed in artifact",
+      "section_or_anchor": "repository, commit, ref, branch, merge entries",
+      "bounded_normalized_observation_basis": "Git glossary terminology describes repositories, objects, refs/branches, commits, and merge-related vocabulary used as the normalized basis for observations.",
+      "normalized_basis_sha256": "116854fbd73b331787883944b61c27927dd153c405ff7374f8eb7a3f32c2233d",
+      "immutable_snapshot_reference": null
+    },
+    {
+      "source_id": "SRC-GIT-DOCS-COMMIT",
+      "source_url": "https://git-scm.com/docs/git-commit",
+      "retrieval_date": "2026-07-18",
+      "document_version_identity": "live documentation page retrieved by URL on retrieval date; no frozen upstream version exposed in artifact",
+      "section_or_anchor": "Description",
+      "bounded_normalized_observation_basis": "git-commit documentation describes recording repository changes and supports the normalized observation that commits record project history snapshots.",
+      "normalized_basis_sha256": "18bfa6b8c35f98e68b4fab0eaf8726dcaf411e944b7dc7c4ff64fa34b27114fb",
+      "immutable_snapshot_reference": null
+    }
+  ]
+}

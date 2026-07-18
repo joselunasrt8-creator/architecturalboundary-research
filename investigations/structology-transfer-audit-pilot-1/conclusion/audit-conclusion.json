@@ -1,15 +1,17 @@
 {
-  "object_type": "Audit Conclusion",
+  "object_type": "Rehearsal Determination",
   "object_id": "AC-PILOT-001",
-  "pilot_execution_id": "CDSTA-v0.1-PILOT-001",
-  "canonical_outcome": "Indeterminate",
+  "pilot_execution_id": "CDSTA-v0.1-REHEARSAL-001",
+  "canonical_pilot_execution": false,
+  "execution_validity": "BLOCKED",
+  "domain_transfer_outcome": "NOT_REACHED",
   "assessment_record_ids": ["TA-PILOT-001", "FFA-PILOT-001", "PFA-PILOT-001", "FA-PILOT-001"],
-  "conclusion_rationale": "The pilot produced reviewable observations, mappings, assessments, deviations, failures, and calibration observations, but the lack of immutable content references and authoritative local definitions prevents determining whether the methodology was executed as written strongly enough to classify transfer as Natural Transfer, Partial Transfer, Forced Fit, or No Transfer.",
+  "determination_rationale": "The artifact set rehearses the evidence chain and instrument mechanics, but the governing methodology and Structology authorities were not immutably bound and the complete candidate concept inventory was not fully assessable. Therefore canonical pilot execution is blocked and no domain transfer outcome is reached.",
   "evidence_chain_integrity": {
     "observation_to_conclusion_shortcut_present": false,
-    "required_chain": "Domain Observation -> Mapping Record -> Assessment -> Audit Conclusion",
-    "conclusion_supported_only_by_assessments": true
+    "required_chain": "Domain Observation -> Mapping Record -> Assessment -> Rehearsal Determination",
+    "determination_supported_only_by_assessments": true
   },
   "uncertainty": "high",
-  "scope_limits": ["No Structology validation claim", "No cross-domain claim", "No methodology change", "No generalization beyond Git distributed version control repository model"]
+  "scope_limits": ["No Structology validation claim", "No canonical Pilot Execution #1 claim", "No cross-domain claim", "No methodology change", "No generalization beyond Git distributed version control repository model"]
 }

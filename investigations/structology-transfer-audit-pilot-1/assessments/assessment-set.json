@@ -1,0 +1,15 @@
+{
+  "object_type": "Assessment Set",
+  "assessment_set_id": "AS-PILOT-001",
+  "mapping_set_id": "MRS-PILOT-001",
+  "transfer_assessment": {"object_type":"Transfer Assessment","object_id":"TA-PILOT-001","mapping_record_ids":["MR-PILOT-001","MR-PILOT-002","MR-PILOT-003"],"assessment":"Some Structology-labelled concepts can be mapped to Git observations with preserved meaning, but every core mapping also changes meaning and depends on unavailable external definitions.","uncertainty":"high","supports_outcomes":["Partial Transfer","Indeterminate"],"does_not_support":["Natural Transfer"]},
+  "forced_fit_assessment": {"object_type":"Forced-Fit Assessment","object_id":"FFA-PILOT-001","mapping_record_ids":["MR-PILOT-004"],"assessment":"At least one artificial mapping was recorded rather than hidden. The conflict-to-forced-fit mapping is useful for exercising the instrument but is too uncertain to establish a Forced Fit outcome by itself.","uncertainty":"high","supports_outcomes":["Indeterminate"],"does_not_support":["Forced Fit"]},
+  "partial_fit_assessment": {"object_type":"Partial-Fit Assessment","object_id":"PFA-PILOT-001","mapping_record_ids":["MR-PILOT-001","MR-PILOT-002","MR-PILOT-003","MR-PILOT-004"],"assessment":"Partial preservation is visible in boundary, continuity, and transfer mappings, while changes in meaning and missing authoritative definitions prevent stronger classification.","uncertainty":"high","supports_outcomes":["Partial Transfer","Indeterminate"]},
+  "failure_assessment": {"object_type":"Failure Assessment","object_id":"FA-PILOT-001","failure_record_ids":["FR-PILOT-001"],"assessment":"The pilot could not bind immutable content references for the three external methodology artifacts from the active workspace. This failure limits replay and prevents claiming that v0.1 was fully executed as written.","uncertainty":"low","supports_outcomes":["Indeterminate"],"does_not_support":["Natural Transfer","No Transfer"]},
+  "deviation_records": [
+    {"object_type":"Deviation Record","object_id":"DR-PILOT-001","description":"Immutable references were available only as issue-supplied title/version labels, not as content-addressed local files, release URLs, tags, or hashes.","impact":"Limits exact replay and direct verification against the external authorities.","disposition":"Recorded; methodology not revised."}
+  ],
+  "failure_records": [
+    {"object_type":"Failure Record","object_id":"FR-PILOT-001","description":"Full authoritative text of Structology Candidate Model v0.1, Methodology Engineering Contract v0.1, and Cross-Domain Structology Transfer Audit v0.1 was not present in the active workspace.","impact":"Definitions could not be independently verified beyond the issue prompt, so the execution can only demonstrate evidence-chain mechanics and reviewability under explicit uncertainty.","disposition":"Recorded; audit conclusion accounts for this limitation."}
+  ]
+}

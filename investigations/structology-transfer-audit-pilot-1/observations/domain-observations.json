@@ -5,57 +5,45 @@
   "observations": [
     {
       "object_type": "Domain Observation",
-      "object_id": "DO-PILOT-001",
+      "object_id": "DO-REHEARSAL-001",
       "claim": "A Git project history is represented as a repository containing objects and references.",
-      "provenance": [
-        "SRC-GIT-DOCS-GLOSSARY"
-      ],
+      "provenance": ["SRC-GIT-DOCS-GLOSSARY"],
       "uncertainty": "low",
       "notes": "Terminology is native to Git, not Structology.",
       "source_evidence_set_id": "SES-REHEARSAL-001"
     },
     {
       "object_type": "Domain Observation",
-      "object_id": "DO-PILOT-002",
+      "object_id": "DO-REHEARSAL-002",
       "claim": "A commit records a snapshot and parent relationship, allowing history traversal.",
-      "provenance": [
-        "SRC-GIT-DOCS-COMMIT",
-        "SRC-GIT-DOCS-GLOSSARY"
-      ],
+      "provenance": ["SRC-GIT-DOCS-COMMIT", "SRC-GIT-DOCS-GLOSSARY"],
       "uncertainty": "low",
       "notes": "Observed at documentation level only.",
       "source_evidence_set_id": "SES-REHEARSAL-001"
     },
     {
       "object_type": "Domain Observation",
-      "object_id": "DO-PILOT-003",
+      "object_id": "DO-REHEARSAL-003",
       "claim": "Branches and refs identify movable positions in repository history.",
-      "provenance": [
-        "SRC-GIT-DOCS-GLOSSARY"
-      ],
+      "provenance": ["SRC-GIT-DOCS-GLOSSARY"],
       "uncertainty": "low",
       "notes": "Ref mutability introduces lifecycle behavior.",
       "source_evidence_set_id": "SES-REHEARSAL-001"
     },
     {
       "object_type": "Domain Observation",
-      "object_id": "DO-PILOT-004",
+      "object_id": "DO-REHEARSAL-004",
       "claim": "Distributed workflows allow multiple repositories to exchange changes through fetch, pull, push, and merge practices.",
-      "provenance": [
-        "SRC-GIT-BOOK-DISTRIBUTED"
-      ],
+      "provenance": ["SRC-GIT-BOOK-DISTRIBUTED"],
       "uncertainty": "medium",
       "notes": "Workflow patterns vary by project.",
       "source_evidence_set_id": "SES-REHEARSAL-001"
     },
     {
       "object_type": "Domain Observation",
-      "object_id": "DO-PILOT-005",
+      "object_id": "DO-REHEARSAL-005",
       "claim": "Merge operations integrate divergent histories and can expose conflicts requiring resolution.",
-      "provenance": [
-        "SRC-GIT-DOCS-GLOSSARY",
-        "SRC-GIT-BOOK-DISTRIBUTED"
-      ],
+      "provenance": ["SRC-GIT-DOCS-GLOSSARY", "SRC-GIT-BOOK-DISTRIBUTED"],
       "uncertainty": "medium",
       "notes": "Conflict behavior depends on content and strategy.",
       "source_evidence_set_id": "SES-REHEARSAL-001"

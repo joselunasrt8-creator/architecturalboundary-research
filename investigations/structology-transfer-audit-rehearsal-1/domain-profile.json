@@ -1,0 +1,55 @@
+{
+  "domain_candidate": {
+    "object_type": "Domain Candidate",
+    "object_id": "DC-REHEARSAL-001",
+    "domain_name": "Git distributed version control repository model",
+    "domain_version_binding": {
+      "implementation_observed": "git version 2.43.0",
+      "command": "git --version",
+      "documentation_sources": [
+        {
+          "source_id": "SRC-GIT-BOOK-DISTRIBUTED",
+          "title": "Pro Git book, Distributed Git",
+          "url": "https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows",
+          "accessed_utc_date": "2026-07-18"
+        },
+        {
+          "source_id": "SRC-GIT-DOCS-GLOSSARY",
+          "title": "Git glossary documentation",
+          "url": "https://git-scm.com/docs/gitglossary",
+          "accessed_utc_date": "2026-07-18"
+        },
+        {
+          "source_id": "SRC-GIT-DOCS-COMMIT",
+          "title": "git-commit documentation",
+          "url": "https://git-scm.com/docs/git-commit",
+          "accessed_utc_date": "2026-07-18"
+        }
+      ]
+    },
+    "admissibility": {
+      "why_admissible": "The domain has explicit objects, boundaries, histories, references, and transfer/merge operations that can generate observations without altering Structology or the audit methodology.",
+      "why_independent": "Git is a mature software configuration-management domain developed independently of Structology, with its own terminology and operational semantics.",
+      "why_exclusions_do_not_apply": "The pilot uses one domain only, does not compare domains, does not seek to validate Structology, and does not require prohibited repository directories to be modified."
+    },
+    "selection_rationale": "Git was selected to exercise mapping, forced-fit detection, partial-fit reasoning, provenance preservation, and replay traceability rather than to optimize for a favorable transfer outcome."
+  },
+  "domain_profile": {
+    "object_type": "Domain Profile",
+    "object_id": "DP-REHEARSAL-001",
+    "domain_candidate_id": "DC-REHEARSAL-001",
+    "domain_scope": "Conceptual repository model: repositories, commits, object identity, refs, branches, merges, and distributed workflows.",
+    "out_of_scope": [
+      "Git hosting-provider governance",
+      "GitHub-specific pull request semantics",
+      "runtime implementation internals",
+      "performance characteristics"
+    ],
+    "evidence_constraints": [
+      "Public documentation and locally observed git version only",
+      "No claims about all version-control systems",
+      "No direct conclusion support from observations"
+    ],
+    "rehearsal_status": "candidate selected for instrument rehearsal only; not canonical pilot evidence"
+  }
+}

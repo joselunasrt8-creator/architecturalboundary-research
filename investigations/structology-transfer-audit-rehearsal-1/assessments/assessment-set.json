@@ -1,0 +1,60 @@
+{
+  "object_type": "Assessment Set",
+  "assessment_set_id": "AS-REHEARSAL-001",
+  "mapping_set_id": "MRS-REHEARSAL-001",
+  "concept_inventory_id": "PCI-REHEARSAL-001",
+  "transfer_assessment": {
+    "object_type": "Transfer Assessment",
+    "object_id": "TA-REHEARSAL-001",
+    "mapping_record_ids": ["MR-REHEARSAL-001", "MR-REHEARSAL-002", "MR-REHEARSAL-003", "MR-REHEARSAL-004"],
+    "assessment": "Selected concepts can be rehearsed against Git observations, but the full candidate-model inventory is not completely assessed and authoritative definitions remain unavailable.",
+    "uncertainty": "high",
+    "supports_transfer_determinations": ["NOT_REACHED"],
+    "does_not_support_transfer_determinations": ["Natural Transfer", "Partial Transfer", "Forced Fit", "No Transfer"]
+  },
+  "forced_fit_assessment": {
+    "object_type": "Forced-Fit Assessment",
+    "object_id": "FFA-REHEARSAL-001",
+    "assessment_input_mapping_record_ids": ["MR-REHEARSAL-003", "MR-REHEARSAL-004"],
+    "instrument_test_input_observation_ids": ["DO-REHEARSAL-005"],
+    "assessment": "Git merge conflicts are preserved only as an instrument-test input for forced-fit assessment pressure, not as a Structology concept mapping. They may stress the Transfer and State mappings, but they do not establish a Forced Fit outcome in a non-authoritatively-bound rehearsal.",
+    "uncertainty": "high",
+    "supports_transfer_determinations": ["NOT_REACHED"],
+    "does_not_support_transfer_determinations": ["Forced Fit"]
+  },
+  "partial_fit_assessment": {
+    "object_type": "Partial-Fit Assessment",
+    "object_id": "PFA-REHEARSAL-001",
+    "mapping_record_ids": ["MR-REHEARSAL-001", "MR-REHEARSAL-002", "MR-REHEARSAL-003", "MR-REHEARSAL-004"],
+    "assessment": "Partial preservation can be rehearsed for assessed concepts, but the concept inventory records several insufficient-evidence and excluded dispositions. Partial Transfer is therefore not reached as a transfer outcome.",
+    "uncertainty": "high",
+    "supports_transfer_determinations": ["NOT_REACHED"]
+  },
+  "failure_assessment": {
+    "object_type": "Failure Assessment",
+    "object_id": "FA-REHEARSAL-001",
+    "failure_record_ids": ["FR-REHEARSAL-001"],
+    "assessment": "The rehearsal could not bind immutable content references for the three external methodology artifacts from the active workspace. This blocks canonical pilot execution conformance and prevents reaching a domain transfer outcome.",
+    "uncertainty": "low",
+    "supports_execution_validity": ["BLOCKED"],
+    "supports_transfer_determinations": ["NOT_REACHED"]
+  },
+  "deviation_records": [
+    {
+      "object_type": "Deviation Record",
+      "object_id": "DR-REHEARSAL-001",
+      "description": "Immutable methodology and Structology references were available only as issue-supplied title/version labels, not as content-addressed local files, release URLs, tags, or hashes.",
+      "impact": "Limits exact replay and prevents canonical Pilot Execution #1 status.",
+      "disposition": "Recorded; methodology not revised; artifact reclassified as pre-reference instrument harness rehearsal."
+    }
+  ],
+  "failure_records": [
+    {
+      "object_type": "Failure Record",
+      "object_id": "FR-REHEARSAL-001",
+      "description": "Full authoritative text of Structology Candidate Model v0.1, Methodology Engineering Contract v0.1, and Cross-Domain Structology Transfer Audit v0.1 was not present in the active workspace and was identified by review as not yet frozen.",
+      "impact": "Definitions could not be independently verified; execution validity is BLOCKED and transfer outcome is NOT_REACHED.",
+      "disposition": "Recorded; determination separates execution validity from transfer determination."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "object_type": "Pre-reference Audit Request",
+  "object_id": "AR-REHEARSAL-001",
+  "rehearsal_id": "CDSTA-v0.1-REHEARSAL-001",
+  "research_question": "Can the Cross-Domain Structology Transfer Audit v0.1 instrument shape preserve evidence, provenance, uncertainty, and decision traceability before authoritative methodology references are frozen?",
+  "execution_boundary": {
+    "repository_performs": [
+      "pre-reference instrument harness rehearsal"
+    ],
+    "repository_does_not_own": [
+      "Structology definitions",
+      "Methodology definitions",
+      "audit semantics",
+      "decision-rule changes"
+    ],
+    "methodology_mutation_allowed": false,
+    "structology_mutation_allowed": false
+  },
+  "active_workspace_confirmation": {
+    "repository_path": "/workspace/architecturalboundary-research",
+    "branch": "work",
+    "head_commit_at_start": "cd25f95e4deaf428a3dca3ecdc2ecc4247b8c0da"
+  },
+  "immutable_reference_binding": [
+    {
+      "artifact": "Structology Candidate Model v0.1",
+      "version_label": "v0.1",
+      "authority": "external",
+      "content_hash": null,
+      "local_path": null,
+      "binding_status": "version-label-bound; immutable content reference unavailable in active workspace",
+      "provenance_note": "The issue supplied the title and version label, but no local file, URL, release tag, or digest was available in the active workspace. This is recorded as deviation DR-REHEARSAL-001 and failure record FR-REHEARSAL-001."
+    },
+    {
+      "artifact": "Methodology Engineering Contract v0.1",
+      "version_label": "v0.1",
+      "authority": "external",
+      "content_hash": null,
+      "local_path": null,
+      "binding_status": "version-label-bound; immutable content reference unavailable in active workspace",
+      "provenance_note": "The issue supplied the title and version label, but no local file, URL, release tag, or digest was available in the active workspace. This is recorded as deviation DR-REHEARSAL-001 and failure record FR-REHEARSAL-001."
+    },
+    {
+      "artifact": "Cross-Domain Structology Transfer Audit v0.1",
+      "version_label": "v0.1",
+      "authority": "external",
+      "content_hash": null,
+      "local_path": null,
+      "binding_status": "version-label-bound; immutable content reference unavailable in active workspace",
+      "provenance_note": "The issue supplied the title and version label, but no local file, URL, release tag, or digest was available in the active workspace. This is recorded as deviation DR-REHEARSAL-001 and failure record FR-REHEARSAL-001."
+    }
+  ],
+  "rehearsal_scope": {
+    "methodology_count": 1,
+    "domain_count": 1,
+    "canonical_execution_count": 0,
+    "canonical_conclusion_count": 0,
+    "cohort": false,
+    "cross_domain_comparison": false,
+    "calibration_changes": false,
+    "rehearsal_count": 1,
+    "rehearsal_determination_count": 1
+  },
+  "reference_binding_classification": "not_authoritatively_bound",
+  "noncanonical_status": "Pre-reference dry run; Instrument harness rehearsal; Not Pilot Execution #1"
+}

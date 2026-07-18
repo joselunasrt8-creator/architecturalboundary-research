@@ -1,0 +1,136 @@
+{
+  "object_type": "Pinned Concept Inventory",
+  "inventory_id": "PCI-REHEARSAL-001",
+  "status": "review-comment-derived inventory; not an authoritative Structology definition",
+  "source_of_inventory": {
+    "source_type": "pull_request_review_comment",
+    "repository": "joselunasrt8-creator/architecturalboundary-research",
+    "pull_request": 80,
+    "review_comment_id": 3607367356,
+    "review_comment_url": "https://github.com/joselunasrt8-creator/architecturalboundary-research/pull/80#discussion_r3607367356",
+    "copied_concept_list": [
+      "Object",
+      "Relationship",
+      "State",
+      "Lifecycle",
+      "Transformation Contract",
+      "Transformation Event",
+      "Methodology",
+      "Execution",
+      "Verification",
+      "Provenance",
+      "Failure",
+      "Versioning",
+      "Boundary",
+      "Continuity",
+      "Transfer"
+    ],
+    "provenance_note": "The concept list is copied into this artifact so coverage can be reviewed without depending on live GitHub availability."
+  },
+  "disposition_values": [
+    "ASSESSED",
+    "NOT_APPLICABLE",
+    "EXCLUDED_WITH_RATIONALE",
+    "INSUFFICIENT_EVIDENCE"
+  ],
+  "concepts": [
+    {
+      "concept": "Object",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "No authoritative Structology definition was available to determine whether Git objects preserve candidate-model meaning rather than native Git terminology.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Relationship",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Parent links and remotes are observable, but the candidate-model relationship definition was unavailable.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "State",
+      "disposition": "ASSESSED",
+      "rationale": "Rehearsed through commit snapshots and merge/integration observations.",
+      "mapping_record_ids": [
+        "MR-REHEARSAL-004"
+      ]
+    },
+    {
+      "concept": "Lifecycle",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Branch/ref movement suggests lifecycle behavior, but no governing definition was available for exact mapping.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Transformation Contract",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Git has commands and merge strategies, but the candidate concept cannot be mapped without authoritative semantics.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Transformation Event",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Commits and merges may be events, but the exact candidate-model event semantics were unavailable.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Methodology",
+      "disposition": "EXCLUDED_WITH_RATIONALE",
+      "rationale": "The selected domain is Git's repository model, not a research methodology domain.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Execution",
+      "disposition": "EXCLUDED_WITH_RATIONALE",
+      "rationale": "Runtime command execution was outside the domain scope, which was limited to conceptual repository model evidence.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Verification",
+      "disposition": "EXCLUDED_WITH_RATIONALE",
+      "rationale": "Verification systems such as CI and review workflows were explicitly outside Git repository-model scope.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Provenance",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Git records author/committer metadata and history, but exact transfer against the candidate concept requires authoritative definitions.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Failure",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Merge conflicts can test forced-fit assessment behavior but are not themselves mapped as a Structology concept without a governing definition.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Versioning",
+      "disposition": "INSUFFICIENT_EVIDENCE",
+      "rationale": "Git is a version-control system, but the candidate-model versioning concept was not authoritatively bound.",
+      "mapping_record_ids": []
+    },
+    {
+      "concept": "Boundary",
+      "disposition": "ASSESSED",
+      "rationale": "Rehearsed through repository boundary and distributed exchange observations from the original artifact set.",
+      "mapping_record_ids": [
+        "MR-REHEARSAL-001"
+      ]
+    },
+    {
+      "concept": "Continuity",
+      "disposition": "ASSESSED",
+      "rationale": "Rehearsed through commit parent links and refs.",
+      "mapping_record_ids": [
+        "MR-REHEARSAL-002"
+      ]
+    },
+    {
+      "concept": "Transfer",
+      "disposition": "ASSESSED",
+      "rationale": "Rehearsed through distributed exchange and merge observations.",
+      "mapping_record_ids": [
+        "MR-REHEARSAL-003"
+      ]
+    }
+  ]
+}

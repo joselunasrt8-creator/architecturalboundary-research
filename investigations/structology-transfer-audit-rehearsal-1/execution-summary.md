@@ -14,7 +14,7 @@ Execute one bounded pre-reference rehearsal of the Cross-Domain Structology Tran
 
 ## Affected files
 
-All changes are documentation-only rehearsal artifacts under `investigations/structology-transfer-audit-pilot-1/`.
+All changes are documentation-only rehearsal artifacts under `investigations/structology-transfer-audit-rehearsal-1/`.
 
 ## Preserved invariants
 
@@ -36,7 +36,7 @@ The rehearsal recorded the three required external artifacts by issue-supplied t
 2. Methodology Engineering Contract v0.1.
 3. Cross-Domain Structology Transfer Audit v0.1.
 
-However, the active workspace did not contain authoritative files, URLs, release tags, or content hashes for those artifacts. This limitation is recorded in `DR-PILOT-001` and `FR-PILOT-001`; it is also reflected in the Failure Assessment, execution validity `BLOCKED`, and transfer outcome `NOT_REACHED`.
+However, the active workspace did not contain authoritative files, URLs, release tags, or content hashes for those artifacts. This limitation is recorded in `DR-REHEARSAL-001` and `FR-REHEARSAL-001`; it is also reflected in the Failure Assessment, execution validity `BLOCKED`, and transfer outcome `NOT_REACHED`.
 
 ## Concept inventory and source provenance
 
@@ -46,10 +46,10 @@ The rehearsal adds a pinned concept inventory so concepts do not disappear silen
 
 | Chain level | Artifact | Records |
 | --- | --- | --- |
-| Domain Observation | `observations/domain-observations.json` | `DO-PILOT-001` through `DO-PILOT-005` |
-| Mapping Record | `mappings/mapping-records.json` | `MR-PILOT-001` through `MR-PILOT-004` |
-| Assessment | `assessments/assessment-set.json` | `TA-PILOT-001`, `FFA-PILOT-001`, `PFA-PILOT-001`, `FA-PILOT-001` |
-| Rehearsal Determination | `conclusion/audit-conclusion.json` | `AC-PILOT-001` |
+| Domain Observation | `observations/domain-observations.json` | `DO-REHEARSAL-001` through `DO-REHEARSAL-005` |
+| Mapping Record | `mappings/mapping-records.json` | `MR-REHEARSAL-001` through `MR-REHEARSAL-004` |
+| Assessment | `assessments/assessment-set.json` | `TA-REHEARSAL-001`, `FFA-REHEARSAL-001`, `PFA-REHEARSAL-001`, `FA-REHEARSAL-001` |
+| Rehearsal Determination | `conclusion/audit-conclusion.json` | `RD-REHEARSAL-001` |
 
 ## Validation checklist
 

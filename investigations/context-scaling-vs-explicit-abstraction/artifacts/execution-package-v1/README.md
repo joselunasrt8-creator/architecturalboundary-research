@@ -13,6 +13,6 @@ Run `python3 execution_package.py` to obtain the machine-readable readiness resu
 - Source, target, answer-key, and scope-rubric registries record the explicit blockers.
 - Prompt bindings and condition permutations materialize the immutable Section 8 controls.
 - `execution_package.py` provides the offline literal evaluator and readiness validator.
-- `audit-manifest-schema.json` defines the only allowable predeclared audit fields.
+- `audit-manifest-schema.json` defines strict, closed nested records for the honest pre-execution `NULL` determination and for execution-bound audit entries; it rejects missing, mistyped, or undeclared audit data.
 
 No file in this directory authorizes invocation.

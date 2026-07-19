@@ -97,7 +97,7 @@ def readiness() -> dict[str, Any]:
         "HASHES_COMPLETE": all(item.get("sha256") == hashlib.sha256((PACKAGE / item["path"]).read_bytes()).hexdigest() for item in manifest["files"]),
         "CONDITION_ORDER_VALID": all(condition_permutation(p, f)[1] for p in PACKAGE_IDS for f in FAMILIES),
         "EVALUATOR_VALID": True,
-        "AUDIT_MANIFEST_COMPLETE": "response_placeholders" in read_json("audit-manifest-schema.json")["required"],
+        "AUDIT_MANIFEST_COMPLETE": (lambda schema: schema.get("additionalProperties") is False and set(schema.get("required", [])) == {"run_identifiers", "hashes", "prompts", "package_ids", "target_ids", "tokenizer", "model_binding", "condition_order", "response_placeholders", "evaluator_placeholders", "environment_metadata", "credential_boundary", "operator_actions"} and len(schema.get("oneOf", [])) == 2 and {"sha256", "null_record", "request"}.issubset(schema.get("$defs", {})))(read_json("audit-manifest-schema.json")),
         "NO_EXECUTION_OCCURRED": True,
     }
     for name, passed in checks.items():

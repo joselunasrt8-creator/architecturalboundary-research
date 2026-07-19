@@ -8,7 +8,7 @@ The repository is organized around the execution lifecycle of the **Invariance-B
 
 ## Mission
 
-Build a cumulative evidence base for determining whether proposed architectural boundaries are:
+This repository contains the protocol, preregistered investigations, evidence artifacts, comparative datasets, schemas, analysis materials, and publication outputs needed to determine whether proposed architectural boundaries are:
 
 - Architectural invariants
 - Conditional invariants

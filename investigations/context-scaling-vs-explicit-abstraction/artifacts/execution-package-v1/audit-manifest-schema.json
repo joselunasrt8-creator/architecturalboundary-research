@@ -246,6 +246,7 @@
             "package_id": {
               "anyOf": [
                 {
+                  "type": "string",
                   "pattern": "^SP0[1-8]$"
                 },
                 {
@@ -325,6 +326,7 @@
             "supplied_source_unit_ids": {
               "type": "array",
               "items": {
+                "type": "string",
                 "pattern": "^U0(0[1-9]|1[0-6])$"
               },
               "uniqueItems": true
@@ -547,6 +549,7 @@
             "package_id": {
               "anyOf": [
                 {
+                  "type": "string",
                   "pattern": "^SP0[1-8]$"
                 },
                 {
@@ -555,6 +558,7 @@
               ]
             },
             "target_id": {
+              "type": "string",
               "pattern": "^T[0-9]{2}$"
             },
             "target_family": {
@@ -630,6 +634,7 @@
             "supplied_source_unit_ids": {
               "type": "array",
               "items": {
+                "type": "string",
                 "pattern": "^U0(0[1-9]|1[0-6])$"
               },
               "uniqueItems": true
@@ -759,6 +764,7 @@
           ],
           "properties": {
             "target_id": {
+              "type": "string",
               "pattern": "^T[0-9]{2}$"
             },
             "raw_output_sha256": {

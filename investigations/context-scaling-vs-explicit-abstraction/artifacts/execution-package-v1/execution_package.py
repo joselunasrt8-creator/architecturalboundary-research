@@ -62,7 +62,7 @@ def _source_render(p:dict[str,Any],c:str,b:dict[str,Any])->str:
  units=p['units'][:8 if c in {'C1','C2'} else 16]; text='\n'.join(f"{u['id']}: {u['content']}" for u in units); return b['system_prompt']+'\n\n'+b['source_prompt_template'].format(package_id=p['id'],condition_id=c,source_units=text,retention_instruction=b['retention_instructions'][c])
 def _target_render(t:dict[str,Any],c:str,b:dict[str,Any],stage1:dict[str,Any])->str:
  artifact=stage1[t['package_id']][c]; retained=artifact['source_response'] + ('\n'+artifact['abstraction_artifact'] if c in {'C2','C4'} else '')
- return b['system_prompt']+'\n\n'+b['target_prompt_template'].format(target_id=t['id'],condition_id=c,retained_package=retained)
+ return b['system_prompt']+'\n\n'+b['target_prompt_template'].format(target_id=t['id'],condition_id=c,retained_package=retained)+'\n\n'+t['target_prompt']
 def token_count(text:str)->int:
  import tiktoken
  if metadata.version('tiktoken')!='0.9.0':raise RuntimeError('tokenizer version mismatch')
@@ -150,13 +150,15 @@ def semantic_audit_valid(record:Any, order:Any, targets:Any=None)->bool:
  try:
   state=record['run_identifiers']['execution_state']
   if state=='PRE_EXECUTION_NULL': return all(isinstance(v,dict) and v.get('status')=='NULL' for k,v in record.items() if k!='run_identifiers')
-  run=record['run_identifiers']; req=record['model_binding']['request']; hashes=record['hashes']; response=record['response']; actions=record['operator_actions']
-  start,end=_parse_time(req['started_at']),_parse_time(req['ended_at'])
+  run=record['run_identifiers']; binding=record['model_binding']; req=binding['request']; hashes=record['hashes']; response=record['response']; actions=record['operator_actions']
+  start,end=_parse_time(binding['started_at']),_parse_time(binding['ended_at'])
   if not start or not end or end<start or (end-start).total_seconds()>120 or hashes['request_sha256']!=req['request_sha256'] or hashes['raw_response_sha256']!=response['raw_response_sha256'] or record['credential_boundary']['request_count']!=1:return False
   times=[_parse_time(a['recorded_at']) for a in actions]; names=[a['action'] for a in actions]
   if not all(times) or times!=sorted(times) or names.count('request')!=1 or not {'request','response_retained','offline_evaluation'} <= set(names) or not(names.index('request')<names.index('response_retained')<names.index('offline_evaluation')):return False
   if state=='SOURCE_EXECUTION_BOUND':
-   return run['invocation']=='source' and run['target_id'] is None and run['target_family'] is None and record['evaluator'] is None and record['token_accounting']['target_record_sha256']=='0'*64
+   source=[x for x in order['canonical_source_order'] if x['package_id']==run['package_id']]; position=record['condition_order']['position']
+   if not isinstance(position,int) or isinstance(position,bool) or not 1<=position<=len(source):return False
+   return run['invocation']=='source' and run['target_id'] is None and run['target_family'] is None and record['evaluator'] is None and record['token_accounting']['target_record_sha256']=='0'*64 and source[position-1]=={'package_id':run['package_id'],'condition_id':run['condition_id']} and record['condition_order']['condition_id']==run['condition_id']
   if state!='TARGET_EXECUTION_BOUND' or run['invocation']!='target' or not isinstance(run['target_id'],str):return False
   ev=record['evaluator']
   if run['target_id']!=ev['target_id'] or response['raw_response_sha256']!=ev['raw_output_sha256'] or ev['score'] != (ev['KEY_MATCH'] and ev['SCOPE_MATCH']):return False

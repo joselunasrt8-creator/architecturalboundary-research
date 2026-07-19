@@ -105,20 +105,21 @@ def complete_readiness_fixture():
         units = []
         for number in range(1, 17):
             content = f'{package_id} unit {number}'
-            units.append({'id': f'U{number:03d}', 'status': 'ELIGIBLE', 'content': content, 'sha256': __import__('hashlib').sha256(content.encode()).hexdigest()})
-        packages.append({'id': package_id, 'status': 'READY', 'units': units, 'rendered_source_inputs': {condition: f'{package_id} source {condition}' for condition in module.CONDITIONS}})
+            units.append({'id': f'U{number:03d}', 'status': 'ELIGIBLE', 'content': content, 'sha256': __import__('hashlib').sha256(content.encode()).hexdigest(), 'source_reference': f'{package_id}#{number}'})
+        packages.append({'id': package_id, 'status': 'READY', 'canonical_source_reference': f'canonical:{package_id}', 'units': units})
     targets = []
     for package_id in module.PACKAGE_IDS:
         for family in module.FAMILIES:
-            targets.append({'id': f'T-{package_id}-{family}', 'package_id': package_id, 'family': family, 'status': 'ELIGIBLE', 'answer_key_sha256': module.sha256(key), 'scope_rubric_sha256': module.sha256(rubric), 'transfer_distance': {'domain': True, 'surface_representation': True, 'entities_vocabulary': True, 'task_objective': False, 'causal_structural_arrangement': False}, 'rendered_target_inputs': {condition: f'{package_id} {family} {condition}' for condition in module.CONDITIONS}})
+            targets.append({'id': f'T{len(targets) + 1:02d}', 'package_id': package_id, 'family': family, 'status': 'ELIGIBLE', 'answer_key_sha256': module.sha256(key), 'scope_rubric_sha256': module.sha256(rubric), 'transfer_distance': {'domain': True, 'surface_representation': True, 'entities_vocabulary': True, 'task_objective': False, 'causal_structural_arrangement': False}, 'retained_package_by_condition': {condition: f'{package_id} {family} retained {condition}' for condition in module.CONDITIONS}})
     manifest_files = [{'path': path, 'sha256': __import__('hashlib').sha256((module.PACKAGE / path).read_bytes()).hexdigest()} for path in module.PACKAGE_FILES]
     return {
         'source-package-registry.json': {'preregistration_commit': 'aed5ff895d3afb0a03b819bc5112327b479b8905', 'preregistration_sha256': __import__('hashlib').sha256(module.PREREGISTRATION.read_bytes()).hexdigest(), 'packages': packages},
         'target-registry.json': {'targets': targets},
         'answer-key-registry.json': {'records': [key]}, 'scope-rubric-registry.json': {'records': [rubric]},
         'hash-manifest.json': {'files': manifest_files, 'external_files': [{'path': 'investigations/context-scaling-vs-explicit-abstraction/preregistration.md', 'sha256': __import__('hashlib').sha256(module.PREREGISTRATION.read_bytes()).hexdigest()}]},
-        'prompt-bindings.json': {'model': 'gpt-4.1-2025-04-14'},
+        'prompt-bindings.json': module.read_json('prompt-bindings.json'),
         'audit-manifest-schema.json': module.read_json('audit-manifest-schema.json'),
+        'condition-order.json': module.read_json('condition-order.json'),
     }
 
 
@@ -138,3 +139,58 @@ def test_readiness_returns_null_for_adversarial_malformed_records(monkeypatch):
     result = module.readiness()
     assert result['outcome'] == 'NULL'
     assert result['checks']['TWENTY_FOUR_TARGETS'] is False
+
+
+def test_token_budget_uses_canonical_renders_not_caller_strings(monkeypatch):
+    fixture = complete_readiness_fixture()
+    fixture["source-package-registry.json"]["packages"][0]["units"][0]["content"] = "x " * 10000
+    # The stale, arbitrary render field is undeclared and therefore cannot reduce accounting.
+    fixture["source-package-registry.json"]["packages"][0]["rendered_source_inputs"] = {c: "" for c in module.CONDITIONS}
+    monkeypatch.setattr(module, "token_count", lambda text: len(text.split()))
+    assert module.valid_token_budgets(fixture["source-package-registry.json"], fixture["target-registry.json"], fixture["prompt-bindings.json"]) is False
+
+
+def test_readiness_rejects_invalid_source_ids_hashes_and_duplicate_targets(monkeypatch):
+    fixture = complete_readiness_fixture()
+    fixture["source-package-registry.json"]["packages"][0]["units"][0]["id"] = "broken"
+    fixture["target-registry.json"]["targets"][1]["id"] = fixture["target-registry.json"]["targets"][0]["id"]
+    monkeypatch.setattr(module, "read_json", lambda name: fixture[name])
+    monkeypatch.setattr(module, "token_count", lambda text: 1)
+    result = module.readiness()
+    assert result["checks"]["EIGHT_SOURCE_PACKAGES"] is False
+    assert result["checks"]["TWENTY_FOUR_TARGETS"] is False
+
+
+def test_preregistration_hash_mismatch_and_condition_artifact_are_rejected(monkeypatch):
+    fixture = complete_readiness_fixture()
+    fixture["source-package-registry.json"]["preregistration_sha256"] = "0" * 64
+    order = module.read_json("condition-order.json")
+    order["target_condition_blocks"][0]["execution_conditions"] = ["C1", "C2", "C3", "C4"]
+    fixture["condition-order.json"] = order
+    # Direct checks avoid a recursive monkeypatch fallback and cover both immutable gates.
+    assert module.preregistration_matches(fixture["source-package-registry.json"], fixture["hash-manifest.json"]) is False
+    assert module.valid_condition_order(order) is False
+
+
+def test_readiness_rejects_invalid_unit_count_hash_and_family_distribution():
+    fixture = complete_readiness_fixture()
+    sources = fixture["source-package-registry.json"]
+    assert module.valid_sources(sources)
+    sources["packages"][0]["units"] = sources["packages"][0]["units"][:-1]
+    assert not module.valid_sources(sources)
+    fixture = complete_readiness_fixture()
+    fixture["source-package-registry.json"]["packages"][0]["units"][0]["sha256"] = "0" * 64
+    assert not module.valid_sources(fixture["source-package-registry.json"])
+    fixture = complete_readiness_fixture()
+    fixture["target-registry.json"]["targets"][0]["family"] = module.FAMILIES[1]
+    assert not module.valid_targets(fixture["target-registry.json"], fixture["answer-key-registry.json"], fixture["scope-rubric-registry.json"])
+
+
+def test_prompt_binding_and_pinned_tokenizer_are_required(monkeypatch):
+    bindings = module.read_json("prompt-bindings.json")
+    assert module._bindings_valid(bindings)
+    bindings["decoding"]["temperature"] = 1
+    assert not module._bindings_valid(bindings)
+    fixture = complete_readiness_fixture()
+    monkeypatch.setattr(module.metadata, "version", lambda name: "9.9.9")
+    assert not module.valid_token_budgets(fixture["source-package-registry.json"], fixture["target-registry.json"], fixture["prompt-bindings.json"])

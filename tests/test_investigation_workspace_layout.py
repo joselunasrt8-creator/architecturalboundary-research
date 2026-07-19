@@ -20,14 +20,13 @@ def write_json(path: Path, data: dict) -> None:
 
 
 def create_workspace(root: Path, base: str) -> None:
-    for item in repository_validate.INVESTIGATION_ITEMS:
+    for item in repository_validate.INVESTIGATION_WORKSPACE_ITEMS:
         path = root / base / item
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("", encoding="utf-8")
 
 
 def test_workspace_layout_includes_every_registered_investigation(tmp_path, monkeypatch):
-    create_workspace(tmp_path, "investigations/template")
     create_workspace(tmp_path, "investigations/registered-later")
     write_json(tmp_path / "registry/investigations.json", {"investigations": [
         {"id": "registered-later", "path": "investigations/registered-later"},
@@ -38,7 +37,6 @@ def test_workspace_layout_includes_every_registered_investigation(tmp_path, monk
 
 
 def test_workspace_layout_rejects_missing_item_in_registered_investigation(tmp_path, monkeypatch):
-    create_workspace(tmp_path, "investigations/template")
     create_workspace(tmp_path, "investigations/registered-later")
     (tmp_path / "investigations/registered-later/artifacts/README.md").unlink()
     write_json(tmp_path / "registry/investigations.json", {"investigations": [
@@ -47,4 +45,19 @@ def test_workspace_layout_rejects_missing_item_in_registered_investigation(tmp_p
     monkeypatch.setattr(repository_validate, "ROOT", tmp_path)
 
     with pytest.raises(SystemExit, match="investigations/registered-later/artifacts/README.md"):
+        repository_validate.validate_investigation_workspace_layout()
+
+
+def test_workspace_layout_reports_registered_workspaces_in_path_order(tmp_path, monkeypatch):
+    create_workspace(tmp_path, "investigations/a-study")
+    create_workspace(tmp_path, "investigations/z-study")
+    (tmp_path / "investigations/a-study/investigation-design.md").unlink()
+    (tmp_path / "investigations/z-study/investigation-design.md").unlink()
+    write_json(tmp_path / "registry/investigations.json", {"investigations": [
+        {"id": "z-study", "path": "investigations/z-study"},
+        {"id": "a-study", "path": "investigations/a-study"},
+    ]})
+    monkeypatch.setattr(repository_validate, "ROOT", tmp_path)
+
+    with pytest.raises(SystemExit, match="investigations/a-study/investigation-design.md"):
         repository_validate.validate_investigation_workspace_layout()

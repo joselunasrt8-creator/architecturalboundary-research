@@ -30,11 +30,10 @@ REQUIRED_PATHS = [
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
     "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/build_publication_manifest.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
-INVESTIGATION_TEMPLATE = "investigations/template"
-INVESTIGATION_ITEMS = [
-    "README.md", "preregistration.md", "literature/README.md", "bor/README.md", "srf/README.md",
-    "der/README.md", "msr/README.md", "dataset/README.md", "analysis/README.md", "results/README.md",
-    "figures/README.md", "artifacts/README.md",
+INVESTIGATION_WORKSPACE_ITEMS = [
+    "README.md", "investigation-design.md", "preregistration.md", "literature/README.md",
+    "bor/README.md", "srf/README.md", "der/README.md", "msr/README.md", "dataset/README.md",
+    "analysis/README.md", "results/README.md", "figures/README.md", "artifacts/README.md",
 ]
 SCHEMAS = [
     "schemas/bor.schema.json", "schemas/srf.schema.json", "schemas/der.schema.json",
@@ -188,7 +187,7 @@ def validate_registered_paths() -> None:
 
 
 def registered_investigation_paths() -> list[str]:
-    """Return investigation workspace paths in their registered order."""
+    """Return registered investigation workspace paths in deterministic order."""
     data = require_json("registry/investigations.json")
     investigations = data.get("investigations") if isinstance(data, dict) else None
     if not isinstance(investigations, list):
@@ -199,13 +198,13 @@ def registered_investigation_paths() -> list[str]:
         if not isinstance(item, dict) or not isinstance(item.get("path"), str) or not item["path"]:
             raise SystemExit("registry/investigations.json entries must contain a path")
         paths.append(item["path"])
-    return paths
+    return sorted(paths)
 
 
 def validate_investigation_workspace_layout() -> None:
-    """Require the template and every registered investigation to have the standard layout."""
-    for base in [INVESTIGATION_TEMPLATE, *registered_investigation_paths()]:
-        for item in INVESTIGATION_ITEMS:
+    """Require every registry-defined investigation to have the standard layout."""
+    for base in registered_investigation_paths():
+        for item in INVESTIGATION_WORKSPACE_ITEMS:
             require_path(f"{base}/{item}")
 
 

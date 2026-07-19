@@ -1,9 +1,8 @@
 name: regenerate-publication-manifest
 
 on:
-  push:
-    branches:
-      - docs/refine-repository-positioning
+  pull_request:
+    branches: [main]
 
 jobs:
   regenerate:

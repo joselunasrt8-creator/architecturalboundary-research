@@ -1084,5 +1084,6 @@
         "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
       }
     }
-  ]
+  ],
+  "preregistration_sha256": "8e793c7fb68c8efc0e9fb2602214231f783e79e93f7bc10fc5ed9153b3b4cd23"
 }

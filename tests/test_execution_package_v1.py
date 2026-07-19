@@ -85,3 +85,56 @@ def test_audit_manifest_schema_requires_typed_complete_records():
     assert not list(validator.iter_errors(execution))
     execution["hashes"]["request_sha256"] = None
     assert list(validator.iter_errors(execution))
+
+
+def test_evaluator_rejects_cross_list_and_reserved_literal_conflicts():
+    scope = {'relation_literals': ['r'], 'required_applicability_literals': ['a'], 'forbidden_applicability_literals': []}
+    key = {'required_literals': ['correct'], 'forbidden_literals': ['CORRECT']}
+    with pytest.raises(ValueError, match='malformed literal registry'):
+        module.evaluate(b'correct r a', fixture_record(key, scope), key, scope)
+    key = {'required_literals': ['KEY_MATCH'], 'forbidden_literals': []}
+    with pytest.raises(ValueError, match='malformed literal registry'):
+        module.evaluate(b'key_match r a', fixture_record(key, scope), key, scope)
+
+
+def complete_readiness_fixture():
+    key = {'required_literals': ['answer'], 'forbidden_literals': []}
+    rubric = {'relation_literals': ['relation'], 'required_applicability_literals': ['applicable'], 'forbidden_applicability_literals': []}
+    packages = []
+    for package_id in module.PACKAGE_IDS:
+        units = []
+        for number in range(1, 17):
+            content = f'{package_id} unit {number}'
+            units.append({'id': f'U{number:03d}', 'status': 'ELIGIBLE', 'content': content, 'sha256': __import__('hashlib').sha256(content.encode()).hexdigest()})
+        packages.append({'id': package_id, 'status': 'READY', 'units': units, 'rendered_source_inputs': {condition: f'{package_id} source {condition}' for condition in module.CONDITIONS}})
+    targets = []
+    for package_id in module.PACKAGE_IDS:
+        for family in module.FAMILIES:
+            targets.append({'id': f'T-{package_id}-{family}', 'package_id': package_id, 'family': family, 'status': 'ELIGIBLE', 'answer_key_sha256': module.sha256(key), 'scope_rubric_sha256': module.sha256(rubric), 'transfer_distance': {'domain': True, 'surface_representation': True, 'entities_vocabulary': True, 'task_objective': False, 'causal_structural_arrangement': False}, 'rendered_target_inputs': {condition: f'{package_id} {family} {condition}' for condition in module.CONDITIONS}})
+    manifest_files = [{'path': path, 'sha256': __import__('hashlib').sha256((module.PACKAGE / path).read_bytes()).hexdigest()} for path in module.PACKAGE_FILES]
+    return {
+        'source-package-registry.json': {'preregistration_commit': 'aed5ff895d3afb0a03b819bc5112327b479b8905', 'preregistration_sha256': __import__('hashlib').sha256(module.PREREGISTRATION.read_bytes()).hexdigest(), 'packages': packages},
+        'target-registry.json': {'targets': targets},
+        'answer-key-registry.json': {'records': [key]}, 'scope-rubric-registry.json': {'records': [rubric]},
+        'hash-manifest.json': {'files': manifest_files, 'external_files': [{'path': 'investigations/context-scaling-vs-explicit-abstraction/preregistration.md', 'sha256': __import__('hashlib').sha256(module.PREREGISTRATION.read_bytes()).hexdigest()}]},
+        'prompt-bindings.json': {'model': 'gpt-4.1-2025-04-14'},
+        'audit-manifest-schema.json': module.read_json('audit-manifest-schema.json'),
+    }
+
+
+def test_readiness_returns_ready_for_complete_valid_fixture(monkeypatch):
+    fixture = complete_readiness_fixture()
+    monkeypatch.setattr(module, 'read_json', lambda name: fixture[name])
+    monkeypatch.setattr(module, 'token_count', lambda rendered: len(rendered.split()))
+    assert module.readiness()['outcome'] == 'READY'
+
+
+def test_readiness_returns_null_for_adversarial_malformed_records(monkeypatch):
+    fixture = complete_readiness_fixture()
+    fixture['target-registry.json']['targets'][0]['transfer_distance']['domain'] = False
+    fixture['target-registry.json']['targets'][0]['transfer_distance']['surface_representation'] = False
+    monkeypatch.setattr(module, 'read_json', lambda name: fixture[name])
+    monkeypatch.setattr(module, 'token_count', lambda rendered: 1)
+    result = module.readiness()
+    assert result['outcome'] == 'NULL'
+    assert result['checks']['TWENTY_FOUR_TARGETS'] is False

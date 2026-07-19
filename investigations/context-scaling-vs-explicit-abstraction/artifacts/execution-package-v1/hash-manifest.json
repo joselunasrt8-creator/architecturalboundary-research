@@ -8,7 +8,7 @@
     },
     {
       "path": "source-package-registry.json",
-      "sha256": "0028e3dc32b799e01e9d3c0c81ecc51b770b46516c0b81652d200c71ed34259e"
+      "sha256": "f4370ad1ccd4302c74e5306ed165c7df83eb990de93b956829974845f44fc9e3"
     },
     {
       "path": "target-registry.json",
@@ -44,7 +44,13 @@
     },
     {
       "path": "execution_package.py",
-      "sha256": "2893e0213fa975fc91131ef484476529a6fad44f68c17b9ccf7bba33edf6dc7a"
+      "sha256": "b5b6374150244e3e3bece455d9c8d1b29bc195528cfb3da303ea37696707d8c7"
+    }
+  ],
+  "external_files": [
+    {
+      "path": "investigations/context-scaling-vs-explicit-abstraction/preregistration.md",
+      "sha256": "8e793c7fb68c8efc0e9fb2602214231f783e79e93f7bc10fc5ed9153b3b4cd23"
     }
   ]
 }

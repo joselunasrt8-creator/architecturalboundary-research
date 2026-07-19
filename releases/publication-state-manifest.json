@@ -104,8 +104,8 @@
       },
       {
         "path": "registry/investigations.json",
-        "sha256": "4f8f09d88ce1d65d9a3d82bc28741039c9b0ac515a4caf51d25012825a7895d3",
-        "size_bytes": 315
+        "sha256": "ef72509bb91bd4a551300d9774da68746799b4290e1031bcff0a27eda0bb15ae",
+        "size_bytes": 495
       },
       {
         "path": "registry/protocol_versions.json",

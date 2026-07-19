@@ -58,17 +58,26 @@ One or more unseen target tasks
 One predefined transfer assessment
 ```
 
-## Conditions
+## Factorial Conditions
 
-### C1 — Context-only
+This is a 2 × 2 factorial design. Context budget and explicit abstraction are independently assigned factors; no condition is optional.
 
-The system receives source material within a declared context budget and completes the source task without being required to construct or preserve a separate abstraction artifact.
+| Workflow | Standard context | High context |
+| --- | --- | --- |
+| Context-only | C1 | C3 |
+| Explicit abstraction | C2 | C4 |
 
-### C2 — Explicit abstraction
+Each context level must be declared in advance as a deterministic maximum input budget. The same source-task material is used across conditions; the applicable source-step budget is the assigned context level.
 
-The system receives the same source material and budget class, then must construct a source-linked abstraction artifact before attempting target tasks.
+### Context-only workflow — C1 and C3
 
-The abstraction artifact must include:
+The system completes the source task without being required to construct or preserve a separate abstraction artifact. C1 uses the standard context budget and C3 uses the high context budget.
+
+### Explicit-abstraction workflow — C2 and C4
+
+The system constructs a source-linked abstraction artifact before attempting target tasks. C2 uses the standard context budget and C4 uses the high context budget.
+
+For C2 and C4, the abstraction artifact must include:
 
 - identified relations or patterns;
 - a generalized principle;
@@ -76,13 +85,20 @@ The abstraction artifact must include:
 - limitations or exclusions;
 - provenance linking the principle to source material.
 
-### C3 — Combined condition
+## Target-Step Information Policy
 
-The system receives an increased context budget and must also construct the explicit abstraction artifact. This condition tests complementarity rather than assuming context and abstraction are substitutes.
+Target-task execution uses a frozen transfer package. The raw source material is not visible during transfer in any condition; C1 and C3 do not regain it merely because they are context-only. Every condition receives the same unseen target-task prompt, the frozen source response, and provenance identifiers that permit audit but do not reveal source content. C2 and C4 additionally receive their frozen abstraction artifact. No condition receives unrecorded notes, conversation history, retrieval output, tool state, or hidden retained memory from the source step.
 
-### C4 — Optional minimal-context control
+The target-step input budget is the condition's assigned context level and is measured using one preregistered deterministic accounting method. It counts every item supplied at transfer: target prompt, source response, explicit abstraction artifact when present, provenance data, system and user prompt text, and any permitted tool or retrieval material. The budget does not grant an exception for an abstraction artifact. If a package exceeds its assigned budget, it must be deterministically reduced or the unit must stop under the stopping rules; it may not be silently truncated or supplemented.
 
-A constrained-context baseline may be included when needed to estimate the effect of information availability itself.
+Within each context level, C1 and C2 use identical accounting and the same maximum target-step budget; C3 and C4 do the same. Thus abstraction changes the retained object available at transfer, while the context factor changes the maximum information budget. The transfer package, its order, identifiers, sizes, accounting result, and any deterministic reduction must be frozen before target execution. Provenance identifiers remain visible only to the extent needed for traceability and are counted as package content.
+
+## Primary Contrasts
+
+- **C1 ↔ C2 — abstraction at standard context:** estimates the effect of the explicit-abstraction workflow at the standard budget.
+- **C1 ↔ C3 — context in the context-only workflow:** estimates the effect of the larger context budget without explicit abstraction.
+- **C3 ↔ C4 — abstraction at high context:** estimates the effect of the explicit-abstraction workflow at the high budget.
+- **Interaction:** tests whether the abstraction effect differs between standard and high context. This matters because an average main effect can conceal that abstraction is more, less, or differently valuable as context increases.
 
 ## Canonical Prospective Objects
 
@@ -171,13 +187,18 @@ Before execution, freeze or record:
 - source material;
 - task order;
 - context budget;
+- target-step context budget and its deterministic accounting result;
+- target-step artifact visibility, including the source response and (only for C2/C4) the abstraction artifact;
+- target-step source-material visibility, which is prohibited for every condition;
+- target-step system and user prompt visibility;
 - time or compute budget where applicable;
 - scoring procedure;
 - evaluator identity or evaluation program;
 - randomization procedure;
-- permitted reuse of prior artifacts.
+- permitted reuse of prior artifacts, which is limited to the frozen transfer package;
+- retention and reduction rules for every transfer-package item.
 
-Any uncontrolled difference must be recorded as a limitation.
+Context and abstraction must be assigned independently. Comparisons must use identical target-step budget accounting, prompt visibility, source visibility, provenance visibility, and reuse rules within each context level. Any uncontrolled difference must be recorded as a limitation and assessed as potential methodology failure.
 
 ## Measurement Plan
 
@@ -201,17 +222,23 @@ The difference in predefined reasoning work between workflows, without treating 
 
 Agreement in principle interpretation and application across separated target tasks.
 
+### Target-step information budget
+
+The measured total of all transfer-package content under the preregistered accounting method, reported with the assigned budget, context level, retained-artifact inventory, and any deterministic reduction.
+
 ## Analysis Plan
 
 The analysis must:
 
 1. report source-task and transfer outcomes separately;
-2. compare C1 and C2 as the primary contrast;
-3. compare C2 and C3 to evaluate complementarity with additional context;
-4. stratify results by context budget and task family where sample size permits;
-5. report task-level variation and failure classifications;
-6. retain null, negative, mixed, and indeterminate results;
-7. separate measured findings from interpretations of the bottleneck-shift framing.
+2. estimate the context main effect across the two abstraction levels;
+3. estimate the abstraction main effect across the two context levels;
+4. estimate and report the context-by-abstraction interaction, because it determines whether the abstraction effect changes as context increases;
+5. report the preregistered C1 ↔ C2, C1 ↔ C3, and C3 ↔ C4 contrasts;
+6. stratify results by context budget and task family where sample size permits;
+7. report task-level variation, target-step information budgets, retained-artifact inventories, and failure classifications;
+8. retain null, negative, mixed, and indeterminate results;
+9. separate measured findings from interpretations of the bottleneck-shift framing.
 
 No post hoc metric may replace the preregistered primary outcome. Exploratory analyses must be labeled exploratory.
 
@@ -241,8 +268,12 @@ Stop before or during execution when:
 
 - source or target tasks violate frozen eligibility rules;
 - context budgets cannot be enforced or measured;
-- the abstraction artifact is not preserved independently from the response;
-- target tasks are exposed before the source artifact is frozen;
+- a C2 or C4 abstraction artifact is not preserved independently from the response;
+- the required C1 or C3 freeze package (source material, source response, and provenance) is incomplete;
+- the required C2 or C4 freeze package (abstraction artifact, source response, and provenance) is incomplete;
+- target tasks are exposed before the applicable condition's freeze package is frozen;
+- source material, artifacts, prompts, provenance, or reuse permissions differ from the target-step information policy;
+- target-step budget accounting is unequal within a context level;
 - evaluators cannot apply the scoring protocol consistently;
 - condition contamination occurs;
 - provenance or version bindings are missing;
@@ -281,7 +312,7 @@ The selected measures may not fully capture understanding, abstraction quality, 
 
 ### Internal validity
 
-Prompt differences, artifact exposure, evaluator expectations, or unequal budgets may confound condition effects.
+Unequal target-step information, unequal retained artifacts, unequal context budgets, workflow contamination, prompt differences, artifact exposure, source-material exposure, or evaluator expectations may confound condition effects. The target-step information policy and condition-specific freeze packages control these risks but cannot remove defects that are not recorded or detected.
 
 ### External validity
 
@@ -312,6 +343,10 @@ Before running the experiment, create and freeze:
 - stopping rules;
 - provenance manifest;
 - preregistration record.
+
+## Registration Status
+
+This investigation is registered in `registry/investigations.json`, as required for investigation workspaces by the repository's documented convention. Its scaffold remains prospective: this design is documentation only and does not authorize execution, evidence collection, or empirical interpretation.
 
 ## Current Determination
 

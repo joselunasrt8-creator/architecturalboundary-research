@@ -9,6 +9,11 @@
       "id": "b2-governance-cohort",
       "path": "investigations/b2-governance-cohort",
       "protocol_version": "protocol-v1"
+    },
+    {
+      "id": "context-scaling-vs-explicit-abstraction",
+      "path": "investigations/context-scaling-vs-explicit-abstraction",
+      "protocol_version": "protocol-v1"
     }
   ]
 }

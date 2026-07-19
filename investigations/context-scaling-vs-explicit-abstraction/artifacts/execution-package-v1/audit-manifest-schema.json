@@ -16,13 +16,11 @@
     "evaluator": {},
     "condition_order": {},
     "credential_boundary": {},
-    "operator_actions": {}
+    "operator_actions": {},
+    "scorer_image_sha256": {}
   },
   "$defs": {
-    "sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$"
-    },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "null_field": {
       "type": "object",
       "additionalProperties": false,
@@ -94,31 +92,133 @@
         "target_record_sha256": { "$ref": "#/$defs/sha256" }
       }
     },
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature",
+        "top_p",
+        "max_output_tokens",
+        "presence_penalty",
+        "frequency_penalty",
+        "seed",
+        "omitted_optional_parameters"
+      ],
+      "properties": {
+        "temperature": { "const": 0 },
+        "top_p": { "const": 1 },
+        "max_output_tokens": { "const": 2048 },
+        "presence_penalty": { "const": 0 },
+        "frequency_penalty": { "const": 0 },
+        "seed": { "const": 20260719 },
+        "omitted_optional_parameters": { "const": true }
+      }
+    },
+    "supplied_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "identifier", "sha256", "content"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["source_unit", "source_response", "citation_identifier", "retained_object"]
+        },
+        "identifier": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "content": { "type": "string", "minLength": 1 }
+      }
+    },
+    "canonical_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "system_prompt",
+        "rendered_user_prompt",
+        "supplied_inputs",
+        "model",
+        "decoding",
+        "tools",
+        "tool_choice"
+      ],
+      "properties": {
+        "endpoint": { "const": "https://api.openai.com/v1/responses" },
+        "system_prompt": { "type": "string", "minLength": 1 },
+        "rendered_user_prompt": { "type": "string", "minLength": 1 },
+        "supplied_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/supplied_input" }
+        },
+        "model": { "const": "gpt-4.1-2025-04-14" },
+        "decoding": { "$ref": "#/$defs/decoding" },
+        "tools": { "type": "array", "maxItems": 0 },
+        "tool_choice": { "const": "none" }
+      }
+    },
     "model_binding": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["request", "started_at", "ended_at"],
+      "required": ["request", "request_sha256", "started_at", "ended_at"],
       "properties": {
-        "request": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["endpoint", "request_sha256"],
-          "properties": {
-            "endpoint": { "const": "https://api.openai.com/v1/responses" },
-            "request_sha256": { "$ref": "#/$defs/sha256" }
-          }
-        },
+        "request": { "$ref": "#/$defs/canonical_request" },
+        "request_sha256": { "$ref": "#/$defs/sha256" },
         "started_at": { "type": "string", "format": "date-time" },
         "ended_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "artifact_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
       }
     },
     "response": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["raw_response_sha256"],
+      "required": [
+        "raw_response_sha256",
+        "retained_raw_response_utf8",
+        "immutable_artifact_reference",
+        "parsed_final_response",
+        "parsed_final_response_sha256",
+        "abstraction_artifact",
+        "abstraction_artifact_sha256",
+        "stage1_output_hash"
+      ],
       "properties": {
-        "raw_response_sha256": { "$ref": "#/$defs/sha256" }
-      }
+        "raw_response_sha256": { "$ref": "#/$defs/sha256" },
+        "retained_raw_response_utf8": { "type": ["string", "null"] },
+        "immutable_artifact_reference": {
+          "anyOf": [{ "$ref": "#/$defs/artifact_reference" }, { "type": "null" }]
+        },
+        "parsed_final_response": { "type": "string", "minLength": 1 },
+        "parsed_final_response_sha256": { "$ref": "#/$defs/sha256" },
+        "abstraction_artifact": { "type": ["string", "null"] },
+        "abstraction_artifact_sha256": {
+          "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "stage1_output_hash": {
+          "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "retained_raw_response_utf8": { "type": "string", "minLength": 1 },
+            "immutable_artifact_reference": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "retained_raw_response_utf8": { "type": "null" },
+            "immutable_artifact_reference": { "$ref": "#/$defs/artifact_reference" }
+          }
+        }
+      ]
     },
     "condition_order": {
       "type": "object",
@@ -176,15 +276,57 @@
         {
           "if": {
             "required": ["KEY_MATCH", "SCOPE_MATCH"],
-            "properties": {
-              "KEY_MATCH": { "const": true },
-              "SCOPE_MATCH": { "const": true }
-            }
+            "properties": { "KEY_MATCH": { "const": true }, "SCOPE_MATCH": { "const": true } }
           },
           "then": { "properties": { "score": { "const": true } } },
           "else": { "properties": { "score": { "const": false } } }
         }
       ]
+    },
+    "run_identifiers_pre": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
+      "properties": {
+        "audit_id": { "type": "string", "minLength": 1 },
+        "execution_state": { "const": "PRE_EXECUTION_NULL" },
+        "package_id": { "type": "null" },
+        "target_id": { "type": "null" },
+        "target_family": { "type": "null" },
+        "condition_id": { "type": "null" },
+        "invocation": { "type": "null" }
+      }
+    },
+    "run_identifiers_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
+      "properties": {
+        "audit_id": { "type": "string", "minLength": 1 },
+        "execution_state": { "const": "SOURCE_EXECUTION_BOUND" },
+        "package_id": { "type": "string", "pattern": "^SP0[1-8]$" },
+        "target_id": { "type": "null" },
+        "target_family": { "type": "null" },
+        "condition_id": { "type": "string", "enum": ["C1", "C2", "C3", "C4"] },
+        "invocation": { "const": "source" }
+      }
+    },
+    "run_identifiers_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
+      "properties": {
+        "audit_id": { "type": "string", "minLength": 1 },
+        "execution_state": { "const": "TARGET_EXECUTION_BOUND" },
+        "package_id": { "type": "string", "pattern": "^SP0[1-8]$" },
+        "target_id": { "type": "string", "pattern": "^T[0-9]{2}$" },
+        "target_family": {
+          "type": "string",
+          "enum": ["structural_diagnosis", "constraint_aware_recommendation", "causal_explanation"]
+        },
+        "condition_id": { "type": "string", "enum": ["C1", "C2", "C3", "C4"] },
+        "invocation": { "const": "target" }
+      }
     },
     "pre_execution": {
       "type": "object",
@@ -201,20 +343,7 @@
         "operator_actions"
       ],
       "properties": {
-        "run_identifiers": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
-          "properties": {
-            "audit_id": { "type": "string", "minLength": 1 },
-            "execution_state": { "const": "PRE_EXECUTION_NULL" },
-            "package_id": { "type": "null" },
-            "target_id": { "type": "null" },
-            "target_family": { "type": "null" },
-            "condition_id": { "type": "null" },
-            "invocation": { "type": "null" }
-          }
-        },
+        "run_identifiers": { "$ref": "#/$defs/run_identifiers_pre" },
         "hashes": { "$ref": "#/$defs/null_field" },
         "token_accounting": { "$ref": "#/$defs/null_field" },
         "model_binding": { "$ref": "#/$defs/null_field" },
@@ -237,23 +366,11 @@
         "evaluator",
         "condition_order",
         "credential_boundary",
-        "operator_actions"
+        "operator_actions",
+        "scorer_image_sha256"
       ],
       "properties": {
-        "run_identifiers": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
-          "properties": {
-            "audit_id": { "type": "string", "minLength": 1 },
-            "execution_state": { "const": "SOURCE_EXECUTION_BOUND" },
-            "package_id": { "type": "string", "pattern": "^SP0[1-8]$" },
-            "target_id": { "type": "null" },
-            "target_family": { "type": "null" },
-            "condition_id": { "type": "string", "enum": ["C1", "C2", "C3", "C4"] },
-            "invocation": { "const": "source" }
-          }
-        },
+        "run_identifiers": { "$ref": "#/$defs/run_identifiers_source" },
         "hashes": { "$ref": "#/$defs/hashes" },
         "token_accounting": { "$ref": "#/$defs/token_accounting" },
         "model_binding": { "$ref": "#/$defs/model_binding" },
@@ -261,7 +378,8 @@
         "evaluator": { "type": "null" },
         "condition_order": { "$ref": "#/$defs/condition_order" },
         "credential_boundary": { "$ref": "#/$defs/credential_boundary" },
-        "operator_actions": { "$ref": "#/$defs/operator_actions" }
+        "operator_actions": { "$ref": "#/$defs/operator_actions" },
+        "scorer_image_sha256": { "$ref": "#/$defs/sha256" }
       }
     },
     "target_execution": {
@@ -276,26 +394,11 @@
         "evaluator",
         "condition_order",
         "credential_boundary",
-        "operator_actions"
+        "operator_actions",
+        "scorer_image_sha256"
       ],
       "properties": {
-        "run_identifiers": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["audit_id", "execution_state", "package_id", "target_id", "target_family", "condition_id", "invocation"],
-          "properties": {
-            "audit_id": { "type": "string", "minLength": 1 },
-            "execution_state": { "const": "TARGET_EXECUTION_BOUND" },
-            "package_id": { "type": "string", "pattern": "^SP0[1-8]$" },
-            "target_id": { "type": "string", "pattern": "^T[0-9]{2}$" },
-            "target_family": {
-              "type": "string",
-              "enum": ["structural_diagnosis", "constraint_aware_recommendation", "causal_explanation"]
-            },
-            "condition_id": { "type": "string", "enum": ["C1", "C2", "C3", "C4"] },
-            "invocation": { "const": "target" }
-          }
-        },
+        "run_identifiers": { "$ref": "#/$defs/run_identifiers_target" },
         "hashes": { "$ref": "#/$defs/hashes" },
         "token_accounting": { "$ref": "#/$defs/token_accounting" },
         "model_binding": { "$ref": "#/$defs/model_binding" },
@@ -303,7 +406,8 @@
         "evaluator": { "$ref": "#/$defs/evaluator" },
         "condition_order": { "$ref": "#/$defs/condition_order" },
         "credential_boundary": { "$ref": "#/$defs/credential_boundary" },
-        "operator_actions": { "$ref": "#/$defs/operator_actions" }
+        "operator_actions": { "$ref": "#/$defs/operator_actions" },
+        "scorer_image_sha256": { "$ref": "#/$defs/sha256" }
       }
     }
   }

@@ -29,10 +29,15 @@ def recalculate_source(package, bindings):
     package["package_hash"] = module.sha256({key: value for key, value in package.items() if key != "package_hash"})
 
 
-def recalculate_target(target, bindings, stage1):
+def recalculate_target(target):
+    target["target_record_hash"] = module.sha256({key: value for key, value in target.items() if key != "target_record_hash"})
+
+
+def calculate_target_accounting(target, bindings, stage1):
+    accounting = {}
     for condition in module.CONDITIONS:
         rendered = module._target_render(target, condition, bindings, stage1)
-        target["retained_package_accounting"][condition] = {
+        accounting[condition] = {
             "retention_instruction_sha256": hashlib.sha256(bindings["retention_instructions"][condition].encode()).hexdigest(),
             "target_prompt_sha256": hashlib.sha256(target["target_prompt"].encode()).hexdigest(),
             "rendered_package_sha256": module.sha256(rendered.encode()),
@@ -42,7 +47,7 @@ def recalculate_target(target, bindings, stage1):
             "compression": False,
             "substitution": False,
         }
-    target["target_record_hash"] = module.sha256({key: value for key, value in target.items() if key != "target_record_hash"})
+    return accounting
 
 
 def refresh_manifest(files, preregistration):
@@ -55,7 +60,33 @@ def refresh_manifest(files, preregistration):
         ],
         "external_files": [{"path": module.PREREGISTRATION_PATH, "sha256": module.sha256(preregistration)}],
     }
-    files["hash-manifest.json"] = json_bytes(manifest)
+    files[module.MANIFEST_NAME] = json_bytes(manifest)
+
+
+def install_anchor(files):
+    parent = "1" * 40
+    introduction = "2" * 40
+    anchor = {
+        "schema_version": "1",
+        "algorithm": "sha256",
+        "manifest_path": module.MANIFEST_NAME,
+        "manifest_sha256": module.sha256(files[module.MANIFEST_NAME]),
+        "manifest_commit": parent,
+    }
+    anchor_bytes = module.canonical_bytes(anchor) + b"\n"
+    files[module.MANIFEST_ANCHOR_NAME] = anchor_bytes
+    return {
+        "introduction_commit": introduction,
+        "parent_commit": parent,
+        "frozen_anchor_bytes": anchor_bytes,
+        "frozen_manifest_bytes": files[module.MANIFEST_NAME],
+        "commit_is_ancestor": True,
+    }
+
+
+def freeze_fixture(fixture):
+    refresh_manifest(fixture["files"], fixture["preregistration"])
+    fixture["anchor_evidence"] = install_anchor(fixture["files"])
 
 
 def replace_json(files, name, value, preregistration, *, refresh=True):
@@ -67,6 +98,7 @@ def replace_json(files, name, value, preregistration, *, refresh=True):
 @pytest.fixture(scope="module")
 def valid_fixture():
     bindings = copy.deepcopy(module.EXPECTED_BINDINGS)
+    bindings["scorer_image_sha256"] = "a" * 64
     packages = []
     for package_id in module.PACKAGE_IDS:
         units = []
@@ -138,13 +170,21 @@ def valid_fixture():
                 else []
             )
             stage1[package_id][condition] = {
+                "raw_response_sha256": hashlib.sha256(
+                    (response if abstraction is None else response + "\nABSTRACTION:\n" + abstraction).encode()
+                ).hexdigest(),
                 "source_response": response,
                 "source_response_sha256": hashlib.sha256(response.encode()).hexdigest(),
                 "abstraction_artifact": abstraction,
                 "abstraction_artifact_sha256": hashlib.sha256(abstraction.encode()).hexdigest() if abstraction else None,
                 "citation_identifiers": [f"{package_id}:U001", f"{package_id}:U002"],
                 "retained_objects": retained,
+                "stage1_output_hash": "0" * 64,
             }
+            artifact = stage1[package_id][condition]
+            artifact["stage1_output_hash"] = module.sha256(
+                {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
+            )
     key_records = []
     rubric_records = []
     targets_list = []
@@ -186,10 +226,12 @@ def valid_fixture():
             "eligibility_rationale": "Deterministic synthetic positive fixture.",
             "eligibility_determination": "ELIGIBLE",
             "target_record_hash": "0" * 64,
-            "retained_package_accounting": {condition: {} for condition in module.CONDITIONS},
         }
-        recalculate_target(target, bindings, stage1)
+        recalculate_target(target)
         targets_list.append(target)
+    target_accounting = {
+        target["id"]: calculate_target_accounting(target, bindings, stage1) for target in targets_list
+    }
     targets = {
         "schema_version": "1",
         "package_version": module.PACKAGE_VERSION,
@@ -197,6 +239,7 @@ def valid_fixture():
         "expected_target_count": 24,
         "targets": targets_list,
         "stage1_outputs": stage1,
+        "target_package_accounting": target_accounting,
         "status": "READY",
         "reason": "Complete deterministic synthetic fixture only.",
     }
@@ -254,7 +297,8 @@ def valid_fixture():
     }
     preregistration = module.PREREGISTRATION.read_bytes()
     refresh_manifest(files, preregistration)
-    return {"files": files, "preregistration": preregistration}
+    anchor_evidence = install_anchor(files)
+    return {"files": files, "preregistration": preregistration, "anchor_evidence": anchor_evidence}
 
 
 def clone_fixture(valid_fixture):
@@ -265,9 +309,10 @@ def readiness(fixture, **overrides):
     preregistration = overrides.pop("preregistration", fixture["preregistration"])
     pinned = overrides.pop("pinned", fixture["preregistration"])
     merged = overrides.pop("merged", True)
+    anchor_evidence = overrides.pop("anchor_evidence", fixture["anchor_evidence"])
     assert not overrides
     return module.readiness_from_bytes(
-        fixture["files"], preregistration, pinned, commit_is_merged=merged
+        fixture["files"], preregistration, pinned, commit_is_merged=merged, anchor_evidence=anchor_evidence
     )
 
 
@@ -276,7 +321,33 @@ def test_complete_synthetic_fixture_is_deterministically_ready(valid_fixture):
     second = readiness(valid_fixture)
     assert first == second
     assert first["outcome"] == "READY"
+    assert first["source_stage"] == "READY"
+    assert first["target_stage"] == "READY"
     assert all(first["checks"].values())
+
+
+def test_source_stage_ready_does_not_require_future_stage1_outputs(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    targets["stage1_outputs"] = None
+    targets["target_package_accounting"] = None
+    fixture["files"]["target-registry.json"] = json_bytes(targets)
+    freeze_fixture(fixture)
+    result = readiness(fixture)
+    assert result["outcome"] == "NULL"
+    assert result["source_stage"] == "READY"
+    assert result["target_stage"] == "NULL"
+    assert result["checks"]["SOURCE_STAGE_READY"] is True
+    assert result["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+
+def test_ci_pins_python_supported_by_preregistered_tokenizer():
+    workflow = (ROOT / ".github/workflows/validate.yml").read_text()
+    requirements = (ROOT / "requirements.txt").read_text().splitlines()
+    assert 'python-version: "3.13"' in workflow
+    assert 'python-version: "3.x"' not in workflow
+    assert "tiktoken==0.9.0" in requirements
+    assert module.EXPECTED_BINDINGS["tokenizer"]["package"] == "tiktoken==0.9.0"
 
 
 def test_committed_package_remains_deterministically_null():
@@ -284,7 +355,9 @@ def test_committed_package_remains_deterministically_null():
     second = module.readiness()
     assert first == second
     assert first["outcome"] == "NULL"
-    assert first["checks"]["TOKEN_BUDGET_VALID"] is False
+    assert first["source_stage"] == "NULL"
+    assert first["target_stage"] == "NULL"
+    assert first["checks"]["SOURCE_INPUT_BUDGET_VALID"] is False
 
 
 def test_duplicate_package_id_returns_null(valid_fixture):
@@ -311,6 +384,20 @@ def test_duplicate_source_units_return_null(valid_fixture):
     assert readiness(fixture)["outcome"] == "NULL"
 
 
+def test_duplicate_source_content_across_packages_returns_null(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    sources = json.loads(fixture["files"]["source-package-registry.json"])
+    first = sources["packages"][0]["units"][0]
+    duplicate = sources["packages"][1]["units"][0]
+    duplicate["content"] = first["content"].upper()
+    duplicate["sha256"] = hashlib.sha256(duplicate["content"].encode()).hexdigest()
+    recalculate_source(sources["packages"][1], json.loads(fixture["files"]["prompt-bindings.json"]))
+    replace_json(fixture["files"], "source-package-registry.json", sources, fixture["preregistration"])
+    result = readiness(fixture)
+    assert result["checks"]["EIGHT_SOURCE_PACKAGES"] is False
+    assert result["outcome"] == "NULL"
+
+
 def test_malformed_source_hash_returns_null(valid_fixture):
     fixture = clone_fixture(valid_fixture)
     sources = json.loads(fixture["files"]["source-package-registry.json"])
@@ -331,7 +418,7 @@ def test_actual_token_overflow_returns_null_without_hard_coding(valid_fixture):
     result = readiness(fixture)
     assert result["outcome"] == "NULL"
     assert result["checks"]["EIGHT_SOURCE_PACKAGES"] is True
-    assert result["checks"]["TOKEN_BUDGET_VALID"] is False
+    assert result["checks"]["SOURCE_INPUT_BUDGET_VALID"] is False
 
 
 def test_duplicate_target_id_returns_null(valid_fixture):
@@ -467,12 +554,32 @@ def test_target_render_counts_target_task_and_retained_objects(valid_fixture):
     assert "SP01:U001" in rendered
 
 
+def test_target_stage_rejects_missing_c2_abstraction_and_accounting(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    targets["stage1_outputs"]["SP01"]["C2"]["abstraction_artifact"] = None
+    fixture["files"]["target-registry.json"] = json_bytes(targets)
+    freeze_fixture(fixture)
+    result = readiness(fixture)
+    assert result["source_stage"] == "READY"
+    assert result["target_stage"] == "NULL"
+    assert result["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+
 def source_audit_record(valid_fixture, condition="C1"):
     sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
     bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
     package = sources["packages"][0]
     units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
     zero = "0" * 64
+    artifact = targets["stage1_outputs"]["SP01"][condition]
+    raw_text = artifact["source_response"]
+    if condition in {"C2", "C4"}:
+        raw_text += "\nABSTRACTION:\n" + artifact["abstraction_artifact"]
+    raw = raw_text.encode()
+    request = module.canonical_source_request(package, condition, bindings)
+    request_hash = module.sha256(request)
     return {
         "run_identifiers": {
             "audit_id": f"source-SP01-{condition}",
@@ -485,8 +592,8 @@ def source_audit_record(valid_fixture, condition="C1"):
         },
         "hashes": {
             "package_sha256": package["package_hash"],
-            "request_sha256": zero,
-            "raw_response_sha256": zero,
+            "request_sha256": request_hash,
+            "raw_response_sha256": module.sha256(raw),
         },
         "token_accounting": {
             "supplied_source_unit_ids": [unit["id"] for unit in units],
@@ -505,11 +612,21 @@ def source_audit_record(valid_fixture, condition="C1"):
             "target_record_sha256": zero,
         },
         "model_binding": {
-            "request": {"endpoint": module.EXPECTED_BINDINGS["endpoint"], "request_sha256": zero},
+            "request": request,
+            "request_sha256": request_hash,
             "started_at": "2026-07-19T12:00:00Z",
             "ended_at": "2026-07-19T12:00:01Z",
         },
-        "response": {"raw_response_sha256": zero},
+        "response": {
+            "raw_response_sha256": module.sha256(raw),
+            "retained_raw_response_utf8": raw_text,
+            "immutable_artifact_reference": None,
+            "parsed_final_response": artifact["source_response"],
+            "parsed_final_response_sha256": artifact["source_response_sha256"],
+            "abstraction_artifact": artifact["abstraction_artifact"],
+            "abstraction_artifact_sha256": artifact["abstraction_artifact_sha256"],
+            "stage1_output_hash": artifact["stage1_output_hash"],
+        },
         "evaluator": None,
         "condition_order": {"position": module.CONDITIONS.index(condition) + 1, "condition_id": condition},
         "credential_boundary": {"request_count": 1, "retry": False},
@@ -518,6 +635,7 @@ def source_audit_record(valid_fixture, condition="C1"):
             {"action": "response_retained", "recorded_at": "2026-07-19T12:00:01Z"},
             {"action": "offline_evaluation", "recorded_at": "2026-07-19T12:00:02Z"},
         ],
+        "scorer_image_sha256": bindings["scorer_image_sha256"],
     }
 
 
@@ -532,22 +650,114 @@ def test_source_audit_schema_requires_no_target_material(valid_fixture):
 
 def test_source_audit_semantics_bind_inventory_order_budget_and_timestamps(valid_fixture):
     sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
     order = json.loads(valid_fixture["files"]["condition-order.json"])
     record = source_audit_record(valid_fixture, "C3")
-    assert module.semantic_audit_valid(record, order, sources=sources)
+    kwargs = {"sources": sources, "targets": targets, "bindings": bindings}
+    assert module.semantic_audit_valid(record, order, **kwargs)
     missing = copy.deepcopy(record)
     missing["token_accounting"]["supplied_source_unit_ids"].pop()
     missing["token_accounting"]["supplied_source_unit_hashes"].pop()
-    assert not module.semantic_audit_valid(missing, order, sources=sources)
+    assert not module.semantic_audit_valid(missing, order, **kwargs)
     over = copy.deepcopy(record)
     over["token_accounting"]["token_count"] = 8193
-    assert not module.semantic_audit_valid(over, order, sources=sources)
+    assert not module.semantic_audit_valid(over, order, **kwargs)
     misplaced = copy.deepcopy(record)
     misplaced["condition_order"]["position"] = 1
-    assert not module.semantic_audit_valid(misplaced, order, sources=sources)
+    assert not module.semantic_audit_valid(misplaced, order, **kwargs)
     bad_time = copy.deepcopy(record)
     bad_time["model_binding"]["ended_at"] = "2026-07-19T11:59:59Z"
-    assert not module.semantic_audit_valid(bad_time, order, sources=sources)
+    assert not module.semantic_audit_valid(bad_time, order, **kwargs)
+
+
+def test_source_audit_binds_raw_parse_abstraction_and_stage1_record(valid_fixture):
+    sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
+    order = json.loads(valid_fixture["files"]["condition-order.json"])
+    record = source_audit_record(valid_fixture, "C2")
+    kwargs = {"sources": sources, "targets": targets, "bindings": bindings}
+    assert module.semantic_audit_valid(record, order, **kwargs)
+
+    parsed = copy.deepcopy(record)
+    parsed["response"]["parsed_final_response"] += " fabricated"
+    parsed["response"]["parsed_final_response_sha256"] = hashlib.sha256(
+        parsed["response"]["parsed_final_response"].encode()
+    ).hexdigest()
+    assert not module.semantic_audit_valid(parsed, order, **kwargs)
+
+    abstraction = copy.deepcopy(record)
+    abstraction["response"]["abstraction_artifact"] += " fabricated"
+    abstraction["response"]["abstraction_artifact_sha256"] = hashlib.sha256(
+        abstraction["response"]["abstraction_artifact"].encode()
+    ).hexdigest()
+    assert not module.semantic_audit_valid(abstraction, order, **kwargs)
+
+    altered_targets = copy.deepcopy(targets)
+    altered_targets["stage1_outputs"]["SP01"]["C2"]["source_response"] += " substituted"
+    assert not module.semantic_audit_valid(
+        record,
+        order,
+        sources=sources,
+        targets=altered_targets,
+        bindings=bindings,
+    )
+
+    fabricated_hash = copy.deepcopy(record)
+    fabricated_hash["response"]["raw_response_sha256"] = "f" * 64
+    fabricated_hash["hashes"]["raw_response_sha256"] = "f" * 64
+    assert not module.semantic_audit_valid(fabricated_hash, order, **kwargs)
+
+
+def test_source_audit_accepts_verified_immutable_response_reference(valid_fixture):
+    sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
+    order = json.loads(valid_fixture["files"]["condition-order.json"])
+    record = source_audit_record(valid_fixture, "C4")
+    raw = record["response"]["retained_raw_response_utf8"].encode()
+    record["response"]["retained_raw_response_utf8"] = None
+    record["response"]["immutable_artifact_reference"] = {
+        "path": "retained/source-SP01-C4.raw.txt",
+        "sha256": module.sha256(raw),
+    }
+    assert module.semantic_audit_valid(
+        record,
+        order,
+        sources=sources,
+        targets=targets,
+        bindings=bindings,
+        raw_output=raw,
+    )
+    assert not module.semantic_audit_valid(
+        record,
+        order,
+        sources=sources,
+        targets=targets,
+        bindings=bindings,
+        raw_output=raw + b" altered",
+    )
+
+
+def test_source_audit_rejects_noncanonical_request_and_scorer_digest(valid_fixture):
+    sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
+    order = json.loads(valid_fixture["files"]["condition-order.json"])
+    record = source_audit_record(valid_fixture)
+    kwargs = {"sources": sources, "targets": targets, "bindings": bindings}
+
+    altered_request = copy.deepcopy(record)
+    altered_request["model_binding"]["request"]["rendered_user_prompt"] += " altered"
+    new_hash = module.sha256(altered_request["model_binding"]["request"])
+    altered_request["model_binding"]["request_sha256"] = new_hash
+    altered_request["hashes"]["request_sha256"] = new_hash
+    assert not module.semantic_audit_valid(altered_request, order, **kwargs)
+
+    scorer = copy.deepcopy(record)
+    scorer["scorer_image_sha256"] = "b" * 64
+    assert not module.semantic_audit_valid(scorer, order, **kwargs)
 
 
 def target_audit_record(valid_fixture):
@@ -569,6 +779,9 @@ def target_audit_record(valid_fixture):
     condition = permutation[0]
     package = sources["packages"][0]
     rendered = module._target_render(target, condition, bindings, targets["stage1_outputs"])
+    request = module.canonical_target_request(target, condition, bindings, targets["stage1_outputs"])
+    request_hash = module.sha256(request)
+    accounting = targets["target_package_accounting"][target["id"]][condition]
     return raw, {
         "run_identifiers": {
             "audit_id": f"target-T01-{condition}",
@@ -579,7 +792,11 @@ def target_audit_record(valid_fixture):
             "condition_id": condition,
             "invocation": "target",
         },
-        "hashes": {"package_sha256": package["package_hash"], "request_sha256": zero, "raw_response_sha256": module.sha256(raw)},
+        "hashes": {
+            "package_sha256": package["package_hash"],
+            "request_sha256": request_hash,
+            "raw_response_sha256": module.sha256(raw),
+        },
         "token_accounting": {
             "supplied_source_unit_ids": [],
             "supplied_source_unit_hashes": [],
@@ -587,7 +804,7 @@ def target_audit_record(valid_fixture):
             "abstraction_slot_inventory": [],
             "rendered_input_sha256": module.sha256(rendered.encode()),
             "tokenizer": "tiktoken==0.9.0/o200k_base",
-            "token_count": target["retained_package_accounting"][condition]["token_count"],
+            "token_count": accounting["token_count"],
             "token_ceiling": module.TOKEN_CEILINGS[condition],
             "budget_result": True,
             "model_output_tokens": 10,
@@ -597,11 +814,21 @@ def target_audit_record(valid_fixture):
             "target_record_sha256": target["target_record_hash"],
         },
         "model_binding": {
-            "request": {"endpoint": module.EXPECTED_BINDINGS["endpoint"], "request_sha256": zero},
+            "request": request,
+            "request_sha256": request_hash,
             "started_at": "2026-07-19T12:00:00Z",
             "ended_at": "2026-07-19T12:00:01Z",
         },
-        "response": {"raw_response_sha256": module.sha256(raw)},
+        "response": {
+            "raw_response_sha256": module.sha256(raw),
+            "retained_raw_response_utf8": raw.decode(),
+            "immutable_artifact_reference": None,
+            "parsed_final_response": raw.decode(),
+            "parsed_final_response_sha256": module.sha256(raw),
+            "abstraction_artifact": None,
+            "abstraction_artifact_sha256": None,
+            "stage1_output_hash": None,
+        },
         "evaluator": evaluator,
         "condition_order": {"position": 1, "condition_id": condition},
         "credential_boundary": {"request_count": 1, "retry": False},
@@ -610,6 +837,7 @@ def target_audit_record(valid_fixture):
             {"action": "response_retained", "recorded_at": "2026-07-19T12:00:01Z"},
             {"action": "offline_evaluation", "recorded_at": "2026-07-19T12:00:02Z"},
         ],
+        "scorer_image_sha256": bindings["scorer_image_sha256"],
     }
 
 
@@ -620,7 +848,15 @@ def test_target_audit_recomputes_evaluator_and_binds_permutation(valid_fixture):
     sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
     keys = json.loads(valid_fixture["files"]["answer-key-registry.json"])
     rubrics = json.loads(valid_fixture["files"]["scope-rubric-registry.json"])
-    kwargs = {"sources": sources, "targets": targets, "keys": keys, "rubrics": rubrics, "raw_output": raw}
+    bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
+    kwargs = {
+        "sources": sources,
+        "targets": targets,
+        "keys": keys,
+        "rubrics": rubrics,
+        "raw_output": raw,
+        "bindings": bindings,
+    }
     assert module.semantic_audit_valid(record, order, **kwargs)
     fabricated = copy.deepcopy(record)
     fabricated["evaluator"]["KEY_MATCH"] = False
@@ -648,5 +884,21 @@ def test_audit_schema_enforces_score_conjunction_and_strict_objects(valid_fixtur
 
 def test_manifest_exact_coverage_and_hash_reproduction(valid_fixture):
     manifest = json.loads(valid_fixture["files"]["hash-manifest.json"])
-    assert module.hashes_complete(manifest, valid_fixture["files"], valid_fixture["preregistration"])
+    assert module.hashes_complete(
+        manifest,
+        valid_fixture["files"],
+        valid_fixture["preregistration"],
+        valid_fixture["anchor_evidence"],
+    )
     assert {item["path"] for item in manifest["files"]} == module.PACKAGE_FILES
+
+
+def test_regenerated_manifest_cannot_bypass_frozen_anchor(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    bindings = json.loads(fixture["files"]["prompt-bindings.json"])
+    bindings["system_prompt"] += " post-freeze alteration"
+    fixture["files"]["prompt-bindings.json"] = json_bytes(bindings)
+    refresh_manifest(fixture["files"], fixture["preregistration"])
+    result = readiness(fixture)
+    assert result["checks"]["HASHES_COMPLETE"] is False
+    assert result["source_stage"] == "NULL"

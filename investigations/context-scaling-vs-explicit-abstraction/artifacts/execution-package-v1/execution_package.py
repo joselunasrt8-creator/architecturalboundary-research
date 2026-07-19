@@ -55,6 +55,7 @@ ABSTRACTION_INSTRUCTION = (
 EXPECTED_BINDINGS = {
     "schema_version": "1",
     "endpoint": "https://api.openai.com/v1/responses",
+    "scorer_image_sha256": None,
     "system_prompt": SYSTEM_PROMPT,
     "source_prompt_template": SOURCE_PROMPT,
     "target_prompt_template": TARGET_PROMPT,
@@ -102,6 +103,8 @@ PACKAGE_FILES = {
     "evaluator-specification.md",
     "execution_package.py",
 }
+MANIFEST_NAME = "hash-manifest.json"
+MANIFEST_ANCHOR_NAME = "hash-manifest-anchor.json"
 JSON_INPUTS = {
     "source-package-registry.json",
     "target-registry.json",
@@ -143,7 +146,8 @@ def read_json(name: str) -> Any:
 
 
 def package_bytes(package_dir: Path = PACKAGE) -> dict[str, bytes]:
-    return {name: (package_dir / name).read_bytes() for name in PACKAGE_FILES | {"hash-manifest.json"}}
+    names = PACKAGE_FILES | {MANIFEST_NAME, MANIFEST_ANCHOR_NAME}
+    return {name: (package_dir / name).read_bytes() for name in names}
 
 
 def _literal_list(value: Any, *, nonempty: bool) -> list[str]:
@@ -228,20 +232,30 @@ def condition_permutation(package_id: str, family: str) -> tuple[str, str, int, 
     return digest_input, digest, integer_value, order
 
 
-def bindings_valid(bindings: Any) -> bool:
-    return bindings == EXPECTED_BINDINGS
+def bindings_valid(bindings: Any, *, require_scorer: bool = False) -> bool:
+    if not isinstance(bindings, dict):
+        return False
+    expected = dict(EXPECTED_BINDINGS)
+    scorer = bindings.get("scorer_image_sha256")
+    expected["scorer_image_sha256"] = scorer
+    if bindings != expected:
+        return False
+    return valid_hash(scorer) if require_scorer else scorer is None or valid_hash(scorer)
 
 
-def _source_render(package: dict[str, Any], condition: str, bindings: dict[str, Any]) -> str:
+def _source_user_prompt(package: dict[str, Any], condition: str, bindings: dict[str, Any]) -> str:
     units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
     unit_text = "\n".join(f"{unit['id']}: {unit['content']}" for unit in units)
-    user = bindings["source_prompt_template"].format(
+    return bindings["source_prompt_template"].format(
         package_id=package["id"],
         condition_id=condition,
         source_units=unit_text,
         retention_instruction=bindings["retention_instructions"][condition],
     )
-    return bindings["system_prompt"] + "\n\n" + user
+
+
+def _source_render(package: dict[str, Any], condition: str, bindings: dict[str, Any]) -> str:
+    return bindings["system_prompt"] + "\n\n" + _source_user_prompt(package, condition, bindings)
 
 
 def _retained_package(artifact: dict[str, Any], condition: str) -> str:
@@ -264,6 +278,72 @@ def _target_render(
         target_id=target["id"], condition_id=condition, retained_package=retained
     )
     return bindings["system_prompt"] + "\n\n" + user + "\n\nTARGET TASK:\n" + target["target_prompt"]
+
+
+def _target_user_prompt(
+    target: dict[str, Any], condition: str, bindings: dict[str, Any], stage1_outputs: dict[str, Any]
+) -> str:
+    rendered = _target_render(target, condition, bindings, stage1_outputs)
+    prefix = bindings["system_prompt"] + "\n\n"
+    if not rendered.startswith(prefix):
+        raise ValueError("target render does not contain the frozen system prompt")
+    return rendered[len(prefix) :]
+
+
+def canonical_source_request(
+    package: dict[str, Any], condition: str, bindings: dict[str, Any]
+) -> dict[str, Any]:
+    units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
+    return {
+        "endpoint": bindings["endpoint"],
+        "system_prompt": bindings["system_prompt"],
+        "rendered_user_prompt": _source_user_prompt(package, condition, bindings),
+        "supplied_inputs": [
+            {"kind": "source_unit", "identifier": unit["id"], "sha256": unit["sha256"], "content": unit["content"]}
+            for unit in units
+        ],
+        "model": bindings["model"],
+        "decoding": bindings["decoding"],
+        "tools": [],
+        "tool_choice": "none",
+    }
+
+
+def canonical_target_request(
+    target: dict[str, Any], condition: str, bindings: dict[str, Any], stage1_outputs: dict[str, Any]
+) -> dict[str, Any]:
+    artifact = stage1_outputs[target["package_id"]][condition]
+    supplied = [
+        {
+            "kind": "source_response",
+            "identifier": f"{target['package_id']}:{condition}:source_response",
+            "sha256": artifact["source_response_sha256"],
+            "content": artifact["source_response"],
+        }
+    ]
+    supplied.extend(
+        {
+            "kind": "citation_identifier",
+            "identifier": citation,
+            "sha256": sha256(citation.encode()),
+            "content": citation,
+        }
+        for citation in artifact["citation_identifiers"]
+    )
+    supplied.extend(
+        {"kind": "retained_object", "identifier": item["id"], "sha256": item["sha256"], "content": item["content"]}
+        for item in artifact["retained_objects"]
+    )
+    return {
+        "endpoint": bindings["endpoint"],
+        "system_prompt": bindings["system_prompt"],
+        "rendered_user_prompt": _target_user_prompt(target, condition, bindings, stage1_outputs),
+        "supplied_inputs": supplied,
+        "model": bindings["model"],
+        "decoding": bindings["decoding"],
+        "tools": [],
+        "tool_choice": "none",
+    }
 
 
 def token_count(text: str) -> int:
@@ -319,7 +399,8 @@ def valid_sources(
             return False
         source_references: set[str] = set()
         immutable_locators: set[str] = set()
-        unit_sequences: set[tuple[str, ...]] = set()
+        global_verbatim_hashes: set[str] = set()
+        global_normalized_hashes: set[str] = set()
         for package in packages:
             if not closed(package, SOURCE_FIELDS) or package["status"] != "READY" or package["duplicate_eligible_content_absent"] is not True:
                 return False
@@ -350,16 +431,20 @@ def valid_sources(
                     return False
                 if not valid_hash(unit["sha256"]) or hashlib.sha256(unit["content"].encode()).hexdigest() != unit["sha256"]:
                     return False
+                normalized_content = normalized(unit["content"])
+                if not normalized_content:
+                    return False
+                normalized_hash = sha256(normalized_content.encode())
+                if unit["sha256"] in global_verbatim_hashes or normalized_hash in global_normalized_hashes:
+                    return False
+                global_verbatim_hashes.add(unit["sha256"])
+                global_normalized_hashes.add(normalized_hash)
             if len({unit["content"] for unit in units}) != 16 or len({unit["sha256"] for unit in units}) != 16:
                 return False
             if len({unit["source_reference"] for unit in units}) != 16:
                 return False
             if package["source_hashes"] != [unit["sha256"] for unit in units]:
                 return False
-            sequence = tuple(package["source_hashes"])
-            if sequence in unit_sequences:
-                return False
-            unit_sequences.add(sequence)
             if package["subsets"] != {"N=8": UNIT_IDS[:8], "M=16": UNIT_IDS}:
                 return False
             accounting = package["token_accounting"]
@@ -428,7 +513,6 @@ TARGET_FIELDS = {
     "eligibility_rationale",
     "eligibility_determination",
     "target_record_hash",
-    "retained_package_accounting",
 }
 
 
@@ -441,6 +525,7 @@ def valid_targets(registry: Any, key_registry: Any, rubric_registry: Any) -> boo
             "expected_target_count",
             "targets",
             "stage1_outputs",
+            "target_package_accounting",
             "status",
             "reason",
         }
@@ -499,29 +584,6 @@ def valid_targets(registry: Any, key_registry: Any, rubric_registry: Any) -> boo
                 value is True for value in checks.values()
             ):
                 return False
-            accounting = target["retained_package_accounting"]
-            if not closed(accounting, set(CONDITIONS)):
-                return False
-            for condition in CONDITIONS:
-                entry = accounting[condition]
-                fields = {
-                    "retention_instruction_sha256",
-                    "target_prompt_sha256",
-                    "rendered_package_sha256",
-                    "token_count",
-                    "token_ceiling",
-                    "truncation",
-                    "compression",
-                    "substitution",
-                }
-                if not closed(entry, fields) or not valid_hash(entry["retention_instruction_sha256"]) or not valid_hash(
-                    entry["target_prompt_sha256"]
-                ) or not valid_hash(entry["rendered_package_sha256"]):
-                    return False
-                if not integer(entry["token_count"]) or entry["token_ceiling"] != TOKEN_CEILINGS[condition]:
-                    return False
-                if any(entry[name] is not False for name in ("truncation", "compression", "substitution")):
-                    return False
             body = {key_name: value for key_name, value in target.items() if key_name != "target_record_hash"}
             if not valid_hash(target["target_record_hash"]) or sha256(body) != target["target_record_hash"]:
                 return False
@@ -531,13 +593,61 @@ def valid_targets(registry: Any, key_registry: Any, rubric_registry: Any) -> boo
 
 
 STAGE1_FIELDS = {
+    "raw_response_sha256",
     "source_response",
     "source_response_sha256",
     "abstraction_artifact",
     "abstraction_artifact_sha256",
     "citation_identifiers",
     "retained_objects",
+    "stage1_output_hash",
 }
+
+
+def valid_stage1_output_record(artifact: Any, condition: str) -> bool:
+    try:
+        if condition not in CONDITIONS:
+            return False
+        if not closed(artifact, STAGE1_FIELDS) or not isinstance(artifact["source_response"], str) or not artifact[
+            "source_response"
+        ]:
+            return False
+        if hashlib.sha256(artifact["source_response"].encode()).hexdigest() != artifact["source_response_sha256"]:
+            return False
+        citations = artifact["citation_identifiers"]
+        if not isinstance(citations, list) or not citations or not all(isinstance(item, str) and item for item in citations):
+            return False
+        if len(citations) != len(set(citations)):
+            return False
+        retained = artifact["retained_objects"]
+        if not isinstance(retained, list) or not all(
+            closed(item, {"id", "content", "sha256"})
+            and isinstance(item["id"], str)
+            and item["id"]
+            and isinstance(item["content"], str)
+            and item["content"]
+            and hashlib.sha256(item["content"].encode()).hexdigest() == item["sha256"]
+            for item in retained
+        ):
+            return False
+        abstraction = artifact["abstraction_artifact"]
+        abstraction_hash = artifact["abstraction_artifact_sha256"]
+        if condition in {"C1", "C3"}:
+            if abstraction is not None or abstraction_hash is not None or retained:
+                return False
+        else:
+            if not isinstance(abstraction, str) or not abstraction or hashlib.sha256(abstraction.encode()).hexdigest() != abstraction_hash:
+                return False
+            if len(retained) != 1 or retained[0]["content"] != abstraction or retained[0]["sha256"] != abstraction_hash:
+                return False
+        body = {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
+        return (
+            valid_hash(artifact["raw_response_sha256"])
+            and valid_hash(artifact["stage1_output_hash"])
+            and sha256(body) == artifact["stage1_output_hash"]
+        )
+    except (KeyError, TypeError):
+        return False
 
 
 def valid_stage1_outputs(stage1: Any) -> bool:
@@ -548,57 +658,20 @@ def valid_stage1_outputs(stage1: Any) -> bool:
             if not closed(stage1[package], set(CONDITIONS)):
                 return False
             for condition in CONDITIONS:
-                artifact = stage1[package][condition]
-                if not closed(artifact, STAGE1_FIELDS) or not isinstance(artifact["source_response"], str) or not artifact[
-                    "source_response"
-                ]:
+                if not valid_stage1_output_record(stage1[package][condition], condition):
                     return False
-                if hashlib.sha256(artifact["source_response"].encode()).hexdigest() != artifact["source_response_sha256"]:
-                    return False
-                citations = artifact["citation_identifiers"]
-                if not isinstance(citations, list) or not citations or not all(isinstance(item, str) and item for item in citations):
-                    return False
-                if len(citations) != len(set(citations)):
-                    return False
-                retained = artifact["retained_objects"]
-                if not isinstance(retained, list) or not all(
-                    closed(item, {"id", "content", "sha256"})
-                    and isinstance(item["id"], str)
-                    and item["id"]
-                    and isinstance(item["content"], str)
-                    and item["content"]
-                    and hashlib.sha256(item["content"].encode()).hexdigest() == item["sha256"]
-                    for item in retained
-                ):
-                    return False
-                abstraction = artifact["abstraction_artifact"]
-                abstraction_hash = artifact["abstraction_artifact_sha256"]
-                if condition in {"C1", "C3"}:
-                    if abstraction is not None or abstraction_hash is not None or retained:
-                        return False
-                else:
-                    if not isinstance(abstraction, str) or not abstraction or hashlib.sha256(abstraction.encode()).hexdigest() != abstraction_hash:
-                        return False
-                    if len(retained) != 1 or retained[0]["content"] != abstraction or retained[0]["sha256"] != abstraction_hash:
-                        return False
         return True
     except (KeyError, TypeError):
         return False
 
 
-def valid_token_budgets(
+def valid_source_budgets(
     sources: Any,
-    targets: Any,
-    keys: Any,
-    rubrics: Any,
     bindings: Any,
     counter: Callable[[str], int] = token_count,
 ) -> bool:
-    """Reproduce every stored source/target count and enforce all four ceilings."""
-    if not valid_sources(sources, bindings, counter) or not valid_targets(targets, keys, rubrics):
-        return False
-    stage1 = targets.get("stage1_outputs") if isinstance(targets, dict) else None
-    if not valid_stage1_outputs(stage1):
+    """Reproduce source request counts without requiring future Stage-1 outputs."""
+    if not valid_sources(sources, bindings, counter):
         return False
     try:
         for package in sources["packages"]:
@@ -606,19 +679,60 @@ def valid_token_budgets(
                 count = counter(_source_render(package, condition, bindings))
                 if count != package["token_accounting"]["condition_counts"][condition] or count > TOKEN_CEILINGS[condition]:
                     return False
+        return True
+    except Exception:
+        return False
+
+
+def valid_target_budgets(
+    targets: Any,
+    keys: Any,
+    rubrics: Any,
+    bindings: Any,
+    counter: Callable[[str], int] = token_count,
+) -> bool:
+    """Validate retained Stage-1 artifacts and all rendered target request budgets."""
+    if not valid_targets(targets, keys, rubrics) or not bindings_valid(bindings, require_scorer=True):
+        return False
+    stage1 = targets.get("stage1_outputs") if isinstance(targets, dict) else None
+    accounting = targets.get("target_package_accounting") if isinstance(targets, dict) else None
+    if not valid_stage1_outputs(stage1) or not closed(accounting, set(TARGET_IDS)):
+        return False
+    try:
         for target in targets["targets"]:
+            target_accounting = accounting[target["id"]]
+            if not closed(target_accounting, set(CONDITIONS)):
+                return False
             for condition in CONDITIONS:
                 rendered = _target_render(target, condition, bindings, stage1)
                 count = counter(rendered)
-                accounting = target["retained_package_accounting"][condition]
-                if count != accounting["token_count"] or count > TOKEN_CEILINGS[condition]:
+                entry = target_accounting[condition]
+                fields = {
+                    "retention_instruction_sha256",
+                    "target_prompt_sha256",
+                    "rendered_package_sha256",
+                    "token_count",
+                    "token_ceiling",
+                    "truncation",
+                    "compression",
+                    "substitution",
+                }
+                if not closed(entry, fields) or not valid_hash(entry["retention_instruction_sha256"]):
                     return False
-                if sha256(rendered.encode()) != accounting["rendered_package_sha256"]:
+                if not valid_hash(entry["target_prompt_sha256"]) or not valid_hash(entry["rendered_package_sha256"]):
                     return False
-                if hashlib.sha256(target["target_prompt"].encode()).hexdigest() != accounting["target_prompt_sha256"]:
+                if not integer(entry["token_count"]) or entry["token_ceiling"] != TOKEN_CEILINGS[condition]:
+                    return False
+                if any(entry[name] is not False for name in ("truncation", "compression", "substitution")):
+                    return False
+                if count != entry["token_count"] or count > TOKEN_CEILINGS[condition]:
+                    return False
+                if sha256(rendered.encode()) != entry["rendered_package_sha256"]:
+                    return False
+                if hashlib.sha256(target["target_prompt"].encode()).hexdigest() != entry["target_prompt_sha256"]:
                     return False
                 instruction = bindings["retention_instructions"][condition]
-                if hashlib.sha256(instruction.encode()).hexdigest() != accounting["retention_instruction_sha256"]:
+                if hashlib.sha256(instruction.encode()).hexdigest() != entry["retention_instruction_sha256"]:
                     return False
         return True
     except Exception:
@@ -707,7 +821,49 @@ def valid_condition_order(order: Any, targets: Any = None) -> bool:
         return False
 
 
-def hashes_complete(manifest: Any, files: Mapping[str, bytes], preregistration_bytes: bytes) -> bool:
+def manifest_anchor_valid(
+    anchor: Any,
+    manifest_bytes: bytes,
+    evidence: Any,
+) -> bool:
+    """Bind the mutable manifest to its one-time repository introduction boundary."""
+    try:
+        fields = {"schema_version", "algorithm", "manifest_path", "manifest_sha256", "manifest_commit"}
+        return (
+            closed(anchor, fields)
+            and anchor["schema_version"] == "1"
+            and anchor["algorithm"] == "sha256"
+            and anchor["manifest_path"] == MANIFEST_NAME
+            and valid_hash(anchor["manifest_sha256"])
+            and re.fullmatch(r"[0-9a-f]{40}", anchor["manifest_commit"]) is not None
+            and closed(
+                evidence,
+                {
+                    "introduction_commit",
+                    "parent_commit",
+                    "frozen_anchor_bytes",
+                    "frozen_manifest_bytes",
+                    "commit_is_ancestor",
+                },
+            )
+            and evidence["commit_is_ancestor"] is True
+            and re.fullmatch(r"[0-9a-f]{40}", evidence["introduction_commit"]) is not None
+            and evidence["introduction_commit"] != evidence["parent_commit"]
+            and anchor["manifest_commit"] == evidence["parent_commit"]
+            and evidence["frozen_anchor_bytes"] == canonical_bytes(anchor) + b"\n"
+            and evidence["frozen_manifest_bytes"] == manifest_bytes
+            and sha256(manifest_bytes) == anchor["manifest_sha256"]
+        )
+    except (KeyError, TypeError):
+        return False
+
+
+def hashes_complete(
+    manifest: Any,
+    files: Mapping[str, bytes],
+    preregistration_bytes: bytes,
+    anchor_evidence: Any,
+) -> bool:
     try:
         if not closed(manifest, {"schema_version", "algorithm", "files", "external_files"}):
             return False
@@ -717,7 +873,8 @@ def hashes_complete(manifest: Any, files: Mapping[str, bytes], preregistration_b
         if not isinstance(records, list):
             return False
         paths = [item.get("path") if isinstance(item, dict) else None for item in records]
-        if set(paths) != PACKAGE_FILES or len(paths) != len(set(paths)) or set(files) != PACKAGE_FILES | {"hash-manifest.json"}:
+        expected_files = PACKAGE_FILES | {MANIFEST_NAME, MANIFEST_ANCHOR_NAME}
+        if set(paths) != PACKAGE_FILES or len(paths) != len(set(paths)) or set(files) != expected_files:
             return False
         if not all(
             closed(item, {"path", "sha256"})
@@ -726,7 +883,11 @@ def hashes_complete(manifest: Any, files: Mapping[str, bytes], preregistration_b
             for item in records
         ):
             return False
-        return manifest["external_files"] == [{"path": PREREGISTRATION_PATH, "sha256": sha256(preregistration_bytes)}]
+        anchor = json.loads(files[MANIFEST_ANCHOR_NAME])
+        return (
+            manifest["external_files"] == [{"path": PREREGISTRATION_PATH, "sha256": sha256(preregistration_bytes)}]
+            and manifest_anchor_valid(anchor, files[MANIFEST_NAME], anchor_evidence)
+        )
     except (KeyError, TypeError):
         return False
 
@@ -751,9 +912,17 @@ def valid_audit_schema(schema: Any) -> bool:
             "condition_order",
             "credential_boundary",
             "operator_actions",
+            "scorer_image_sha256",
         }:
             return False
-        if set(schema["$defs"]) < {"sha256", "pre_execution", "source_execution", "target_execution"}:
+        if set(schema["$defs"]) < {
+            "sha256",
+            "canonical_request",
+            "response",
+            "pre_execution",
+            "source_execution",
+            "target_execution",
+        }:
             return False
         stack = [schema]
         while stack:
@@ -771,10 +940,85 @@ def valid_audit_schema(schema: Any) -> bool:
         return False
 
 
+def source_audit_capable(schema: Any) -> bool:
+    try:
+        if not valid_audit_schema(schema):
+            return False
+        source = schema["$defs"]["source_execution"]
+        response_required = set(schema["$defs"]["response"]["required"])
+        request_required = set(schema["$defs"]["canonical_request"]["required"])
+        return (
+            "scorer_image_sha256" in source["required"]
+            and {
+                "raw_response_sha256",
+                "parsed_final_response",
+                "parsed_final_response_sha256",
+                "abstraction_artifact",
+                "abstraction_artifact_sha256",
+                "stage1_output_hash",
+            }
+            <= response_required
+            and {
+                "endpoint",
+                "system_prompt",
+                "rendered_user_prompt",
+                "supplied_inputs",
+                "model",
+                "decoding",
+                "tools",
+                "tool_choice",
+            }
+            <= request_required
+        )
+    except (KeyError, TypeError):
+        return False
+
+
+def target_audit_capable(schema: Any) -> bool:
+    try:
+        return source_audit_capable(schema) and "scorer_image_sha256" in schema["$defs"]["target_execution"]["required"]
+    except (KeyError, TypeError):
+        return False
+
+
 def _parse_time(value: Any) -> datetime | None:
     try:
         return datetime.fromisoformat(value.replace("Z", "+00:00")) if isinstance(value, str) else None
     except ValueError:
+        return None
+
+
+def parse_source_response(raw_response: bytes, condition: str) -> tuple[str, str | None]:
+    try:
+        text = raw_response.decode("utf-8", "strict")
+    except (AttributeError, UnicodeDecodeError) as error:
+        raise ValueError("undecodable source response") from error
+    if not text:
+        raise ValueError("empty source response")
+    delimiter = "\nABSTRACTION:\n"
+    if condition in {"C1", "C3"}:
+        if delimiter in text:
+            raise ValueError("context-only response contains abstraction delimiter")
+        return text, None
+    if condition not in {"C2", "C4"} or text.count(delimiter) != 1:
+        raise ValueError("malformed abstraction delimiter")
+    final_response, abstraction = text.split(delimiter)
+    if not final_response or not abstraction:
+        raise ValueError("empty parsed source object")
+    return final_response, abstraction
+
+
+def _retained_response_bytes(response: Any, supplied_bytes: bytes | None) -> bytes | None:
+    try:
+        inline = response["retained_raw_response_utf8"]
+        reference = response["immutable_artifact_reference"]
+        if isinstance(inline, str) and reference is None:
+            raw = inline.encode("utf-8")
+            return raw if supplied_bytes is None or supplied_bytes == raw else None
+        if inline is None and closed(reference, {"path", "sha256"}) and isinstance(supplied_bytes, bytes):
+            return supplied_bytes if valid_hash(reference["sha256"]) and sha256(supplied_bytes) == reference["sha256"] else None
+        return None
+    except (KeyError, TypeError):
         return None
 
 
@@ -789,25 +1033,42 @@ def semantic_audit_valid(
     raw_output: bytes | None = None,
     bindings: Any = EXPECTED_BINDINGS,
 ) -> bool:
-    """Validate audit lineage, budgets, inventories, chronology, order, and scores."""
+    """Validate canonical requests, retained responses, lineage, order, budgets, and scores."""
     try:
         run = record["run_identifiers"]
         state = run["execution_state"]
         if state == "PRE_EXECUTION_NULL":
-            return all(isinstance(value, dict) and value.get("status") == "NULL" for key, value in record.items() if key != "run_identifiers")
+            return all(
+                isinstance(value, dict) and value.get("status") == "NULL"
+                for key, value in record.items()
+                if key != "run_identifiers"
+            )
+        if not bindings_valid(bindings, require_scorer=True):
+            return False
+        if record["scorer_image_sha256"] != bindings["scorer_image_sha256"] or not valid_hash(record["scorer_image_sha256"]):
+            return False
         binding = record["model_binding"]
         request = binding["request"]
         hashes = record["hashes"]
         response = record["response"]
         accounting = record["token_accounting"]
         start, end = _parse_time(binding["started_at"]), _parse_time(binding["ended_at"])
-        if not start or not end or end < start or (end - start).total_seconds() > 120:
+        if not start or not end or end < start or (end - start).total_seconds() > bindings["timeout_seconds"]:
             return False
-        if hashes["request_sha256"] != request["request_sha256"] or hashes["raw_response_sha256"] != response["raw_response_sha256"]:
+        request_hash = sha256(request)
+        if hashes["request_sha256"] != binding["request_sha256"] or request_hash != binding["request_sha256"]:
+            return False
+        retained_bytes = _retained_response_bytes(response, raw_output)
+        if retained_bytes is None or sha256(retained_bytes) != response["raw_response_sha256"]:
+            return False
+        if hashes["raw_response_sha256"] != response["raw_response_sha256"]:
+            return False
+        if hashlib.sha256(response["parsed_final_response"].encode()).hexdigest() != response["parsed_final_response_sha256"]:
             return False
         if record["credential_boundary"] != {"request_count": 1, "retry": False}:
             return False
-        if accounting["tokenizer"] != "tiktoken==0.9.0/o200k_base" or accounting["token_ceiling"] != TOKEN_CEILINGS[run["condition_id"]]:
+        condition = run["condition_id"]
+        if accounting["tokenizer"] != "tiktoken==0.9.0/o200k_base" or accounting["token_ceiling"] != TOKEN_CEILINGS[condition]:
             return False
         if not integer(accounting["token_count"]) or accounting["token_count"] > accounting["token_ceiling"] or accounting["budget_result"] is not True:
             return False
@@ -821,31 +1082,45 @@ def semantic_audit_valid(
         if not names.index("request") < names.index("response_retained") < names.index("offline_evaluation"):
             return False
         position = record["condition_order"]["position"]
-        if not integer(position, minimum=1) or position > 4 or record["condition_order"]["condition_id"] != run["condition_id"]:
+        if not integer(position, minimum=1) or position > 4 or record["condition_order"]["condition_id"] != condition:
+            return False
+        package = next((item for item in sources.get("packages", []) if item.get("id") == run["package_id"]), None)
+        if package is None:
             return False
         if state == "SOURCE_EXECUTION_BOUND":
             if run["invocation"] != "source" or run["target_id"] is not None or run["target_family"] is not None or record["evaluator"] is not None:
                 return False
-            if position != CONDITIONS.index(run["condition_id"]) + 1:
+            if position != CONDITIONS.index(condition) + 1:
                 return False
-            package = next((item for item in sources.get("packages", []) if item.get("id") == run["package_id"]), None)
-            if package is None:
-                return False
-            expected_units = package["units"][: 8 if run["condition_id"] in {"C1", "C2"} else 16]
+            expected_units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
             if accounting["supplied_source_unit_ids"] != [item["id"] for item in expected_units]:
                 return False
             if accounting["supplied_source_unit_hashes"] != [item["sha256"] for item in expected_units]:
                 return False
-            rendered = _source_render(package, run["condition_id"], bindings)
+            expected_request = canonical_source_request(package, condition, bindings)
+            if request != expected_request:
+                return False
+            rendered = _source_render(package, condition, bindings)
+            final_response, abstraction = parse_source_response(retained_bytes, condition)
+            stage1 = targets.get("stage1_outputs")
+            artifact = stage1.get(run["package_id"], {}).get(condition) if isinstance(stage1, dict) else None
+            if not valid_stage1_output_record(artifact, condition):
+                return False
             return (
-                hashes["package_sha256"] == package["package_hash"] == accounting["package_record_sha256"]
+                response["parsed_final_response"] == final_response == artifact["source_response"]
+                and response["parsed_final_response_sha256"] == artifact["source_response_sha256"]
+                and response["abstraction_artifact"] == abstraction == artifact["abstraction_artifact"]
+                and response["abstraction_artifact_sha256"] == artifact["abstraction_artifact_sha256"]
+                and response["stage1_output_hash"] == artifact["stage1_output_hash"]
+                and response["raw_response_sha256"] == artifact["raw_response_sha256"]
+                and hashes["package_sha256"] == package["package_hash"] == accounting["package_record_sha256"]
                 and accounting["target_record_sha256"] == "0" * 64
                 and accounting["rendered_input_sha256"] == sha256(rendered.encode())
                 and accounting["token_count"] == token_count(rendered)
                 and accounting["source_prompt_sha256"] == EXPECTED_BINDINGS["hashes"]["source_prompt_template"]
                 and accounting["target_prompt_sha256"] == "0" * 64
             )
-        if state != "TARGET_EXECUTION_BOUND" or run["invocation"] != "target" or not isinstance(raw_output, bytes):
+        if state != "TARGET_EXECUTION_BOUND" or run["invocation"] != "target":
             return False
         target = next((item for item in targets.get("targets", []) if item.get("id") == run["target_id"]), None)
         if target is None or target["package_id"] != run["package_id"] or target["family"] != run["target_family"]:
@@ -858,7 +1133,12 @@ def semantic_audit_valid(
             ),
             None,
         )
-        if block is None or block["execution_conditions"][position - 1] != run["condition_id"]:
+        if block is None or block["execution_conditions"][position - 1] != condition:
+            return False
+        if not valid_stage1_outputs(targets.get("stage1_outputs")):
+            return False
+        expected_request = canonical_target_request(target, condition, bindings, targets["stage1_outputs"])
+        if request != expected_request:
             return False
         key_records = _registry_records(keys, "key")
         rubric_records = _registry_records(rubrics, "rubric")
@@ -868,23 +1148,24 @@ def semantic_audit_valid(
         rubric = next((item for item in rubric_records if sha256(item) == target["scope_rubric_sha256"]), None)
         if key is None or rubric is None:
             return False
-        expected = evaluate(
-            raw_output,
+        expected_evaluator = evaluate(
+            retained_bytes,
             {"id": target["id"], "answer_key_sha256": target["answer_key_sha256"], "scope_rubric_sha256": target["scope_rubric_sha256"]},
             key,
             rubric,
         )
-        package = next((item for item in sources.get("packages", []) if item.get("id") == run["package_id"]), None)
-        if package is None or not bindings_valid(bindings) or not valid_stage1_outputs(targets.get("stage1_outputs")):
-            return False
-        rendered = _target_render(target, run["condition_id"], bindings, targets["stage1_outputs"])
+        rendered = _target_render(target, condition, bindings, targets["stage1_outputs"])
+        target_accounting = targets["target_package_accounting"][target["id"]][condition]
         return (
-            record["evaluator"] == expected
-            and response["raw_response_sha256"] == sha256(raw_output)
+            record["evaluator"] == expected_evaluator
+            and response["parsed_final_response"] == retained_bytes.decode("utf-8", "strict")
+            and response["abstraction_artifact"] is None
+            and response["abstraction_artifact_sha256"] is None
+            and response["stage1_output_hash"] is None
             and hashes["package_sha256"] == package["package_hash"] == accounting["package_record_sha256"]
             and target["target_record_hash"] == accounting["target_record_sha256"]
-            and accounting["rendered_input_sha256"] == sha256(rendered.encode())
-            and accounting["token_count"] == token_count(rendered)
+            and accounting["rendered_input_sha256"] == sha256(rendered.encode()) == target_accounting["rendered_package_sha256"]
+            and accounting["token_count"] == token_count(rendered) == target_accounting["token_count"]
             and accounting["source_prompt_sha256"] == EXPECTED_BINDINGS["hashes"]["source_prompt_template"]
             and accounting["target_prompt_sha256"] == EXPECTED_BINDINGS["hashes"]["target_prompt_template"]
             and accounting["supplied_source_unit_ids"] == []
@@ -915,7 +1196,9 @@ def evaluator_valid(manifest: Any, files: Mapping[str, bytes]) -> bool:
 
 def no_execution_occurred(files: Mapping[str, bytes]) -> bool:
     forbidden = re.compile(r"(^|[-_])(raw[-_]?output|model[-_]?output|execution[-_]?evidence|audit[-_]?record)([-_.]|$)", re.I)
-    return set(files) == PACKAGE_FILES | {"hash-manifest.json"} and not any(forbidden.search(name) for name in files)
+    return set(files) == PACKAGE_FILES | {MANIFEST_NAME, MANIFEST_ANCHOR_NAME} and not any(
+        forbidden.search(name) for name in files
+    )
 
 
 def invocation_boundary_valid(files: Mapping[str, bytes]) -> bool:
@@ -935,19 +1218,27 @@ def invocation_boundary_valid(files: Mapping[str, bytes]) -> bool:
         return False
 
 
-CHECK_NAMES = (
+SOURCE_CHECK_NAMES = (
     "PREREGISTRATION_MATCH",
     "EIGHT_SOURCE_PACKAGES",
-    "TWENTY_FOUR_TARGETS",
-    "TOKEN_BUDGET_VALID",
+    "TARGET_ROSTER_VALID",
+    "SOURCE_INPUT_BUDGET_VALID",
     "PROMPTS_MATCH",
+    "SCORER_IMAGE_BOUND",
     "HASHES_COMPLETE",
     "CONDITION_ORDER_VALID",
     "EVALUATOR_VALID",
     "AUDIT_MANIFEST_COMPLETE",
+    "SOURCE_AUDIT_CAPABLE",
     "NO_EXECUTION_OCCURRED",
     "INVOCATION_BOUNDARY_VALID",
 )
+TARGET_CHECK_NAMES = (
+    "STAGE1_OUTPUTS_VALID",
+    "TARGET_PACKAGE_BUDGET_VALID",
+    "TARGET_AUDIT_CAPABLE",
+)
+CHECK_NAMES = SOURCE_CHECK_NAMES + TARGET_CHECK_NAMES + ("SOURCE_STAGE_READY", "TARGET_STAGE_READY")
 
 
 def readiness_from_bytes(
@@ -956,6 +1247,7 @@ def readiness_from_bytes(
     pinned_preregistration_bytes: bytes,
     *,
     commit_is_merged: bool,
+    anchor_evidence: Any,
     counter: Callable[[str], int] = token_count,
 ) -> dict[str, Any]:
     try:
@@ -968,7 +1260,7 @@ def readiness_from_bytes(
         manifest = parsed["hash-manifest.json"]
         order = parsed["condition-order.json"]
         audit_schema = parsed["audit-manifest-schema.json"]
-        checks = {
+        source_checks = {
             "PREREGISTRATION_MATCH": preregistration_matches(
                 sources,
                 manifest,
@@ -977,20 +1269,43 @@ def readiness_from_bytes(
                 commit_is_merged=commit_is_merged,
             ),
             "EIGHT_SOURCE_PACKAGES": valid_sources(sources, bindings, counter),
-            "TWENTY_FOUR_TARGETS": valid_targets(targets, keys, rubrics),
-            "TOKEN_BUDGET_VALID": valid_token_budgets(sources, targets, keys, rubrics, bindings, counter),
+            "TARGET_ROSTER_VALID": valid_targets(targets, keys, rubrics),
+            "SOURCE_INPUT_BUDGET_VALID": valid_source_budgets(sources, bindings, counter),
             "PROMPTS_MATCH": bindings_valid(bindings),
-            "HASHES_COMPLETE": hashes_complete(manifest, files, preregistration_bytes),
+            "SCORER_IMAGE_BOUND": bindings_valid(bindings, require_scorer=True),
+            "HASHES_COMPLETE": hashes_complete(manifest, files, preregistration_bytes, anchor_evidence),
             "CONDITION_ORDER_VALID": valid_condition_order(order, targets),
             "EVALUATOR_VALID": evaluator_valid(manifest, files),
             "AUDIT_MANIFEST_COMPLETE": valid_audit_schema(audit_schema),
+            "SOURCE_AUDIT_CAPABLE": source_audit_capable(audit_schema),
             "NO_EXECUTION_OCCURRED": no_execution_occurred(files),
             "INVOCATION_BOUNDARY_VALID": invocation_boundary_valid(files),
         }
+        source_ready = all(source_checks.values())
+        target_checks = {
+            "STAGE1_OUTPUTS_VALID": valid_stage1_outputs(targets.get("stage1_outputs")),
+            "TARGET_PACKAGE_BUDGET_VALID": valid_target_budgets(targets, keys, rubrics, bindings, counter),
+            "TARGET_AUDIT_CAPABLE": target_audit_capable(audit_schema),
+        }
+        target_ready = source_ready and all(target_checks.values())
+        checks = {
+            **source_checks,
+            **target_checks,
+            "SOURCE_STAGE_READY": source_ready,
+            "TARGET_STAGE_READY": target_ready,
+        }
     except (KeyError, TypeError, ValueError, json.JSONDecodeError, UnicodeDecodeError):
         checks = {name: False for name in CHECK_NAMES}
+        source_ready = False
+        target_ready = False
     reasons = [f"READINESS_{name}_FAILED" for name, passed in checks.items() if not passed]
-    return {"outcome": "READY" if all(checks.values()) else "NULL", "checks": checks, "reasons": reasons}
+    return {
+        "outcome": "READY" if target_ready else "NULL",
+        "source_stage": "READY" if source_ready else "NULL",
+        "target_stage": "READY" if target_ready else "NULL",
+        "checks": checks,
+        "reasons": reasons,
+    }
 
 
 def _pinned_preregistration() -> tuple[bytes, bool]:
@@ -1008,6 +1323,43 @@ def _pinned_preregistration() -> tuple[bytes, bool]:
         return b"", False
 
 
+def _manifest_anchor_evidence() -> dict[str, Any]:
+    package_relative = PACKAGE.relative_to(ROOT).as_posix()
+    anchor_path = f"{package_relative}/{MANIFEST_ANCHOR_NAME}"
+    manifest_path = f"{package_relative}/{MANIFEST_NAME}"
+    empty = {
+        "introduction_commit": "",
+        "parent_commit": "",
+        "frozen_anchor_bytes": b"",
+        "frozen_manifest_bytes": b"",
+        "commit_is_ancestor": False,
+    }
+    try:
+        additions = subprocess.check_output(
+            ["git", "log", "--diff-filter=A", "--format=%H", "--", anchor_path], cwd=ROOT, text=True
+        ).splitlines()
+        if len(additions) != 1:
+            return empty
+        introduction = additions[0]
+        parent = subprocess.check_output(["git", "rev-parse", f"{introduction}^"], cwd=ROOT, text=True).strip()
+        subprocess.run(
+            ["git", "merge-base", "--is-ancestor", introduction, "HEAD"],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return {
+            "introduction_commit": introduction,
+            "parent_commit": parent,
+            "frozen_anchor_bytes": subprocess.check_output(["git", "show", f"{introduction}:{anchor_path}"], cwd=ROOT),
+            "frozen_manifest_bytes": subprocess.check_output(["git", "show", f"{parent}:{manifest_path}"], cwd=ROOT),
+            "commit_is_ancestor": True,
+        }
+    except (OSError, subprocess.CalledProcessError):
+        return empty
+
+
 def readiness() -> dict[str, Any]:
     try:
         pinned, merged = _pinned_preregistration()
@@ -1016,11 +1368,14 @@ def readiness() -> dict[str, Any]:
             PREREGISTRATION.read_bytes(),
             pinned,
             commit_is_merged=merged,
+            anchor_evidence=_manifest_anchor_evidence(),
         )
     except OSError:
         checks = {name: False for name in CHECK_NAMES}
         return {
             "outcome": "NULL",
+            "source_stage": "NULL",
+            "target_stage": "NULL",
             "checks": checks,
             "reasons": [f"READINESS_{name}_FAILED" for name in CHECK_NAMES],
         }

@@ -208,15 +208,15 @@
       },
       {
         "path": "scripts/validate.py",
-        "sha256": "e245e31abd484526bd7d727c5a97f2d76d954be9ba33626a664cbdd57d00ffed",
-        "size_bytes": 37012
+        "sha256": "fc25a30a5f910be855e248bb44735957658750b6c4f2a8e4fcfc79b360ddcbdc",
+        "size_bytes": 36986
       }
     ],
     "publication_sources": [
       {
         "path": "README.md",
-        "sha256": "c446a6bfbdc18235abed15ccaa1ebd7e8b553dc03e93467ca1c1b9ef02af78c0",
-        "size_bytes": 4955
+        "sha256": "2722eed9c070a66909576660df5c0bf7374fb19ad5ad2ce1866d323064cb5d3d",
+        "size_bytes": 5062
       },
       {
         "path": "REPRODUCIBILITY.md",

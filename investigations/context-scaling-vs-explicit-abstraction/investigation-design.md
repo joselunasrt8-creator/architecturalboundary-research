@@ -67,11 +67,13 @@ This is a 2 × 2 factorial design. Context budget and explicit abstraction are i
 | Context-only | C1 | C3 |
 | Explicit abstraction | C2 | C4 |
 
-Each context level must be declared in advance as a deterministic maximum input budget. The same source-task material is used across conditions; the applicable source-step budget is the assigned context level.
+Before execution, the full source-material corpus must be frozen as an ordered sequence of source units under one declared unitization method. Each context level must declare both a deterministic maximum input budget and a deterministic selection rule: standard context receives the first `N` source units and high context receives the first `M` source units, where `M > N`. The values of `N` and `M`, ordering method, unit boundaries, and accounting method must be frozen before execution. Thus C1/C2 receive identical standard-context source material, C3/C4 receive identical high-context source material, and high context contains a fixed additional information set rather than only unused capacity.
 
 ### Context-only workflow — C1 and C3
 
-The system completes the source task without being required to construct or preserve a separate abstraction artifact. C1 uses the standard context budget and C3 uses the high context budget.
+The system completes the source task without constructing or preserving an abstraction artifact. C1 uses the standard source-unit selection and context budget; C3 uses the high source-unit selection and context budget.
+
+The context-only source prompt must require a source-specific task answer and prohibit a separately stated reusable principle, applicability conditions, limitations, pattern inventory, or other generalized summary. The prohibition concerns retained experimental objects, not unobserved internal reasoning. At the source-to-transfer boundary, C1/C3 retain only the source response (including its final task answer) and source citations. They do not retain generalized principles, applicability conditions, limitations, notes, extracted summaries, or a separate abstraction artifact.
 
 ### Explicit-abstraction workflow — C2 and C4
 
@@ -87,7 +89,7 @@ For C2 and C4, the abstraction artifact must include:
 
 ## Target-Step Information Policy
 
-Target-task execution uses a frozen transfer package. The raw source material is not visible during transfer in any condition; C1 and C3 do not regain it merely because they are context-only. Every condition receives the same unseen target-task prompt, the frozen source response, and provenance identifiers that permit audit but do not reveal source content. C2 and C4 additionally receive their frozen abstraction artifact. No condition receives unrecorded notes, conversation history, retrieval output, tool state, or hidden retained memory from the source step.
+Target-task execution uses a frozen transfer package. The raw source material is not visible during transfer in any condition; C1 and C3 do not regain it merely because they are context-only. Every condition receives the same unseen target-task prompt, the frozen source response, and source citations or provenance identifiers that permit audit but do not reveal source content. C2 and C4 additionally receive their frozen abstraction artifact. For C1/C3, the frozen source response must be the permitted source-specific task answer, not a wrapper or extraction containing generalized principles, applicability conditions, limitations, or a summary created for reuse. No condition receives unrecorded notes, conversation history, retrieval output, tool state, or hidden retained memory from the source step.
 
 The target-step input budget is the condition's assigned context level and is measured using one preregistered deterministic accounting method. It counts every item supplied at transfer: target prompt, source response, explicit abstraction artifact when present, provenance data, system and user prompt text, and any permitted tool or retrieval material. The budget does not grant an exception for an abstraction artifact. If a package exceeds its assigned budget, it must be deterministically reduced or the unit must stop under the stopping rules; it may not be silently truncated or supplemented.
 
@@ -185,10 +187,12 @@ Before execution, freeze or record:
 - tool access;
 - retrieval access;
 - source material;
+- source-material unitization, ordering, and the frozen `N`/`M` selection values for the standard and high context levels;
 - task order;
 - context budget;
 - target-step context budget and its deterministic accounting result;
 - target-step artifact visibility, including the source response and (only for C2/C4) the abstraction artifact;
+- C1/C3 retained-object inventory, which must contain only the source response/final task answer and source citations;
 - target-step source-material visibility, which is prohibited for every condition;
 - target-step system and user prompt visibility;
 - time or compute budget where applicable;
@@ -269,10 +273,12 @@ Stop before or during execution when:
 - source or target tasks violate frozen eligibility rules;
 - context budgets cannot be enforced or measured;
 - a C2 or C4 abstraction artifact is not preserved independently from the response;
-- the required C1 or C3 freeze package (source material, source response, and provenance) is incomplete;
+- C1/C3 retain a generalized principle, applicability condition, limitation, extracted summary, note, or separate abstraction artifact;
+- the required C1 or C3 freeze package (source response/final task answer and source citations) is incomplete or contains a prohibited retained object;
 - the required C2 or C4 freeze package (abstraction artifact, source response, and provenance) is incomplete;
 - target tasks are exposed before the applicable condition's freeze package is frozen;
 - source material, artifacts, prompts, provenance, or reuse permissions differ from the target-step information policy;
+- the frozen source-unit selection does not provide the preregistered additional information in high context relative to standard context;
 - target-step budget accounting is unequal within a context level;
 - evaluators cannot apply the scoring protocol consistently;
 - condition contamination occurs;

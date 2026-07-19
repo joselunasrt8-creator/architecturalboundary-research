@@ -215,8 +215,8 @@
     "publication_sources": [
       {
         "path": "README.md",
-        "sha256": "c446a6bfbdc18235abed15ccaa1ebd7e8b553dc03e93467ca1c1b9ef02af78c0",
-        "size_bytes": 4955
+        "sha256": "befeb4ecfdee32ea7da40f493da7bfd21aa4b9f60110504b684e9f08e34804cd",
+        "size_bytes": 7083
       },
       {
         "path": "REPRODUCIBILITY.md",

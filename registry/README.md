@@ -3,7 +3,7 @@
 Machine-readable JSON registry contracts are canonical in this repository. The requested conceptual contracts are represented as JSON files to avoid duplicate YAML authorities:
 
 - `architectural_boundaries.json` for architectural-boundary candidates.
-- `investigations.json` for registered investigation workspaces.
+- `investigations.json` for registered investigation workspaces. Repository topology validation derives the complete set of canonical investigation workspaces from this registry and verifies each workspace's required scaffold.
 - `terminology.json` for terminology authority pointers.
 - `classifications.json` for classification contracts.
 

@@ -19,14 +19,6 @@ jobs:
           python-version: "3.13"
       - name: Install deterministic Python dependencies
         run: python3 -m pip install -r requirements.txt
-      - name: Generate refreshed publication manifest
-        run: python3 scripts/build_publication_manifest.py
-      - name: Upload refreshed publication manifest
-        uses: actions/upload-artifact@v4
-        with:
-          name: refreshed-publication-manifest
-          path: releases/publication-state-manifest.json
-          if-no-files-found: error
       - name: Run test suite
         run: python3 -m pytest -q
       - name: Install TeX Live publication dependencies

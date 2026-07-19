@@ -8,15 +8,15 @@
     },
     {
       "path": "source-package-registry.json",
-      "sha256": "f4370ad1ccd4302c74e5306ed165c7df83eb990de93b956829974845f44fc9e3"
+      "sha256": "5525d746618324cbdf700613b3c48419afff1e0059739d586b5cb4f4a993c172"
     },
     {
       "path": "target-registry.json",
-      "sha256": "d86aaae9bacba536c06d37b068d9cfebfdbf8ed6fbc04e7e8306cefd2eb9ef04"
+      "sha256": "9854ef0520ed360e07c6833961f73bca1ffd55268794b9341e0ffc74ffaf0078"
     },
     {
       "path": "prompt-bindings.json",
-      "sha256": "e139798fee9d29a4b177e595ae50af32b17c14552b5a906693c9383602520a2b"
+      "sha256": "86a3a60a3c48e3819abb090d97c419fd7c4b05f1760f4c280f6e6f5248488a7e"
     },
     {
       "path": "condition-order.json",
@@ -32,7 +32,7 @@
     },
     {
       "path": "audit-manifest-schema.json",
-      "sha256": "7aeb44539df559f7830ce015360bf90d853ced9d018275d12cb1a1e2effce0bb"
+      "sha256": "5601c9fe5551c9a0d0cb6f4cdbb14f80346945efd73895e11fff8ab8971ded40"
     },
     {
       "path": "execution-readiness-report.md",
@@ -44,7 +44,7 @@
     },
     {
       "path": "execution_package.py",
-      "sha256": "fc19d21ef7c1a676c63c5ab622e8b46b27739952e533e78f9cc7da441b8f99ed"
+      "sha256": "50c02b42629fd781bea60ee5b7f2299391ece3ce0d0a19f19900f63852e9a1c2"
     }
   ],
   "external_files": [

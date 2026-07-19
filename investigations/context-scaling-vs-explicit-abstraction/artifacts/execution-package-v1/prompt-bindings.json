@@ -1,5 +1,6 @@
 {
   "schema_version": "1",
+  "endpoint": "https://api.openai.com/v1/responses",
   "system_prompt": "You are a careful research assistant. Follow the user message exactly. Do not use tools, browse, retrieve, or rely on information not supplied in this conversation. Return only the requested answer.",
   "source_prompt_template": "SOURCE PACKAGE {package_id}; CONDITION {condition_id}. Source units, in order: {source_units}. Produce the source-specific answer. {retention_instruction}",
   "target_prompt_template": "TARGET {target_id}; CONDITION {condition_id}. Retained package: {retained_package}. Solve the target. State the conclusion and a concise justification. Do not use tools, retrieval, or outside knowledge.",

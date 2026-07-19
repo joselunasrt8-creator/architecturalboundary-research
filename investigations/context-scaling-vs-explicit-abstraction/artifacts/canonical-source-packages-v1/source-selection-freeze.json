@@ -3,40 +3,162 @@
   "issue": 96,
   "milestone": "canonical-source-packages-v1",
   "authorization": "AUTHORIZED",
-  "selection_status": "BLOCKED",
-  "selected_rule": null,
-  "allowed_rules": {
-    "A": {
-      "name": "eight_explicitly_named_frozen_sources",
-      "status": "UNSELECTED",
-      "required_document_count": 8,
-      "required_fields_per_document": [
-        "canonical_order",
-        "canonical_source_identifier",
-        "title",
-        "stable_locator",
-        "version_or_commit",
-        "retrieval_date",
-        "document_sha256"
-      ],
-      "documents": []
+  "protocol_status": "READY",
+  "selected_rule": "B",
+  "repository": {
+    "name_with_owner": "joselunasrt8-creator/architecturalboundary-research",
+    "remote": "https://github.com/joselunasrt8-creator/architecturalboundary-research.git",
+    "ref_type": "commit",
+    "commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+    "retrieval_date": "2026-07-19"
+  },
+  "corpus_boundary": {
+    "allowed_path_prefixes": [
+      "docs/",
+      "investigations/",
+      "papers/"
+    ],
+    "excluded_path_prefixes": [
+      "investigations/context-scaling-vs-explicit-abstraction/"
+    ],
+    "excluded_directory_names": [
+      "__pycache__",
+      "analysis",
+      "artifacts",
+      "build",
+      "dataset",
+      "datasets",
+      "dist",
+      "fixtures",
+      "generated",
+      "results",
+      "temp",
+      "testdata",
+      "tests",
+      "tmp"
+    ],
+    "excluded_filename_patterns": [
+      "*.fixture.md",
+      "*.generated.md",
+      "*.snapshot.md",
+      "*.tmp.*"
+    ],
+    "excluded_artifact_classes": [
+      "generated datasets or analyses",
+      "test fixtures and snapshots",
+      "duplicated publication outputs",
+      "temporary or build files",
+      "prior outputs from this experiment",
+      "documents created specifically for the context-scaling-vs-explicit-abstraction investigation"
+    ],
+    "candidate_file_extensions": [
+      ".md",
+      ".tex"
+    ],
+    "symlinks_allowed": false,
+    "submodules_allowed": false
+  },
+  "candidate_ordering": {
+    "normalization": "Unicode NFKC of repository-relative POSIX path",
+    "rule": "normalized repository-relative path ascending; ties by original UTF-8 path bytes ascending",
+    "relevance_ranking": "PROHIBITED",
+    "subjective_quality_ranking": "PROHIBITED",
+    "model_selection": "PROHIBITED"
+  },
+  "eligibility": {
+    "authorship": {
+      "required_classification": "HUMAN_AUTHORED",
+      "required_evidence": "nonempty frozen provenance evidence from commit history or an in-document authorship declaration",
+      "generated_content": "EXCLUDE",
+      "unclear_provenance": "EXCLUDE",
+      "derived_from_another_candidate": "EXCLUDE"
     },
-    "B": {
-      "name": "frozen_corpus_deterministic_selection",
-      "status": "UNSELECTED",
-      "corpus_boundary": null,
-      "retrieval_date": null,
-      "inclusion_rules": [],
-      "exclusion_rules": [],
-      "canonical_ordering": null,
-      "duplicate_handling": null,
-      "minimum_document_requirements": [],
-      "selection_rule": null,
-      "stable_locator_rule": null,
-      "version_binding_rule": null,
-      "fewer_than_eight_rule": null,
-      "substitution_rule": "PROHIBITED",
-      "candidate_manifest": []
+    "substantive_content": {
+      "minimum_unicode_word_tokens": 320,
+      "index_only_readme": "EXCLUDE",
+      "meaningful_unit_minimum_word_tokens": 12,
+      "minimum_meaningful_units": 16
+    },
+    "unitization": {
+      "encoding": "strict UTF-8",
+      "boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each form one verbatim unit",
+      "rewriting": "PROHIBITED",
+      "summarization": "PROHIBITED",
+      "compression": "PROHIBITED",
+      "required_unit_ids": "U001 through U016 in document order",
+      "verification": "each frozen unit must equal its declared byte slice of the pinned document and reproduce its SHA-256"
+    },
+    "stable_binding": {
+      "path_required": true,
+      "commit_required": true,
+      "blob_sha256_required": true,
+      "stable_locator_template": "git+https://github.com/joselunasrt8-creator/architecturalboundary-research.git@{commit}#path={path}"
+    },
+    "duplicate_detection": {
+      "normalization": "strict UTF-8 decode, Unicode NFKC, case-fold, collapse Unicode whitespace, trim ASCII spaces",
+      "exact_duplicate": "normalized-content SHA-256 equality",
+      "shingle_size_words": 5,
+      "substantial_overlap_jaccard_threshold": "0.80",
+      "substantial_overlap_containment_threshold": "0.90",
+      "handling": "retain only the first eligible canonical-path occurrence; reject every later exact or substantial duplicate"
+    },
+    "source_budget": {
+      "tokenizer_name": "o200k_base",
+      "tokenizer_package": "tiktoken==0.9.0",
+      "counts_include": "system prompt, rendered source prompt, package and condition identifiers, unit identifiers, verbatim units, and retention instruction",
+      "assignment_check": "use the maximum count across SP01 through SP08 for each condition",
+      "ceilings": {
+        "C1": 4096,
+        "C2": 4096,
+        "C3": 8192,
+        "C4": 8192
+      },
+      "truncation": "PROHIBITED",
+      "compression": "PROHIBITED",
+      "substitution": "PROHIBITED"
+    },
+    "experiment_leakage": {
+      "target_tasks": "EXCLUDE",
+      "answer_keys": "EXCLUDE",
+      "scope_rubrics": "EXCLUDE",
+      "prior_experiment_outputs": "EXCLUDE",
+      "experiment_specific_instructions": "EXCLUDE",
+      "post_target_performance_review": "PROHIBITED"
+    }
+  },
+  "selection": {
+    "evaluation_order": "candidate_ordering.rule",
+    "rule": "select the first eight eligible documents in canonical order",
+    "required_count": 8,
+    "assignment": {
+      "first": "SP01",
+      "second": "SP02",
+      "third": "SP03",
+      "fourth": "SP04",
+      "fifth": "SP05",
+      "sixth": "SP06",
+      "seventh": "SP07",
+      "eighth": "SP08"
+    },
+    "fewer_than_eight_result": "NULL",
+    "outside_corpus_substitution": "PROHIBITED",
+    "manual_substitution": "PROHIBITED",
+    "post_outcome_selection": "PROHIBITED"
+  },
+  "selection_execution": {
+    "status": "NOT_EXECUTED",
+    "result": "NULL",
+    "candidate_manifest": [],
+    "eligible_candidates": [],
+    "assignments": {
+      "SP01": null,
+      "SP02": null,
+      "SP03": null,
+      "SP04": null,
+      "SP05": null,
+      "SP06": null,
+      "SP07": null,
+      "SP08": null
     }
   },
   "construction_status": "NOT_STARTED",
@@ -51,7 +173,7 @@
     "SP08": "NULL"
   },
   "prohibitions": {
-    "repository_inference": true,
+    "repository_inference_outside_protocol": true,
     "convenience_substitution": true,
     "target_construction": true,
     "model_invocation": true,
@@ -59,5 +181,5 @@
     "experiment_execution": true,
     "empirical_evidence_collection": true
   },
-  "reason": "Neither eight explicit source identities nor a frozen candidate corpus and deterministic selection protocol has been supplied."
+  "reason": "Option B is frozen, but the pinned corpus has not been enumerated or evaluated and no canonical source package has been constructed."
 }

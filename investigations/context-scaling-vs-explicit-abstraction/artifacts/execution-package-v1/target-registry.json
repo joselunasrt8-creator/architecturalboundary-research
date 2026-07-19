@@ -5,6 +5,7 @@
   "expected_target_count": 24,
   "targets": [],
   "stage1_outputs": null,
+  "source_execution_audits": null,
   "target_package_accounting": null,
   "status": "NULL",
   "reason": "No frozen candidate target registry exists; creating targets, answer keys, or scope rubrics would fabricate preregistered objects."

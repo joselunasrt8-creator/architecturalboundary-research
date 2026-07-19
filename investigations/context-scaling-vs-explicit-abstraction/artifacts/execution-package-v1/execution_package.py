@@ -48,9 +48,9 @@ TARGET_PROMPT = (
 )
 CONTEXT_INSTRUCTION = "Return only the source-specific answer; do not create or state any reusable abstraction."
 ABSTRACTION_INSTRUCTION = (
-    "Return the source-specific answer, then exactly one line ABSTRACTION:, then the abstraction containing "
-    "principle, applicability conditions, limitations/failure cases, source-unit provenance for every material "
-    "claim, and reuse instructions."
+    "Return the source-specific answer, then exactly one line ABSTRACTION:, then one canonical JSON object with "
+    "exactly artifact_id, principle, applicability_conditions, limitations, source_unit_provenance, and "
+    "reuse_instructions. Provenance entries must contain unit_id, unit_sha256, and claims for every material claim."
 )
 EXPECTED_BINDINGS = {
     "schema_version": "1",
@@ -104,7 +104,7 @@ PACKAGE_FILES = {
     "execution_package.py",
 }
 MANIFEST_NAME = "hash-manifest.json"
-MANIFEST_ANCHOR_NAME = "hash-manifest-anchor.json"
+MANIFEST_ANCHOR_NAME = "hash-manifest-anchor-v2.json"
 JSON_INPUTS = {
     "source-package-registry.json",
     "target-registry.json",
@@ -262,10 +262,9 @@ def _retained_package(artifact: dict[str, Any], condition: str) -> str:
     lines = ["SOURCE RESPONSE:", artifact["source_response"], "CITATION IDENTIFIERS:"]
     lines.extend(artifact["citation_identifiers"])
     lines.append("RETAINED OBJECTS:")
-    for item in artifact["retained_objects"]:
-        lines.extend((f"{item['id']}:", item["content"]))
     if condition in {"C2", "C4"}:
-        lines.extend(("ABSTRACTION ARTIFACT:", artifact["abstraction_artifact"]))
+        abstraction = artifact["abstraction_artifact"]
+        lines.extend((f"ABSTRACTION ARTIFACT {abstraction['artifact_id']}:", abstraction["canonical_serialization"]))
     return "\n".join(lines)
 
 
@@ -330,10 +329,16 @@ def canonical_target_request(
         }
         for citation in artifact["citation_identifiers"]
     )
-    supplied.extend(
-        {"kind": "retained_object", "identifier": item["id"], "sha256": item["sha256"], "content": item["content"]}
-        for item in artifact["retained_objects"]
-    )
+    if condition in {"C2", "C4"}:
+        abstraction = artifact["abstraction_artifact"]
+        supplied.append(
+            {
+                "kind": "retained_object",
+                "identifier": abstraction["artifact_id"],
+                "sha256": abstraction["sha256"],
+                "content": abstraction["canonical_serialization"],
+            }
+        )
     return {
         "endpoint": bindings["endpoint"],
         "system_prompt": bindings["system_prompt"],
@@ -525,6 +530,7 @@ def valid_targets(registry: Any, key_registry: Any, rubric_registry: Any) -> boo
             "expected_target_count",
             "targets",
             "stage1_outputs",
+            "source_execution_audits",
             "target_package_accounting",
             "status",
             "reason",
@@ -593,7 +599,13 @@ def valid_targets(registry: Any, key_registry: Any, rubric_registry: Any) -> boo
 
 
 STAGE1_FIELDS = {
+    "package_id",
+    "condition_id",
+    "source_audit_id",
+    "source_audit_binding_sha256",
     "raw_response_sha256",
+    "retained_raw_response_utf8",
+    "immutable_artifact_reference",
     "source_response",
     "source_response_sha256",
     "abstraction_artifact",
@@ -604,13 +616,111 @@ STAGE1_FIELDS = {
 }
 
 
-def valid_stage1_output_record(artifact: Any, condition: str) -> bool:
+ABSTRACTION_CORE_FIELDS = {
+    "artifact_id",
+    "principle",
+    "applicability_conditions",
+    "limitations",
+    "source_unit_provenance",
+    "reuse_instructions",
+}
+ABSTRACTION_FIELDS = ABSTRACTION_CORE_FIELDS | {"canonical_serialization", "sha256"}
+ABSTRACTION_CLAIMS = {"principle", "applicability_conditions", "limitations", "reuse_instructions"}
+
+
+def structured_abstraction(serialized: str, package: dict[str, Any], condition: str) -> dict[str, Any]:
+    """Parse the exact canonical C2/C4 artifact and bind every provenance item to supplied units."""
+    if condition not in {"C2", "C4"} or not isinstance(serialized, str) or not serialized:
+        raise ValueError("missing abstraction artifact")
+    core = json.loads(serialized)
+    if not closed(core, ABSTRACTION_CORE_FIELDS) or canonical_bytes(core).decode("utf-8") != serialized:
+        raise ValueError("abstraction is not canonical JSON")
+    if core["artifact_id"] != f"A-{package['id']}-{condition}":
+        raise ValueError("invalid abstraction identifier")
+    if not all(isinstance(core[name], str) and core[name].strip() for name in ("principle", "reuse_instructions")):
+        raise ValueError("empty abstraction text")
+    for name in ("applicability_conditions", "limitations"):
+        values = core[name]
+        if not isinstance(values, list) or not values or not all(isinstance(value, str) and value.strip() for value in values):
+            raise ValueError("empty abstraction list")
+    supplied = package["units"][: 8 if condition == "C2" else 16]
+    supplied_hashes = {unit["id"]: unit["sha256"] for unit in supplied}
+    provenance = core["source_unit_provenance"]
+    if not isinstance(provenance, list) or not provenance:
+        raise ValueError("missing abstraction provenance")
+    seen_units: set[str] = set()
+    covered_claims: set[str] = set()
+    for item in provenance:
+        if not closed(item, {"unit_id", "unit_sha256", "claims"}):
+            raise ValueError("malformed abstraction provenance")
+        unit_id = item["unit_id"]
+        claims = item["claims"]
+        if unit_id in seen_units or supplied_hashes.get(unit_id) != item["unit_sha256"]:
+            raise ValueError("unbound abstraction provenance")
+        if not isinstance(claims, list) or not claims or not all(claim in ABSTRACTION_CLAIMS for claim in claims):
+            raise ValueError("invalid abstraction claim provenance")
+        if len(claims) != len(set(claims)):
+            raise ValueError("duplicate abstraction claim provenance")
+        seen_units.add(unit_id)
+        covered_claims.update(claims)
+    if covered_claims != ABSTRACTION_CLAIMS:
+        raise ValueError("incomplete abstraction claim provenance")
+    return {
+        **core,
+        "canonical_serialization": serialized,
+        "sha256": sha256(serialized.encode("utf-8")),
+    }
+
+
+def source_audit_binding_hash(record: Any) -> str:
+    """Hash a source audit with the reciprocal Stage-1 hash slot canonically nulled."""
+    if not isinstance(record, dict):
+        raise ValueError("malformed source audit")
+    normalized_record = json.loads(canonical_bytes(record))
+    normalized_record["response"]["stage1_output_hash"] = None
+    return sha256(normalized_record)
+
+
+def _stage1_raw_bytes(artifact: Any, raw_artifacts: Mapping[str, bytes] | None = None) -> bytes | None:
+    try:
+        response = {
+            "retained_raw_response_utf8": artifact["retained_raw_response_utf8"],
+            "immutable_artifact_reference": artifact["immutable_artifact_reference"],
+        }
+        reference = response["immutable_artifact_reference"]
+        supplied = None
+        if isinstance(reference, dict) and raw_artifacts is not None:
+            supplied = raw_artifacts.get(reference.get("path"))
+        return _retained_response_bytes(response, supplied)
+    except (KeyError, TypeError):
+        return None
+
+
+def valid_stage1_output_record(
+    artifact: Any,
+    package: dict[str, Any],
+    condition: str,
+    raw_artifacts: Mapping[str, bytes] | None = None,
+) -> bool:
     try:
         if condition not in CONDITIONS:
             return False
-        if not closed(artifact, STAGE1_FIELDS) or not isinstance(artifact["source_response"], str) or not artifact[
-            "source_response"
-        ]:
+        if (
+            not closed(artifact, STAGE1_FIELDS)
+            or artifact["package_id"] != package["id"]
+            or artifact["condition_id"] != condition
+            or not isinstance(artifact["source_audit_id"], str)
+            or not artifact["source_audit_id"]
+            or not valid_hash(artifact["source_audit_binding_sha256"])
+            or not isinstance(artifact["source_response"], str)
+            or not artifact["source_response"]
+        ):
+            return False
+        raw = _stage1_raw_bytes(artifact, raw_artifacts)
+        if raw is None or sha256(raw) != artifact["raw_response_sha256"]:
+            return False
+        parsed_response, parsed_abstraction = parse_source_response(raw, condition)
+        if parsed_response != artifact["source_response"]:
             return False
         if hashlib.sha256(artifact["source_response"].encode()).hexdigest() != artifact["source_response_sha256"]:
             return False
@@ -619,49 +729,84 @@ def valid_stage1_output_record(artifact: Any, condition: str) -> bool:
             return False
         if len(citations) != len(set(citations)):
             return False
+        supplied_ids = {unit["id"] for unit in package["units"][: 8 if condition in {"C1", "C2"} else 16]}
+        if not all(item.startswith(f"{package['id']}:") and item.split(":", 1)[1] in supplied_ids for item in citations):
+            return False
         retained = artifact["retained_objects"]
-        if not isinstance(retained, list) or not all(
-            closed(item, {"id", "content", "sha256"})
-            and isinstance(item["id"], str)
-            and item["id"]
-            and isinstance(item["content"], str)
-            and item["content"]
-            and hashlib.sha256(item["content"].encode()).hexdigest() == item["sha256"]
-            for item in retained
-        ):
+        if not isinstance(retained, list):
             return False
         abstraction = artifact["abstraction_artifact"]
         abstraction_hash = artifact["abstraction_artifact_sha256"]
         if condition in {"C1", "C3"}:
-            if abstraction is not None or abstraction_hash is not None or retained:
+            if parsed_abstraction is not None or abstraction is not None or abstraction_hash is not None or retained:
                 return False
         else:
-            if not isinstance(abstraction, str) or not abstraction or hashlib.sha256(abstraction.encode()).hexdigest() != abstraction_hash:
+            expected_abstraction = structured_abstraction(parsed_abstraction, package, condition)
+            if abstraction != expected_abstraction or abstraction_hash != expected_abstraction["sha256"]:
                 return False
-            if len(retained) != 1 or retained[0]["content"] != abstraction or retained[0]["sha256"] != abstraction_hash:
+            expected_reference = {
+                "id": expected_abstraction["artifact_id"],
+                "kind": "abstraction_artifact",
+                "sha256": expected_abstraction["sha256"],
+            }
+            if retained != [expected_reference]:
                 return False
         body = {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
         return (
-            valid_hash(artifact["raw_response_sha256"])
-            and valid_hash(artifact["stage1_output_hash"])
+            valid_hash(artifact["stage1_output_hash"])
             and sha256(body) == artifact["stage1_output_hash"]
         )
-    except (KeyError, TypeError):
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
         return False
 
 
-def valid_stage1_outputs(stage1: Any) -> bool:
+def valid_stage1_outputs(
+    stage1: Any,
+    audits: Any,
+    sources: Any,
+    targets: Any,
+    order: Any,
+    audit_schema: Any,
+    bindings: Any,
+    raw_artifacts: Mapping[str, bytes] | None = None,
+) -> bool:
     try:
-        if not closed(stage1, set(PACKAGE_IDS)):
+        from jsonschema import Draft202012Validator, FormatChecker
+
+        if not closed(stage1, set(PACKAGE_IDS)) or not isinstance(audits, list) or len(audits) != 32:
             return False
+        audit_by_id = {
+            item.get("run_identifiers", {}).get("audit_id"): item for item in audits if isinstance(item, dict)
+        }
+        expected_audit_ids = {f"source-{package}-{condition}" for package in PACKAGE_IDS for condition in CONDITIONS}
+        if set(audit_by_id) != expected_audit_ids or len(audit_by_id) != len(audits):
+            return False
+        validator = Draft202012Validator(audit_schema, format_checker=FormatChecker())
         for package in PACKAGE_IDS:
             if not closed(stage1[package], set(CONDITIONS)):
                 return False
+            source_package = next(item for item in sources["packages"] if item["id"] == package)
             for condition in CONDITIONS:
-                if not valid_stage1_output_record(stage1[package][condition], condition):
+                artifact = stage1[package][condition]
+                audit = audit_by_id.get(artifact.get("source_audit_id")) if isinstance(artifact, dict) else None
+                raw = _stage1_raw_bytes(artifact, raw_artifacts)
+                if (
+                    audit is None
+                    or list(validator.iter_errors(audit))
+                    or not valid_stage1_output_record(artifact, source_package, condition, raw_artifacts)
+                    or source_audit_binding_hash(audit) != artifact["source_audit_binding_sha256"]
+                    or not semantic_audit_valid(
+                        audit,
+                        order,
+                        sources=sources,
+                        targets=targets,
+                        raw_output=raw,
+                        bindings=bindings,
+                    )
+                ):
                     return False
         return True
-    except (KeyError, TypeError):
+    except (KeyError, StopIteration, TypeError, ValueError):
         return False
 
 
@@ -685,10 +830,13 @@ def valid_source_budgets(
 
 
 def valid_target_budgets(
+    sources: Any,
     targets: Any,
     keys: Any,
     rubrics: Any,
     bindings: Any,
+    order: Any,
+    audit_schema: Any,
     counter: Callable[[str], int] = token_count,
 ) -> bool:
     """Validate retained Stage-1 artifacts and all rendered target request budgets."""
@@ -696,7 +844,15 @@ def valid_target_budgets(
         return False
     stage1 = targets.get("stage1_outputs") if isinstance(targets, dict) else None
     accounting = targets.get("target_package_accounting") if isinstance(targets, dict) else None
-    if not valid_stage1_outputs(stage1) or not closed(accounting, set(TARGET_IDS)):
+    if not valid_stage1_outputs(
+        stage1,
+        targets.get("source_execution_audits"),
+        sources,
+        targets,
+        order,
+        audit_schema,
+        bindings,
+    ) or not closed(accounting, set(TARGET_IDS)):
         return False
     try:
         for target in targets["targets"]:
@@ -826,7 +982,7 @@ def manifest_anchor_valid(
     manifest_bytes: bytes,
     evidence: Any,
 ) -> bool:
-    """Bind the mutable manifest to its one-time repository introduction boundary."""
+    """Bind current artifacts to the manifest at the exact commit frozen by the external anchor."""
     try:
         fields = {"schema_version", "algorithm", "manifest_path", "manifest_sha256", "manifest_commit"}
         return (
@@ -840,18 +996,25 @@ def manifest_anchor_valid(
                 evidence,
                 {
                     "introduction_commit",
-                    "parent_commit",
                     "frozen_anchor_bytes",
-                    "frozen_manifest_bytes",
-                    "commit_is_ancestor",
+                    "anchored_commit",
+                    "anchored_manifest_bytes",
+                    "introduction_is_ancestor",
+                    "anchored_commit_exists",
+                    "anchored_commit_is_ancestor",
+                    "manifest_found_at_anchor_commit",
                 },
             )
-            and evidence["commit_is_ancestor"] is True
+            and evidence["introduction_is_ancestor"] is True
+            and evidence["anchored_commit_exists"] is True
+            and evidence["anchored_commit_is_ancestor"] is True
+            and evidence["manifest_found_at_anchor_commit"] is True
             and re.fullmatch(r"[0-9a-f]{40}", evidence["introduction_commit"]) is not None
-            and evidence["introduction_commit"] != evidence["parent_commit"]
-            and anchor["manifest_commit"] == evidence["parent_commit"]
+            and anchor["manifest_commit"] == evidence["anchored_commit"]
+            and anchor["manifest_commit"] != evidence["introduction_commit"]
             and evidence["frozen_anchor_bytes"] == canonical_bytes(anchor) + b"\n"
-            and evidence["frozen_manifest_bytes"] == manifest_bytes
+            and evidence["anchored_manifest_bytes"] == manifest_bytes
+            and sha256(evidence["anchored_manifest_bytes"]) == anchor["manifest_sha256"]
             and sha256(manifest_bytes) == anchor["manifest_sha256"]
         )
     except (KeyError, TypeError):
@@ -918,6 +1081,8 @@ def valid_audit_schema(schema: Any) -> bool:
         if set(schema["$defs"]) < {
             "sha256",
             "canonical_request",
+            "abstraction_artifact",
+            "abstraction_provenance",
             "response",
             "pre_execution",
             "source_execution",
@@ -1104,12 +1269,25 @@ def semantic_audit_valid(
             final_response, abstraction = parse_source_response(retained_bytes, condition)
             stage1 = targets.get("stage1_outputs")
             artifact = stage1.get(run["package_id"], {}).get(condition) if isinstance(stage1, dict) else None
-            if not valid_stage1_output_record(artifact, condition):
+            artifact_reference = artifact.get("immutable_artifact_reference") if isinstance(artifact, dict) else None
+            artifact_raw = (
+                {artifact_reference["path"]: retained_bytes}
+                if isinstance(artifact_reference, dict) and isinstance(artifact_reference.get("path"), str)
+                else None
+            )
+            if not valid_stage1_output_record(artifact, package, condition, artifact_raw):
                 return False
+            expected_abstraction = structured_abstraction(abstraction, package, condition) if abstraction is not None else None
             return (
-                response["parsed_final_response"] == final_response == artifact["source_response"]
+                artifact["package_id"] == run["package_id"]
+                and artifact["condition_id"] == condition
+                and artifact["source_audit_id"] == run["audit_id"]
+                and artifact["source_audit_binding_sha256"] == source_audit_binding_hash(record)
+                and artifact["retained_raw_response_utf8"] == response["retained_raw_response_utf8"]
+                and artifact["immutable_artifact_reference"] == response["immutable_artifact_reference"]
+                and response["parsed_final_response"] == final_response == artifact["source_response"]
                 and response["parsed_final_response_sha256"] == artifact["source_response_sha256"]
-                and response["abstraction_artifact"] == abstraction == artifact["abstraction_artifact"]
+                and response["abstraction_artifact"] == expected_abstraction == artifact["abstraction_artifact"]
                 and response["abstraction_artifact_sha256"] == artifact["abstraction_artifact_sha256"]
                 and response["stage1_output_hash"] == artifact["stage1_output_hash"]
                 and response["raw_response_sha256"] == artifact["raw_response_sha256"]
@@ -1135,7 +1313,8 @@ def semantic_audit_valid(
         )
         if block is None or block["execution_conditions"][position - 1] != condition:
             return False
-        if not valid_stage1_outputs(targets.get("stage1_outputs")):
+        stage1_artifact = targets.get("stage1_outputs", {}).get(run["package_id"], {}).get(condition)
+        if not valid_stage1_output_record(stage1_artifact, package, condition):
             return False
         expected_request = canonical_target_request(target, condition, bindings, targets["stage1_outputs"])
         if request != expected_request:
@@ -1283,8 +1462,18 @@ def readiness_from_bytes(
         }
         source_ready = all(source_checks.values())
         target_checks = {
-            "STAGE1_OUTPUTS_VALID": valid_stage1_outputs(targets.get("stage1_outputs")),
-            "TARGET_PACKAGE_BUDGET_VALID": valid_target_budgets(targets, keys, rubrics, bindings, counter),
+            "STAGE1_OUTPUTS_VALID": valid_stage1_outputs(
+                targets.get("stage1_outputs"),
+                targets.get("source_execution_audits"),
+                sources,
+                targets,
+                order,
+                audit_schema,
+                bindings,
+            ),
+            "TARGET_PACKAGE_BUDGET_VALID": valid_target_budgets(
+                sources, targets, keys, rubrics, bindings, order, audit_schema, counter
+            ),
             "TARGET_AUDIT_CAPABLE": target_audit_capable(audit_schema),
         }
         target_ready = source_ready and all(target_checks.values())
@@ -1329,10 +1518,13 @@ def _manifest_anchor_evidence() -> dict[str, Any]:
     manifest_path = f"{package_relative}/{MANIFEST_NAME}"
     empty = {
         "introduction_commit": "",
-        "parent_commit": "",
         "frozen_anchor_bytes": b"",
-        "frozen_manifest_bytes": b"",
-        "commit_is_ancestor": False,
+        "anchored_commit": "",
+        "anchored_manifest_bytes": b"",
+        "introduction_is_ancestor": False,
+        "anchored_commit_exists": False,
+        "anchored_commit_is_ancestor": False,
+        "manifest_found_at_anchor_commit": False,
     }
     try:
         additions = subprocess.check_output(
@@ -1341,7 +1533,17 @@ def _manifest_anchor_evidence() -> dict[str, Any]:
         if len(additions) != 1:
             return empty
         introduction = additions[0]
-        parent = subprocess.check_output(["git", "rev-parse", f"{introduction}^"], cwd=ROOT, text=True).strip()
+        frozen_anchor_bytes = subprocess.check_output(["git", "show", f"{introduction}:{anchor_path}"], cwd=ROOT)
+        frozen_anchor = json.loads(frozen_anchor_bytes)
+        anchored_commit = frozen_anchor["manifest_commit"]
+        anchored_manifest_path = f"{package_relative}/{frozen_anchor['manifest_path']}"
+        subprocess.run(
+            ["git", "cat-file", "-e", f"{anchored_commit}^{{commit}}"],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
         subprocess.run(
             ["git", "merge-base", "--is-ancestor", introduction, "HEAD"],
             cwd=ROOT,
@@ -1349,14 +1551,27 @@ def _manifest_anchor_evidence() -> dict[str, Any]:
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
+        subprocess.run(
+            ["git", "merge-base", "--is-ancestor", anchored_commit, "HEAD"],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        anchored_manifest_bytes = subprocess.check_output(
+            ["git", "show", f"{anchored_commit}:{anchored_manifest_path}"], cwd=ROOT
+        )
         return {
             "introduction_commit": introduction,
-            "parent_commit": parent,
-            "frozen_anchor_bytes": subprocess.check_output(["git", "show", f"{introduction}:{anchor_path}"], cwd=ROOT),
-            "frozen_manifest_bytes": subprocess.check_output(["git", "show", f"{parent}:{manifest_path}"], cwd=ROOT),
-            "commit_is_ancestor": True,
+            "frozen_anchor_bytes": frozen_anchor_bytes,
+            "anchored_commit": anchored_commit,
+            "anchored_manifest_bytes": anchored_manifest_bytes,
+            "introduction_is_ancestor": True,
+            "anchored_commit_exists": True,
+            "anchored_commit_is_ancestor": True,
+            "manifest_found_at_anchor_commit": True,
         }
-    except (OSError, subprocess.CalledProcessError):
+    except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError, subprocess.CalledProcessError):
         return empty
 
 

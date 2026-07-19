@@ -50,6 +50,90 @@ def calculate_target_accounting(target, bindings, stage1):
     return accounting
 
 
+def make_abstraction(package, condition):
+    core = {
+        "artifact_id": f"A-{package['id']}-{condition}",
+        "principle": f"Synthetic reusable principle for {package['id']} {condition}.",
+        "applicability_conditions": ["Apply when the registered structural relation is present."],
+        "limitations": ["Do not apply when the registered relation is absent."],
+        "source_unit_provenance": [
+            {
+                "unit_id": "U001",
+                "unit_sha256": package["units"][0]["sha256"],
+                "claims": ["principle", "applicability_conditions", "limitations", "reuse_instructions"],
+            }
+        ],
+        "reuse_instructions": "Check applicability and limitations before reuse on an unseen target.",
+    }
+    serialized = module.canonical_bytes(core).decode()
+    return serialized, module.structured_abstraction(serialized, package, condition)
+
+
+def make_source_audit_record(package, condition, bindings, artifact, raw_text):
+    units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
+    zero = "0" * 64
+    raw = raw_text.encode()
+    request = module.canonical_source_request(package, condition, bindings)
+    request_hash = module.sha256(request)
+    return {
+        "run_identifiers": {
+            "audit_id": f"source-{package['id']}-{condition}",
+            "execution_state": "SOURCE_EXECUTION_BOUND",
+            "package_id": package["id"],
+            "target_id": None,
+            "target_family": None,
+            "condition_id": condition,
+            "invocation": "source",
+        },
+        "hashes": {
+            "package_sha256": package["package_hash"],
+            "request_sha256": request_hash,
+            "raw_response_sha256": module.sha256(raw),
+        },
+        "token_accounting": {
+            "supplied_source_unit_ids": [unit["id"] for unit in units],
+            "supplied_source_unit_hashes": [unit["sha256"] for unit in units],
+            "retained_object_inventory": ["source_response"],
+            "abstraction_slot_inventory": ["abstraction_artifact"] if condition in {"C2", "C4"} else [],
+            "rendered_input_sha256": module.sha256(module._source_render(package, condition, bindings).encode()),
+            "tokenizer": "tiktoken==0.9.0/o200k_base",
+            "token_count": package["token_accounting"]["condition_counts"][condition],
+            "token_ceiling": module.TOKEN_CEILINGS[condition],
+            "budget_result": True,
+            "model_output_tokens": 10,
+            "source_prompt_sha256": module.EXPECTED_BINDINGS["hashes"]["source_prompt_template"],
+            "target_prompt_sha256": zero,
+            "package_record_sha256": package["package_hash"],
+            "target_record_sha256": zero,
+        },
+        "model_binding": {
+            "request": request,
+            "request_sha256": request_hash,
+            "started_at": "2026-07-19T12:00:00Z",
+            "ended_at": "2026-07-19T12:00:01Z",
+        },
+        "response": {
+            "raw_response_sha256": module.sha256(raw),
+            "retained_raw_response_utf8": raw_text,
+            "immutable_artifact_reference": None,
+            "parsed_final_response": artifact["source_response"],
+            "parsed_final_response_sha256": artifact["source_response_sha256"],
+            "abstraction_artifact": artifact["abstraction_artifact"],
+            "abstraction_artifact_sha256": artifact["abstraction_artifact_sha256"],
+            "stage1_output_hash": None,
+        },
+        "evaluator": None,
+        "condition_order": {"position": module.CONDITIONS.index(condition) + 1, "condition_id": condition},
+        "credential_boundary": {"request_count": 1, "retry": False},
+        "operator_actions": [
+            {"action": "request", "recorded_at": "2026-07-19T12:00:00Z"},
+            {"action": "response_retained", "recorded_at": "2026-07-19T12:00:01Z"},
+            {"action": "offline_evaluation", "recorded_at": "2026-07-19T12:00:02Z"},
+        ],
+        "scorer_image_sha256": bindings["scorer_image_sha256"],
+    }
+
+
 def refresh_manifest(files, preregistration):
     manifest = {
         "schema_version": "1",
@@ -64,23 +148,26 @@ def refresh_manifest(files, preregistration):
 
 
 def install_anchor(files):
-    parent = "1" * 40
+    anchored_commit = "1" * 40
     introduction = "2" * 40
     anchor = {
         "schema_version": "1",
         "algorithm": "sha256",
         "manifest_path": module.MANIFEST_NAME,
         "manifest_sha256": module.sha256(files[module.MANIFEST_NAME]),
-        "manifest_commit": parent,
+        "manifest_commit": anchored_commit,
     }
     anchor_bytes = module.canonical_bytes(anchor) + b"\n"
     files[module.MANIFEST_ANCHOR_NAME] = anchor_bytes
     return {
         "introduction_commit": introduction,
-        "parent_commit": parent,
         "frozen_anchor_bytes": anchor_bytes,
-        "frozen_manifest_bytes": files[module.MANIFEST_NAME],
-        "commit_is_ancestor": True,
+        "anchored_commit": anchored_commit,
+        "anchored_manifest_bytes": files[module.MANIFEST_NAME],
+        "introduction_is_ancestor": True,
+        "anchored_commit_exists": True,
+        "anchored_commit_is_ancestor": True,
+        "manifest_found_at_anchor_commit": True,
     }
 
 
@@ -93,6 +180,60 @@ def replace_json(files, name, value, preregistration, *, refresh=True):
     files[name] = json_bytes(value)
     if refresh:
         refresh_manifest(files, preregistration)
+
+
+def freeze_targets(fixture, targets):
+    fixture["files"]["target-registry.json"] = json_bytes(targets)
+    freeze_fixture(fixture)
+
+
+def recompute_stage1_hash(artifact):
+    artifact["stage1_output_hash"] = module.sha256(
+        {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
+    )
+
+
+def replace_abstraction(targets, package_id, condition, core):
+    artifact = targets["stage1_outputs"][package_id][condition]
+    serialized = module.canonical_bytes(core).decode()
+    digest = module.sha256(serialized.encode())
+    envelope = {**core, "canonical_serialization": serialized, "sha256": digest}
+    raw_text = artifact["source_response"] + "\nABSTRACTION:\n" + serialized
+    artifact.update(
+        {
+            "raw_response_sha256": module.sha256(raw_text.encode()),
+            "retained_raw_response_utf8": raw_text,
+            "immutable_artifact_reference": None,
+            "abstraction_artifact": envelope,
+            "abstraction_artifact_sha256": digest,
+            "retained_objects": [
+                {
+                    "id": core.get("artifact_id", f"A-{package_id}-{condition}"),
+                    "kind": "abstraction_artifact",
+                    "sha256": digest,
+                }
+            ],
+        }
+    )
+    audit = next(
+        item
+        for item in targets["source_execution_audits"]
+        if item["run_identifiers"]["audit_id"] == artifact["source_audit_id"]
+    )
+    audit["hashes"]["raw_response_sha256"] = artifact["raw_response_sha256"]
+    audit["response"].update(
+        {
+            "raw_response_sha256": artifact["raw_response_sha256"],
+            "retained_raw_response_utf8": raw_text,
+            "immutable_artifact_reference": None,
+            "abstraction_artifact": envelope,
+            "abstraction_artifact_sha256": digest,
+            "stage1_output_hash": None,
+        }
+    )
+    artifact["source_audit_binding_sha256"] = module.source_audit_binding_hash(audit)
+    recompute_stage1_hash(artifact)
+    audit["response"]["stage1_output_hash"] = artifact["stage1_output_hash"]
 
 
 @pytest.fixture(scope="module")
@@ -151,40 +292,49 @@ def valid_fixture():
         "packages": packages,
     }
     stage1 = {}
-    for package_id in module.PACKAGE_IDS:
+    source_audits = []
+    for package in packages:
+        package_id = package["id"]
         stage1[package_id] = {}
         for condition in module.CONDITIONS:
             response = f"Synthetic retained source response for {package_id} {condition}."
-            abstraction = (
-                f"Synthetic retained abstraction for {package_id} {condition}." if condition in {"C2", "C4"} else None
-            )
+            abstraction_serialized, abstraction = make_abstraction(package, condition) if condition in {"C2", "C4"} else (None, None)
+            raw_text = response if abstraction is None else response + "\nABSTRACTION:\n" + abstraction_serialized
             retained = (
                 [
                     {
-                        "id": f"abstraction-{package_id}-{condition}",
-                        "content": abstraction,
-                        "sha256": hashlib.sha256(abstraction.encode()).hexdigest(),
+                        "id": abstraction["artifact_id"],
+                        "kind": "abstraction_artifact",
+                        "sha256": abstraction["sha256"],
                     }
                 ]
                 if abstraction is not None
                 else []
             )
             stage1[package_id][condition] = {
-                "raw_response_sha256": hashlib.sha256(
-                    (response if abstraction is None else response + "\nABSTRACTION:\n" + abstraction).encode()
-                ).hexdigest(),
+                "package_id": package_id,
+                "condition_id": condition,
+                "source_audit_id": f"source-{package_id}-{condition}",
+                "source_audit_binding_sha256": "0" * 64,
+                "raw_response_sha256": hashlib.sha256(raw_text.encode()).hexdigest(),
+                "retained_raw_response_utf8": raw_text,
+                "immutable_artifact_reference": None,
                 "source_response": response,
                 "source_response_sha256": hashlib.sha256(response.encode()).hexdigest(),
                 "abstraction_artifact": abstraction,
-                "abstraction_artifact_sha256": hashlib.sha256(abstraction.encode()).hexdigest() if abstraction else None,
+                "abstraction_artifact_sha256": abstraction["sha256"] if abstraction else None,
                 "citation_identifiers": [f"{package_id}:U001", f"{package_id}:U002"],
                 "retained_objects": retained,
                 "stage1_output_hash": "0" * 64,
             }
             artifact = stage1[package_id][condition]
+            audit = make_source_audit_record(package, condition, bindings, artifact, raw_text)
+            artifact["source_audit_binding_sha256"] = module.source_audit_binding_hash(audit)
             artifact["stage1_output_hash"] = module.sha256(
                 {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
             )
+            audit["response"]["stage1_output_hash"] = artifact["stage1_output_hash"]
+            source_audits.append(audit)
     key_records = []
     rubric_records = []
     targets_list = []
@@ -239,6 +389,7 @@ def valid_fixture():
         "expected_target_count": 24,
         "targets": targets_list,
         "stage1_outputs": stage1,
+        "source_execution_audits": source_audits,
         "target_package_accounting": target_accounting,
         "status": "READY",
         "reason": "Complete deterministic synthetic fixture only.",
@@ -330,6 +481,7 @@ def test_source_stage_ready_does_not_require_future_stage1_outputs(valid_fixture
     fixture = clone_fixture(valid_fixture)
     targets = json.loads(fixture["files"]["target-registry.json"])
     targets["stage1_outputs"] = None
+    targets["source_execution_audits"] = None
     targets["target_package_accounting"] = None
     fixture["files"]["target-registry.json"] = json_bytes(targets)
     freeze_fixture(fixture)
@@ -550,7 +702,7 @@ def test_target_render_counts_target_task_and_retained_objects(valid_fixture):
     rendered = module._target_render(target, "C2", bindings, targets["stage1_outputs"])
     assert target["target_prompt"] in rendered
     assert targets["stage1_outputs"]["SP01"]["C2"]["source_response"] in rendered
-    assert targets["stage1_outputs"]["SP01"]["C2"]["abstraction_artifact"] in rendered
+    assert targets["stage1_outputs"]["SP01"]["C2"]["abstraction_artifact"]["canonical_serialization"] in rendered
     assert "SP01:U001" in rendered
 
 
@@ -566,77 +718,180 @@ def test_target_stage_rejects_missing_c2_abstraction_and_accounting(valid_fixtur
     assert result["checks"]["STAGE1_OUTPUTS_VALID"] is False
 
 
-def source_audit_record(valid_fixture, condition="C1"):
+def test_stage1_registry_binds_raw_bytes_and_corresponding_source_audit(valid_fixture):
+    assert readiness(valid_fixture)["checks"]["STAGE1_OUTPUTS_VALID"] is True
+
+    raw_mismatch = clone_fixture(valid_fixture)
+    targets = json.loads(raw_mismatch["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C1"]
+    artifact["retained_raw_response_utf8"] += " fabricated"
+    artifact["raw_response_sha256"] = module.sha256(artifact["retained_raw_response_utf8"].encode())
+    recompute_stage1_hash(artifact)
+    freeze_targets(raw_mismatch, targets)
+    assert readiness(raw_mismatch)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    unrelated_audit = clone_fixture(valid_fixture)
+    targets = json.loads(unrelated_audit["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C1"]
+    artifact["source_audit_id"] = "source-SP01-C2"
+    recompute_stage1_hash(artifact)
+    freeze_targets(unrelated_audit, targets)
+    assert readiness(unrelated_audit)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    missing_audit = clone_fixture(valid_fixture)
+    targets = json.loads(missing_audit["files"]["target-registry.json"])
+    targets["source_execution_audits"].pop(0)
+    freeze_targets(missing_audit, targets)
+    assert readiness(missing_audit)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    wrong_identity = clone_fixture(valid_fixture)
+    targets = json.loads(wrong_identity["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C1"]
+    artifact["condition_id"] = "C2"
+    recompute_stage1_hash(artifact)
+    freeze_targets(wrong_identity, targets)
+    assert readiness(wrong_identity)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+
+def test_stage1_registry_rejects_fabricated_parsed_and_reciprocal_hashes(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C3"]
+    artifact["source_response_sha256"] = "f" * 64
+    recompute_stage1_hash(artifact)
+    freeze_targets(fixture, targets)
+    assert readiness(fixture)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C3"]
+    artifact["source_audit_binding_sha256"] = "e" * 64
+    recompute_stage1_hash(artifact)
+    freeze_targets(fixture, targets)
+    assert readiness(fixture)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    targets["stage1_outputs"]["SP01"]["C3"]["stage1_output_hash"] = "d" * 64
+    freeze_targets(fixture, targets)
+    assert readiness(fixture)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+
+def test_stage1_registry_accepts_only_verified_immutable_raw_reference(valid_fixture):
     sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
     targets = json.loads(valid_fixture["files"]["target-registry.json"])
     bindings = json.loads(valid_fixture["files"]["prompt-bindings.json"])
-    package = sources["packages"][0]
-    units = package["units"][: 8 if condition in {"C1", "C2"} else 16]
-    zero = "0" * 64
-    artifact = targets["stage1_outputs"]["SP01"][condition]
-    raw_text = artifact["source_response"]
-    if condition in {"C2", "C4"}:
-        raw_text += "\nABSTRACTION:\n" + artifact["abstraction_artifact"]
-    raw = raw_text.encode()
-    request = module.canonical_source_request(package, condition, bindings)
-    request_hash = module.sha256(request)
-    return {
-        "run_identifiers": {
-            "audit_id": f"source-SP01-{condition}",
-            "execution_state": "SOURCE_EXECUTION_BOUND",
-            "package_id": "SP01",
-            "target_id": None,
-            "target_family": None,
-            "condition_id": condition,
-            "invocation": "source",
-        },
-        "hashes": {
-            "package_sha256": package["package_hash"],
-            "request_sha256": request_hash,
-            "raw_response_sha256": module.sha256(raw),
-        },
-        "token_accounting": {
-            "supplied_source_unit_ids": [unit["id"] for unit in units],
-            "supplied_source_unit_hashes": [unit["sha256"] for unit in units],
-            "retained_object_inventory": ["source_response"],
-            "abstraction_slot_inventory": ["abstraction_artifact"] if condition in {"C2", "C4"} else [],
-            "rendered_input_sha256": module.sha256(module._source_render(package, condition, bindings).encode()),
-            "tokenizer": "tiktoken==0.9.0/o200k_base",
-            "token_count": package["token_accounting"]["condition_counts"][condition],
-            "token_ceiling": module.TOKEN_CEILINGS[condition],
-            "budget_result": True,
-            "model_output_tokens": 10,
-            "source_prompt_sha256": module.EXPECTED_BINDINGS["hashes"]["source_prompt_template"],
-            "target_prompt_sha256": zero,
-            "package_record_sha256": package["package_hash"],
-            "target_record_sha256": zero,
-        },
-        "model_binding": {
-            "request": request,
-            "request_sha256": request_hash,
-            "started_at": "2026-07-19T12:00:00Z",
-            "ended_at": "2026-07-19T12:00:01Z",
-        },
-        "response": {
-            "raw_response_sha256": module.sha256(raw),
-            "retained_raw_response_utf8": raw_text,
-            "immutable_artifact_reference": None,
-            "parsed_final_response": artifact["source_response"],
-            "parsed_final_response_sha256": artifact["source_response_sha256"],
-            "abstraction_artifact": artifact["abstraction_artifact"],
-            "abstraction_artifact_sha256": artifact["abstraction_artifact_sha256"],
-            "stage1_output_hash": artifact["stage1_output_hash"],
-        },
-        "evaluator": None,
-        "condition_order": {"position": module.CONDITIONS.index(condition) + 1, "condition_id": condition},
-        "credential_boundary": {"request_count": 1, "retry": False},
-        "operator_actions": [
-            {"action": "request", "recorded_at": "2026-07-19T12:00:00Z"},
-            {"action": "response_retained", "recorded_at": "2026-07-19T12:00:01Z"},
-            {"action": "offline_evaluation", "recorded_at": "2026-07-19T12:00:02Z"},
-        ],
-        "scorer_image_sha256": bindings["scorer_image_sha256"],
+    order = json.loads(valid_fixture["files"]["condition-order.json"])
+    schema = json.loads(valid_fixture["files"]["audit-manifest-schema.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C4"]
+    raw = artifact["retained_raw_response_utf8"].encode()
+    reference = {"path": "retained/source-SP01-C4.raw.txt", "sha256": module.sha256(raw)}
+    artifact["retained_raw_response_utf8"] = None
+    artifact["immutable_artifact_reference"] = reference
+    audit = next(
+        item
+        for item in targets["source_execution_audits"]
+        if item["run_identifiers"]["audit_id"] == artifact["source_audit_id"]
+    )
+    audit["response"]["retained_raw_response_utf8"] = None
+    audit["response"]["immutable_artifact_reference"] = copy.deepcopy(reference)
+    audit["response"]["stage1_output_hash"] = None
+    artifact["source_audit_binding_sha256"] = module.source_audit_binding_hash(audit)
+    recompute_stage1_hash(artifact)
+    audit["response"]["stage1_output_hash"] = artifact["stage1_output_hash"]
+    kwargs = {
+        "stage1": targets["stage1_outputs"],
+        "audits": targets["source_execution_audits"],
+        "sources": sources,
+        "targets": targets,
+        "order": order,
+        "audit_schema": schema,
+        "bindings": bindings,
     }
+    assert module.valid_stage1_outputs(
+        **kwargs,
+        raw_artifacts={reference["path"]: raw},
+    )
+    assert not module.valid_stage1_outputs(
+        **kwargs,
+        raw_artifacts={reference["path"]: raw + b" fabricated"},
+    )
+
+
+def test_structured_abstraction_is_canonical_provenanced_and_retained_once(valid_fixture):
+    sources = json.loads(valid_fixture["files"]["source-package-registry.json"])
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    package = sources["packages"][0]
+    artifact = targets["stage1_outputs"]["SP01"]["C2"]
+    abstraction = artifact["abstraction_artifact"]
+    assert set(abstraction) == module.ABSTRACTION_FIELDS
+    assert module.structured_abstraction(abstraction["canonical_serialization"], package, "C2") == abstraction
+    rendered = module._retained_package(artifact, "C2")
+    assert rendered.count(abstraction["canonical_serialization"]) == 1
+    assert artifact["retained_objects"] == [
+        {"id": abstraction["artifact_id"], "kind": "abstraction_artifact", "sha256": abstraction["sha256"]}
+    ]
+
+
+@pytest.mark.parametrize("failure", ["empty_principle", "outside_provenance", "wrong_provenance_hash", "missing_field"])
+def test_malformed_structured_abstraction_is_fatal(valid_fixture, failure):
+    fixture = clone_fixture(valid_fixture)
+    targets = json.loads(fixture["files"]["target-registry.json"])
+    core = {
+        key: value
+        for key, value in targets["stage1_outputs"]["SP01"]["C2"]["abstraction_artifact"].items()
+        if key in module.ABSTRACTION_CORE_FIELDS
+    }
+    if failure == "empty_principle":
+        core["principle"] = ""
+    elif failure == "outside_provenance":
+        core["source_unit_provenance"][0]["unit_id"] = "U009"
+    elif failure == "wrong_provenance_hash":
+        core["source_unit_provenance"][0]["unit_sha256"] = "f" * 64
+    else:
+        core.pop("limitations")
+    replace_abstraction(targets, "SP01", "C2", core)
+    freeze_targets(fixture, targets)
+    result = readiness(fixture)
+    assert result["checks"]["STAGE1_OUTPUTS_VALID"] is False
+    assert result["target_stage"] == "NULL"
+
+
+def test_duplicate_abstraction_object_and_context_only_abstraction_are_fatal(valid_fixture):
+    duplicate = clone_fixture(valid_fixture)
+    targets = json.loads(duplicate["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C2"]
+    artifact["retained_objects"].append(copy.deepcopy(artifact["retained_objects"][0]))
+    recompute_stage1_hash(artifact)
+    freeze_targets(duplicate, targets)
+    assert readiness(duplicate)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+    context_only = clone_fixture(valid_fixture)
+    targets = json.loads(context_only["files"]["target-registry.json"])
+    artifact = targets["stage1_outputs"]["SP01"]["C1"]
+    artifact["abstraction_artifact"] = copy.deepcopy(targets["stage1_outputs"]["SP01"]["C2"]["abstraction_artifact"])
+    artifact["abstraction_artifact_sha256"] = artifact["abstraction_artifact"]["sha256"]
+    artifact["retained_objects"] = [
+        {
+            "id": artifact["abstraction_artifact"]["artifact_id"],
+            "kind": "abstraction_artifact",
+            "sha256": artifact["abstraction_artifact"]["sha256"],
+        }
+    ]
+    recompute_stage1_hash(artifact)
+    freeze_targets(context_only, targets)
+    assert readiness(context_only)["checks"]["STAGE1_OUTPUTS_VALID"] is False
+
+
+def source_audit_record(valid_fixture, condition="C1"):
+    targets = json.loads(valid_fixture["files"]["target-registry.json"])
+    return copy.deepcopy(
+        next(
+            audit
+            for audit in targets["source_execution_audits"]
+            if audit["run_identifiers"]["audit_id"] == f"source-SP01-{condition}"
+        )
+    )
 
 
 def test_source_audit_schema_requires_no_target_material(valid_fixture):
@@ -688,10 +943,7 @@ def test_source_audit_binds_raw_parse_abstraction_and_stage1_record(valid_fixtur
     assert not module.semantic_audit_valid(parsed, order, **kwargs)
 
     abstraction = copy.deepcopy(record)
-    abstraction["response"]["abstraction_artifact"] += " fabricated"
-    abstraction["response"]["abstraction_artifact_sha256"] = hashlib.sha256(
-        abstraction["response"]["abstraction_artifact"].encode()
-    ).hexdigest()
+    abstraction["response"]["abstraction_artifact"]["principle"] += " fabricated"
     assert not module.semantic_audit_valid(abstraction, order, **kwargs)
 
     altered_targets = copy.deepcopy(targets)
@@ -722,6 +974,14 @@ def test_source_audit_accepts_verified_immutable_response_reference(valid_fixtur
         "path": "retained/source-SP01-C4.raw.txt",
         "sha256": module.sha256(raw),
     }
+    artifact = targets["stage1_outputs"]["SP01"]["C4"]
+    artifact["retained_raw_response_utf8"] = None
+    artifact["immutable_artifact_reference"] = copy.deepcopy(record["response"]["immutable_artifact_reference"])
+    artifact["source_audit_binding_sha256"] = module.source_audit_binding_hash(record)
+    artifact["stage1_output_hash"] = module.sha256(
+        {key: value for key, value in artifact.items() if key != "stage1_output_hash"}
+    )
+    record["response"]["stage1_output_hash"] = artifact["stage1_output_hash"]
     assert module.semantic_audit_valid(
         record,
         order,
@@ -891,6 +1151,38 @@ def test_manifest_exact_coverage_and_hash_reproduction(valid_fixture):
         valid_fixture["anchor_evidence"],
     )
     assert {item["path"] for item in manifest["files"]} == module.PACKAGE_FILES
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("anchored_commit_exists", False),
+        ("manifest_found_at_anchor_commit", False),
+        ("anchored_commit_is_ancestor", False),
+    ],
+)
+def test_manifest_anchor_fails_closed_when_commit_or_manifest_is_unavailable(valid_fixture, field, value):
+    evidence = copy.deepcopy(valid_fixture["anchor_evidence"])
+    evidence[field] = value
+    assert readiness(valid_fixture, anchor_evidence=evidence)["checks"]["HASHES_COMPLETE"] is False
+
+
+def test_manifest_anchor_rejects_wrong_commit_and_changed_manifest(valid_fixture):
+    wrong_commit = copy.deepcopy(valid_fixture["anchor_evidence"])
+    wrong_commit["anchored_commit"] = "3" * 40
+    assert readiness(valid_fixture, anchor_evidence=wrong_commit)["checks"]["HASHES_COMPLETE"] is False
+
+    changed_manifest = clone_fixture(valid_fixture)
+    manifest = json.loads(changed_manifest["files"][module.MANIFEST_NAME])
+    manifest["schema_version"] = "2"
+    changed_manifest["files"][module.MANIFEST_NAME] = json_bytes(manifest)
+    assert readiness(changed_manifest)["checks"]["HASHES_COMPLETE"] is False
+
+
+def test_manifest_anchor_rejects_changed_governed_artifact(valid_fixture):
+    fixture = clone_fixture(valid_fixture)
+    fixture["files"]["README.md"] += b"post-anchor mutation\n"
+    assert readiness(fixture)["checks"]["HASHES_COMPLETE"] is False
 
 
 def test_regenerated_manifest_cannot_bypass_frozen_anchor(valid_fixture):

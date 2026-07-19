@@ -8,8 +8,8 @@
   "retention_instructions": {
     "C1": "Return only the source-specific answer; do not create or state any reusable abstraction.",
     "C3": "Return only the source-specific answer; do not create or state any reusable abstraction.",
-    "C2": "Return the source-specific answer, then exactly one line ABSTRACTION:, then the abstraction containing principle, applicability conditions, limitations/failure cases, source-unit provenance for every material claim, and reuse instructions.",
-    "C4": "Return the source-specific answer, then exactly one line ABSTRACTION:, then the abstraction containing principle, applicability conditions, limitations/failure cases, source-unit provenance for every material claim, and reuse instructions."
+    "C2": "Return the source-specific answer, then exactly one line ABSTRACTION:, then one canonical JSON object with exactly artifact_id, principle, applicability_conditions, limitations, source_unit_provenance, and reuse_instructions. Provenance entries must contain unit_id, unit_sha256, and claims for every material claim.",
+    "C4": "Return the source-specific answer, then exactly one line ABSTRACTION:, then one canonical JSON object with exactly artifact_id, principle, applicability_conditions, limitations, source_unit_provenance, and reuse_instructions. Provenance entries must contain unit_id, unit_sha256, and claims for every material claim."
   },
   "hashes": {
     "system_prompt": "5bf8463177eb1599b50cbea5d8f6d80fdd467618de0e805a106b9d424e18b3f2",
@@ -18,8 +18,8 @@
     "retention_instructions": {
       "C1": "4bed96dea30ead94e0c041d18e213b28eb4083a3ddb42147991868758005225e",
       "C3": "4bed96dea30ead94e0c041d18e213b28eb4083a3ddb42147991868758005225e",
-      "C2": "906cda79904e79f40ddacad75fc888246c754059b03b883b4f2c451071e54bc4",
-      "C4": "906cda79904e79f40ddacad75fc888246c754059b03b883b4f2c451071e54bc4"
+      "C2": "87b7a64bc0715e980352633e2a9d78721d697b66b9be0374aa0e8813ab91f18e",
+      "C4": "87b7a64bc0715e980352633e2a9d78721d697b66b9be0374aa0e8813ab91f18e"
     }
   },
   "model": "gpt-4.1-2025-04-14",

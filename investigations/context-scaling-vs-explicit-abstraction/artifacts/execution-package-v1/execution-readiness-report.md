@@ -5,9 +5,9 @@
 - **Artifact inventory:** the ten required registry, binding, order, schema, hash, report, and evaluator artifacts, plus deterministic implementation.
 - **Validation outcome:** `NULL`.
 - **Source-stage outcome:** `NULL`; the canonical source and target rosters and scorer image digest are not frozen.
-- **Target-stage outcome:** `NULL`; no retained Stage-1 outputs or target-package accounting exist.
+- **Target-stage outcome:** `NULL`; no raw-byte-bound Stage-1 outputs, reciprocal source audits, structured abstraction artifacts, or target-package accounting exist.
 - **Unresolved issues:** no canonical verbatim source references and eligible `U001`–`U016` records exist for any roster member; no frozen target candidates, answer keys, or scope rubrics exist. Consequently no complete package can be rendered/tokenized and no 24-target cohort can be frozen without violating the preregistration.
-- **Hashes:** `hash-manifest.json` records SHA-256 for every non-recursive immutable package input and `hash-manifest-anchor.json` freezes that manifest against its repository introduction boundary. Prompt hashes are in `prompt-bindings.json`; order verification is in `condition-order.json`.
+- **Hashes:** `hash-manifest.json` records SHA-256 for every non-recursive immutable package input and `hash-manifest-anchor-v2.json` freezes the exact manifest path, bytes, digest, and named trusted commit outside that manifest. Prompt hashes are in `prompt-bindings.json`; order verification is in `condition-order.json`.
 - **Invocation boundary:** the future networked Responses API process may receive a one-invocation credential only in memory, must hash canonical requests and raw responses, and may expose neither tools, retrieval, memory, cache, nor persistent storage. Its one-way output enters a network-disabled isolated scorer with no credentials. No live request is included here.
 
 ## Determination

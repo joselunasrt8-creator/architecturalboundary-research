@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "17112120bc1efa1fbd53f9e48a5a1c7c0999e94b56d5396665598aa0c2da402d"
+      "sha256": "13d53767f9c5b21abca43cde541917723761796b869018d62ad4a54f6377eb3a"
     },
     {
       "path": "source-package-registry.json",
@@ -12,11 +12,11 @@
     },
     {
       "path": "target-registry.json",
-      "sha256": "e4186eadf9f76e4a31fe55dd2b1a888c751223e907de25f95807e7b17da26916"
+      "sha256": "94d7d9802d4d42e151aa3d05545187200308a075a7537348da9517d4bd75c8e5"
     },
     {
       "path": "prompt-bindings.json",
-      "sha256": "7c97e6228a4ef450271a2c6c28c7eb987e778bc0c80d301a75d2e225d73853f3"
+      "sha256": "1bddfe4b2cbd90500246903d9008d4defe171b6935b63eb09cf74c3b1326b625"
     },
     {
       "path": "condition-order.json",
@@ -32,11 +32,11 @@
     },
     {
       "path": "audit-manifest-schema.json",
-      "sha256": "150122c4120cfef69be7a3b0e7ebef8037d30b9a7a55f98a152ff2ac71b82444"
+      "sha256": "56d70f5df3e25986fe819dd5984cbe81291d852b7c5e9e1247c97d4688426c36"
     },
     {
       "path": "execution-readiness-report.md",
-      "sha256": "cf7a6423c5753786f5f85acdff50002b35e71279fc2adcbc0dd3fa0cbf19b7f5"
+      "sha256": "ba1d0737078c9525fd30cdeb0ed4fc0f75d3ace6f28f3741a4e2360eba668a29"
     },
     {
       "path": "evaluator-specification.md",
@@ -44,7 +44,7 @@
     },
     {
       "path": "execution_package.py",
-      "sha256": "afa1ad6c7dac6ba128086049bcd18ed7c6dfc33aba87d8ed6642b5d8bddb1a3d"
+      "sha256": "01f30a15894743c89f77fabe8cbf3a3183c1abce07b9cc12c0628040fcff1494"
     }
   ],
   "external_files": [

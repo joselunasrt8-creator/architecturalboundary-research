@@ -16,7 +16,9 @@ This registration operationalizes the prospective design in [the investigation d
 
 ## 2. Experimental Design
 
-The unit of analysis is one **source-package/condition/target-task evaluation**. One source package is evaluated in every condition; each condition receives the same target task in a block, and no output from one condition is available to another.
+The unit of analysis is one **source-package/condition/target-task evaluation**. The execution cohort is frozen at exactly **eight** source packages, `SP01` through `SP08`; no ninth package may be added and none may be substituted. One source package is evaluated in every condition; each condition receives the same target task in a block, and no output from one condition is available to another.
+
+Each of the eight packages has exactly one preregistered target in each of the three families. Therefore the planned evaluation count is exactly `8 packages × 4 conditions × 3 targets = 96` source-package/condition/target evaluations (24 per condition, 32 per target family, and 12 per package). The 32 source-step invocations (`8 × 4`) are preparation steps, not additional units of analysis.
 
 | Workflow | Standard context | High context |
 | --- | --- | --- |
@@ -36,7 +38,7 @@ A **source unit** is one immutable, consecutively numbered record in the pre-exe
 
 The canonical order is ascending registry sequence number (`U001`, `U002`, ...), assigned before condition execution by source-document order, then ascending paragraph/block order within document. Segmentation is performed once with those rules and is not rerun per condition. Inclusion requires a nonempty, in-scope unit with its identifier, source location, and hash. Exclude duplicate content (retain only the first canonical occurrence), boilerplate, navigation, evaluator material, target material, and any text added after the source registry freeze.
 
-The standard information level is **N = 8 source units** (`U001`–`U008`). The high information level is **M = 16 source units** (`U001`–`U016`), so `M > N`; it includes every standard unit plus `U009`–`U016`. A source package with fewer than 16 eligible units is ineligible and is a methodology failure, not a reason to lower either level.
+The standard information level is **N = 8 source units** (`U001`–`U008`). The high information level is **M = 16 source units** (`U001`–`U016`), so `M > N`; it includes every standard unit plus `U009`–`U016`. Each of the fixed packages `SP01`–`SP08` must have at least 16 eligible units before its first invocation. A package with fewer than 16 eligible units is a methodology failure, not a reason to lower either level, add a package, or substitute a package.
 
 Effective source information is the ordered list of eligible units actually supplied, plus their deterministic token count under the model tokenizer named in the execution package. Nominal model context-window capacity is not an information measure. Record unit IDs, hashes, tokenizer/version, token count, and any excluded unit for every source invocation; no truncation is permitted at the source step.
 
@@ -64,7 +66,7 @@ Target tasks are selected before execution from a frozen registry using three fa
 
 Every target must be unseen: its full content, answer key, and evaluator rubric are unavailable during the source step and abstraction creation. A target is eligible only when it differs from its source on at least **three of five** dimensions—domain/subject matter, surface representation, entities/vocabulary, task objective, and causal/structural arrangement—while the registry records why the candidate relation remains applicable. It must have no duplicate, paraphrase, shared answer, shared source unit, or shared unique entity set with its source or another target in its block.
 
-Selection proceeds deterministically: registry entries are sorted by target ID; take the first eligible entry for each family after applying the stated overlap checks. The fixed execution order is source-package ID ascending, then target family order shown above, then condition order `C1`, `C2`, `C3`, `C4`; condition presentation order is independently randomized once with a recorded seed, while scoring uses canonical order. A target that fails eligibility is excluded before execution and replaced only by the next eligible registry entry under this rule.
+Selection proceeds deterministically: registry entries are sorted by target ID; take the first eligible entry for each family after applying the stated overlap checks. The fixed execution order is source-package ID ascending, then target family order shown above, then condition order `C1`, `C2`, `C3`, `C4`; scoring uses that canonical order. Condition presentation is instead determined by the fixed seed and procedure in Section 8. A target that fails eligibility before any model invocation makes its fixed package ineligible; it is **not** replaced, because replacement would change the frozen cohort and the 96-evaluation design.
 
 ## 7. Information Accounting
 
@@ -72,9 +74,29 @@ For each source and target invocation, an audit manifest records, in supplied or
 
 The accounting unit is tokens produced by the frozen model tokenizer/version. The assigned target-package maximum is **4,096 tokens** in every condition. Count all supplied text and identifiers, including prompts and artifact. When a package is over budget, apply this deterministic order: remove optional whitespace; then remove provenance display labels while retaining fixed identifiers; then stop as a methodology failure if still over budget. Do not summarize, compress, silently truncate substantive content, or add information. C1/C2 and C3/C4 use the same accounting and same 4,096-token maximum. The manifest makes all four conditions auditable.
 
-## 8. Controlled Variables
+## 8. Immutable Execution Bindings and Randomization
 
-Freeze before execution one model provider, model identifier/version, tokenizer/version, decoding parameters, system prompt, source prompt template, target prompt template, scoring rubric, evaluator identity/program, execution environment image, and time/compute limit. Prompts may differ only where the condition requires the C2/C4 artifact instruction or the C1/C3 prohibition; all other wording is byte-identical. The same trained operator performs only predeclared mechanical procedures and never scores their own work. Each invocation uses a fresh session, account context, process, and cache namespace; session isolation forbids conversational carryover.
+All execution choices are bound by this merged document; an executor may not select, upgrade, substitute, or “freeze” any of them later. The following literal bindings, including capitalization and punctuation, are the authoritative execution package:
+
+| Control | Immutable binding |
+| --- | --- |
+| Model/version policy | OpenAI Responses API model `gpt-4.1-2025-04-14`; no model alias, fallback, routing, or version upgrade is permitted. |
+| Tokenizer | `o200k_base`, package `tiktoken==0.9.0`; tokenization is UTF-8 input encoded by that tokenizer with no normalization. |
+| System prompt | `You are a careful research assistant. Follow the user message exactly. Do not use tools, browse, retrieve, or rely on information not supplied in this conversation. Return only the requested answer.` |
+| Source prompt template | `SOURCE PACKAGE {package_id}; CONDITION {condition_id}. Source units, in order: {source_units}. Produce the source-specific answer. {retention_instruction}` |
+| Target prompt template | `TARGET {target_id}; CONDITION {condition_id}. Retained package: {retained_package}. Solve the target. State the conclusion and a concise justification. Do not use tools, retrieval, or outside knowledge.` |
+| Retention instruction | C1/C3: `Return only the source-specific answer; do not create or state any reusable abstraction.` C2/C4: `After the source-specific answer, return a separately headed ABSTRACTION containing principle, applicability conditions, limitations/failure cases, source-unit provenance for every material claim, and reuse instructions.` |
+| Scoring rubric | Score `1` only if the answer reaches the registry answer key’s conclusion **and** applies the recorded source-derived relation within its recorded scope; otherwise score `0`. A scorer must record `KEY_MATCH` and `SCOPE_MATCH` independently; score is `KEY_MATCH AND SCOPE_MATCH`. |
+| Evaluator | A deterministic evaluator, not a human or model: read the prewritten registry fields `KEY_MATCH` and `SCOPE_MATCH` as literal JSON booleans; emit `1` iff both are `true`, otherwise emit `0`; reject absent, non-boolean, or extra scoring fields as a methodology failure. |
+| Environment | A fresh Linux/amd64 container with network disabled, a read-only filesystem except empty `/work`, no mounted credentials, no tools, plugins, cache, or persistent volumes; it runs only the pinned tokenizer and the deterministic evaluator defined in this table. |
+| Time limit | 120 wall-clock seconds per source or target invocation; a timeout is a fatal methodology failure, with no retry. |
+| Decoding | Send exactly `temperature=0`, `top_p=1`, `max_output_tokens=2048`, `presence_penalty=0`, `frequency_penalty=0`, and `seed=20260719`; omit every other optional decoding parameter, make no tools available, and log the complete request JSON. |
+
+The source-package roster is exactly `SP01`, `SP02`, `SP03`, `SP04`, `SP05`, `SP06`, `SP07`, and `SP08`. Before the first model invocation, each roster member and all three of its selected targets must pass Sections 3 and 6 eligibility checks. This is a gate, not a selection opportunity: a failed member is neither excluded from aggregation nor replaced. It prevents execution and records `METHODOLOGY_FAILURE` for the study, so the planned denominator remains 96 and the minimum-five-pair rule cannot be used to salvage a reduced design.
+
+**Condition-presentation randomization (not bootstrap).** Use the integer seed `20260719`, distinct from the Section 13 bootstrap seed `94`. For each `(package_id, target_family)` block in canonical package/family order, derive `d = SHA-256("context-transfer-condition-order-v1|20260719|{package_id}|{target_family}")`. Interpret the first 16 hexadecimal characters of `d` as an unsigned 64-bit big-endian integer. Starting from the canonical list `[C1, C2, C3, C4]`, apply Fisher–Yates for `i = 3, 2, 1`, swapping positions `i` and `j = (integer // 4^(3-i)) mod (i+1)`. Present the four conditions in the resulting order. This procedure produces one deterministic permutation per block; do not generate random numbers, reseed, shuffle again, or use outcome information. Score and analyze only in canonical order.
+
+Prompts may differ only in the literal retention instruction above; all other wording is byte-identical. The same trained operator performs only predeclared mechanical procedures and never scores their own work. Each invocation uses a fresh session, account context, process, and cache namespace; session isolation forbids conversational carryover.
 
 ## 9. Confound Controls
 
@@ -86,7 +108,7 @@ All scores use the target-task evaluation as the unit of analysis. Missing value
 
 ### Primary outcome
 
-**Transfer correctness** is `1` when a blinded scorer, using the frozen rubric, finds that the target answer reaches the correct task conclusion and applies the source-derived relation within its stated scope; otherwise `0`. Aggregate as the mean across eligible target evaluations within condition, then report paired condition differences by identical source package and target. Higher is better; it is not evidence of necessity or internal abstraction.
+**Transfer correctness** is `1` when the frozen deterministic evaluator finds that the target answer reaches the correct task conclusion and applies the source-derived relation within its stated scope; otherwise `0`. Aggregate as the mean across eligible target evaluations within condition, then report paired condition differences by identical source package and target. Higher is better; it is not evidence of necessity or internal abstraction.
 
 ### Secondary outcomes
 
@@ -107,7 +129,7 @@ The following are fatal: contamination between conditions; unequal accounted inf
 
 ## 12. Stopping Rules
 
-Per trial, stop before scoring on any fatal condition in Section 11 or an over-budget package. Per condition, stop remaining trials for that condition when two fatal trial failures occur or when a controlled variable cannot be held fixed. Stop the study when any condition stops, when an execution package cannot be reproduced from hashes, or after all preregistered source packages and their three targets have completed—whichever occurs first. Tooling failures trigger one recorded rerun only if no model invocation occurred; otherwise they invalidate that invocation. There is no discretionary stopping, extension, replacement, or rerun after observing outcomes.
+Before any invocation, stop the study as `METHODOLOGY_FAILURE` if any one of the eight fixed packages or its three fixed targets fails eligibility. Per trial, stop before scoring on any fatal condition in Section 11 or an over-budget package. Per condition, stop remaining trials for that condition when two fatal trial failures occur or when a controlled variable cannot be held fixed. Stop the study when any condition stops, when an execution package cannot be reproduced from hashes, or after all **96** preregistered evaluations (eight packages × three targets × four conditions) have completed—whichever occurs first. Tooling failures trigger one recorded rerun only if no model invocation occurred; otherwise they invalidate that invocation. There is no discretionary stopping, extension, replacement, or rerun after observing outcomes.
 
 ## 13. Planned Analysis
 
@@ -120,7 +142,7 @@ Secondary analyses apply the same paired aggregation to the secondary measures a
 After validity checks, the study receives exactly one classification:
 
 - `METHODOLOGY_FAILURE` if any fatal defect invalidates a primary factorial contrast or the study stopping rule stops the study.
-- `INDETERMINATE` if no fatal defect exists but fewer than five eligible paired source packages complete, or the primary comparison is not significant and the absolute paired transfer difference is less than 0.10.
+- `INDETERMINATE` if no fatal defect exists but fewer than five eligible paired source packages complete, or the primary comparison is not significant and the absolute paired transfer difference is less than 0.10. Under this frozen eight-package design, this branch can occur only after a nonfatal post-invocation loss that is explicitly permitted by Sections 11–12; pre-invocation eligibility loss and stopping never reduce the cohort to create it.
 - `SUPPORTS_CANDIDATE_HYPOTHESIS` if the primary C2−C1 difference is at least `+0.10`, its exact test is significant, and neither the high-context abstraction contrast nor interaction reverses direction by `0.10` or more.
 - `VIOLATES_CANDIDATE_HYPOTHESIS` if C2−C1 is at most `−0.10` with a significant exact test, or C1 matches/exceeds C2 within `0.10` while C3−C1 is at least `+0.10` and significant.
 - `MIXED_OR_INTERACTION_DEPENDENT` otherwise, including a significant interaction of absolute magnitude at least `0.10` without a classification above.

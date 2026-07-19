@@ -34,9 +34,65 @@ Comparative Dataset
 Analysis
   ↓
 Retained Classification
+  ↓
+Canonical Cohort Conclusion
 ```
 
-Current B2 lifecycle state: BOR complete, SRF complete, DER complete, MSR complete, and Comparative Dataset complete. Analysis and Retained Classification remain Not Started.
+Current B2 lifecycle state: BOR, SRF, DER, MSR, Comparative Dataset, Analysis,
+Retained Classification, Canonical Cohort Conclusion, and publication-readiness
+audit are complete. The canonical cohort outcome is `indeterminate`; publication
+readiness does not strengthen that outcome or authorize formalization.
+
+## Reference Execution v1.0 Boundary
+
+This repository is the empirical execution environment that applies frozen
+methodologies to bounded investigations of real systems and preserves reviewable
+research artifacts. It owns its protocol executions, empirical evidence,
+datasets, analyses, retained classifications, cohort conclusions, and
+producer-owned promotion packages.
+
+It does not create canonical theory, mutate an upstream methodology or
+Structology definition during execution, grant implementation or execution
+authority, decide execution legitimacy for another repository, or convert
+evidence into formalization authority. The producer/consumer boundary is:
+
+```text
+Empirical Evidence
+  -> Producer-Owned Promotion Package
+  -> Consumer-Owned Admissibility and Promotion Decision
+```
+
+The canonical Protocol v1 evidence chain is:
+
+```text
+Registration
+  -> BOR
+  -> SRF
+  -> DER
+  -> MSR
+  -> Comparative Dataset
+  -> Analysis
+  -> Retained Classification
+  -> Canonical Cohort Conclusion
+```
+
+Observation, derivation, measurement, analysis, and decision artifacts remain
+distinct. A Minimal Promotion Package may reference this chain, but it neither
+duplicates the canonical evidence nor performs a downstream decision.
+
+The artifacts under
+`investigations/structology-transfer-audit-rehearsal-1/` are a pre-reference
+instrument-harness rehearsal only. Its validity is `BLOCKED`, its transfer
+outcome is `NOT_REACHED`, and it is not Pilot Execution #1 or a Reference
+Execution.
+
+The repository-owned [Reference Execution v1.0 freeze/readiness record](docs/reference-execution/v1.0/freeze-readiness-record.md)
+assesses clean `main` commit
+`dc636f2ec0161b3554605489857cf19142818a43` and records `BLOCKED`. The local
+Architectural Investigation Instrument specification, execution-record
+contract, and calibration predicates remain unfinished under Issues #59, #77,
+and #78. No Reference Execution or clean rerun has been performed under Issue
+#83.
 
 ## Repository Organization
 

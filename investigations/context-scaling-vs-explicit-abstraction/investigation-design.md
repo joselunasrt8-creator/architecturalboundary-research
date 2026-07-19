@@ -1,0 +1,367 @@
+# Investigation Design: Context Scaling Versus Explicit Abstraction
+
+## Status
+
+**DOCUMENTATION-ONLY INVESTIGATION DESIGN**
+
+This artifact defines a prospective empirical investigation. No experiment has been run, no observations have been collected, and no outcome is asserted.
+
+## Provenance
+
+- Upstream candidate hypothesis: `joselunasrt8-creator/MindShift-` PR #59
+- Downstream design issue: `joselunasrt8-creator/architecturalboundary-research` Issue #86
+- Upstream status: candidate abstraction; not empirically validated; novelty not established
+
+## Candidate Hypothesis
+
+> Scaling context windows increases information availability, but transforming information into reusable principles requires an explicit abstraction process.
+
+The investigation must be capable of supporting, violating, or leaving this hypothesis indeterminate.
+
+## Research Question
+
+Under controlled task conditions, does an explicit abstraction workflow produce more transferable and reusable principles than a context-only workflow?
+
+## Investigation Boundary
+
+This design:
+
+- separates context availability from explicit abstraction;
+- distinguishes source-task performance from transfer;
+- defines prospective measurements and stopping rules;
+- preserves negative, indeterminate, and methodology-failure outcomes.
+
+This design does not:
+
+- execute an experiment;
+- select final models, datasets, or vendors;
+- claim that explicit abstraction is necessary;
+- claim that context scaling is ineffective;
+- establish novelty;
+- prescribe operational architecture or governance.
+
+## Experimental Unit
+
+One experimental unit consists of:
+
+```text
+One source task
++
+One bounded source-material set
++
+One assigned workflow condition
++
+One produced response or abstraction artifact
++
+One or more unseen target tasks
++
+One predefined transfer assessment
+```
+
+## Factorial Conditions
+
+This is a 2 × 2 factorial design. Context budget and explicit abstraction are independently assigned factors; no condition is optional.
+
+| Workflow | Standard context | High context |
+| --- | --- | --- |
+| Context-only | C1 | C3 |
+| Explicit abstraction | C2 | C4 |
+
+Before execution, the full source-material corpus must be frozen as an ordered sequence of source units under one declared unitization method. Each context level must declare both a deterministic maximum input budget and a deterministic selection rule: standard context receives the first `N` source units and high context receives the first `M` source units, where `M > N`. The values of `N` and `M`, ordering method, unit boundaries, and accounting method must be frozen before execution. Thus C1/C2 receive identical standard-context source material, C3/C4 receive identical high-context source material, and high context contains a fixed additional information set rather than only unused capacity.
+
+### Context-only workflow — C1 and C3
+
+The system completes the source task without constructing or preserving an abstraction artifact. C1 uses the standard source-unit selection and context budget; C3 uses the high source-unit selection and context budget.
+
+The context-only source prompt must require a source-specific task answer and prohibit a separately stated reusable principle, applicability conditions, limitations, pattern inventory, or other generalized summary. The prohibition concerns retained experimental objects, not unobserved internal reasoning. At the source-to-transfer boundary, C1/C3 retain only the source response (including its final task answer) and source citations. They do not retain generalized principles, applicability conditions, limitations, notes, extracted summaries, or a separate abstraction artifact.
+
+### Explicit-abstraction workflow — C2 and C4
+
+The system constructs a source-linked abstraction artifact before attempting target tasks. C2 uses the standard context budget and C4 uses the high context budget.
+
+For C2 and C4, the abstraction artifact must include:
+
+- identified relations or patterns;
+- a generalized principle;
+- applicability conditions;
+- limitations or exclusions;
+- provenance linking the principle to source material.
+
+## Target-Step Information Policy
+
+Target-task execution uses a frozen transfer package. The raw source material is not visible during transfer in any condition; C1 and C3 do not regain it merely because they are context-only. Every condition receives the same unseen target-task prompt, the frozen source response, and source citations or provenance identifiers that permit audit but do not reveal source content. C2 and C4 additionally receive their frozen abstraction artifact. For C1/C3, the frozen source response must be the permitted source-specific task answer, not a wrapper or extraction containing generalized principles, applicability conditions, limitations, or a summary created for reuse. No condition receives unrecorded notes, conversation history, retrieval output, tool state, or hidden retained memory from the source step.
+
+The target-step input budget is the condition's assigned context level and is measured using one preregistered deterministic accounting method. It counts every item supplied at transfer: target prompt, source response, explicit abstraction artifact when present, provenance data, system and user prompt text, and any permitted tool or retrieval material. The budget does not grant an exception for an abstraction artifact. If a package exceeds its assigned budget, it must be deterministically reduced or the unit must stop under the stopping rules; it may not be silently truncated or supplemented.
+
+Within each context level, C1 and C2 use identical accounting and the same maximum target-step budget; C3 and C4 do the same. Thus abstraction changes the retained object available at transfer, while the context factor changes the maximum information budget. The transfer package, its order, identifiers, sizes, accounting result, and any deterministic reduction must be frozen before target execution. Provenance identifiers remain visible only to the extent needed for traceability and are counted as package content.
+
+## Primary Contrasts
+
+- **C1 ↔ C2 — abstraction at standard context:** estimates the effect of the explicit-abstraction workflow at the standard budget.
+- **C1 ↔ C3 — context in the context-only workflow:** estimates the effect of the larger context budget without explicit abstraction.
+- **C3 ↔ C4 — abstraction at high context:** estimates the effect of the explicit-abstraction workflow at the high budget.
+- **Interaction:** tests whether the abstraction effect differs between standard and high context. This matters because an average main effect can conceal that abstraction is more, less, or differently valuable as context increases.
+
+## Canonical Prospective Objects
+
+### Source Task
+
+A bounded task performed using the source material.
+
+### Source Material
+
+The frozen information supplied before target-task evaluation.
+
+### Context Budget
+
+The maximum input material available to the system for the evaluated step, recorded in tokens or an equivalent deterministic unit.
+
+### Abstraction Artifact
+
+A preserved, source-linked object containing patterns, a generalized principle, applicability conditions, and limitations.
+
+### Reusable Principle
+
+A generalized statement that can be evaluated on an unseen target task distinct from its source.
+
+### Target Task
+
+An unseen task satisfying a preregistered difference criterion relative to the source task.
+
+### Transfer Assessment
+
+A preregistered procedure for determining whether the reusable principle was correctly applied to the target task.
+
+### Repeated-Reasoning Measure
+
+A predefined measure of reasoning work repeated after the source task, including the permitted reuse mechanism.
+
+### Long-Horizon Consistency Measure
+
+A predefined comparison of principle use across separated target tasks or evaluation intervals.
+
+### Failure Classification
+
+A typed record distinguishing task failure, abstraction failure, transfer failure, overgeneralization, evidence insufficiency, and methodology failure.
+
+## Target-Task Difference Criterion
+
+Before execution, each target task must be classified as materially different from its source using declared dimensions such as:
+
+- domain or subject matter;
+- surface representation;
+- entities or vocabulary;
+- task objective;
+- causal or structural arrangement;
+- required application context.
+
+At least one substantive dimension must differ while the candidate underlying relation remains applicable. The exact threshold must be frozen before data collection.
+
+## Primary Outcome
+
+**Transfer performance on unseen target tasks.**
+
+The primary measure must score whether a source-derived principle is applied correctly under the preregistered target-task difference criterion.
+
+Source-task accuracy alone cannot satisfy the primary outcome.
+
+## Secondary Outcomes
+
+- source-task performance;
+- abstraction-artifact completeness;
+- source-to-principle traceability;
+- principle applicability accuracy;
+- overgeneralization rate;
+- long-horizon consistency;
+- repeated-reasoning reduction;
+- performance by context budget;
+- failure modes and boundary conditions.
+
+## Comparability Controls
+
+Before execution, freeze or record:
+
+- model and version;
+- system and user prompts;
+- decoding or sampling parameters;
+- tool access;
+- retrieval access;
+- source material;
+- source-material unitization, ordering, and the frozen `N`/`M` selection values for the standard and high context levels;
+- task order;
+- context budget;
+- target-step context budget and its deterministic accounting result;
+- target-step artifact visibility, including the source response and (only for C2/C4) the abstraction artifact;
+- C1/C3 retained-object inventory, which must contain only the source response/final task answer and source citations;
+- target-step source-material visibility, which is prohibited for every condition;
+- target-step system and user prompt visibility;
+- time or compute budget where applicable;
+- scoring procedure;
+- evaluator identity or evaluation program;
+- randomization procedure;
+- permitted reuse of prior artifacts, which is limited to the frozen transfer package;
+- retention and reduction rules for every transfer-package item.
+
+Context and abstraction must be assigned independently. Comparisons must use identical target-step budget accounting, prompt visibility, source visibility, provenance visibility, and reuse rules within each context level. Any uncontrolled difference must be recorded as a limitation and assessed as potential methodology failure.
+
+## Measurement Plan
+
+### Transfer score
+
+A task-specific score defined before execution. It must distinguish correct transfer, incorrect transfer, non-application, and unsupported application.
+
+### Traceability score
+
+The proportion of material claims in the abstraction artifact linked to identifiable source evidence.
+
+### Overgeneralization rate
+
+The proportion of target applications in which a principle is applied outside its declared conditions.
+
+### Repeated-reasoning reduction
+
+The difference in predefined reasoning work between workflows, without treating shorter output alone as reduced reasoning.
+
+### Consistency score
+
+Agreement in principle interpretation and application across separated target tasks.
+
+### Target-step information budget
+
+The measured total of all transfer-package content under the preregistered accounting method, reported with the assigned budget, context level, retained-artifact inventory, and any deterministic reduction.
+
+## Analysis Plan
+
+The analysis must:
+
+1. report source-task and transfer outcomes separately;
+2. estimate the context main effect across the two abstraction levels;
+3. estimate the abstraction main effect across the two context levels;
+4. estimate and report the context-by-abstraction interaction, because it determines whether the abstraction effect changes as context increases;
+5. report the preregistered C1 ↔ C2, C1 ↔ C3, and C3 ↔ C4 contrasts;
+6. stratify results by context budget and task family where sample size permits;
+7. report task-level variation, target-step information budgets, retained-artifact inventories, and failure classifications;
+8. retain null, negative, mixed, and indeterminate results;
+9. separate measured findings from interpretations of the bottleneck-shift framing.
+
+No post hoc metric may replace the preregistered primary outcome. Exploratory analyses must be labeled exploratory.
+
+## Decision Rule
+
+The retained investigation outcome must be exactly one of:
+
+### SUPPORTS
+
+The explicit-abstraction condition demonstrates a preregistered, meaningful improvement in transfer relative to the context-only condition without an offsetting failure that invalidates the comparison.
+
+### VIOLATES
+
+The context-only condition matches or outperforms explicit abstraction under the preregistered decision rule, or explicit abstraction reliably impairs transfer.
+
+### INDETERMINATE
+
+Evidence is mixed, insufficient, underpowered, or unable to distinguish the conditions while the methodology remains valid.
+
+### METHODOLOGY_FAILURE
+
+The design or execution cannot validly test the research question because of confounding, invalid target-task separation, scoring failure, provenance failure, or another preregistered fatal defect.
+
+## Stopping Rules
+
+Stop before or during execution when:
+
+- source or target tasks violate frozen eligibility rules;
+- context budgets cannot be enforced or measured;
+- a C2 or C4 abstraction artifact is not preserved independently from the response;
+- C1/C3 retain a generalized principle, applicability condition, limitation, extracted summary, note, or separate abstraction artifact;
+- the required C1 or C3 freeze package (source response/final task answer and source citations) is incomplete or contains a prohibited retained object;
+- the required C2 or C4 freeze package (abstraction artifact, source response, and provenance) is incomplete;
+- target tasks are exposed before the applicable condition's freeze package is frozen;
+- source material, artifacts, prompts, provenance, or reuse permissions differ from the target-step information policy;
+- the frozen source-unit selection does not provide the preregistered additional information in high context relative to standard context;
+- target-step budget accounting is unequal within a context level;
+- evaluators cannot apply the scoring protocol consistently;
+- condition contamination occurs;
+- provenance or version bindings are missing;
+- a fatal methodology defect makes the primary contrast uninterpretable.
+
+Stopping does not imply support or violation. It produces `METHODOLOGY_FAILURE` or `INDETERMINATE` according to the defect.
+
+## Literature and Novelty Review
+
+Before any novelty claim, review primary literature on:
+
+- long-context language models;
+- retrieval and external memory;
+- abstraction and concept formation;
+- representation and transfer learning;
+- summarization and knowledge distillation;
+- externalized reasoning artifacts;
+- reusable prompts, schemas, and structured memory.
+
+The contribution status must be classified as one of:
+
+- new empirical comparison;
+- new operationalization;
+- new abstraction workflow;
+- synthesis of existing ideas;
+- novelty unsupported;
+- review incomplete.
+
+A literature review is not part of this documentation-only PR unless separately scoped and source-bound.
+
+## Threats to Validity
+
+### Construct validity
+
+The selected measures may not fully capture understanding, abstraction quality, or reasoning effort.
+
+### Internal validity
+
+Unequal target-step information, unequal retained artifacts, unequal context budgets, workflow contamination, prompt differences, artifact exposure, source-material exposure, or evaluator expectations may confound condition effects. The target-step information policy and condition-specific freeze packages control these risks but cannot remove defects that are not recorded or detected.
+
+### External validity
+
+Results may not transfer across models, task families, domains, context sizes, or abstraction formats.
+
+### Statistical conclusion validity
+
+Small samples, task dependence, evaluator disagreement, and multiple comparisons may produce unstable estimates.
+
+### Novelty validity
+
+A positive empirical result does not establish that the underlying distinction or mechanism is novel.
+
+## Required Execution Package
+
+Before running the experiment, create and freeze:
+
+- research request;
+- protocol version;
+- source and target task registry;
+- task-difference criteria;
+- condition assignments;
+- prompt and model bindings;
+- abstraction-artifact template;
+- measurement specification;
+- evaluator instructions;
+- analysis script or deterministic procedure;
+- stopping rules;
+- provenance manifest;
+- preregistration record.
+
+## Registration Status
+
+This investigation is registered in `registry/investigations.json`, as required for investigation workspaces by the repository's documented convention. Its scaffold remains prospective: this design is documentation only and does not authorize execution, evidence collection, or empirical interpretation.
+
+## Current Determination
+
+```text
+Investigation design: COMPLETE
+Experiment execution: NOT PERFORMED
+Evidence collection: NOT PERFORMED
+Empirical outcome: NOT REACHED
+Novelty determination: NOT ESTABLISHED
+```
+
+No experiment may be represented as authorized or complete by this document alone.

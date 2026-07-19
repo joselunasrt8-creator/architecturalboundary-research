@@ -30,11 +30,10 @@ REQUIRED_PATHS = [
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
     "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/build_publication_manifest.py", "scripts/check_registry.py", "scripts/build_papers.py",
 ]
-INVESTIGATIONS = ["investigations/template", "investigations/b1-three-system-pilot", "investigations/b2-governance-cohort"]
-INVESTIGATION_ITEMS = [
-    "README.md", "preregistration.md", "literature/README.md", "bor/README.md", "srf/README.md",
-    "der/README.md", "msr/README.md", "dataset/README.md", "analysis/README.md", "results/README.md",
-    "figures/README.md", "artifacts/README.md",
+INVESTIGATION_WORKSPACE_ITEMS = [
+    "README.md", "investigation-design.md", "preregistration.md", "literature/README.md",
+    "bor/README.md", "srf/README.md", "der/README.md", "msr/README.md", "dataset/README.md",
+    "analysis/README.md", "results/README.md", "figures/README.md", "artifacts/README.md",
 ]
 SCHEMAS = [
     "schemas/bor.schema.json", "schemas/srf.schema.json", "schemas/der.schema.json",
@@ -185,6 +184,28 @@ def validate_registered_paths() -> None:
             registered = item.get("path")
             if not registered or not (ROOT / registered).exists():
                 raise SystemExit(f"{relative} references missing path: {registered}")
+
+
+def registered_investigation_paths() -> list[str]:
+    """Return registered investigation workspace paths in deterministic order."""
+    data = require_json("registry/investigations.json")
+    investigations = data.get("investigations") if isinstance(data, dict) else None
+    if not isinstance(investigations, list):
+        raise SystemExit("registry/investigations.json investigations must be a list")
+
+    paths = []
+    for item in investigations:
+        if not isinstance(item, dict) or not isinstance(item.get("path"), str) or not item["path"]:
+            raise SystemExit("registry/investigations.json entries must contain a path")
+        paths.append(item["path"])
+    return sorted(paths)
+
+
+def validate_investigation_workspace_layout() -> None:
+    """Require every registry-defined investigation to have the standard layout."""
+    for base in registered_investigation_paths():
+        for item in INVESTIGATION_WORKSPACE_ITEMS:
+            require_path(f"{base}/{item}")
 
 
 def validate_bor_schemas() -> None:
@@ -723,11 +744,9 @@ def main() -> None:
             raise SystemExit(f"missing required top-level directory: {relative}")
     for relative in REQUIRED_PATHS:
         require_path(relative)
-    for base in INVESTIGATIONS:
-        for item in INVESTIGATION_ITEMS:
-            require_path(f"{base}/{item}")
     for relative in [*SCHEMAS, *REGISTRIES]:
         require_json(relative)
+    validate_investigation_workspace_layout()
     validate_yaml_syntax()
     validate_bor_schemas()
     validate_srf_registry()

@@ -4,6 +4,7 @@ Copy this directory to `investigations/<investigation-id>/` for every future inv
 
 ## Required Items
 
+- `investigation-design.md`: bounded investigation design and status statement.
 - `preregistration.md`: frozen protocol registration and scope definition placeholder.
 - `literature/`: literature-review notes and source traceability.
 - `bor/`: baseline observation records.

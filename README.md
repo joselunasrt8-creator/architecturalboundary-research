@@ -125,7 +125,7 @@ and #78. No Reference Execution or clean rerun has been performed under Issue
 3. Record observations in `bor/`, surfaces in `srf/`, derived evidence in `der/`, and measurements in `msr/`.
 4. Build investigation-local datasets in `dataset/` and analysis outputs in `analysis/`.
 5. Place figures and publication artifacts in `figures/` and `artifacts/`.
-6. Register the investigation in `registry/investigations.json`.
+6. Register the investigation in `registry/investigations.json`; topology validation automatically discovers every registered workspace and verifies its standard scaffold.
 7. Run `python3 scripts/validate.py` before publication or release.
 
 ## Scientific Principles

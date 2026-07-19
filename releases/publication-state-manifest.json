@@ -104,8 +104,8 @@
       },
       {
         "path": "registry/investigations.json",
-        "sha256": "4f8f09d88ce1d65d9a3d82bc28741039c9b0ac515a4caf51d25012825a7895d3",
-        "size_bytes": 315
+        "sha256": "ef72509bb91bd4a551300d9774da68746799b4290e1031bcff0a27eda0bb15ae",
+        "size_bytes": 495
       },
       {
         "path": "registry/protocol_versions.json",
@@ -208,15 +208,15 @@
       },
       {
         "path": "scripts/validate.py",
-        "sha256": "d75472c6569dd0a03e5be13b441def8b6c91f99919d1265bc610af8b7718c84e",
-        "size_bytes": 36154
+        "sha256": "fc25a30a5f910be855e248bb44735957658750b6c4f2a8e4fcfc79b360ddcbdc",
+        "size_bytes": 36986
       }
     ],
     "publication_sources": [
       {
         "path": "README.md",
-        "sha256": "befeb4ecfdee32ea7da40f493da7bfd21aa4b9f60110504b684e9f08e34804cd",
-        "size_bytes": 7083
+        "sha256": "54ffdcc5b8190892b0499a5b435769effec28cdd01738ca3b1c0b606f8a4e16e",
+        "size_bytes": 7190
       },
       {
         "path": "REPRODUCIBILITY.md",

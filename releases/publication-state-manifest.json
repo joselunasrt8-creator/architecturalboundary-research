@@ -208,8 +208,8 @@
       },
       {
         "path": "scripts/validate.py",
-        "sha256": "d75472c6569dd0a03e5be13b441def8b6c91f99919d1265bc610af8b7718c84e",
-        "size_bytes": 36154
+        "sha256": "e245e31abd484526bd7d727c5a97f2d76d954be9ba33626a664cbdd57d00ffed",
+        "size_bytes": 37012
       }
     ],
     "publication_sources": [

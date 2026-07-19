@@ -32,7 +32,7 @@
     },
     {
       "path": "audit-manifest-schema.json",
-      "sha256": "54f325c8b9feeaad96a975321c579d5ebe31d3e520daf2453658c142c3d7ea21"
+      "sha256": "d3659aeefab8e922d8449f4bd60816c3f97cd5f850f762c2603fa297b4799278"
     },
     {
       "path": "execution-readiness-report.md",
@@ -44,7 +44,7 @@
     },
     {
       "path": "execution_package.py",
-      "sha256": "aebf31915f7a6e619115432a2aac269c9a583105cea4d196233e85f360652a27"
+      "sha256": "62cea977e7414329e542c2478e4aed6a08c5006336713356fe440fa2e1006099"
     }
   ],
   "external_files": [

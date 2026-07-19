@@ -1,0 +1,403 @@
+{
+  "schema_version": "1",
+  "seed": 20260719,
+  "canonical_source_order": [
+    {
+      "package_id": "SP01",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP01",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP01",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP01",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP02",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP02",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP02",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP02",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP03",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP03",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP03",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP03",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP04",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP04",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP04",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP04",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP05",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP05",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP05",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP05",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP06",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP06",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP06",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP06",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP07",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP07",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP07",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP07",
+      "condition_id": "C4"
+    },
+    {
+      "package_id": "SP08",
+      "condition_id": "C1"
+    },
+    {
+      "package_id": "SP08",
+      "condition_id": "C2"
+    },
+    {
+      "package_id": "SP08",
+      "condition_id": "C3"
+    },
+    {
+      "package_id": "SP08",
+      "condition_id": "C4"
+    }
+  ],
+  "canonical_target_order": "NULL: targets are not frozen",
+  "target_condition_blocks": [
+    {
+      "package_id": "SP01",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "b8c597ef0e5a28c91a454016561d5ef7d0109cb578fd578d2cd92ac9171def04",
+      "execution_conditions": [
+        "C4",
+        "C1",
+        "C3",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP01",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "a5cb9b1bbdf7d9485a51919950560de4652163e4c8896f8e66886fbefc966279",
+      "execution_conditions": [
+        "C2",
+        "C3",
+        "C4",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP01",
+      "target_family": "causal_explanation",
+      "digest_sha256": "f44b6f0885784b36b553560f72e4b2d049909acd8f076441b4a0f70964058193",
+      "execution_conditions": [
+        "C1",
+        "C2",
+        "C4",
+        "C3"
+      ]
+    },
+    {
+      "package_id": "SP02",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "6c89394918aec6591bd426220e51f15aec989294e0885877001f04e21832d279",
+      "execution_conditions": [
+        "C1",
+        "C3",
+        "C4",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP02",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "8ab8441765528dc6d9975db19cb2a763a528c56c2dfaf0f993ae9a5c27c2dee4",
+      "execution_conditions": [
+        "C2",
+        "C4",
+        "C1",
+        "C3"
+      ]
+    },
+    {
+      "package_id": "SP02",
+      "target_family": "causal_explanation",
+      "digest_sha256": "9910963036e397f176285447ae7e0f925cece30e70f82a982751a449fd24ac45",
+      "execution_conditions": [
+        "C1",
+        "C3",
+        "C4",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP03",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "62e2383eb43b7569ce91c469ac2376a1c1a6681291a262afac83b4d3a12d4a04",
+      "execution_conditions": [
+        "C4",
+        "C1",
+        "C3",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP03",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "e9d18438d97ebc884c028d996a33e1b3894bab03edc9f8d7ac2f87a42f9c38e3",
+      "execution_conditions": [
+        "C3",
+        "C4",
+        "C2",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP03",
+      "target_family": "causal_explanation",
+      "digest_sha256": "9be21d06c1ac5e22735f151b288c35dc6ede015ae71a47ad1d022cbd08725766",
+      "execution_conditions": [
+        "C4",
+        "C1",
+        "C2",
+        "C3"
+      ]
+    },
+    {
+      "package_id": "SP04",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "f4cbc56b53e13567833e5f1c47194b067940f791b69ba605eab644fdb28ff8ef",
+      "execution_conditions": [
+        "C2",
+        "C3",
+        "C1",
+        "C4"
+      ]
+    },
+    {
+      "package_id": "SP04",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "bab6def24f2f8cad48408fc4b9ef299fbe47304b9e17467eb82e60705ca111ab",
+      "execution_conditions": [
+        "C3",
+        "C1",
+        "C4",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP04",
+      "target_family": "causal_explanation",
+      "digest_sha256": "67025c23af9d7907087a8efd5eecf3ef71ced5a9c3d5b776057e105340e3d67c",
+      "execution_conditions": [
+        "C2",
+        "C1",
+        "C3",
+        "C4"
+      ]
+    },
+    {
+      "package_id": "SP05",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "1d698a0bb2a466c310dc04fd3b643ddc3ed9be9ff0ce95e825d5bea1666da6ff",
+      "execution_conditions": [
+        "C3",
+        "C1",
+        "C2",
+        "C4"
+      ]
+    },
+    {
+      "package_id": "SP05",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "1d93d5e2cf214ccff1f85d9a2f2de3ce8e4e2692e8f4e8033b89bc35a571deb1",
+      "execution_conditions": [
+        "C3",
+        "C1",
+        "C2",
+        "C4"
+      ]
+    },
+    {
+      "package_id": "SP05",
+      "target_family": "causal_explanation",
+      "digest_sha256": "5dd0e5b3b283342594aafc219c6db8fc3ff313fca24b5c9fd6db8f5927b047d7",
+      "execution_conditions": [
+        "C4",
+        "C1",
+        "C3",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP06",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "84424b4c07ae0d70b08c082290da73162c8d9680ce9f8918a7c774050e088c05",
+      "execution_conditions": [
+        "C4",
+        "C3",
+        "C2",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP06",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "18d50320ebdbb268f908d89bea92734d124792e232ae5002f2cbef208a3817f7",
+      "execution_conditions": [
+        "C2",
+        "C3",
+        "C4",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP06",
+      "target_family": "causal_explanation",
+      "digest_sha256": "54f8fa0c30b1cb5842053bbd04b7b74d489c3a89b997dcbc59feda519c3100c2",
+      "execution_conditions": [
+        "C3",
+        "C2",
+        "C4",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP07",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "de2ab93878e7f3a89422680513a57830ffcf9ab62d6a27f990bb885640e5a4ab",
+      "execution_conditions": [
+        "C3",
+        "C4",
+        "C2",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP07",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "e76bc943d11d2209b9b6c37c48c6ceb84f6a9299cc0c2ca26f1e9cf7bfc1e641",
+      "execution_conditions": [
+        "C3",
+        "C1",
+        "C4",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP07",
+      "target_family": "causal_explanation",
+      "digest_sha256": "19a9a38d2e12d4c346a0b3582abfdc4f81847022283f8e1c757f691e9bd99995",
+      "execution_conditions": [
+        "C2",
+        "C3",
+        "C1",
+        "C4"
+      ]
+    },
+    {
+      "package_id": "SP08",
+      "target_family": "structural_diagnosis",
+      "digest_sha256": "da82ce07d7ee10c4577afc6a53f822f19bac96e80263a05dffeb19ba09f26d74",
+      "execution_conditions": [
+        "C2",
+        "C4",
+        "C3",
+        "C1"
+      ]
+    },
+    {
+      "package_id": "SP08",
+      "target_family": "constraint_aware_recommendation",
+      "digest_sha256": "d900acbb2508a661c43653d62a06bd1fdbb66129697293bcd95f248ee37841a9",
+      "execution_conditions": [
+        "C3",
+        "C1",
+        "C4",
+        "C2"
+      ]
+    },
+    {
+      "package_id": "SP08",
+      "target_family": "causal_explanation",
+      "digest_sha256": "e0225fbfb010733eef14a854cd1d8158833419eb2556e31a2c3814d36a381818",
+      "execution_conditions": [
+        "C1",
+        "C2",
+        "C4",
+        "C3"
+      ]
+    }
+  ],
+  "verification_hash": "5fe447e7e26ae5bada744de52b6bb6c96eddd9b7bc7c7bf40fad46c1ef27b8aa",
+  "status": "NULL"
+}

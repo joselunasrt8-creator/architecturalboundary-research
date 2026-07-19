@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "scorer_image_sha256": null,
+  "system_prompt": "You are a careful research assistant. Follow the user message exactly. Do not use tools, browse, retrieve, or rely on information not supplied in this conversation. Return only the requested answer.",
+  "source_prompt_template": "SOURCE PACKAGE {package_id}; CONDITION {condition_id}. Source units, in order: {source_units}. Produce the source-specific answer. {retention_instruction}",
+  "target_prompt_template": "TARGET {target_id}; CONDITION {condition_id}. Retained package: {retained_package}. Solve the target. State the conclusion and a concise justification. Do not use tools, retrieval, or outside knowledge.",
+  "retention_instructions": {
+    "C1": "Return only the source-specific answer; do not create or state any reusable abstraction.",
+    "C3": "Return only the source-specific answer; do not create or state any reusable abstraction.",
+    "C2": "Return the source-specific answer, then exactly one line ABSTRACTION:, then one canonical JSON object with exactly artifact_id, principle, applicability_conditions, limitations, source_unit_provenance, and reuse_instructions. Provenance entries must contain unit_id, unit_sha256, and claims for every material claim.",
+    "C4": "Return the source-specific answer, then exactly one line ABSTRACTION:, then one canonical JSON object with exactly artifact_id, principle, applicability_conditions, limitations, source_unit_provenance, and reuse_instructions. Provenance entries must contain unit_id, unit_sha256, and claims for every material claim."
+  },
+  "hashes": {
+    "system_prompt": "5bf8463177eb1599b50cbea5d8f6d80fdd467618de0e805a106b9d424e18b3f2",
+    "source_prompt_template": "df6412072f515e2b0e47249cd14b5da8413e0e219100d27f98c72e8275fc1c5e",
+    "target_prompt_template": "45f393b381a3555c52c87ddca5dffdd8290ad68803964f7ebd1559e94939ac13",
+    "retention_instructions": {
+      "C1": "4bed96dea30ead94e0c041d18e213b28eb4083a3ddb42147991868758005225e",
+      "C3": "4bed96dea30ead94e0c041d18e213b28eb4083a3ddb42147991868758005225e",
+      "C2": "87b7a64bc0715e980352633e2a9d78721d697b66b9be0374aa0e8813ab91f18e",
+      "C4": "87b7a64bc0715e980352633e2a9d78721d697b66b9be0374aa0e8813ab91f18e"
+    }
+  },
+  "model": "gpt-4.1-2025-04-14",
+  "tokenizer": {
+    "name": "o200k_base",
+    "package": "tiktoken==0.9.0",
+    "encoding": "UTF-8 without normalization"
+  },
+  "decoding": {
+    "temperature": 0,
+    "top_p": 1,
+    "max_output_tokens": 2048,
+    "presence_penalty": 0,
+    "frequency_penalty": 0,
+    "seed": 20260719,
+    "omitted_optional_parameters": true
+  },
+  "timeout_seconds": 120,
+  "token_ceilings": {
+    "C1": 4096,
+    "C2": 4096,
+    "C3": 8192,
+    "C4": 8192
+  }
+}

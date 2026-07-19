@@ -1,0 +1,1090 @@
+{
+  "schema_version": "1",
+  "package_version": "execution-package-v1",
+  "preregistration_path": "investigations/context-scaling-vs-explicit-abstraction/preregistration.md",
+  "preregistration_commit": "aed5ff895d3afb0a03b819bc5112327b479b8905",
+  "unitization": "Section 3 of preregistration",
+  "packages": [
+    {
+      "id": "SP01",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP02",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP03",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP04",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP05",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP06",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP07",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    },
+    {
+      "id": "SP08",
+      "status": "NULL",
+      "canonical_source_reference": null,
+      "unit_boundary_rule": "paragraph boundaries; heading attached to following paragraph; tables, lists, and code blocks each one unit",
+      "units": [
+        {
+          "id": "U001",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U002",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U003",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U004",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U005",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U006",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U007",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U008",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U009",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U010",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U011",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U012",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U013",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U014",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U015",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        },
+        {
+          "id": "U016",
+          "source_reference": null,
+          "content": null,
+          "sha256": null,
+          "status": "NULL"
+        }
+      ],
+      "source_hashes": [],
+      "package_hash": null,
+      "subsets": {
+        "N=8": [],
+        "M=16": []
+      },
+      "token_accounting": {
+        "tokenizer": "o200k_base",
+        "package": "tiktoken==0.9.0",
+        "status": "NULL"
+      },
+      "provenance": {
+        "status": "NULL",
+        "reason": "No frozen verbatim source corpus or canonical source references exist in this repository."
+      }
+    }
+  ],
+  "preregistration_sha256": "8e793c7fb68c8efc0e9fb2602214231f783e79e93f7bc10fc5ed9153b3b4cd23"
+}

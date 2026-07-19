@@ -1,0 +1,56 @@
+{
+  "schema_version": "1",
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "13d53767f9c5b21abca43cde541917723761796b869018d62ad4a54f6377eb3a"
+    },
+    {
+      "path": "source-package-registry.json",
+      "sha256": "5525d746618324cbdf700613b3c48419afff1e0059739d586b5cb4f4a993c172"
+    },
+    {
+      "path": "target-registry.json",
+      "sha256": "94d7d9802d4d42e151aa3d05545187200308a075a7537348da9517d4bd75c8e5"
+    },
+    {
+      "path": "prompt-bindings.json",
+      "sha256": "1bddfe4b2cbd90500246903d9008d4defe171b6935b63eb09cf74c3b1326b625"
+    },
+    {
+      "path": "condition-order.json",
+      "sha256": "aa0b02436a2ac4a1a721891ba166cd38799dd1c6c06d076572c82a8fe705f24b"
+    },
+    {
+      "path": "answer-key-registry.json",
+      "sha256": "dc484d4d65a90f49b009501939ee3bb64ad05732037e13c9eaba33db6487965f"
+    },
+    {
+      "path": "scope-rubric-registry.json",
+      "sha256": "c41fa2047328b59f159a03f076498bb23ecd0c754166de0bac7a3beb482b0e16"
+    },
+    {
+      "path": "audit-manifest-schema.json",
+      "sha256": "56d70f5df3e25986fe819dd5984cbe81291d852b7c5e9e1247c97d4688426c36"
+    },
+    {
+      "path": "execution-readiness-report.md",
+      "sha256": "ba1d0737078c9525fd30cdeb0ed4fc0f75d3ace6f28f3741a4e2360eba668a29"
+    },
+    {
+      "path": "evaluator-specification.md",
+      "sha256": "42e47b08801ee654efb3036c473f991e2ec0acd6a48be881c35cdc8707fb0077"
+    },
+    {
+      "path": "execution_package.py",
+      "sha256": "01f30a15894743c89f77fabe8cbf3a3183c1abce07b9cc12c0628040fcff1494"
+    }
+  ],
+  "external_files": [
+    {
+      "path": "investigations/context-scaling-vs-explicit-abstraction/preregistration.md",
+      "sha256": "8e793c7fb68c8efc0e9fb2602214231f783e79e93f7bc10fc5ed9153b3b4cd23"
+    }
+  ]
+}

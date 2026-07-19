@@ -15,7 +15,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          # tiktoken==0.9.0 is preregistered and supports Python through 3.13.
+          python-version: "3.13"
       - name: Install deterministic Python dependencies
         run: python3 -m pip install -r requirements.txt
       - name: Run test suite

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1",
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "f5f9da82fc76540c721fa82108c8dcda5f48b0aed86e2e37088e6790d64f40d9"
+    },
+    {
+      "path": "source-package-registry.json",
+      "sha256": "0028e3dc32b799e01e9d3c0c81ecc51b770b46516c0b81652d200c71ed34259e"
+    },
+    {
+      "path": "target-registry.json",
+      "sha256": "d86aaae9bacba536c06d37b068d9cfebfdbf8ed6fbc04e7e8306cefd2eb9ef04"
+    },
+    {
+      "path": "prompt-bindings.json",
+      "sha256": "e139798fee9d29a4b177e595ae50af32b17c14552b5a906693c9383602520a2b"
+    },
+    {
+      "path": "condition-order.json",
+      "sha256": "aa0b02436a2ac4a1a721891ba166cd38799dd1c6c06d076572c82a8fe705f24b"
+    },
+    {
+      "path": "answer-key-registry.json",
+      "sha256": "dc484d4d65a90f49b009501939ee3bb64ad05732037e13c9eaba33db6487965f"
+    },
+    {
+      "path": "scope-rubric-registry.json",
+      "sha256": "c41fa2047328b59f159a03f076498bb23ecd0c754166de0bac7a3beb482b0e16"
+    },
+    {
+      "path": "audit-manifest-schema.json",
+      "sha256": "911df86acbb74c7e091cb94364ee7123d2eb86da504c46a205a8b56aec08239c"
+    },
+    {
+      "path": "execution-readiness-report.md",
+      "sha256": "4346f287dda830a379b33f2f16dda1c3199ac11da570f15e1e4bac6e5491c4bd"
+    },
+    {
+      "path": "evaluator-specification.md",
+      "sha256": "42e47b08801ee654efb3036c473f991e2ec0acd6a48be881c35cdc8707fb0077"
+    },
+    {
+      "path": "execution_package.py",
+      "sha256": "5680bb87f19c1d81d964909e1b48f39af4feea0cd20c77741313ac7e3eff26b4"
+    }
+  ]
+}

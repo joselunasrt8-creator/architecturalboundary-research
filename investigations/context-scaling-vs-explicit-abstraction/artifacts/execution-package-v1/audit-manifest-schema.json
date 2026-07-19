@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pre-execution audit manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_identifiers",
+    "hashes",
+    "prompts",
+    "package_ids",
+    "target_ids",
+    "tokenizer",
+    "model_binding",
+    "condition_order",
+    "response_placeholders",
+    "evaluator_placeholders",
+    "environment_metadata",
+    "credential_boundary",
+    "operator_actions"
+  ],
+  "properties": {
+    "run_identifiers": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "hashes": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "prompts": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "package_ids": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "target_ids": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "tokenizer": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "model_binding": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "condition_order": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "response_placeholders": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "evaluator_placeholders": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "environment_metadata": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "credential_boundary": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    },
+    "operator_actions": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    }
+  }
+}

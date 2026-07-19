@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "package_version": "execution-package-v1",
+  "selection_rule": "Target IDs sorted; first eligible per family only after preregistration Section 6 overlap checks.",
+  "expected_target_count": 24,
+  "targets": [],
+  "status": "NULL",
+  "reason": "No frozen candidate target registry exists; creating targets, answer keys, or scope rubrics would fabricate preregistered objects."
+}

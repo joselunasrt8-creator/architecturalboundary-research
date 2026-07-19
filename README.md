@@ -1,8 +1,10 @@
 # Architectural Boundary Research
 
-Empirical research investigating whether architectural boundaries recur across independently designed software systems.
+Developing reproducible methods for discovering, evaluating, and validating architectural boundaries across independently designed software systems.
 
-This repository is organized around the execution lifecycle of the **Invariance-Based Architectural Investigation Protocol**. The root README is the entry point; the directory topology mirrors how an investigation is registered, executed, validated, analyzed, and prepared for publication.
+This repository is an empirical research environment for controlled investigations into recurring software structure. It contains the protocols, preregistrations, execution instruments, evidence artifacts, datasets, analyses, and publication outputs needed to turn architectural reasoning into reviewable and reproducible evidence.
+
+The repository is organized around the execution lifecycle of the **Invariance-Based Architectural Investigation Protocol**. The root README is the entry point; the directory topology mirrors how an investigation is registered, executed, validated, analyzed, and prepared for publication.
 
 ## Mission
 

@@ -85,7 +85,7 @@ permission, truth, or consumer acceptance.
 | --- | --- | --- |
 | [`README.md`](../../../README.md) | `7053e53f4dfee4bf6dd48ad92bd44e007728930a` | Repository purpose, lifecycle, topology, and scientific principles at the assessed commit |
 | [`protocol/protocol-v1/protocol.md`](../../../protocol/protocol-v1/protocol.md) | `72bba3bf38a6811e07df2977fb76e634b23f1e9b` | Normative Protocol v1 lifecycle and SRF-to-DER evidence boundary |
-| [`docs/research_pipeline.md`](../../research_pipeline.md) | `34e96fc509a950f4057912577ef409b062552684` | Compact canonical artifact sequence through cohort conclusion |
+| [`docs/research_pipeline.md`](../../research_pipeline.md) | `34e96fc509a950f4057912577ef409bcb276f40f` | Compact canonical artifact sequence through cohort conclusion |
 | [`REPRODUCIBILITY.md`](../../../REPRODUCIBILITY.md) | `4fb22313ba85b00551d5cea1d84b27706f8c0a1b` | Deterministic replay expectations |
 | [`docs/minimal_promotion_package.md`](../../minimal_promotion_package.md) | `504ec385dde1928f52465dda462409b062552684` | Producer-owned promotion-package and consumer-authority boundary |
 | [`releases/publication-state-manifest.json`](../../../releases/publication-state-manifest.json) | `bc82f82c1b26e14d35044417727ed35a26201d32` | Machine-readable B2 publication-state and hash inventory |

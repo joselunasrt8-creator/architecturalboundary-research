@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "protocol_sha256": "e30ae79722eff29ab69acd814d317af4bbf7e54344545388808b1cbbacd643ad",
+  "corpus_commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+  "prompt_bindings_sha256": "1bddfe4b2cbd90500246903d9008d4defe171b6935b63eb09cf74c3b1326b625",
+  "ordering_rule": "normalized repository-relative path ascending; ties by original UTF-8 path bytes ascending",
+  "selection_rule": "select the first eight eligible documents in canonical order",
+  "selection_result": "NULL",
+  "construction_status": "NOT_STARTED",
+  "reason": "Only 4 of eight required eligible documents exist in the frozen corpus.",
+  "candidate_review_ledger_sha256": "6ac81693cb89dc979135499d7c71333edecfff25ab9fb1e0bd0af84870330f26",
+  "eligible_paths": [
+    "docs/higher_order_abstraction.md",
+    "docs/minimal_promotion_package.md",
+    "docs/publication.md",
+    "docs/reference-execution/v1.0/freeze-readiness-record.md"
+  ],
+  "selected_paths": [],
+  "assignments": {
+    "SP01": null,
+    "SP02": null,
+    "SP03": null,
+    "SP04": null,
+    "SP05": null,
+    "SP06": null,
+    "SP07": null,
+    "SP08": null
+  },
+  "package_sha256": {},
+  "prohibitions_respected": {
+    "manual_ordering": true,
+    "subjective_relevance_ranking": true,
+    "substitution": true,
+    "model_invocation": true,
+    "abstraction_generation": true,
+    "target_construction": true,
+    "experiment_execution": true,
+    "empirical_evidence_collection": true
+  }
+}

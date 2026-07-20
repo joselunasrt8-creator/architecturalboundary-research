@@ -1,0 +1,3537 @@
+{
+  "schema_version": "1",
+  "protocol_sha256": "e30ae79722eff29ab69acd814d317af4bbf7e54344545388808b1cbbacd643ad",
+  "corpus_repository": "joselunasrt8-creator/architecturalboundary-research",
+  "corpus_commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+  "prompt_bindings": {
+    "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/prompt-bindings.json",
+    "commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+    "sha256": "1bddfe4b2cbd90500246903d9008d4defe171b6935b63eb09cf74c3b1326b625"
+  },
+  "ordering_rule": "normalized repository-relative path ascending; ties by original UTF-8 path bytes ascending",
+  "candidate_count": 81,
+  "candidates": [
+    {
+      "path": "docs/README.md",
+      "tree_object_id": "f490301bb3282ca51a339f2a0e24af6b0febb0d6",
+      "document_sha256": "cc1b61d3f78859c618028bea350ce8eade26dfded64676757d6f6e8df5d1244a",
+      "byte_length": 824,
+      "unicode_word_tokens": 93,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit ee86b0ae7869a6f70f86be9a4a2a405080b41403 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T07:14:16-05:00 for docs/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 209,
+          "C2": 254,
+          "C3": 209,
+          "C4": 254
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "docs/glossary.md",
+      "tree_object_id": "b760757fb0e962a32602fd0285d281b5fd933daf",
+      "document_sha256": "a7aaf7227f670619a5e03db48bdf0ed9e0e8e23133ed196fc1a92dbc928cef87",
+      "byte_length": 149,
+      "unicode_word_tokens": 18,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for docs/glossary.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 108,
+          "C2": 153,
+          "C3": 108,
+          "C4": 153
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "docs/higher_order_abstraction.md",
+      "tree_object_id": "be50b1611427abe00948b6f802efecf9a248f084",
+      "document_sha256": "e9d4171431880b836178787258fe62b504b373ec72e79612f95b5fbe6494f723",
+      "byte_length": 17013,
+      "unicode_word_tokens": 2207,
+      "meaningful_unit_count": 33,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 11efcf502b62c4dbbe2cb77dc69a651efc263a1b records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-16T23:51:07-05:00 for docs/higher_order_abstraction.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 938,
+          "C2": 983,
+          "C3": 1845,
+          "C4": 1890
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "ELIGIBLE",
+      "reasons": []
+    },
+    {
+      "path": "docs/methodology.md",
+      "tree_object_id": "aa2f605882cc9cb8c5fedcdd698a3e3cca17b9cb",
+      "document_sha256": "6ea53d16cfb7f83cc18e54f2a2a5dd6c099ee9eb52836b751d62aceb5d75b1e1",
+      "byte_length": 162,
+      "unicode_word_tokens": 22,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for docs/methodology.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 111,
+          "C2": 156,
+          "C3": 111,
+          "C4": 156
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "docs/minimal_promotion_package.md",
+      "tree_object_id": "504ec385dde1928f52465dda462409b062552684",
+      "document_sha256": "889c84adbf570714c43b9d8e549be8b2dcea8550c92befb954abedfe41aa6f8f",
+      "byte_length": 51610,
+      "unicode_word_tokens": 6680,
+      "meaningful_unit_count": 116,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 6c74db9aee22bd0f9e3dcc1c4b9f467234071dcb records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-16T00:27:31-05:00 for docs/minimal_promotion_package.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 568,
+          "C2": 613,
+          "C3": 1535,
+          "C4": 1580
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "ELIGIBLE",
+      "reasons": []
+    },
+    {
+      "path": "docs/publication.md",
+      "tree_object_id": "3ac6b038948d17f515b118ddb5edead28c813a7f",
+      "document_sha256": "11cbbe284e39b70d3c57b1dfcf1e9f89a975a0d245f5e9dc4d204f0f6d65496b",
+      "byte_length": 5030,
+      "unicode_word_tokens": 708,
+      "meaningful_unit_count": 21,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 463d36fe18bcfda258f1368d6d6730920496770d records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T01:08:01-05:00 for docs/publication.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 506,
+          "C2": 551,
+          "C3": 823,
+          "C4": 868
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "ELIGIBLE",
+      "reasons": []
+    },
+    {
+      "path": "docs/publication_readiness_audit.md",
+      "tree_object_id": "9b2c8f44fac711dcf559e40f5b8285f2c8db8b14",
+      "document_sha256": "ec9e80b81f268972700b5aeeb13d736884ebbdb3d3eaa61414b97f1ea0206632",
+      "byte_length": 1318,
+      "unicode_word_tokens": 188,
+      "meaningful_unit_count": 7,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 463d36fe18bcfda258f1368d6d6730920496770d records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T01:08:01-05:00 for docs/publication_readiness_audit.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 322,
+          "C2": 367,
+          "C3": 322,
+          "C4": 367
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "docs/reference-execution/v1.0/freeze-readiness-record.md",
+      "tree_object_id": "92bcefb29d907b958a2ff2f54f796faf8701c713",
+      "document_sha256": "9f7ae59d24cf70e161924b68dd08c75a0d2cdbe14f9d4d1036b0366f026926ca",
+      "byte_length": 24994,
+      "unicode_word_tokens": 2932,
+      "meaningful_unit_count": 40,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit ee86b0ae7869a6f70f86be9a4a2a405080b41403 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T07:14:16-05:00 for docs/reference-execution/v1.0/freeze-readiness-record.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1285,
+          "C2": 1330,
+          "C3": 2493,
+          "C4": 2538
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "ELIGIBLE",
+      "reasons": []
+    },
+    {
+      "path": "docs/research_pipeline.md",
+      "tree_object_id": "34e96fc509a950f4057912577ef409bcb276f40f",
+      "document_sha256": "c02152edd8de06c07ac8afdf1d536a4d7f537c06454113fd5bb2e5db37d00225",
+      "byte_length": 207,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for docs/research_pipeline.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 145,
+          "C2": 190,
+          "C3": 145,
+          "C4": 190
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/README.md",
+      "tree_object_id": "e5b16515af4aaf8aaa4cf01e04aad67758747298",
+      "document_sha256": "31fddefa73424791c6a085943b1d566dac7c835c18881160860a1d11ccb412f8",
+      "byte_length": 132,
+      "unicode_word_tokens": 15,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 7a0bbad10dd4aae18fd2249445be3966bba5a6df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:27:19-05:00 for investigations/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 103,
+          "C2": 148,
+          "C3": 103,
+          "C4": 148
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/README.md",
+      "tree_object_id": "659b3435fbf3933c2ba2ab02eac0a0648aa3d24d",
+      "document_sha256": "0ef35f92b326246f351b724afdf21fcc986a9828e306051f794e488bba2ebc19",
+      "byte_length": 90,
+      "unicode_word_tokens": 13,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 7a0bbad10dd4aae18fd2249445be3966bba5a6df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:27:19-05:00 for investigations/b1-three-system-pilot/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 97,
+          "C2": 142,
+          "C3": 97,
+          "C4": 142
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/bor/README.md",
+      "tree_object_id": "38be72acd2a212203a1622798847ba1c508935ed",
+      "document_sha256": "03bbf3c6a7ad2fc666321f093eea95dc465b27cb497faf217ba0dbcfa5992d5c",
+      "byte_length": 126,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/bor/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 106,
+          "C2": 151,
+          "C3": 106,
+          "C4": 151
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/der/README.md",
+      "tree_object_id": "e76ebaf09b7da17a6e496582ea42049d38c65a85",
+      "document_sha256": "21d8a6803c9a6ab9d87c2263d8c70345e558e1a08af1dbdf1a83233a904c2c20",
+      "byte_length": 126,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/der/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 106,
+          "C2": 151,
+          "C3": 106,
+          "C4": 151
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/figures/README.md",
+      "tree_object_id": "56fc20c0b0e32258cf37241c46fc562e9da225a0",
+      "document_sha256": "cc10b87d6f0a1d8ea973d1734e48e5a9fc222876fd617439c24744cea0e3fec2",
+      "byte_length": 134,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/figures/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 106,
+          "C2": 151,
+          "C3": 106,
+          "C4": 151
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/investigation-design.md",
+      "tree_object_id": "aac6310de8e9f2c403e39642cae56da36f789aba",
+      "document_sha256": "0ff4635c7c359e0af902153eaf03312043ea05e1dc00aa6380e3b75f956dd4a1",
+      "byte_length": 233,
+      "unicode_word_tokens": 30,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit f2cba91d87c3dfe8be3395ddc22086b531c89876 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T05:57:35-05:00 for investigations/b1-three-system-pilot/investigation-design.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 122,
+          "C2": 167,
+          "C3": 122,
+          "C4": 167
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/literature/README.md",
+      "tree_object_id": "6182b76bb598b0b12ab41e5936425563b213d2b2",
+      "document_sha256": "119d6a01f4b083026331db06d9d7fd80c73417989d3b71c2b563509bcddb445f",
+      "byte_length": 140,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/literature/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 106,
+          "C2": 151,
+          "C3": 106,
+          "C4": 151
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/msr/README.md",
+      "tree_object_id": "a4e9984d0ba121e564426f399be5190df19f0ff1",
+      "document_sha256": "e3ccf4be9b3e22292c1cfb65904f695ac4c350c81b63cc432a3ab498b31185df",
+      "byte_length": 126,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/msr/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 108,
+          "C2": 153,
+          "C3": 108,
+          "C4": 153
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/preregistration.md",
+      "tree_object_id": "ac97ff42579fa2326c84f3566720792200373601",
+      "document_sha256": "c68d644a34442d12973c396098a7b55a37f342832c7d5ff1124355cd5b0ba5a7",
+      "byte_length": 168,
+      "unicode_word_tokens": 19,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/preregistration.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 113,
+          "C2": 158,
+          "C3": 113,
+          "C4": 158
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b1-three-system-pilot/srf/README.md",
+      "tree_object_id": "22186861fc1d1e75f3c06ebd6ce27f2f1e45935c",
+      "document_sha256": "a07706cd7a3413f7e4850dfb2f7d4ec9955d0b6a2065cf1fa08c7c6fd344d9c6",
+      "byte_length": 126,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b1-three-system-pilot/srf/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 108,
+          "C2": 153,
+          "C3": 108,
+          "C4": 153
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/README.md",
+      "tree_object_id": "7658c036e70d006ffddb7f85ffc7b08bfca2b5d0",
+      "document_sha256": "fe570a48eef2f997628d923e6757bc0c5864dcc6b9ae47a210f16f799578804a",
+      "byte_length": 818,
+      "unicode_word_tokens": 104,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for investigations/b2-governance-cohort/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 266,
+          "C2": 311,
+          "C3": 266,
+          "C4": 311
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/bor/README.md",
+      "tree_object_id": "7508ffcfcd8c0c47d08073703aac3040c6e09bba",
+      "document_sha256": "4111263aca7c2bb812a0f727a3475053980cf881d8658074d46f9b46091a42ed",
+      "byte_length": 125,
+      "unicode_word_tokens": 16,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b2-governance-cohort/bor/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 107,
+          "C2": 152,
+          "C3": 107,
+          "C4": 152
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/der/README.md",
+      "tree_object_id": "512f512a95deac04131d7120e9e1e18bc4faea3b",
+      "document_sha256": "7b876feef51320c98123a6e8e7d7fc88818035d1ca302f36ecef39169343edb9",
+      "byte_length": 1485,
+      "unicode_word_tokens": 203,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit c475ac2e02806c3e37c0296d85b88e9f58c1fde3 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T15:55:04-05:00 for investigations/b2-governance-cohort/der/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 385,
+          "C2": 430,
+          "C3": 385,
+          "C4": 430
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/figures/README.md",
+      "tree_object_id": "4e200284ec295f9247fddb3eea812e7a2b627476",
+      "document_sha256": "ef84d0d533a5c05ee77a5595ec65285d64cdab8073b1d8ffae3cf1cebc3735f5",
+      "byte_length": 133,
+      "unicode_word_tokens": 16,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b2-governance-cohort/figures/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 107,
+          "C2": 152,
+          "C3": 107,
+          "C4": 152
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/investigation-design.md",
+      "tree_object_id": "ebab7bd6191481a3ea4a167b6763f25b6bec6438",
+      "document_sha256": "929bdc6d66f884fff69d5d4c193c9b4c4d5e5055191d6c84d8535a529bc1c56b",
+      "byte_length": 349,
+      "unicode_word_tokens": 39,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit f2cba91d87c3dfe8be3395ddc22086b531c89876 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T05:57:35-05:00 for investigations/b2-governance-cohort/investigation-design.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 146,
+          "C2": 191,
+          "C3": 146,
+          "C4": 191
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/literature/README.md",
+      "tree_object_id": "5562bc398b7e6d5621891d3de8cd1914c797b996",
+      "document_sha256": "b75033bcf61f1e319af0ead3e752180356b9511aad65b94d8fbbd2a63d082136",
+      "byte_length": 139,
+      "unicode_word_tokens": 16,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b2-governance-cohort/literature/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 107,
+          "C2": 152,
+          "C3": 107,
+          "C4": 152
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/msr/README.md",
+      "tree_object_id": "fc79cc362fb39fdb4774a1dc65f9e8a05add1cb0",
+      "document_sha256": "afebc1aeba69ed77fac85890723e270297a73081334c955ad8852a3dcbfc607f",
+      "byte_length": 671,
+      "unicode_word_tokens": 83,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for investigations/b2-governance-cohort/msr/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 219,
+          "C2": 264,
+          "C3": 219,
+          "C4": 264
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/preregistration.md",
+      "tree_object_id": "3ea5d638a88421e5e93f859b9ee5ff12ebd4ac7a",
+      "document_sha256": "8115542e2ae77d40e361387d5d2e7d78161762d1a055cc5d3207361947b0f449",
+      "byte_length": 404,
+      "unicode_word_tokens": 48,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 2822dc7574b0f49431160737fa6c271187f5c6ed records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T23:41:36-05:00 for investigations/b2-governance-cohort/preregistration.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 159,
+          "C2": 204,
+          "C3": 159,
+          "C4": 204
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/b2-governance-cohort/srf/README.md",
+      "tree_object_id": "796924b41c4afa44df50f58dc838a5ca076b6be3",
+      "document_sha256": "3062e8009d6493fb57c9f25c481f616c9d094d72cb5afcfac42d6032313556ce",
+      "byte_length": 125,
+      "unicode_word_tokens": 16,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/b2-governance-cohort/srf/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 109,
+          "C2": 154,
+          "C3": 109,
+          "C4": 154
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/structology-transfer-audit-rehearsal-1/README.md",
+      "tree_object_id": "82e31dfffe95a242f0d7c4c0d2e009665efb7d9d",
+      "document_sha256": "7f5fc95b7c41da8e1314162349d0b0bd244ab30b92195c49400d2be4f2f513a9",
+      "byte_length": 2034,
+      "unicode_word_tokens": 228,
+      "meaningful_unit_count": 5,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 97e3acba6aa3d255e0b5a5b410bd1538b54d38da records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-17T23:48:59-05:00 for investigations/structology-transfer-audit-rehearsal-1/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 466,
+          "C2": 511,
+          "C3": 466,
+          "C4": 511
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/structology-transfer-audit-rehearsal-1/execution-summary.md",
+      "tree_object_id": "204a4b26a98ef36b7050e74166a175c7f57506b2",
+      "document_sha256": "98b8006efe667f2724c4039707bac9297e95aed73406e31b0777773f81f18277",
+      "byte_length": 3812,
+      "unicode_word_tokens": 475,
+      "meaningful_unit_count": 12,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 97e3acba6aa3d255e0b5a5b410bd1538b54d38da records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-17T23:48:59-05:00 for investigations/structology-transfer-audit-rehearsal-1/execution-summary.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 528,
+          "C2": 573,
+          "C3": 944,
+          "C4": 989
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/README.md",
+      "tree_object_id": "8e14d67a33e24bf86cc5a412512bdfac93142aa5",
+      "document_sha256": "0f61b6b68b4734f9a7a581533e25e7a935380dba85b5048d12f93faa95c74078",
+      "byte_length": 913,
+      "unicode_word_tokens": 96,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit f2cba91d87c3dfe8be3395ddc22086b531c89876 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T05:57:35-05:00 for investigations/template/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 266,
+          "C2": 311,
+          "C3": 266,
+          "C4": 311
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/bor/README.md",
+      "tree_object_id": "e7c5dfb5779ea5d80e38dbcb445a2baaf053b513",
+      "document_sha256": "f16cc06a96f9b03915a791de72dbe21fcc8ebdf6eb277add29b411c04ecb0bac",
+      "byte_length": 113,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/bor/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 101,
+          "C2": 146,
+          "C3": 101,
+          "C4": 146
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/der/README.md",
+      "tree_object_id": "aca0ad3d3e27d5e7164b267dbadca183a283af59",
+      "document_sha256": "7abfa11c0ca7014cc2a56632ef7c8fc1b17021c74cd5f95c43b43a49ceec568b",
+      "byte_length": 113,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/der/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 101,
+          "C2": 146,
+          "C3": 101,
+          "C4": 146
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/figures/README.md",
+      "tree_object_id": "e50e5c33734ddf39ef725724655536b849045b24",
+      "document_sha256": "6e5b6e14ef8060a88cd961f45480c1f1fff6b6a7d1d9dbd2987d94c3e5e7a851",
+      "byte_length": 121,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/figures/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 101,
+          "C2": 146,
+          "C3": 101,
+          "C4": 146
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/investigation-design.md",
+      "tree_object_id": "4f81520d4e649d27d7cc5c463eabab6850e41cfc",
+      "document_sha256": "9476dabcb49cace8ab657a722568b84610ef047bd50f5d866e5ae6dce7b25fd9",
+      "byte_length": 151,
+      "unicode_word_tokens": 17,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit f2cba91d87c3dfe8be3395ddc22086b531c89876 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-19T05:57:35-05:00 for investigations/template/investigation-design.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 105,
+          "C2": 150,
+          "C3": 105,
+          "C4": 150
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/literature/README.md",
+      "tree_object_id": "ce583cbab19cc1f61e4af5b04aac61df086e671f",
+      "document_sha256": "08996fd3cf1a68376f38bb8e2310fe895300553e2a584cad3c3c3289568b3649",
+      "byte_length": 127,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/literature/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 101,
+          "C2": 146,
+          "C3": 101,
+          "C4": 146
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/msr/README.md",
+      "tree_object_id": "02853bd5ed43ac31b9f94841451466f096ae7144",
+      "document_sha256": "6ccc0b9bd23343ea34ff07cdc03f4708d23efe21da572b0f23597ed103b8be39",
+      "byte_length": 113,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/msr/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 103,
+          "C2": 148,
+          "C3": 103,
+          "C4": 148
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/preregistration.md",
+      "tree_object_id": "78826c1867661c2869c717725ac5fe70cc34bb90",
+      "document_sha256": "5954bf4f98d14373fd14a3d3f242a65027b6c23dcbf17d064bdb40d9e5394182",
+      "byte_length": 155,
+      "unicode_word_tokens": 16,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/preregistration.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 108,
+          "C2": 153,
+          "C3": 108,
+          "C4": 153
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "investigations/template/srf/README.md",
+      "tree_object_id": "917464d28a35145fffce9043ba5f790cf12a3cd9",
+      "document_sha256": "7420e021ae68c0539d0ab9b65007893851ef924bdb01cf59f5102a774be49e6b",
+      "byte_length": 113,
+      "unicode_word_tokens": 14,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for investigations/template/srf/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 103,
+          "C2": 148,
+          "C3": 103,
+          "C4": 148
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/README.md",
+      "tree_object_id": "52ba5b71a749d3e5270284048c911031252d5e7c",
+      "document_sha256": "d77a660aa9b10d89f70330b10934d890f7515933b77daf204eaddb5a49316e9a",
+      "byte_length": 1580,
+      "unicode_word_tokens": 200,
+      "meaningful_unit_count": 7,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 404,
+          "C2": 449,
+          "C3": 404,
+          "C4": 449
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/README.md",
+      "tree_object_id": "14b4169c1363d5bab29ad3fed009a4d8b0d0651b",
+      "document_sha256": "aef5592ebef0d4ae9ba01d8a65feae3a16652c50993e24b70c82259798c90579",
+      "byte_length": 1379,
+      "unicode_word_tokens": 181,
+      "meaningful_unit_count": 5,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 387,
+          "C2": 432,
+          "C3": 387,
+          "C4": 432
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/main.tex",
+      "tree_object_id": "ce1f4eaf1aec2b70e2261a52c1bbf0474d5f3f04",
+      "document_sha256": "a0f74ba7f9d4812a353b1002c67938acb9075b4f39712864aba41a807e19aa72",
+      "byte_length": 680,
+      "unicode_word_tokens": 71,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/main.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 249,
+          "C2": 294,
+          "C3": 249,
+          "C4": 294
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/abstract.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/abstract.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/analysis.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/analysis.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/conclusion.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/conclusion.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/evidence.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/evidence.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/introduction.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/introduction.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/_template/sections/methodology.tex",
+      "tree_object_id": "9160dead595e6641dbd70000977bf37691da49ea",
+      "document_sha256": "55eeb40566dfea150800e64beb52115e37631919d4e577fdcdf2b3d1974d2e8c",
+      "byte_length": 69,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit a0db0af624fda35258fcc0b11b5c7cf431616452 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T02:26:12-05:00 for papers/_template/sections/methodology.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/future/README.md",
+      "tree_object_id": "e1cca65d7f78d76f861943f26d001279474de889",
+      "document_sha256": "54a6101a7d436a0cbc3dcac7966adb9c548d2c4134d4ee9a78bd2a6a68ec760b",
+      "byte_length": 71,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 7a0bbad10dd4aae18fd2249445be3966bba5a6df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:27:19-05:00 for papers/future/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/README.md",
+      "tree_object_id": "92aef8576caab44f32140dc65a2200823fafc058",
+      "document_sha256": "364e54f655050f736cb2f855a80cad365c05a379425645816a859da2e1db531b",
+      "byte_length": 73,
+      "unicode_word_tokens": 10,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for papers/paper-0-protocol/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/abstract.tex",
+      "tree_object_id": "127757478cba4dd262efde3ad8c03583f85f0da8",
+      "document_sha256": "451ce0e66ad15498b06e929cd7f63d40a91192e0a6c12120d1e15b523a935558",
+      "byte_length": 629,
+      "unicode_word_tokens": 82,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/abstract.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 178,
+          "C2": 223,
+          "C3": 178,
+          "C4": 223
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/conclusion.tex",
+      "tree_object_id": "106148a80be2c0a684d124894c30d05d5a81ad17",
+      "document_sha256": "0daa07b77ad2777610dc5dbe147df82a5e0efdb8d93971bfbc3bac085f1003b8",
+      "byte_length": 1340,
+      "unicode_word_tokens": 187,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/conclusion.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 335,
+          "C2": 380,
+          "C3": 335,
+          "C4": 380
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/introduction.tex",
+      "tree_object_id": "e1d721de69eedcf69bdbf016dea604fc889dc83d",
+      "document_sha256": "fcfb7832b64d2cdf005740e3d0197c5a8d5936c8c53e1c67e4e6ca05d983cdaa",
+      "byte_length": 1249,
+      "unicode_word_tokens": 165,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/introduction.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 299,
+          "C2": 344,
+          "C3": 299,
+          "C4": 344
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/main.tex",
+      "tree_object_id": "72bf8205be84472bfacb376265d1232005148dce",
+      "document_sha256": "8f48c0b4c799e035781097f431c89046aa7ab59a84cc3e1d3722e0f6b77138d5",
+      "byte_length": 1030,
+      "unicode_word_tokens": 97,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/main.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 354,
+          "C2": 399,
+          "C3": 354,
+          "C4": 399
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/measurement_classification_rules.tex",
+      "tree_object_id": "6cc47f4f13895b0b10027e9640a728cc7971c7dd",
+      "document_sha256": "5b1ad93c515974312a7fae204eb3ed3c0ca8568d9132734053dc805578d3230d",
+      "byte_length": 2316,
+      "unicode_word_tokens": 300,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/measurement_classification_rules.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 557,
+          "C2": 602,
+          "C3": 557,
+          "C4": 602
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/motivation.tex",
+      "tree_object_id": "399a2e6f86c8defa7637433d53638cc9244909d1",
+      "document_sha256": "8d8e0b664b5b7c230caf61c9174fa6b5fc8b498eb87763d6199b20d462e328ca",
+      "byte_length": 1440,
+      "unicode_word_tokens": 184,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/motivation.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 364,
+          "C2": 409,
+          "C3": 364,
+          "C4": 409
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/observation_theory_separation.tex",
+      "tree_object_id": "fbd467d9c92002fbbec01c1b54a19bc9b2bf46eb",
+      "document_sha256": "ec5954a2cd18f2d5e4b2c2a53b67b1aee3816c5a9675982824b1a119c267de0c",
+      "byte_length": 1713,
+      "unicode_word_tokens": 226,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/observation_theory_separation.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 453,
+          "C2": 498,
+          "C3": 453,
+          "C4": 498
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/protocol_versioning.tex",
+      "tree_object_id": "4ebf29abf2d594b48823a0ff53881e67f5e39c08",
+      "document_sha256": "6527e580097f69fe463ac3c767ba624a3e345947de8dade833afb402228fb521",
+      "byte_length": 1503,
+      "unicode_word_tokens": 208,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/protocol_versioning.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 414,
+          "C2": 459,
+          "C3": 414,
+          "C4": 459
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/required_research_artifacts.tex",
+      "tree_object_id": "5707944f1e72ded20bb2e01adda149a72792ac74",
+      "document_sha256": "2194190924289ae84418b21f3abc5a021839d6ad7841b6eeef6a44a4aa093ad6",
+      "byte_length": 1924,
+      "unicode_word_tokens": 252,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/required_research_artifacts.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 477,
+          "C2": 522,
+          "C3": 477,
+          "C4": 522
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/threats_to_validity.tex",
+      "tree_object_id": "0d150e3eeac5445a3b4087f9efe2fc041a1b37e3",
+      "document_sha256": "9d228b4745800f5463ebeba4ec6930bdb2dfbbef39b0fa88cdf4ba5180cd24af",
+      "byte_length": 2013,
+      "unicode_word_tokens": 245,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/threats_to_validity.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 522,
+          "C2": 567,
+          "C3": 522,
+          "C4": 567
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-0-protocol/universal_research_pipeline.tex",
+      "tree_object_id": "36856aefb9eee3453a49f6c5c604322a9601133d",
+      "document_sha256": "90e7db2195ed7fad963f83c155e5b59cb178d8be946650cf13de3fc44304f101",
+      "byte_length": 2061,
+      "unicode_word_tokens": 263,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit fdb9975c908fa6ee621ee98756e11b6e37237c0e records author joselunasrt8-creator <your-github-email@example.com> at 2026-07-12T02:07:59-05:00 for papers/paper-0-protocol/universal_research_pipeline.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 492,
+          "C2": 537,
+          "C3": 492,
+          "C4": 537
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b1/README.md",
+      "tree_object_id": "ebd668d30cf4ba83eee5001492a7078b7b9ce7cd",
+      "document_sha256": "fb9533513508f2c3f830fc108ec0342a8ba2704ff9fba2cbbcee9463b2c6aa46",
+      "byte_length": 63,
+      "unicode_word_tokens": 8,
+      "meaningful_unit_count": 0,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for papers/paper-b1/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 76,
+          "C2": 121,
+          "C3": 76,
+          "C4": 121
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/README.md",
+      "tree_object_id": "888d81a32c65f4afee36dca46f2b851aea2a8814",
+      "document_sha256": "7191d3efe2ff613e4c10c1233f1228515f2badf5e70138ffa5da48b7cbe89e49",
+      "byte_length": 299,
+      "unicode_word_tokens": 44,
+      "meaningful_unit_count": 2,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for papers/paper-b2/README.md"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 143,
+          "C2": 188,
+          "C3": 143,
+          "C4": 188
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_01_abstract.tex",
+      "tree_object_id": "e742894e117ebe6cfef5a0816a25c84bc1297940",
+      "document_sha256": "8bc3e542616646d02511a755f822e49906ecaf029c93aebdd0545a1dc804c551",
+      "byte_length": 1602,
+      "unicode_word_tokens": 208,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_01_abstract.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 429,
+          "C2": 474,
+          "C3": 429,
+          "C4": 474
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_02_introduction.tex",
+      "tree_object_id": "c038f7e97dbb63f38b535ef83f1df2a2a44050a0",
+      "document_sha256": "305a263cfb27e684fe6dc0f8262ba70ac4cb924052aafd14edb8c0ff358e31d2",
+      "byte_length": 2611,
+      "unicode_word_tokens": 361,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_02_introduction.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 645,
+          "C2": 690,
+          "C3": 645,
+          "C4": 690
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_03_related_work.tex",
+      "tree_object_id": "b347d98ae961167bfedeed364df9a1a7972f485b",
+      "document_sha256": "29babfe90f7ef652b2f3ec06dc07f85844781a201546c729458f289bba4e8c00",
+      "byte_length": 2657,
+      "unicode_word_tokens": 364,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_03_related_work.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 579,
+          "C2": 624,
+          "C3": 579,
+          "C4": 624
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_04_methodology.tex",
+      "tree_object_id": "f09c67df7ba150e530e3ba1c16b9d11e1a13e16a",
+      "document_sha256": "020573e63cac394a8d62a2a1efca0d7302c40540e98b997726588080239d00c5",
+      "byte_length": 6981,
+      "unicode_word_tokens": 944,
+      "meaningful_unit_count": 9,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_04_methodology.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1424,
+          "C2": 1469,
+          "C3": 1480,
+          "C4": 1525
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_05_protocol_registration.tex",
+      "tree_object_id": "8c2cbdeb518d01bb9acee703bae8d06bd35850ac",
+      "document_sha256": "b1f13d6450dbcdeb49a1ce39094e01c448ce4de60985f8152b7e8c8f884b449b",
+      "byte_length": 8669,
+      "unicode_word_tokens": 1197,
+      "meaningful_unit_count": 10,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 2822dc7574b0f49431160737fa6c271187f5c6ed records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T23:41:36-05:00 for papers/paper-b2/b2_05_protocol_registration.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 2062,
+          "C2": 2107,
+          "C3": 2239,
+          "C4": 2284
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_06_study_design.tex",
+      "tree_object_id": "6c4444ba0018a8af75ac35a85c1b4ae20b817d5f",
+      "document_sha256": "e6b00b7ff4dc30c5fec490e78f75f408c1bcbf9202bc71f9c1d1d6916dc3785f",
+      "byte_length": 1266,
+      "unicode_word_tokens": 153,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for papers/paper-b2/b2_06_study_design.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 370,
+          "C2": 415,
+          "C3": 370,
+          "C4": 415
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_07_baseline_observation_records.tex",
+      "tree_object_id": "6b17585a1afcac78ab5f71fcf244154afd185b70",
+      "document_sha256": "65606c111acb7a2db87913eda1c61fbff487e9f265ddfb9ccb79b9eb67fa8f3d",
+      "byte_length": 2554,
+      "unicode_word_tokens": 342,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 109c455924f0e89bea28ca521758a7a16dc73721 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T16:09:26-05:00 for papers/paper-b2/b2_07_baseline_observation_records.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 799,
+          "C2": 844,
+          "C3": 799,
+          "C4": 844
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_08_execution_surface_matrix.tex",
+      "tree_object_id": "72746bcd1eeda29c0f9d1dd4e566aaadae00c47c",
+      "document_sha256": "e63fabd2dfff218fe46ca158788f4905b58420155c52be06915ac2fb72e09262",
+      "byte_length": 4195,
+      "unicode_word_tokens": 560,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_08_execution_surface_matrix.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1171,
+          "C2": 1216,
+          "C3": 1171,
+          "C4": 1216
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_09_derived_object_registry.tex",
+      "tree_object_id": "3804aa68630a00af287283445920b57592382eba",
+      "document_sha256": "881b1a777990537c938337d93961e0ca257db6253ef4c7b0c7a2271c3bca782b",
+      "byte_length": 5510,
+      "unicode_word_tokens": 737,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_09_derived_object_registry.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1452,
+          "C2": 1497,
+          "C3": 1452,
+          "C4": 1497
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_10_measurement_registry.tex",
+      "tree_object_id": "38ce31b9af8d3cca21fa50cfb0efab5e863a3b02",
+      "document_sha256": "80c03c7caccdbc6c411f1183cbbe46f101b27e4615726bcb39081591657740fc",
+      "byte_length": 3682,
+      "unicode_word_tokens": 495,
+      "meaningful_unit_count": 5,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_10_measurement_registry.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1054,
+          "C2": 1099,
+          "C3": 1054,
+          "C4": 1099
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_11_comparative_dataset.tex",
+      "tree_object_id": "1659e63f1e27bbc53492aad91c7358e9a87c7f9c",
+      "document_sha256": "6a475b8b0b7cd8c57d9728acb12423dde09fe0cc23ac54305cd26599bab4e7d7",
+      "byte_length": 4619,
+      "unicode_word_tokens": 638,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_11_comparative_dataset.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 1329,
+          "C2": 1374,
+          "C3": 1329,
+          "C4": 1374
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_11a_registration_freeze.tex",
+      "tree_object_id": "6e53a9a6c9fae54f08e316ae742f4e39b295a8e2",
+      "document_sha256": "9b42535cadd58a5aea5fc8f3fbe0a0adf2c68347379ab5e021e4d8d64c517a68",
+      "byte_length": 1869,
+      "unicode_word_tokens": 241,
+      "meaningful_unit_count": 3,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_11a_registration_freeze.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 518,
+          "C2": 563,
+          "C3": 518,
+          "C4": 563
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_12_analysis.tex",
+      "tree_object_id": "cfabab55d13360fd07c90df27f8d156f14764fbd",
+      "document_sha256": "3dc143b603fd6cc6a7a9c24db22f1712a857bea595f83e06e97849223b778844",
+      "byte_length": 3393,
+      "unicode_word_tokens": 467,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_12_analysis.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 892,
+          "C2": 937,
+          "C3": 892,
+          "C4": 937
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_13_threats_to_validity.tex",
+      "tree_object_id": "af81c58d1ea76469c25c459fc78e772910880d53",
+      "document_sha256": "9f27f475ae5bc89148b93633468c0820705adea8649dc073a3c3335b33ed70fd",
+      "byte_length": 3661,
+      "unicode_word_tokens": 467,
+      "meaningful_unit_count": 4,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 396c9f208d6078e4dcc0b562113462c16adcd951 records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-13T00:22:37-05:00 for papers/paper-b2/b2_13_threats_to_validity.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 860,
+          "C2": 905,
+          "C3": 860,
+          "C4": 905
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_14_retained_classification.tex",
+      "tree_object_id": "4a1ca598d011e56fda04514642480c6d927ae154",
+      "document_sha256": "eb3f5e43575d6a61159d920985429067d76993dcf754650e58501c6d6df2323d",
+      "byte_length": 2794,
+      "unicode_word_tokens": 351,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_14_retained_classification.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 811,
+          "C2": 856,
+          "C3": 811,
+          "C4": 856
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_15_future_work.tex",
+      "tree_object_id": "0d5c0502ff0dd9c78e5818072295d651e0191227",
+      "document_sha256": "6835eaa36c56b80f89c35850a6ce0ba275f8b5acf412da53b0dfc97bf8f44f56",
+      "byte_length": 2169,
+      "unicode_word_tokens": 280,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_15_future_work.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 519,
+          "C2": 564,
+          "C3": 519,
+          "C4": 564
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/b2_16_conclusion.tex",
+      "tree_object_id": "8c273ee0de7f62af2afeb3c200b167e63daa0ad8",
+      "document_sha256": "dbb613a965fa6819cb85052a8305c366f8b908070a972917bb68e21861a5fa4a",
+      "byte_length": 746,
+      "unicode_word_tokens": 101,
+      "meaningful_unit_count": 1,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 70e8c6e32f2088e3e92fb9ade3033aaac2810a4a records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-12T20:04:54-05:00 for papers/paper-b2/b2_16_conclusion.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 236,
+          "C2": 281,
+          "C3": 236,
+          "C4": 281
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    },
+    {
+      "path": "papers/paper-b2/main.tex",
+      "tree_object_id": "55e142ec2cd3f42d7c017471955e1dae783bfaed",
+      "document_sha256": "be410f6796329264274fed6d80f12ce3d415db9b423ab19cc5bb71738b393a10",
+      "byte_length": 1889,
+      "unicode_word_tokens": 210,
+      "meaningful_unit_count": 5,
+      "provenance": {
+        "authorship_classification": "HUMAN_AUTHORED",
+        "authorship_evidence": [
+          "git commit 67796dcba6616dc75693a24232250f9801e408df records author joselunasrt8-creator <238390525+joselunasrt8-creator@users.noreply.github.com> at 2026-07-10T22:38:53-05:00 for papers/paper-b2/main.tex"
+        ],
+        "generated": false,
+        "provenance_clear": true,
+        "derived_from": []
+      },
+      "leakage": {
+        "contains_answer_keys": false,
+        "contains_scope_rubrics": false,
+        "contains_prior_experiment_outputs": false,
+        "contains_experiment_specific_instructions": false,
+        "contains_target_tasks": false,
+        "selected_after_target_performance": false
+      },
+      "token_accounting": {
+        "tokenizer_name": "o200k_base",
+        "tokenizer_package": "tiktoken==0.9.0",
+        "condition_counts": {
+          "C1": 670,
+          "C2": 715,
+          "C3": 670,
+          "C4": 715
+        },
+        "truncation": false,
+        "compression": false,
+        "substitution": false
+      },
+      "status": "INELIGIBLE",
+      "reasons": [
+        "INSUBSTANTIAL_OR_INDEX_ONLY_DOCUMENT",
+        "INSUFFICIENT_SUBSTANTIVE_CONTENT",
+        "INSUFFICIENT_MEANINGFUL_UNITS"
+      ]
+    }
+  ]
+}

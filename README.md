@@ -158,3 +158,27 @@ python3 scripts/validate.py
 New research manuscripts must originate in this repository by copying `papers/_template/` to `papers/<paper-id>/`; Overleaf and other external editors are non-canonical review surfaces only.
 
 See [Publication Build and Release Artifacts](docs/publication.md) for the repository-first authoring workflow, required TeX Live packages, CI behavior, bibliography/reference warning categories, and release artifact locations.
+
+## Architectural Boundary Research Overview
+
+This visual overview summarizes the purpose, workflow, evidence model, and ecosystem position of Architectural Boundary Research.
+
+### Research Focus
+
+![Research Focus](assets/images/slides/boundaryresearch.jpeg)
+
+### Research Workflow
+
+![Research Workflow](assets/images/slides/howwediscover.jpeg)
+
+### Evidence Before Theory
+
+![Evidence Before Theory](assets/images/slides/evidencebeforetheory.jpeg)
+
+### Why Evidence Comes First
+
+![Why Evidence Comes First](assets/images/slides/whyevidencecomesfirst.jpeg)
+
+### Position in the Continufy Research Pipeline
+
+![Research Pipeline](assets/images/slides/pipeline.png)

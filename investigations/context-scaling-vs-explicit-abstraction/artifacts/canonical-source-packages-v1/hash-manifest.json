@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "corpus_commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+  "protocol_freeze_commit": "f2590be67c5763b7ef31827f473813007e695ff3",
+  "prompt_bindings": {
+    "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/prompt-bindings.json",
+    "commit": "ba18a99ab6276948aebf74f4240e5de75a30d62d",
+    "sha256": "1bddfe4b2cbd90500246903d9008d4defe171b6935b63eb09cf74c3b1326b625"
+  },
+  "governed_files": {
+    "investigations/context-scaling-vs-explicit-abstraction/artifacts/canonical-source-packages-v1/candidate-review-ledger.json": "6ac81693cb89dc979135499d7c71333edecfff25ab9fb1e0bd0af84870330f26",
+    "investigations/context-scaling-vs-explicit-abstraction/artifacts/canonical-source-packages-v1/selection-result.json": "a28cfcced0ecab01b67ca2e7c2775fa5c6608334ab1eacf511256267ab3d8e67",
+    "investigations/context-scaling-vs-explicit-abstraction/artifacts/canonical-source-packages-v1/source-selection-freeze.json": "e30ae79722eff29ab69acd814d317af4bbf7e54344545388808b1cbbacd643ad"
+  }
+}

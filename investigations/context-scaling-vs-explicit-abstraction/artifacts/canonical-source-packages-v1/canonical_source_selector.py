@@ -345,8 +345,9 @@ def select_candidates(
                     "normalized_sha256": sha256(normalized_document(candidate["content_utf8"]).encode("utf-8")),
                 }
             )
-            if len(eligible) == protocol["selection"]["required_count"]:
-                break
+            # Review the entire frozen corpus even after the selection quota is
+            # reached.  The first eight remain selected, while the complete
+            # ledger preserves every later eligibility determination.
     selected_paths = [item["candidate"]["path"] for item in eligible[:8]]
     ready = len(selected_paths) == 8
     assignments = {

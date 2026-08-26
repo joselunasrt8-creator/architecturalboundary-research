@@ -1,0 +1,52 @@
+{
+  "object_type": "architectural_investigation_execution_package",
+  "object_id": "AII-SAF-20260825-001",
+  "package_status": "complete_blocked_preflight_record",
+  "execution_host": {
+    "repository": "joselunasrt8-creator/architecturalboundary-research",
+    "commit": "d10c0329f5fa871d131d4879ae6684865bf2f2fc",
+    "tree": "39b8151ecc510df8e36bbad5e66dcc87aa3933c9"
+  },
+  "instrument": {
+    "requested_identity": "frozen repository-local Architectural Investigation Instrument",
+    "binding_status": "unbound",
+    "binding_failure_claim": "CL-002"
+  },
+  "target": {
+    "repository": "joselunasrt8-creator/structural-analysis-foundations",
+    "commit": "7cc919bebe799b5c9086d4ef58968947c761d00a",
+    "tree": "fb1682fd84f677e1b51fd6e6f8987bba1e2b7753"
+  },
+  "operator": "Codex",
+  "custodian": "joselunasrt8-creator",
+  "preflight_started_at": "2026-08-26T00:26:43Z",
+  "preflight_stopped_at": "2026-08-26T00:27:27Z",
+  "execution_validity": "BLOCKED",
+  "audit_outcome": "NOT_REACHED",
+  "validation": {
+    "repository_validator": "passed_with_disclosed_missing_tex_toolchain",
+    "python_tests": "261_passed",
+    "package_integrity": "passed",
+    "git_diff_check": "passed"
+  },
+  "artifacts": [
+    "README.md",
+    "audit-request.md",
+    "scope-and-coverage.md",
+    "inspection-log.md",
+    "claim-level-evidence-ledger.md",
+    "boundary-decomposed-findings.md",
+    "repository-findings.md",
+    "research-methodology-candidates.md",
+    "structology-candidates.md",
+    "instrument-improvement-observations.md",
+    "manual-judgment-register.md",
+    "stopping-determination.md",
+    "execution-validity-record.md",
+    "validation-record.md",
+    "execution-package-manifest.json"
+  ],
+  "authority_changes": [],
+  "target_mutations": [],
+  "external_mutations": []
+}

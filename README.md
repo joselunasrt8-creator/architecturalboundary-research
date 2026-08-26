@@ -90,11 +90,20 @@ Execution.
 
 The repository-owned [Reference Execution v1.0 freeze/readiness record](docs/reference-execution/v1.0/freeze-readiness-record.md)
 assesses clean `main` commit
-`dc636f2ec0161b3554605489857cf19142818a43` and records `BLOCKED`. The local
-Architectural Investigation Instrument specification, execution-record
-contract, and calibration predicates remain unfinished under Issues #59, #77,
-and #78. No Reference Execution or clean rerun has been performed under Issue
-#83.
+`dc636f2ec0161b3554605489857cf19142818a43` and records `BLOCKED`. Issue #106
+later materialized a deterministic
+[Architectural Investigation Instrument v1 candidate](instrument/architectural-investigation/v1/README.md),
+but the [superseding instrument freeze record](docs/reference-execution/v1.0/architectural-investigation-instrument-v1-freeze-record.md)
+records `INSTRUMENT_SPECIFICATION_REVISION_REQUIRED`: Issues #59, #77, and #78
+were closed without an evidence-bound `IMPLEMENTATION_READY` determination or
+complete calibration predicates. Issue #107's
+[candidate.2 readiness overlay](instrument/architectural-investigation/v1/candidate-2/README.md)
+materializes those general semantics and a controlled fixture, while the
+[Issue #107 readiness review](docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-review-issue-107.md)
+preserves the remaining independent-calibration and containing-commit blockers.
+Its determination remains `INSTRUMENT_SPECIFICATION_REVISION_REQUIRED`. The
+blocked Issue #84 package remains `BLOCKED` / `NOT_REACHED`; no substantive
+rerun is authorized.
 
 ## Repository Organization
 
@@ -106,6 +115,7 @@ and #78. No Reference Execution or clean rerun has been performed under Issue
 | `datasets/` | Canonical, comparative, and published datasets derived from investigations. |
 | `schemas/` | Repository-level JSON schemas for protocol objects and investigation metadata. |
 | `analysis/` | Investigation-local analysis lives under each investigation; reusable or cross-investigation analysis should be added through the lifecycle layout before publication. |
+| `instrument/` | Versioned repository-owned audit-instrument candidates, manifests, compatibility contracts, and readiness boundaries. Presence does not imply freeze or execution authority. |
 | `papers/` | Manuscripts and paper-specific source files, including the migrated B2 manuscript. |
 | `registry/` | Machine-readable indexes of investigations, protocol versions, retained classifications, and candidate invariants. |
 | `figures/` | Shared figures grouped by protocol, papers, and investigations. |

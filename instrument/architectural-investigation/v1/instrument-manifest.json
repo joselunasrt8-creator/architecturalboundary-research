@@ -1,0 +1,133 @@
+{
+  "schema_version": "architectural-investigation-instrument-manifest-v1",
+  "object_type": "ArchitecturalInvestigationInstrumentManifest",
+  "instrument_name": "Architectural Investigation Instrument",
+  "instrument_version": "1.0.0-candidate.1",
+  "repository": "joselunasrt8-creator/architecturalboundary-research",
+  "package_path": "instrument/architectural-investigation/v1",
+  "materialization_base_commit": "d10c0329f5fa871d131d4879ae6684865bf2f2fc",
+  "containing_commit": null,
+  "package_status": "UNFROZEN_CANDIDATE",
+  "readiness_determination": "INSTRUMENT_SPECIFICATION_REVISION_REQUIRED",
+  "audit_authorization": false,
+  "canonical_path_status": "PROPOSED_NOT_FROZEN",
+  "proposed_canonical_paths": [
+    "instrument/architectural-investigation/v1/specification.md",
+    "instrument/architectural-investigation/v1/execution-record-contract.md",
+    "instrument/architectural-investigation/v1/calibration-contract.md",
+    "instrument/architectural-investigation/v1/compatibility-and-supersession.md"
+  ],
+  "content_identity": {
+    "algorithm": "sha256-path-nul-digest-lf-v1",
+    "canonicalization": "Sort artifact records by path; for each record append UTF-8 path, one NUL byte, lowercase SHA-256 hex, and one LF byte; hash the concatenation with SHA-256.",
+    "digest": "9888d755916ffae082e54161f5b716ec5b26ca8b5d43b5b9848cbca07bc09b00",
+    "artifacts": [
+      {
+        "path": "instrument/architectural-investigation/v1/README.md",
+        "sha256": "dc4a4737b5f46c053e18169d241d2ed077251b3da4027f827f9f342661b5e977"
+      },
+      {
+        "path": "instrument/architectural-investigation/v1/calibration-contract.md",
+        "sha256": "1c003ecb2ae94f6202cc03f1d73183607f8805b2ce9894af66e4c89b4dfa9d00"
+      },
+      {
+        "path": "instrument/architectural-investigation/v1/compatibility-and-supersession.md",
+        "sha256": "71b600ac05bad83649528e34541796feb3c15c6b8930b1e794874ff6278e0cb7"
+      },
+      {
+        "path": "instrument/architectural-investigation/v1/execution-record-contract.md",
+        "sha256": "203baae2b004873a0c88e7714e99ed1bf1a23e1eb460f08065d9b95c2ae2f8ab"
+      },
+      {
+        "path": "instrument/architectural-investigation/v1/specification.md",
+        "sha256": "ef058c5c5e4524a2b47cbddcdd290b74ce9d988d1203b6abc358407f40df1216"
+      },
+      {
+        "path": "instrument/architectural-investigation/v1/unresolved-normative-gaps.md",
+        "sha256": "d4e264c2fc22f2a49bb8514552628ec1151d44c089a938432884512039452d6b"
+      }
+    ]
+  },
+  "contract_provenance": [
+    {
+      "issue": 59,
+      "url": "https://github.com/joselunasrt8-creator/architecturalboundary-research/issues/59",
+      "closed_at": "2026-08-21T07:20:05Z",
+      "last_recorded_determination": "SPECIFICATION_REVISION_REQUIRED",
+      "role": "parent instrument specification"
+    },
+    {
+      "issue": 77,
+      "url": "https://github.com/joselunasrt8-creator/architecturalboundary-research/issues/77",
+      "closed_at": "2026-08-21T07:21:18Z",
+      "last_recorded_determination": "SPECIFICATION_REVISION_REQUIRED",
+      "role": "execution-record container"
+    },
+    {
+      "issue": 78,
+      "url": "https://github.com/joselunasrt8-creator/architecturalboundary-research/issues/78",
+      "closed_at": "2026-08-21T07:21:26Z",
+      "last_recorded_determination": "SPECIFICATION_REVISION_REQUIRED",
+      "role": "controlled calibration semantics"
+    }
+  ],
+  "external_normative_dependencies": [
+    {
+      "name": "Continufy Research & Development Instrument",
+      "version": "1.0.0",
+      "repository": "joselunasrt8-creator/Continufy-",
+      "commit": "398098c231530379769c2c0660f1f3217d5e7b62",
+      "path": "docs/reference-execution/v1.0/canonical-instrument-specification.md",
+      "git_blob": "27a9d9ab4904182b31d63a8f7c43f6a8b8927d9a",
+      "authority_boundary": "common coordination instrument; not repository-local audit semantics"
+    },
+    {
+      "name": "Reference Execution v1.0 coordination contract",
+      "repository": "joselunasrt8-creator/Continufy-",
+      "commit": "398098c231530379769c2c0660f1f3217d5e7b62",
+      "path": "docs/reference-execution/v1.0/coordination-contract.md",
+      "git_blob": "327c304e222bfab75d0aa9bbf3a19bcea85f217b",
+      "authority_boundary": "coordination only; determinations remain repository-local"
+    },
+    {
+      "name": "Downstream execution-plan template",
+      "repository": "joselunasrt8-creator/Continufy-",
+      "commit": "398098c231530379769c2c0660f1f3217d5e7b62",
+      "path": "docs/reference-execution/v1.0/downstream-execution-plan-template.md",
+      "git_blob": "45dcf7f58e89713eae9c3a118e3add4d4fd36a73",
+      "authority_boundary": "record shape only; not a substitute instrument"
+    }
+  ],
+  "compatibility": {
+    "issue_77_execution_record": "STRUCTURALLY_MAPPED",
+    "issue_78_calibration": "STRUCTURALLY_MAPPED_SEMANTICALLY_UNRESOLVED",
+    "structural_validation": "AVAILABLE_FOR_CANDIDATE_IDENTITY_ONLY",
+    "scientific_judgment_automation": "PROHIBITED"
+  },
+  "unresolved_gap_ids": [
+    "AII-V1-GAP-001",
+    "AII-V1-GAP-002",
+    "AII-V1-GAP-003",
+    "AII-V1-GAP-004",
+    "AII-V1-GAP-005",
+    "AII-V1-GAP-006",
+    "AII-V1-GAP-007",
+    "AII-V1-GAP-008",
+    "AII-V1-GAP-009",
+    "AII-V1-GAP-010"
+  ],
+  "supersession": {
+    "previous_readiness_record": "docs/reference-execution/v1.0/freeze-readiness-record.md",
+    "previous_readiness_record_git_blob": "92bcefb29d907b958a2ff2f54f796faf8701c713",
+    "supersedes_scope": "instrument materialization assessment only",
+    "supersedes_frozen_instrument": null
+  },
+  "preserved_blocked_execution": {
+    "execution_id": "AII-SAF-20260825-001",
+    "path": "investigations/structural-analysis-foundations-audit-1/execution-package-manifest.json",
+    "sha256": "d6b865736f21405a34434186a6989a32d20794ebaef6ef3d7cb4b6e9423daa1d",
+    "execution_validity": "BLOCKED",
+    "audit_outcome": "NOT_REACHED",
+    "superseded": false
+  }
+}

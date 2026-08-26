@@ -1,0 +1,251 @@
+{
+  "schema_version": "architectural-investigation-calibration-fixture-v1",
+  "object_type": "ArchitecturalInvestigationCalibrationFixture",
+  "fixture_id": "AII-V1-CAL-FIXTURE-001",
+  "instrument_version": "1.0.0-candidate.2",
+  "purpose": "Controlled classification cases for reviewer calibration; expected classifications are normative review targets, not automated scientific judgments.",
+  "review_protocol": {
+    "minimum_qualified_independent_reviewers": 2,
+    "blind_review_required": true,
+    "automatic_classification_prohibited": true,
+    "disagreement_disposition": "PRESERVE_AND_ADJUDICATE_OR_REVISE_SPECIFICATION"
+  },
+  "cases": [
+    {
+      "case_id": "CAL-001",
+      "question": "What may a bound canonical specification establish when no implementation or execution evidence exists?",
+      "claim_type": "DOCUMENTARY_CONTRACT",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-001-E01",
+          "evidence_class": "NORMATIVE_SPECIFICATION",
+          "source_authority": "DECLARED_CANONICAL",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_DECLARED_TEXT",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "SUPPORTED_WITH_LIMITATIONS",
+        "applicable_tracks": ["DOCUMENTARY_SPECIFICATION"],
+        "highest_supported_states": ["NORMATIVELY_SPECIFIED"],
+        "reachability_states": ["METHOD_NORMATIVELY_SPECIFIED"],
+        "promotion_disposition": "OBSERVED_CANDIDATE",
+        "manual_judgment_required": true,
+        "prohibited_inferences": ["IMPLEMENTED", "EXECUTED", "SCIENTIFICALLY_CORRECT"]
+      },
+      "rationale": "Normative authority establishes declared meaning only; implementation, execution, and scientific correctness require distinct evidence."
+    },
+    {
+      "case_id": "CAL-002",
+      "question": "What follows from a bound test and workflow configuration when no workflow run is observed?",
+      "claim_type": "EXECUTABLE_SYSTEM",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-002-E01",
+          "evidence_class": "TEST_OR_FIXTURE",
+          "source_authority": "NONAUTHORITATIVE_EXAMPLE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_ARTIFACT_BYTES",
+          "execution_observed": false
+        },
+        {
+          "evidence_id": "CAL-002-E02",
+          "evidence_class": "WORKFLOW_CONFIGURATION",
+          "source_authority": "WORKFLOW_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_DECLARED_SELECTION",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "SUPPORTED_WITH_LIMITATIONS",
+        "applicable_tracks": ["EXECUTABLE_IMPLEMENTATION"],
+        "highest_supported_states": ["ARTIFACT_PRESENT"],
+        "reachability_states": ["ARTIFACT_SELECTED_BY_REQUIRED_WORKFLOW"],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "prohibited_inferences": ["EXECUTED", "EXECUTION_SUCCEEDED", "RESULT_PRESERVED"]
+      },
+      "rationale": "Configuration may establish declared selection, but artifact and workflow presence cannot establish an observed run or result."
+    },
+    {
+      "case_id": "CAL-003",
+      "question": "What follows from a revision-bound execution record whose declared success predicate is satisfied and whose result identity is preserved?",
+      "claim_type": "EXECUTABLE_SYSTEM",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-003-E01",
+          "evidence_class": "EXECUTION_RECORD",
+          "source_authority": "REPOSITORY_STATUS_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_RECORDED_EXECUTION",
+          "execution_observed": true
+        },
+        {
+          "evidence_id": "CAL-003-E02",
+          "evidence_class": "DIRECT_OBSERVATION",
+          "source_authority": "REPOSITORY_STATUS_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_EXECUTION_OBSERVATION",
+          "execution_observed": true
+        }
+      ],
+      "expected": {
+        "claim_status": "SUPPORTED_WITH_LIMITATIONS",
+        "applicable_tracks": ["EXECUTABLE_IMPLEMENTATION"],
+        "highest_supported_states": ["RESULT_PRESERVED"],
+        "reachability_states": ["RESULT_BOUND_TO_REVISION"],
+        "promotion_disposition": "PROVISIONAL",
+        "manual_judgment_required": true,
+        "prohibited_inferences": ["REPEATED", "TRANSFERRED", "INDEPENDENTLY_REPRODUCED", "GENERAL_CORRECTNESS"]
+      },
+      "rationale": "The record supports only its bounded execution and result; it does not establish repetition, transfer, reproduction, or general correctness."
+    },
+    {
+      "case_id": "CAL-004",
+      "question": "How is a claim classified when two bound operative normative sources disagree and no owning supersession decision exists?",
+      "claim_type": "DOCUMENTARY_CONTRACT",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-004-E01",
+          "evidence_class": "NORMATIVE_SPECIFICATION",
+          "source_authority": "DECLARED_CANONICAL",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_DECLARED_TEXT",
+          "execution_observed": false
+        },
+        {
+          "evidence_id": "CAL-004-E02",
+          "evidence_class": "CONTRADICTORY_EVIDENCE",
+          "source_authority": "DECLARED_CANONICAL",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_CONTRADICTION",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "CONTESTED",
+        "applicable_tracks": ["DOCUMENTARY_SPECIFICATION"],
+        "highest_supported_states": ["DOCUMENTED"],
+        "reachability_states": ["METHOD_DOCUMENTED"],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "canonical_source_state": "SPLIT_OPERATIVE_AUTHORITY",
+        "prohibited_inferences": ["SILENT_PRECEDENCE", "NORMATIVELY_SPECIFIED", "PROMOTION_ELIGIBLE"]
+      },
+      "rationale": "Conflicting operative authority remains visible and caps the claim below a resolved normative state."
+    },
+    {
+      "case_id": "CAL-005",
+      "question": "How is an inaccessible producer-owned external dependency treated when no immutable external evidence is available?",
+      "claim_type": "EXTERNAL_DEPENDENCY",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-005-E01",
+          "evidence_class": "ABSENCE_OR_MISSING_EVIDENCE",
+          "source_authority": "EXTERNAL_UNRESOLVED",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_BOUNDED_SEARCH_FAILURE",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "INSUFFICIENT_EVIDENCE",
+        "applicable_tracks": ["TRANSFER_AND_REPRODUCTION"],
+        "highest_supported_states": [],
+        "reachability_states": [],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "external_evidence_mode": "EXTERNAL_REFERENCE_UNRESOLVED",
+        "external_sovereignty_state": "UNRESOLVED",
+        "prohibited_inferences": ["LOCAL_CONFORMANCE_FAILURE", "EXTERNAL_NONEXISTENCE", "AUTHORITY_TRANSFER"]
+      },
+      "rationale": "Unavailable external evidence remains unresolved and producer-owned; it is neither local failure nor proof of nonexistence."
+    },
+    {
+      "case_id": "CAL-006",
+      "question": "Can a closed issue and successful structural validator establish instrument readiness, authority, or audit eligibility?",
+      "claim_type": "INSTRUMENT_LIFECYCLE",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-006-E01",
+          "evidence_class": "REPOSITORY_METADATA",
+          "source_authority": "REPOSITORY_STATUS_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_ISSUE_STATE",
+          "execution_observed": false
+        },
+        {
+          "evidence_id": "CAL-006-E02",
+          "evidence_class": "DIRECT_OBSERVATION",
+          "source_authority": "REPOSITORY_STATUS_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_VALIDATION_RESULT",
+          "execution_observed": true
+        }
+      ],
+      "expected": {
+        "claim_status": "INSUFFICIENT_EVIDENCE",
+        "applicable_tracks": ["DOCUMENTARY_SPECIFICATION", "EXECUTABLE_IMPLEMENTATION"],
+        "highest_supported_states": [],
+        "reachability_states": [],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "prohibited_inferences": ["IMPLEMENTATION_READY", "FROZEN", "AUDIT_AUTHORIZED", "SCIENTIFICALLY_CORRECT"]
+      },
+      "rationale": "Issue state and a bounded validator result establish only repository status and that validation execution; readiness and authorization have additional predicates."
+    },
+    {
+      "case_id": "CAL-007",
+      "question": "What legitimacy state follows from an implemented local enforcement guard with no external or bypass-path evidence?",
+      "claim_type": "LEGITIMACY_ENFORCEMENT",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-007-E01",
+          "evidence_class": "IMPLEMENTATION_SOURCE",
+          "source_authority": "IMPLEMENTATION_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_SOURCE_BYTES",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "SUPPORTED_WITH_LIMITATIONS",
+        "applicable_tracks": ["EXECUTABLE_IMPLEMENTATION"],
+        "highest_supported_states": ["IMPLEMENTED"],
+        "reachability_states": ["ARTIFACT_PRESENT"],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "legitimacy_state": "RUNTIME_LOCAL_ENFORCEMENT",
+        "prohibited_inferences": ["REPOSITORY_WIDE_ENFORCEMENT", "EXTERNALLY_VERIFIED_ENFORCEMENT", "NON_BYPASS_CLOSURE"]
+      },
+      "rationale": "Static implementation supports a local bounded capability only; it cannot establish execution, repository-wide selection, external coverage, or bypass closure."
+    },
+    {
+      "case_id": "CAL-008",
+      "question": "What does a revision-bound bounded search establish when required execution evidence is not found?",
+      "claim_type": "EXECUTION_CLAIM",
+      "evidence_items": [
+        {
+          "evidence_id": "CAL-008-E01",
+          "evidence_class": "ABSENCE_OR_MISSING_EVIDENCE",
+          "source_authority": "REPOSITORY_STATUS_AUTHORITATIVE",
+          "revision_bound": true,
+          "directness": "DIRECT_FOR_BOUNDED_SEARCH_FAILURE",
+          "execution_observed": false
+        }
+      ],
+      "expected": {
+        "claim_status": "INSUFFICIENT_EVIDENCE",
+        "applicable_tracks": ["EXECUTABLE_IMPLEMENTATION"],
+        "highest_supported_states": [],
+        "reachability_states": [],
+        "promotion_disposition": "DEFERRED_PENDING_EVIDENCE",
+        "manual_judgment_required": true,
+        "prohibited_inferences": ["EXECUTION_DID_NOT_OCCUR", "ARTIFACT_DOES_NOT_EXIST_OUTSIDE_SCOPE", "WITHDRAWN"]
+      },
+      "rationale": "The search result establishes missing support within the declared search boundary, not universal nonexistence or a negative runtime fact."
+    }
+  ]
+}

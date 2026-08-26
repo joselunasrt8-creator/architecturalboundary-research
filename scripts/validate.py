@@ -16,7 +16,7 @@ except ModuleNotFoundError:  # pragma: no cover - restricted local environments 
     from tools.jsonschema_fallback import Draft202012Validator
 
 REQUIRED_TOP_LEVEL = [
-    "analysis", "ci", "datasets", "docs", "evidence", "figures", "investigations",
+    "analysis", "ci", "datasets", "docs", "evidence", "figures", "instrument", "investigations",
     "papers", "protocol", "registry", "releases", "schemas", "scripts", "validation",
 ]
 REQUIRED_PATHS = [
@@ -29,6 +29,12 @@ REQUIRED_PATHS = [
     "papers/paper-0-protocol/README.md", "papers/paper-b1/README.md", "papers/paper-b2/main.tex",
     "datasets/README.md", "datasets/canonical/README.md", "datasets/comparative/README.md", "datasets/exports/README.md",
     "scripts/build_dataset.py", "scripts/build_retained_classification.py", "scripts/build_cohort_conclusion.py", "scripts/build_report.py", "scripts/build_publication_manifest.py", "scripts/check_registry.py", "scripts/build_papers.py",
+    "instrument/README.md", "instrument/architectural-investigation/v1/instrument-manifest.json",
+    "instrument/architectural-investigation/v1/candidate-2/instrument-manifest.json",
+    "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-freeze-record.md",
+    "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-review-issue-107.md",
+    "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md",
+    "scripts/validate_architectural_investigation_instrument.py",
 ]
 INVESTIGATION_WORKSPACE_ITEMS = [
     "README.md", "investigation-design.md", "preregistration.md", "literature/README.md",
@@ -763,6 +769,7 @@ def main() -> None:
     validate_repository_first_paper_template()
     validate_standard_paper_structure()
     validate_move_ledger()
+    subprocess.run([sys.executable, "scripts/validate_architectural_investigation_instrument.py"], cwd=ROOT, check=True)
     subprocess.run(["python3", "scripts/check_registry.py"], cwd=ROOT, check=True)
     publication_build = subprocess.run(["python3", "scripts/build_papers.py"], cwd=ROOT)
     if publication_build.returncode == 2:

@@ -100,8 +100,11 @@ complete calibration predicates. Issue #107's
 [candidate.2 readiness overlay](instrument/architectural-investigation/v1/candidate-2/README.md)
 materializes those general semantics and a controlled fixture, while the
 [Issue #107 readiness review](docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-review-issue-107.md)
-preserves the remaining independent-calibration and containing-commit blockers.
-Its determination remains `INSTRUMENT_SPECIFICATION_REVISION_REQUIRED`. The
+preserves the original independent-calibration and containing-commit blockers.
+The [Issue #108 readiness adjudication](docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md)
+subsequently binds candidate.2 to its exact containing commit but preserves the
+unavailable qualified independent review and exemplar evidence. Its determination
+remains `INSTRUMENT_SPECIFICATION_REVISION_REQUIRED`. The
 blocked Issue #84 package remains `BLOCKED` / `NOT_REACHED`; no substantive
 rerun is authorized.
 

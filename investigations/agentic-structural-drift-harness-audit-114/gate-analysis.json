@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "issue": 114,
+  "audit_status": "blocked",
+  "final_determination": "AUDIT_BLOCKED",
+  "evidence_boundary": {
+    "commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f",
+    "source_binding": "evidence/source-bindings.json"
+  },
+  "gates": [],
+  "unresolved_gate": {
+    "reported_expression": "from lib import helper",
+    "source": "Issue 114 controlling specification supplied to the audit",
+    "intended_task_property": null,
+    "actual_property_tested": null,
+    "classification": "UNRESOLVED_MISSING_PRIMARY_EVIDENCE",
+    "permitted_categories": [
+      "required_behavior",
+      "required_semantics",
+      "required_interface",
+      "required_structural_property",
+      "particular_implementation_shape",
+      "instrumentation_assumption"
+    ],
+    "decision_blocker": "Frozen objective, focused-gate definition, candidate patch, and raw focused-validation output are absent."
+  },
+  "compatibility": {
+    "focused_plus_ordinary_coherent": null,
+    "reason": "Neither gate suite nor its raw execution record is present.",
+    "historical_runs_classified": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "issue": 114,
+  "status": "prospective_decision_rules_not_applied",
+  "precedence": [
+    "ENVIRONMENT_FAILURE",
+    "INSTRUMENTATION_LIMITATION",
+    "HARNESS_MISMATCH",
+    "ORDINARY_VALIDATION_FAILURE",
+    "STRUCTURAL_INVARIANT_FAILURE",
+    "TASK_FAILURE"
+  ],
+  "precedence_rule": "Evaluate in listed order and assign the first class whose rule is established by preserved evidence. If none is established, leave the outcome UNCLASSIFIED; never infer a class from exit status alone.",
+  "classes": {
+    "TASK_FAILURE": {
+      "decision_rule": "The candidate violates a frozen behavioral, semantic, or interface requirement, the test is a valid operationalization of that requirement, and environment and instrument integrity are established.",
+      "required_evidence": ["frozen objective", "candidate patch/tree", "valid task test", "raw result"]
+    },
+    "HARNESS_MISMATCH": {
+      "decision_rule": "The candidate satisfies the frozen objective through a permitted implementation, but a gate rejects it because the gate requires an unfrozen implementation shape, ordering, path, or dependency edge.",
+      "required_evidence": ["frozen objective", "gate source", "candidate semantics", "counterexample implementation"]
+    },
+    "ORDINARY_VALIDATION_FAILURE": {
+      "decision_rule": "A repository-owned ordinary validation command, frozen before candidate generation and executable in the specified environment, reproducibly fails because of the candidate, without the failure being a frozen task or structural-invariant violation.",
+      "required_evidence": ["frozen command", "baseline result", "candidate result", "raw log", "causal localization"]
+    },
+    "STRUCTURAL_INVARIANT_FAILURE": {
+      "decision_rule": "A prospectively frozen structural invariant is violated under its prospectively frozen measurement, and the violation is not merely an unsupported instrument assumption.",
+      "required_evidence": ["frozen invariant", "frozen measure", "baseline measurement", "candidate measurement"]
+    },
+    "ENVIRONMENT_FAILURE": {
+      "decision_rule": "Execution cannot validly evaluate the candidate because a declared environmental prerequisite is absent or unstable, or the unchanged baseline fails for the same environmental cause.",
+      "required_evidence": ["environment contract", "environment observation", "baseline/control result"]
+    },
+    "INSTRUMENTATION_LIMITATION": {
+      "decision_rule": "The instrument cannot observe or correctly represent the relevant property for an otherwise in-scope implementation, independent of whether the candidate satisfies the task.",
+      "required_evidence": ["instrument specification", "instrument output", "independent observation or controlled counterexample"]
+    }
+  },
+  "historical_assignments": {
+    "run_1": "UNCLASSIFIED_MISSING_PRIMARY_EVIDENCE",
+    "run_2": "UNCLASSIFIED_MISSING_PRIMARY_EVIDENCE"
+  },
+  "final_determination": "AUDIT_BLOCKED"
+}

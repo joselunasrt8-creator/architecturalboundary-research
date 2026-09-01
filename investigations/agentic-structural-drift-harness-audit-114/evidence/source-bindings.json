@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "issue": 114,
+  "audit_checkout": {
+    "commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f",
+    "branch": "work",
+    "reachable_commit_count": 134,
+    "remote_configured": false
+  },
+  "searches": [
+    {
+      "command": "rg -n --hidden --glob '!.git/**' 'from lib import helper|focused validation|no-repair|candidate patch|multi-transition|Run 3|Issue #109|Issue 109' .",
+      "result": "no_matches"
+    },
+    {
+      "command": "git log --all -S'from lib import helper' --oneline --all",
+      "result": "no_matches"
+    },
+    {
+      "command": "git log --all -G'focused validation|Issue #109|Run 2' --oneline --all",
+      "result": "no_matches"
+    },
+    {
+      "command": "git fsck --full --no-reflogs --unreachable",
+      "result": "no_unreachable_objects"
+    }
+  ],
+  "required_primary_sources": {
+    "frozen_preregistration": {"status": "unavailable", "paths": []},
+    "run_1_artifacts": {"status": "unavailable", "paths": []},
+    "run_2_artifacts": {"status": "unavailable", "paths": []},
+    "frozen_objectives": {"status": "unavailable", "paths": []},
+    "validation_commands": {"status": "unavailable", "paths": []},
+    "focused_gates": {"status": "unavailable", "paths": []},
+    "ordinary_validation": {"status": "unavailable", "paths": []},
+    "structural_measurements": {"status": "unavailable", "paths": []},
+    "repair_policies": {"status": "unavailable", "paths": []},
+    "stopping_rules": {"status": "unavailable", "paths": []},
+    "candidate_patches": {"status": "unavailable", "paths": []},
+    "rejection_reasons": {"status": "unavailable", "paths": []},
+    "raw_validation_logs": {"status": "unavailable", "paths": []},
+    "machine_readable_execution_records": {"status": "unavailable", "paths": []}
+  },
+  "retrieval_constraints": [
+    "No Git remote is configured in .git/config.",
+    "GitHub CLI is unauthenticated, so Issue 109 and Issue 114 could not be retrieved through gh."
+  ],
+  "controlling_specification_assertions_not_treated_as_primary_evidence": {
+    "run_1_path": "candidate -> focused validation PASS -> full ordinary validation FAIL -> rejected",
+    "run_2_path": "candidate -> full ordinary validation PASS -> focused validation FAIL -> rejected",
+    "run_2_reported_expectation": "from lib import helper"
+  },
+  "material_conclusion": "The required primary evidence is absent, so semantic, compatibility, feasibility, and repair-policy conclusions cannot be made legitimately.",
+  "final_determination": "AUDIT_BLOCKED"
+}

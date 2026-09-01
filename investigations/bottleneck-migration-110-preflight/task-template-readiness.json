@@ -1,0 +1,47 @@
+{
+  "audit_date": "2026-09-01",
+  "difficulty_rule": {
+    "difficult": "broader reach or dependency/architecture uncertainty forecast near the cap",
+    "moderate": "bounded multi-clause change forecast to fit the cap with ordinary uncertainty",
+    "prohibited_inputs": [
+      "experimental success",
+      "candidate count",
+      "condition-specific duration",
+      "paired-condition outcome"
+    ]
+  },
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "finding": "No eligible repositories or independently reviewed task contracts exist, so task feasibility is unproved.",
+  "investigation": "bottleneck-migration-110-preflight",
+  "matrix": {
+    "cross-module feature": {
+      "difficult": 0,
+      "moderate": 0
+    },
+    "dependency/API adaptation": {
+      "difficult": 0,
+      "moderate": 0
+    },
+    "localized defect repair": {
+      "difficult": 0,
+      "moderate": 0
+    },
+    "structural/refactoring change": {
+      "difficult": 0,
+      "moderate": 0
+    }
+  },
+  "planned_templates": 64,
+  "schema_version": "1.0",
+  "selection_procedure": [
+    "After repository eligibility, independent task designers create contracts without condition labels.",
+    "Two blinded experts score module/file reach, acceptance-clause count, dependency reach, and estimated active effort using non-study exemplars only.",
+    "Resolve band disagreement before assignment; do not use candidate behavior, elapsed experimental time, or paired results.",
+    "Independent reviewers approve oracle-entailment maps before template hash lock.",
+    "Freeze exactly two templates per repository x class x band, then hash and randomize."
+  ],
+  "status": "BLOCKED",
+  "substitution_control": "Pre-randomization replacement requires a versioned prospective amendment and same stratum. After randomization retain ineligibility under frozen rules; never substitute.",
+  "synthetic_only": false,
+  "templates_frozen": 0
+}

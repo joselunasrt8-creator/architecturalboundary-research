@@ -1,0 +1,30 @@
+{
+  "algorithm": {
+    "blocks": [
+      "repository",
+      "task class",
+      "difficulty"
+    ],
+    "condition_order": "Within each block, balanced LOW-first/HIGH-first permutation; odd counts impossible under frozen two-template cell.",
+    "input": "lexicographically sorted hash-locked eligible template IDs and frozen operator IDs",
+    "operator_assignment": "Balanced permutation subject only to prospectively recorded qualification and conflict constraints.",
+    "output": "append-only manifest containing input hash, algorithm/library version, seed, block, order, operator, and manifest hash",
+    "prng": "PCG64 (exact library/version still must be frozen)",
+    "seed": 11020260901
+  },
+  "anti_discretion": [
+    "Generate once after eligibility/template/operator locks and before execution.",
+    "No manual reassignment; unavailability is retained and disposition follows frozen rules.",
+    "Corrections require prospective amendment and complete readiness rerun.",
+    "Operators cannot access paired-condition outcome."
+  ],
+  "assignments_generated": false,
+  "audit_date": "2026-09-01",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "empirical_identities_present": false,
+  "finding": "The mechanism is specified, but library/version, eligible inputs, operator roster, and manifest cannot be frozen yet. No assignments were generated.",
+  "investigation": "bottleneck-migration-110-preflight",
+  "schema_version": "1.0",
+  "status": "BLOCKED",
+  "synthetic_only": false
+}

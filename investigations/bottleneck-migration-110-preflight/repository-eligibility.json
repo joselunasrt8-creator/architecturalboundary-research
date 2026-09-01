@@ -1,0 +1,55 @@
+{
+  "audit_date": "2026-09-01",
+  "candidate_identity_policy": "Do not record or freeze an identity until all criteria pass without running a study task.",
+  "cohort_constraints": {
+    "continufy_dependency_allowed": false,
+    "domains_minimum": 2,
+    "structural_validation_repositories_minimum": 1,
+    "toolchain_families_minimum": 2
+  },
+  "eligibility_evidence_required": [
+    "immutable repository URL and reset commit",
+    "license permission",
+    "offline dependency snapshot identity",
+    "documented focused and repository validation commands",
+    "baseline validation fingerprint from a non-task checkout",
+    "stage measurability review",
+    "domain and toolchain classification",
+    "Continufy independence attestation"
+  ],
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "finding": "Required count and diversity cannot yet be legitimately verified. No repository was selected and no experimental task was run.",
+  "identity_freeze_status": "NOT_FROZEN",
+  "investigation": "bottleneck-migration-110-preflight",
+  "required_repository_count": 4,
+  "schema_version": "1.0",
+  "selection_independence": "Eligibility and replacement decisions must be signed before randomization; expected LOW/HIGH outcome is forbidden selection evidence.",
+  "slots": [
+    {
+      "eligibility": "BLOCKED",
+      "identity": null,
+      "reason": "No candidate has a documented license, reset commit, offline dependency snapshot, baseline validation, measurable-stage feasibility, and non-Continufy attestation.",
+      "slot": 1
+    },
+    {
+      "eligibility": "BLOCKED",
+      "identity": null,
+      "reason": "No candidate has a documented license, reset commit, offline dependency snapshot, baseline validation, measurable-stage feasibility, and non-Continufy attestation.",
+      "slot": 2
+    },
+    {
+      "eligibility": "BLOCKED",
+      "identity": null,
+      "reason": "No candidate has a documented license, reset commit, offline dependency snapshot, baseline validation, measurable-stage feasibility, and non-Continufy attestation.",
+      "slot": 3
+    },
+    {
+      "eligibility": "BLOCKED",
+      "identity": null,
+      "reason": "No candidate has a documented license, reset commit, offline dependency snapshot, baseline validation, measurable-stage feasibility, and non-Continufy attestation.",
+      "slot": 4
+    }
+  ],
+  "status": "BLOCKED",
+  "synthetic_only": false
+}

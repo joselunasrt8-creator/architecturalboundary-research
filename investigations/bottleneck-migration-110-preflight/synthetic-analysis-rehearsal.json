@@ -1,0 +1,156 @@
+{
+  "analysis_code_result": "NOT_RUN: no frozen executable analysis implementation, event schema, or synthetic numeric dataset exists.",
+  "audit_date": "2026-09-01",
+  "cases": [
+    {
+      "case_id": "SYNTHETIC-01",
+      "expected": "BOTTLENECK_MIGRATION_SUPPORTED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": true
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_SUPPORTED",
+      "pass": true,
+      "scenario": "migration_supported"
+    },
+    {
+      "case_id": "SYNTHETIC-02",
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true,
+      "scenario": "implementation_remains_dominant"
+    },
+    {
+      "case_id": "SYNTHETIC-03",
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true,
+      "scenario": "proportional_acceleration"
+    },
+    {
+      "case_id": "SYNTHETIC-04",
+      "expected": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": true,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "pass": true,
+      "scenario": "domain_dependent_migration"
+    },
+    {
+      "case_id": "SYNTHETIC-05",
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true,
+      "scenario": "null_effect"
+    },
+    {
+      "case_id": "SYNTHETIC-06",
+      "expected": "EXPERIMENT_BLOCKED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": true,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "EXPERIMENT_BLOCKED",
+      "pass": true,
+      "scenario": "harness_artifact"
+    },
+    {
+      "case_id": "SYNTHETIC-07",
+      "expected": "EXPERIMENT_BLOCKED",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": true,
+        "domain_dependent": false,
+        "indeterminate": false,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "EXPERIMENT_BLOCKED",
+      "pass": true,
+      "scenario": "environment_artifact"
+    },
+    {
+      "case_id": "SYNTHETIC-08",
+      "expected": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "fixture": {
+        "adequately_powered": true,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": true,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "pass": true,
+      "scenario": "inadequate_high_manipulation"
+    },
+    {
+      "case_id": "SYNTHETIC-09",
+      "expected": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "fixture": {
+        "adequately_powered": false,
+        "blocked": false,
+        "domain_dependent": false,
+        "indeterminate": true,
+        "support_rule": false
+      },
+      "label": "SYNTHETIC_ONLY_DO_NOT_TREAT_AS_EMPIRICAL",
+      "observed_by_precedence": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "pass": true,
+      "scenario": "insufficient_evidence"
+    }
+  ],
+  "decision_table_result": "9/9 prospective categories matched",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "finding": "Category precedence is coherent, but the required frozen analysis-logic dry run (bootstrap, binding replay, models, multiplicity, interactions) cannot be claimed. This mandatory entry condition fails.",
+  "investigation": "bottleneck-migration-110-preflight",
+  "precedence_applied": [
+    "EXPERIMENT_BLOCKED",
+    "BOTTLENECK_MIGRATION_INDETERMINATE",
+    "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+    "BOTTLENECK_MIGRATION_SUPPORTED",
+    "BOTTLENECK_MIGRATION_NOT_SUPPORTED"
+  ],
+  "schema_version": "1.0",
+  "status": "FAIL",
+  "synthetic_only": true,
+  "warning": "ALL RECORDS IN THIS FILE ARE FICTIONAL DECISION-TABLE FIXTURES; NONE IS AN EXECUTION, TASK, CANDIDATE, OR OBSERVATION."
+}

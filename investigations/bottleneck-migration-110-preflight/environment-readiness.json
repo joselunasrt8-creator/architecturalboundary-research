@@ -1,0 +1,38 @@
+{
+  "audit_date": "2026-09-01",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "environment_identity": null,
+  "failure_separation": {
+    "candidate_failure": "valid frozen gate rejects candidate-controlled behavior",
+    "environment_failure": "dependency/service/resource/platform unavailable outside candidate control",
+    "instrumentation_failure": "logger/timer corrupts, loses, or materially alters observation",
+    "repository_failure": "deterministic baseline or repository defect unrelated to candidate"
+  },
+  "finding": "No candidate repositories or immutable images exist. Instability therefore cannot be silently attributed to migration, but execution is blocked.",
+  "investigation": "bottleneck-migration-110-preflight",
+  "required_record": {
+    "ai_identity": null,
+    "clock_logger_calibration": null,
+    "cpu_memory_limits": null,
+    "dependency_lock_or_snapshot": [],
+    "external_service_fixtures": [],
+    "locale": "must be frozen",
+    "network_policy": null,
+    "os_or_image_digest": null,
+    "reset_procedure": null,
+    "runtime_compiler_versions": [],
+    "timezone": "must be frozen",
+    "validation_commands": []
+  },
+  "reset_acceptance": [
+    "verify recorded commit and clean status",
+    "restore pinned dependencies without mutable network resolution",
+    "start pinned fixtures/services",
+    "run non-task baseline focused/full/structural commands",
+    "record deterministic pre-existing-failure fingerprints",
+    "create candidate-isolated workspace"
+  ],
+  "schema_version": "1.0",
+  "status": "BLOCKED",
+  "synthetic_only": false
+}

@@ -1,0 +1,106 @@
+{
+  "artifacts": [
+    {
+      "bytes": 8377,
+      "git_blob": "9c3d9e7d8d44346af4d8ce319c65700498786eec",
+      "path": "investigations/bottleneck-migration-110/README.md",
+      "sha256": "5fcc60f6dfbfa012687cb5818e9f4ed7f241628d2673a1e1c8ea735e46af8b8c"
+    },
+    {
+      "bytes": 2553,
+      "git_blob": "1273f4c37c9dab0823ed03b8c20379f9baf66968",
+      "path": "investigations/bottleneck-migration-110/analysis-plan.json",
+      "sha256": "928327a9003c69523e71cb092eb9a748763685d4da545a54ba1fe8be32814a39"
+    },
+    {
+      "bytes": 2687,
+      "git_blob": "05d8a7b998a9a52f38b7ee5972591505741574af",
+      "path": "investigations/bottleneck-migration-110/bottleneck-definition.json",
+      "sha256": "a70d3a107266d9e3493eb0fed448e78397be1a27ead1fedf22e2b91885d14b19"
+    },
+    {
+      "bytes": 2494,
+      "git_blob": "54b310a999f99055d9b952c6f4928e8be3cfe910",
+      "path": "investigations/bottleneck-migration-110/cohort-design.json",
+      "sha256": "317d240a22d817cbbe817d810249854732cef39439f240d055929f77ea606163"
+    },
+    {
+      "bytes": 2402,
+      "git_blob": "672d350326475a336e7f0592f5b2e110c070afbb",
+      "path": "investigations/bottleneck-migration-110/determination-rules.json",
+      "sha256": "e4a134f35015129d9ae488f15e960ffb08474af07510a3107c3fdabedb37058c"
+    },
+    {
+      "bytes": 2234,
+      "git_blob": "0beaf9e6b60b7928850c54ef3588374e56598c1e",
+      "path": "investigations/bottleneck-migration-110/entry-conditions.json",
+      "sha256": "ada23e54213a148dc28c17471d820e41fe10e3d3825a1e363325dc0af701833c"
+    },
+    {
+      "bytes": 2251,
+      "git_blob": "b125fd3a7618e8f432725bba7a8ab8b991f262ac",
+      "path": "investigations/bottleneck-migration-110/experimental-contrast.json",
+      "sha256": "e1bd70579ee397dcff2b94f9ec09222a97863b7b47d1f40a82a5b7356a0bed82"
+    },
+    {
+      "bytes": 2684,
+      "git_blob": "f1f8ff328f75da074b866f36b3ca774c81af477a",
+      "path": "investigations/bottleneck-migration-110/failure-taxonomy.json",
+      "sha256": "acf0a38d873b177f01c89964dc764b5dd5ea38c9af56fcc9c694a149f5328d13"
+    },
+    {
+      "bytes": 1974,
+      "git_blob": "397b564c4b2f8954abf680034ce45b0cd7882277",
+      "path": "investigations/bottleneck-migration-110/hypotheses.json",
+      "sha256": "e612a874f2a4c55f63013fd5119c34576f648099e24e83d6e15baedead56e22d"
+    },
+    {
+      "bytes": 2198,
+      "git_blob": "5c60a8965052040c09aaa457f54357a014438070",
+      "path": "investigations/bottleneck-migration-110/measurements.json",
+      "sha256": "9d7dfac2aba405cb8d6459bce75026cb84cd72a0fcce8ca073e080a8abf42dff"
+    },
+    {
+      "bytes": 2286,
+      "git_blob": "258672a8b9e0e3323af04a10072e9dd867433478",
+      "path": "investigations/bottleneck-migration-110/protocol.json",
+      "sha256": "20b57022b63178bb28b91057929ae7615a3967bebe47515b3272bc2502b12fa0"
+    },
+    {
+      "bytes": 1349,
+      "git_blob": "ea70217f4008a31f85fa93e1098d08069579da9a",
+      "path": "investigations/bottleneck-migration-110/stopping-rule.json",
+      "sha256": "b3203ef462ca66d8ec004db1ed2873082026615831c858515092ec2984cb0f52"
+    },
+    {
+      "bytes": 2843,
+      "git_blob": "fa3ab2c34fc2e9e2f903fd5197d39c5f00c898cb",
+      "path": "investigations/bottleneck-migration-110/workflow-stages.json",
+      "sha256": "97d1be8c005e1c67cee45442cb099c335615d217a414e371693c2bdcfd65d51f"
+    }
+  ],
+  "audit_date": "2026-09-01",
+  "binding_method": "SHA-256 over committed bytes plus Git blob identity; all paths resolved at the recorded commit",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "investigation": "bottleneck-migration-110-preflight",
+  "mismatch_policy": "Any byte, tree, link, manifest, or reconstructed-design mismatch is FAIL and blocks readiness.",
+  "observed_mismatches": [],
+  "protocol_commit": "a82bd52b052b4d3c00586c3585cb02e595023e28",
+  "protocol_tree": "0be84fe6dd28e3c4348297391cab87eb8a80153f",
+  "reconstructed_design": {
+    "analysis_plan": "analysis-plan.json: paired strata, bootstrap, models, artifact checks",
+    "bottleneck_definition": "bottleneck-definition.json: candidate plus marginal constraint; primary failure/throughput",
+    "cohort_design": "cohort-design.json: 4 x 4 x 2 x 2 templates",
+    "determination_rules": "determination-rules.json: five exclusive categories in precedence order",
+    "entry_conditions": "entry-conditions.json: mandatory false items remain unresolved",
+    "experimental_contrast": "experimental-contrast.json: blocked paired LOW/HIGH crossover",
+    "failure_taxonomy": "failure-taxonomy.json: ordered 15-class taxonomy",
+    "hypotheses": "hypotheses.json: H0-H8 and HM remain live",
+    "measurements": "measurements.json: P1-P5, secondary, diagnostics",
+    "stopping_rules": "stopping-rule.json: execution/study caps and evidence lock",
+    "workflow_stages": "workflow-stages.json: S01-S12 and frozen clock/transition rules"
+  },
+  "schema_version": "1.0",
+  "status": "PASS",
+  "synthetic_only": false
+}

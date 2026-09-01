@@ -1,0 +1,100 @@
+{
+  "amendment": {
+    "reason": "No frozen scientific definition was silently changed. Sample-size and runnable-candidate operationalization defects require prospective resolution; if resolution changes protocol v1.0.0, create an identified amendment and rerun all conditions.",
+    "required_now": false
+  },
+  "audit_date": "2026-09-01",
+  "conditions": [
+    {
+      "evidence": "artifact-bindings.json",
+      "id": "protocol_binding",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "repository-eligibility.json",
+      "id": "cohort_repositories",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "task-template-readiness.json",
+      "id": "task_templates",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "cohort-size-audit.json",
+      "id": "cohort_size_justified",
+      "mandatory": true,
+      "status": "FAIL"
+    },
+    {
+      "evidence": "manipulation-audit.json",
+      "id": "implementation_abundance",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "environment-readiness.json",
+      "id": "environment_freeze",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "instrument-audit.json",
+      "id": "instrument_freeze_calibration",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "oracle-review.json",
+      "id": "oracle_harness_review",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "taxonomy-rehearsal.json",
+      "id": "taxonomy_rehearsal",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "randomization-freeze.json",
+      "id": "randomization_manifest",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "synthetic-analysis-rehearsal.json",
+      "id": "synthetic_analysis_code_rehearsal",
+      "mandatory": true,
+      "status": "FAIL"
+    },
+    {
+      "evidence": "frozen entry-conditions.json",
+      "id": "separate_execution_authorization",
+      "mandatory": true,
+      "status": "BLOCKED"
+    }
+  ],
+  "counts": {
+    "BLOCKED": 8,
+    "FAIL": 2,
+    "PASS": 2
+  },
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "guards": {
+    "issue_109_evidence_unchanged": true,
+    "no_empirical_result_created": true,
+    "no_empirical_task_executed": true,
+    "no_outcome_dependent_selection": true,
+    "protocol_110_unchanged": true
+  },
+  "investigation": "bottleneck-migration-110-preflight",
+  "override_allowed": false,
+  "readiness": "BOTTLENECK_EXPERIMENT_NOT_READY",
+  "rule": "READY iff every mandatory condition is PASS.",
+  "schema_version": "1.0",
+  "synthetic_only": false
+}

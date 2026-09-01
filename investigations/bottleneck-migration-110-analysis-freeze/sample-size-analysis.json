@@ -1,0 +1,15 @@
+{
+ "schema_version":"1.0","status":"AVAILABLE_INFORMATION_INSUFFICIENT_TO_FREEZE_FINAL_SAMPLE_SIZE",
+ "method":"Prospective normal approximations and fixed-parameter sensitivity grid for paired binary/continuous endpoints; binding migration treated as a conjunctive binary endpoint. No empirical #110 observations.",
+ "frozen_proposal":{"repositories":4,"task_classes":4,"difficulty_bands":2,"templates_per_cell":2,"templates":64,"low_high_executions":128,"assessment":"not justified: only 2 pairs/cell and unknown nuisance parameters"},
+ "candidate_designs":[
+  {"repositories":4,"task_classes":4,"difficulty_bands":2,"templates_per_cell":2,"templates":64,"executions":128,"primary_power_range":[0.42,0.83],"yield_mde_range":[0.13,0.24],"attrition":"0-25%","interaction_capability":"inadequate; two pairs/cell"},
+  {"repositories":4,"task_classes":4,"difficulty_bands":2,"templates_per_cell":4,"templates":128,"executions":256,"primary_power_range":[0.69,0.96],"yield_mde_range":[0.09,0.17],"attrition":"0-25%","interaction_capability":"screening only; four pairs/cell"},
+  {"repositories":6,"task_classes":4,"difficulty_bands":2,"templates_per_cell":6,"templates":288,"executions":576,"primary_power_range":[0.82,0.99],"yield_mde_range":[0.06,0.11],"attrition":"0-25%","interaction_capability":"bounded repository/class contrasts under moderate heterogeneity"},
+  {"repositories":8,"task_classes":4,"difficulty_bands":2,"templates_per_cell":8,"templates":512,"executions":1024,"primary_power_range":[0.91,0.99],"yield_mde_range":[0.04,0.08],"attrition":"0-25%","interaction_capability":"credible interaction/external-validity target under conservative heterogeneity"}
+ ],
+ "primary_cohort_requirement":"Do not freeze a count yet. Obtain outcome-blind external/pilot nuisance bounds. If moderate regime is defensible, 128 templates/256 executions is the smallest candidate for primary migration; 64/128 is not robust to conservative variance/attrition.",
+ "interaction_external_validity_requirement":"At least 288 templates/576 executions is the current candidate; 512/1024 for conservative interaction precision. This is distinct from primary support.",
+ "decision":"D: available information is insufficient to freeze sample size; amendment replaces asserted 64 with a blinded variance-calibration gate and prospective recalculation.",
+ "not_cheapest_warning":"No design selected merely on cost; scientific conjunction and interactions remain unchanged."
+}

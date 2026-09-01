@@ -1,0 +1,10 @@
+{
+ "schema_version":"1.0","amendment_required":true,"amendment_id":"ISSUE-110-PROSPECTIVE-AMENDMENT-001","status":"PROPOSED_NOT_AUTHORIZED","date":"2026-09-01","no_empirical_outcomes_observed":true,
+ "historical_protocol_immutable":true,
+ "changes":[
+  {"original_rule":"64 templates / 128 executions asserted in cohort-design.json","defect":"no paired variance, attrition, conjunctive or interaction justification","proposed_revision":"replace fixed N with outcome-blind nuisance calibration, frozen simulation rerun, then smallest design meeting >=80% primary power; independently size interactions","justification":"current sensitivity includes regimes where 128 executions has <80% power","effect_on_interpretation":"prevents underpowered NOT_SUPPORTED and separates bounded primary from external-validity claims"},
+  {"original_rule":"conceptual P1-P5 and 10,000 bootstrap/mixed models","defect":"estimands, censoring and executable interfaces were incomplete","proposed_revision":"adopt estimands.json, results-schema.json and analysis-specification.json; implement production clustered bootstrap and survival/mixed-model adapter before execution","justification":"makes numerators, denominators, missingness and precedence computable","effect_on_interpretation":"no scientific hypothesis or support direction changes"},
+  {"original_rule":"HIGH manipulation includes median time-to-first-runnable <=70% LOW","defect":"current minimal executable checks only candidate realization/configuration","proposed_revision":"add candidate timestamp field and executable paired median-ratio check before authorization","justification":"all frozen manipulation clauses must be computationally evaluated","effect_on_interpretation":"failure remains INDETERMINATE"}
+ ],
+ "authorization":"This proposed amendment does not authorize task selection, AI invocation, candidate generation, validation on study tasks, or empirical collection."
+}

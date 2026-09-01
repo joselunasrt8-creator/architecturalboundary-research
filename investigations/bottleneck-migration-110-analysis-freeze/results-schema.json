@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "results-schema.json",
+  "title": "Issue 110 future paired result dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","dataset_kind","planned_pairs","adequately_powered","administrative_stop","records"],
+  "properties": {
+    "schema_version":{"const":"1.0"},
+    "dataset_kind":{"enum":["SYNTHETIC_REHEARSAL_ONLY","FUTURE_EMPIRICAL_RESULTS"]},
+    "synthetic_warning":{"type":"string"}, "planned_pairs":{"type":"integer","minimum":1},
+    "adequately_powered":{"type":"boolean"}, "administrative_stop":{"type":["string","null"]},
+    "interaction_signal":{"enum":["none","repository","task_class","opposite_intervals"]},
+    "records":{"type":"array","items":{"$ref":"#/$defs/record"}}
+  },
+  "$defs": {
+    "event":{"type":"object","additionalProperties":true},
+    "binding":{"type":"object","additionalProperties":false,"required":["type","candidate_clause_met","binding_clause_met","effect","ci_low","ci_high"],"properties":{"type":{"enum":["failure","throughput","time","rework","coordination"]},"candidate_clause_met":{"type":"boolean"},"binding_clause_met":{"type":"boolean"},"effect":{"type":"number"},"ci_low":{"type":"number"},"ci_high":{"type":"number"}}},
+    "stage":{"type":"object","additionalProperties":false,"required":["stage_id","entered_at","exited_at","active_minutes","wait_minutes","outcome","binding_evidence"],"properties":{"stage_id":{"pattern":"^S(0[1-9]|1[0-2])$"},"entered_at":{"type":"string"},"exited_at":{"type":"string"},"active_minutes":{"type":"number","minimum":0},"wait_minutes":{"type":"number","minimum":0},"outcome":{"enum":["PASS","FAIL","NOT_REACHED","NOT_APPLICABLE"]},"binding_evidence":{"type":"array","items":{"$ref":"#/$defs/binding"}}}},
+    "record":{"type":"object","additionalProperties":false,"required":["record_id","pair_id","repository_id","task_template_id","task_class","difficulty_band","condition","operator_blinded_id","randomized_order","environment_id","ai_configuration_id","candidate_ids","stage_observations","active_minutes","wait_minutes","attempts","candidate_count","first_failure_stage","terminal_cause","rework_events","accepted_all_gates","environment_events","instrumentation_events","harness_valid","oracle_valid","stopping_reason","adjudication","manipulation","classifiable"],"properties":{"record_id":{"type":"string","minLength":1},"pair_id":{"type":"string","minLength":1},"repository_id":{"type":"string"},"task_template_id":{"type":"string"},"task_class":{"type":"string"},"difficulty_band":{"type":"string"},"condition":{"enum":["LOW","HIGH"]},"operator_blinded_id":{"type":"string"},"randomized_order":{"enum":[1,2]},"environment_id":{"type":"string"},"ai_configuration_id":{"type":["string","null"]},"candidate_ids":{"type":"array","items":{"type":"string"}},"stage_observations":{"type":"array","items":{"$ref":"#/$defs/stage"}},"active_minutes":{"type":"number","minimum":0},"wait_minutes":{"type":"number","minimum":0},"attempts":{"type":"integer","minimum":0},"candidate_count":{"type":"integer","minimum":0},"first_failure_stage":{"oneOf":[{"type":"null"},{"type":"string","pattern":"^S(0[1-9]|1[0-2])$"}]},"terminal_cause":{"type":"string"},"rework_events":{"type":"array","items":{"$ref":"#/$defs/event"}},"accepted_all_gates":{"type":"boolean"},"environment_events":{"type":"array","items":{"type":"string"}},"instrumentation_events":{"type":"array","items":{"type":"string"}},"harness_valid":{"type":"boolean"},"oracle_valid":{"type":"boolean"},"stopping_reason":{"type":"string"},"adjudication":{"type":"object"},"manipulation":{"type":"object","required":["runnable_candidates","configuration_frozen"],"properties":{"runnable_candidates":{"type":"integer","minimum":0},"configuration_frozen":{"type":"boolean"}}},"classifiable":{"type":"boolean"}}}
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "artifacts": [
+    {
+      "bytes": 8377,
+      "git_blob": "9c3d9e7d8d44346af4d8ce319c65700498786eec",
+      "path": "investigations/bottleneck-migration-110/README.md",
+      "sha256": "5fcc60f6dfbfa012687cb5818e9f4ed7f241628d2673a1e1c8ea735e46af8b8c"
+    },
+    {
+      "bytes": 2553,
+      "git_blob": "1273f4c37c9dab0823ed03b8c20379f9baf66968",
+      "path": "investigations/bottleneck-migration-110/analysis-plan.json",
+      "sha256": "928327a9003c69523e71cb092eb9a748763685d4da545a54ba1fe8be32814a39"
+    },
+    {
+      "bytes": 2687,
+      "git_blob": "05d8a7b998a9a52f38b7ee5972591505741574af",
+      "path": "investigations/bottleneck-migration-110/bottleneck-definition.json",
+      "sha256": "a70d3a107266d9e3493eb0fed448e78397be1a27ead1fedf22e2b91885d14b19"
+    },
+    {
+      "bytes": 2494,
+      "git_blob": "54b310a999f99055d9b952c6f4928e8be3cfe910",
+      "path": "investigations/bottleneck-migration-110/cohort-design.json",
+      "sha256": "317d240a22d817cbbe817d810249854732cef39439f240d055929f77ea606163"
+    },
+    {
+      "bytes": 2402,
+      "git_blob": "672d350326475a336e7f0592f5b2e110c070afbb",
+      "path": "investigations/bottleneck-migration-110/determination-rules.json",
+      "sha256": "e4a134f35015129d9ae488f15e960ffb08474af07510a3107c3fdabedb37058c"
+    },
+    {
+      "bytes": 2234,
+      "git_blob": "0beaf9e6b60b7928850c54ef3588374e56598c1e",
+      "path": "investigations/bottleneck-migration-110/entry-conditions.json",
+      "sha256": "ada23e54213a148dc28c17471d820e41fe10e3d3825a1e363325dc0af701833c"
+    },
+    {
+      "bytes": 2251,
+      "git_blob": "b125fd3a7618e8f432725bba7a8ab8b991f262ac",
+      "path": "investigations/bottleneck-migration-110/experimental-contrast.json",
+      "sha256": "e1bd70579ee397dcff2b94f9ec09222a97863b7b47d1f40a82a5b7356a0bed82"
+    },
+    {
+      "bytes": 2684,
+      "git_blob": "f1f8ff328f75da074b866f36b3ca774c81af477a",
+      "path": "investigations/bottleneck-migration-110/failure-taxonomy.json",
+      "sha256": "acf0a38d873b177f01c89964dc764b5dd5ea38c9af56fcc9c694a149f5328d13"
+    },
+    {
+      "bytes": 1974,
+      "git_blob": "397b564c4b2f8954abf680034ce45b0cd7882277",
+      "path": "investigations/bottleneck-migration-110/hypotheses.json",
+      "sha256": "e612a874f2a4c55f63013fd5119c34576f648099e24e83d6e15baedead56e22d"
+    },
+    {
+      "bytes": 2198,
+      "git_blob": "5c60a8965052040c09aaa457f54357a014438070",
+      "path": "investigations/bottleneck-migration-110/measurements.json",
+      "sha256": "9d7dfac2aba405cb8d6459bce75026cb84cd72a0fcce8ca073e080a8abf42dff"
+    },
+    {
+      "bytes": 2286,
+      "git_blob": "258672a8b9e0e3323af04a10072e9dd867433478",
+      "path": "investigations/bottleneck-migration-110/protocol.json",
+      "sha256": "20b57022b63178bb28b91057929ae7615a3967bebe47515b3272bc2502b12fa0"
+    },
+    {
+      "bytes": 1349,
+      "git_blob": "ea70217f4008a31f85fa93e1098d08069579da9a",
+      "path": "investigations/bottleneck-migration-110/stopping-rule.json",
+      "sha256": "b3203ef462ca66d8ec004db1ed2873082026615831c858515092ec2984cb0f52"
+    },
+    {
+      "bytes": 2843,
+      "git_blob": "fa3ab2c34fc2e9e2f903fd5197d39c5f00c898cb",
+      "path": "investigations/bottleneck-migration-110/workflow-stages.json",
+      "sha256": "97d1be8c005e1c67cee45442cb099c335615d217a414e371693c2bdcfd65d51f"
+    },
+    {
+      "bytes": 4320,
+      "git_blob": "b14e6c30527fc2cbfad17d20af200f7064b5b7a2",
+      "path": "investigations/bottleneck-migration-110-preflight/README.md",
+      "sha256": "e0cbbd7f33d7d63f95cd638ec6869fc5b82a9f0d1a1f9d85b7ee2f0c297074f2"
+    },
+    {
+      "bytes": 4951,
+      "git_blob": "3574e2716b0197aaef4d12a14e6b50643fd223b4",
+      "path": "investigations/bottleneck-migration-110-preflight/artifact-bindings.json",
+      "sha256": "ee5e302cb4195fe60a269f6536bd759ac74f231e3de02e2c3ebd2718cffc2e6c"
+    },
+    {
+      "bytes": 2098,
+      "git_blob": "ace60cb13abdc41cae80d7f0889fa42a788cc6f7",
+      "path": "investigations/bottleneck-migration-110-preflight/cohort-size-audit.json",
+      "sha256": "07249b0661b9156b3fc7e8743703a47a062673a7371423d6153202ec8bcfb9b8"
+    },
+    {
+      "bytes": 2731,
+      "git_blob": "562741adb54391b8170090a6bc877b6ac40ba6c2",
+      "path": "investigations/bottleneck-migration-110-preflight/entry-conditions.json",
+      "sha256": "6d12bdf7ad8d257b136306ccafa21f80e2871e952251e13b689f61950a54b7a5"
+    },
+    {
+      "bytes": 1599,
+      "git_blob": "a88e1fced6c8970d42e25ed2d125fff3c27b2bc6",
+      "path": "investigations/bottleneck-migration-110-preflight/environment-readiness.json",
+      "sha256": "eca75e043d5e3a106584cd36f9f76c80339521f498624014276fc833a5575ce8"
+    },
+    {
+      "bytes": 3629,
+      "git_blob": "28d51657a4db44329344c5dcd7f686db8e3d3d1e",
+      "path": "investigations/bottleneck-migration-110-preflight/instrument-audit.json",
+      "sha256": "c7f00bd8e37362a79426f66d6e2499620d3d8672ec344103b9fef409ab84e2aa"
+    },
+    {
+      "bytes": 1986,
+      "git_blob": "0da0ce4a4500b52261db8ba7f14871580b61735c",
+      "path": "investigations/bottleneck-migration-110-preflight/manipulation-audit.json",
+      "sha256": "26d88094e9aa7e827d3b6cfe6a0a40c523a194814f08e3e9fb82ff0207e4721b"
+    },
+    {
+      "bytes": 1431,
+      "git_blob": "471219579ef04ab7399d01a6a8cba407ef38e50b",
+      "path": "investigations/bottleneck-migration-110-preflight/oracle-review.json",
+      "sha256": "70196cb5e91ba74e5607c725948dcb4e45aa38b5d455ea75528ca6a9bdf149e0"
+    },
+    {
+      "bytes": 1509,
+      "git_blob": "497872c5c44a0a3c41781b3a50651e44066333b8",
+      "path": "investigations/bottleneck-migration-110-preflight/randomization-freeze.json",
+      "sha256": "48bdf98d6f57ab399e4ec546ea6ecd591e1251bf5fe2023c613dbe210b0f12cb"
+    },
+    {
+      "bytes": 2414,
+      "git_blob": "2b458e63aaca49340db34853ccc5b2928a9ee535",
+      "path": "investigations/bottleneck-migration-110-preflight/repository-eligibility.json",
+      "sha256": "755ce46fbd92f30dd2398a7235416ae7b1c3ccc401055d13c1d24ce835b1c0ac"
+    },
+    {
+      "bytes": 5269,
+      "git_blob": "e5c17417793e672b30bb96bb1b378e208650fac8",
+      "path": "investigations/bottleneck-migration-110-preflight/synthetic-analysis-rehearsal.json",
+      "sha256": "e15753f82b64313de785e55637da728b25f0c29364c7162f4459efdb1db4d9bf"
+    },
+    {
+      "bytes": 1927,
+      "git_blob": "e974cb00cdebb9f6a4118e16fa9e862e4f3ca17e",
+      "path": "investigations/bottleneck-migration-110-preflight/task-template-readiness.json",
+      "sha256": "2a72e321f945bda2821757655c08b81ec653d5ed238bfee1412fc685bac0e29d"
+    },
+    {
+      "bytes": 4829,
+      "git_blob": "002931b01ae958e2a949f7cdd6561c768dd5425f",
+      "path": "investigations/bottleneck-migration-110-preflight/taxonomy-rehearsal.json",
+      "sha256": "072d6d8829df9359e3bee215f071d831906e37cdfde54bf5dad89a599b55c0c6"
+    }
+  ],
+  "binding_commit": "321f0c932937265accd76c0d6a69ca8232a2f7d9",
+  "binding_method": "SHA-256 and Git blob over committed bytes at binding_commit",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "issue_109_non_circularity": "No Issue #109 evidence was read as an outcome, modified, or used to select tasks; #110 remains an independent prospective test.",
+  "mismatch_policy": "fail closed",
+  "preserved_contracts": [
+    "bottleneck definition and LOW/HIGH contrast",
+    "H0-H8 and HM live",
+    "S01-S12",
+    "P1-P5 and secondary measurements",
+    "five determination categories and precedence",
+    "negative/null outcomes",
+    "Issue #109 non-circularity",
+    "design-only authorization boundary"
+  ],
+  "repository_tree": "bc1804e8cef37defd8f30b6045312855f8474043",
+  "schema_version": "1.0",
+  "source_trees": {
+    "investigations/bottleneck-migration-110": "0be84fe6dd28e3c4348297391cab87eb8a80153f",
+    "investigations/bottleneck-migration-110-preflight": "d8e03eda007aa79e9ab5ad410f322c52618d669d"
+  }
+}

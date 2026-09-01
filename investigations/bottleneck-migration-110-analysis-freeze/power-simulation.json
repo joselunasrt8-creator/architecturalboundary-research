@@ -1,0 +1,7 @@
+{
+ "schema_version":"1.0","synthetic_only":true,"seed":11020260901,"replicates_per_cell":10000,
+ "model":{"paired_binary":"correlated Bernoulli acceptance with LOW baseline 0.25-0.60, HIGH risk difference 0/0.10/0.20, within-pair correlation 0.1-0.6","throughput":"lognormal active time, HIGH relative effect 0/0.15/0.30, CV 0.35-0.80","time_to_valid":"right-censored lognormal, ratio 0.70-1.10, censoring 0.05-0.25","binding":"LOW S05 and HIGH replacement probabilities varied 0.55-0.90; conjunctive success","heterogeneity":"repository SD 0.05-0.15; task SD 0.10-0.30; difficulty fixed effect; attrition 0/0.10/0.25","multiplicity":"Holm across P1-P5 at familywise 0.05"},
+ "regimes":[{"name":"favorable","pair_correlation":0.6,"attrition":0.05,"repository_sd":0.05,"task_sd":0.10},{"name":"moderate","pair_correlation":0.35,"attrition":0.10,"repository_sd":0.10,"task_sd":0.20},{"name":"conservative","pair_correlation":0.10,"attrition":0.25,"repository_sd":0.15,"task_sd":0.30}],
+ "interpretation":"Ranges in sample-size-analysis.json are prospective sensitivity results, not observed power. Unknown nuisance parameters prevent a unique justified N.",
+ "reproducibility_note":"The design grid and seed are frozen; simulate.py deterministically regenerates numeric scenario rehearsals. Final Monte Carlo engine is a required pre-authorization amendment deliverable."
+}

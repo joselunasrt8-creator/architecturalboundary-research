@@ -1,0 +1,15 @@
+{
+ "schema_version":"1.0","implementation":"analysis.py","fixed_seed":11020260901,
+ "input":"results-schema.json; semantic pair/control checks in validate() fail closed",
+ "outputs":["P1/P2 condition estimates and effects","paired time contrast","first-failure distribution","per-pair and stratum binding/migration","interaction signal","manipulation and control validity","one final determination"],
+ "migration_conjunction":{"per_task":"S05 binding LOW AND not binding HIGH AND named non-S05 newly binding HIGH","per_repository":"report each repository x task-class stratum; never infer from pooled average","per_task_class":"report each repository x class and condition interaction","cohort":"pass in >=2 repositories and >=2 task classes, no opposite interaction, manipulation succeeds, controls valid, and P1 >=15% or P2 >=0.10 with positive adjusted interval"},
+ "binding":"candidate_clause_met AND binding_clause_met AND ci_low > 0, separately for frozen type/stage/condition; binding evidence must be produced by the frozen queue/rework/bootstrap replay before ingestion",
+ "precedence":["EXPERIMENT_BLOCKED","BOTTLENECK_MIGRATION_INDETERMINATE","BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT","BOTTLENECK_MIGRATION_SUPPORTED","BOTTLENECK_MIGRATION_NOT_SUPPORTED"],
+ "blocked":"administrative stop, >20% common defects, identity/integrity failure, or <75% planned pairs classifiable",
+ "indeterminate":"not blocked and failed manipulation, invalid/imbalanced artifacts, unclassifiable binding, overhead-sensitive call, or <80% power",
+ "domain_dependent":"qualified migration in some but not other repository/class strata with frozen interaction evidence and no cohort-wide support",
+ "supported":"full conjunction and frozen effect threshold; never longest-stage alone",
+ "not_supported":"adequate information and no higher-precedence category, including null, opposite, proportional, or implementation-still-binding",
+ "known_boundary":"The executable rehearsal uses supplied frozen binding replay evidence and descriptive time contrast. Production freeze requires the amendment's 10,000-resample cluster bootstrap/mixed model adapter before authorization.",
+ "determinism":"canonical sorted JSON hashing/output; no clock, network, candidate implementation, or unseeded randomness"
+}

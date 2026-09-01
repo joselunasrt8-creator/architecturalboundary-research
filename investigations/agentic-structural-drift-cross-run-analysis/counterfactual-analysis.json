@@ -1,0 +1,30 @@
+{
+  "schema_version":"1.0",
+  "labels":{"OBSERVED":"directly recorded","SUPPORTED_INFERENCE":"entailed by frozen AND-gate result/order without changing history","SPECULATION":"possible but not evidenced as likely","NOT_DETERMINABLE":"unobserved and not entailed"},
+  "runs":[
+    {"run":1,"claims":[
+      {"question":"If the focused gate were removed, would T1 have formed?","label":"SUPPORTED_INFERENCE","answer":"No. Focused checks passed already; required ordinary validation still failed."},
+      {"question":"If ordinary validation were removed, would T1 have formed?","label":"SUPPORTED_INFERENCE","answer":"It could have passed the remaining observed local check, but changing the frozen required gate would be post-hoc weakening; therefore no legitimate historical T1 forms."},
+      {"question":"Would another repair likely have formed T1?","label":"NOT_DETERMINABLE","answer":"The manifest consequence was identified, but no preserved additional candidate proves it would fix that issue and all environment failures simultaneously."},
+      {"question":"Did environment independently prevent acceptance?","label":"OBSERVED","answer":"Environment errors independently kept the required suite nonzero, while a separate candidate-relevant manifest failure also prevented acceptance."},
+      {"question":"What caused rejection?","label":"OBSERVED","answer":"Candidate/repository interaction plus independent environment failure; not focused-harness behavior."},
+      {"question":"Would changing the gate after result weaken it?","label":"SUPPORTED_INFERENCE","answer":"Yes; ordinary pytest was frozen as required acceptance validation."}
+    ],"evidence":["investigations/agentic-structural-drift-109/preregistration.json","investigations/agentic-structural-drift-109/execution-record.json"]},
+    {"run":2,"claims":[
+      {"question":"If the focused gate were removed, would T1 have formed?","label":"SUPPORTED_INFERENCE","answer":"The candidate passed the other recorded gate, but removing the frozen focused AND-gate cannot create a legitimate historical T1."},
+      {"question":"If ordinary validation were removed, would T1 have formed?","label":"SUPPORTED_INFERENCE","answer":"No; ordinary validation passed already and focused validation historically failed."},
+      {"question":"Would another repair likely have formed T1?","label":"NOT_DETERMINABLE","answer":"No repair was permitted or observed. Issue #114 shows the oracle, not necessarily the candidate, required prospective correction."},
+      {"question":"Did environment independently prevent acceptance?","label":"OBSERVED","answer":"No. Missing TeX limited coverage, but scripts/validate.py exited zero; focused rejection controlled."},
+      {"question":"What caused rejection?","label":"OBSERVED","answer":"Historically, focused-harness behavior; Issue #114 prospectively classifies it HARNESS_MISMATCH, without retroactive acceptance."},
+      {"question":"Would changing the gate after result weaken it?","label":"SUPPORTED_INFERENCE","answer":"Yes if used to accept Run 2; prospective correction for later runs is not retroactive weakening."}
+    ],"evidence":["investigations/agentic-structural-drift-run-2/transitions/t1.md","investigations/agentic-structural-drift-harness-audit-114/audit.md","investigations/agentic-structural-drift-harness-audit-114/gate-analysis.json"]},
+    {"run":3,"claims":[
+      {"question":"If the focused gate were removed, would T1 have formed?","label":"NOT_DETERMINABLE","answer":"Ordinary validation was never reached; removing the controlling frozen semantic gate would also be post-hoc weakening."},
+      {"question":"If ordinary validation were removed, would T1 have formed?","label":"SUPPORTED_INFERENCE","answer":"No; it was not reached, and both candidates failed the prior focused gate."},
+      {"question":"Would another repair likely have formed T1?","label":"NOT_DETERMINABLE","answer":"The residual nodes omission is known, but no third candidate or all-gates result establishes likely acceptance."},
+      {"question":"Did environment independently prevent acceptance?","label":"OBSERVED","answer":"No environment failure was recorded; exact candidates exercised and failed frozen semantics."},
+      {"question":"What caused rejection?","label":"OBSERVED","answer":"Candidate behavior: attempt 1 violated canonical serialization and repaired attempt 2 omitted nodes. Frozen evidence supports TASK_FAILURE."},
+      {"question":"Would changing the gate after result weaken it?","label":"SUPPORTED_INFERENCE","answer":"Yes; the corrected oracle and coverage were prospectively frozen and passed the 19/0/0 entry boundary."}
+    ],"evidence":["investigations/agentic-structural-drift-run-3/pre-execution-verification.json","investigations/agentic-structural-drift-run-3/execution-record.json","investigations/agentic-structural-drift-run-3/transitions/O1/attempt-1/focused.stderr","investigations/agentic-structural-drift-run-3/transitions/O1/attempt-2/focused.stderr"]}
+  ]
+}

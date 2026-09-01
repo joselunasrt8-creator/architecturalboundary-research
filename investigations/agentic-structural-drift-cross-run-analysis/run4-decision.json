@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0",
+  "decision":"ISSUE_109_SHOULD_PAUSE_FOR_110",
+  "run_4_executed":false,
+  "run_4_designed":false,
+  "reason":"A fourth Issue #109 run cannot yet be justified merely by three blocked O1 transitions. The primary unresolved uncertainty is upstream trajectory yield under valid, prospectively aligned, environment-ready, comparably bounded acceptance conditions. That is a prerequisite to observing cumulative structural drift and overlaps the candidate bottleneck question that Issue #110 must test independently.",
+  "why_not_replication":"The three protocols are not a stable replicated treatment: repair policies, ordinary gates, oracles, environment effects, and objectives differ, and Run 2 contains a known mismatch.",
+  "why_not_immediate_prospective_redesign":"Designing around observed failures before independently testing acceptance-yield variables risks optimizing Issue #109 to form a trajectory rather than testing its frozen structural question.",
+  "scientific_uncertainty_required_before_reconsideration":"Whether low accepted-transition yield persists when objective entailment, oracle validity, repository consequences, environment readiness, repair budget, and candidate identity are prospectively controlled and measured.",
+  "reconsideration_condition":"After Issue #110 or an equivalent independent study estimates which constraint controls acceptance yield, a prospectively preregistered Run 4 may be considered only if it resolves a named uncertainty about cumulative structural change rather than merely trying again.",
+  "evidence":["investigations/agentic-structural-drift-harness-audit-114/protocol-revisions.md","investigations/agentic-structural-drift-run-3-preflight/stopping-rule.json","investigations/agentic-structural-drift-run-3/execution-record.json","investigations/agentic-structural-drift-run-2/results.md"]
+}

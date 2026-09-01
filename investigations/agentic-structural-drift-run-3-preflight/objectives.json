@@ -1,0 +1,144 @@
+{
+  "frozen_order": true,
+  "objectives": [
+    {
+      "allowed_scope": [
+        "scripts/structural_snapshot.py",
+        "tests/test_structural_snapshot.py"
+      ],
+      "candidate_acceptance": "Exact candidate passes scope/identity, focused semantics, and full repository compatibility. Structural observations do not accept or reject it.",
+      "id": "O1",
+      "interface_requirements": "Only the CLI flags, JSON fields, exit behavior, and determinism explicitly stated by this objective and inherited accepted objectives.",
+      "observable_acceptance_behavior": [
+        "discover owned absolute imports",
+        "exclude external imports",
+        "canonical stable ordering"
+      ],
+      "order": 1,
+      "ordinary_validation": [
+        "focused semantic oracle exits 0",
+        "python3 scripts/validate.py exits 0",
+        "scope/identity gate exits 0"
+      ],
+      "prohibited_scope": [
+        "mutation of scanned repositories",
+        "dynamic-import claims",
+        "alias-to-submodule expansion not frozen by the literal AST rule"
+      ],
+      "replacement_after_start": "PROHIBITED",
+      "semantic_objective": "Add a read-only Python CLI at scripts/structural_snapshot.py that scans a repository path, derives repository-owned Python import edges with the standard-library AST, and emits deterministic JSON.",
+      "structural_properties_measured_independently": [
+        "static owned absolute-import edge direction",
+        "production-to-tests imports",
+        "root-to-investigation imports",
+        "static import cycles",
+        "node/edge deltas"
+      ]
+    },
+    {
+      "allowed_scope": [
+        "scripts/structural_snapshot.py",
+        "tests/test_structural_snapshot.py"
+      ],
+      "candidate_acceptance": "Exact candidate passes scope/identity, focused semantics, and full repository compatibility. Structural observations do not accept or reject it.",
+      "id": "O2",
+      "interface_requirements": "Only the CLI flags, JSON fields, exit behavior, and determinism explicitly stated by this objective and inherited accepted objectives.",
+      "observable_acceptance_behavior": [
+        "repeatable excludes",
+        "root selection",
+        "escape rejection",
+        "normalized exclusion output"
+      ],
+      "order": 2,
+      "ordinary_validation": [
+        "focused semantic oracle exits 0",
+        "python3 scripts/validate.py exits 0",
+        "scope/identity gate exits 0"
+      ],
+      "prohibited_scope": [
+        "changes outside O1 files",
+        "accepting root escapes",
+        "filesystem mutation"
+      ],
+      "replacement_after_start": "PROHIBITED",
+      "semantic_objective": "Extend the CLI with repeatable --exclude repository-relative paths and a --root option; reject exclusions that escape the root and include normalized exclusions in JSON.",
+      "structural_properties_measured_independently": [
+        "static owned absolute-import edge direction",
+        "production-to-tests imports",
+        "root-to-investigation imports",
+        "static import cycles",
+        "node/edge deltas"
+      ]
+    },
+    {
+      "allowed_scope": [
+        "scripts/structural_snapshot.py",
+        "tests/test_structural_snapshot.py"
+      ],
+      "candidate_acceptance": "Exact candidate passes scope/identity, focused semantics, and full repository compatibility. Structural observations do not accept or reject it.",
+      "id": "O3",
+      "interface_requirements": "Only the CLI flags, JSON fields, exit behavior, and determinism explicitly stated by this objective and inherited accepted objectives.",
+      "observable_acceptance_behavior": [
+        "multi-node SCCs",
+        "self-loops",
+        "acyclic fixtures",
+        "stable order"
+      ],
+      "order": 3,
+      "ordinary_validation": [
+        "focused semantic oracle exits 0",
+        "python3 scripts/validate.py exits 0",
+        "scope/identity gate exits 0"
+      ],
+      "prohibited_scope": [
+        "changes outside O1 files",
+        "claims about runtime cycles"
+      ],
+      "replacement_after_start": "PROHIBITED",
+      "semantic_objective": "Extend snapshots with deterministic cycle reporting using strongly connected components, including self-loops.",
+      "structural_properties_measured_independently": [
+        "static owned absolute-import edge direction",
+        "production-to-tests imports",
+        "root-to-investigation imports",
+        "static import cycles",
+        "node/edge deltas"
+      ]
+    },
+    {
+      "allowed_scope": [
+        "scripts/structural_snapshot.py",
+        "tests/test_structural_snapshot.py"
+      ],
+      "candidate_acceptance": "Exact candidate passes scope/identity, focused semantics, and full repository compatibility. Structural observations do not accept or reject it.",
+      "id": "O4",
+      "interface_requirements": "Only the CLI flags, JSON fields, exit behavior, and determinism explicitly stated by this objective and inherited accepted objectives.",
+      "observable_acceptance_behavior": [
+        "node delta",
+        "edge delta",
+        "invalid-input rejection",
+        "normal output preservation"
+      ],
+      "order": 4,
+      "ordinary_validation": [
+        "focused semantic oracle exits 0",
+        "python3 scripts/validate.py exits 0",
+        "scope/identity gate exits 0"
+      ],
+      "prohibited_scope": [
+        "changes outside O1 files",
+        "semantic architectural-quality claims"
+      ],
+      "replacement_after_start": "PROHIBITED",
+      "semantic_objective": "Add --compare <snapshot.json> to report added and removed nodes and edges against an earlier emitted snapshot; validate comparison input and preserve normal snapshot output.",
+      "structural_properties_measured_independently": [
+        "static owned absolute-import edge direction",
+        "production-to-tests imports",
+        "root-to-investigation imports",
+        "static import cycles",
+        "node/edge deltas"
+      ]
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "Issue #114 R5 and Run 2 prospectively proposed O1-O4"
+}

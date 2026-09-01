@@ -1,0 +1,107 @@
+{
+  "claim_boundary": "Only enumerated static AST properties are measured; no general architecture claim.",
+  "measures": [
+    {
+      "acceptance_role": "INDEPENDENT_NON_GATE",
+      "baseline": "T0 bound in preregistration plus deterministic positive/negative synthetic controls",
+      "comparisons": [
+        "T(n-1) -> Tn for accepted states",
+        "T0 -> Tn for every accepted state"
+      ],
+      "id": "M1",
+      "interpretation_boundary": "Static syntactic imports only; not runtime/data/call coupling.",
+      "measurement_command": "python3 <accepted-tree>/scripts/structural_snapshot.py --root <accepted-tree> --exclude investigations/agentic-structural-drift-run-3-preflight",
+      "output_schema": {
+        "cycles": "sorted lists when available",
+        "edges": "sorted unique [source,target] pairs",
+        "nodes": "sorted unique strings",
+        "unmeasurable": "sorted declarations"
+      },
+      "predicate": "no tools.* source may have an edge to scripts.*",
+      "representation": "tracked non-test Python AST absolute-import graph",
+      "violation_or_change_rule": "new matching edge relative to baseline"
+    },
+    {
+      "acceptance_role": "INDEPENDENT_NON_GATE",
+      "baseline": "T0 bound in preregistration plus deterministic positive/negative synthetic controls",
+      "comparisons": [
+        "T(n-1) -> Tn for accepted states",
+        "T0 -> Tn for every accepted state"
+      ],
+      "id": "M2",
+      "interpretation_boundary": "Tests excluded as source but retained as import-target labels; dynamic imports unobserved.",
+      "measurement_command": "python3 <accepted-tree>/scripts/structural_snapshot.py --root <accepted-tree> --exclude investigations/agentic-structural-drift-run-3-preflight",
+      "output_schema": {
+        "cycles": "sorted lists when available",
+        "edges": "sorted unique [source,target] pairs",
+        "nodes": "sorted unique strings",
+        "unmeasurable": "sorted declarations"
+      },
+      "predicate": "no measured production module imports tests.*",
+      "representation": "same graph plus measured target labels",
+      "violation_or_change_rule": "new matching edge relative to baseline"
+    },
+    {
+      "acceptance_role": "INDEPENDENT_NON_GATE",
+      "baseline": "T0 bound in preregistration plus deterministic positive/negative synthetic controls",
+      "comparisons": [
+        "T(n-1) -> Tn for accepted states",
+        "T0 -> Tn for every accepted state"
+      ],
+      "id": "M3",
+      "interpretation_boundary": "Only syntactically visible absolute imports.",
+      "measurement_command": "python3 <accepted-tree>/scripts/structural_snapshot.py --root <accepted-tree> --exclude investigations/agentic-structural-drift-run-3-preflight",
+      "output_schema": {
+        "cycles": "sorted lists when available",
+        "edges": "sorted unique [source,target] pairs",
+        "nodes": "sorted unique strings",
+        "unmeasurable": "sorted declarations"
+      },
+      "predicate": "scripts.* and tools.* do not import investigations.*; investigation implementation does not import scripts.*",
+      "representation": "same graph",
+      "violation_or_change_rule": "new matching edge relative to baseline"
+    },
+    {
+      "acceptance_role": "INDEPENDENT_NON_GATE",
+      "baseline": "T0 bound in preregistration plus deterministic positive/negative synthetic controls",
+      "comparisons": [
+        "T(n-1) -> Tn for accepted states",
+        "T0 -> Tn for every accepted state"
+      ],
+      "id": "M4",
+      "interpretation_boundary": "Static graph cycles, not runtime recursion.",
+      "measurement_command": "python3 <accepted-tree>/scripts/structural_snapshot.py --root <accepted-tree> --exclude investigations/agentic-structural-drift-run-3-preflight",
+      "output_schema": {
+        "cycles": "sorted lists when available",
+        "edges": "sorted unique [source,target] pairs",
+        "nodes": "sorted unique strings",
+        "unmeasurable": "sorted declarations"
+      },
+      "predicate": "no SCC >1 and no self-loop",
+      "representation": "strongly connected components of same graph",
+      "violation_or_change_rule": "new cycle relative to baseline"
+    },
+    {
+      "acceptance_role": "INDEPENDENT_NON_GATE",
+      "baseline": "T0 bound in preregistration plus deterministic positive/negative synthetic controls",
+      "comparisons": [
+        "T(n-1) -> Tn for accepted states",
+        "T0 -> Tn for every accepted state"
+      ],
+      "id": "M5",
+      "interpretation_boundary": "Counts/topology are descriptive and do not measure architecture generally.",
+      "measurement_command": "python3 <accepted-tree>/scripts/structural_snapshot.py --root <accepted-tree> --exclude investigations/agentic-structural-drift-run-3-preflight",
+      "output_schema": {
+        "cycles": "sorted lists when available",
+        "edges": "sorted unique [source,target] pairs",
+        "nodes": "sorted unique strings",
+        "unmeasurable": "sorted declarations"
+      },
+      "predicate": "report additions/removals",
+      "representation": "sorted node and edge sets",
+      "violation_or_change_rule": "nonempty delta is change, not inherently degradation"
+    }
+  ],
+  "schema_version": "1.0",
+  "withholding": "All structural outputs are withheld during generation and repair."
+}

@@ -1,0 +1,22 @@
+{
+  "blocked_transition": "not accepted and never a trajectory parent",
+  "interpretation": "fewer than three accepted transitions is EXPERIMENT_BLOCKED and is not evidence of no structural drift",
+  "maximum_attempted_transitions": 4,
+  "minimum_accepted_transitions": 3,
+  "objective_order": [
+    "O1",
+    "O2",
+    "O3",
+    "O4"
+  ],
+  "on_accept": "record independent structural evidence; exact accepted commit/tree is next parent; continue unless O4 complete",
+  "on_environment_failure": "environment-only retry solely on proved non-exercise; otherwise stop EXPERIMENT_BLOCKED",
+  "on_first_attempt_candidate_failure": "permit the single transcript-bound repair",
+  "on_harness_mismatch": "stop and invalidate Run 3 entry/execution; do not edit gate after generation",
+  "on_instrumentation_limitation": "block affected inference; if required discrimination is unavailable stop EXPERIMENT_BLOCKED",
+  "on_repair_failure": "reject transition, stop, final EXPERIMENT_BLOCKED when fewer than 3 accepted",
+  "on_structural_invariant_failure": "record and continue when ordinary gates pass; never reject unless objective explicitly made it a task contract",
+  "rules_mutable_after_start": false,
+  "schema_version": "1.0",
+  "trajectory": "T0 -> T1 -> T2 -> T3, with O4 available for T4"
+}

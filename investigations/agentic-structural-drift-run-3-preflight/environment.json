@@ -1,0 +1,53 @@
+{
+  "classification_boundary": {
+    "environment_failure": "candidate non-exercise proven by identical T0/control external failure",
+    "instrumentation_limitation": "frozen measure cannot observe required property",
+    "task_failure": "exact candidate exercised and entailed semantic assertion fails"
+  },
+  "dependencies": {
+    "jsonschema": "4.25.1",
+    "pytest": "8.4.2",
+    "tiktoken": "0.9.0"
+  },
+  "dependency_identity": {
+    "path": "requirements.txt",
+    "sha256": "cd1b4a8c0c995c55d9def98332866fc751efbc59760275252aff2eeee5dd7a44"
+  },
+  "double_baseline": {
+    "required": true,
+    "result": "recorded in preflight-results.json"
+  },
+  "frozen_commands": [
+    "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py self-test",
+    "python3 scripts/validate.py"
+  ],
+  "remaining_limitations": [
+    "pdflatex/bibtex unavailable; scripts/validate.py reports this as optional and remains zero-exit",
+    "broad pytest may require network tokenizer data and is not the repository ordinary-validation command"
+  ],
+  "required_local": [
+    "Git object for T0",
+    "Python stdlib ast",
+    "installed pinned requirements"
+  ],
+  "resources": {
+    "network": "not required or permitted for frozen acceptance commands",
+    "tex": {
+      "bibtex": false,
+      "boundary": "Publication build availability is reported by scripts/validate.py; its frozen exit must be zero and no failure may be hidden.",
+      "pdflatex": false
+    },
+    "tiktoken": {
+      "acceptance_boundary": "scripts/validate.py does not require tokenizer/model downloads; tokenizer-dependent broad pytest remains a diagnostic, not an acceptance substitute",
+      "deterministic_replacement": "No replacement of ordinary validation. Run every required command twice at T0; any newly required tokenizer check would require a locally hashed cache before execution.",
+      "justification": "The repository documented validator is the ordinary compatibility contract and validates publication/data contracts without external tokenization. Focused objective semantics use only Python stdlib. This separation predates outcomes and does not suppress validator checks.",
+      "package_installed": true
+    }
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+    "python": "3.12.13"
+  },
+  "schema_version": "1.0"
+}

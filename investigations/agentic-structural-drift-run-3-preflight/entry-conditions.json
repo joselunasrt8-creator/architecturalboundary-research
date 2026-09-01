@@ -1,0 +1,226 @@
+{
+  "conditions": [
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "`evidence/source-bindings.json` Run 1 paths/hashes; evidence introduced by `d227e7f...`.",
+      "final_evidence": "Prospective preflight artifact and check for condition 1; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 1,
+      "requirement": "Run 1 primary evidence bound",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "Bindings include both raw logs, patch, transition, and structural JSON; evidence introduced by HEAD.",
+      "final_evidence": "Prospective preflight artifact and check for condition 2; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 2,
+      "requirement": "Run 2 primary evidence bound",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "Bindings C-1/C-2 identify both claims, controller, and effect.",
+      "final_evidence": "Prospective preflight artifact and check for condition 3; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 3,
+      "requirement": "Conflicts resolved by precedence",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "Freeze assertion-to-contract oracle table and plurality controls.",
+      "baseline_failure_reason": "Run 2 `from lib import helper` assertion is not entailed by the frozen representation; R1 preflight is not yet produced.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "Run 2 `from lib import helper` assertion is not entailed by the frozen representation; R1 preflight is not yet produced.",
+      "final_evidence": "Prospective preflight artifact and check for condition 4; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 4,
+      "requirement": "Every focused assertion semantically justified",
+      "verification_procedure": "semantic oracle fixture matrix exits 0"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "Run 1 helper objective and Run 2 behavior objectives do not prescribe source algorithms; the oracle, not O1, created Run 2 narrowness.",
+      "final_evidence": "Prospective preflight artifact and check for condition 5; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 5,
+      "requirement": "Objectives permit multiple legitimate implementations",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "`gate-analysis.json` defines semantic vs repository AND-gates.",
+      "final_evidence": "Prospective preflight artifact and check for condition 6; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 6,
+      "requirement": "Focused/full roles explicitly separated",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "`failure-taxonomy.json` defines inclusion, exclusion, evidence, multi-label use, and precedence.",
+      "final_evidence": "Prospective preflight artifact and check for condition 7; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 7,
+      "requirement": "Deterministic failure taxonomy exists",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "Freeze and double-run T0 environment baseline; bound tokenizer/TeX limitations.",
+      "baseline_failure_reason": "Run 1 tokenizer/network failures and Run 2 missing TeX are documented; no frozen Run 3 environment/T0 double baseline exists.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "Run 1 tokenizer/network failures and Run 2 missing TeX are documented; no frozen Run 3 environment/T0 double baseline exists.",
+      "final_evidence": "Prospective preflight artifact and check for condition 8; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 8,
+      "requirement": "Environment reproducible or bounded",
+      "verification_procedure": "two T0 command runs have equal exit and normalized output hashes"
+    },
+    {
+      "action_necessary_for_pass": "Freeze executable static predicates, controls, commands, and schemas.",
+      "baseline_failure_reason": "Prior measures exist, but Run 3 predicates, controls, and observable scope have not been frozen.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "Prior measures exist, but Run 3 predicates, controls, and observable scope have not been frozen.",
+      "final_evidence": "Prospective preflight artifact and check for condition 9; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 9,
+      "requirement": "Structural measurements prospectively defined",
+      "verification_procedure": "structural controls and schema self-test"
+    },
+    {
+      "action_necessary_for_pass": "Constrain inference to discriminating static observables and cumulative/local comparisons.",
+      "baseline_failure_reason": "Existing measures discriminate only narrow static invariants; Run 3 must adopt R5 controls and constrain its claim before execution.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "Existing measures discriminate only narrow static invariants; Run 3 must adopt R5 controls and constrain its claim before execution.",
+      "final_evidence": "Prospective preflight artifact and check for condition 10; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 10,
+      "requirement": "Measurements discriminate the research question",
+      "verification_procedure": "measure claim boundaries and adjacent/cumulative rules validate"
+    },
+    {
+      "action_necessary_for_pass": "Freeze one transcript-bound repair.",
+      "baseline_failure_reason": "This audit proposes R4, but no Run 3 preregistration has frozen it.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "This audit proposes R4, but no Run 3 preregistration has frozen it.",
+      "final_evidence": "Prospective preflight artifact and check for condition 11; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 11,
+      "requirement": "Repair policy frozen",
+      "verification_procedure": "repair-policy binding validates"
+    },
+    {
+      "action_necessary_for_pass": "Freeze three-floor/four-ceiling stopping rule.",
+      "baseline_failure_reason": "R5 proposes the rule; separate Run 3 preregistration is absent.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "R5 proposes the rule; separate Run 3 preregistration is absent.",
+      "final_evidence": "Prospective preflight artifact and check for condition 12; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 12,
+      "requirement": "Stopping rule frozen",
+      "verification_procedure": "stopping-rule binding validates"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "Audit defines \u22653 as arbitrary but defensible: initial change plus two accumulation opportunities; it is neither sufficient nor no-drift evidence.",
+      "final_evidence": "Prospective preflight artifact and check for condition 13; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 13,
+      "requirement": "Transition count justified",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "Freeze candidate/log/tree schema and equality checks.",
+      "baseline_failure_reason": "R2 is specified but not implemented/frozen for Run 3. Run 2 demonstrates the uncommitted-candidate limitation.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "R2 is specified but not implemented/frozen for Run 3. Run 2 demonstrates the uncommitted-candidate limitation.",
+      "final_evidence": "Prospective preflight artifact and check for condition 14; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 14,
+      "requirement": "Candidate identity bindable to validation identity",
+      "verification_procedure": "synthetic identity dry run exits 0"
+    },
+    {
+      "action_necessary_for_pass": "Require accepted exact tree as next parent.",
+      "baseline_failure_reason": "R2 requires exact-tree lineage, but no Run 3 registration/execution substrate exists.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "R2 requires exact-tree lineage, but no Run 3 registration/execution substrate exists.",
+      "final_evidence": "Prospective preflight artifact and check for condition 15; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 15,
+      "requirement": "Accepted state bindable to next input",
+      "verification_procedure": "identity equality dry run exits 0"
+    },
+    {
+      "action_necessary_for_pass": "Commit preregistration on reachable branch history.",
+      "baseline_failure_reason": "Claimed Run 1/2 freeze commits are absent from the current object database; Run 3 must preserve its freeze object in reachable history.",
+      "baseline_status": "BLOCKED",
+      "controlling_evidence": "Claimed Run 1/2 freeze commits are absent from the current object database; Run 3 must preserve its freeze object in reachable history.",
+      "final_evidence": "Prospective preflight artifact and check for condition 16; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 16,
+      "requirement": "Preregistration freeze identities independently available",
+      "verification_procedure": "git cat-file verifies the preflight commit after commit"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "Audit writes only the Issue 114 directory; final tree comparison must continue to show no Run 1/2 diff.",
+      "final_evidence": "Prospective preflight artifact and check for condition 17; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 17,
+      "requirement": "Historical evidence unchanged",
+      "verification_procedure": "hash/path/status recheck"
+    },
+    {
+      "action_necessary_for_pass": "Freeze O1-O4 before generation.",
+      "baseline_failure_reason": "No Run 3 preregistration/objective freeze was created by this audit.",
+      "baseline_status": "FAIL",
+      "controlling_evidence": "No Run 3 preregistration/objective freeze was created by this audit.",
+      "final_evidence": "Prospective preflight artifact and check for condition 18; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 18,
+      "requirement": "Run 3 objectives frozen before execution",
+      "verification_procedure": "objectives.json hash is bound by committed preregistration"
+    },
+    {
+      "action_necessary_for_pass": "No prospective remediation; reverify controlling evidence unchanged.",
+      "baseline_failure_reason": null,
+      "baseline_status": "PASS",
+      "controlling_evidence": "No Run 3 directory, candidate, gate execution, or accepted state was created.",
+      "final_evidence": "Prospective preflight artifact and check for condition 19; see preflight-results.json.",
+      "final_status": "PASS",
+      "identifier": 19,
+      "requirement": "Run 3 remains a separate action",
+      "verification_procedure": "hash/path/status recheck"
+    }
+  ],
+  "controlling_source": "investigations/agentic-structural-drift-harness-audit-114/run-3-entry-conditions.md",
+  "determination": "RUN_3_READY",
+  "final_counts": {
+    "BLOCKED": 0,
+    "FAIL": 0,
+    "PASS": 19
+  },
+  "recomputed_baseline": {
+    "BLOCKED": 1,
+    "FAIL": 8,
+    "PASS": 10
+  },
+  "schema_version": "1.0"
+}

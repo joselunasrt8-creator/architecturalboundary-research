@@ -1,0 +1,30 @@
+{
+  "candidate_repairs_per_transition": 1,
+  "environment_retry": {
+    "allowed_only_if": "raw output plus T0/control proves candidate semantics were not exercised",
+    "changed_gate_or_environment_without_record": "PROHIBITED",
+    "consumes_repair": false,
+    "same_candidate_required": true
+  },
+  "evidence": "preserve both commits, trees, patches, prompt/transcript hashes, and all logs",
+  "repair_input_allowlist": [
+    "frozen current objective",
+    "candidate commit/tree identity",
+    "failing command",
+    "complete captured stdout/stderr from that command",
+    "candidate parent commit/tree and patch"
+  ],
+  "repair_input_denylist": [
+    "structural findings",
+    "researcher hints or diagnosis",
+    "later objectives",
+    "modified tests or edited gates",
+    "desired implementation",
+    "desired structural result",
+    "other gate output"
+  ],
+  "response_limit": 1,
+  "result": "one immutable repaired candidate; rerun scope, focused, and full gates in frozen order; any candidate-related failure rejects and stops",
+  "schema_version": "1.0",
+  "trigger": "first legitimate candidate-related TASK_FAILURE or ORDINARY_VALIDATION_FAILURE after exact candidate was exercised"
+}

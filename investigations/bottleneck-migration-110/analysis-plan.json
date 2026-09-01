@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "populations": {
+    "intention_to_treat": "all randomized eligible pairs, assigned condition regardless of realized abundance",
+    "per_protocol": "pairs meeting abundance manipulation checks and without artifact exclusion; sensitivity only"
+  },
+  "primary_analysis": [
+    "Within each repository × task-class × difficulty stratum, compute paired HIGH−LOW differences for P1-P5 and stage binding status",
+    "Use task-template clustered bootstrap with 10000 resamples and fixed seed 11020260901; report two-sided 95% intervals and raw numerators/denominators",
+    "Estimate conditional mixed-effects models with condition, repository, task class, difficulty, order, and condition interactions; template and operator random intercepts",
+    "Apply frozen bottleneck criteria separately by condition, then apply the migration definition",
+    "Control primary familywise error at 0.05 using Holm across P1-P5; binding thresholds remain conjunctive effect-size criteria"
+  ],
+  "artifact_checks": [
+    "Repeat including and excluding instrumentation time; an apparent result that disappears only when overhead is included is H3-compatible",
+    "Report invalid-oracle/harness and environment rates by condition; imbalance >=0.10 or common defect triggers indeterminate/block rules",
+    "Gate-order sensitivity reports not-reached stages without treating them as passes",
+    "Check baseline balance and condition-by-repository/task/difficulty interactions",
+    "Compare ITT and per-protocol; failure of manipulation check cannot support migration"
+  ],
+  "difficulty": "Difficulty bands are frozen pre-outcome. Analyze within band and interaction; no aggregate conclusion may reverse both bands without DOMAIN_DEPENDENT or INDETERMINATE.",
+  "proportional_acceleration": "H2 is compatible when HIGH/LOW median active-time ratios for every applicable S01-S11 stage fall within ±0.10 of their geometric mean, no binding stage changes, and throughput ratio is consistent with that common acceleration.",
+  "measurement_overhead": "Instrumentation burden is acceptable when median <=5% of cycle time in both conditions and between-condition difference <=2 percentage points.",
+  "reporting": "Publish every stratum, null/negative case, censored observation, exclusion, protocol deviation, manipulation result, and uncertainty interval. No post-hoc pooled-only claim."
+}

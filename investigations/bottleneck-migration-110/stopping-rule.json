@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "per_execution": [
+    "Stop accepted when one bound candidate passes every applicable frozen gate",
+    "Stop censored at 120 implementation active minutes, 240 total active operator minutes, 8 wall-clock hours excluding declared shared outage, 4 HIGH or 2 LOW candidates, or 2 rework loops, whichever occurs first",
+    "Safety/destructive behavior stops immediately and is retained as failure",
+    "No discretionary extra candidate, repair, time, or reordered gate"
+  ],
+  "study": [
+    "Complete all non-excluded randomized pairs; do not stop for apparent support, futility, or effect size",
+    "Administrative stop only for authorization withdrawal, integrity breach, >20% eligible executions affected by a common harness/environment defect, or inability to realize HIGH abundance",
+    "A common defect pauses collection before any repair; affected observations are quarantined and protocol amendment requires a new version, never silent continuation"
+  ],
+  "evidence_lock": "Hash task contract, starting commit, gates, environment, randomization, model/configuration, and analysis code before execution. Freeze dataset before unblinding condition aggregates."
+}

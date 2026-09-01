@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "target": {
+    "repositories": 4,
+    "task_classes": [
+      "localized defect repair",
+      "cross-module feature",
+      "dependency/API adaptation",
+      "structural/refactoring change"
+    ],
+    "difficulty_bands": [
+      "moderate",
+      "difficult"
+    ],
+    "task_templates_per_repository_class_band": 2,
+    "planned_templates": 64,
+    "executions_per_template": 2,
+    "planned_executions": 128
+  },
+  "repository_rules": [
+    "At least two distinct application domains and two language/toolchain families",
+    "Repository has deterministic checkout, license permission, documented build/test commands, and an offline-capable dependency snapshot",
+    "At least one repository must have meaningful structural validation; N/A is allowed elsewhere",
+    "No Continufy or any named component is required"
+  ],
+  "inclusion": [
+    "Realistic change with frozen intent, independently reviewed acceptance oracle, known starting commit, and both focused and repository gates",
+    "Pilot calibration by non-study tasks places task in moderate or difficult band using file/module reach, acceptance clauses, and blinded expert estimates",
+    "Task can be attempted in both conditions without changing requirements or environment",
+    "Implementation is substantively required; preserve tasks forecast to remain implementation-difficult"
+  ],
+  "exclusion": [
+    "Security-sensitive or destructive deployment",
+    "Requirements cannot be made determinate before randomization",
+    "Repository cannot be reproduced in the frozen environment",
+    "Task was used to tune the assigned AI system or is already present in its session context",
+    "Trivial formatting/document-only work"
+  ],
+  "allocation": "Freeze all 64 templates and strata, then computer-randomize condition order and operator using a committed seed. Both conditions execute every template from reset commits.",
+  "substitution": "No post-outcome substitution. Pre-randomization replacements require a versioned amendment and same stratum; post-randomization ineligibility is retained and classified/excluded only by frozen rules.",
+  "preservation": "All failures, null effects, implementation-dominant cases, and valid negative results remain in analysis. Report repository/task/difficulty strata individually before aggregation."
+}

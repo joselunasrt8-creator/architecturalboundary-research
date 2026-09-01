@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "precedence": [
+    "EXPERIMENT_BLOCKED",
+    "BOTTLENECK_MIGRATION_INDETERMINATE",
+    "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+    "BOTTLENECK_MIGRATION_SUPPORTED",
+    "BOTTLENECK_MIGRATION_NOT_SUPPORTED"
+  ],
+  "categories": {
+    "EXPERIMENT_BLOCKED": "Any study-level administrative stop occurs; >20% common harness/environment/instrument defect occurs; authorization/identity/data integrity fails; or fewer than 75% of planned randomized pairs yield classifiable primary outcomes.",
+    "BOTTLENECK_MIGRATION_INDETERMINATE": "Not blocked, but HIGH manipulation checks fail; primary data/intervals cannot classify binding status; artifact/environment imbalance >=0.10 is sufficient to explain the observed yield difference; measurement overhead limits fail and sensitivity changes the migration call; or valid completed pairs provide <80% power for the frozen minimum effects.",
+    "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT": "Not blocked/indeterminate; full migration rule passes in at least one repository and task class and fails in at least one other, with a condition×repository or condition×task-class interaction Holm-adjusted p<0.05 or opposite 95% intervals; neither pattern spans the required 2 repositories and 2 task classes.",
+    "BOTTLENECK_MIGRATION_SUPPORTED": "Not blocked/indeterminate/domain-dependent; implementation is binding in LOW and ceases binding in HIGH, a named non-implementation stage newly binds in HIGH under bottleneck-definition.json, this occurs in >=2 repositories and >=2 task classes without significant opposite interaction, HIGH improves P1 or P2 by the frozen minimum (P1 >=15% or P2 >=0.10; Holm-adjusted 95% interval excludes 0), and H3/H4/H6/H7 artifact checks do not account for it.",
+    "BOTTLENECK_MIGRATION_NOT_SUPPORTED": "Not blocked/indeterminate/domain-dependent and the SUPPORTED rule fails with adequate power. Includes implementation remaining binding, no newly binding non-implementation stage, proportional acceleration, or precise null/opposite effects."
+  },
+  "interpretation": "Only one category is emitted using precedence. NOT_SUPPORTED is a valid negative/null outcome, not proof of universal absence. No category has been applied to empirical data."
+}

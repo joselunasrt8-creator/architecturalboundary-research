@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "readiness_checklist": {
+    "all_machine_readable_artifacts_present": true,
+    "hypotheses_and_determination_rules_frozen": true,
+    "stage_and_measurement_schemas_frozen": true,
+    "contrast_and_cohort_rules_frozen": true,
+    "failure_stopping_exclusion_rules_frozen": true,
+    "environment_requirements_defined": true,
+    "execution_authorized": false,
+    "tasks_selected_and_frozen": false,
+    "repositories_and_images_verified": false,
+    "oracles_independently_validated": false,
+    "instrument_calibrated": false,
+    "randomization_manifest_committed": false,
+    "analysis_code_dry_run_on_synthetic_data": false
+  },
+  "environment_requirements": [
+    "Pinned OS/container digest, runtime/compiler/tool versions, locale, timezone, CPU/memory limits, and dependency lock/snapshot",
+    "Clean resettable checkout at recorded commit with candidate-isolated workspaces",
+    "Repository-native focused and full gates pass at baseline or documented pre-existing failures have deterministic fingerprints",
+    "Required services use pinned fixtures; credentials and network policy verified without exposing secrets",
+    "Monotonic clock and event logger calibrated on synthetic non-study fixtures",
+    "Equivalent hardware/resource limits by condition except the assigned AI implementation resource",
+    "AI model/version/configuration and availability recorded and immutable during cohort"
+  ],
+  "authorization_boundary": "This package authorizes protocol design only. It does not authorize task selection, human enrollment, AI invocation, candidate generation, repository mutation, validation runs on study tasks, deployment, or empirical data collection. A separate human authorization after every false entry condition is satisfied is required.",
+  "readiness": "BOTTLENECK_EXPERIMENT_NOT_READY",
+  "reason": "The protocol is frozen, but execution authorization, cohort binding, environment/oracle verification, instrument calibration, randomization, and synthetic analysis rehearsal remain outstanding. No experiment was executed."
+}

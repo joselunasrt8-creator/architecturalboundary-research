@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "primary": [
+    {
+      "id": "P1",
+      "name": "all_gates_valid_throughput",
+      "unit": "accepted executions per 8 active operator-hours",
+      "collection": "accepted candidate identity divided by total active work; zero retained"
+    },
+    {
+      "id": "P2",
+      "name": "acceptance_yield",
+      "unit": "accepted executions / eligible executions",
+      "collection": "all prospectively required gates pass before cap"
+    },
+    {
+      "id": "P3",
+      "name": "binding_status",
+      "unit": "boolean by stage, type, condition, and stratum",
+      "collection": "apply bottleneck-definition.json unchanged"
+    },
+    {
+      "id": "P4",
+      "name": "time_to_all_gates_valid",
+      "unit": "wall-clock minutes",
+      "collection": "assignment start to first all-gates-valid result; right-censor at stopping cap"
+    },
+    {
+      "id": "P5",
+      "name": "first_failure_stage",
+      "unit": "stage category",
+      "collection": "first required stage/gate producing a valid failure"
+    }
+  ],
+  "secondary": [
+    "stage elapsed time",
+    "stage exclusive active work time",
+    "stage wait time",
+    "attempt count",
+    "bound candidate count",
+    "pass/fail/not-reached per stage",
+    "rework count",
+    "rework origin",
+    "total cycle time",
+    "exclusive critical-path proportion by stage",
+    "coordination events and handoffs"
+  ],
+  "diagnostic": [
+    "instrumentation time",
+    "environment incidents and outage duration",
+    "oracle disputes",
+    "harness validity adjudication",
+    "tokens/tool calls in HIGH",
+    "queue utilization",
+    "gate-order censoring",
+    "operator/repository/task/difficulty identifiers",
+    "candidate identity/hash"
+  ],
+  "timing": "Monotonic automated timestamps where possible; manual stage changes require reason codes. Instrumentation time is separately labeled and excluded from work time but reported.",
+  "missingness": "Never impute primary endpoints. Report missing/not-reached/censored separately by reason and condition."
+}

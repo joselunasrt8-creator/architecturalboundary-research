@@ -1,0 +1,219 @@
+{
+  "artifact_role": "PROSPECTIVE_ASSUMPTION_SENSITIVITY_NOT_EMPIRICAL_DATA",
+  "configuration": {
+    "designs": [
+      {
+        "difficulty_bands": 2,
+        "executions": 128,
+        "pairs": 64,
+        "repositories": 4,
+        "task_classes": 4
+      },
+      {
+        "difficulty_bands": 2,
+        "executions": 256,
+        "pairs": 128,
+        "repositories": 4,
+        "task_classes": 4
+      },
+      {
+        "difficulty_bands": 2,
+        "executions": 576,
+        "pairs": 288,
+        "repositories": 6,
+        "task_classes": 4
+      },
+      {
+        "difficulty_bands": 2,
+        "executions": 1024,
+        "pairs": 512,
+        "repositories": 8,
+        "task_classes": 4
+      }
+    ],
+    "model_features": [
+      "paired LOW/HIGH",
+      "repository clusters",
+      "task class",
+      "difficulty",
+      "within-pair correlation",
+      "repository and task variation",
+      "attrition",
+      "right censoring",
+      "acceptance yield",
+      "throughput",
+      "time to valid",
+      "conjunctive migration"
+    ],
+    "regimes": [
+      {
+        "attrition": 0.05,
+        "baseline": 0.4,
+        "censoring": 0.05,
+        "environment_failure": 0.02,
+        "name": "favorable",
+        "pair_correlation": 0.6,
+        "repository_sd": 0.05,
+        "task_sd": 0.1,
+        "timing_cv": 0.35,
+        "yield_effect": 0.2
+      },
+      {
+        "attrition": 0.1,
+        "baseline": 0.4,
+        "censoring": 0.15,
+        "environment_failure": 0.05,
+        "name": "moderate",
+        "pair_correlation": 0.35,
+        "repository_sd": 0.1,
+        "task_sd": 0.2,
+        "timing_cv": 0.55,
+        "yield_effect": 0.15
+      },
+      {
+        "attrition": 0.25,
+        "baseline": 0.4,
+        "censoring": 0.25,
+        "environment_failure": 0.1,
+        "name": "conservative",
+        "pair_correlation": 0.1,
+        "repository_sd": 0.15,
+        "task_sd": 0.3,
+        "timing_cv": 0.8,
+        "yield_effect": 0.1
+      }
+    ],
+    "replicates_per_design_regime": 10000,
+    "seed": 11020260901
+  },
+  "configuration_sha256": "f5ac974328346d5b36e7a13b9424a8626bd585b50b6b102c1de1e1cf8506ae56",
+  "engine_sha256": "21f8ee2d27009dbc2c84987635127d5601a3b2686ec14be6377c28755ab65979",
+  "final_n": "FINAL_N_NOT_YET_FREEZABLE",
+  "reason": "Regime nuisance values are synthetic assumptions; no permissible outcome-blind calibration bounds have been frozen.",
+  "replicates_per_design_regime": 10000,
+  "results": [
+    {
+      "executions": 128,
+      "mean_retained_pairs": 59.559,
+      "pairs": 64,
+      "primary_conjunctive_power": 0.2825,
+      "regime": "favorable",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.9558
+    },
+    {
+      "executions": 128,
+      "mean_retained_pairs": 54.702,
+      "pairs": 64,
+      "primary_conjunctive_power": 0.0349,
+      "regime": "moderate",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.9892
+    },
+    {
+      "executions": 128,
+      "mean_retained_pairs": 43.16,
+      "pairs": 64,
+      "primary_conjunctive_power": 0.0048,
+      "regime": "conservative",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.9958
+    },
+    {
+      "executions": 256,
+      "mean_retained_pairs": 119.202,
+      "pairs": 128,
+      "primary_conjunctive_power": 0.4531,
+      "regime": "favorable",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.9166
+    },
+    {
+      "executions": 256,
+      "mean_retained_pairs": 109.404,
+      "pairs": 128,
+      "primary_conjunctive_power": 0.0662,
+      "regime": "moderate",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.9789
+    },
+    {
+      "executions": 256,
+      "mean_retained_pairs": 86.402,
+      "pairs": 128,
+      "primary_conjunctive_power": 0.0081,
+      "regime": "conservative",
+      "replicates_executed": 10000,
+      "repositories": 4,
+      "repository_interaction_detection_rate": 0.993
+    },
+    {
+      "executions": 576,
+      "mean_retained_pairs": 268.196,
+      "pairs": 288,
+      "primary_conjunctive_power": 0.6071,
+      "regime": "favorable",
+      "replicates_executed": 10000,
+      "repositories": 6,
+      "repository_interaction_detection_rate": 0.978
+    },
+    {
+      "executions": 576,
+      "mean_retained_pairs": 246.198,
+      "pairs": 288,
+      "primary_conjunctive_power": 0.1389,
+      "regime": "moderate",
+      "replicates_executed": 10000,
+      "repositories": 6,
+      "repository_interaction_detection_rate": 0.9979
+    },
+    {
+      "executions": 576,
+      "mean_retained_pairs": 194.435,
+      "pairs": 288,
+      "primary_conjunctive_power": 0.0111,
+      "regime": "conservative",
+      "replicates_executed": 10000,
+      "repositories": 6,
+      "repository_interaction_detection_rate": 0.9997
+    },
+    {
+      "executions": 1024,
+      "mean_retained_pairs": 476.679,
+      "pairs": 512,
+      "primary_conjunctive_power": 0.6788,
+      "regime": "favorable",
+      "replicates_executed": 10000,
+      "repositories": 8,
+      "repository_interaction_detection_rate": 0.9937
+    },
+    {
+      "executions": 1024,
+      "mean_retained_pairs": 437.662,
+      "pairs": 512,
+      "primary_conjunctive_power": 0.2061,
+      "regime": "moderate",
+      "replicates_executed": 10000,
+      "repositories": 8,
+      "repository_interaction_detection_rate": 0.9998
+    },
+    {
+      "executions": 1024,
+      "mean_retained_pairs": 345.443,
+      "pairs": 512,
+      "primary_conjunctive_power": 0.0191,
+      "regime": "conservative",
+      "replicates_executed": 10000,
+      "repositories": 8,
+      "repository_interaction_detection_rate": 0.9999
+    }
+  ],
+  "schema_version": "1.0",
+  "seed": 11020260901,
+  "total_replicates_executed": 120000
+}

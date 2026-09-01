@@ -1,0 +1,43 @@
+{
+  "calibration_record_required": [
+    "source_class",
+    "source identifier and hash",
+    "collection date",
+    "variables accessed",
+    "exclusion of study tasks/outcomes",
+    "estimator",
+    "bounds",
+    "independent sign-off"
+  ],
+  "freeze_gate": "Every parameter has defensible conservative bounds from EXTERNAL DATA or PRE-STUDY CALIBRATION; otherwise FINAL_N_NOT_YET_FREEZABLE.",
+  "parameters": [
+    "baseline acceptance rate",
+    "paired correlation",
+    "timing variance",
+    "repository variance",
+    "task variance",
+    "censoring",
+    "attrition",
+    "environment failure rate"
+  ],
+  "schema_version": "1.0",
+  "source_classes": {
+    "EMPIRICAL ISSUE-110 OUTCOME": {
+      "permitted": false,
+      "rules": "Prohibited before final sample-size freeze, including blinded or pooled endpoint-derived variance if it reveals study outcome information."
+    },
+    "EXTERNAL DATA": {
+      "permitted": true,
+      "rules": "Published or archived data collected independently of Issue #110, provenance/hash/date recorded; task/outcome comparability justified without inspecting #110 outcomes."
+    },
+    "PRE-STUDY CALIBRATION": {
+      "permitted": true,
+      "rules": "Instrumentation/environment dry runs on non-study tasks or aggregate operational metadata fixed before assignments; no candidate qualification, study task, condition contrast, acceptance, binding, or migration outcome."
+    },
+    "SYNTHETIC ASSUMPTION": {
+      "permitted": true,
+      "rules": "Clearly fictional sensitivity values only; cannot alone freeze final N."
+    }
+  },
+  "status": "BLOCKED_PENDING_LEGITIMATE_BOUNDS"
+}

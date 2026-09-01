@@ -1,0 +1,26 @@
+{
+  "determination_precedence": [
+    "EXPERIMENT_BLOCKED",
+    "BOTTLENECK_MIGRATION_INDETERMINATE",
+    "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+    "BOTTLENECK_MIGRATION_SUPPORTED",
+    "BOTTLENECK_MIGRATION_NOT_SUPPORTED"
+  ],
+  "implementation": "production_analysis.py",
+  "methods": {
+    "acceptance_yield": "paired risk difference with paired-template cluster bootstrap",
+    "binding": "S05 LOW binding AND not S05 HIGH AND named non-S05 HIGH binding",
+    "domain_dependent": "qualified heterogeneous repository/task effects cannot be overridden by pooling",
+    "interactions": "condition effects by repository and task class; difficulty retained",
+    "migration": "binding conjunction plus manipulation, controls, adequate power and primary threshold",
+    "mixed_effects": "repository-by-task stratum effects with pair-cluster resampling; no execution-level independence",
+    "multiplicity": "Holm adjustment across primary endpoint family",
+    "throughput": "accepted all-gates per 480 active minutes; paired-template cluster bootstrap",
+    "time_to_valid": "Kaplan-Meier restricted mean through 480 minutes; right-censored stops retained",
+    "uncertainty": "two-sided percentile 95% intervals from 10,000 deterministic resamples"
+  },
+  "no_silent_fallback": "Any unavailable or malformed required method raises an error; no simpler substitute is permitted.",
+  "schema_version": "1.0",
+  "status": "EXECUTABLE_PROSPECTIVE_INTERFACE",
+  "unit": "paired template cluster nested in repository and crossed with task class/difficulty"
+}

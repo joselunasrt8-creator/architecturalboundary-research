@@ -1,0 +1,73 @@
+{
+  "amendment": "PASS",
+  "authorization": "Neither determination authorizes empirical execution.",
+  "conditions": [
+    {
+      "id": "historical_binding",
+      "status": "PASS"
+    },
+    {
+      "id": "production_analysis_machinery",
+      "status": "PASS"
+    },
+    {
+      "id": "power_engine",
+      "status": "PASS"
+    },
+    {
+      "id": "synthetic_validation",
+      "status": "PASS"
+    },
+    {
+      "id": "final_N",
+      "reason": "nuisance bounds not calibrated",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "repository_cohort",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "task_templates",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "environment",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "instruments",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "oracles",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "randomization",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "operator_adjudicator_process",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "AI_configuration_and_isolation",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "execution_authorization",
+      "status": "BLOCKED"
+    }
+  ],
+  "exact_amendment_determination": "AMENDMENT_001_COMPLETE",
+  "guards": {
+    "historical_issue_109_unchanged": true,
+    "historical_issue_110_unchanged": true,
+    "no_issue_110_execution": true,
+    "no_outcome_selected_cohort": true,
+    "no_study_candidate_generated": true
+  },
+  "issue_110_readiness": "BOTTLENECK_EXPERIMENT_NOT_READY",
+  "schema_version": "1.0"
+}

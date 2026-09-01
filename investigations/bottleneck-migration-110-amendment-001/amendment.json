@@ -1,0 +1,40 @@
+{
+  "amendment_id": "ISSUE-110-PROSPECTIVE-AMENDMENT-001",
+  "amends": "Issue #110 protocol v1.0.0 without rewriting it",
+  "authorization": "Does not authorize task selection, AI invocation, candidate generation, empirical collection, or Issue #110 execution.",
+  "changes": [
+    {
+      "defect": "count lacked clustered, attrition, censoring, conjunctive, or interaction power justification",
+      "effect_on_interpretation": "prevents an underpowered null from being labeled non-support and separates bounded from general claims",
+      "original_rule": "64 templates / 128 LOW-HIGH executions",
+      "prospective_revision": "outcome-blind calibration followed by deterministic Monte Carlo; select smallest eligible design meeting the frozen requirement",
+      "scientific_justification": "paired executions nested in repositories/tasks are not independent and conjunction power is binding"
+    },
+    {
+      "defect": "production clustering, survival, mixed effects, uncertainty, and multiplicity were unresolved",
+      "effect_on_interpretation": "pooled effects cannot erase heterogeneous domain results",
+      "original_rule": "conceptual P1-P5 inference",
+      "prospective_revision": "10,000-draw paired-template cluster bootstrap, Kaplan-Meier RMST, repository-by-task strata, Holm family correction, and explicit interactions",
+      "scientific_justification": "matches assignment and censoring while controlling familywise error"
+    },
+    {
+      "defect": "candidate timing and implementation-only/configuration checks were incomplete",
+      "effect_on_interpretation": "failure is INDETERMINATE and never migration support/non-support",
+      "original_rule": "HIGH abundance realization",
+      "prospective_revision": "evaluate all four frozen clauses A-D from immutable event fields",
+      "scientific_justification": "the assigned manipulation must be realized before causal interpretation"
+    },
+    {
+      "defect": "baseline, correlation, timing, cluster variation, censoring and attrition were unknown",
+      "effect_on_interpretation": "FINAL_N_NOT_YET_FREEZABLE until bounds are legitimate",
+      "original_rule": "final cohort fixed before nuisance evidence",
+      "prospective_revision": "permit only labeled external, synthetic, or pre-study outcome-blind calibration and re-run signed engine",
+      "scientific_justification": "precision depends on nuisance parameters, not desired outcomes"
+    }
+  ],
+  "effective_date": "2026-09-01",
+  "empirical_issue_110_outcomes_informed_amendment": false,
+  "schema_version": "1.0",
+  "status": "FROZEN_PROSPECTIVE",
+  "version": "1.0.0"
+}

@@ -1,0 +1,19 @@
+{
+  "candidate_grid_rule": "Predeclare ascending pair counts and cluster allocations; engine evaluates every design/regime at >=10,000 replicates.",
+  "claims": {
+    "broader_external_validity": "requires prospectively justified repository/task sampling frame and interaction precision; cannot be inferred from nested executions",
+    "primary_bounded_migration": "requires conjunctive acceptance-yield/throughput/time/binding power >=0.80 with paired cluster unit",
+    "repository_interactions": "separately powered condition-by-repository contrasts with multiple independent repositories; primary N does not imply this claim",
+    "task_class_interactions": "separately powered condition-by-task-class contrasts with Holm correction"
+  },
+  "current_result": "FINAL_N_NOT_YET_FREEZABLE",
+  "forbidden_automatic_choices": [
+    256,
+    576,
+    1024
+  ],
+  "independence_guard": "LOW/HIGH executions and templates inside a repository are never counted as independent repository observations.",
+  "reason": "Only synthetic assumption regimes exist; legitimate outcome-blind nuisance bounds and frozen repositories/tasks do not.",
+  "schema_version": "1.0",
+  "selection_rule": "After calibration only, select the smallest design whose lower Monte Carlo 95% bound is >=0.80 for the complete frozen primary conjunction in every defensible nuisance regime, with >=75% classifiable pairs; hash-bind inputs/engine/output. No cost- or outcome-based selection."
+}

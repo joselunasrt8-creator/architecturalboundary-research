@@ -1,0 +1,86 @@
+{
+  "$id": "results-schema-amendment.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ai_configuration_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ai_use_stage_ids": {
+      "items": {
+        "const": "S05"
+      },
+      "type": "array"
+    },
+    "runnable_candidate_events": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "build_exit_code": {
+            "type": "integer"
+          },
+          "build_exited_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "build_started_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "candidate_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "first_gate_entered_at": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "runnable": {
+            "type": "boolean"
+          },
+          "source_frozen_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_sha256",
+          "source_frozen_at",
+          "build_started_at",
+          "build_exited_at",
+          "build_exit_code",
+          "first_gate_entered_at",
+          "runnable"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "s05_entered_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "time_to_first_runnable_minutes": {
+      "minimum": 0,
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "s05_entered_at",
+    "runnable_candidate_events",
+    "ai_configuration_sha256",
+    "ai_use_stage_ids"
+  ],
+  "title": "Prospective additions to each Issue #110 result record",
+  "type": "object"
+}

@@ -49,13 +49,13 @@
       "status": "PASS"
     },
     {
-      "corrective_evidence": "Independent instrument, enumerated predicates, fixture controls, command, schema, ordering, and hash frozen.",
+      "corrective_evidence": "Independent instrument, exact two-directory administrative exclusion population, enumerated predicates, fixture controls, command, schema, ordering, and hash frozen.",
       "identifier": 9,
       "requirement": "Structural measurements prospectively defined",
       "status": "PASS"
     },
     {
-      "corrective_evidence": "Only narrow static AST observables; limitations and adjacent/cumulative comparisons explicit.",
+      "corrective_evidence": "Only narrow static AST observables; limitations and adjacent/cumulative rules explicit. Identical frozen exclusions hold measured state population constant across T0-T3.",
       "identifier": 10,
       "requirement": "Measurements discriminate the research question",
       "status": "PASS"

@@ -1,16 +1,16 @@
 {
   "amendment_id": "RUN3-PREFLIGHT-AMENDMENT-POST-MERGE-REVIEW-1",
-  "artifact_set_sha256": "5cf89c9476d60221c4cdf7a168dce10777aff1fb5b1c8958b6b80ecb0227adfc",
+  "artifact_set_sha256": "2ff989dd1ff6180b32c50edd03ffab6bb3438f388d77054da1919c6a88549a32",
   "bindings": {
-    "README.md": "4e33a0508891904209e1697fc1b1ea71492aa7192f48479b96ad1f017dd5f0b9",
-    "entry-conditions.json": "c39d725efc302fc111a335bfaf14ff82b00b9a45d52307e45089a958c4a0e1d0",
+    "README.md": "faf2510ee6fc8120afa51d8d106383faa1fe36336ffbe1ebd94d442932222864",
+    "entry-conditions.json": "bc2e2500ea1cbe88f260588aa8cbce936607b8333600af6af6d0fabe939420e4",
     "independent_structural_measure.py": "47a38f3ea1b778078a6ea3741f85dc9916500fa2e2f2812c3491bf45cf484f4c",
     "oracle-coverage.json": "834ab2faec0302a13a1200fbb96865baac000863da5cdcbab07cab5ecf148ad8",
     "oracle.py": "15713a826ff05575fee314434e024efb0be9f643b6181a42e50e6e710fa23d7d",
-    "preflight-results.json": "b488a90a4d5b1b2d1a933e851f2bf4949bfc5f6a60b4e86e6978a20ee71c2934",
-    "structural-measures.json": "4e67a15d6febcfe2b74df9923e05c30acf499179a05e1efa6ab63a2f1c0c1983",
+    "preflight-results.json": "7484c72a77878251793d7b10b4dc01202be45ec407f6006bd95fd44df7ab385b",
+    "structural-measures.json": "5d3b05321d507ed67970fe9b2e40fdae55c2c6f9c33d1538ad26841f098c2ddc",
     "t0-structural-baseline.json": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
-    "test_amendment.py": "cb3ee84acc1ba06f69026d86cde777758eb704259604984a011f45574b1ab1d8"
+    "test_amendment.py": "40153928558dfe3514c28516a0617e69f6d3ce83d0a5ccec46845134ff9d3938"
   },
   "bound_repository": {
     "branch_at_start": "work",
@@ -41,6 +41,22 @@
     "this corrective preflight amendment",
     "RUN_3_READY"
   ],
+  "measurement_frame": {
+    "execution_parent_equals_t0_under_frozen_exclusions": true,
+    "execution_parent_output_sha256": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+    "frozen_exclusions": [
+      "investigations/agentic-structural-drift-run-3-preflight",
+      "investigations/agentic-structural-drift-run-3-preflight-amendment"
+    ],
+    "post_t0_related_python_audit": [
+      "investigations/agentic-structural-drift-run-3-preflight/harness.py",
+      "investigations/agentic-structural-drift-run-3-preflight/oracle.py",
+      "investigations/agentic-structural-drift-run-3-preflight-amendment/independent_structural_measure.py",
+      "investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py",
+      "investigations/agentic-structural-drift-run-3-preflight-amendment/test_amendment.py"
+    ],
+    "related_post_t0_python_outside_exclusions": []
+  },
   "run_3_executed": false,
   "schema_version": "1.0",
   "status_effect": "Supersedes only the execution-readiness effect of v1; v1 remains unmodified historical evidence and is treated as PRELIMINARY_READY_PENDING_POST_MERGE_REVIEW_CORRECTIONS.",

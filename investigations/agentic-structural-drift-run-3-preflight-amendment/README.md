@@ -19,6 +19,14 @@ code is input, never the instrument. Its five observables and limitations are
 frozen in `structural-measures.json`; structural results remain withheld,
 independent non-gates.
 
+The measured population is also held constant. The exact exclusion set for
+every T0–T3 measurement contains both the PR #117 v1 preflight directory and
+this amendment directory. A T0-to-parent path audit found that these directories
+contain all related post-T0 administrative Python additions (`harness.py`, both
+oracles, the independent instrument, and its fixture test); none occur elsewhere.
+Thus administrative preflight machinery cannot appear as an M5 node or edge
+delta, while future candidate code remains inside the measured system state.
+
 The second gap is also confirmed. The replacement future-candidate `oracle.py`
 adds direct black-box assertions for literal `ImportFrom` semantics (the target
 of `from owned import helper` is `owned`), two exclusions in one invocation, a
@@ -29,7 +37,8 @@ not implementation shape.
 
 ## T0 and experimental boundary
 
-The independent instrument measured the historical T0 commit
+The independent instrument remeasured the historical T0 commit using that exact
+two-directory exclusion policy
 `f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166` and tree
 `18cd9de245d2a0cdb73218ba500cc368485c71ac` externally. The canonical baseline
 contains 35 nodes, 10 edges, no cycles, no unmeasurable files, and no enumerated

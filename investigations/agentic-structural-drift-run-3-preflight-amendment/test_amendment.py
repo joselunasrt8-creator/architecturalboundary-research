@@ -34,3 +34,18 @@ def test_malformed_delta() -> None:
     try: measure_module.delta({"nodes":"bad","edges":[]},{"nodes":[],"edges":[]})
     except ValueError: return
     raise AssertionError("malformed delta was accepted")
+
+def test_frozen_administrative_exclusion_population() -> None:
+    """Both generations of post-T0 preflight machinery are outside the frame."""
+    with tempfile.TemporaryDirectory(prefix="non-experimental-frame-controls-") as td:
+        root = Path(td)
+        put(root, "system.py", "")
+        put(root, "investigations/agentic-structural-drift-run-3-preflight/harness.py", "import system\n")
+        put(root, "investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", "import system\n")
+        exclusions = (
+            measure_module.PurePosixPath("investigations/agentic-structural-drift-run-3-preflight"),
+            measure_module.PurePosixPath("investigations/agentic-structural-drift-run-3-preflight-amendment"),
+        )
+        result = measure_module.measure(root, exclusions)
+        assert result["nodes"] == ["system"]
+        assert result["edges"] == []

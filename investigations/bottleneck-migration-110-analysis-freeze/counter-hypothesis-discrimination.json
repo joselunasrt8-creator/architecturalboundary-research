@@ -1,0 +1,15 @@
+{
+ "schema_version":"1.0","all_hypotheses_remain_live":true,"synthetic_only":true,
+ "hypotheses":[
+  {"id":"H0","status":"DISCRIMINATED","future_observations":"adequately precise binding conjunction and yield/throughput effects versus precise absence"},
+  {"id":"H1","status":"DISCRIMINATED","future_observations":"S05 binding evidence in HIGH; implementation-remains scenario"},
+  {"id":"H2","status":"DISCRIMINATED","future_observations":"stage HIGH/LOW time ratios within ±0.10 geometric mean, unchanged binding, common throughput acceleration; proportional scenario"},
+  {"id":"H3","status":"PARTIALLY_DISCRIMINATED","future_observations":"instrumentation burden <=5%, imbalance <=2 points, include/exclude sensitivity unchanged; residual unmeasured overhead cannot be eliminated"},
+  {"id":"H4","status":"PARTIALLY_DISCRIMINATED","future_observations":"pre-outcome difficulty bands, within-band estimates and condition x difficulty/task-mix interactions; finite mix limits generalization"},
+  {"id":"H5","status":"DISCRIMINATED","future_observations":"repository/class strata plus Holm interaction or opposite intervals; repository- and class-specific scenarios"},
+  {"id":"H6","status":"DISCRIMINATED","future_observations":"oracle/harness adjudication, defect frequency and condition imbalance; harness-artifact scenario blocks"},
+  {"id":"H7","status":"DISCRIMINATED","future_observations":"environment event/outage identity, rate and imbalance; environment-artifact scenario blocks"},
+  {"id":"H8","status":"PARTIALLY_DISCRIMINATED","future_observations":"candidate count, S10 time/wait/rework and candidate-count mediation/interaction; manipulation is assigned but multiplicity dose is partly post-treatment"}
+ ],
+ "note":"DISCRIMINATED means the frozen future record can separate the stated observable pattern in synthetic rehearsal, not that the hypothesis is false or settled."
+}

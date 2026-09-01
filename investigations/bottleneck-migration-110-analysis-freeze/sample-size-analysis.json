@@ -1,0 +1,97 @@
+{
+  "candidate_designs": [
+    {
+      "analytic_approximation_power_range": [
+        0.42,
+        0.83
+      ],
+      "attrition": "0-25%",
+      "difficulty_bands": 2,
+      "executions": 128,
+      "interaction_capability": "inadequate; two pairs/cell",
+      "range_status": "PLANNING_APPROXIMATION_NOT_MONTE_CARLO_OUTPUT",
+      "repositories": 4,
+      "task_classes": 4,
+      "templates": 64,
+      "templates_per_cell": 2,
+      "yield_mde_range": [
+        0.13,
+        0.24
+      ]
+    },
+    {
+      "analytic_approximation_power_range": [
+        0.69,
+        0.96
+      ],
+      "attrition": "0-25%",
+      "difficulty_bands": 2,
+      "executions": 256,
+      "interaction_capability": "screening only; four pairs/cell",
+      "range_status": "PLANNING_APPROXIMATION_NOT_MONTE_CARLO_OUTPUT",
+      "repositories": 4,
+      "task_classes": 4,
+      "templates": 128,
+      "templates_per_cell": 4,
+      "yield_mde_range": [
+        0.09,
+        0.17
+      ]
+    },
+    {
+      "analytic_approximation_power_range": [
+        0.82,
+        0.99
+      ],
+      "attrition": "0-25%",
+      "difficulty_bands": 2,
+      "executions": 576,
+      "interaction_capability": "bounded repository/class contrasts under moderate heterogeneity",
+      "range_status": "PLANNING_APPROXIMATION_NOT_MONTE_CARLO_OUTPUT",
+      "repositories": 6,
+      "task_classes": 4,
+      "templates": 288,
+      "templates_per_cell": 6,
+      "yield_mde_range": [
+        0.06,
+        0.11
+      ]
+    },
+    {
+      "analytic_approximation_power_range": [
+        0.91,
+        0.99
+      ],
+      "attrition": "0-25%",
+      "difficulty_bands": 2,
+      "executions": 1024,
+      "interaction_capability": "credible interaction/external-validity target under conservative heterogeneity",
+      "range_status": "PLANNING_APPROXIMATION_NOT_MONTE_CARLO_OUTPUT",
+      "repositories": 8,
+      "task_classes": 4,
+      "templates": 512,
+      "templates_per_cell": 8,
+      "yield_mde_range": [
+        0.04,
+        0.08
+      ]
+    }
+  ],
+  "decision": "D: available information is insufficient to freeze sample size; amendment replaces asserted 64 with a blinded variance-calibration gate and prospective recalculation.",
+  "frozen_proposal": {
+    "assessment": "not justified: only 2 pairs/cell and unknown nuisance parameters",
+    "difficulty_bands": 2,
+    "low_high_executions": 128,
+    "repositories": 4,
+    "task_classes": 4,
+    "templates": 64,
+    "templates_per_cell": 2
+  },
+  "interaction_external_validity_requirement": "At least 288 templates/576 executions is the current candidate; 512/1024 for conservative interaction precision. This is distinct from primary support.",
+  "method": "Planning-only prospective normal approximations and fixed-parameter sensitivity calculations for paired binary/continuous endpoints; binding migration treated as a conjunctive binary endpoint. No Monte Carlo power simulation was implemented or run, and no empirical #110 observations were used.",
+  "not_cheapest_warning": "No design selected merely on cost; scientific conjunction and interactions remain unchanged.",
+  "primary_cohort_requirement": "Do not freeze a count yet. Obtain outcome-blind external/pilot nuisance bounds. If moderate regime is defensible, 128 templates/256 executions is the smallest candidate for primary migration; 64/128 is not robust to conservative variance/attrition.",
+  "provenance": "All power and MDE ranges are analytic/sensitivity approximations recorded for design triage, not reproducible simulation results. power-model-specification.json describes an unexecuted future model; the prospective amendment must implement and run it before final N is frozen.",
+  "schema_version": "1.0",
+  "status": "AVAILABLE_INFORMATION_INSUFFICIENT_TO_FREEZE_FINAL_SAMPLE_SIZE"
+}

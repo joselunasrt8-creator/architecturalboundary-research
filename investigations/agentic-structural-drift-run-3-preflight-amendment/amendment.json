@@ -1,0 +1,53 @@
+{
+  "amendment_id": "RUN3-PREFLIGHT-AMENDMENT-POST-MERGE-REVIEW-1",
+  "artifact_set_sha256": "5cf89c9476d60221c4cdf7a168dce10777aff1fb5b1c8958b6b80ecb0227adfc",
+  "bindings": {
+    "README.md": "4e33a0508891904209e1697fc1b1ea71492aa7192f48479b96ad1f017dd5f0b9",
+    "entry-conditions.json": "c39d725efc302fc111a335bfaf14ff82b00b9a45d52307e45089a958c4a0e1d0",
+    "independent_structural_measure.py": "47a38f3ea1b778078a6ea3741f85dc9916500fa2e2f2812c3491bf45cf484f4c",
+    "oracle-coverage.json": "834ab2faec0302a13a1200fbb96865baac000863da5cdcbab07cab5ecf148ad8",
+    "oracle.py": "15713a826ff05575fee314434e024efb0be9f643b6181a42e50e6e710fa23d7d",
+    "preflight-results.json": "b488a90a4d5b1b2d1a933e851f2bf4949bfc5f6a60b4e86e6978a20ee71c2934",
+    "structural-measures.json": "4e67a15d6febcfe2b74df9923e05c30acf499179a05e1efa6ab63a2f1c0c1983",
+    "t0-structural-baseline.json": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+    "test_amendment.py": "cb3ee84acc1ba06f69026d86cde777758eb704259604984a011f45574b1ab1d8"
+  },
+  "bound_repository": {
+    "branch_at_start": "work",
+    "head_commit_at_start": "833489c58f93e0af2a8c30a1cfae504aaf788214",
+    "head_tree_at_start": "315344b9eeb60f134a340cebc05213dfa41008dc",
+    "status_at_start": "clean"
+  },
+  "determination": "RUN_3_READY",
+  "execution_identity_rule": "Before O1 generation, verify every binding and the committed amendment identity. Any difference requires a new prospective preflight and yields RUN_3_NOT_READY.",
+  "historical_identities": {
+    "issue_114_git_tree": "78b47693901eca7e10e88542d217849f35dd924b",
+    "run_1_git_tree": "fbf7b4683de7c964c7305b7ec6292c05debb7aea",
+    "run_2_git_tree": "25c18709406215c9ace127a6d017d5e6c067727e",
+    "v1_git_tree": "118a5d16ce2459f933a53b818bf5ef0ddd5be040",
+    "v1_preregistration_sha256": "c66561c784383b681645cbaa2ac72c39625ccfd06c97dde1e6609815e7a95b43"
+  },
+  "inherited_bindings": {
+    "environment.json": "abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501",
+    "failure-taxonomy.json": "35733f747d674bd701130fd1f95f4c390f44d52eecb487ec5b461f42e58ff4a3",
+    "objectives.json": "813ed2de8d318482308d87e0ddb66cdfd2b5519fc147fb63acab612a11959f38",
+    "repair-policy.json": "d528a0b7e7ba03596a53ec6560bbbc739281ff2844a58d567b78f01a6db00a82",
+    "stopping-rule.json": "50f4645752f07d45bc9989c18cd7c404a877265f5d0b051eacf765af5406eb29"
+  },
+  "lineage": [
+    "Issue #114",
+    "PR #117 preflight v1",
+    "post-merge methodological review",
+    "this corrective preflight amendment",
+    "RUN_3_READY"
+  ],
+  "run_3_executed": false,
+  "schema_version": "1.0",
+  "status_effect": "Supersedes only the execution-readiness effect of v1; v1 remains unmodified historical evidence and is treated as PRELIMINARY_READY_PENDING_POST_MERGE_REVIEW_CORRECTIONS.",
+  "t0": {
+    "administrative_not_transition": true,
+    "commit": "f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166",
+    "measurement_sha256": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+    "tree": "18cd9de245d2a0cdb73218ba500cc368485c71ac"
+  }
+}

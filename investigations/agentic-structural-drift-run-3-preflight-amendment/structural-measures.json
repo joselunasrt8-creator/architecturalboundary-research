@@ -1,0 +1,24 @@
+{
+  "schema_version": "2.0-amendment",
+  "acceptance_role": "INDEPENDENT_NON_GATE",
+  "instrument": "independent_structural_measure.py",
+  "command": "python3 <frozen-amendment>/independent_structural_measure.py --root <tree> --exclude investigations/agentic-structural-drift-run-3-preflight-amendment",
+  "input_identity": "Git commit and tree IDs are recorded for every Tn; T0 is f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166 / 18cd9de245d2a0cdb73218ba500cc368485c71ac.",
+  "same_measurement_instrument": {"T0": true, "T1": true, "T2": true, "T3": true},
+  "representation": "Tracked-tree-equivalent .py files; module names are root-relative paths, __init__ maps to its package; AST Import aliases use alias.name and absolute ImportFrom uses node.module literally; only targets that exactly name an owned module form edges.",
+  "ordering": "Nodes, two-string edges, SCC members, SCC list, violations, unmeasurable declarations, and deltas are lexicographically sorted and JSON keys are sorted.",
+  "output_schema": {"schema_version":"string","nodes":"sorted unique strings","edges":"sorted unique two-string lists","cycles":"sorted SCC member lists (size >1 or self-loop)","violations":"three named sorted edge lists","unmeasurable":"sorted module/reason objects","comparison":"optional four sorted delta lists"},
+  "baseline_semantics": "The externally inspected historical T0 output is the fixed cumulative baseline; measuring it is administrative evidence, not a transition.",
+  "adjacent_comparison_rule": "Set difference T(n-1) to Tn for nodes and edges.",
+  "cumulative_comparison_rule": "Set difference T0 to every accepted Tn for nodes and edges.",
+  "withholding": "Instrument, fixtures, specifications, and all structural outputs are withheld from candidate generation and the one candidate repair.",
+  "measures": [
+    {"id":"M1","predicate":"tools.* source to scripts.* target","violation_or_change_rule":"a newly present matching static edge","interpretation_boundary":"static repository-owned absolute imports only"},
+    {"id":"M2","predicate":"non-tests source to tests or tests.* target","violation_or_change_rule":"a newly present matching static edge","interpretation_boundary":"tests remain possible targets but test sources do not create this violation"},
+    {"id":"M3","predicate":"scripts.* or tools.* to investigations.*, or investigations.* to scripts.*","violation_or_change_rule":"a newly present matching static edge","interpretation_boundary":"only syntactically visible absolute imports"},
+    {"id":"M4","predicate":"SCC size >1 or explicit self-edge","violation_or_change_rule":"a newly present sorted SCC","interpretation_boundary":"static import cycles, not runtime recursion"},
+    {"id":"M5","predicate":"node and edge set differences","violation_or_change_rule":"any nonempty delta is change, not inherently degradation","interpretation_boundary":"descriptive topology only"}
+  ],
+  "limitations": ["dynamic imports","runtime calls","runtime dependency behavior","data coupling","semantic cohesion","general architectural quality"],
+  "malformed_policy": "Unreadable, undecodable, or unparsable Python is deterministically declared unmeasurable; malformed comparison JSON exits nonzero."
+}

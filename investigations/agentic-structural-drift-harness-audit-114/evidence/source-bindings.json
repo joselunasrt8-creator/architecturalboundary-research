@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "issue": 114,
+  "audit_id": "ASD-HARNESS-AUDIT-114-2026-09-01",
+  "repository": {
+    "checkout_branch": "work",
+    "head_commit": "16d1f5abfd7591c9a9880253370338e59de185ce",
+    "head_tree": "2866c5885f9cc6a202cfd48e13fc028e2ff303e5",
+    "initial_worktree_status": "CLEAN",
+    "relevant_history": [
+      {"commit": "d227e7fd204c83f989a7c84a0d767b2af69fba97", "tree": "7fb466fd5c1d35d73f94552df31f996ef8a98799", "subject": "Record blocked agentic drift experiment (#112)"},
+      {"commit": "16d1f5abfd7591c9a9880253370338e59de185ce", "tree": "2866c5885f9cc6a202cfd48e13fc028e2ff303e5", "subject": "Record blocked agentic structural drift Run 2 (#113)"}
+    ],
+    "remote": "NONE_CONFIGURED",
+    "identity_note": "The supplied checkout is named work, not main; its HEAD contains the consecutive #112 and #113 merge-result commits. This audit binds the checkout rather than asserting unavailable remote state."
+  },
+  "run_1": {
+    "run_identifier": "Issue-109-Run-1",
+    "determination": "EXPERIMENT_BLOCKED",
+    "preregistration_path": "investigations/agentic-structural-drift-109/preregistration.json",
+    "preregistration_sha256": "18a97b128d57a4eca89f118453a312a67951eb2e0c7465605e368a0d84d035f9",
+    "preregistration_commit_claim": "39a6762",
+    "preregistration_commit_availability": "OBJECT_NOT_PRESENT_IN_CURRENT_OBJECT_DATABASE",
+    "t0_commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "t0_tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f",
+    "evidence_introduction_commit": "d227e7fd204c83f989a7c84a0d767b2af69fba97",
+    "execution_paths": ["investigations/agentic-structural-drift-109/execution-record.json", "investigations/agentic-structural-drift-109/README.md"],
+    "validation_logs": [],
+    "candidate_patches": [{"path": "investigations/agentic-structural-drift-109/t1-rejected-candidate.patch", "sha256": "b4b87c932a21f791081102dbe28a7b2f7099676f102e460f4deb7db49747bfae", "accepted": false}],
+    "structural_artifacts": ["investigations/agentic-structural-drift-109/execution-record.json"],
+    "focused_gate": "Diagnostic after final rejection: python3 -m pytest -q tests/test_json_io.py tests/test_b2_analysis_contract.py; not the frozen acceptance gate",
+    "full_gate": "python3 -m pytest -q",
+    "repair_rule": "One preserved repair attempt permitted",
+    "stopping_rule": "Stop after T3, or EXPERIMENT_BLOCKED when a transition lacks an ordinarily valid candidate after one repair or tooling cannot execute",
+    "lineage": {"accepted_states": ["T0"], "candidate": "REJECTED", "resulting_state": null},
+    "final_determination_source": "investigations/agentic-structural-drift-109/execution-record.json#/final_determination"
+  },
+  "run_2": {
+    "run_identifier": "ASD-RUN-2-2026-09-01",
+    "determination": "EXPERIMENT_BLOCKED",
+    "preregistration_path": "investigations/agentic-structural-drift-run-2/preregistration.md",
+    "preregistration_sha256": "84816f4a1594d27bef1ea5d5b87aedfcd48558e46b8f1303f9ce55709509ec07",
+    "preregistration_commit_claim": "07157fb30b45fda00f792612edaedb58af5b5053",
+    "preregistration_commit_availability": "OBJECT_NOT_PRESENT_IN_CURRENT_OBJECT_DATABASE",
+    "candidate_parent_tree_claim": "8a1a5625cf81124ffad5c7bfddf690f57029891a",
+    "t0_commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "t0_tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f",
+    "evidence_introduction_commit": "16d1f5abfd7591c9a9880253370338e59de185ce",
+    "execution_paths": ["investigations/agentic-structural-drift-run-2/repository-selection.md", "investigations/agentic-structural-drift-run-2/results.md", "investigations/agentic-structural-drift-run-2/transitions/t1.md", "investigations/agentic-structural-drift-run-2/README.md"],
+    "validation_logs": [
+      {"path": "investigations/agentic-structural-drift-run-2/validation/t1-focused.log", "sha256": "97acef79e52f2a98b23b70f9b04d516b03986b070ea83ddf7ca06faa6d9bf3d9", "exit": 1},
+      {"path": "investigations/agentic-structural-drift-run-2/validation/t1-full.log", "sha256": "2de966316006c3db00fce967c6be8ccf89b438b13c146666ac858c798be9e718", "exit": 0}
+    ],
+    "candidate_patches": [{"path": "investigations/agentic-structural-drift-run-2/transitions/t1-candidate.patch", "sha256": "df391a53ad707cb912231e651c777c9a48b759f9503c1042ed18ff552880df51", "accepted": false}],
+    "structural_artifacts": ["investigations/agentic-structural-drift-run-2/structural/t0.json", "investigations/agentic-structural-drift-run-2/structural/t1-candidate.json"],
+    "focused_gate": "python3 -m pytest -q tests/test_structural_snapshot.py",
+    "full_gate": "python3 scripts/validate.py",
+    "repair_rule": "No repair after the first recorded focused or full gate failure; environment-only retry only when the output proves the candidate was not exercised",
+    "stopping_rule": "Stop after O4, first rejection, or unavailable execution; fewer than three accepted transitions is EXPERIMENT_BLOCKED",
+    "lineage": {"accepted_states": ["T0"], "candidate": "REJECTED_UNCOMMITTED_CANDIDATE", "resulting_state": null},
+    "final_determination_source": "investigations/agentic-structural-drift-run-2/results.md#final-determination"
+  },
+  "conflicts": [
+    {
+      "id": "C-1",
+      "higher_precedence": "Run 2 preregistration defines an internal edge only when an absolute import target equals a measured module or starts with that module plus a dot; relative imports are NOT_MEASURABLE.",
+      "lower_precedence": "The frozen focused test expects `from lib import helper` to yield an edge to the measured module `lib.helper`.",
+      "controlling_source": "investigations/agentic-structural-drift-run-2/preregistration.md",
+      "resolution": "The preregistered representation controls. The focused assertion adds alias/submodule resolution not entailed by that representation or O1, so this failure is classified HARNESS_MISMATCH, not historical TASK_FAILURE. Rejection remains immutable."
+    },
+    {
+      "id": "C-2",
+      "higher_precedence": "Run 1 preregistration requires the single full command `python3 -m pytest -q` and allows one repair.",
+      "lower_precedence": "The execution record labels the later eight-test command diagnostic and reports both candidate-related manifest failure and tokenizer environment errors in the required suite.",
+      "controlling_source": "investigations/agentic-structural-drift-109/preregistration.json",
+      "resolution": "The focused diagnostic cannot substitute for the full gate; after the permitted repair the full gate was nonzero, so rejection and EXPERIMENT_BLOCKED control even though failure causes were mixed."
+    }
+  ]
+}

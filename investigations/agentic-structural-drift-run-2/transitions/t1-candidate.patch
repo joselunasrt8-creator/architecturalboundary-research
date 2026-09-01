@@ -1,0 +1,115 @@
+diff --git a/scripts/structural_snapshot.py b/scripts/structural_snapshot.py
+new file mode 100644
+index 0000000..c2833c4
+--- /dev/null
++++ b/scripts/structural_snapshot.py
+@@ -0,0 +1,59 @@
++#!/usr/bin/env python3
++"""Emit a deterministic snapshot of repository-owned Python imports."""
++from __future__ import annotations
++
++import argparse
++import ast
++import json
++from pathlib import Path
++from typing import Iterable
++
++
++def module_name(root: Path, path: Path) -> str:
++    relative = path.relative_to(root).with_suffix("")
++    parts = list(relative.parts)
++    if parts[-1] == "__init__":
++        parts.pop()
++    return ".".join(parts)
++
++
++def python_modules(root: Path) -> dict[str, Path]:
++    paths = sorted(path for path in root.rglob("*.py") if ".git" not in path.parts)
++    return {module_name(root, path): path for path in paths if module_name(root, path)}
++
++
++def imported_names(tree: ast.AST) -> Iterable[str]:
++    for node in ast.walk(tree):
++        if isinstance(node, ast.Import):
++            yield from (alias.name for alias in node.names)
++        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
++            yield node.module
++
++
++def snapshot(root: Path) -> dict[str, object]:
++    root = root.resolve()
++    modules = python_modules(root)
++    edges: set[tuple[str, str]] = set()
++    for source, path in modules.items():
++        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
++        for imported in imported_names(tree):
++            candidates = [name for name in modules if imported == name or imported.startswith(f"{name}.")]
++            if candidates:
++                edges.add((source, max(candidates, key=len)))
++    return {
++        "schema_version": 1,
++        "nodes": sorted(modules),
++        "edges": [{"from": source, "to": target} for source, target in sorted(edges)],
++    }
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("path", nargs="?", default=".", help="repository path (default: current directory)")
++    args = parser.parse_args()
++    print(json.dumps(snapshot(Path(args.path)), sort_keys=True, separators=(",", ":")))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tests/test_structural_snapshot.py b/tests/test_structural_snapshot.py
+new file mode 100644
+index 0000000..38a692f
+--- /dev/null
++++ b/tests/test_structural_snapshot.py
+@@ -0,0 +1,44 @@
++import json
++import subprocess
++import sys
++from pathlib import Path
++
++from scripts.structural_snapshot import snapshot
++
++
++def write(root: Path, relative: str, content: str) -> None:
++    path = root / relative
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(content, encoding="utf-8")
++
++
++def test_snapshot_discovers_internal_edges_and_ignores_external_imports(tmp_path):
++    write(tmp_path, "app/main.py", "import json\nfrom lib import helper\n")
++    write(tmp_path, "lib/helper.py", "import app.main\n")
++
++    result = snapshot(tmp_path)
++
++    assert result["nodes"] == ["app.main", "lib.helper"]
++    assert result["edges"] == [
++        {"from": "app.main", "to": "lib.helper"},
++        {"from": "lib.helper", "to": "app.main"},
++    ]
++
++
++def test_snapshot_order_is_stable(tmp_path):
++    write(tmp_path, "z.py", "import a\n")
++    write(tmp_path, "a.py", "")
++    assert snapshot(tmp_path) == snapshot(tmp_path)
++    assert snapshot(tmp_path)["nodes"] == ["a", "z"]
++
++
++def test_cli_emits_canonical_json(tmp_path):
++    write(tmp_path, "only.py", "")
++    completed = subprocess.run(
++        [sys.executable, "scripts/structural_snapshot.py", str(tmp_path)],
++        check=True,
++        cwd=Path(__file__).resolve().parents[1],
++        text=True,
++        stdout=subprocess.PIPE,
++    )
++    assert completed.stdout == json.dumps(snapshot(tmp_path), sort_keys=True, separators=(",", ":")) + "\n"

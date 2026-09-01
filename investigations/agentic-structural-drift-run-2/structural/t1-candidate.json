@@ -1,0 +1,18 @@
+{
+  "accepted_state": false,
+  "added_edges": [],
+  "added_nodes": ["scripts.structural_snapshot"],
+  "cycles": [],
+  "edge_count": 6,
+  "invariants": {
+    "I1_dependency_direction": "PRESERVED",
+    "I2_test_isolation": "PRESERVED",
+    "I3_investigation_isolation": "PRESERVED",
+    "I4_acyclicity": "PRESERVED",
+    "I5_bounded_responsibility": "PRESERVED_IN_PATCH_INSPECTION"
+  },
+  "node_count": 20,
+  "removed_edges": [],
+  "removed_nodes": [],
+  "state": "REJECTED_UNCOMMITTED_CANDIDATE"
+}

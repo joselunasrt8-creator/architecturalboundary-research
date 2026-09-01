@@ -1,0 +1,17 @@
+{
+  "cycles": [],
+  "edges": [
+    ["scripts.build_analysis", "tools.jsonschema_fallback"],
+    ["scripts.build_cohort_conclusion", "tools.jsonschema_fallback"],
+    ["scripts.build_dataset", "tools.jsonschema_fallback"],
+    ["scripts.build_retained_classification", "tools.jsonschema_fallback"],
+    ["scripts.validate", "tools.jsonschema_fallback"],
+    ["scripts.validate_minimal_promotion_packages", "tools.jsonschema_fallback"]
+  ],
+  "edge_count": 6,
+  "node_count": 19,
+  "state": {
+    "commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f"
+  }
+}

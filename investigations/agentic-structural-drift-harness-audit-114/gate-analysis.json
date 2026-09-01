@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "issue": 114,
+  "run_1": {
+    "frozen_objective": "Add a small reusable canonical JSON writer and use it in scripts/build_analysis.py, preserving CLI behavior and output format.",
+    "path": ["candidate generated", "full gate attempt 1 failed during collection", "one permitted repair", "full gate attempt 2 failed", "focused diagnostic passed 8 tests", "candidate rejected", "stop with only T0 accepted", "EXPERIMENT_BLOCKED"],
+    "focused_gate_role": "post-rejection diagnostic, not frozen acceptance gate",
+    "focused_classification": ["externally observable task behavior", "interface contract"],
+    "full_gate_role": "sole frozen ordinary acceptance command",
+    "findings": {
+      "objective_entailed": true,
+      "multiple_implementations_allowed": true,
+      "implementation_shape_encoded": false,
+      "candidate_relevant_full_failure": "stale publication manifest caused by changed build_analysis.py",
+      "environment_failure": "tiktoken download returned proxy HTTP 403",
+      "historical_outcome": "REJECTED_UNCHANGED"
+    }
+  },
+  "run_2": {
+    "frozen_objective": "Add a read-only AST-based CLI that derives repository-owned Python import edges and deterministic JSON, with focused tests for edge discovery, external exclusion, and ordering.",
+    "path": ["candidate generated", "focused gate failed: 2 passed, 1 failed", "full gate passed", "no repair permitted", "candidate rejected", "stop with only T0 accepted", "EXPERIMENT_BLOCKED"],
+    "focused_gate_role": "required task oracle",
+    "focused_classification": ["semantic requirement", "instrumentation assumption", "mixed/ambiguous"],
+    "full_gate_role": "required repository contract excluding the new focused test",
+    "from_import_finding": {
+      "assertion": "from lib import helper must produce app.main -> lib.helper",
+      "classification": "HARNESS_MISMATCH",
+      "reason": "The higher-precedence preregistered representation treats an absolute ImportFrom target as its AST module (`lib`) and counts it only if that target equals or extends a measured module. It does not freeze alias/submodule expansion from `lib` to `lib.helper`. O1 asks for owned edges but does not select that resolution convention. The assertion is plausible instrumentation behavior, but not an entailed semantic, interface, or frozen structural requirement.",
+      "semantically_correct_alternative_rejected": true,
+      "implementation_shape_encoded": false,
+      "research_instrument_measured": true,
+      "historical_outcome": "REJECTED_UNCHANGED"
+    }
+  },
+  "compatibility": {
+    "run_1_pattern_verified": "focused diagnostic PASS; required full gate FAIL; REJECT",
+    "run_2_pattern_verified": "focused gate FAIL; required full gate PASS; REJECT",
+    "finding": "Independent AND-gates are coherent only after each has a prospectively justified role. Run 1's full gate legitimately detected repository manifest consequences, although environment noise impaired attribution. Run 2's full gate legitimately omitted objective-specific behavior, but its focused oracle contained an unfrozen resolution assumption. Disagreement alone is not invalidity; Run 2's lack of entailment is.",
+    "prospective_contract": "focused semantic oracle AND full repository validator AND scope/identity check; structural measurement remains independent unless a structural constraint is explicitly part of the task acceptance contract"
+  },
+  "structural_discrimination": {
+    "current": "Static absolute-import edges, selected boundary crossings, cycles, tracked-tree mutation, and manual responsibility observation can detect their frozen predicates but cannot measure dynamic imports, data/call coupling, semantic cohesion, or broad architectural quality.",
+    "adequacy": "Sufficient only for the narrow Issue #109 claim framed as degradation of the enumerated frozen invariants; insufficient for general structural drift.",
+    "required_revision": "Freeze executable fixtures and violation predicates for every claimed invariant and limit conclusions to their observable domain."
+  },
+  "counterexamples": [
+    {"possibility":1,"result":"not falsified; Run 1 may be an unlucky legitimate rejection, but Run 2's mismatch prevents concluding the whole current harness is already valid"},
+    {"possibility":2,"result":"plausible; one research repository and first-transition stops limit feasibility"},
+    {"possibility":3,"result":"supported as an instrumentation-semantic assumption, not a source-code implementation shape"},
+    {"possibility":4,"result":"supported by Run 1's manifest failure"},
+    {"possibility":5,"result":"supported for general drift, not for the narrow frozen invariants"},
+    {"possibility":6,"result":"plausible; no-repair maximizes observation independence"},
+    {"possibility":7,"result":"plausible if one mechanical, transcript-bound repair is frozen"},
+    {"possibility":8,"result":"supported: three is arbitrary but defensible as the smallest trajectory with two opportunities for cumulative interaction beyond an initial state change"},
+    {"possibility":9,"result":"rejected by conflict C-1 and unresolved entry conditions"}
+  ],
+  "determination": "HARNESS_VALID_WITH_PROSPECTIVE_REVISIONS"
+}

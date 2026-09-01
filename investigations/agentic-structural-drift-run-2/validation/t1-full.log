@@ -1,0 +1,12 @@
+canonical dataset fresh: investigations/b2-governance-cohort/dataset/b2-governance-cohort-i4.dataset.json
+canonical analysis fresh: investigations/b2-governance-cohort/analysis/b2-governance-cohort-i4.analysis.json
+publication-state manifest fresh: releases/publication-state-manifest.json
+instrument v1 candidate identity valid: 1.0.0-candidate.1 / INSTRUMENT_SPECIFICATION_REVISION_REQUIRED
+instrument v1 candidate identity valid: 1.0.0-candidate.2 / INSTRUMENT_SPECIFICATION_REVISION_REQUIRED
+instrument v1 Issue #108 binding valid: 0520a5deca3ad1e00cb74095ee74d0f7227d58c7 / INSTRUMENT_SPECIFICATION_REVISION_REQUIRED
+registry validation passed
+missing required TeX tool(s): pdflatex, bibtex
+canonical retained classification fresh: investigations/b2-governance-cohort/results/b2-governance-cohort-i5.retained-classification.json
+canonical cohort conclusion fresh: investigations/b2-governance-cohort/results/b2-governance-cohort-i5.cohort-conclusion.json
+publication validation unavailable: missing TeX toolchain
+repository topology validation passed

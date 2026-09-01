@@ -1,0 +1,27 @@
+F..                                                                      [100%]
+=================================== FAILURES ===================================
+_____ test_snapshot_discovers_internal_edges_and_ignores_external_imports ______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-1/test_snapshot_discovers_intern0')
+
+    def test_snapshot_discovers_internal_edges_and_ignores_external_imports(tmp_path):
+        write(tmp_path, "app/main.py", "import json\nfrom lib import helper\n")
+        write(tmp_path, "lib/helper.py", "import app.main\n")
+    
+        result = snapshot(tmp_path)
+    
+        assert result["nodes"] == ["app.main", "lib.helper"]
+>       assert result["edges"] == [
+            {"from": "app.main", "to": "lib.helper"},
+            {"from": "lib.helper", "to": "app.main"},
+        ]
+E       AssertionError: assert [{'from': 'li...: 'app.main'}] == [{'from': 'ap...: 'app.main'}]
+E         
+E         At index 0 diff: {'from': 'lib.helper', 'to': 'app.main'} != {'from': 'app.main', 'to': 'lib.helper'}
+E         Right contains one more item: {'from': 'lib.helper', 'to': 'app.main'}
+E         Use -v to get more diff
+
+tests/test_structural_snapshot.py:22: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_structural_snapshot.py::test_snapshot_discovers_internal_edges_and_ignores_external_imports
+1 failed, 2 passed in 0.22s

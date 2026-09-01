@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "design": "randomized, blocked, paired crossover at task-template level",
+  "conditions": {
+    "LOW": {
+      "label": "lower implementation capacity",
+      "implementation_resources": "one qualified human implementer; ordinary editor, search, and deterministic tools; no generative code tool",
+      "candidate_cap": 2,
+      "implementation_active_time_cap_minutes": 120
+    },
+    "HIGH": {
+      "label": "abundant AI implementation capacity",
+      "implementation_resources": "same qualification pool plus a frozen AI coding agent/model/configuration; up to four isolated candidate workspaces; human may prompt, select, and integrate",
+      "candidate_cap": 4,
+      "implementation_active_time_cap_minutes": 120
+    }
+  },
+  "abundance_definition": "HIGH is implementation abundance by assigned capacity: generative implementation is available and candidate capacity is doubled (4 versus 2) within the identical 120-minute implementation cap. It is empirically realized only if preregistered manipulation checks pass.",
+  "manipulation_checks": [
+    "HIGH produces >=2 runnable bound candidates for >=70% of eligible task executions",
+    "median time to first runnable candidate in HIGH is <=70% of LOW",
+    "AI/model/configuration and candidate caps remain identical across all HIGH executions"
+  ],
+  "controls": [
+    "same frozen task contract, starting commit, context packet, gates, environment image, total stage definitions and repair cap",
+    "non-implementation AI assistance prohibited in both conditions",
+    "condition order randomized within repository/task/difficulty blocks; starting states reset; operators do not see paired outcome",
+    "gate order fixed: focused, repository/system, structural if applicable, governance boundary if applicable"
+  ],
+  "estimand": "paired HIGH-minus-LOW change in all-gates-valid throughput and in stage-specific binding status",
+  "anti_success_bias": "Tasks are selected and difficulty-banded before assignment; HIGH is not tuned to observed failures and difficult implementation tasks remain eligible."
+}

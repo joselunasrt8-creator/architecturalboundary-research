@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "unit": "task-condition execution",
+  "principle": "A longest stage is only a time concentration; a binding bottleneck must also limit reliable completions under the frozen marginal and failure/rework criteria.",
+  "types": {
+    "time": {
+      "candidate": "stage has median exclusive active-plus-attributed-wait share >=0.25",
+      "binding": "candidate criterion AND removing its observed duration in a prespecified queueing replay increases all-gates-valid throughput >=15%; bootstrap 95% CI lower bound >0"
+    },
+    "failure": {
+      "candidate": "stage accounts for >=0.30 of attributable terminal failures or is modal first-failure stage",
+      "binding": "candidate criterion AND stage-specific pass probability is lower than every other required gate by >=0.10; paired bootstrap 95% CI excludes 0"
+    },
+    "rework": {
+      "candidate": "stage originates >=0.30 of rework loops or rework active time",
+      "binding": "candidate criterion AND counterfactual removal of its attributed loops increases acceptance yield >=0.10; bootstrap 95% CI lower bound >0"
+    },
+    "throughput": {
+      "candidate": "stage has highest observed utilization in the frozen single-server flow model",
+      "binding": "utilization >=0.80 AND its service capacity has the largest prespecified marginal throughput gain; gain >=15% with bootstrap 95% CI lower bound >0"
+    },
+    "coordination": {
+      "candidate": "coordination/approval wait or active time share >=0.20 OR candidate-selection/reconciliation causes >=0.20 of rework",
+      "binding": "candidate criterion AND high-minus-low increase is >=0.10 absolute share or >=20% time, with paired bootstrap 95% CI excluding 0"
+    }
+  },
+  "stage_binding_rule": "A stage is binding for a type only when both that type's candidate and binding clauses pass within a repository-by-task-class stratum. Cohort-level binding requires the rule in at least 2 repositories and 2 task classes without a significant opposite-direction interaction.",
+  "migration": "Migration requires implementation to be binding for at least one primary type in the lower-capacity condition, cease to bind for that type under higher capacity, and a named non-implementation stage newly bind for that same or another primary type. It also requires the manipulation check and artifact controls. Merely becoming the longest stage is insufficient.",
+  "primary_types": [
+    "failure",
+    "throughput"
+  ],
+  "secondary_types": [
+    "time",
+    "rework",
+    "coordination"
+  ]
+}

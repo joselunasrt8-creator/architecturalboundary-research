@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "hypotheses": [
+    {
+      "id": "H0",
+      "statement": "Increasing implementation capacity causes no binding-bottleneck migration.",
+      "live": true
+    },
+    {
+      "id": "H1",
+      "statement": "Implementation remains the dominant binding bottleneck under higher capacity.",
+      "live": true
+    },
+    {
+      "id": "H2",
+      "statement": "All workflow stages accelerate proportionally, so relative constraints do not migrate.",
+      "live": true
+    },
+    {
+      "id": "H3",
+      "statement": "Any apparent migration is caused by measurement or instrumentation overhead.",
+      "live": true
+    },
+    {
+      "id": "H4",
+      "statement": "Any apparent migration is caused by task difficulty or task mix.",
+      "live": true
+    },
+    {
+      "id": "H5",
+      "statement": "Migration is domain- or repository-specific rather than general across the bounded cohort.",
+      "live": true
+    },
+    {
+      "id": "H6",
+      "statement": "Any apparent migration is caused by validation or harness artifacts.",
+      "live": true
+    },
+    {
+      "id": "H7",
+      "statement": "Environment readiness or availability, not workflow constraint, causes apparent migration.",
+      "live": true
+    },
+    {
+      "id": "H8",
+      "statement": "Candidate multiplicity increases coordination, selection, or review load enough to offset implementation gains.",
+      "live": true
+    },
+    {
+      "id": "HM",
+      "statement": "Under higher implementation capacity, at least one non-implementation stage becomes a binding throughput constraint while implementation ceases to be binding.",
+      "live": true
+    }
+  ],
+  "logical_note": "H0 is the null; H1-H8 are retained rival mechanisms and can overlap. HM is the target hypothesis. No hypothesis has been evaluated."
+}

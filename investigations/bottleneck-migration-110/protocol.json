@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "title": "Prospective protocol: bottleneck migration under abundant AI implementation",
+  "primary_question": "As implementation capacity increases, does the binding constraint on reliable software-development throughput move away from code production toward other stages?",
+  "artifact_manifest": [
+    "README.md",
+    "protocol.json",
+    "hypotheses.json",
+    "bottleneck-definition.json",
+    "workflow-stages.json",
+    "experimental-contrast.json",
+    "cohort-design.json",
+    "measurements.json",
+    "failure-taxonomy.json",
+    "stopping-rule.json",
+    "analysis-plan.json",
+    "determination-rules.json",
+    "entry-conditions.json"
+  ],
+  "links": {
+    "hypotheses": "hypotheses.json",
+    "bottleneck": "bottleneck-definition.json",
+    "stages": "workflow-stages.json",
+    "contrast": "experimental-contrast.json",
+    "cohort": "cohort-design.json",
+    "measurements": "measurements.json",
+    "failures": "failure-taxonomy.json",
+    "stopping_and_exclusions": "stopping-rule.json",
+    "analysis": "analysis-plan.json",
+    "determinations": "determination-rules.json",
+    "entry_and_environment": "entry-conditions.json"
+  },
+  "exclusion_rules": [
+    "Exclude only prospectively ineligible task, corrupted identity, invalid oracle/harness, or environment failure that makes the assigned contrast unavailable",
+    "Do not exclude candidate/task failures, timeouts, nulls, difficult implementations, valid gate failures, or negative outcomes",
+    "Apply without aggregate condition outcomes; retain excluded records with reason and condition",
+    "If exclusions exceed 20% overall or differ by >=10 percentage points between conditions, determination is INDETERMINATE unless BLOCKED precedence applies"
+  ],
+  "source_boundary": {
+    "allowed": "Issue #109 Runs 1–3 and cross-run package only as bounded observations identifying variables/confounders",
+    "prohibited": "treating #109 as proof, baseline effect estimate, abundance manipulation, causal evidence, or generalizable outcome"
+  },
+  "execution_prohibited": true,
+  "readiness": "BOTTLENECK_EXPERIMENT_NOT_READY"
+}

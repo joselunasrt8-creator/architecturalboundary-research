@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "classification_order": [
+    "INSTRUMENTATION_ARTIFACT",
+    "HARNESS_OR_ORACLE_ARTIFACT",
+    "ENVIRONMENT_LIMITATION",
+    "SPECIFICATION_INTENT_FAILURE",
+    "CONTEXT_FAILURE",
+    "ARCHITECTURAL_UNDERSTANDING_FAILURE",
+    "IMPLEMENTATION_FAILURE",
+    "REVIEW_FAILURE",
+    "FOCUSED_VALIDATION_FAILURE",
+    "REPOSITORY_VALIDATION_FAILURE",
+    "STRUCTURAL_VALIDATION_FAILURE",
+    "COORDINATION_APPROVAL_FAILURE",
+    "GOVERNANCE_BOUNDARY_FAILURE",
+    "STOPPING_CENSORED",
+    "UNATTRIBUTABLE"
+  ],
+  "classes": {
+    "INSTRUMENTATION_ARTIFACT": "logging/timing itself changes, loses, or misattributes the outcome",
+    "HARNESS_OR_ORACLE_ARTIFACT": "gate is nondeterministic, invalid, or not entailed by frozen contract",
+    "ENVIRONMENT_LIMITATION": "missing/unavailable dependency, service, resource, credential, or platform outside candidate control",
+    "SPECIFICATION_INTENT_FAILURE": "task contract is ambiguous, inconsistent, or incorrectly represented",
+    "CONTEXT_FAILURE": "required repository fact was not acquired",
+    "ARCHITECTURAL_UNDERSTANDING_FAILURE": "known context was mapped to boundaries/consequences incorrectly",
+    "IMPLEMENTATION_FAILURE": "candidate does not implement an entailed requirement",
+    "REVIEW_FAILURE": "review incorrectly accepts/rejects or misses a detectable defect",
+    "FOCUSED_VALIDATION_FAILURE": "valid task gate detects candidate failure",
+    "REPOSITORY_VALIDATION_FAILURE": "valid broad gate detects repository consequence",
+    "STRUCTURAL_VALIDATION_FAILURE": "valid structural gate detects boundary/invariant failure",
+    "COORDINATION_APPROVAL_FAILURE": "selection, handoff, conflict, or approval prevents acceptance",
+    "GOVERNANCE_BOUNDARY_FAILURE": "authorized execution/deployment boundary prevents progression",
+    "STOPPING_CENSORED": "cap reached before result; not itself assigned as causal failure",
+    "UNATTRIBUTABLE": "evidence cannot select one class"
+  },
+  "rules": [
+    "Classify first failure and terminal cause separately",
+    "Two blinded adjudicators use frozen task, logs, and oracle-entailment map; disagreement goes to a third adjudicator",
+    "Artifact and environment classes do not count as task-stage failures but remain diagnostic and trigger exclusion/block rules",
+    "A failed assertion is not automatically candidate failure",
+    "Rework records origin class and detection stage separately",
+    "Never relabel after viewing condition aggregate; corrections require an auditable reason"
+  ]
+}

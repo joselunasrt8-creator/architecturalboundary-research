@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "investigation": "bottleneck-migration-110",
+  "protocol_version": "1.0.0",
+  "frozen_on": "2026-09-01",
+  "execution_status": "NOT_EXECUTED",
+  "clock_rules": {
+    "elapsed": "wall-clock from first entry to final exit, including waits",
+    "active": "attended work intervals; mutually exclusive stage labels",
+    "wait": "elapsed minus active, attributed to the stage awaiting a resource",
+    "overlap": "parallel intervals retain stage labels but total cycle-time proportions use exclusive critical-path attribution fixed by earliest unresolved prerequisite",
+    "transition": "log timestamp, actor, candidate id, trigger, origin and destination",
+    "not_applicable": "S09 or S11 may be prospectively N/A with reason before assignment; never silently zero"
+  },
+  "stages": [
+    {
+      "id": "S01",
+      "name": "problem_selection_specification",
+      "definition": "Problem choice, feasibility, scope, and acceptance contract"
+    },
+    {
+      "id": "S02",
+      "name": "intent_requirements_representation",
+      "definition": "Translate intent into explicit requirements and oracle-entailment map"
+    },
+    {
+      "id": "S03",
+      "name": "context_acquisition",
+      "definition": "Acquire files, dependencies, history, and constraints"
+    },
+    {
+      "id": "S04",
+      "name": "architectural_understanding",
+      "definition": "Map boundaries, consequences, and affected execution paths"
+    },
+    {
+      "id": "S05",
+      "name": "implementation",
+      "definition": "Produce or edit candidate code/configuration; excludes planning and validation"
+    },
+    {
+      "id": "S06",
+      "name": "review",
+      "definition": "Inspect candidate correctness, scope, safety, and maintainability"
+    },
+    {
+      "id": "S07",
+      "name": "focused_task_validation",
+      "definition": "Run task-specific tests or checks"
+    },
+    {
+      "id": "S08",
+      "name": "repository_system_validation",
+      "definition": "Run repository-native broad validation"
+    },
+    {
+      "id": "S09",
+      "name": "structural_validation",
+      "definition": "Run preregistered structural checks when applicable"
+    },
+    {
+      "id": "S10",
+      "name": "coordination_approval",
+      "definition": "Candidate selection, handoff, approval, conflict resolution"
+    },
+    {
+      "id": "S11",
+      "name": "deployment_execution_governance",
+      "definition": "Authorization, deployment, or execution-governance boundary when applicable"
+    },
+    {
+      "id": "S12",
+      "name": "rework",
+      "definition": "Correct work after a failed gate or review; origin stage separately coded"
+    }
+  ],
+  "separation": "S05 implementation and every non-implementation stage use distinct event labels. S12 time never rolls into S05; rework_origin identifies the causal stage."
+}

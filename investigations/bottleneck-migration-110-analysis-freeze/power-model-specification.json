@@ -1,0 +1,47 @@
+{
+  "artifact_role": "UNEXECUTED_PROSPECTIVE_MODEL_SPECIFICATION",
+  "execution_status": "NOT_IMPLEMENTED_NOT_RUN",
+  "future_monte_carlo_requirement": {
+    "implementation": "NOT_COMMITTED",
+    "output": "NOT_CREATED",
+    "replicates_per_cell": 10000,
+    "seed": 11020260901,
+    "status": "REQUIRED_BEFORE_SAMPLE_SIZE_FREEZE"
+  },
+  "interpretation": "Ranges in sample-size-analysis.json are prospective sensitivity results, not observed power. Unknown nuisance parameters prevent a unique justified N.",
+  "model": {
+    "binding": "LOW S05 and HIGH replacement probabilities varied 0.55-0.90; conjunctive success",
+    "heterogeneity": "repository SD 0.05-0.15; task SD 0.10-0.30; difficulty fixed effect; attrition 0/0.10/0.25",
+    "multiplicity": "Holm across P1-P5 at familywise 0.05",
+    "paired_binary": "correlated Bernoulli acceptance with LOW baseline 0.25-0.60, HIGH risk difference 0/0.10/0.20, within-pair correlation 0.1-0.6",
+    "throughput": "lognormal active time, HIGH relative effect 0/0.15/0.30, CV 0.35-0.80",
+    "time_to_valid": "right-censored lognormal, ratio 0.70-1.10, censoring 0.05-0.25"
+  },
+  "regimes": [
+    {
+      "attrition": 0.05,
+      "name": "favorable",
+      "pair_correlation": 0.6,
+      "repository_sd": 0.05,
+      "task_sd": 0.1
+    },
+    {
+      "attrition": 0.1,
+      "name": "moderate",
+      "pair_correlation": 0.35,
+      "repository_sd": 0.1,
+      "task_sd": 0.2
+    },
+    {
+      "attrition": 0.25,
+      "name": "conservative",
+      "pair_correlation": 0.1,
+      "repository_sd": 0.15,
+      "task_sd": 0.3
+    }
+  ],
+  "reported_ranges_provenance": "The ranges in sample-size-analysis.json are planning-only analytic/sensitivity approximations. They are not outputs from Monte Carlo simulation or from simulate.py.",
+  "reproducibility_note": "simulate.py regenerates only the 13 synthetic determination rehearsals. It does not execute this power model. A deterministic Monte Carlo implementation and its output remain prospective-amendment deliverables.",
+  "schema_version": "1.0",
+  "synthetic_only": true
+}

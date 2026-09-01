@@ -26,6 +26,8 @@ Thirteen numeric scenarios cover replicated migration, implementation dominance,
 
 ## Precision and sample size
 
+`power-model-specification.json` is an **unexecuted prospective model specification**. `simulate.py` does not run a power simulation; it only regenerates the 13 determination rehearsals. Every power/MDE range in `sample-size-analysis.json` is a planning-only analytic sensitivity approximation, not Monte Carlo output. A deterministic 10,000-replicate-per-cell engine and its generated results remain required before final sample-size freeze.
+
 The 64-template/128-execution proposal is not prospectively justified across the frozen sensitivity regimes and has only two pairs per cell. Unknown baseline rates, paired correlation, heterogeneity and censoring mean no final N can honestly be frozen. The smallest current *candidate* for primary inference is 128 templates/256 executions under a defensible moderate regime. Interaction/external-validity claims require a separately sized candidate of at least 288 templates/576 executions, potentially 512/1024 conservatively. These are planning candidates, not authorization or a cost optimization.
 
 ## Amendment and boundary

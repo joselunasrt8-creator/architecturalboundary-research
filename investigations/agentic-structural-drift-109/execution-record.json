@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "preregistration_commit": "39a6762",
+  "preregistration_path": "investigations/agentic-structural-drift-109/preregistration.json",
+  "execution": {
+    "started_after_preregistration_freeze": true,
+    "experimental_worktree": "ephemeral isolated Git worktree",
+    "base_commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "accepted_states": [
+      "T0"
+    ],
+    "stopping_point": "T0 -> T1 candidate rejected; T1 was not established"
+  },
+  "transitions": [
+    {
+      "transition": "T0-T1",
+      "input_state": "b950b618360ccdd1409b5365fc02cea4437482ee",
+      "frozen_objective": "Add a small reusable canonical JSON writer and use it in scripts/build_analysis.py, preserving CLI behavior and output format.",
+      "agent_model_harness": {
+        "model": "GPT-5.6 Sol",
+        "provider": "OpenAI",
+        "harness": "Codex API coding-agent environment"
+      },
+      "candidate": {
+        "status": "REJECTED",
+        "artifact": "t1-rejected-candidate.patch",
+        "sha256": "b4b87c932a21f791081102dbe28a7b2f7099676f102e460f4deb7db49747bfae",
+        "summary": [
+          "added scripts/json_io.py canonical_json_bytes",
+          "changed scripts/build_analysis.py stable_bytes to delegate to helper",
+          "added focused serializer test"
+        ]
+      },
+      "ordinary_validation": {
+        "attempt_1": {
+          "command": "python3 -m pytest -q",
+          "result": "FAIL_DURING_COLLECTION",
+          "observed": "ModuleNotFoundError: json_io from the existing importlib-based analysis contract test",
+          "intervention": "One allowed repair changed the import to scripts.json_io after inserting repository root on sys.path. The failure and repair are retained."
+        },
+        "repair_attempt": {
+          "command": "python3 -m pytest -q",
+          "result": "FAIL",
+          "summary": "227 passed, 5 failed, 50 errors",
+          "candidate_relevant_failure": "Publication manifest freshness failed because the manifest hashes build_analysis.py; no second repair was permitted.",
+          "environmental_failures": "tiktoken attempted to download o200k_base through a proxy and received 403; these errors also prevent a clean suite result.",
+          "accepted": false
+        },
+        "diagnostic_not_acceptance": {
+          "command": "python3 -m pytest -q tests/test_json_io.py tests/test_b2_analysis_contract.py",
+          "result": "PASS",
+          "summary": "8 passed in 0.26s",
+          "interpretation": "The objective-local checks passed but cannot override the frozen ordinary-validation requirement."
+        }
+      },
+      "resulting_state": "NONE; rejected candidate did not establish T1",
+      "structural_analysis": {
+        "candidate_internal_edges": 9,
+        "delta_from_t0": 1,
+        "new_edges": [
+          {
+            "source": "scripts/build_analysis.py",
+            "target": "scripts.json_io"
+          }
+        ],
+        "scripts_to_tests_edges": 0,
+        "build_entrypoint_to_build_entrypoint_edges": 0,
+        "tracked_tree_mutated_by_validation": false,
+        "not_measurable": [
+          "responsibility migration",
+          "semantic cohesion",
+          "runtime coupling not expressed as Python imports"
+        ]
+      },
+      "invariant_assessment": {
+        "INV-1": "PRESERVED_IN_REJECTED_CANDIDATE",
+        "INV-2": "PRESERVED_IN_REJECTED_CANDIDATE",
+        "INV-3": "PRESERVED_IN_REJECTED_CANDIDATE",
+        "material_degradation": "NONE_OBSERVED_BUT_CANDIDATE_REJECTED"
+      }
+    }
+  ],
+  "unexecuted_frozen_transitions": [
+    {
+      "transition": "T1-T2",
+      "reason": "Stopping rule triggered before T1 existed"
+    },
+    {
+      "transition": "T2-T3",
+      "reason": "Stopping rule triggered before T1 existed"
+    }
+  ],
+  "cumulative_comparison": {
+    "comparison": "T0 -> T0 (last accepted state)",
+    "internal_edge_delta": 0,
+    "frozen_invariant_violations_delta": 0,
+    "interpretation": "No agent-generated candidate was accepted, so T0-to-T3 accumulation is unavailable and cannot support either substantive hypothesis outcome."
+  },
+  "negative_null_observations": [
+    "The rejected candidate passed all eight focused task-level tests.",
+    "The rejected candidate introduced one shared-helper edge but violated none of the frozen invariants.",
+    "No evidence of cumulative drift exists because no transition was accepted.",
+    "Ordinary validation did catch a repository-level manifest consequence not covered by the focused tests."
+  ],
+  "limitations": [
+    "The required tokenizer data were unavailable and network retrieval was blocked by HTTP 403.",
+    "The one-repair stopping rule conflates a candidate-relevant manifest failure with unrelated environment errors, so substantive support/non-support cannot be inferred.",
+    "SYNAPSE was not locally available; the frozen AST measurement was used without assigning decision or merge authority.",
+    "All prospectively listed semantic properties remain NOT_MEASURABLE."
+  ],
+  "separation_checks": {
+    "task_success_is_structural_preservation": false,
+    "local_validity_is_global_coherence": false,
+    "tests_passing_is_invariants_preserved": false,
+    "structural_evidence_has_merge_authority": false,
+    "detection_capability_has_execution_legitimacy": false
+  },
+  "final_determination": "EXPERIMENT_BLOCKED"
+}

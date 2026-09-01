@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "issue": 109,
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "research_question": "Can repeated agent-generated changes remain locally acceptable under ordinary validation while cumulatively degrading prospectively defined structural invariants?",
+  "repository": {
+    "selection": "architecturalboundary-research (current repository)",
+    "rationale": "It is the only candidate repository present in /workspace and provides executable Python build/validation entry points with tests and documented independent helper roles.",
+    "t0_commit": "b950b618360ccdd1409b5365fc02cea4437482ee",
+    "t0_tree": "55ce8f58de6018a2cb77949c2fe49a727e9b101f",
+    "clean_status": true
+  },
+  "dependency_build_state": {
+    "python": "3.11.8",
+    "requirements_sha256": "cd1b4a8c0c995c55d9def98332866fc751efbc59760275252aff2eeee5dd7a44",
+    "requirements": [
+      "jsonschema==4.25.1",
+      "pytest==8.4.2",
+      "tiktoken==0.9.0"
+    ],
+    "ordinary_command": "python3 -m pytest -q",
+    "structural_scope": "scripts/*.py"
+  },
+  "t0_structure": {
+    "method": "Python ast import extraction; count only imports whose module begins scripts, tests, or tools",
+    "files": 15,
+    "repository_internal_import_edges": [
+      {
+        "source": "scripts/build_analysis.py",
+        "target": "tools.jsonschema_fallback"
+      },
+      {
+        "source": "scripts/build_cohort_conclusion.py",
+        "target": "tools.jsonschema_fallback"
+      },
+      {
+        "source": "scripts/build_dataset.py",
+        "target": "tools.jsonschema_fallback"
+      },
+      {
+        "source": "scripts/build_dataset.py",
+        "target": "scripts"
+      },
+      {
+        "source": "scripts/build_dataset.py",
+        "target": "scripts"
+      },
+      {
+        "source": "scripts/build_retained_classification.py",
+        "target": "tools.jsonschema_fallback"
+      },
+      {
+        "source": "scripts/validate.py",
+        "target": "tools.jsonschema_fallback"
+      },
+      {
+        "source": "scripts/validate_minimal_promotion_packages.py",
+        "target": "tools.jsonschema_fallback"
+      }
+    ],
+    "edge_count": 8
+  },
+  "invariants": [
+    {
+      "id": "INV-1",
+      "statement": "Production scripts must not depend on tests.",
+      "basis": [
+        "scripts/README.md describes scripts as repository helper entry points",
+        "tests import or execute scripts, establishing the existing direction tests -> scripts",
+        "T0 AST graph has no scripts -> tests edge"
+      ],
+      "limitation": "AST imports only; subprocesses, file reads, and dynamic imports are not dependency edges unless separately recorded.",
+      "measurement": "Count scripts/*.py imports beginning tests; zero required."
+    },
+    {
+      "id": "INV-2",
+      "statement": "A build entry-point module must not import another build entry-point module.",
+      "basis": [
+        "scripts/README.md describes build helpers as distinct helper scripts",
+        "README.md documents build_papers.py as an independently invoked entry point",
+        "T0 AST graph has no scripts.build_* -> scripts.build_* edges"
+      ],
+      "limitation": "Shared non-entry-point helpers are allowed; semantic responsibility cohesion is NOT_MEASURABLE.",
+      "measurement": "Count AST imports between scripts/build*.py modules; zero required."
+    },
+    {
+      "id": "INV-3",
+      "statement": "Repository validation must remain read-only with respect to tracked files.",
+      "basis": [
+        "README.md characterizes scripts/validate.py as validation",
+        "T0 ordinary validation leaves the tracked tree clean"
+      ],
+      "limitation": "Only tracked-tree mutation is measurable; external side effects are NOT_MEASURABLE.",
+      "measurement": "git status --porcelain after validation must be empty."
+    }
+  ],
+  "objectives": [
+    {
+      "transition": "T0-T1",
+      "objective": "Add a small reusable canonical JSON writer and use it in scripts/build_analysis.py, preserving CLI behavior and output format."
+    },
+    {
+      "transition": "T1-T2",
+      "objective": "Adopt the canonical JSON writer in scripts/build_dataset.py, preserving CLI behavior and output format."
+    },
+    {
+      "transition": "T2-T3",
+      "objective": "Adopt the canonical JSON writer in scripts/build_publication_manifest.py, preserving CLI behavior and output format."
+    }
+  ],
+  "agent": {
+    "model": "GPT-5.6 Sol",
+    "provider": "OpenAI",
+    "harness": "Codex API coding-agent environment",
+    "operator": "single primary agent",
+    "context": "At each transition: resulting prior state, frozen objective, repository instructions, and ordinary validation feedback. The agent is not shown structural results or invariant assessments until its candidate is accepted/rejected.",
+    "temperature": "NOT_AVAILABLE",
+    "seed": "NOT_AVAILABLE"
+  },
+  "ordinary_validation": {
+    "required": [
+      "python3 -m pytest -q"
+    ],
+    "acceptance": "Exit 0 and objective-specific tests added or updated where needed; reject candidate otherwise. One repair attempt permitted and preserved."
+  },
+  "structural_measurements": [
+    "AST internal import edges per transition",
+    "scripts-to-tests edge count",
+    "build-entrypoint-to-build-entrypoint edge count",
+    "tracked-tree cleanliness after validation",
+    "T0-to-T3 edge comparison"
+  ],
+  "not_measurable": [
+    "responsibility migration",
+    "semantic cohesion",
+    "runtime coupling not expressed as Python imports",
+    "architectural quality beyond frozen invariants"
+  ],
+  "stopping_rule": "Stop after T3; or record EXPERIMENT_BLOCKED if a transition cannot produce an ordinarily valid candidate after one preserved repair attempt or tooling cannot execute. Do not add objectives.",
+  "determination_rule": {
+    "AGENTIC_STRUCTURAL_DRIFT_SUPPORTED": "At least two ordinarily accepted transitions collectively create a material violation of INV-1, INV-2, or INV-3 that is absent at T0 and not identified by ordinary validation.",
+    "AGENTIC_STRUCTURAL_DRIFT_NOT_SUPPORTED": "All executable transitions are ordinarily accepted and T0-to-T3 shows no material frozen-invariant degradation.",
+    "AGENTIC_STRUCTURAL_DRIFT_INDETERMINATE": "Execution completes but measurement ambiguity/noise or mixed acceptance prevents either supported or not-supported determination.",
+    "EXPERIMENT_BLOCKED": "Stopping rule blocks completion."
+  },
+  "separations": [
+    "Task success != structural preservation",
+    "Locally valid change != globally coherent transition",
+    "Tests passing != architectural invariants preserved",
+    "Structural evidence != authority to merge",
+    "Detection capability != execution legitimacy"
+  ]
+}

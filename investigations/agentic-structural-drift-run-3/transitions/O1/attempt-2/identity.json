@@ -1,0 +1,73 @@
+{
+  "acceptance_decision": "REJECTED",
+  "accepted_commit": null,
+  "accepted_tree": null,
+  "agent_model_identity": "OpenAI GPT-5.6 Sol; Codex API root agent; non-interactive Bash",
+  "attempt": 2,
+  "candidate_commit": "e5242cc3a0975e03efcc8fb0b56b89e0f05a316e",
+  "candidate_patch_sha256": "5be513d0c7c0df12f94490c33593a9bd95296385829dd364946c79942b4ab098",
+  "candidate_tree": "eebc945bb1299e3dc6443578201753152d46644e",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "c85ebace27b9773613a1941167132b3c7f844d84",
+        "e5242cc3a0975e03efcc8fb0b56b89e0f05a316e"
+      ],
+      "argv_sha256": "c68e0a7cbb6ddc62066fafd8c6c08bf9702568fc2bdcde3b66de55b28caf99b4",
+      "exit": 0,
+      "post_gate_diff_exit": 0,
+      "pre_gate_diff_exit": 0,
+      "role": "scope_identity",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py",
+        "--objective",
+        "O1",
+        "--candidate-tree",
+        "."
+      ],
+      "argv_sha256": "9f480ffb36a56263c354acfeef3e4b2ffeb07fa4ab817211c55929c6eb895821",
+      "exit": 1,
+      "post_gate_diff_exit": 0,
+      "pre_gate_diff_exit": 0,
+      "role": "focused_semantics",
+      "stderr_sha256": "44f9d31dbd2cd548c3e916fa7e0c4583117b715dddbab57982757eee220e7154",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/validate.py"
+      ],
+      "argv_sha256": "55af14c80f39ea244502d76aabaf7d027eba2077ce2ecb8ec880b1d2aedf9581",
+      "exit": null,
+      "log_sha256": "f6b1c771d622c574339ce8e595bd945ebd045747c0fb3aa0241222771695525c",
+      "role": "full_repository",
+      "status": "NOT_RUN_AFTER_FOCUSED_FAILURE"
+    }
+  ],
+  "environment_sha256": "abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501",
+  "failure_taxonomy_labels": [
+    "TASK_FAILURE"
+  ],
+  "focused_gate": "FAIL",
+  "generation_transcript_path": "generation/O1-attempt-2-repair-input.txt",
+  "generation_transcript_sha256": "4d0889ad81739490ccb12fb6781728fb64149aaea6262e77fce4283394d577f5",
+  "next_parent_commit": null,
+  "next_parent_tree": null,
+  "objective_id": "O1",
+  "ordinary_validation": "NOT_RUN",
+  "parent_commit": "68bc12a8fb87c3777fa4b32f22bb196d82f192c4",
+  "parent_tree": "31f067e980f61679dcd9367c0b5e5b110700284a",
+  "scope_gate": "PASS",
+  "stopping_decision_cause": "TASK_FAILURE",
+  "structural_measurement_sha256": null,
+  "transition": "T0_to_candidate_T1"
+}

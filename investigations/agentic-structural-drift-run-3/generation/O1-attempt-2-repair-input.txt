@@ -1,0 +1,13 @@
+Frozen repair opportunity for current objective O1 (one response only). Candidate identity: commit 68bc12a8fb87c3777fa4b32f22bb196d82f192c4, tree 31f067e980f61679dcd9367c0b5e5b110700284a. Parent: commit c85ebace27b9773613a1941167132b3c7f844d84, tree 3b71ed784d2635d7bc96ec9e1570b448cf5d3473. Candidate patch SHA-256: 1ebd52da3cf73d032d51067484a9d68f7001844a690f781e0bab3a59b12ed344; permitted patch is available via `git diff c85ebace27b9773613a1941167132b3c7f844d84 68bc12a8fb87c3777fa4b32f22bb196d82f192c4`. Failing command: `python3 investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py --objective O1 --candidate-tree .`. Complete captured stdout was empty. Complete captured stderr follows:
+Traceback (most recent call last):
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 58, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 31, in main
+    first = load(invoke(candidate, str(root))); second = load(invoke(candidate, str(root)))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 17, in load
+    assert result.stdout == json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+Exit status: 1. Repair only O1 within exactly scripts/structural_snapshot.py and tests/test_structural_snapshot.py. Do not inspect structural findings or later objectives; do not modify the frozen oracle/gates. Make one repaired candidate directly in the working tree, then report.

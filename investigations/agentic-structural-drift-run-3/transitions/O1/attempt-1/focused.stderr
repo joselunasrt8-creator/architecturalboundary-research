@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 58, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 31, in main
+    first = load(invoke(candidate, str(root))); second = load(invoke(candidate, str(root)))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/architecturalboundary-research/investigations/agentic-structural-drift-run-3-preflight-amendment/oracle.py", line 17, in load
+    assert result.stdout == json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

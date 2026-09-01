@@ -1,0 +1,168 @@
+diff --git a/scripts/structural_snapshot.py b/scripts/structural_snapshot.py
+new file mode 100644
+index 0000000..f9f92d1
+--- /dev/null
++++ b/scripts/structural_snapshot.py
+@@ -0,0 +1,86 @@
++#!/usr/bin/env python3
++"""Emit a deterministic snapshot of repository-owned Python import edges."""
++
++from __future__ import annotations
++
++import argparse
++import ast
++import json
++from pathlib import Path
++from typing import Iterable
++
++
++def module_name(repository: Path, source: Path) -> str:
++    """Return the dotted module name represented by *source*."""
++    relative = source.relative_to(repository)
++    parts = list(relative.with_suffix("").parts)
++    if parts[-1] == "__init__" and len(parts) > 1:
++        parts.pop()
++    return ".".join(parts)
++
++
++def python_sources(repository: Path) -> list[Path]:
++    """Find Python sources without following directory symlinks."""
++    return sorted(
++        (path for path in repository.rglob("*.py") if path.is_file()),
++        key=lambda path: path.relative_to(repository).as_posix(),
++    )
++
++
++def owned_roots(modules: Iterable[str]) -> set[str]:
++    """Return import roots supplied by Python sources in the repository."""
++    return {module.partition(".")[0] for module in modules}
++
++
++def imported_modules(tree: ast.AST) -> Iterable[str]:
++    """Yield literal absolute module names present in an AST."""
++    for node in ast.walk(tree):
++        if isinstance(node, ast.Import):
++            for alias in node.names:
++                yield alias.name
++        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
++            # ImportFrom.module is the literal target.  Its aliases name objects
++            # imported from that target, not necessarily child modules.
++            yield node.module
++
++
++def snapshot(repository: Path) -> dict[str, list[dict[str, str]]]:
++    """Build the structural import snapshot for *repository*."""
++    sources = python_sources(repository)
++    names = {source: module_name(repository, source) for source in sources}
++    roots = owned_roots(names.values())
++    edges: set[tuple[str, str]] = set()
++
++    for source in sources:
++        tree = ast.parse(source.read_text(encoding="utf-8"), filename=str(source))
++        for target in imported_modules(tree):
++            if target.partition(".")[0] in roots:
++                edges.add((names[source], target))
++
++    return {
++        "edges": [
++            {"source": source, "target": target}
++            for source, target in sorted(edges)
++        ]
++    }
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(
++        description="Print repository-owned Python import edges as JSON."
++    )
++    parser.add_argument("repository", type=Path, help="repository directory to scan")
++    return parser.parse_args()
++
++
++def main() -> int:
++    args = parse_args()
++    repository = args.repository.resolve()
++    if not repository.is_dir():
++        raise SystemExit(f"repository is not a directory: {args.repository}")
++    print(json.dumps(snapshot(repository), indent=2, sort_keys=True))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tests/test_structural_snapshot.py b/tests/test_structural_snapshot.py
+new file mode 100644
+index 0000000..fec4378
+--- /dev/null
++++ b/tests/test_structural_snapshot.py
+@@ -0,0 +1,70 @@
++import json
++import subprocess
++import sys
++from pathlib import Path
++
++
++ROOT = Path(__file__).resolve().parents[1]
++SCRIPT = ROOT / "scripts" / "structural_snapshot.py"
++
++
++def write(repository: Path, relative: str, content: str = "") -> None:
++    path = repository / relative
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(content, encoding="utf-8")
++
++
++def run_snapshot(repository: Path) -> subprocess.CompletedProcess[str]:
++    return subprocess.run(
++        [sys.executable, str(SCRIPT), str(repository)],
++        text=True,
++        capture_output=True,
++        check=False,
++    )
++
++
++def test_discovers_owned_absolute_imports_and_excludes_external(tmp_path):
++    write(tmp_path, "owned/__init__.py")
++    write(tmp_path, "owned/helper.py", "VALUE = 1\n")
++    write(
++        tmp_path,
++        "consumer.py",
++        "import json\nimport owned.helper\nfrom owned import helper\nfrom . import local\n",
++    )
++
++    result = run_snapshot(tmp_path)
++
++    assert result.returncode == 0
++    assert json.loads(result.stdout) == {
++        "edges": [
++            {"source": "consumer", "target": "owned"},
++            {"source": "consumer", "target": "owned.helper"},
++        ]
++    }
++
++
++def test_output_is_canonical_and_identical_across_runs(tmp_path):
++    write(tmp_path, "zeta.py", "import alpha\nimport alpha\n")
++    write(tmp_path, "alpha.py", "import zeta\n")
++
++    first = run_snapshot(tmp_path)
++    second = run_snapshot(tmp_path)
++
++    assert first.returncode == second.returncode == 0
++    assert first.stdout == second.stdout
++    assert json.loads(first.stdout)["edges"] == [
++        {"source": "alpha", "target": "zeta"},
++        {"source": "zeta", "target": "alpha"},
++    ]
++
++
++def test_does_not_modify_scanned_repository(tmp_path):
++    write(tmp_path, "package/__init__.py", "from package import api\n")
++    write(tmp_path, "package/api.py")
++    before = {path.relative_to(tmp_path): path.read_bytes() for path in tmp_path.rglob("*") if path.is_file()}
++
++    result = run_snapshot(tmp_path)
++
++    after = {path.relative_to(tmp_path): path.read_bytes() for path in tmp_path.rglob("*") if path.is_file()}
++    assert result.returncode == 0
++    assert after == before

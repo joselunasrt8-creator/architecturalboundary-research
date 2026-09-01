@@ -1,0 +1,106 @@
+{
+  "all_bindings_pass": true,
+  "artifact_bindings": {
+    "README.md": {
+      "actual": "faf2510ee6fc8120afa51d8d106383faa1fe36336ffbe1ebd94d442932222864",
+      "expected": "faf2510ee6fc8120afa51d8d106383faa1fe36336ffbe1ebd94d442932222864",
+      "pass": true
+    },
+    "entry-conditions.json": {
+      "actual": "bc2e2500ea1cbe88f260588aa8cbce936607b8333600af6af6d0fabe939420e4",
+      "expected": "bc2e2500ea1cbe88f260588aa8cbce936607b8333600af6af6d0fabe939420e4",
+      "pass": true
+    },
+    "independent_structural_measure.py": {
+      "actual": "47a38f3ea1b778078a6ea3741f85dc9916500fa2e2f2812c3491bf45cf484f4c",
+      "expected": "47a38f3ea1b778078a6ea3741f85dc9916500fa2e2f2812c3491bf45cf484f4c",
+      "pass": true
+    },
+    "oracle-coverage.json": {
+      "actual": "834ab2faec0302a13a1200fbb96865baac000863da5cdcbab07cab5ecf148ad8",
+      "expected": "834ab2faec0302a13a1200fbb96865baac000863da5cdcbab07cab5ecf148ad8",
+      "pass": true
+    },
+    "oracle.py": {
+      "actual": "15713a826ff05575fee314434e024efb0be9f643b6181a42e50e6e710fa23d7d",
+      "expected": "15713a826ff05575fee314434e024efb0be9f643b6181a42e50e6e710fa23d7d",
+      "pass": true
+    },
+    "preflight-results.json": {
+      "actual": "7484c72a77878251793d7b10b4dc01202be45ec407f6006bd95fd44df7ab385b",
+      "expected": "7484c72a77878251793d7b10b4dc01202be45ec407f6006bd95fd44df7ab385b",
+      "pass": true
+    },
+    "structural-measures.json": {
+      "actual": "5d3b05321d507ed67970fe9b2e40fdae55c2c6f9c33d1538ad26841f098c2ddc",
+      "expected": "5d3b05321d507ed67970fe9b2e40fdae55c2c6f9c33d1538ad26841f098c2ddc",
+      "pass": true
+    },
+    "t0-structural-baseline.json": {
+      "actual": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+      "expected": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+      "pass": true
+    },
+    "test_amendment.py": {
+      "actual": "40153928558dfe3514c28516a0617e69f6d3ce83d0a5ccec46845134ff9d3938",
+      "expected": "40153928558dfe3514c28516a0617e69f6d3ce83d0a5ccec46845134ff9d3938",
+      "pass": true
+    }
+  },
+  "artifact_set_sha256": "2ff989dd1ff6180b32c50edd03ffab6bb3438f388d77054da1919c6a88549a32",
+  "branch": "work",
+  "controlling_artifacts_present": true,
+  "entry_boundary_pass": true,
+  "entry_counts": {
+    "BLOCKED": 0,
+    "FAIL": 0,
+    "PASS": 19
+  },
+  "git_status": "",
+  "head_commit": "c85ebace27b9773613a1941167132b3c7f844d84",
+  "head_tree": "3b71ed784d2635d7bc96ec9e1570b448cf5d3473",
+  "historical_t0": {
+    "administrative_not_transition": true,
+    "commit": "f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166",
+    "measurement_sha256": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+    "tree": "18cd9de245d2a0cdb73218ba500cc368485c71ac"
+  },
+  "historical_trees": {
+    "issue_114_git_tree": "78b47693901eca7e10e88542d217849f35dd924b",
+    "run_1_git_tree": "fbf7b4683de7c964c7305b7ec6292c05debb7aea",
+    "run_2_git_tree": "25c18709406215c9ace127a6d017d5e6c067727e",
+    "v1_git_tree": "118a5d16ce2459f933a53b818bf5ef0ddd5be040",
+    "v1_preregistration_sha256": "c66561c784383b681645cbaa2ac72c39625ccfd06c97dde1e6609815e7a95b43"
+  },
+  "inherited_bindings": {
+    "environment.json": {
+      "actual": "abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501",
+      "expected": "abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501",
+      "pass": true
+    },
+    "failure-taxonomy.json": {
+      "actual": "35733f747d674bd701130fd1f95f4c390f44d52eecb487ec5b461f42e58ff4a3",
+      "expected": "35733f747d674bd701130fd1f95f4c390f44d52eecb487ec5b461f42e58ff4a3",
+      "pass": true
+    },
+    "objectives.json": {
+      "actual": "813ed2de8d318482308d87e0ddb66cdfd2b5519fc147fb63acab612a11959f38",
+      "expected": "813ed2de8d318482308d87e0ddb66cdfd2b5519fc147fb63acab612a11959f38",
+      "pass": true
+    },
+    "repair-policy.json": {
+      "actual": "d528a0b7e7ba03596a53ec6560bbbc739281ff2844a58d567b78f01a6db00a82",
+      "expected": "d528a0b7e7ba03596a53ec6560bbbc739281ff2844a58d567b78f01a6db00a82",
+      "pass": true
+    },
+    "stopping-rule.json": {
+      "actual": "50f4645752f07d45bc9989c18cd7c404a877265f5d0b051eacf765af5406eb29",
+      "expected": "50f4645752f07d45bc9989c18cd7c404a877265f5d0b051eacf765af5406eb29",
+      "pass": true
+    }
+  },
+  "merged_corrective_amendment_identity": {
+    "amendment_id": "RUN3-PREFLIGHT-AMENDMENT-POST-MERGE-REVIEW-1",
+    "commit": "c85ebace27b9773613a1941167132b3c7f844d84"
+  }
+}

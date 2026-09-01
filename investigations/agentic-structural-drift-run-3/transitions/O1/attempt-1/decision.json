@@ -1,0 +1,17 @@
+{
+  "acceptance_decision": "REJECTED",
+  "accepted_commit": null,
+  "accepted_tree": null,
+  "attempt": 1,
+  "failure_taxonomy_labels": [
+    "TASK_FAILURE"
+  ],
+  "focused_gate": "FAIL",
+  "next_parent_commit": null,
+  "next_parent_tree": null,
+  "objective_id": "O1",
+  "ordinary_validation": "NOT_RUN",
+  "scope_gate": "PASS",
+  "stopping_decision_cause": "TASK_FAILURE",
+  "structural_measurement_sha256": null
+}

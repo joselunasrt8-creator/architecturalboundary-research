@@ -1,0 +1,126 @@
+{
+  "conditions": [
+    {
+      "corrective_evidence": "Run 1 tree fbf7b4683de7c964c7305b7ec6292c05debb7aea unchanged.",
+      "identifier": 1,
+      "requirement": "Run 1 primary evidence bound",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Run 2 tree 25c18709406215c9ace127a6d017d5e6c067727e unchanged.",
+      "identifier": 2,
+      "requirement": "Run 2 primary evidence bound",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Issue #114 audit tree 78b47693901eca7e10e88542d217849f35dd924b and prospective supersession boundary.",
+      "identifier": 3,
+      "requirement": "Conflicts resolved by precedence",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "oracle-coverage.json maps every O1-O4 requirement to black-box assertions.",
+      "identifier": 4,
+      "requirement": "Every focused assertion semantically justified",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Coverage assertions observe interfaces/JSON only and prescribe no functions, classes, decomposition, or SCC algorithm.",
+      "identifier": 5,
+      "requirement": "Objectives permit multiple legitimate implementations",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Candidate oracle remains an acceptance gate; structural-measures.json is INDEPENDENT_NON_GATE.",
+      "identifier": 6,
+      "requirement": "Focused/full roles explicitly separated",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Unchanged failure-taxonomy SHA-256 35733f747d674bd701130fd1f95f4c390f44d52eecb487ec5b461f42e58ff4a3.",
+      "identifier": 7,
+      "requirement": "Deterministic failure taxonomy exists",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Unchanged bounded environment SHA-256 abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501.",
+      "identifier": 8,
+      "requirement": "Environment reproducible or bounded",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Independent instrument, exact two-directory administrative exclusion population, enumerated predicates, fixture controls, command, schema, ordering, and hash frozen.",
+      "identifier": 9,
+      "requirement": "Structural measurements prospectively defined",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Only narrow static AST observables; limitations and adjacent/cumulative rules explicit. Identical frozen exclusions hold measured state population constant across T0-T3.",
+      "identifier": 10,
+      "requirement": "Measurements discriminate the research question",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Unchanged repair-policy SHA-256 d528a0b7e7ba03596a53ec6560bbbc739281ff2844a58d567b78f01a6db00a82.",
+      "identifier": 11,
+      "requirement": "Repair policy frozen",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Unchanged stopping-rule SHA-256 50f4645752f07d45bc9989c18cd7c404a877265f5d0b051eacf765af5406eb29.",
+      "identifier": 12,
+      "requirement": "Stopping rule frozen",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Unchanged >=3 accepted floor and maximum four attempts.",
+      "identifier": 13,
+      "requirement": "Transition count justified",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "V1 candidate identity schema/harness preserved; validated_object == accepted_object.",
+      "identifier": 14,
+      "requirement": "Candidate identity bindable to validation identity",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "V1 exact-tree lineage preserved; accepted_object == next_transition_input.",
+      "identifier": 15,
+      "requirement": "Accepted state bindable to next input",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "V1 commit 833489c58f93e0af2a8c30a1cfae504aaf788214 plus this committed amendment are reachable.",
+      "identifier": 16,
+      "requirement": "Preregistration freeze identities independently available",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Issue #114, Run 1, Run 2, and v1 Git trees unchanged.",
+      "identifier": 17,
+      "requirement": "Historical evidence unchanged",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "Objectives SHA-256 813ed2de8d318482308d87e0ddb66cdfd2b5519fc147fb63acab612a11959f38 remains frozen.",
+      "identifier": 18,
+      "requirement": "Run 3 objectives frozen before execution",
+      "status": "PASS"
+    },
+    {
+      "corrective_evidence": "No candidate, T1, generation, repair, acceptance, or experimental structural output was produced.",
+      "identifier": 19,
+      "requirement": "Run 3 remains a separate action",
+      "status": "PASS"
+    }
+  ],
+  "controlling_source": "Issue #114 19-condition boundary, recomputed after corrective amendment",
+  "determination": "RUN_3_READY",
+  "final_counts": {
+    "BLOCKED": 0,
+    "FAIL": 0,
+    "PASS": 19
+  },
+  "schema_version": "2.0-amendment"
+}

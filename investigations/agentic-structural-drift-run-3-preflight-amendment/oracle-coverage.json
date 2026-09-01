@@ -1,0 +1,213 @@
+{
+  "assertions": [
+    {
+      "assertion": "two invocations are equal and canonical JSON",
+      "expected": "identical bytes/value; fixture unchanged",
+      "fixture": "temporary owned fixture",
+      "frozen_requirement": "deterministic read-only snapshot",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "semantic and deterministic representation contracts",
+      "objective": "O1"
+    },
+    {
+      "assertion": "assert exact owned edge set",
+      "expected": "app.main -> owned.direct",
+      "fixture": "import owned.direct",
+      "frozen_requirement": "repository-owned absolute imports",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O1"
+    },
+    {
+      "assertion": "assert external edge absent",
+      "expected": "no external edge/node",
+      "fixture": "import external",
+      "frozen_requirement": "external-import exclusion",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O1"
+    },
+    {
+      "assertion": "assert sorted nodes and canonical serialized JSON",
+      "expected": "sorted nodes/keys",
+      "fixture": "deliberately nonlexical creation/import order",
+      "frozen_requirement": "canonical deterministic ordering",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "deterministic representation contract",
+      "objective": "O1"
+    },
+    {
+      "assertion": "assert edge terminates at node.module",
+      "expected": "app.main -> owned, not owned.helper",
+      "fixture": "from owned import helper",
+      "frozen_requirement": "literal ImportFrom AST semantics",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "prospectively frozen literal AST representation; repairs prior Run 2 mismatch",
+      "objective": "O1"
+    },
+    {
+      "assertion": "invoke with --root",
+      "expected": "successful snapshot of specified root",
+      "fixture": "temporary root outside candidate",
+      "frozen_requirement": "explicit --root",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "explicit interface contract",
+      "objective": "O2"
+    },
+    {
+      "assertion": "pass two --exclude flags in one invocation",
+      "expected": "both absent",
+      "fixture": "skip_one and skip_two",
+      "frozen_requirement": "repeatable --exclude",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "explicit interface contract",
+      "objective": "O2"
+    },
+    {
+      "assertion": "assert exclusions list",
+      "expected": "[skip_one, skip_two]",
+      "fixture": "reverse-order exclusions",
+      "frozen_requirement": "normalized exclusion output",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "deterministic representation contract",
+      "objective": "O2"
+    },
+    {
+      "assertion": "invoke ../escape",
+      "expected": "nonzero",
+      "fixture": "relative escape",
+      "frozen_requirement": "root escape rejection",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "explicit interface contract",
+      "objective": "O2"
+    },
+    {
+      "assertion": "O1 assertions execute before O2 assertions",
+      "expected": "all pass",
+      "fixture": "same O1 fixture",
+      "frozen_requirement": "inherited O1 behavior",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "objective inheritance",
+      "objective": "O2"
+    },
+    {
+      "assertion": "assert cycle member list",
+      "expected": "[[cycle.a,cycle.b],...]",
+      "fixture": "cycle.a <-> cycle.b",
+      "frozen_requirement": "multi-node SCC",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O3"
+    },
+    {
+      "assertion": "assert singleton cycle",
+      "expected": "[selfish] cycle",
+      "fixture": "selfish imports selfish",
+      "frozen_requirement": "explicit self-loop",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O3"
+    },
+    {
+      "assertion": "remove cycle edges and assert empty",
+      "expected": "[]",
+      "fixture": "same nodes, edges removed",
+      "frozen_requirement": "acyclic graph",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O3"
+    },
+    {
+      "assertion": "assert entire ordered cycles value",
+      "expected": "lexicographic lists",
+      "fixture": "multi-node and singleton controls",
+      "frozen_requirement": "deterministic cycle ordering",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "deterministic representation contract",
+      "objective": "O3"
+    },
+    {
+      "assertion": "all earlier blocks execute",
+      "expected": "all pass",
+      "fixture": "combined fixture",
+      "frozen_requirement": "inherited O1/O2",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "objective inheritance",
+      "objective": "O3"
+    },
+    {
+      "assertion": "assert added_nodes",
+      "expected": "[new]",
+      "fixture": "before snapshot versus modified fixture",
+      "frozen_requirement": "added node",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O4"
+    },
+    {
+      "assertion": "assert removed_nodes",
+      "expected": "[owned.direct]",
+      "fixture": "before snapshot versus modified fixture",
+      "frozen_requirement": "removed node",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O4"
+    },
+    {
+      "assertion": "assert added_edges",
+      "expected": "app.main -> new",
+      "fixture": "before snapshot versus modified fixture",
+      "frozen_requirement": "added edge",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O4"
+    },
+    {
+      "assertion": "assert removed_edges",
+      "expected": "two exact removed edges",
+      "fixture": "before snapshot versus modified fixture",
+      "frozen_requirement": "removed edge",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O4"
+    },
+    {
+      "assertion": "assert exact ordered delta lists",
+      "expected": "lexicographic",
+      "fixture": "multiple removed edges",
+      "frozen_requirement": "deterministic delta ordering",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "deterministic representation contract",
+      "objective": "O4"
+    },
+    {
+      "assertion": "compare malformed schema",
+      "expected": "nonzero",
+      "fixture": "nodes is string",
+      "frozen_requirement": "malformed input rejection",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "explicit interface contract",
+      "objective": "O4"
+    },
+    {
+      "assertion": "invoke without --compare after comparison",
+      "expected": "no comparison member",
+      "fixture": "modified fixture",
+      "frozen_requirement": "ordinary snapshot preservation",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "frozen semantic objective",
+      "objective": "O4"
+    },
+    {
+      "assertion": "all earlier blocks execute",
+      "expected": "all pass",
+      "fixture": "combined fixture",
+      "frozen_requirement": "inherited O1-O3",
+      "implementation_shape_independent": "Black-box CLI output only; no candidate source, symbol, class, helper, or algorithm is inspected.",
+      "justification": "objective inheritance",
+      "objective": "O4"
+    }
+  ],
+  "classification": "All frozen requirements are candidate acceptance requirements; none are classified out.",
+  "schema_version": "1.0"
+}

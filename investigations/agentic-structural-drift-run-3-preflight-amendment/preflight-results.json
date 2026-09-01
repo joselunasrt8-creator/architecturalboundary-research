@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "id": "historical-preservation",
+      "result": "Issue #114, Run 1, Run 2, and PR #117 v1 Git tree identities match amendment.json.",
+      "status": "PASS"
+    },
+    {
+      "id": "gap-1-confirmed",
+      "result": "V1 invokes <accepted-tree>/scripts/structural_snapshot.py, which is inside every O1-O4 allowed scope; the confound is confirmed.",
+      "status": "PASS"
+    },
+    {
+      "id": "gap-1-corrected",
+      "result": "The independent instrument is outside candidate scope, treats candidate trees only as filesystem input, and is content-bound.",
+      "status": "PASS"
+    },
+    {
+      "id": "instrument-controls",
+      "result": "Two non-experimental pytest controls cover equality, owned edges, all three violation predicates, multi-node SCC, self-loop, acyclic nodes, node/edge additions and removals, and malformed syntax/comparison.",
+      "status": "PASS"
+    },
+    {
+      "id": "instrument-determinism",
+      "result": "Repeated in-process measurements of the same fixture are equal; canonical CLI JSON is key-sorted and collection ordering is frozen.",
+      "status": "PASS"
+    },
+    {
+      "id": "measurement-frame-audit",
+      "result": "T0-to-execution-parent comparison found exactly five related post-T0 Python additions, all under the v1 preflight or amendment directories; the frozen two-directory exclusion set removes all of them at every Tn.",
+      "status": "PASS"
+    },
+    {
+      "id": "measurement-frame-control",
+      "result": "A non-experimental fixture containing Python files in both administrative directories measured only the system node and no administrative edges when the frozen exclusions were applied.",
+      "status": "PASS"
+    },
+    {
+      "id": "execution-parent-frame-equality",
+      "result": "Before experimental execution, the current execution parent measured under the frozen exclusions is byte-identical to the regenerated historical T0 baseline (SHA-256 9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293); administrative additions contribute no nodes or edges.",
+      "status": "PASS"
+    },
+    {
+      "id": "t0-measurement",
+      "result": "The independent instrument externally remeasured commit f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166/tree 18cd9de245d2a0cdb73218ba500cc368485c71ac with both frozen exclusions: 35 nodes, 10 edges, 0 cycles, 0 unmeasurable files, and no enumerated violations.",
+      "status": "PASS"
+    },
+    {
+      "id": "gap-2-confirmed",
+      "result": "V1 omitted literal ImportFrom, two excludes in one call, candidate self-loop, and direct edge-delta assertions; the coverage gap is confirmed.",
+      "status": "PASS"
+    },
+    {
+      "id": "o1-importfrom-definition",
+      "result": "Frozen candidate oracle directly asserts `from owned import helper` yields app.main -> owned and not app.main -> owned.helper, plus repeated equality.",
+      "status": "PASS"
+    },
+    {
+      "id": "o2-multiple-exclusion-definition",
+      "result": "Frozen candidate oracle passes skip_two and skip_one as two flags in one invocation and asserts normalized output and both files absent.",
+      "status": "PASS"
+    },
+    {
+      "id": "o3-self-loop-definition",
+      "result": "Frozen candidate oracle creates `selfish.py` importing itself and asserts singleton SCC output alongside a multi-node SCC.",
+      "status": "PASS"
+    },
+    {
+      "id": "o4-edge-delta-definition",
+      "result": "Frozen candidate oracle directly asserts exact added and removed edge lists, independently of node deltas.",
+      "status": "PASS"
+    },
+    {
+      "id": "implementation-plurality",
+      "result": "All assertions use subprocess exit status and documented JSON/CLI behavior; no source inspection, function/class names, helper layout, alias expansion, or SCC algorithm is prescribed.",
+      "status": "PASS"
+    },
+    {
+      "id": "machine-readable-parse",
+      "result": "All amendment and v1 JSON artifacts parse.",
+      "status": "PASS"
+    },
+    {
+      "id": "entry-boundary",
+      "result": "All 19 conditions were recomputed: 19 PASS, 0 FAIL, 0 BLOCKED.",
+      "status": "PASS"
+    },
+    {
+      "id": "experimental-boundary",
+      "result": "No O1 candidate was generated; no candidate oracle was run against experimental code; no T1 was accepted; no experimental structural outcome exists.",
+      "status": "PASS"
+    }
+  ],
+  "classification": "PROSPECTIVE_ADMINISTRATIVE_PREFLIGHT_ONLY",
+  "determination": "RUN_3_READY",
+  "run_3_executed": false,
+  "schema_version": "1.0"
+}

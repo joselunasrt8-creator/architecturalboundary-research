@@ -1,0 +1,47 @@
+{
+  "assigned_contrast": {
+    "HIGH": {
+      "agent": "model/version/configuration not yet identified or frozen",
+      "candidate_cap": 4,
+      "implementation_active_time_cap_minutes": 120,
+      "qualification_pool": "same frozen pool as LOW"
+    },
+    "LOW": {
+      "candidate_cap": 2,
+      "implementation_active_time_cap_minutes": 120,
+      "qualification_pool": "same frozen pool as HIGH",
+      "tools": "ordinary non-generative editor/search/deterministic tools"
+    }
+  },
+  "audit_date": "2026-09-01",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "finding": "The conceptual contrast is preserved, but neither arm nor isolation can yet be instantiated reproducibly.",
+  "investigation": "bottleneck-migration-110-preflight",
+  "leakage_controls_required": [
+    "role-scoped accounts and network/tool allowlists",
+    "AI disabled for S01-S04 and S06-S12",
+    "stage-tagged tool-call audit log",
+    "sealed identical context packets",
+    "operators barred from paired outcomes",
+    "adjudicators blinded to condition and aggregates"
+  ],
+  "realization_measurement": {
+    "anti_redefinition": "Compute on all eligible assigned executions from frozen event fields; no outcome-conditioned denominator or threshold changes.",
+    "frozen_checks": [
+      ">=2 runnable bound candidates in >=70% eligible HIGH executions",
+      "HIGH median time to first runnable <=70% LOW",
+      "configuration and caps invariant"
+    ],
+    "runnable_definition": "Must be operationalized before execution as a candidate hash that builds/starts enough to enter the first frozen gate; acceptance is not required."
+  },
+  "schema_version": "1.0",
+  "status": "BLOCKED",
+  "synthetic_only": false,
+  "unresolved": [
+    "qualified-human criteria and pool roster",
+    "AI model/version/configuration identity and availability",
+    "ordinary-tool allowlist",
+    "technical enforcement and leakage detector",
+    "runnable-candidate schema and calibrated logger"
+  ]
+}

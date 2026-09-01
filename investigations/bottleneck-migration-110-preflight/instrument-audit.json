@@ -1,0 +1,143 @@
+{
+  "audit_date": "2026-09-01",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "field_coverage": [
+    {
+      "measure": "stage elapsed time",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "active work time",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "wait time",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "candidate count",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "attempts",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "first-failure stage",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "rework",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "acceptance",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "total cycle time",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "coordination events",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    },
+    {
+      "measure": "environment events",
+      "required_event_fields": [
+        "monotonic timestamp",
+        "stage",
+        "actor",
+        "candidate id",
+        "event/reason code"
+      ],
+      "verified": false
+    }
+  ],
+  "finding": "No logger/schema/version or calibration evidence was supplied; measurability remains prospective only.",
+  "independence": "Reviewer must not implement the logger and must sign field, replay, loss, clock-skew, and perturbation checks.",
+  "instrument_identity": null,
+  "investigation": "bottleneck-migration-110-preflight",
+  "non_interference_acceptance": "On synthetic non-study fixtures, median burden <=5% cycle time, condition difference <=2 percentage points, no changed gate result, and no reordered transition.",
+  "required_properties": [
+    "monotonic clock and mutually exclusive active labels",
+    "explicit wait resource and stage attribution",
+    "parallel/critical-path rule implementation",
+    "append-only candidate and transition identities",
+    "not-reached, N/A, missing, and censored remain distinct",
+    "instrumentation time separately measured"
+  ],
+  "schema_version": "1.0",
+  "status": "BLOCKED",
+  "synthetic_only": false
+}

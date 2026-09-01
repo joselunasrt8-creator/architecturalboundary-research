@@ -1,0 +1,34 @@
+{
+  "audit": {
+    "attrition": "75% classifiable and 80% power rules exist, but no attrition-adjusted calculation links them to 64 templates.",
+    "blocking": "32 cells leave only two independent task-template pairs per cell.",
+    "expected_variance": "Absent for binary yield/failure and continuous timing estimands.",
+    "interaction_analysis": "No interaction power or precision demonstration; two templates per cell cannot establish stable cell-level uncertainty.",
+    "minimum_detectable_effect": "Thresholds (15% throughput, 0.10 yield) exist, but no design MDE calculation exists.",
+    "multiplicity_models": "No simulation demonstrates Holm-adjusted P1-P5 inference or mixed-model identifiability with planned operators.",
+    "paired_design": "Specified but no prospective within-pair variance supplied."
+  },
+  "audit_date": "2026-09-01",
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "finding": "The number is a design assertion, not a prospective power/precision justification. Convenience cannot resolve it.",
+  "frozen_proposal": {
+    "paired_executions": 128,
+    "pairs_per_repository_task_class_difficulty_cell": 2,
+    "templates": 64
+  },
+  "investigation": "bottleneck-migration-110-preflight",
+  "primary_estimands": [
+    "paired HIGH-LOW P1-P5 differences",
+    "stage/type binding within repository x task-class strata",
+    "condition interactions by repository, task class, and difficulty"
+  ],
+  "required_resolution": [
+    "Specify variance, baseline rates, within-pair correlation, repository/task intraclass correlations, operator allocation, and plausible attrition ranges without study outcomes.",
+    "Run a prospective simulation or analytic precision/power calculation for conjunctive binding and interaction decisions.",
+    "Document sensitivity across defensible nuisance parameters and justify the frozen minimum effects.",
+    "If 64 is inadequate or excessive, issue a separately identified amendment and rerun every readiness condition before execution."
+  ],
+  "schema_version": "1.0",
+  "status": "FAIL",
+  "synthetic_only": false
+}

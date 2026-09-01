@@ -1,0 +1,115 @@
+{
+  "audit_date": "2026-09-01",
+  "blinded_adjudication": {
+    "adjudicators": 2,
+    "correction": "auditable reason required; aggregate outcomes never available",
+    "packet": "frozen contract, redacted synthetic logs, oracle-entailment map; no condition or aggregate",
+    "records": "independent first-failure and terminal-cause labels plus reason; detection stage and rework origin separate",
+    "tie_breaker": "third blinded adjudicator"
+  },
+  "cases": {
+    "ARCHITECTURAL_UNDERSTANDING_FAILURE": {
+      "expected": "ARCHITECTURAL_UNDERSTANDING_FAILURE",
+      "scenario": "All synthetic facts are present, but a boundary direction is mapped backward.",
+      "synthetic": true
+    },
+    "CONTEXT_FAILURE": {
+      "expected": "CONTEXT_FAILURE",
+      "scenario": "The synthetic context packet omits a required public module map present in frozen repository facts.",
+      "synthetic": true
+    },
+    "COORDINATION_APPROVAL_FAILURE": {
+      "expected": "COORDINATION_APPROVAL_FAILURE",
+      "scenario": "Two valid synthetic candidates exist, but an unresolved handoff prevents selection before the cap.",
+      "synthetic": true
+    },
+    "ENVIRONMENT_LIMITATION": {
+      "expected": "ENVIRONMENT_LIMITATION",
+      "scenario": "A pinned synthetic fixture service is unavailable before either candidate can reach a gate.",
+      "synthetic": true
+    },
+    "FOCUSED_VALIDATION_FAILURE": {
+      "expected": "FOCUSED_VALIDATION_FAILURE",
+      "scenario": "A valid synthetic task-specific test rejects behavior violating its mapped contract clause.",
+      "synthetic": true
+    },
+    "GOVERNANCE_BOUNDARY_FAILURE": {
+      "expected": "GOVERNANCE_BOUNDARY_FAILURE",
+      "scenario": "A synthetic candidate passes gates, but required approval authority is unavailable.",
+      "synthetic": true
+    },
+    "HARNESS_OR_ORACLE_ARTIFACT": {
+      "expected": "HARNESS_OR_ORACLE_ARTIFACT",
+      "scenario": "Synthetic assertion requires an exact internal helper although the contract permits two implementations.",
+      "synthetic": true
+    },
+    "IMPLEMENTATION_FAILURE": {
+      "expected": "IMPLEMENTATION_FAILURE",
+      "scenario": "A synthetic candidate returns the wrong entailed value before any gate-specific attribution applies.",
+      "synthetic": true
+    },
+    "INSTRUMENTATION_ARTIFACT": {
+      "expected": "INSTRUMENTATION_ARTIFACT",
+      "scenario": "Synthetic logger drops an exit event and falsely extends S05; replay proves candidate and gate unchanged.",
+      "synthetic": true
+    },
+    "REPOSITORY_VALIDATION_FAILURE": {
+      "expected": "REPOSITORY_VALIDATION_FAILURE",
+      "scenario": "Focused synthetic checks pass; a valid broad compatibility test detects a regression.",
+      "synthetic": true
+    },
+    "REVIEW_FAILURE": {
+      "expected": "REVIEW_FAILURE",
+      "scenario": "A synthetic review approves a visible contract violation that a valid later gate detects.",
+      "synthetic": true
+    },
+    "SPECIFICATION_INTENT_FAILURE": {
+      "expected": "SPECIFICATION_INTENT_FAILURE",
+      "scenario": "A synthetic contract simultaneously requires a field to be omitted and required.",
+      "synthetic": true
+    },
+    "STOPPING_CENSORED": {
+      "expected": "STOPPING_CENSORED",
+      "scenario": "A synthetic trace reaches the cap without acceptance or evidence selecting a causal failure.",
+      "synthetic": true
+    },
+    "STRUCTURAL_VALIDATION_FAILURE": {
+      "expected": "STRUCTURAL_VALIDATION_FAILURE",
+      "scenario": "Behavioral synthetic gates pass; a preregistered boundary check detects a forbidden dependency.",
+      "synthetic": true
+    },
+    "UNATTRIBUTABLE": {
+      "expected": "UNATTRIBUTABLE",
+      "scenario": "A complete synthetic trace equally supports context and implementation causes after artifact checks.",
+      "synthetic": true
+    }
+  },
+  "empirical_execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "investigation": "bottleneck-migration-110-preflight",
+  "limitation": "This validates category reachability and procedure only; instrument-integrated adjudication awaits a frozen logger.",
+  "rehearsal_result": {
+    "cases": 15,
+    "correct": 15,
+    "note": "Prospective decision-table walkthrough, not classification of real outcomes."
+  },
+  "schema_version": "1.0",
+  "status": "PASS",
+  "synthetic_only": true,
+  "taxonomy_order": [
+    "INSTRUMENTATION_ARTIFACT",
+    "HARNESS_OR_ORACLE_ARTIFACT",
+    "ENVIRONMENT_LIMITATION",
+    "SPECIFICATION_INTENT_FAILURE",
+    "CONTEXT_FAILURE",
+    "ARCHITECTURAL_UNDERSTANDING_FAILURE",
+    "IMPLEMENTATION_FAILURE",
+    "REVIEW_FAILURE",
+    "FOCUSED_VALIDATION_FAILURE",
+    "REPOSITORY_VALIDATION_FAILURE",
+    "STRUCTURAL_VALIDATION_FAILURE",
+    "COORDINATION_APPROVAL_FAILURE",
+    "GOVERNANCE_BOUNDARY_FAILURE",
+    "STOPPING_CENSORED",
+    "UNATTRIBUTABLE"
+  ]
+}

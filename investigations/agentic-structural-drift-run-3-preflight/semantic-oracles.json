@@ -1,0 +1,74 @@
+{
+  "assertion_review": "Every listed assertion is traceable to objective text or this explicit inherited interface contract; no unresolved assertion.",
+  "literal_import_contract": {
+    "absolute_import": "resolve the longest repository-owned module equal to or prefixing the AST target",
+    "import_from": "use node.module literally; do not expand aliases into possible submodules",
+    "relative_import": "NOT_MEASURABLE"
+  },
+  "oracles": [
+    {
+      "deterministic_preflight_command": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py fixture-matrix",
+      "entailed_by": "Add a read-only Python CLI at scripts/structural_snapshot.py that scans a repository path, derives repository-owned Python import edges with the standard-library AST, and emits deterministic JSON.",
+      "expected": "exit 0 and canonical JSON status PASS",
+      "fixture_kind": "NON-EXPERIMENTAL synthetic fixture matrix",
+      "future_focused_gate": "python3 investigations/agentic-structural-drift-run-3-preflight/oracle.py --objective O1 --candidate-tree <immutable-candidate-worktree>",
+      "implementation_plurality": "Two materially distinct source/ordering strategies are accepted; assertions concern outputs and errors, not algorithm/source shape.",
+      "objective": "O1",
+      "required_semantics": [
+        "discover owned absolute imports",
+        "exclude external imports",
+        "canonical stable ordering"
+      ],
+      "structural_independence": "Oracle reads only task outputs/exit status and never structural measurement artifacts."
+    },
+    {
+      "deterministic_preflight_command": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py fixture-matrix",
+      "entailed_by": "Extend the CLI with repeatable --exclude repository-relative paths and a --root option; reject exclusions that escape the root and include normalized exclusions in JSON.",
+      "expected": "exit 0 and canonical JSON status PASS",
+      "fixture_kind": "NON-EXPERIMENTAL synthetic fixture matrix",
+      "future_focused_gate": "python3 investigations/agentic-structural-drift-run-3-preflight/oracle.py --objective O2 --candidate-tree <immutable-candidate-worktree>",
+      "implementation_plurality": "Two materially distinct source/ordering strategies are accepted; assertions concern outputs and errors, not algorithm/source shape.",
+      "objective": "O2",
+      "required_semantics": [
+        "repeatable excludes",
+        "root selection",
+        "escape rejection",
+        "normalized exclusion output"
+      ],
+      "structural_independence": "Oracle reads only task outputs/exit status and never structural measurement artifacts."
+    },
+    {
+      "deterministic_preflight_command": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py fixture-matrix",
+      "entailed_by": "Extend snapshots with deterministic cycle reporting using strongly connected components, including self-loops.",
+      "expected": "exit 0 and canonical JSON status PASS",
+      "fixture_kind": "NON-EXPERIMENTAL synthetic fixture matrix",
+      "future_focused_gate": "python3 investigations/agentic-structural-drift-run-3-preflight/oracle.py --objective O3 --candidate-tree <immutable-candidate-worktree>",
+      "implementation_plurality": "Two materially distinct source/ordering strategies are accepted; assertions concern outputs and errors, not algorithm/source shape.",
+      "objective": "O3",
+      "required_semantics": [
+        "multi-node SCCs",
+        "self-loops",
+        "acyclic fixtures",
+        "stable order"
+      ],
+      "structural_independence": "Oracle reads only task outputs/exit status and never structural measurement artifacts."
+    },
+    {
+      "deterministic_preflight_command": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py fixture-matrix",
+      "entailed_by": "Add --compare <snapshot.json> to report added and removed nodes and edges against an earlier emitted snapshot; validate comparison input and preserve normal snapshot output.",
+      "expected": "exit 0 and canonical JSON status PASS",
+      "fixture_kind": "NON-EXPERIMENTAL synthetic fixture matrix",
+      "future_focused_gate": "python3 investigations/agentic-structural-drift-run-3-preflight/oracle.py --objective O4 --candidate-tree <immutable-candidate-worktree>",
+      "implementation_plurality": "Two materially distinct source/ordering strategies are accepted; assertions concern outputs and errors, not algorithm/source shape.",
+      "objective": "O4",
+      "required_semantics": [
+        "node delta",
+        "edge delta",
+        "invalid-input rejection",
+        "normal output preservation"
+      ],
+      "structural_independence": "Oracle reads only task outputs/exit status and never structural measurement artifacts."
+    }
+  ],
+  "schema_version": "1.0"
+}

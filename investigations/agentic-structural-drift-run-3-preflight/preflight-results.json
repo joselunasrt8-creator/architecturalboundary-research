@@ -1,0 +1,70 @@
+{
+  "baseline_commands": [
+    {
+      "command": "python3 scripts/validate.py",
+      "exits": [
+        0,
+        0
+      ],
+      "identical": true,
+      "normalized_output_sha256": [
+        "2de966316006c3db00fce967c6be8ccf89b438b13c146666ac858c798be9e718",
+        "2de966316006c3db00fce967c6be8ccf89b438b13c146666ac858c798be9e718"
+      ],
+      "runs": 2
+    },
+    {
+      "command": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py self-test",
+      "exits": [
+        0,
+        0
+      ],
+      "identical": true,
+      "normalized_output_sha256": [
+        "9a66469f4a5e2038a40f9a4fd66c695bcbd5329332394164c2f096e9463de343",
+        "9a66469f4a5e2038a40f9a4fd66c695bcbd5329332394164c2f096e9463de343"
+      ],
+      "runs": 2
+    }
+  ],
+  "candidate_generated": false,
+  "checks": {
+    "classification_discrimination": {
+      "ENVIRONMENT_FAILURE": "proved non-exercise rule and T0 repeat",
+      "HARNESS_MISMATCH": "literal ImportFrom countercontract fixture",
+      "INSTRUMENTATION_LIMITATION": "relative/dynamic import NOT_MEASURABLE declaration",
+      "ORDINARY_VALIDATION_FAILURE": "synthetic nonzero full-gate record schema",
+      "STRUCTURAL_INVARIANT_FAILURE": "positive/negative graph predicates",
+      "TASK_FAILURE": "negative semantic fixture"
+    },
+    "environment_double_baseline": "PASS",
+    "failure_taxonomy_binding": "PASS",
+    "historical_boundaries": "PASS",
+    "identity_chain_synthetic_dry_run": "PASS",
+    "implementation_plurality": "PASS",
+    "machine_readable_artifacts": "PASS",
+    "no_candidate_or_t1": "PASS",
+    "repair_policy_binding": "PASS",
+    "semantic_oracles": "PASS",
+    "stopping_rule_binding": "PASS",
+    "structural_instrumentation_controls": "PASS",
+    "t0_identity": "PASS"
+  },
+  "determination": "RUN_3_READY",
+  "historical_tree_hashes": {
+    "issue_114": "2b535205aa4577fcc8df6a0706bc36152952ac913abafe3ae6466b4afb66f711",
+    "run_1": "e6c955aba0fa8b756253cba7eb4ada36b5b358406e8511d4f4ccf42816f8e0c8",
+    "run_2": "25660e05b6d2f6a105c46e45887e6f4b0be01e95de942df010f0945125f541ea"
+  },
+  "non_experimental": true,
+  "preregistration_sha256_before_commit": "c66561c784383b681645cbaa2ac72c39625ccfd06c97dde1e6609815e7a95b43",
+  "repository_identity": {
+    "branch": "work",
+    "head_commit": "f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166",
+    "head_tree": "18cd9de245d2a0cdb73218ba500cc368485c71ac",
+    "initial_status": "CLEAN"
+  },
+  "run3_executed": false,
+  "schema_version": "1.0",
+  "t1_accepted": false
+}

@@ -1,0 +1,46 @@
+{
+  "commands_required": [
+    "role",
+    "argv",
+    "argv_sha256",
+    "exit",
+    "stdout_sha256",
+    "stderr_sha256",
+    "pre_gate_diff_exit",
+    "post_gate_diff_exit"
+  ],
+  "dry_run": "python3 investigations/agentic-structural-drift-run-3-preflight/harness.py identity-dry-run",
+  "equalities": {
+    "accepted_object": "candidate_tree",
+    "next_transition_input": "accepted_tree",
+    "required": "validated_object == accepted_object == next_transition_input",
+    "validated_object": "candidate_tree"
+  },
+  "record_required": [
+    "transition",
+    "attempt",
+    "parent_commit",
+    "parent_tree",
+    "candidate_commit",
+    "candidate_tree",
+    "candidate_patch_sha256",
+    "environment_sha256",
+    "commands",
+    "validation_log_sha256",
+    "acceptance_decision",
+    "accepted_commit",
+    "accepted_tree",
+    "structural_measurement_sha256",
+    "next_parent_commit",
+    "next_parent_tree"
+  ],
+  "rules": [
+    "candidate commit is created on reachable evidence ref before gates",
+    "pre/post diff against candidate tree must exit 0",
+    "all gate records name the candidate commit/tree",
+    "accepted tree equals candidate tree (administrative commit allowed only when tree-equivalent)",
+    "accepted commit/tree exactly equals next transition parent",
+    "no post-validation mutation enters accepted state"
+  ],
+  "schema_version": "1.0"
+}

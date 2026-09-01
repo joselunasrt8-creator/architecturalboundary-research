@@ -1,0 +1,77 @@
+{
+  "agent_model_harness": {
+    "availability_note": "Exact future model build/session identifier must be recorded at execution; mismatch blocks rather than silently substitutes.",
+    "harness": "Codex API, root agent, non-interactive Bash",
+    "model": "OpenAI GPT-5.6 Sol"
+  },
+  "artifact_sha256": {
+    "entry-conditions.json": "96e11e08f9d2eafacd1803a805ce1dd64b2a9a4ce43591ae3ab258931d347cd3",
+    "environment.json": "abf8796dd81c8364fb438dc32ca1dea1ec9b7fea2c1db70fb2e6710f50819501",
+    "harness.py": "e093395721a6b100b7e58bed268f770fab668e0cd6f96a17904012f443c3873d",
+    "identity-chain-schema.json": "5071b75f1ed860a07afaed151c326d8e31475ced16bbddfe127ce364907a70a2",
+    "objectives.json": "813ed2de8d318482308d87e0ddb66cdfd2b5519fc147fb63acab612a11959f38",
+    "oracle.py": "21fdf46c926bca07ec4ee57bdb1fabe8f6cb5146141b638015afd6166204968a",
+    "repair-policy.json": "d528a0b7e7ba03596a53ec6560bbbc739281ff2844a58d567b78f01a6db00a82",
+    "semantic-oracles.json": "a1e09ee4b6249c83903d86a257ffc9f6a139a655846bb1b6695b0e2c9606d67a",
+    "stopping-rule.json": "50f4645752f07d45bc9989c18cd7c404a877265f5d0b051eacf765af5406eb29",
+    "structural-measures.json": "58b57bb28308f4efda77ea46095462bfdda93ee8cfdcca632a07d1f0355d53e8"
+  },
+  "authorization": "RUN_3_READY only after every 19 entry conditions passes and this preregistration is committed/reachable; readiness does not execute Run 3",
+  "bindings": {
+    "environment": "environment.json",
+    "failure_taxonomy_path": "investigations/agentic-structural-drift-harness-audit-114/failure-taxonomy.json",
+    "failure_taxonomy_sha256": "35733f747d674bd701130fd1f95f4c390f44d52eecb487ec5b461f42e58ff4a3",
+    "identity_chain": "identity-chain-schema.json",
+    "objectives": "objectives.json",
+    "repair_policy": "repair-policy.json",
+    "semantic_oracles": "semantic-oracles.json",
+    "stopping_rule": "stopping-rule.json",
+    "structural_measures": "structural-measures.json"
+  },
+  "counter_hypotheses": [
+    "ordinary validation may prevent trajectory formation",
+    "observed changes may be isolated rather than cumulative",
+    "instrumentation may alias distinct structures",
+    "bounded repair dependence may affect yield"
+  ],
+  "evidence_layout": "run-specific future execution package with transitions/<id>/<attempt>/{identity.json,patch,scope.log,focused.log,full.log,decision.json} and structural/<accepted-state>.json; this preflight directory contains no candidates",
+  "final_determination_rules": {
+    "blocked": "fewer than 3 accepted transitions or unavailable required environment/instrumentation",
+    "eligibility": "at least 3 accepted exact transitions with discriminating measurements",
+    "indeterminate": "eligible trajectory whose frozen evidence cannot discriminate",
+    "not_supported": "eligible trajectory with no frozen predicate degradation",
+    "supported": "eligible trajectory with endpoint frozen-predicate degradation attributable to accumulated accepted transitions"
+  },
+  "gates": {
+    "focused_semantics": "oracle command for current objective exits 0",
+    "full_repository": "python3 scripts/validate.py exits 0",
+    "logic": "all three pass; structural measurement is independent",
+    "order": [
+      "scope_identity",
+      "focused_semantics",
+      "full_repository"
+    ],
+    "scope_identity": "candidate diff limited to current objective allowed scope; immutable candidate and clean pre/post checks"
+  },
+  "limitations": [
+    "static AST measures do not observe dynamic imports, calls, data coupling, cohesion, or architecture generally",
+    "three accepted transitions is a small arbitrary-but-defensible eligibility floor",
+    "plurality fixtures cannot enumerate every valid implementation",
+    "optional TeX tools unavailable in this frozen environment"
+  ],
+  "prohibitions": [
+    "candidate generation during preflight",
+    "T1 acceptance during preflight",
+    "gate/objective/measure changes after candidate generation",
+    "structural-result disclosure during generation/repair"
+  ],
+  "research_question": "Can repeated agent-generated software changes remain individually acceptable under ordinary validation while collectively degrading the prospectively enumerated static structural properties?",
+  "run_id": "ASD-RUN-3-PROSPECTIVE",
+  "schema_version": "1.0",
+  "status": "FROZEN_ON_REACHABLE_BRANCH_COMMIT_CONTAINING_THIS_EXACT_BLOB",
+  "t0": {
+    "commit": "f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166",
+    "meaning": "accepted source parent before administrative preregistration; preflight paths are excluded only from measurement",
+    "tree": "18cd9de245d2a0cdb73218ba500cc368485c71ac"
+  }
+}

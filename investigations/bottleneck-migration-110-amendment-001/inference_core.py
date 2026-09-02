@@ -1,4 +1,4 @@
-"""Shared finite-cluster null inference used by production analysis and power."""
+"""Shared repository-symmetry inference used by production analysis and power."""
 from __future__ import annotations
 
 ALPHA = .05
@@ -16,8 +16,8 @@ def holm(pvalues, alpha=ALPHA):
         adjusted[index] = running
     return {"adjusted_p": adjusted, "reject": [pvalue <= alpha for pvalue in adjusted]}
 
-def finite_signflip_capability(repository_count, family_size=PRIMARY_FAMILY_SIZE, alpha=ALPHA):
-    """Best-case two-sided resolution, including the symmetric opposite assignment."""
+def finite_symmetry_signflip_capability(repository_count, family_size=PRIMARY_FAMILY_SIZE, alpha=ALPHA):
+    """Resolution under the separately frozen repository-score symmetry assumption."""
     if repository_count < 2:
         raise ValueError("at least two repositories required")
     assignments = 1 << repository_count
@@ -33,8 +33,8 @@ def finite_signflip_capability(repository_count, family_size=PRIMARY_FAMILY_SIZE
         "eligible": all(minimum_holm["reject"]),
     }
 
-def exact_repository_signflip(repository_effects):
-    """Exact two-sided cluster sign-flip tests for endpoint effects by repository."""
+def exact_repository_symmetry_signflip(repository_effects):
+    """Enumerate repository score signs; this is not experiment randomization inference."""
     if len(repository_effects) < 2 or not repository_effects:
         raise ValueError("at least two repository effect vectors required")
     endpoint_count = len(repository_effects[0])

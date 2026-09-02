@@ -9,7 +9,7 @@ import math
 import random
 from pathlib import Path
 
-from inference_core import exact_repository_signflip, finite_signflip_capability, primary_endpoint_conjunction
+from inference_core import exact_repository_symmetry_signflip, finite_symmetry_signflip_capability, primary_endpoint_conjunction
 
 ROOT = Path(__file__).resolve().parent
 SEED = 11020260901
@@ -63,7 +63,7 @@ def _weighted_rmst(observations, tau=480):
 
 def _simulate_cell(pairs, repositories, regime, rng, replicates):
     primary_hits = interaction_hits = retained_total = censored_total = 0
-    capability = finite_signflip_capability(repositories)
+    capability = finite_symmetry_signflip_capability(repositories)
     tasks, difficulties = 4, 2
     cells = repositories * tasks * difficulties
     for _ in range(replicates):
@@ -125,7 +125,7 @@ def _simulate_cell(pairs, repositories, regime, rng, replicates):
         time_relative_change = _weighted_rmst(all_high_survival)/_weighted_rmst(all_low_survival)-1
         point_effects = (mean_yield, throughput_weighted/retained, time_relative_change)
         migration_hit = migration_weighted/retained >= .20
-        null_result = exact_repository_signflip(primary_endpoint_effects) if capability["eligible"] else None
+        null_result = exact_repository_symmetry_signflip(primary_endpoint_effects) if capability["eligible"] else None
         endpoint_conjunction = (capability["eligible"]
                                 and primary_endpoint_conjunction(point_effects, regime["baseline_throughput"], null_result["holm"]))
         production_rejection = endpoint_conjunction and migration_hit
@@ -145,6 +145,7 @@ def _simulate_cell(pairs, repositories, regime, rng, replicates):
         "production_aligned_primary_power": round(primary_hits/replicates, 6),
         "production_aligned_primary_power_95_wilson": _wilson(primary_hits, replicates),
         "design_eligible_for_primary_inference": capability["eligible"],
+        "eligibility_is_conditional_on_repository_symmetry_justification": True,
         "finite_null_capability": capability,
         "ineligibility_reason": None if capability["eligible"] else "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
         "repository_interaction_wald_power": round(interaction_hits/replicates, 6),
@@ -160,7 +161,7 @@ def run(replicates=REPLICATES, seed=SEED):
     configuration = {
         "seed": seed,
         "inference_core_sha256": hashlib.sha256((ROOT/"inference_core.py").read_bytes()).hexdigest(),
-        "production_inference_rule": "exact repository sign flips; three-endpoint Holm alpha 0.05; frozen effect-threshold conjunction",
+        "production_inference_rule": "repository-score symmetry sign flip (not experiment randomization); three-endpoint Holm alpha 0.05; frozen effect-threshold conjunction",
         "replicates_per_design_regime": replicates,
         "designs": [{"pairs": pairs, "executions": 2*pairs, "repositories": repositories,
                      "task_classes": 4, "difficulty_bands": 2} for pairs,repositories in DESIGNS],
@@ -180,6 +181,7 @@ def run(replicates=REPLICATES, seed=SEED):
     return {
         "schema_version": "1.2",
         "artifact_role": "PROSPECTIVE_ASSUMPTION_SENSITIVITY_NOT_EMPIRICAL_DATA",
+        "inferential_assumption_status": "REPOSITORY_INDEPENDENCE_AND_JOINT_SCORE_SYMMETRY_REQUIRE_PROSPECTIVE_JUSTIFICATION",
         "seed": seed,
         "replicates_per_design_regime": replicates,
         "total_replicates_executed": replicates*len(results),

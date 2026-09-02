@@ -9,7 +9,19 @@
     "bounds",
     "independent sign-off"
   ],
-  "freeze_gate": "Every parameter has defensible conservative bounds from EXTERNAL DATA or PRE-STUDY CALIBRATION; otherwise FINAL_N_NOT_YET_FREEZABLE.",
+  "freeze_gate": "Every parameter has defensible conservative bounds from EXTERNAL DATA or PRE-STUDY CALIBRATION; otherwise FINAL_N_NOT_YET_FREEZABLE. The repository independence/joint-score-symmetry assumption must also be justified; otherwise FINAL_N_NOT_YET_FREEZABLE.",
+  "inferential_assumption_calibration": {
+    "repository_independence_and_joint_score_symmetry": {
+      "failure_consequence": "FINAL_N_NOT_YET_FREEZABLE and production inference BLOCKED",
+      "permissible_sources": [
+        "EXTERNAL DATA",
+        "PRE-STUDY CALIBRATION"
+      ],
+      "prohibited": "EMPIRICAL ISSUE-110 OUTCOME",
+      "required": true,
+      "synthetic_assumption_use": "sensitivity analysis only; cannot establish readiness"
+    }
+  },
   "parameters": [
     "baseline acceptance rate",
     "paired correlation",
@@ -20,7 +32,7 @@
     "attrition",
     "environment failure rate"
   ],
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source_classes": {
     "EMPIRICAL ISSUE-110 OUTCOME": {
       "permitted": false,

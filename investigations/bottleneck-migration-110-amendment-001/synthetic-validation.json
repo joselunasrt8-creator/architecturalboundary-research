@@ -93,7 +93,7 @@
       "pass": true
     }
   ],
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "validated_properties": [
     "determination precedence",
     "paired cluster resampling",
@@ -104,13 +104,13 @@
     "repository/task domain dependence",
     "fail-closed records",
     "repository-outer hierarchical bootstrap",
-    "sharp-null cluster randomization p-values",
+    "repository-score symmetry sign-flip p-values, explicitly non-randomization",
     "tie-grouped event/censor risk sets",
     "defined omnibus repository-interaction Wald power",
-    "finite 2^R sign-flip resolution gate",
+    "finite 2^R repository-score symmetry resolution gate",
     "4- and 6-repository structural ineligibility",
     "8-repository extreme-effect Holm attainability",
-    "power/production endpoint conjunction identity"
+    "power/production endpoint conjunction and cluster-assumption identity"
   ],
-  "warning": "FICTIONAL NON-EMPIRICAL CASES; NO ISSUE #110 TASK OR CANDIDATE WAS USED"
+  "warning": "FICTIONAL NON-EMPIRICAL CASES; NO ISSUE #110 TASK OR CANDIDATE WAS USED; REPOSITORY SIGN SYMMETRY IS A SYNTHETIC MODEL ASSUMPTION, NOT THE EXPERIMENT RANDOMIZATION"
 }

@@ -31,7 +31,7 @@
         "task_classes": 4
       }
     ],
-    "inference_core_sha256": "0ceb40ecad01a3146f0758aa1079905b1287cded85fe104f9d4b69ee6a0b24db",
+    "inference_core_sha256": "3689012dc2603d6133423c3686b655a676ecaa620640332161607d113fcfaf2c",
     "model_features": [
       "paired LOW/HIGH",
       "repository random intercepts and condition interactions",
@@ -45,7 +45,7 @@
       "time to valid",
       "conjunctive migration"
     ],
-    "production_inference_rule": "exact repository sign flips; three-endpoint Holm alpha 0.05; frozen effect-threshold conjunction",
+    "production_inference_rule": "repository-score symmetry sign flip (not experiment randomization); three-endpoint Holm alpha 0.05; frozen effect-threshold conjunction",
     "regimes": [
       {
         "attrition": 0.05,
@@ -99,15 +99,17 @@
     "replicates_per_design_regime": 10000,
     "seed": 11020260901
   },
-  "configuration_sha256": "5e7862109e6618d4c6dbba765cd9dc6811215bb8d1abfc013f92c2850aa6945e",
-  "engine_sha256": "c8b5c47ce4cc079043256c06e2be73c8a953933b613e668fccc007d18a77ad3e",
+  "configuration_sha256": "dc2625c85700a2d36157be7a26350af1d08dcd67b153ce90491f876fc1c399ce",
+  "engine_sha256": "93c17de661b914d7df52263e62826f29ac7a0249b45100828ffd87746f969628",
   "final_n": "FINAL_N_NOT_YET_FREEZABLE",
-  "inference_core_sha256": "0ceb40ecad01a3146f0758aa1079905b1287cded85fe104f9d4b69ee6a0b24db",
+  "inference_core_sha256": "3689012dc2603d6133423c3686b655a676ecaa620640332161607d113fcfaf2c",
+  "inferential_assumption_status": "REPOSITORY_INDEPENDENCE_AND_JOINT_SCORE_SYMMETRY_REQUIRE_PROSPECTIVE_JUSTIFICATION",
   "reason": "Regime nuisance values are synthetic assumptions; no permissible outcome-blind calibration bounds have been frozen.",
   "replicates_per_design_regime": 10000,
   "results": [
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 128,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -139,6 +141,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 128,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -170,6 +173,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 128,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -201,6 +205,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 256,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -232,6 +237,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 256,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -263,6 +269,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 256,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -294,6 +301,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 576,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -325,6 +333,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 576,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -356,6 +365,7 @@
     },
     {
       "design_eligible_for_primary_inference": false,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 576,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -387,6 +397,7 @@
     },
     {
       "design_eligible_for_primary_inference": true,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 1024,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -418,6 +429,7 @@
     },
     {
       "design_eligible_for_primary_inference": true,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 1024,
       "finite_null_capability": {
         "alpha": 0.05,
@@ -449,6 +461,7 @@
     },
     {
       "design_eligible_for_primary_inference": true,
+      "eligibility_is_conditional_on_repository_symmetry_justification": true,
       "executions": 1024,
       "finite_null_capability": {
         "alpha": 0.05,

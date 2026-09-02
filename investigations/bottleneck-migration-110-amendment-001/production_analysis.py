@@ -7,7 +7,7 @@ import json
 import random
 from collections import defaultdict
 
-from inference_core import exact_repository_signflip, holm, primary_endpoint_conjunction
+from inference_core import exact_repository_symmetry_signflip, holm, primary_endpoint_conjunction
 
 SEED = 11020260901
 
@@ -109,10 +109,10 @@ def analyze(records, bootstrap_replicates=10_000, seed=SEED):
     intervals = [[round(_q([draw[index] for draw in bootstrap], .025), 6),
                   round(_q([draw[index] for draw in bootstrap], .975), 6)] for index in range(3)]
 
-    # Exact finite-cluster inference: enumerate the actual 2^R repository sign patterns.
+    # Separate cluster-score inference, not the task-template/order randomization distribution.
     repositories = sorted(by_repository)
     repository_effects = [_effects(pairs, by_repository[repository]) for repository in repositories]
-    null_result = exact_repository_signflip(repository_effects)
+    null_result = exact_repository_symmetry_signflip(repository_effects)
     endpoint_conjunction = primary_endpoint_conjunction(point, low_throughput, null_result["holm"])
 
     strata = defaultdict(list)
@@ -130,7 +130,8 @@ def analyze(records, bootstrap_replicates=10_000, seed=SEED):
                     "throughput_relative_change": throughput_relative_change, "rmst_relative_change": point[2]},
         "intervals_95": {"acceptance_yield": intervals[0], "throughput": intervals[1], "rmst": intervals[2]},
         "right_censoring_method": "tie-grouped Kaplan-Meier restricted mean through 480 minutes",
-        "null_test": "exact enumeration of all repository-cluster sign flips under the sharp null",
+        "null_test": "repository-score symmetry sign flip; separate inferential assumption, not experiment randomization",
+        "cluster_inference_assumption": "independent repository score vectors are jointly sign-symmetric under the null",
         "stratum_effects": interactions,
         "holm": null_result["holm"],
         "primary_endpoint_evidentiary_conjunction": endpoint_conjunction,

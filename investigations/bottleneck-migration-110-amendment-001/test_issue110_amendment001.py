@@ -50,10 +50,11 @@ class Issue110Amendment001Tests(unittest.TestCase):
         self.assertEqual(first["bootstrap_replicates"], 10_000)
         self.assertEqual(first["null_assignments_enumerated"], 256)
         self.assertTrue(first["primary_endpoint_evidentiary_conjunction"])
+        self.assertIn("jointly sign-symmetric", first["cluster_inference_assumption"])
 
     def test_null_randomization_not_ordinary_bootstrap(self):
         result = analysis.analyze(fixture(effect=False))
-        self.assertEqual(result["null_test"], "exact enumeration of all repository-cluster sign flips under the sharp null")
+        self.assertEqual(result["null_test"], "repository-score symmetry sign flip; separate inferential assumption, not experiment randomization")
         self.assertTrue(all(pvalue >= .99 for pvalue in result["holm"]["adjusted_p"]))
 
     def test_tied_event_and_censor_are_grouped(self):
@@ -91,8 +92,8 @@ class Issue110Amendment001Tests(unittest.TestCase):
         self.assertAlmostEqual(power._weighted_rmst([(2, True, 1), (2, False, 1), (4, True, 1)], 4), 10/3)
 
     def test_smallest_grid_repository_count_can_attain_holm_threshold(self):
-        core = analysis.exact_repository_signflip
-        capability = power.finite_signflip_capability
+        core = analysis.exact_repository_symmetry_signflip
+        capability = power.finite_symmetry_signflip_capability
         self.assertFalse(capability(4)["eligible"])
         self.assertFalse(capability(6)["eligible"])
         self.assertTrue(capability(8)["eligible"])
@@ -108,6 +109,7 @@ class Issue110Amendment001Tests(unittest.TestCase):
         self.assertTrue(all("production_aligned_primary_power_95_wilson" in row for row in result["results"]))
         self.assertEqual(result["engine_sha256"], hashlib.sha256((ROOT/"power-engine.py").read_bytes()).hexdigest())
         self.assertEqual(result["inference_core_sha256"], hashlib.sha256((ROOT/"inference_core.py").read_bytes()).hexdigest())
+        self.assertIn("SYMMETRY_REQUIRE_PROSPECTIVE_JUSTIFICATION", result["inferential_assumption_status"])
 
 if __name__ == "__main__":
     unittest.main()

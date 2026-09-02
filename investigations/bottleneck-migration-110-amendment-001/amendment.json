@@ -30,11 +30,18 @@
       "original_rule": "final cohort fixed before nuisance evidence",
       "prospective_revision": "permit only labeled external, synthetic, or pre-study outcome-blind calibration and re-run signed engine",
       "scientific_justification": "precision depends on nuisance parameters, not desired outcomes"
+    },
+    {
+      "defect": "task-template order randomization does not imply exchangeability of whole-repository signs",
+      "effect_on_interpretation": "p-values target the repository-population symmetry model; inability to justify symmetry blocks inference and final N",
+      "original_rule": "blocked paired crossover randomizes condition order within repository/task/difficulty blocks",
+      "prospective_revision": "freeze whole-repository score sign flips only as a separate independent-cluster/joint-symmetry inferential assumption; never label them experiment randomization inference",
+      "scientific_justification": "preserves arbitrary within-repository dependence while making the additional population-model assumption explicit and falsifiable as a readiness gate"
     }
   ],
   "effective_date": "2026-09-01",
   "empirical_issue_110_outcomes_informed_amendment": false,
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "FROZEN_PROSPECTIVE",
   "version": "1.0.0"
 }

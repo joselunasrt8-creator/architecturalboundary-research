@@ -93,7 +93,7 @@
       "pass": true
     }
   ],
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "validated_properties": [
     "determination precedence",
     "paired cluster resampling",
@@ -102,7 +102,11 @@
     "manipulation failure mapping",
     "binding conjunction",
     "repository/task domain dependence",
-    "fail-closed records"
+    "fail-closed records",
+    "repository-outer hierarchical bootstrap",
+    "sharp-null cluster randomization p-values",
+    "tie-grouped event/censor risk sets",
+    "defined omnibus repository-interaction Wald power"
   ],
   "warning": "FICTIONAL NON-EMPIRICAL CASES; NO ISSUE #110 TASK OR CANDIDATE WAS USED"
 }

@@ -8,19 +8,20 @@
   ],
   "implementation": "production_analysis.py",
   "methods": {
-    "acceptance_yield": "paired risk difference with paired-template cluster bootstrap",
+    "acceptance_yield": "paired risk difference; repositories sampled first and intact pairs sampled within selected repositories",
     "binding": "S05 LOW binding AND not S05 HIGH AND named non-S05 HIGH binding",
     "domain_dependent": "qualified heterogeneous repository/task effects cannot be overridden by pooling",
     "interactions": "condition effects by repository and task class; difficulty retained",
     "migration": "binding conjunction plus manipulation, controls, adequate power and primary threshold",
-    "mixed_effects": "repository-by-task stratum effects with pair-cluster resampling; no execution-level independence",
-    "multiplicity": "Holm adjustment across primary endpoint family",
-    "throughput": "accepted all-gates per 480 active minutes; paired-template cluster bootstrap",
-    "time_to_valid": "Kaplan-Meier restricted mean through 480 minutes; right-censored stops retained",
-    "uncertainty": "two-sided percentile 95% intervals from 10,000 deterministic resamples"
+    "mixed_effects": "repository is outer resampling unit; paired templates remain intact within repositories; repository-by-task strata retain difficulty",
+    "multiplicity": "Holm adjustment of repository-cluster sharp-null LOW/HIGH randomization p-values; ordinary bootstrap draws are never used as null p-values",
+    "throughput": "accepted all-gates per 480 active minutes; repository-then-pair hierarchical cluster bootstrap",
+    "time_to_valid": "tie-grouped Kaplan-Meier restricted mean through 480 minutes; events applied before same-time censor removal",
+    "uncertainty": "two-sided percentile 95% intervals from 10,000 deterministic hierarchical repository/pair resamples"
   },
   "no_silent_fallback": "Any unavailable or malformed required method raises an error; no simpler substitute is permitted.",
-  "schema_version": "1.0",
+  "null_inference": "10,000 fixed-seed repository-cluster LOW/HIGH assignment swaps under the sharp null with add-one Monte Carlo p-values",
+  "schema_version": "1.1",
   "status": "EXECUTABLE_PROSPECTIVE_INTERFACE",
   "unit": "paired template cluster nested in repository and crossed with task class/difficulty"
 }

@@ -1,68 +1,161 @@
 #!/usr/bin/env python3
-"""Frozen stdlib inference interfaces; raises instead of silently downgrading methods."""
+"""Frozen, repository-aware prospective inference for Amendment 001."""
 from __future__ import annotations
-import hashlib, json, math, random
+
+import hashlib
+import json
+import random
 from collections import defaultdict
 
-SEED=11020260901
-def _q(xs,p):
-    xs=sorted(xs); return xs[min(len(xs)-1,max(0,int(p*(len(xs)-1))))]
+SEED = 11020260901
+
+def _q(values, probability):
+    values = sorted(values)
+    return values[min(len(values) - 1, max(0, int(probability * (len(values) - 1))))]
+
 def validate(records):
-    required={"pair_id","condition","repository_id","task_class","difficulty","accepted","active_minutes","time_to_valid_minutes","time_to_valid_event","eligible","binding_stages","manipulation"}
-    if not isinstance(records,list) or not records: raise ValueError("nonempty records required")
-    groups=defaultdict(list)
-    for r in records:
-        if not isinstance(r,dict) or set(r) != required: raise ValueError("malformed record")
-        if r["condition"] not in ("LOW","HIGH") or not isinstance(r["time_to_valid_event"],bool): raise ValueError("invalid value")
-        if min(r["active_minutes"],r["time_to_valid_minutes"])<0: raise ValueError("negative time")
-        groups[r["pair_id"]].append(r)
-    for g in groups.values():
-        if sorted(x["condition"] for x in g)!=["HIGH","LOW"]: raise ValueError("incomplete pair")
-        if len({(x["repository_id"],x["task_class"],x["difficulty"]) for x in g})!=1: raise ValueError("pair mismatch")
-    return groups
-def holm(pvalues,alpha=.05):
-    ordered=sorted(enumerate(pvalues),key=lambda x:x[1]); adjusted=[0.0]*len(pvalues); running=0
-    for rank,(idx,p) in enumerate(ordered): running=max(running,min(1,p*(len(pvalues)-rank))); adjusted[idx]=running
-    return {"adjusted_p":adjusted,"reject":[p<=alpha for p in adjusted]}
-def rmst(rows,tau=480):
-    # Kaplan-Meier integral with administrative right censoring.
-    ordered=sorted((min(r["time_to_valid_minutes"],tau),r["time_to_valid_event"]) for r in rows)
-    at=len(ordered); surv=1.; last=0.; area=0.
-    for t,event in ordered:
-        area += surv*(t-last); last=t
-        if event: surv*=1-1/at
-        at-=1
-    return area+surv*(tau-last)
-def analyze(records,bootstrap_replicates=10_000,seed=SEED):
-    if bootstrap_replicates<10_000: raise ValueError("cluster bootstrap requires >=10,000 replicates")
-    groups=validate(records); ids=sorted(groups); rng=random.Random(seed)
-    def effects(sample):
-        low=[]; high=[]
-        for pid in sample:
-            d={x["condition"]:x for x in groups[pid]}
-            low.append(d["LOW"]); high.append(d["HIGH"])
-        yd=sum(x["accepted"] for x in high)/len(high)-sum(x["accepted"] for x in low)/len(low)
-        tp=lambda xs:sum(x["accepted"] for x in xs)*480/sum(x["active_minutes"] for x in xs)
-        return yd,tp(high)-tp(low),rmst(high)-rmst(low)
-    point=effects(ids); boots=[effects([rng.choice(ids) for _ in ids]) for _ in range(bootstrap_replicates)]
-    cis=[[round(_q([x[j] for x in boots],.025),6),round(_q([x[j] for x in boots],.975),6)] for j in range(3)]
-    # Mixed-effects interface is a prespecified cluster-stratified estimator: no nested execution independence.
-    strata=defaultdict(list)
-    for pid,g in groups.items(): strata[(g[0]["repository_id"],g[0]["task_class"])].append(pid)
-    interactions={f"{k[0]}::{k[1]}":round(effects(v)[0],6) for k,v in sorted(strata.items())}
-    pvals=[sum(abs(x[j])>=abs(point[j]) for x in boots)/bootstrap_replicates for j in range(3)]
-    return {"schema_version":"1.0","unit":"paired_template_cluster","bootstrap_replicates":bootstrap_replicates,"seed":seed,"effects":{"acceptance_yield":point[0],"throughput":point[1],"rmst_high_minus_low":point[2]},"intervals_95":{"acceptance_yield":cis[0],"throughput":cis[1],"rmst":cis[2]},"right_censoring_method":"Kaplan-Meier restricted mean through 480 minutes","mixed_effects_interface":"repository-by-task stratum effects; pair cluster is resampling unit","stratum_effects":interactions,"holm":holm(pvals),"input_sha256":hashlib.sha256(json.dumps(records,sort_keys=True,separators=(",",":")).encode()).hexdigest()}
+    required = {"pair_id", "condition", "repository_id", "task_class", "difficulty",
+                "accepted", "active_minutes", "time_to_valid_minutes", "time_to_valid_event",
+                "eligible", "binding_stages", "manipulation"}
+    if not isinstance(records, list) or not records:
+        raise ValueError("nonempty records required")
+    pairs = defaultdict(list)
+    for record in records:
+        if not isinstance(record, dict) or set(record) != required:
+            raise ValueError("malformed record")
+        if record["condition"] not in ("LOW", "HIGH") or not isinstance(record["time_to_valid_event"], bool):
+            raise ValueError("invalid value")
+        if min(record["active_minutes"], record["time_to_valid_minutes"]) < 0:
+            raise ValueError("negative time")
+        pairs[record["pair_id"]].append(record)
+    for pair in pairs.values():
+        if sorted(row["condition"] for row in pair) != ["HIGH", "LOW"]:
+            raise ValueError("incomplete pair")
+        identity = {(row["repository_id"], row["task_class"], row["difficulty"]) for row in pair}
+        if len(identity) != 1:
+            raise ValueError("pair mismatch")
+    if len({pair[0]["repository_id"] for pair in pairs.values()}) < 2:
+        raise ValueError("clustered inference requires at least two repositories")
+    return pairs
+
+def holm(pvalues, alpha=.05):
+    ordered = sorted(enumerate(pvalues), key=lambda item: item[1])
+    adjusted = [0.0] * len(pvalues)
+    running = 0.0
+    for rank, (index, pvalue) in enumerate(ordered):
+        running = max(running, min(1.0, pvalue * (len(pvalues) - rank)))
+        adjusted[index] = running
+    return {"adjusted_p": adjusted, "reject": [pvalue <= alpha for pvalue in adjusted]}
+
+def rmst(rows, tau=480):
+    """Tie-correct Kaplan–Meier restricted mean; events precede same-time censor removal."""
+    grouped = defaultdict(lambda: [0, 0])
+    for row in rows:
+        time = min(row["time_to_valid_minutes"], tau)
+        event = row["time_to_valid_event"] and row["time_to_valid_minutes"] <= tau
+        grouped[time][0 if event else 1] += 1
+    at_risk = len(rows)
+    survival = 1.0
+    previous = 0.0
+    area = 0.0
+    for time in sorted(grouped):
+        if time > tau:
+            break
+        events, censored = grouped[time]
+        area += survival * (time - previous)
+        if events:
+            survival *= 1.0 - events / at_risk
+        at_risk -= events + censored
+        previous = time
+    return area + survival * (tau - previous)
+
+def _effects(pairs, pair_ids, swapped_repositories=frozenset()):
+    low, high = [], []
+    for pair_id in pair_ids:
+        rows = {row["condition"]: row for row in pairs[pair_id]}
+        if rows["LOW"]["repository_id"] in swapped_repositories:
+            rows["LOW"], rows["HIGH"] = rows["HIGH"], rows["LOW"]
+        low.append(rows["LOW"])
+        high.append(rows["HIGH"])
+    throughput = lambda rows: sum(row["accepted"] for row in rows) * 480 / sum(row["active_minutes"] for row in rows)
+    yield_difference = sum(row["accepted"] for row in high) / len(high) - sum(row["accepted"] for row in low) / len(low)
+    return yield_difference, throughput(high) - throughput(low), rmst(high) - rmst(low)
+
+def _hierarchical_sample(by_repository, rng):
+    """Sample repositories first, then intact paired templates within each selected repository."""
+    repositories = sorted(by_repository)
+    sample = []
+    for _ in repositories:
+        repository = rng.choice(repositories)
+        pair_ids = by_repository[repository]
+        sample.extend(rng.choice(pair_ids) for _ in pair_ids)
+    return sample
+
+def analyze(records, bootstrap_replicates=10_000, seed=SEED):
+    if bootstrap_replicates < 10_000:
+        raise ValueError("cluster bootstrap and null randomization require >=10,000 replicates")
+    pairs = validate(records)
+    pair_ids = sorted(pairs)
+    by_repository = defaultdict(list)
+    for pair_id in pair_ids:
+        by_repository[pairs[pair_id][0]["repository_id"]].append(pair_id)
+    for pair_ids_in_repository in by_repository.values():
+        pair_ids_in_repository.sort()
+    point = _effects(pairs, pair_ids)
+    bootstrap_rng = random.Random(seed)
+    bootstrap = [_effects(pairs, _hierarchical_sample(by_repository, bootstrap_rng))
+                 for _ in range(bootstrap_replicates)]
+    intervals = [[round(_q([draw[index] for draw in bootstrap], .025), 6),
+                  round(_q([draw[index] for draw in bootstrap], .975), 6)] for index in range(3)]
+
+    # Randomization inference is centered on the sharp null by swapping complete LOW/HIGH
+    # assignments at the repository cluster level; ordinary bootstrap draws are never p-values.
+    repositories = sorted(by_repository)
+    null_rng = random.Random(seed + 1)
+    exceedances = [0, 0, 0]
+    for _ in range(bootstrap_replicates):
+        swapped = frozenset(repository for repository in repositories if null_rng.getrandbits(1))
+        null_effect = _effects(pairs, pair_ids, swapped)
+        for index in range(3):
+            exceedances[index] += abs(null_effect[index]) >= abs(point[index])
+    pvalues = [(count + 1) / (bootstrap_replicates + 1) for count in exceedances]
+
+    strata = defaultdict(list)
+    for pair_id, pair in pairs.items():
+        strata[(pair[0]["repository_id"], pair[0]["task_class"])].append(pair_id)
+    interactions = {f"{key[0]}::{key[1]}": round(_effects(pairs, value)[0], 6)
+                    for key, value in sorted(strata.items())}
+    return {
+        "schema_version": "1.1",
+        "resampling_unit": "repository_then_paired_template_hierarchical_cluster",
+        "bootstrap_replicates": bootstrap_replicates,
+        "null_randomization_replicates": bootstrap_replicates,
+        "seed": seed,
+        "effects": {"acceptance_yield": point[0], "throughput": point[1], "rmst_high_minus_low": point[2]},
+        "intervals_95": {"acceptance_yield": intervals[0], "throughput": intervals[1], "rmst": intervals[2]},
+        "right_censoring_method": "tie-grouped Kaplan-Meier restricted mean through 480 minutes",
+        "null_test": "repository-cluster LOW/HIGH randomization under the sharp null",
+        "stratum_effects": interactions,
+        "holm": holm(pvalues),
+        "input_sha256": hashlib.sha256(json.dumps(records, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
+    }
+
 def manipulation_check(records):
-    groups=validate(records); eligible_high=[x for g in groups.values() for x in g if x["condition"]=="HIGH" and x["eligible"]]; eligible_low=[x for g in groups.values() for x in g if x["condition"]=="LOW" and x["eligible"]]
-    if not eligible_high or not eligible_low: raise ValueError("eligible LOW and HIGH required")
-    a=sum(x["manipulation"]["runnable_candidate_count"]>=2 for x in eligible_high)/len(eligible_high)>=.70
-    med=lambda xs:_q([x["manipulation"]["time_to_first_runnable_minutes"] for x in xs],.5)
-    b=med(eligible_high)<=.70*med(eligible_low)
-    c=all(x["manipulation"]["ai_configuration_frozen"] for x in eligible_high)
-    d=all(x["manipulation"]["ai_use_stage_ids"]==["S05"] for x in eligible_high)
-    return {"A_candidate_abundance":a,"B_time_ratio":b,"C_configuration_frozen":c,"D_implementation_only":d,"passed":a and b and c and d,"failure_consequence":"BOTTLENECK_MIGRATION_INDETERMINATE" if not(a and b and c and d) else None}
-def determination(*,blocked=False, manipulation=True, adequate_power=True, domain=False, migration=False):
-    """Apply the immutable precedence after binding-stage evidence is evaluated."""
+    pairs = validate(records)
+    high = [row for pair in pairs.values() for row in pair if row["condition"] == "HIGH" and row["eligible"]]
+    low = [row for pair in pairs.values() for row in pair if row["condition"] == "LOW" and row["eligible"]]
+    if not high or not low:
+        raise ValueError("eligible LOW and HIGH required")
+    a = sum(row["manipulation"]["runnable_candidate_count"] >= 2 for row in high) / len(high) >= .70
+    median = lambda rows: _q([row["manipulation"]["time_to_first_runnable_minutes"] for row in rows], .5)
+    b = median(high) <= .70 * median(low)
+    c = all(row["manipulation"]["ai_configuration_frozen"] for row in high)
+    d = all(row["manipulation"]["ai_use_stage_ids"] == ["S05"] for row in high)
+    return {"A_candidate_abundance": a, "B_time_ratio": b, "C_configuration_frozen": c,
+            "D_implementation_only": d, "passed": a and b and c and d,
+            "failure_consequence": "BOTTLENECK_MIGRATION_INDETERMINATE" if not (a and b and c and d) else None}
+
+def determination(*, blocked=False, manipulation=True, adequate_power=True, domain=False, migration=False):
     if blocked: return "EXPERIMENT_BLOCKED"
     if not manipulation or not adequate_power: return "BOTTLENECK_MIGRATION_INDETERMINATE"
     if domain: return "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT"
@@ -70,9 +163,8 @@ def determination(*,blocked=False, manipulation=True, adequate_power=True, domai
     return "BOTTLENECK_MIGRATION_NOT_SUPPORTED"
 
 def binding_migration(low_stages, high_stages):
-    """Frozen conjunction: implementation ceases binding and a named stage replaces it."""
-    low=set(low_stages); high=set(high_stages)
-    replacements=sorted(high-{"S05"})
+    low, high = set(low_stages), set(high_stages)
+    replacements = sorted(high - {"S05"})
     return {"implementation_low": "S05" in low, "implementation_high": "S05" in high,
             "replacement_high": replacements,
             "migration": "S05" in low and "S05" not in high and bool(replacements)}

@@ -10,7 +10,7 @@ This separately versioned package implements `ISSUE-110-PROSPECTIVE-AMENDMENT-00
 
 `power-engine.py` is a fixed-seed (`11020260901`) Monte Carlo sensitivity engine. It executes 10,000 replicates for every combination of four candidate designs and three prospective nuisance regimes (120,000 total). It models paired LOW/HIGH assignments, repository clusters, task class, difficulty, within-pair correlation, repository/task heterogeneity, attrition, environment loss, censoring, acceptance yield, throughput, time to valid, and conjunctive migration. `power-results.json` is machine-readable and binds the exact engine and canonical configuration by SHA-256. Its values are synthetic prospective assumptions, never nuisance estimates or empirical findings.
 
-`production_analysis.py` freezes fail-closed executable interfaces for paired-template cluster bootstrap inference, paired acceptance yield, throughput, Kaplan-Meier restricted-mean time-to-valid with right censoring, repository-by-task stratification, difficulty retention, interactions, Holm correction, uncertainty intervals, binding stages, migration conjunction, domain dependence, and determination precedence. It refuses fewer than 10,000 bootstrap draws rather than silently substituting a simpler method.
+`production_analysis.py` freezes fail-closed executable interfaces for repository-outer/pair-inner hierarchical bootstrap inference, paired acceptance yield, throughput, tie-grouped Kaplan-Meier restricted-mean time-to-valid with right censoring, sharp-null repository-cluster randomization tests, repository-by-task stratification, difficulty retention, interactions, Holm correction, uncertainty intervals, binding stages, migration conjunction, domain dependence, and determination precedence. It refuses fewer than 10,000 bootstrap draws rather than silently substituting a simpler method.
 
 ## Manipulation and future contract
 
@@ -26,7 +26,7 @@ Run:
 
 ```bash
 python investigations/bottleneck-migration-110-amendment-001/power-engine.py
-python -m unittest discover investigations/bottleneck-migration-110-amendment-001 -p 'test_*.py'
+python -m unittest discover investigations/bottleneck-migration-110-amendment-001 -p 'test_issue110_amendment001.py'
 ```
 
 **Exact amendment determination: `AMENDMENT_001_COMPLETE`. Current Issue #110 readiness: `BOTTLENECK_EXPERIMENT_NOT_READY`. Neither determination authorizes empirical execution.**

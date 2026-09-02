@@ -7,6 +7,8 @@ import json
 import random
 from collections import defaultdict
 
+from inference_core import exact_repository_signflip, holm, primary_endpoint_conjunction
+
 SEED = 11020260901
 
 def _q(values, probability):
@@ -25,8 +27,8 @@ def validate(records):
             raise ValueError("malformed record")
         if record["condition"] not in ("LOW", "HIGH") or not isinstance(record["time_to_valid_event"], bool):
             raise ValueError("invalid value")
-        if min(record["active_minutes"], record["time_to_valid_minutes"]) < 0:
-            raise ValueError("negative time")
+        if record["active_minutes"] <= 0 or record["time_to_valid_minutes"] < 0:
+            raise ValueError("nonpositive active time or negative event time")
         pairs[record["pair_id"]].append(record)
     for pair in pairs.values():
         if sorted(row["condition"] for row in pair) != ["HIGH", "LOW"]:
@@ -37,15 +39,6 @@ def validate(records):
     if len({pair[0]["repository_id"] for pair in pairs.values()}) < 2:
         raise ValueError("clustered inference requires at least two repositories")
     return pairs
-
-def holm(pvalues, alpha=.05):
-    ordered = sorted(enumerate(pvalues), key=lambda item: item[1])
-    adjusted = [0.0] * len(pvalues)
-    running = 0.0
-    for rank, (index, pvalue) in enumerate(ordered):
-        running = max(running, min(1.0, pvalue * (len(pvalues) - rank)))
-        adjusted[index] = running
-    return {"adjusted_p": adjusted, "reject": [pvalue <= alpha for pvalue in adjusted]}
 
 def rmst(rows, tau=480):
     """Tie-correct Kaplan–Meier restricted mean; events precede same-time censor removal."""
@@ -79,7 +72,10 @@ def _effects(pairs, pair_ids, swapped_repositories=frozenset()):
         high.append(rows["HIGH"])
     throughput = lambda rows: sum(row["accepted"] for row in rows) * 480 / sum(row["active_minutes"] for row in rows)
     yield_difference = sum(row["accepted"] for row in high) / len(high) - sum(row["accepted"] for row in low) / len(low)
-    return yield_difference, throughput(high) - throughput(low), rmst(high) - rmst(low)
+    low_rmst = rmst(low)
+    if low_rmst <= 0:
+        raise ValueError("relative RMST effect undefined when LOW RMST is zero")
+    return yield_difference, throughput(high)-throughput(low), rmst(high)/low_rmst-1
 
 def _hierarchical_sample(by_repository, rng):
     """Sample repositories first, then intact paired templates within each selected repository."""
@@ -93,7 +89,7 @@ def _hierarchical_sample(by_repository, rng):
 
 def analyze(records, bootstrap_replicates=10_000, seed=SEED):
     if bootstrap_replicates < 10_000:
-        raise ValueError("cluster bootstrap and null randomization require >=10,000 replicates")
+        raise ValueError("hierarchical cluster bootstrap requires >=10,000 replicates")
     pairs = validate(records)
     pair_ids = sorted(pairs)
     by_repository = defaultdict(list)
@@ -102,23 +98,22 @@ def analyze(records, bootstrap_replicates=10_000, seed=SEED):
     for pair_ids_in_repository in by_repository.values():
         pair_ids_in_repository.sort()
     point = _effects(pairs, pair_ids)
+    all_low = [row for pair in pairs.values() for row in pair if row["condition"] == "LOW"]
+    low_throughput = sum(row["accepted"] for row in all_low)*480/sum(row["active_minutes"] for row in all_low)
+    if low_throughput <= 0:
+        raise ValueError("relative throughput threshold undefined when cohort LOW throughput is zero")
+    throughput_relative_change = point[1]/low_throughput
     bootstrap_rng = random.Random(seed)
     bootstrap = [_effects(pairs, _hierarchical_sample(by_repository, bootstrap_rng))
                  for _ in range(bootstrap_replicates)]
     intervals = [[round(_q([draw[index] for draw in bootstrap], .025), 6),
                   round(_q([draw[index] for draw in bootstrap], .975), 6)] for index in range(3)]
 
-    # Randomization inference is centered on the sharp null by swapping complete LOW/HIGH
-    # assignments at the repository cluster level; ordinary bootstrap draws are never p-values.
+    # Exact finite-cluster inference: enumerate the actual 2^R repository sign patterns.
     repositories = sorted(by_repository)
-    null_rng = random.Random(seed + 1)
-    exceedances = [0, 0, 0]
-    for _ in range(bootstrap_replicates):
-        swapped = frozenset(repository for repository in repositories if null_rng.getrandbits(1))
-        null_effect = _effects(pairs, pair_ids, swapped)
-        for index in range(3):
-            exceedances[index] += abs(null_effect[index]) >= abs(point[index])
-    pvalues = [(count + 1) / (bootstrap_replicates + 1) for count in exceedances]
+    repository_effects = [_effects(pairs, by_repository[repository]) for repository in repositories]
+    null_result = exact_repository_signflip(repository_effects)
+    endpoint_conjunction = primary_endpoint_conjunction(point, low_throughput, null_result["holm"])
 
     strata = defaultdict(list)
     for pair_id, pair in pairs.items():
@@ -126,17 +121,19 @@ def analyze(records, bootstrap_replicates=10_000, seed=SEED):
     interactions = {f"{key[0]}::{key[1]}": round(_effects(pairs, value)[0], 6)
                     for key, value in sorted(strata.items())}
     return {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "resampling_unit": "repository_then_paired_template_hierarchical_cluster",
         "bootstrap_replicates": bootstrap_replicates,
-        "null_randomization_replicates": bootstrap_replicates,
+        "null_assignments_enumerated": null_result["assignments_enumerated"],
         "seed": seed,
-        "effects": {"acceptance_yield": point[0], "throughput": point[1], "rmst_high_minus_low": point[2]},
+        "effects": {"acceptance_yield_difference": point[0], "throughput_absolute_difference": point[1],
+                    "throughput_relative_change": throughput_relative_change, "rmst_relative_change": point[2]},
         "intervals_95": {"acceptance_yield": intervals[0], "throughput": intervals[1], "rmst": intervals[2]},
         "right_censoring_method": "tie-grouped Kaplan-Meier restricted mean through 480 minutes",
-        "null_test": "repository-cluster LOW/HIGH randomization under the sharp null",
+        "null_test": "exact enumeration of all repository-cluster sign flips under the sharp null",
         "stratum_effects": interactions,
-        "holm": holm(pvalues),
+        "holm": null_result["holm"],
+        "primary_endpoint_evidentiary_conjunction": endpoint_conjunction,
         "input_sha256": hashlib.sha256(json.dumps(records, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
     }
 

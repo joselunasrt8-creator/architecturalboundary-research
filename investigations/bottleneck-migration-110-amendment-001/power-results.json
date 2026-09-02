@@ -31,6 +31,7 @@
         "task_classes": 4
       }
     ],
+    "inference_core_sha256": "0ceb40ecad01a3146f0758aa1079905b1287cded85fe104f9d4b69ee6a0b24db",
     "model_features": [
       "paired LOW/HIGH",
       "repository random intercepts and condition interactions",
@@ -44,10 +45,12 @@
       "time to valid",
       "conjunctive migration"
     ],
+    "production_inference_rule": "exact repository sign flips; three-endpoint Holm alpha 0.05; frozen effect-threshold conjunction",
     "regimes": [
       {
         "attrition": 0.05,
         "baseline": 0.4,
+        "baseline_throughput": 0.8,
         "censoring": 0.05,
         "difficulty_effect": 0.08,
         "environment_failure": 0.02,
@@ -63,6 +66,7 @@
       {
         "attrition": 0.1,
         "baseline": 0.4,
+        "baseline_throughput": 0.8,
         "censoring": 0.15,
         "difficulty_effect": 0.12,
         "environment_failure": 0.05,
@@ -78,6 +82,7 @@
       {
         "attrition": 0.25,
         "baseline": 0.4,
+        "baseline_throughput": 0.8,
         "censoring": 0.25,
         "difficulty_effect": 0.16,
         "environment_failure": 0.1,
@@ -94,254 +99,387 @@
     "replicates_per_design_regime": 10000,
     "seed": 11020260901
   },
-  "configuration_sha256": "fc69439a16839e05c558222d89f9eac38b9aebe1e6b8e90aef872acd251322b7",
-  "engine_sha256": "f8eff7e06acdf464fe8c9a7ce0674aebd3f1c7b39f68d52e7a5a428a0fe50d71",
+  "configuration_sha256": "5e7862109e6618d4c6dbba765cd9dc6811215bb8d1abfc013f92c2850aa6945e",
+  "engine_sha256": "c8b5c47ce4cc079043256c06e2be73c8a953933b613e668fccc007d18a77ad3e",
   "final_n": "FINAL_N_NOT_YET_FREEZABLE",
+  "inference_core_sha256": "0ceb40ecad01a3146f0758aa1079905b1287cded85fe104f9d4b69ee6a0b24db",
   "reason": "Regime nuisance values are synthetic assumptions; no permissible outcome-blind calibration bounds have been frozen.",
   "replicates_per_design_regime": 10000,
   "results": [
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 128,
-      "mean_censored_arm_observations": 2.918,
-      "mean_retained_pairs": 59.587,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 2.781,
+      "mean_retained_pairs": 59.609,
       "pairs": 64,
-      "primary_conjunctive_power": 0.2214,
-      "primary_conjunctive_power_95_wilson": [
-        0.21337,
-        0.229644
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "favorable",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.2368,
+      "repository_interaction_wald_power": 0.2389,
       "repository_interaction_wald_power_95_wilson": [
-        0.22857,
-        0.245232
+        0.230644,
+        0.247357
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 128,
-      "mean_censored_arm_observations": 8.281,
-      "mean_retained_pairs": 54.703,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 8.288,
+      "mean_retained_pairs": 54.727,
       "pairs": 64,
-      "primary_conjunctive_power": 0.0877,
-      "primary_conjunctive_power_95_wilson": [
-        0.082313,
-        0.093403
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "moderate",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.1713,
+      "repository_interaction_wald_power": 0.1656,
       "repository_interaction_wald_power_95_wilson": [
-        0.164042,
-        0.17881
+        0.158443,
+        0.173014
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 128,
-      "mean_censored_arm_observations": 10.784,
-      "mean_retained_pairs": 43.193,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 10.273,
+      "mean_retained_pairs": 43.166,
       "pairs": 64,
-      "primary_conjunctive_power": 0.0353,
-      "primary_conjunctive_power_95_wilson": [
-        0.031858,
-        0.039099
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "conservative",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.131,
+      "repository_interaction_wald_power": 0.1349,
       "repository_interaction_wald_power_95_wilson": [
-        0.124529,
-        0.137755
+        0.128344,
+        0.141736
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 256,
-      "mean_censored_arm_observations": 5.69,
-      "mean_retained_pairs": 119.171,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 5.564,
+      "mean_retained_pairs": 119.133,
       "pairs": 128,
-      "primary_conjunctive_power": 0.2757,
-      "primary_conjunctive_power_95_wilson": [
-        0.267029,
-        0.284543
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "favorable",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.3985,
+      "repository_interaction_wald_power": 0.4012,
       "repository_interaction_wald_power_95_wilson": [
-        0.388945,
-        0.408133
+        0.391633,
+        0.410843
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 256,
-      "mean_censored_arm_observations": 16.588,
-      "mean_retained_pairs": 109.43,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 16.552,
+      "mean_retained_pairs": 109.424,
       "pairs": 128,
-      "primary_conjunctive_power": 0.11,
-      "primary_conjunctive_power_95_wilson": [
-        0.104017,
-        0.116283
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "moderate",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.2998,
+      "repository_interaction_wald_power": 0.2926,
       "repository_interaction_wald_power_95_wilson": [
-        0.290898,
-        0.308855
+        0.283764,
+        0.301595
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 256,
-      "mean_censored_arm_observations": 21.997,
-      "mean_retained_pairs": 86.401,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 16,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.375,
+        "minimum_attainable_two_sided_p": 0.125,
+        "primary_family_size": 3,
+        "repository_count": 4
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 21.205,
+      "mean_retained_pairs": 86.434,
       "pairs": 128,
-      "primary_conjunctive_power": 0.036,
-      "primary_conjunctive_power_95_wilson": [
-        0.032523,
-        0.039833
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "conservative",
       "replicates_executed": 10000,
       "repositories": 4,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.2175,
+      "repository_interaction_wald_power": 0.2217,
       "repository_interaction_wald_power_95_wilson": [
-        0.209524,
-        0.225693
+        0.213666,
+        0.229948
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 576,
-      "mean_censored_arm_observations": 13.608,
-      "mean_retained_pairs": 268.079,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 64,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.09375,
+        "minimum_attainable_two_sided_p": 0.03125,
+        "primary_family_size": 3,
+        "repository_count": 6
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 12.735,
+      "mean_retained_pairs": 268.16,
       "pairs": 288,
-      "primary_conjunctive_power": 0.3722,
-      "primary_conjunctive_power_95_wilson": [
-        0.362776,
-        0.381722
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "favorable",
       "replicates_executed": 10000,
       "repositories": 6,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.6761,
+      "repository_interaction_wald_power": 0.6778,
       "repository_interaction_wald_power_95_wilson": [
-        0.666862,
-        0.685203
+        0.668574,
+        0.68689
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 576,
-      "mean_censored_arm_observations": 38.806,
-      "mean_retained_pairs": 246.327,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 64,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.09375,
+        "minimum_attainable_two_sided_p": 0.03125,
+        "primary_family_size": 3,
+        "repository_count": 6
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 38.288,
+      "mean_retained_pairs": 246.225,
       "pairs": 288,
-      "primary_conjunctive_power": 0.1336,
-      "primary_conjunctive_power_95_wilson": [
-        0.127072,
-        0.140409
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "moderate",
       "replicates_executed": 10000,
       "repositories": 6,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.5275,
+      "repository_interaction_wald_power": 0.5245,
       "repository_interaction_wald_power_95_wilson": [
-        0.517706,
-        0.537273
+        0.514704,
+        0.534277
       ]
     },
     {
+      "design_eligible_for_primary_inference": false,
       "executions": 576,
-      "mean_censored_arm_observations": 49.236,
-      "mean_retained_pairs": 194.532,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 64,
+        "eligible": false,
+        "minimum_attainable_holm_adjusted_p": 0.09375,
+        "minimum_attainable_two_sided_p": 0.03125,
+        "primary_family_size": 3,
+        "repository_count": 6
+      },
+      "ineligibility_reason": "Holm-corrected alpha is unattainable with this repository count regardless of pair count",
+      "mean_censored_arm_observations": 48.419,
+      "mean_retained_pairs": 194.421,
       "pairs": 288,
-      "primary_conjunctive_power": 0.0298,
-      "primary_conjunctive_power_95_wilson": [
-        0.026644,
-        0.033317
+      "production_aligned_primary_power": 0.0,
+      "production_aligned_primary_power_95_wilson": [
+        0.0,
+        0.000384
       ],
       "regime": "conservative",
       "replicates_executed": 10000,
       "repositories": 6,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.3923,
+      "repository_interaction_wald_power": 0.3988,
       "repository_interaction_wald_power_95_wilson": [
-        0.382773,
-        0.401909
+        0.389244,
+        0.408434
       ]
     },
     {
+      "design_eligible_for_primary_inference": true,
       "executions": 1024,
-      "mean_censored_arm_observations": 21.923,
-      "mean_retained_pairs": 476.541,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 256,
+        "eligible": true,
+        "minimum_attainable_holm_adjusted_p": 0.0234375,
+        "minimum_attainable_two_sided_p": 0.0078125,
+        "primary_family_size": 3,
+        "repository_count": 8
+      },
+      "ineligibility_reason": null,
+      "mean_censored_arm_observations": 22.657,
+      "mean_retained_pairs": 476.655,
       "pairs": 512,
-      "primary_conjunctive_power": 0.4721,
-      "primary_conjunctive_power_95_wilson": [
-        0.462328,
-        0.481893
+      "production_aligned_primary_power": 0.5517,
+      "production_aligned_primary_power_95_wilson": [
+        0.541935,
+        0.561426
       ],
       "regime": "favorable",
       "replicates_executed": 10000,
       "repositories": 8,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.8644,
+      "repository_interaction_wald_power": 0.8546,
       "repository_interaction_wald_power_95_wilson": [
-        0.85755,
-        0.87097
+        0.847555,
+        0.861373
       ]
     },
     {
+      "design_eligible_for_primary_inference": true,
       "executions": 1024,
-      "mean_censored_arm_observations": 67.613,
-      "mean_retained_pairs": 437.695,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 256,
+        "eligible": true,
+        "minimum_attainable_holm_adjusted_p": 0.0234375,
+        "minimum_attainable_two_sided_p": 0.0078125,
+        "primary_family_size": 3,
+        "repository_count": 8
+      },
+      "ineligibility_reason": null,
+      "mean_censored_arm_observations": 67.918,
+      "mean_retained_pairs": 437.947,
       "pairs": 512,
-      "primary_conjunctive_power": 0.1691,
-      "primary_conjunctive_power_95_wilson": [
-        0.161881,
-        0.176573
+      "production_aligned_primary_power": 0.1651,
+      "production_aligned_primary_power_95_wilson": [
+        0.157952,
+        0.172505
       ],
       "regime": "moderate",
       "replicates_executed": 10000,
       "repositories": 8,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.7348,
+      "repository_interaction_wald_power": 0.7409,
       "repository_interaction_wald_power_95_wilson": [
-        0.726059,
-        0.743361
+        0.732221,
+        0.749394
       ]
     },
     {
+      "design_eligible_for_primary_inference": true,
       "executions": 1024,
-      "mean_censored_arm_observations": 85.524,
-      "mean_retained_pairs": 345.779,
+      "finite_null_capability": {
+        "alpha": 0.05,
+        "distinct_assignments": 256,
+        "eligible": true,
+        "minimum_attainable_holm_adjusted_p": 0.0234375,
+        "minimum_attainable_two_sided_p": 0.0078125,
+        "primary_family_size": 3,
+        "repository_count": 8
+      },
+      "ineligibility_reason": null,
+      "mean_censored_arm_observations": 86.17,
+      "mean_retained_pairs": 345.582,
       "pairs": 512,
-      "primary_conjunctive_power": 0.0303,
-      "primary_conjunctive_power_95_wilson": [
-        0.027117,
-        0.033844
+      "production_aligned_primary_power": 0.0284,
+      "production_aligned_primary_power_95_wilson": [
+        0.025321,
+        0.031841
       ],
       "regime": "conservative",
       "replicates_executed": 10000,
       "repositories": 8,
       "repository_interaction_test": "omnibus condition-by-repository inverse-variance Wald, alpha=0.05",
-      "repository_interaction_wald_power": 0.5923,
+      "repository_interaction_wald_power": 0.5933,
       "repository_interaction_wald_power_95_wilson": [
-        0.582635,
-        0.601894
+        0.583638,
+        0.60289
       ]
     }
   ],
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "seed": 11020260901,
   "total_replicates_executed": 120000
 }

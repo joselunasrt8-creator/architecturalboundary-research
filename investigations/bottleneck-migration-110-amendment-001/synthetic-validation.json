@@ -93,7 +93,7 @@
       "pass": true
     }
   ],
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "validated_properties": [
     "determination precedence",
     "paired cluster resampling",
@@ -106,7 +106,11 @@
     "repository-outer hierarchical bootstrap",
     "sharp-null cluster randomization p-values",
     "tie-grouped event/censor risk sets",
-    "defined omnibus repository-interaction Wald power"
+    "defined omnibus repository-interaction Wald power",
+    "finite 2^R sign-flip resolution gate",
+    "4- and 6-repository structural ineligibility",
+    "8-repository extreme-effect Holm attainability",
+    "power/production endpoint conjunction identity"
   ],
   "warning": "FICTIONAL NON-EMPIRICAL CASES; NO ISSUE #110 TASK OR CANDIDATE WAS USED"
 }

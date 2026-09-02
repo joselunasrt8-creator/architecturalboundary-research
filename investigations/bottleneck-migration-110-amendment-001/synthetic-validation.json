@@ -1,0 +1,116 @@
+{
+  "all_pass": true,
+  "dataset_kind": "SYNTHETIC_VALIDATION_ONLY",
+  "scenarios": [
+    {
+      "expected": "BOTTLENECK_MIGRATION_SUPPORTED",
+      "name": "strong migration",
+      "observed": "BOTTLENECK_MIGRATION_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "name": "implementation remains dominant",
+      "observed": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "name": "proportional acceleration",
+      "observed": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "name": "precise null",
+      "observed": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "name": "opposite effect",
+      "observed": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "name": "repository-specific migration",
+      "observed": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "name": "task-specific migration",
+      "observed": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "name": "failed HIGH manipulation",
+      "observed": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "name": "censoring",
+      "observed": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "pass": true
+    },
+    {
+      "expected": "EXPERIMENT_BLOCKED",
+      "name": "heavy attrition",
+      "observed": "EXPERIMENT_BLOCKED",
+      "pass": true
+    },
+    {
+      "expected": "EXPERIMENT_BLOCKED",
+      "name": "harness artifact",
+      "observed": "EXPERIMENT_BLOCKED",
+      "pass": true
+    },
+    {
+      "expected": "EXPERIMENT_BLOCKED",
+      "name": "environment artifact",
+      "observed": "EXPERIMENT_BLOCKED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "name": "insufficient power",
+      "observed": "BOTTLENECK_MIGRATION_INDETERMINATE",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "name": "strong clustering",
+      "observed": "BOTTLENECK_MIGRATION_NOT_SUPPORTED",
+      "pass": true
+    },
+    {
+      "expected": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "name": "high heterogeneity",
+      "observed": "BOTTLENECK_MIGRATION_DOMAIN_DEPENDENT",
+      "pass": true
+    }
+  ],
+  "schema_version": "1.3",
+  "validated_properties": [
+    "determination precedence",
+    "paired cluster resampling",
+    "right-censored RMST",
+    "Holm correction",
+    "manipulation failure mapping",
+    "binding conjunction",
+    "repository/task domain dependence",
+    "fail-closed records",
+    "repository-outer hierarchical bootstrap",
+    "repository-score symmetry sign-flip p-values, explicitly non-randomization",
+    "tie-grouped event/censor risk sets",
+    "defined omnibus repository-interaction Wald power",
+    "finite 2^R repository-score symmetry resolution gate",
+    "4- and 6-repository structural ineligibility",
+    "8-repository extreme-effect Holm attainability",
+    "power/production endpoint conjunction and cluster-assumption identity"
+  ],
+  "warning": "FICTIONAL NON-EMPIRICAL CASES; NO ISSUE #110 TASK OR CANDIDATE WAS USED; REPOSITORY SIGN SYMMETRY IS A SYNTHETIC MODEL ASSUMPTION, NOT THE EXPERIMENT RANDOMIZATION"
+}

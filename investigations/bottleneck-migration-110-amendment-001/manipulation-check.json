@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "A": ">=2 distinct runnable candidate hashes in >=70% of eligible HIGH executions",
+    "B": "median elapsed minutes from S05 entry to first runnable event in HIGH <=70% of the corresponding LOW median",
+    "C": "every HIGH record matches the pre-registered AI provider/model/version/configuration hash and caps",
+    "D": "audited AI calls occur only while stage S05 is active"
+  },
+  "consequence": {
+    "failure": "BOTTLENECK_MIGRATION_INDETERMINATE; cannot become support or non-support",
+    "pass": "allows other frozen evidence to be interpreted; does not itself support migration"
+  },
+  "eligible_denominator": "all prospectively eligible assigned executions; never conditioned on acceptance or observed outcome",
+  "frozen_configuration_status": "BLOCKED: configuration identity and enforcement not yet supplied",
+  "implementation": "production_analysis.py:manipulation_check",
+  "runnable_candidate_definition": "A content-addressed candidate produced during S05 whose immutable source hash is recorded and for which the frozen build/start command exits zero and reaches the first frozen validation-gate entry event. Acceptance and later-gate passage are not required.",
+  "schema_version": "1.0"
+}

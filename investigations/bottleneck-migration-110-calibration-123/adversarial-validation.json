@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "tests": [
+    {"test":"Issue #110 outcome provenance leakage","result":"PASS_BLOCKED","evidence":"No study outcome or candidate artifact was accessed or added."},
+    {"test":"synthetic assumptions treated as calibration","result":"PASS_BLOCKED","evidence":"Synthetic regimes are explicitly sensitivity-only and bounds remain null."},
+    {"test":"repository independence","result":"BLOCKER_FOUND","evidence":"No eligible sampling-frame evidence or sign-off exists."},
+    {"test":"joint central sign symmetry","result":"BLOCKER_FOUND","evidence":"No eligible evidence or sign-off exists; simulation is not justification."},
+    {"test":"finite-cluster significance","result":"PASS_GUARD_PRESERVED","evidence":"Frozen 4/6 ineligible and 8 eligible labels were not reinterpreted as a sample-size choice."},
+    {"test":"repository/pair pseudoreplication","result":"PASS_GUARD_PRESERVED","evidence":"Pairs and executions were not counted as independent repository clusters."},
+    {"test":"censoring sensitivity","result":"BLOCKER_FOUND","evidence":"No permissible censoring bound exists."},
+    {"test":"attrition sensitivity","result":"BLOCKER_FOUND","evidence":"No permissible attrition bound exists."},
+    {"test":"environment-failure sensitivity","result":"BLOCKER_FOUND","evidence":"No permissible environment-failure bound exists."},
+    {"test":"deterministic replay","result":"PASS","evidence":"Automated test verifies the JSON decision and immutable Git/SHA-256 identities."},
+    {"test":"artifact/hash drift","result":"PASS","evidence":"Automated test verifies all bound trees, blobs, and SHA-256 values."},
+    {"test":"production rule versus power implementation","result":"PASS_NO_SUBSTITUTION","evidence":"Both bound implementations remain unchanged; power was not run past failed gates."}
+  ],
+  "conclusion":"Falsification found decisive missing-evidence blockers; no final N is proposed."
+}

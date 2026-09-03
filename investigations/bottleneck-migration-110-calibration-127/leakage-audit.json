@@ -11,5 +11,5 @@
     {"surface":"Issue #110 power final-N adjudication","executed":false}
   ],
   "non_study_sources_only":true,
-  "protocol_timing":"Protocol frozen at commit 93e45f3 before calibration values were extracted; only topology, filenames, top-level keys, and controlling contracts were inspected before freeze."
+  "protocol_timing":"Protocol frozen at reachable commit 93e45f3879cd7dd927af01250d71881a15f6dd26 before calibration values were extracted; only topology, filenames, top-level keys, and controlling contracts were inspected before freeze."
 }

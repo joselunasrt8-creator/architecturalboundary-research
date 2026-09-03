@@ -1,6 +1,6 @@
 {
   "acquisition_date_utc": "2026-09-03",
-  "protocol_freeze_commit": "93e45f3",
+  "protocol_freeze_commit": "93e45f3879cd7dd927af01250d71881a15f6dd26",
   "schema_version": "1.0",
   "sources": [
     {

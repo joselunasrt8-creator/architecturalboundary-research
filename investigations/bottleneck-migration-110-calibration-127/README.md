@@ -1,6 +1,7 @@
 # Issue #127 outcome-blind calibration evidence acquisition
 
-The acquisition protocol was frozen in commit `93e45f3` before calibration
+The acquisition protocol was frozen in reachable commit
+`93e45f3879cd7dd927af01250d71881a15f6dd26` before calibration
 values were extracted. The subsequent acquisition exhausted the bounded local
 source class and made the three preregistered public-source attempts. All three
 external attempts were blocked by the environment's HTTP CONNECT proxy with a
@@ -33,11 +34,14 @@ adjudication, or final N was generated, inspected, selected, or frozen.
 ## Smallest legitimate next action
 
 An independent human methodologist should approve and supervise one new,
-prospective **non-study** pilot using at least five independently sourced,
-ancestry-screened repositories, at least five tasks in each intended task
-class, both paired harness conditions, explicit timestamps, and explicit
+prospective **non-study** pilot. The frozen estimators impose a minimum pilot
+eligibility threshold of five independently sourced, ancestry-screened
+repositories and five tasks in each intended task class, with both paired
+harness conditions, explicit timestamps, and explicit
 censoring/attrition/environment-failure dispositions for every initiated run.
-The pilot must also preregister a null-generating diagnostic capable of testing
+Meeting that threshold does **not** establish that the sample is sufficient to
+justify repository independence or joint central sign symmetry. The pilot must
+also preregister a null-generating diagnostic capable of testing
 the **joint** score-vector symmetry claim. If that design cannot justify joint
 central sign symmetry prospectively, Issue #123 must remain blocked rather than
 changing the frozen inference model here.

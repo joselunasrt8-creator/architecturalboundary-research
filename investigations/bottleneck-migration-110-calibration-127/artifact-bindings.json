@@ -2,6 +2,16 @@
   "binding_date_utc": "2026-09-03",
   "canonical_start": {"branch": "work", "clean": true, "commit": "cbafadf5df2930b04ad8861da7a37ddfa0658ac6", "tree": "5adcd2d06c7c3e124d71ec0c21356fba6fc979ac", "description": "current clean merged state supplied as main-equivalent; checkout has no local main ref or configured remote"},
   "historical_inputs_immutable": true,
+  "preregistration_freeze": {
+    "commit": "93e45f3879cd7dd927af01250d71881a15f6dd26",
+    "tree": "b393c37724ec5b957a7d98b6cc681a2122575833",
+    "parent_commit": "cbafadf5df2930b04ad8861da7a37ddfa0658ac6",
+    "protocol_path": "investigations/bottleneck-migration-110-calibration-127/calibration-acquisition-protocol.json",
+    "protocol_git_blob": "9e31d18b214a26c8d3867c67c338a084bf8f0004",
+    "protocol_sha256": "6d78ff20fe248c89da0af452c7b8b1eda30004a3d0171cbc1b2cd09a0807c78d",
+    "evidence_absent_at_freeze": true,
+    "first_evidence_commit": "4f3446e3607260709f6fff71cfe3483caf78dd62"
+  },
   "schema_version": "1.0",
   "trees": [
     {"identity":"Issue #110 protocol","merged_commit":"a82bd52b052b4d3c00586c3585cb02e595023e28","path":"investigations/bottleneck-migration-110","git_tree":"0be84fe6dd28e3c4348297391cab87eb8a80153f"},

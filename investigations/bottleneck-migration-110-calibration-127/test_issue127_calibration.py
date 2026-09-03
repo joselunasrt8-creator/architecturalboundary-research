@@ -14,10 +14,28 @@ class Issue127CalibrationTest(unittest.TestCase):
         return json.loads((ROOT / name).read_text())
 
     def test_preregistration_precedes_evidence_commit_and_is_unchanged(self):
-        freeze = "93e45f3"
-        path = "investigations/bottleneck-migration-110-calibration-127/calibration-acquisition-protocol.json"
+        binding = self.load("artifact-bindings.json")["preregistration_freeze"]
+        freeze = binding["commit"]
+        evidence_commit = binding["first_evidence_commit"]
+        path = binding["protocol_path"]
+        self.assertEqual(
+            freeze,
+            subprocess.check_output(["git", "rev-parse", freeze], cwd=REPO, text=True).strip(),
+        )
+        subprocess.run(["git", "merge-base", "--is-ancestor", freeze, evidence_commit], cwd=REPO, check=True)
+        subprocess.run(["git", "merge-base", "--is-ancestor", evidence_commit, "HEAD"], cwd=REPO, check=True)
+        frozen_paths = subprocess.check_output(
+            ["git", "ls-tree", "-r", "--name-only", freeze], cwd=REPO, text=True
+        ).splitlines()
+        evidence_prefix = "investigations/bottleneck-migration-110-calibration-127/evidence/"
+        self.assertFalse(any(item.startswith(evidence_prefix) for item in frozen_paths))
         frozen = subprocess.check_output(["git", "show", f"{freeze}:{path}"], cwd=REPO)
         self.assertEqual(frozen, (REPO / path).read_bytes())
+        self.assertEqual(binding["protocol_sha256"], hashlib.sha256(frozen).hexdigest())
+        self.assertEqual(
+            binding["protocol_git_blob"],
+            subprocess.check_output(["git", "rev-parse", f"{freeze}:{path}"], cwd=REPO, text=True).strip(),
+        )
         self.assertTrue(self.load("leakage-audit.json")["non_study_sources_only"])
 
     def test_historical_bindings_and_interfaces_have_not_drifted(self):

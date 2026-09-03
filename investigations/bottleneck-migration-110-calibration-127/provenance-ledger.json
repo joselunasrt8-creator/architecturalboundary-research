@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0",
+  "entries":[
+    {"type":"OBSERVATION","source":"LOCAL-ASD-109","statement":"One candidate was rejected; validation reports environment-related tokenizer download errors alongside candidate-relevant failures.","evidence_class":"PRE-STUDY CALIBRATION","usable_for_issue_110_bound":false},
+    {"type":"OBSERVATION","source":"LOCAL-ASD-RUN3","statement":"Two repair-linked candidate attempts were explicitly rejected and labeled TASK_FAILURE in one repository and one objective.","evidence_class":"PRE-STUDY CALIBRATION","usable_for_issue_110_bound":false},
+    {"type":"OBSERVATION","source":["EXTERNAL-SWEBENCH","EXTERNAL-METR-TASK-STANDARD","EXTERNAL-GITHUB-ACTIONS"],"statement":"The acquisition environment returned a 403 CONNECT-tunnel failure before any response body was acquired.","evidence_class":"EXTERNAL DATA acquisition attempt","usable_for_issue_110_bound":false},
+    {"type":"CALCULATION","source":"LOCAL-ASD-RUN3","statement":"Treating the two linked attempts descriptively gives 0/2 accepted and a two-sided 95% Clopper-Pearson interval [0, 0.841886116991581].","usable_for_issue_110_bound":false,"reason":"pseudoreplicated repair attempts and population mismatch"},
+    {"type":"EVIDENCE","statement":"No acquired record passes the preregistered comparability and provenance requirements for an Issue #110 nuisance bound.","supports":"unavailability determination"},
+    {"type":"ASSUMPTION","statement":"Repository independence and joint three-endpoint central sign symmetry are required by frozen inference but are not assumed true by this package."},
+    {"type":"DETERMINATION","statement":"CALIBRATION_EVIDENCE_NOT_READY"}
+  ]
+}

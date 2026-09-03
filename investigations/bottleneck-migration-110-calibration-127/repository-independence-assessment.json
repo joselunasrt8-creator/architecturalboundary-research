@@ -1,0 +1,9 @@
+{
+  "assumption":"Repositories behave as independent clusters under the intended sampling frame.",
+  "evidence_reviewed":["LOCAL-ASD-109","LOCAL-ASD-RUN3","three blocked external acquisition attempts"],
+  "assessment":"NOT_JUSTIFIED",
+  "reason":"The only acquired observations concern the same repository. No intended sampling frame or multi-repository provenance was acquired to exclude shared ancestry, contributors, infrastructure, task duplication, or other coupling.",
+  "pseudoreplication_guard":"Attempts, task pairs, and tasks within a repository are not counted as repository clusters.",
+  "inference_consequence":"Production repository-score sign flipping remains blocked.",
+  "schema_version":"1.0"
+}

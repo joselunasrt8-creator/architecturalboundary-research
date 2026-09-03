@@ -1,0 +1,15 @@
+{
+  "schema_version":"1.0",
+  "determination":"CALIBRATION_EVIDENCE_NOT_READY",
+  "experiment_readiness":"BOTTLENECK_EXPERIMENT_NOT_READY",
+  "all_eight_nuisance_bounds_defensible":false,
+  "repository_independence_justified":false,
+  "joint_central_sign_symmetry_justified":false,
+  "independent_sign_off_present":false,
+  "issue_110_outcomes_accessed":false,
+  "power_engine_run_for_final_n":false,
+  "final_n":null,
+  "cohort_selected":false,
+  "unresolved_requirements":["defensible bounds for all eight nuisance quantities from comparable outcome-blind evidence","prospective evidence for independent repository clusters","prospective evidence for joint three-endpoint central sign symmetry","independent methodological sign-off"],
+  "smallest_legitimate_next_action":"Independently approve and conduct the bounded prospective non-study pilot specified in README.md, retaining all dispositions and a joint-null diagnostic; do not access Issue #110 outcomes or alter frozen inference."
+}

@@ -1,0 +1,10 @@
+{
+  "assumption":"Under the global null, the joint three-endpoint repository score vector is centrally sign-symmetric.",
+  "evidence_reviewed":["LOCAL-ASD-109","LOCAL-ASD-RUN3","three blocked external acquisition attempts"],
+  "assessment":"NOT_JUSTIFIED",
+  "reason":"No acquired record contains null-generated joint three-endpoint repository score vectors. Marginal or univariate behavior would not establish the required joint equality in distribution.",
+  "prohibited_substitutes_not_used":["task-template randomization","simulation","synthetic data","passing tests","AI agreement"],
+  "separation":"Repository-score sign flipping is a prospective inferential assumption and is not the experiment's task-template randomization distribution.",
+  "inference_consequence":"Production repository-score sign flipping remains blocked; the frozen model was not replaced.",
+  "schema_version":"1.0"
+}

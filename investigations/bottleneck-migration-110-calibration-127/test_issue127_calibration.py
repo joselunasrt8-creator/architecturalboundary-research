@@ -22,7 +22,15 @@ class Issue127CalibrationTest(unittest.TestCase):
             freeze,
             subprocess.check_output(["git", "rev-parse", freeze], cwd=REPO, text=True).strip(),
         )
-        subprocess.run(["git", "merge-base", "--is-ancestor", freeze, evidence_commit], cwd=REPO, check=True)
+        freeze_parent = binding["parent_commit"]
+        evidence_parent = subprocess.check_output(
+            ["git", "rev-parse", f"{evidence_commit}^"], cwd=REPO, text=True
+        ).strip()
+        self.assertEqual(freeze, evidence_parent)
+        self.assertEqual(
+            freeze_parent,
+            subprocess.check_output(["git", "rev-parse", f"{freeze}^"], cwd=REPO, text=True).strip(),
+        )
         subprocess.run(["git", "merge-base", "--is-ancestor", evidence_commit, "HEAD"], cwd=REPO, check=True)
         frozen_paths = subprocess.check_output(
             ["git", "ls-tree", "-r", "--name-only", freeze], cwd=REPO, text=True

@@ -1,0 +1,41 @@
+{
+  "as_of": "2026-09-02",
+  "determination": "FINAL_N_NOT_YET_FREEZABLE",
+  "experiment_readiness": "BOTTLENECK_EXPERIMENT_NOT_READY",
+  "issue_110_outcomes_accessed": false,
+  "nuisance_audit": [
+    "baseline acceptance rate", "paired-condition correlation", "timing variance",
+    "repository variance", "task-class variance", "censoring", "attrition",
+    "environment-failure rate"
+  ],
+  "nuisance_result": {
+    "bounds": null,
+    "eligible_source_records_found": 0,
+    "status": "BLOCKED_NO_PERMISSIBLE_EVIDENCE",
+    "synthetic_sensitivity_only": "Amendment 001 power-results.json contains SYNTHETIC ASSUMPTION regimes; they are not calibration evidence and cannot freeze N."
+  },
+  "inferential_boundary": {
+    "actual_assignment": "LOW-first/HIGH-first order randomized at task-template level within repository x task-class x difficulty blocks",
+    "frozen_inference": "exact whole-repository score sign flips for the joint three-endpoint score vector",
+    "not_equivalent": true,
+    "required_assumptions": [
+      {"assumption":"repositories are independent clusters under the frozen sampling frame","evidence":null,"status":"UNJUSTIFIED"},
+      {"assumption":"under the global null, the joint three-endpoint repository score vector is centrally sign-symmetric","evidence":null,"status":"UNJUSTIFIED"}
+    ],
+    "substitution_permitted": false
+  },
+  "power_execution": {
+    "candidate_selected": null,
+    "lower_wilson_bounds": null,
+    "reason_not_run": "The frozen rule permits power execution for final-N selection only after nuisance and inferential-assumption gates pass.",
+    "status": "NOT_RUN_GATE_FAILED"
+  },
+  "claim_scope": {
+    "primary_bounded_bottleneck_migration": "NOT_SUPPORTED_NO_FROZEN_N",
+    "repository_interactions": "NOT_SUPPORTED_NO_SEPARATE_POWER_JUSTIFICATION",
+    "task_class_interactions": "NOT_SUPPORTED_NO_SEPARATE_POWER_JUSTIFICATION",
+    "broader_external_validity": "NOT_SUPPORTED_NO_SAMPLING_FRAME_JUSTIFICATION"
+  },
+  "required_sign_off": "Independent methodological sign-off remains absent and is required on the future calibration and assumption-justification package.",
+  "schema_version": "1.0"
+}

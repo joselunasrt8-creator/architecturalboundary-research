@@ -1,0 +1,25 @@
+{
+  "binding_date": "2026-09-02",
+  "canonical_base_commit": "b1865106814fc4732899efd3e999a97f417a213c",
+  "canonical_base_tree": "81548f15b6af189189d4acd07d82341ed215988f",
+  "historical_inputs_immutable": true,
+  "repository_state_at_start": {
+    "branch": "work",
+    "clean": true,
+    "head": "b1865106814fc4732899efd3e999a97f417a213c",
+    "note": "The supplied checkout had no local main ref or configured remote; HEAD is the merge commit for PR #125 and was clean. No historical input was changed."
+  },
+  "schema_version": "1.0",
+  "trees": [
+    {"identity":"Issue #110 protocol","merged_commit":"a82bd52b052b4d3c00586c3585cb02e595023e28","path":"investigations/bottleneck-migration-110","git_tree":"0be84fe6dd28e3c4348297391cab87eb8a80153f"},
+    {"identity":"Issue #110 preflight","merged_commit":"321f0c932937265accd76c0d6a69ca8232a2f7d9","path":"investigations/bottleneck-migration-110-preflight","git_tree":"d8e03eda007aa79e9ab5ad410f322c52618d669d"},
+    {"identity":"Issue #110 analysis freeze","merged_commit":"a7d1a5835d11ae5434c8dbec90513631aa293c28","path":"investigations/bottleneck-migration-110-analysis-freeze","git_tree":"ff91df1ca20bac836cf2d3e546ca9a23967031d7"},
+    {"identity":"Amendment 001 / PR #125","merged_commit":"b1865106814fc4732899efd3e999a97f417a213c","path":"investigations/bottleneck-migration-110-amendment-001","git_tree":"801474b53437343919a6b11e8d444805c73be76a"}
+  ],
+  "interfaces": [
+    {"identity":"shared inference core","path":"investigations/bottleneck-migration-110-amendment-001/inference_core.py","git_blob":"327df2e4b97be03e3e97ba3a5b24b0bc2f245db8","sha256":"3689012dc2603d6133423c3686b655a676ecaa620640332161607d113fcfaf2c"},
+    {"identity":"production analysis implementation","path":"investigations/bottleneck-migration-110-amendment-001/production_analysis.py","git_blob":"20fe101d1a2836f5f6f319e5f50cfc40794c3a12","sha256":"74bbd75100fa283d154375a4ef121a7e1381393b2b4dfdd76e893f6790353276"},
+    {"identity":"power engine","path":"investigations/bottleneck-migration-110-amendment-001/power-engine.py","git_blob":"ae748f4ce928ad6d947a69f443a9c2071116fd18","sha256":"93c17de661b914d7df52263e62826f29ac7a0249b45100828ffd87746f969628"},
+    {"identity":"sample-size freeze rule","path":"investigations/bottleneck-migration-110-amendment-001/sample-size-freeze-rule.json","git_blob":"923b265ed5cec863c04cad45a7000ab6c7a5eeea","sha256":"fd074ec42012f6ced69f852a57fedd714f2d3b430f8975eeeb746f4b15428849"}
+  ]
+}

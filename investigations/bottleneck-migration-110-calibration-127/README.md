@@ -1,11 +1,19 @@
 # Issue #127 outcome-blind calibration evidence acquisition
 
-The acquisition protocol was frozen in reachable commit
-`93e45f3879cd7dd927af01250d71881a15f6dd26` before calibration
-values were extracted. The subsequent acquisition exhausted the bounded local
-source class and made the three preregistered public-source attempts. All three
-external attempts were blocked by the environment's HTTP CONNECT proxy with a
-403 response. Deterministic UTF-8 JSON records retain the requested URL, timestamp, transport and proxy statuses, relevant headers, byte lengths, and SHA-256 identities of the original header/status captures; no source body was acquired.
+The acquisition protocol was frozen locally at commit identity
+`93e45f3879cd7dd927af01250d71881a15f6dd26` before calibration values were
+extracted. That local freeze commit and the first-evidence commit were not
+preserved as reachable commits in the published pull-request history, so GitHub
+CI does not claim to verify their ancestry. The protocol content remains bound
+by its recorded Git blob and SHA-256 identity, and the missing reachable-history
+proof is retained as a provenance limitation rather than silently repaired.
+
+The subsequent acquisition exhausted the bounded local source class and made
+the three preregistered public-source attempts. All three external attempts were
+blocked by the environment's HTTP CONNECT proxy with a 403 response.
+Deterministic UTF-8 JSON records retain the requested URL, timestamp, transport
+and proxy statuses, relevant headers, byte lengths, and SHA-256 identities of
+the original header/status captures; no source body was acquired.
 
 ## Required determination
 
@@ -41,9 +49,9 @@ harness conditions, explicit timestamps, and explicit
 censoring/attrition/environment-failure dispositions for every initiated run.
 Meeting that threshold does **not** establish that the sample is sufficient to
 justify repository independence or joint central sign symmetry. The pilot must
-also preregister a null-generating diagnostic capable of testing
-the **joint** score-vector symmetry claim. If that design cannot justify joint
-central sign symmetry prospectively, Issue #123 must remain blocked rather than
-changing the frozen inference model here.
+also preregister a null-generating diagnostic capable of testing the **joint**
+score-vector symmetry claim. If that design cannot justify joint central sign
+symmetry prospectively, Issue #123 must remain blocked rather than changing the
+frozen inference model here.
 
 Historical artifacts are immutable. AI output is not execution authorization.

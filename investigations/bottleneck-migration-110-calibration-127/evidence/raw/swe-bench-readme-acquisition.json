@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "requested_source": "https://raw.githubusercontent.com/princeton-nlp/SWE-bench/5f3e5f9dc6078a0df00a4a6a40c7553953112bcd/README.md",
+  "attempt_timestamp_utc": "2026-09-03T00:39:54Z",
+  "transport": {
+    "client": "curl",
+    "exit_code": 56,
+    "effective_http_status": "000",
+    "failure_classification": "CONNECT_TUNNEL_REJECTED_BY_PROXY",
+    "failure_message": "CONNECT tunnel failed, response 403"
+  },
+  "proxy_response": {
+    "http_status": 403,
+    "reason": "Forbidden",
+    "headers": {
+      "content-length": "9",
+      "content-type": "text/plain",
+      "date": "Thu, 03 Sep 2026 00:39:54 GMT",
+      "server": "envoy",
+      "connection": "close"
+    },
+    "original_header_bytes": {
+      "byte_length": 142,
+      "sha256": "77e4273d18b8691218767e5798e5149c875bbc872f868882b84d7325ad118007"
+    },
+    "original_status_capture_bytes": {
+      "byte_length": 4,
+      "sha256": "945e4893567554e68f6f28d5652917269341a5f3d295a16b7c708c9bfd95dc5d"
+    }
+  },
+  "source_content": {
+    "acquired": false,
+    "usable": false,
+    "byte_length": 0,
+    "sha256": null,
+    "statement": "No usable source content was acquired; curl did not create a response-body artifact."
+  }
+}

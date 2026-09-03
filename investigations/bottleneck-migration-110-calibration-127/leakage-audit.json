@@ -1,0 +1,15 @@
+{
+  "schema_version":"1.0",
+  "result":"PASS_NO_ISSUE_110_OUTCOME_LEAKAGE",
+  "checks":[
+    {"surface":"future Issue #110 study tasks/candidates","accessed":false},
+    {"surface":"LOW/HIGH effects","accessed":false},
+    {"surface":"candidate qualification outcomes","accessed":false},
+    {"surface":"Issue #110 acceptance outcomes","accessed":false},
+    {"surface":"binding or migration outcomes","accessed":false},
+    {"surface":"outcome-informed repository/task selection","accessed":false},
+    {"surface":"Issue #110 power final-N adjudication","executed":false}
+  ],
+  "non_study_sources_only":true,
+  "protocol_timing":"Protocol frozen at commit 93e45f3 before calibration values were extracted; only topology, filenames, top-level keys, and controlling contracts were inspected before freeze."
+}

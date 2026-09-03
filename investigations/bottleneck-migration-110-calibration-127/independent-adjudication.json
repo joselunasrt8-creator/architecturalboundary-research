@@ -1,0 +1,9 @@
+{
+  "schema_version":"1.0",
+  "required":"Reviewer independent of extraction verifies eligibility, hashes, calculations, blindness, and inferential assumptions.",
+  "reviewer":null,
+  "signed_at":null,
+  "signature":null,
+  "status":"ABSENT_BLOCKING",
+  "reason":"No independent human methodologist was available in the execution environment. AI self-review is not independent sign-off and is not represented as such."
+}

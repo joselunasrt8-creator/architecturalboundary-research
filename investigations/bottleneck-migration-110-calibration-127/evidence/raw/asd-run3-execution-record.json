@@ -1,0 +1,40 @@
+{
+  "accepted_transitions": 0,
+  "adjacent_measurements": [],
+  "attempted_objectives": [
+    "O1"
+  ],
+  "attempted_transitions": 1,
+  "candidate_attempts": 2,
+  "canonical_start": {
+    "branch": "work",
+    "commit": "c85ebace27b9773613a1941167132b3c7f844d84",
+    "status": "clean",
+    "tree": "3b71ed784d2635d7bc96ec9e1570b448cf5d3473"
+  },
+  "cumulative_measurements": [],
+  "entry_boundary": {
+    "BLOCKED": 0,
+    "FAIL": 0,
+    "PASS": 19
+  },
+  "final_determination": "EXPERIMENT_BLOCKED",
+  "historical_artifacts_immutable": true,
+  "observation_floor_reached": false,
+  "pre_execution_verification": "PASS",
+  "repair": {
+    "count": 1,
+    "limit": 1,
+    "used": true
+  },
+  "run_id": "ASD-RUN-3-PROSPECTIVE",
+  "schema_version": "1.0",
+  "stopped_under_frozen_rule": "repaired O1 candidate failed focused oracle",
+  "structural_results_withheld_from_generation_and_repair": true,
+  "t0": {
+    "commit": "f8e5a2c88f2ae7154052ffd90e225b1c2f3ab166",
+    "identity_verified": true,
+    "structural_sha256": "9d0c1c208509dd50d67bc198596241b5b4a5cf2232e43768901725dca9df8293",
+    "tree": "18cd9de245d2a0cdb73218ba500cc368485c71ac"
+  }
+}

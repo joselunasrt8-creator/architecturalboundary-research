@@ -1,0 +1,49 @@
+{
+  "acquisition_date_utc": "2026-09-03",
+  "blindness_boundary": {
+    "allowed": ["metadata and results from completed non-Issue-110 investigations", "public immutable external datasets collected independently of Issue #110"],
+    "prohibited": ["Issue #110 study tasks or candidates", "LOW/HIGH effects", "candidate qualification", "Issue #110 acceptance, binding, or migration outcomes", "outcome-informed repository or task selection"],
+    "pre_acquisition_inspection": "Only repository topology, file names, JSON top-level keys, and frozen #110/#123 contracts were inspected before this freeze; no calibration observation values were extracted.",
+    "study_outcomes_accessed": false
+  },
+  "comparability": {
+    "accept": "Evidence must measure the same operational event under software-maintenance agent tasks, or supply a justified transport relation fixed without #110 outcomes.",
+    "reject": ["different unit or event with no transport argument", "single-repository data for cross-repository dispersion", "unpaired data for paired-condition correlation", "selected successes without all eligible attempts"],
+    "population_target": "independently sampled eligible repositories and non-study software-maintenance tasks executed by the intended #110 harness"
+  },
+  "conservative_bounds": {
+    "binary_rates": "Two-sided 95% Clopper-Pearson interval; use the adverse endpoint (lower for acceptance, upper for censoring/attrition/environment failure).",
+    "correlation": "Two-sided 95% Fisher-z interval when at least four independent paired units exist; otherwise unavailable.",
+    "variance_components": "REML random-effects variance with a 95% profile-likelihood upper bound when at least five units at each relevant level exist; otherwise unavailable.",
+    "timing_variance": "Unbiased sample variance and chi-square 95% upper confidence bound when comparable uncensored durations for at least five independent tasks exist; otherwise unavailable.",
+    "zero_events": "Clopper-Pearson, not a zero point estimate.",
+    "selection_rule": "No bound may be substituted or widened/narrowed in response to power favorability. Unavailable remains unavailable."
+  },
+  "eligible_sources": [
+    {"class": "EXTERNAL DATA", "rule": "archived or published raw observations independent of Issue #110 with stable identity and adequate variable definitions"},
+    {"class": "PRE-STUDY CALIBRATION", "rule": "completed non-study tasks or operational dry runs fixed before any Issue #110 assignment and containing all eligible attempts"}
+  ],
+  "estimands": [
+    {"name": "baseline acceptance rate", "variable": "binary acceptance among all comparable attempts"},
+    {"name": "paired-condition correlation", "variable": "within-unit correlation of paired condition endpoint measurements"},
+    {"name": "timing variance", "variable": "variance of uncensored end-to-end task duration"},
+    {"name": "repository variance", "variable": "between-repository random-intercept variance"},
+    {"name": "task-class variance", "variable": "between-task-class random-intercept variance"},
+    {"name": "censoring", "variable": "right-censoring indicator among initiated executions"},
+    {"name": "attrition", "variable": "post-enrollment loss before analyzable completion"},
+    {"name": "environment-failure rate", "variable": "environment-caused terminal failure among initiated executions"}
+  ],
+  "exclusions": ["synthetic or simulated observations except labeled sensitivity analysis", "Issue #110 empirical outcomes in any blinded, pooled, or transformed form", "AI agreement, test passage, or simulation as evidence for inferential assumptions", "records lacking source identity or complete denominator", "post-selection on observed outcome", "duplicate/pseudoreplicated attempts"],
+  "independent_adjudication": "A reviewer not involved in extraction must verify source eligibility, hashes, calculation replay, blindness, and the two inferential-assumption assessments. Absence or non-independence of sign-off fails readiness.",
+  "inferential_assumptions": {
+    "joint_central_sign_symmetry": "Requires prospective domain evidence that, under the global null, the complete three-endpoint repository score vector has the same joint distribution as its negation; marginal symmetry is insufficient.",
+    "repository_independence": "Requires sampling-frame and provenance evidence excluding shared ancestry, contributors, infrastructure, duplicated tasks, and other cluster coupling for the intended repositories.",
+    "rule": "Evidence must precede #110 outcomes. Task-template randomization, simulations, synthetic data, passing tests, and AI agreement cannot establish either assumption. Failure cannot change the frozen inference model."
+  },
+  "missing_data": "Retain every missingness reason. Environment failures, attrition, and censoring are distinct indicators and are not silently dropped. Missing event classification makes the affected rate unavailable unless an adverse all-missing sensitivity bound is also reported.",
+  "post_observation_changes": "Forbidden. Corrections require a numbered prospective amendment that may only govern newly acquired observations; this protocol continues to govern evidence acquired under it.",
+  "provenance_required": ["source identifier", "immutable hash where possible", "acquisition date", "variables accessed", "evidence class", "estimator", "interval or bound", "exclusions and rationale", "extractor identity"],
+  "schema_version": "1.0",
+  "stopping_rule": "Stop after exhausting repository-local completed non-study records and at most three named public-source acquisition attempts. Report NOT_READY immediately if any nuisance bound or either inferential assumption remains unsupported; do not seek favorable replacements after seeing estimates.",
+  "variables_collected": ["source unit id", "repository id", "task class", "paired-unit id", "attempt initiated", "accepted", "start/end or duration", "censored", "attrited", "environment failure", "missingness reason"]
+}

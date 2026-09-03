@@ -1,0 +1,83 @@
+{
+  "acquisition_date_utc": "2026-09-03",
+  "protocol_freeze_commit": "93e45f3",
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "id": "LOCAL-ASD-109",
+      "class": "PRE-STUDY CALIBRATION",
+      "source": "investigations/agentic-structural-drift-109/execution-record.json",
+      "preserved": "evidence/raw/asd-run1-execution-record.json",
+      "sha256": "c8b4d29fef61df5fe47a79203120e0f3186e6cff245970979f559e6b0d14102f",
+      "variables_accessed": [
+        "candidate status",
+        "validation disposition",
+        "environmental failure narrative"
+      ],
+      "eligibility": "REJECTED_POPULATION_MISMATCH_AND_INCOMPLETE_DENOMINATORS",
+      "exclusion": "One repository/task and a different structural-drift protocol; no paired condition, duration, task-class/repository replication, or complete event indicators."
+    },
+    {
+      "id": "LOCAL-ASD-RUN3",
+      "class": "PRE-STUDY CALIBRATION",
+      "source": "investigations/agentic-structural-drift-run-3 execution and attempt identity records",
+      "preserved": [
+        "evidence/raw/asd-run3-execution-record.json",
+        "evidence/raw/asd-run3-attempt-1-identity.json",
+        "evidence/raw/asd-run3-attempt-2-identity.json"
+      ],
+      "sha256": [
+        "9276f1aaf7082d7684c066135406f1d534d70d5ab357467857c8bdbb317e2196",
+        "9a703dd73281c08283c07207198440ea9ebe38615781431b83d204a17022e506",
+        "c8414201a99f878d1dc47d6ab24ba42e73740c64c440eded63e75f6f1dc6a934"
+      ],
+      "variables_accessed": [
+        "attempt count",
+        "acceptance decision",
+        "failure taxonomy",
+        "environment identity"
+      ],
+      "eligibility": "REJECTED_POPULATION_MISMATCH_AND_MISSING_FIELDS",
+      "exclusion": "Two repair-linked attempts in one repository/task are not independent and do not represent paired #110 conditions; timestamps and explicit censoring/attrition indicators are absent."
+    },
+    {
+      "id": "EXTERNAL-SWEBENCH",
+      "class": "EXTERNAL DATA",
+      "source": "https://raw.githubusercontent.com/princeton-nlp/SWE-bench/5f3e5f9dc6078a0df00a4a6a40c7553953112bcd/README.md",
+      "preserved": "evidence/raw/swe-bench-readme-acquisition.json",
+      "transport_status": "curl exit 56; effective HTTP status 000; proxy HTTP response 403 CONNECT tunnel failed",
+      "eligibility": "UNAVAILABLE_ACQUISITION_BLOCKED",
+      "variables_accessed": [],
+      "sha256": "8d846104436867f6678220987bfd010def06fd9b02769184aefa22632d041eed",
+      "source_content_acquired": false,
+      "source_content_byte_length": 0,
+      "usable_source_content_acquired": false
+    },
+    {
+      "id": "EXTERNAL-METR-TASK-STANDARD",
+      "class": "EXTERNAL DATA",
+      "source": "https://raw.githubusercontent.com/METR/task-standard/main/README.md",
+      "preserved": "evidence/raw/metr-task-standard-readme-acquisition.json",
+      "transport_status": "curl exit 56; effective HTTP status 000; proxy HTTP response 403 CONNECT tunnel failed",
+      "eligibility": "UNAVAILABLE_ACQUISITION_BLOCKED",
+      "variables_accessed": [],
+      "sha256": "d24260f1a5a20d093cb30e6e4c477d038240092062846b3f30bc5c7454cb8e1f",
+      "source_content_acquired": false,
+      "source_content_byte_length": 0,
+      "usable_source_content_acquired": false
+    },
+    {
+      "id": "EXTERNAL-GITHUB-ACTIONS",
+      "class": "EXTERNAL DATA",
+      "source": "https://api.github.com/repos/joselunasrt8-creator/architecturalboundary-research/actions/runs?per_page=100",
+      "preserved": "evidence/raw/github-actions-runs-acquisition.json",
+      "transport_status": "curl exit 56; effective HTTP status 000; proxy HTTP response 403 CONNECT tunnel failed",
+      "eligibility": "UNAVAILABLE_ACQUISITION_BLOCKED",
+      "variables_accessed": [],
+      "sha256": "3b622f75bd02c84c1df904fa79db584be8933bc5ff2396f2175e22325fcf7acb",
+      "source_content_acquired": false,
+      "source_content_byte_length": 0,
+      "usable_source_content_acquired": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version":"1.0",
+  "checks":[
+    {"test":"Issue #110 outcome leakage","result":"PASS"},
+    {"test":"synthetic promoted to empirical","result":"PASS","evidence":"No synthetic observations or bounds are present."},
+    {"test":"circular calibration","result":"PASS","evidence":"No Issue #110 outcome or power result selected evidence."},
+    {"test":"pseudoreplication","result":"BLOCKER_FOUND","evidence":"Two Run 3 attempts are repair-linked; descriptive interval is explicitly nontransportable."},
+    {"test":"repository dependence","result":"BLOCKER_FOUND","evidence":"Only one repository is represented."},
+    {"test":"unsupported sign symmetry","result":"BLOCKER_FOUND"},
+    {"test":"population mismatch","result":"BLOCKER_FOUND","evidence":"Local structural-drift runs do not satisfy the intended #110 calibration population."},
+    {"test":"bounds selected for favorable power","result":"PASS","evidence":"Every Issue #110 bound remains null and the power engine was not run."},
+    {"test":"censoring sensitivity","result":"BLOCKER_FOUND"},
+    {"test":"attrition sensitivity","result":"BLOCKER_FOUND"},
+    {"test":"environment-failure sensitivity","result":"BLOCKER_FOUND"},
+    {"test":"provenance gaps","result":"BLOCKER_FOUND","evidence":"External bodies could not be acquired; local records omit required variables."},
+    {"test":"artifact/hash drift","result":"PASS","evidence":"Deterministic test binds historical trees/interfaces and raw evidence hashes."},
+    {"test":"post-observation protocol changes","result":"PASS","evidence":"Protocol is isolated in prior commit 93e45f3 and unchanged afterward."}
+  ],
+  "determination":"CALIBRATION_EVIDENCE_NOT_READY",
+  "experiment_readiness":"BOTTLENECK_EXPERIMENT_NOT_READY"
+}

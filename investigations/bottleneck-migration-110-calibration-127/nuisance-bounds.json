@@ -1,0 +1,17 @@
+{
+  "schema_version":"1.0",
+  "calculation_method":"Frozen in calibration-acquisition-protocol.json; no power engine invocation.",
+  "descriptive_nontransportable_calculations":[{"quantity":"acceptance among ASD Run 3 repair-linked attempts","x":0,"n":2,"interval_method":"two-sided 95% Clopper-Pearson","interval":[0.0,0.841886116991581],"issue_110_bound":false}],
+  "nuisance_quantities":[
+    {"name":"baseline acceptance rate","bound":null,"status":"UNAVAILABLE","reason":"Observed 0/2 linked non-study attempts fail independence and population comparability."},
+    {"name":"paired-condition correlation","bound":null,"status":"UNAVAILABLE","reason":"No source contains paired intended-condition endpoint measurements."},
+    {"name":"timing variance","bound":null,"status":"UNAVAILABLE","reason":"No acquired comparable source contains start/end timestamps or durations."},
+    {"name":"repository variance","bound":null,"status":"UNAVAILABLE","reason":"All acquired local observations come from one repository; external bodies were unavailable."},
+    {"name":"task-class variance","bound":null,"status":"UNAVAILABLE","reason":"No acquired source has five independent units in each intended task class."},
+    {"name":"censoring","bound":null,"status":"UNAVAILABLE","reason":"Censoring disposition is not explicitly recorded for every initiated run."},
+    {"name":"attrition","bound":null,"status":"UNAVAILABLE","reason":"Enrollment and analyzable-completion dispositions are not explicitly recorded."},
+    {"name":"environment-failure rate","bound":null,"status":"UNAVAILABLE","reason":"One narrative reports mixed environment and task failures, while records lack a comparable complete classified denominator."}
+  ],
+  "all_eight_defensible":false,
+  "synthetic_values_used":false
+}

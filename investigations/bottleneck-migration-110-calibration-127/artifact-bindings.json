@@ -10,7 +10,9 @@
     "protocol_git_blob": "9e31d18b214a26c8d3867c67c338a084bf8f0004",
     "protocol_sha256": "6d78ff20fe248c89da0af452c7b8b1eda30004a3d0171cbc1b2cd09a0807c78d",
     "evidence_absent_at_freeze": true,
-    "first_evidence_commit": "4f3446e3607260709f6fff71cfe3483caf78dd62"
+    "first_evidence_commit": "4f3446e3607260709f6fff71cfe3483caf78dd62",
+    "repository_reachable_history": false,
+    "reachability_note": "The local Codex execution recorded the freeze and first-evidence commit identities, but those two commits were not preserved as reachable commits in the published PR branch. GitHub CI therefore must not claim to verify their ancestry. The protocol blob/SHA identity remains bound, and readiness remains fail-closed."
   },
   "schema_version": "1.0",
   "trees": [

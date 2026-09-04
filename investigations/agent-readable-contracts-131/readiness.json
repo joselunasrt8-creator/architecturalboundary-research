@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "investigation": "agent-readable-contracts-131",
+  "audit_date": "2026-09-04",
+  "rule": "READY iff every mandatory entry is PASS before any outcome-bearing invocation.",
+  "execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "entries": [
+    {
+      "id": "research_question",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "preregistration.json#/research_question"
+    },
+    {
+      "id": "conditions",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "preregistration.json#/conditions"
+    },
+    {
+      "id": "minimum_contract_schema",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "candidate-contract.schema.json"
+    },
+    {
+      "id": "candidate_cohort",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "preregistration.json#/cohort"
+    },
+    {
+      "id": "outcome_and_analysis",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "preregistration.json#/outcomes and /analysis"
+    },
+    {
+      "id": "intervention_stopping_authority",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "preregistration.json#/agent_environment and /authority_rule"
+    },
+    {
+      "id": "evidence_schema",
+      "mandatory": true,
+      "status": "PASS",
+      "evidence": "run-evidence.schema.json"
+    },
+    {
+      "id": "immutable_upstream_inspection",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "MindShift revision recorded, but source tree and MS-76-HANDOFF-001 bytes unavailable (HTTP 401/403); do not infer exact content"
+    },
+    {
+      "id": "condition_context_byte_freeze",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "Contract instances, ordinary-context manifests, and bounded reference-example bytes/hashes do not yet exist"
+    },
+    {
+      "id": "hidden_validation_oracles",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "Task behavior is frozen, but evaluator-owned hidden fixtures and scope-gate bytes/hashes do not yet exist"
+    },
+    {
+      "id": "runner_build_and_image",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "Hosted framework is identified but exact runner build/container digest is unavailable"
+    },
+    {
+      "id": "independent_rubric_reviewer",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "No reviewer has been prospectively named or claimed"
+    },
+    {
+      "id": "execution_authorization",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "evidence": "This readiness task does not authorize model invocation"
+    }
+  ],
+  "counts": {
+    "PASS": 7,
+    "BLOCKED": 6,
+    "FAIL": 0
+  },
+  "guards": {
+    "no_agent_invocation": true,
+    "no_candidate_generation": true,
+    "no_outcome_inspection": true,
+    "no_empirical_claim": true,
+    "no_issue_130_evidence": true,
+    "no_authority_granted": true
+  },
+  "determination": "EXPERIMENT_NOT_READY_FOR_EXECUTION"
+}

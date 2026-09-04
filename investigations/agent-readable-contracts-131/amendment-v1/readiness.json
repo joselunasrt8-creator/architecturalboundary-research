@@ -1,0 +1,108 @@
+{
+  "audit_date": "2026-09-04",
+  "counts": {
+    "BLOCKED": 4,
+    "FAIL": 0,
+    "PASS": 9
+  },
+  "determination": "EXPERIMENT_BLOCKED",
+  "entries": [
+    {
+      "evidence": "preregistration.json#/research_question",
+      "id": "research_question",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "preregistration.json#/conditions",
+      "id": "conditions",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "candidate-contract.schema.json",
+      "id": "minimum_contract_schema",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "preregistration.json#/cohort",
+      "id": "candidate_cohort",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "preregistration.json#/outcomes and /analysis",
+      "id": "outcome_and_analysis",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "preregistration.json#/agent_environment and /authority_rule",
+      "id": "intervention_stopping_authority",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "run-evidence.schema.json",
+      "id": "evidence_schema",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "amendment-v1/amendment.json#/upstream: immutable retrieval attempted but denied; tree/artifact paths/bytes remain unverified",
+      "id": "immutable_upstream_inspection",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "amendment-v1/contexts/manifests/*.json; deterministic equivalence and byte checks in validate.py",
+      "id": "condition_context_byte_freeze",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "amendment-v1/evaluator/oracle-manifest.json and evaluator/oracle.py",
+      "id": "hidden_validation_oracles",
+      "mandatory": true,
+      "status": "PASS"
+    },
+    {
+      "evidence": "amendment-v1/environment.json: reproducible exposed controls frozen; immutable model revision, runner build, and image digest not exposed",
+      "id": "runner_build_and_image",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "amendment-v1/amendment.json#/reviewer: required independent human not yet identified",
+      "id": "independent_rubric_reviewer",
+      "mandatory": true,
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": "amendment-v1/amendment.json#/authorization: no authority-issued authorization object exists",
+      "id": "execution_authorization",
+      "mandatory": true,
+      "status": "BLOCKED"
+    }
+  ],
+  "execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "guards": {
+    "no_agent_invocation": true,
+    "no_authority_granted": true,
+    "no_candidate_generation": true,
+    "no_empirical_claim": true,
+    "no_issue_130_evidence": true,
+    "no_outcome_inspection": true
+  },
+  "investigation": "agent-readable-contracts-131",
+  "remaining_external_gates": [
+    "immutable MindShift artifact access",
+    "sufficient immutable hosted runner/model identity",
+    "independent human reviewer binding",
+    "explicit project-authority execution authorization"
+  ],
+  "rule": "READY iff every mandatory entry is PASS before any outcome-bearing invocation.",
+  "schema_version": "1.0",
+  "supersedes_for_future_entry_decisions": "../readiness.json"
+}

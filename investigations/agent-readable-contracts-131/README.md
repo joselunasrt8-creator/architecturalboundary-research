@@ -67,3 +67,11 @@ All outcome-bearing execution is prohibited until every mandatory item in
 The present bounded determination is:
 
 **EXPERIMENT_NOT_READY_FOR_EXECUTION**
+
+## Prospective readiness amendment 001
+
+`amendment-v1/` supplements—but does not rewrite—this frozen PR #132 package.
+It freezes condition contexts and evaluator-owned hidden oracles, records the
+strongest exposed runner identity, and preserves the exact external gates that
+repository-side work cannot satisfy. Its updated determination is
+`EXPERIMENT_BLOCKED`; no experimental agent invocation is authorized.

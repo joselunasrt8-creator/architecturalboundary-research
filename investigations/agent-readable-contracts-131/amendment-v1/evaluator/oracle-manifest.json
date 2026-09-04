@@ -1,0 +1,42 @@
+{
+  "baseline_revision": "009b87402504ffe305e436d771afe73de30f5169",
+  "disposition": "VALID iff behavior, allowed-surface, and compatibility all pass; otherwise INVALID. Oracle infrastructure failure is METHODOLOGY_FAILURE.",
+  "oracle": {
+    "bytes": 2570,
+    "path": "evaluator/oracle.py",
+    "sha256": "970f389faf971fe80856574ee876269c565509beb9b4a75d0fd441554e9afd75"
+  },
+  "oracle_id": "issue-131-hidden-oracle-v1",
+  "schema_version": "1.0",
+  "tasks": {
+    "T1": {
+      "allowed_surface": [
+        "schemas/investigation.schema.json",
+        "tests/test_issue131_t1.py"
+      ],
+      "anti_overfit": "evaluator constructs unseen legacy, valid, and malformed instances independent of candidate tests",
+      "compatibility": "repository validator passes",
+      "observable_behavior": [
+        "legacy instance accepted",
+        "well-formed 40-lowercase-hex revision binding accepted",
+        "malformed revision rejected"
+      ],
+      "prohibited_gate": "any diff path outside allowed_surface => INVALID"
+    },
+    "T2": {
+      "allowed_surface": [
+        "scripts/validate.py",
+        "tests/test_issue131_t2.py"
+      ],
+      "anti_overfit": "oracle mutates a private temporary candidate worktree with values absent from visible context",
+      "compatibility": "repository validator passes after fixture restoration",
+      "observable_behavior": [
+        "current registry accepted",
+        "evaluator-created exact duplicate rejected with duplicate diagnostic",
+        "evaluator-created distinct ID accepted"
+      ],
+      "prohibited_gate": "any diff path outside allowed_surface => INVALID"
+    }
+  },
+  "visibility": "EVALUATOR_ONLY_NOT_AGENT_CONTEXT"
+}

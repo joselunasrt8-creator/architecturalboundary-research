@@ -1,0 +1,1216 @@
+{
+  "baseline_revision": "009b87402504ffe305e436d771afe73de30f5169",
+  "condition": "C",
+  "presentation_order": [
+    {
+      "bytes": 523,
+      "kind": "task_prompt",
+      "sha256": "0edfed187317abf4b121c19e44311560920114effd3f39690baf3a55c6c5ca6e",
+      "source": "contexts/prompts/T1.md"
+    },
+    {
+      "bytes": 536,
+      "kind": "ordinary_documentation",
+      "path": "CONTRIBUTING.md",
+      "sha256": "78eb5192abfe0ff929c326f81aaca6405201bd2297cd45db8a569de1592f1972",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:CONTRIBUTING.md"
+    },
+    {
+      "bytes": 4224,
+      "kind": "ordinary_documentation",
+      "path": "MOVES.md",
+      "sha256": "fead5187214a88f74082bfa71f02ba07d8c71bf855dff09bd09140ab23e04ead",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:MOVES.md"
+    },
+    {
+      "bytes": 9506,
+      "kind": "ordinary_documentation",
+      "path": "README.md",
+      "sha256": "7ff7ceeaba6e6eb711303e3cd4bffea7d40bced43b6873dbeb6a428d8ff52d86",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:README.md"
+    },
+    {
+      "bytes": 556,
+      "kind": "ordinary_documentation",
+      "path": "REPRODUCIBILITY.md",
+      "sha256": "80c7517ca642d12ee428b818da02f127f654de1fe8613ce01abccc2d43666050",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:REPRODUCIBILITY.md"
+    },
+    {
+      "bytes": 454,
+      "kind": "ordinary_documentation",
+      "path": "ROADMAP.md",
+      "sha256": "0d8477c474ad015720a5b7da44fd7691fb151fab481b6f05cdb8c1a97f181808",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:ROADMAP.md"
+    },
+    {
+      "bytes": 213,
+      "kind": "ordinary_documentation",
+      "path": "analysis/README.md",
+      "sha256": "7a87aa8d36eeb09d34f4cad5b1d24fa757bbeae48c6f30315d0ff183065bf9e0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:analysis/README.md"
+    },
+    {
+      "bytes": 339,
+      "kind": "ordinary_documentation",
+      "path": "ci/README.md",
+      "sha256": "ca4d1b45a279b77b74d6158024c5e05c1aa1e8fc929e07b2cf3426b549e87f71",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:ci/README.md"
+    },
+    {
+      "bytes": 124,
+      "kind": "ordinary_documentation",
+      "path": "datasets/README.md",
+      "sha256": "8ba49903f6c8df5bb8e2b7ad77a358fdbeeb237eb495f9af25a898f7a3614abe",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:datasets/README.md"
+    },
+    {
+      "bytes": 69,
+      "kind": "ordinary_documentation",
+      "path": "datasets/canonical/README.md",
+      "sha256": "c804f8adcc7409ba5b332afd664ffc1b0eededf92b0505e877a0cafac04eb013",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:datasets/canonical/README.md"
+    },
+    {
+      "bytes": 73,
+      "kind": "ordinary_documentation",
+      "path": "datasets/comparative/README.md",
+      "sha256": "f8b6a8f7c992bde64151cef6f73ec5c624598b9f42a7672ea697b97e1e08c867",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:datasets/comparative/README.md"
+    },
+    {
+      "bytes": 65,
+      "kind": "ordinary_documentation",
+      "path": "datasets/exports/README.md",
+      "sha256": "cecd521d3470d276e59d6630ad789bc07d81fa15c2b1477a4bc12a9b3b66cb19",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:datasets/exports/README.md"
+    },
+    {
+      "bytes": 1872,
+      "kind": "ordinary_documentation",
+      "path": "docs/README.md",
+      "sha256": "100278bba771da05f3e8c3bb2a6d6b48f7669ee3100df9d35033328379bd36bd",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/README.md"
+    },
+    {
+      "bytes": 149,
+      "kind": "ordinary_documentation",
+      "path": "docs/glossary.md",
+      "sha256": "a7aaf7227f670619a5e03db48bdf0ed9e0e8e23133ed196fc1a92dbc928cef87",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/glossary.md"
+    },
+    {
+      "bytes": 17013,
+      "kind": "ordinary_documentation",
+      "path": "docs/higher_order_abstraction.md",
+      "sha256": "e9d4171431880b836178787258fe62b504b373ec72e79612f95b5fbe6494f723",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/higher_order_abstraction.md"
+    },
+    {
+      "bytes": 162,
+      "kind": "ordinary_documentation",
+      "path": "docs/methodology.md",
+      "sha256": "6ea53d16cfb7f83cc18e54f2a2a5dd6c099ee9eb52836b751d62aceb5d75b1e1",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/methodology.md"
+    },
+    {
+      "bytes": 51610,
+      "kind": "ordinary_documentation",
+      "path": "docs/minimal_promotion_package.md",
+      "sha256": "889c84adbf570714c43b9d8e549be8b2dcea8550c92befb954abedfe41aa6f8f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/minimal_promotion_package.md"
+    },
+    {
+      "bytes": 5030,
+      "kind": "ordinary_documentation",
+      "path": "docs/publication.md",
+      "sha256": "11cbbe284e39b70d3c57b1dfcf1e9f89a975a0d245f5e9dc4d204f0f6d65496b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/publication.md"
+    },
+    {
+      "bytes": 1318,
+      "kind": "ordinary_documentation",
+      "path": "docs/publication_readiness_audit.md",
+      "sha256": "ec9e80b81f268972700b5aeeb13d736884ebbdb3d3eaa61414b97f1ea0206632",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/publication_readiness_audit.md"
+    },
+    {
+      "bytes": 8524,
+      "kind": "ordinary_documentation",
+      "path": "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-freeze-record.md",
+      "sha256": "0332f1bc72ae1b763d54310fedba095f40e1ee77485d73218afdaf1ed205b944",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/reference-execution/v1.0/architectural-investigation-instrument-v1-freeze-record.md"
+    },
+    {
+      "bytes": 14822,
+      "kind": "ordinary_documentation",
+      "path": "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md",
+      "sha256": "6374780685c02713516888a6b3d11dcdf62bc6276d47f2812b310e2bafcfa086",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md"
+    },
+    {
+      "bytes": 8920,
+      "kind": "ordinary_documentation",
+      "path": "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-review-issue-107.md",
+      "sha256": "3d2e5c7e1c847b31c87cd1b5975f60d429abc5d7b49d4888e643304e373f2ee8",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-review-issue-107.md"
+    },
+    {
+      "bytes": 24994,
+      "kind": "ordinary_documentation",
+      "path": "docs/reference-execution/v1.0/freeze-readiness-record.md",
+      "sha256": "9f7ae59d24cf70e161924b68dd08c75a0d2cdbe14f9d4d1036b0366f026926ca",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/reference-execution/v1.0/freeze-readiness-record.md"
+    },
+    {
+      "bytes": 207,
+      "kind": "ordinary_documentation",
+      "path": "docs/research_pipeline.md",
+      "sha256": "c02152edd8de06c07ac8afdf1d536a4d7f537c06454113fd5bb2e5db37d00225",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:docs/research_pipeline.md"
+    },
+    {
+      "bytes": 133,
+      "kind": "ordinary_documentation",
+      "path": "evidence/README.md",
+      "sha256": "bcd5dc4db2ba6b8ff763dea902911b1e0d46c7388967ac6fc9836dffde83b5ad",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:evidence/README.md"
+    },
+    {
+      "bytes": 100,
+      "kind": "ordinary_documentation",
+      "path": "figures/README.md",
+      "sha256": "3f3d806bc267653c0c53b48af3868f2db136702a61f9de4b25eb1d429db53dcd",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:figures/README.md"
+    },
+    {
+      "bytes": 961,
+      "kind": "ordinary_documentation",
+      "path": "instrument/README.md",
+      "sha256": "c5c22e8d1946acd1132967ea24c254a4e0f964b7d36bbe98513dc77bc5c29313",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/README.md"
+    },
+    {
+      "bytes": 2544,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/README.md",
+      "sha256": "dc4a4737b5f46c053e18169d241d2ed077251b3da4027f827f9f342661b5e977",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/README.md"
+    },
+    {
+      "bytes": 6042,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/calibration-contract.md",
+      "sha256": "1c003ecb2ae94f6202cc03f1d73183607f8805b2ce9894af66e4c89b4dfa9d00",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/calibration-contract.md"
+    },
+    {
+      "bytes": 2220,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/README.md",
+      "sha256": "688fd11f09d061fcba7da1b57e9610cf950c2139437ef65c082a733e6bfd81ca",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/README.md"
+    },
+    {
+      "bytes": 1192,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/calibration/README.md",
+      "sha256": "6d39c9df3b60b2d85ddbd66a550481dd1010b325f59b6f1ed7ace5ca3e1bc51f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/calibration/README.md"
+    },
+    {
+      "bytes": 1475,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/calibration/exemplar-mapping.md",
+      "sha256": "e8dac7c1fad8663ee27135ef473b0de3c473deab3562d1bcc0688a4edcd622bc",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/calibration/exemplar-mapping.md"
+    },
+    {
+      "bytes": 1715,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/calibration/review-record.md",
+      "sha256": "692d201a911f41a6083df3e85be22ef2946cd469b4ce7478cedeb223d322dcd8",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/calibration/review-record.md"
+    },
+    {
+      "bytes": 1977,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/compatibility.md",
+      "sha256": "942de58d8fe070dd325ef45dbb48efb12b4fd1298325f82505e6e773fd43081d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/compatibility.md"
+    },
+    {
+      "bytes": 3519,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/conflict-precedence-and-supersession.md",
+      "sha256": "c3bcaa24eb5fd8e26b13768d2d475b10554787638036aebbd6010c2f1ef317d0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/conflict-precedence-and-supersession.md"
+    },
+    {
+      "bytes": 8403,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/evidence-and-authority.md",
+      "sha256": "72f0f55803a3e3b8a23e14c956940fed8ef94028a492139925978c7f5bbfd1e0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/evidence-and-authority.md"
+    },
+    {
+      "bytes": 1704,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/gap-resolution-register.md",
+      "sha256": "18e934de20764f7b63b4e1c8ffa7b418e441fa4d06930ce5135337c155180837",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/gap-resolution-register.md"
+    },
+    {
+      "bytes": 4305,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/legitimacy-crosswalk.md",
+      "sha256": "42fad66c0be3b962999552ef0998b232daac063fc6ac1a21d45a3f71be3faadf",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/legitimacy-crosswalk.md"
+    },
+    {
+      "bytes": 5976,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/maturity-and-transitions.md",
+      "sha256": "91bd0fb75f817b0c3c786c2d33449a05cd53793eafa240ccbf30e55cb456920a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/maturity-and-transitions.md"
+    },
+    {
+      "bytes": 2243,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/candidate-2/readiness-and-binding.md",
+      "sha256": "b6d0c61aea61d6cc023c3b1590122a60fefb583079a2235c492978f92707bda4",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/candidate-2/readiness-and-binding.md"
+    },
+    {
+      "bytes": 4348,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/compatibility-and-supersession.md",
+      "sha256": "71b600ac05bad83649528e34541796feb3c15c6b8930b1e794874ff6278e0cb7",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/compatibility-and-supersession.md"
+    },
+    {
+      "bytes": 5971,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/execution-record-contract.md",
+      "sha256": "203baae2b004873a0c88e7714e99ed1bf1a23e1eb460f08065d9b95c2ae2f8ab",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/execution-record-contract.md"
+    },
+    {
+      "bytes": 7889,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/specification.md",
+      "sha256": "ef058c5c5e4524a2b47cbddcdd290b74ce9d988d1203b6abc358407f40df1216",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/specification.md"
+    },
+    {
+      "bytes": 3588,
+      "kind": "ordinary_documentation",
+      "path": "instrument/architectural-investigation/v1/unresolved-normative-gaps.md",
+      "sha256": "d4e264c2fc22f2a49bb8514552628ec1151d44c089a938432884512039452d6b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:instrument/architectural-investigation/v1/unresolved-normative-gaps.md"
+    },
+    {
+      "bytes": 551,
+      "kind": "ordinary_documentation",
+      "path": "investigations/README.md",
+      "sha256": "a38403731d7c0a4607aee23842e16b9d75b3eed84a3acca426e27a2459d0224c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/README.md"
+    },
+    {
+      "bytes": 575,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-109/README.md",
+      "sha256": "f5f355886b10f0d246951bef735df0d279bf86160c8d19c1864ac7607c0b319b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-109/README.md"
+    },
+    {
+      "bytes": 9766,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-cross-run-analysis/README.md",
+      "sha256": "536e53d9697c9eb9378a190e50c741362ebe866b0229bc93e7ccfd8e27e871d7",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-cross-run-analysis/README.md"
+    },
+    {
+      "bytes": 1354,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-harness-audit-114/README.md",
+      "sha256": "95a615df1a07407df8f43967064f5d88d365b2ce0646390dc7a0d4060507e577",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-harness-audit-114/README.md"
+    },
+    {
+      "bytes": 7068,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-harness-audit-114/audit.md",
+      "sha256": "d5995e4ce43b8ff0155253f6cfa1fb5945e7d6844840c88ae4530aacf2ed410c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-harness-audit-114/audit.md"
+    },
+    {
+      "bytes": 7144,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-harness-audit-114/protocol-revisions.md",
+      "sha256": "2718ef51d25b9dc06f16595497d75e4e74bdda7ac0e3c702c0fee679af7dc3db",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-harness-audit-114/protocol-revisions.md"
+    },
+    {
+      "bytes": 4203,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-harness-audit-114/run-3-entry-conditions.md",
+      "sha256": "bd02283bd23d774526e7c57c6e37f28cf3222c8259e770e6135bbc28da5a0120",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-harness-audit-114/run-3-entry-conditions.md"
+    },
+    {
+      "bytes": 1129,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-2/README.md",
+      "sha256": "cea32340bbd29df5c35ca4385a902b0989c29f6a37604effad220157ea72d78c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-2/README.md"
+    },
+    {
+      "bytes": 9203,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-2/preregistration.md",
+      "sha256": "84816f4a1594d27bef1ea5d5b87aedfcd48558e46b8f1303f9ce55709509ec07",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-2/preregistration.md"
+    },
+    {
+      "bytes": 2003,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-2/repository-selection.md",
+      "sha256": "80a5de1111fa3180f675f0ad4b58bc167261ba2b8f4c1803eac8533eddcb367d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-2/repository-selection.md"
+    },
+    {
+      "bytes": 3920,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-2/results.md",
+      "sha256": "9434e0910b765f446cfe8c0e85ad26b11e603383d887c00824e3f28e233376a1",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-2/results.md"
+    },
+    {
+      "bytes": 2571,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-2/transitions/t1.md",
+      "sha256": "0c4a816a93d1c8c7c0f6225d251946593ace6595fd0dcb919ab51fbf95b951a0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-2/transitions/t1.md"
+    },
+    {
+      "bytes": 3326,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-3-preflight-amendment/README.md",
+      "sha256": "faf2510ee6fc8120afa51d8d106383faa1fe36336ffbe1ebd94d442932222864",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-3-preflight-amendment/README.md"
+    },
+    {
+      "bytes": 1679,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-3-preflight/README.md",
+      "sha256": "053f275ace3ed269b8f35e2c3a1e5f9fd2bd6223e3ceef511433c038d46ef207",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-3-preflight/README.md"
+    },
+    {
+      "bytes": 2049,
+      "kind": "ordinary_documentation",
+      "path": "investigations/agentic-structural-drift-run-3/README.md",
+      "sha256": "1f7f7b8833f73f5aa7e7f1fa1ed96f6eaec7f96fe42d5c54c458b4a78d8f74f0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/agentic-structural-drift-run-3/README.md"
+    },
+    {
+      "bytes": 90,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/README.md",
+      "sha256": "0ef35f92b326246f351b724afdf21fcc986a9828e306051f794e488bba2ebc19",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/README.md"
+    },
+    {
+      "bytes": 136,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/analysis/README.md",
+      "sha256": "a7433bb6172504806116ca5144cb32995dd7190f0ed8062173bac6f93767ee22",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/analysis/README.md"
+    },
+    {
+      "bytes": 138,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/artifacts/README.md",
+      "sha256": "22d98a0af40e7d10e7e808730a5fd1d6e6438b0effea9ddd6299144299f20000",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/artifacts/README.md"
+    },
+    {
+      "bytes": 126,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/bor/README.md",
+      "sha256": "03bbf3c6a7ad2fc666321f093eea95dc465b27cb497faf217ba0dbcfa5992d5c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/bor/README.md"
+    },
+    {
+      "bytes": 134,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/dataset/README.md",
+      "sha256": "3d22eb0c9444bc63363d512dc1a130be2c036e3ed92bbbb08f85a5d52d698de0",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/dataset/README.md"
+    },
+    {
+      "bytes": 126,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/der/README.md",
+      "sha256": "21d8a6803c9a6ab9d87c2263d8c70345e558e1a08af1dbdf1a83233a904c2c20",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/der/README.md"
+    },
+    {
+      "bytes": 134,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/figures/README.md",
+      "sha256": "cc10b87d6f0a1d8ea973d1734e48e5a9fc222876fd617439c24744cea0e3fec2",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/figures/README.md"
+    },
+    {
+      "bytes": 233,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/investigation-design.md",
+      "sha256": "0ff4635c7c359e0af902153eaf03312043ea05e1dc00aa6380e3b75f956dd4a1",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/investigation-design.md"
+    },
+    {
+      "bytes": 140,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/literature/README.md",
+      "sha256": "119d6a01f4b083026331db06d9d7fd80c73417989d3b71c2b563509bcddb445f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/literature/README.md"
+    },
+    {
+      "bytes": 126,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/msr/README.md",
+      "sha256": "e3ccf4be9b3e22292c1cfb65904f695ac4c350c81b63cc432a3ab498b31185df",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/msr/README.md"
+    },
+    {
+      "bytes": 168,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/preregistration.md",
+      "sha256": "c68d644a34442d12973c396098a7b55a37f342832c7d5ff1124355cd5b0ba5a7",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/preregistration.md"
+    },
+    {
+      "bytes": 134,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/results/README.md",
+      "sha256": "78cb595234a91982d0c67ed1904a5c0471344fe18d3fb67ed2252837122dbe2c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/results/README.md"
+    },
+    {
+      "bytes": 126,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b1-three-system-pilot/srf/README.md",
+      "sha256": "a07706cd7a3413f7e4850dfb2f7d4ec9955d0b6a2065cf1fa08c7c6fd344d9c6",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b1-three-system-pilot/srf/README.md"
+    },
+    {
+      "bytes": 818,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/README.md",
+      "sha256": "fe570a48eef2f997628d923e6757bc0c5864dcc6b9ae47a210f16f799578804a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/README.md"
+    },
+    {
+      "bytes": 404,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/analysis/README.md",
+      "sha256": "a76bc3d77baad4a60924329f4f5998b1dc3588edc089829f48e093614ece802f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/analysis/README.md"
+    },
+    {
+      "bytes": 137,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/artifacts/README.md",
+      "sha256": "a241469388a33ae790b80203e43bc09eb1b3bd0c190569489e0c069639ff9025",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/artifacts/README.md"
+    },
+    {
+      "bytes": 547,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/artifacts/archive/legacy-multi-bor-compilation/README.md",
+      "sha256": "3595880b24e96d12dd26d26801b558cb2e3cb31acf2c6ae881c556ea0e833051",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/artifacts/archive/legacy-multi-bor-compilation/README.md"
+    },
+    {
+      "bytes": 540,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/artifacts/archive/obsolete-bor-audit/README.md",
+      "sha256": "5ec98669168753947acb89c0650c41279c94576d9009fd6ce5900124bcd7db65",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/artifacts/archive/obsolete-bor-audit/README.md"
+    },
+    {
+      "bytes": 5677,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/artifacts/archive/obsolete-bor-audit/bor_audit_report.md",
+      "sha256": "8a1a07e3b4a4e3208fe598a2ba41c9ad4428d1be77b47f51b852d2215186db0e",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/artifacts/archive/obsolete-bor-audit/bor_audit_report.md"
+    },
+    {
+      "bytes": 535,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/artifacts/bor-baseline-collection/README.md",
+      "sha256": "7639b8a0d41e0c0e9510afeddd8e42dd6027451776a4b637ade3599c8224bc26",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/artifacts/bor-baseline-collection/README.md"
+    },
+    {
+      "bytes": 125,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/bor/README.md",
+      "sha256": "4111263aca7c2bb812a0f727a3475053980cf881d8658074d46f9b46091a42ed",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/bor/README.md"
+    },
+    {
+      "bytes": 353,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/dataset/README.md",
+      "sha256": "e9678aa5351e59ddd5fea16abf6599c2a9b4c0355589b8f40f747e355bbee7ec",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/dataset/README.md"
+    },
+    {
+      "bytes": 1485,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/der/README.md",
+      "sha256": "7b876feef51320c98123a6e8e7d7fc88818035d1ca302f36ecef39169343edb9",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/der/README.md"
+    },
+    {
+      "bytes": 133,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/figures/README.md",
+      "sha256": "ef84d0d533a5c05ee77a5595ec65285d64cdab8073b1d8ffae3cf1cebc3735f5",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/figures/README.md"
+    },
+    {
+      "bytes": 349,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/investigation-design.md",
+      "sha256": "929bdc6d66f884fff69d5d4c193c9b4c4d5e5055191d6c84d8535a529bc1c56b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/investigation-design.md"
+    },
+    {
+      "bytes": 139,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/literature/README.md",
+      "sha256": "b75033bcf61f1e319af0ead3e752180356b9511aad65b94d8fbbd2a63d082136",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/literature/README.md"
+    },
+    {
+      "bytes": 671,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/msr/README.md",
+      "sha256": "afebc1aeba69ed77fac85890723e270297a73081334c955ad8852a3dcbfc607f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/msr/README.md"
+    },
+    {
+      "bytes": 404,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/preregistration.md",
+      "sha256": "8115542e2ae77d40e361387d5d2e7d78161762d1a055cc5d3207361947b0f449",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/preregistration.md"
+    },
+    {
+      "bytes": 278,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/results/README.md",
+      "sha256": "2c4ed3de1f5ccd8c6135fa7c7e7bbafc2a42dfc6041eb7d2a84c4f971245a94d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/results/README.md"
+    },
+    {
+      "bytes": 4286,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/results/final_publication_audit.md",
+      "sha256": "e0c2ebe87f9093ebeda90334e5c00f971481d646157cc511c2307b36765321e8",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/results/final_publication_audit.md"
+    },
+    {
+      "bytes": 125,
+      "kind": "ordinary_documentation",
+      "path": "investigations/b2-governance-cohort/srf/README.md",
+      "sha256": "3062e8009d6493fb57c9f25c481f616c9d094d72cb5afcfac42d6032313556ce",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/b2-governance-cohort/srf/README.md"
+    },
+    {
+      "bytes": 4283,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110-amendment-001/README.md",
+      "sha256": "ea8dd02c20da6732c13f4d93145b97416c1742dfe24b4e6c011bdc1a9af61881",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110-amendment-001/README.md"
+    },
+    {
+      "bytes": 3817,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110-analysis-freeze/README.md",
+      "sha256": "d50bd82bbc9d4c9f438d05148b2e257e610d47264532ed3ec2bfde5e8c2d6211",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110-analysis-freeze/README.md"
+    },
+    {
+      "bytes": 2677,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110-calibration-123/README.md",
+      "sha256": "70d1d22a410df7728d09f17d31af18f3a376d33b246a92ef3f976a6fe0645a9a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110-calibration-123/README.md"
+    },
+    {
+      "bytes": 3219,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110-calibration-127/README.md",
+      "sha256": "fbb297eea96915ffe02dc89fbfd8b1ba5b4badbcf1ff0f2cd216936201d58aac",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110-calibration-127/README.md"
+    },
+    {
+      "bytes": 4320,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110-preflight/README.md",
+      "sha256": "e0cbbd7f33d7d63f95cd638ec6869fc5b82a9f0d1a1f9d85b7ee2f0c297074f2",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110-preflight/README.md"
+    },
+    {
+      "bytes": 8377,
+      "kind": "ordinary_documentation",
+      "path": "investigations/bottleneck-migration-110/README.md",
+      "sha256": "5fcc60f6dfbfa012687cb5818e9f4ed7f241628d2673a1e1c8ea735e46af8b8c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/bottleneck-migration-110/README.md"
+    },
+    {
+      "bytes": 563,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/README.md",
+      "sha256": "0cb4aa6a5c8265094e42c1a16400ee16ac79fb35f3fc37d69954c20a4e74a607",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/README.md"
+    },
+    {
+      "bytes": 102,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/analysis/README.md",
+      "sha256": "146b6ebee85c38da09cf014635861f30d636f0b50c2531a6ad633f93fe682076",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/analysis/README.md"
+    },
+    {
+      "bytes": 118,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/README.md",
+      "sha256": "c1b5c491a9dcaeeeeffabf7a36b540c69bf440e354e609ab91de901a3607366c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/artifacts/README.md"
+    },
+    {
+      "bytes": 1972,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/canonical-source-packages-v1/README.md",
+      "sha256": "5c94200bff4f13d53e285d55884be313e973f6c6e6eec653a5bc9829a1daa843",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/artifacts/canonical-source-packages-v1/README.md"
+    },
+    {
+      "bytes": 2273,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/README.md",
+      "sha256": "13d53767f9c5b21abca43cde541917723761796b869018d62ad4a54f6377eb3a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/README.md"
+    },
+    {
+      "bytes": 1119,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/evaluator-specification.md",
+      "sha256": "42e47b08801ee654efb3036c473f991e2ec0acd6a48be881c35cdc8707fb0077",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/evaluator-specification.md"
+    },
+    {
+      "bytes": 1899,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/execution-readiness-report.md",
+      "sha256": "ba1d0737078c9525fd30cdeb0ed4fc0f75d3ace6f28f3741a4e2360eba668a29",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/artifacts/execution-package-v1/execution-readiness-report.md"
+    },
+    {
+      "bytes": 132,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/bor/README.md",
+      "sha256": "f8d18765577a2e42f1c42b145c3e659173aa33bfbfa0c4f9ce32845ab9ff2494",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/bor/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/dataset/README.md",
+      "sha256": "ed0e683dafa41e8502ccdba68e6245f0b6b9de0d472c76b037a5919ebddd17bb",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/dataset/README.md"
+    },
+    {
+      "bytes": 124,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/der/README.md",
+      "sha256": "e678f97df7d48c48034a3113341ba7004c085f6dc4654e3aca2246f752490766",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/der/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/figures/README.md",
+      "sha256": "3c867edfa31fb0e117cf737fdb8cd628a0220b5a026c4ba18cfc301601d9a7fa",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/figures/README.md"
+    },
+    {
+      "bytes": 17421,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/investigation-design.md",
+      "sha256": "19d6f2c6be1ebda89b3dce309747a519b4727766596f3507966756e8ab04e795",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/investigation-design.md"
+    },
+    {
+      "bytes": 1517,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/README.md",
+      "sha256": "28f4bc5ccdad177f0d61c3f3560cf2513a4b6711778db92d47dc21dd80f1312c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/README.md"
+    },
+    {
+      "bytes": 2765,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/comparison-matrix.md",
+      "sha256": "488fb43cdcab6ff92dda14923ce788c996e7cbaff0f50bb1fd18f5c2c48a482c",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/comparison-matrix.md"
+    },
+    {
+      "bytes": 2369,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/design-implications.md",
+      "sha256": "90d6265c85ac349192cc5e8d0f6bd8acc1859be947a371b8741633314b0e3cff",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/design-implications.md"
+    },
+    {
+      "bytes": 4506,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/evidence-summaries.md",
+      "sha256": "8a9b6c29625f12649b4d0cfc8ec2de23d650d2d0dce29e07be7a8d5d497bd2f9",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/evidence-summaries.md"
+    },
+    {
+      "bytes": 4463,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/literature-review-protocol.md",
+      "sha256": "0961bb83045003e972b173992bebf68ba10a6e3d9231d643bf919bcc196f25f3",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/literature-review-protocol.md"
+    },
+    {
+      "bytes": 2233,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/novelty-determination.md",
+      "sha256": "a145da1cead6a9913cd0468e9f308a0f83c5d280ac39b76c679182cf681412a3",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/novelty-determination.md"
+    },
+    {
+      "bytes": 4097,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/source-registry.md",
+      "sha256": "9b7b749f836224528515c5e79570bc6ab1585d417f8ecd45c640236748701ce1",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/source-registry.md"
+    },
+    {
+      "bytes": 2900,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/literature/terminology-reconciliation.md",
+      "sha256": "fcce81c1cee72ce73e8843d4ae2c45ca44283df6449ff784c1d15443e667ca1a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/literature/terminology-reconciliation.md"
+    },
+    {
+      "bytes": 130,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/msr/README.md",
+      "sha256": "fa5654c8c48d25593292165ef05b289319e25c8ebe11521b0e742d7806472abd",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/msr/README.md"
+    },
+    {
+      "bytes": 30573,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/preregistration.md",
+      "sha256": "8e793c7fb68c8efc0e9fb2602214231f783e79e93f7bc10fc5ed9153b3b4cd23",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/preregistration.md"
+    },
+    {
+      "bytes": 115,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/results/README.md",
+      "sha256": "f94e5ca9f83df8ab360863985e7baa1ad018eb0956ecbbdd97dcc4ba00079901",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/results/README.md"
+    },
+    {
+      "bytes": 106,
+      "kind": "ordinary_documentation",
+      "path": "investigations/context-scaling-vs-explicit-abstraction/srf/README.md",
+      "sha256": "b9423880210a9153aab546f72f388859bed1e5ccf241aa3bb7fea9b09796a835",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/context-scaling-vs-explicit-abstraction/srf/README.md"
+    },
+    {
+      "bytes": 2034,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structology-transfer-audit-rehearsal-1/README.md",
+      "sha256": "7f5fc95b7c41da8e1314162349d0b0bd244ab30b92195c49400d2be4f2f513a9",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structology-transfer-audit-rehearsal-1/README.md"
+    },
+    {
+      "bytes": 3812,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structology-transfer-audit-rehearsal-1/execution-summary.md",
+      "sha256": "98b8006efe667f2724c4039707bac9297e95aed73406e31b0777773f81f18277",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structology-transfer-audit-rehearsal-1/execution-summary.md"
+    },
+    {
+      "bytes": 2634,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/README.md",
+      "sha256": "dfa6aeee46980f18115d7db6f0892334f01755e4730da3d88b6c69bfd77f2325",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/README.md"
+    },
+    {
+      "bytes": 1527,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/audit-request.md",
+      "sha256": "9e7e98ee5598c1a6a01e2a8101b1e31d5a204d6764554df9b294ee215fcf4e65",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/audit-request.md"
+    },
+    {
+      "bytes": 1180,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/boundary-decomposed-findings.md",
+      "sha256": "fbccda4033797f5ebe42650afc1b9c345dd4ba5e1979f25a6e54aadfa8864824",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/boundary-decomposed-findings.md"
+    },
+    {
+      "bytes": 4772,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/claim-level-evidence-ledger.md",
+      "sha256": "5144d5d343c7f105802080dbfb2e32745f50048fe4c700ccea6c3f74a66c8ed8",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/claim-level-evidence-ledger.md"
+    },
+    {
+      "bytes": 1113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/execution-validity-record.md",
+      "sha256": "1120786a083fd4408055089a2d311d81da797bc89e322643746f3a61f3a8127e",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/execution-validity-record.md"
+    },
+    {
+      "bytes": 2666,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/inspection-log.md",
+      "sha256": "5ac1690e4b055b308074769af740a45093cfe5dc2136de1e57c683f57f67f968",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/inspection-log.md"
+    },
+    {
+      "bytes": 1056,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/instrument-improvement-observations.md",
+      "sha256": "b8ffbc99e425df34c423d8d503f417eee702cea05448bb79daec5d39c0964a81",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/instrument-improvement-observations.md"
+    },
+    {
+      "bytes": 2845,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/manual-judgment-register.md",
+      "sha256": "2cf51d3d0de8c9e6eac54afdd867b2238f664f58f97bed05bfcd857f1d5ec627",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/manual-judgment-register.md"
+    },
+    {
+      "bytes": 1070,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/repository-findings.md",
+      "sha256": "7f58ea8fa201f2a338664014c68a8adc64c7486c339310e500512a9a89449296",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/repository-findings.md"
+    },
+    {
+      "bytes": 343,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/research-methodology-candidates.md",
+      "sha256": "7090cf03eba78fc46ff7787f60c7298e08e596d7786787ef51570b595ead7b9d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/research-methodology-candidates.md"
+    },
+    {
+      "bytes": 3683,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/scope-and-coverage.md",
+      "sha256": "860dfb2f4802f275766953a20e067c54a043e84350445b1ad1b94d7ce7b77b2d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/scope-and-coverage.md"
+    },
+    {
+      "bytes": 1030,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/stopping-determination.md",
+      "sha256": "5a9d69959d3f73ff4073fdee51a001ba28e42e7df777cc2c9d54292db501522f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/stopping-determination.md"
+    },
+    {
+      "bytes": 322,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/structology-candidates.md",
+      "sha256": "8b86f84f4321973062977a3aaefeab0806bb1c03539ae30c860698e1ef01ad5a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/structology-candidates.md"
+    },
+    {
+      "bytes": 3543,
+      "kind": "ordinary_documentation",
+      "path": "investigations/structural-analysis-foundations-audit-1/validation-record.md",
+      "sha256": "bec63aa0d11ebd1d446d34e2e27b84875cee7dd62950e17ab2de1271b7d6611d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/structural-analysis-foundations-audit-1/validation-record.md"
+    },
+    {
+      "bytes": 913,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/README.md",
+      "sha256": "0f61b6b68b4734f9a7a581533e25e7a935380dba85b5048d12f93faa95c74078",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/README.md"
+    },
+    {
+      "bytes": 123,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/analysis/README.md",
+      "sha256": "c6ba450d92599eac54fca96b36a7c235255b556b1fb0be068071fc51f06f03ed",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/analysis/README.md"
+    },
+    {
+      "bytes": 125,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/artifacts/README.md",
+      "sha256": "bff46859c602d65e9133c99773bc0a4c22bd2a634ab790aef007d81869457dc9",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/artifacts/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/bor/README.md",
+      "sha256": "f16cc06a96f9b03915a791de72dbe21fcc8ebdf6eb277add29b411c04ecb0bac",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/bor/README.md"
+    },
+    {
+      "bytes": 121,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/dataset/README.md",
+      "sha256": "0c730494c4800cf75fd9dfd0a6921dc5d49f3aae235b8e2596ef0e20549f54ff",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/dataset/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/der/README.md",
+      "sha256": "7abfa11c0ca7014cc2a56632ef7c8fc1b17021c74cd5f95c43b43a49ceec568b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/der/README.md"
+    },
+    {
+      "bytes": 121,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/figures/README.md",
+      "sha256": "6e5b6e14ef8060a88cd961f45480c1f1fff6b6a7d1d9dbd2987d94c3e5e7a851",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/figures/README.md"
+    },
+    {
+      "bytes": 151,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/investigation-design.md",
+      "sha256": "9476dabcb49cace8ab657a722568b84610ef047bd50f5d866e5ae6dce7b25fd9",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/investigation-design.md"
+    },
+    {
+      "bytes": 127,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/literature/README.md",
+      "sha256": "08996fd3cf1a68376f38bb8e2310fe895300553e2a584cad3c3c3289568b3649",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/literature/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/msr/README.md",
+      "sha256": "6ccc0b9bd23343ea34ff07cdc03f4708d23efe21da572b0f23597ed103b8be39",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/msr/README.md"
+    },
+    {
+      "bytes": 155,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/preregistration.md",
+      "sha256": "5954bf4f98d14373fd14a3d3f242a65027b6c23dcbf17d064bdb40d9e5394182",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/preregistration.md"
+    },
+    {
+      "bytes": 121,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/results/README.md",
+      "sha256": "9fa7f0807897edf3f41c751e554fb334102fa0bf0b2e8f65855d090d15f1fb34",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/results/README.md"
+    },
+    {
+      "bytes": 113,
+      "kind": "ordinary_documentation",
+      "path": "investigations/template/srf/README.md",
+      "sha256": "7420e021ae68c0539d0ab9b65007893851ef924bdb01cf59f5102a774be49e6b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:investigations/template/srf/README.md"
+    },
+    {
+      "bytes": 1580,
+      "kind": "ordinary_documentation",
+      "path": "papers/README.md",
+      "sha256": "d77a660aa9b10d89f70330b10934d890f7515933b77daf204eaddb5a49316e9a",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/README.md"
+    },
+    {
+      "bytes": 1379,
+      "kind": "ordinary_documentation",
+      "path": "papers/_template/README.md",
+      "sha256": "aef5592ebef0d4ae9ba01d8a65feae3a16652c50993e24b70c82259798c90579",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/_template/README.md"
+    },
+    {
+      "bytes": 71,
+      "kind": "ordinary_documentation",
+      "path": "papers/future/README.md",
+      "sha256": "54a6101a7d436a0cbc3dcac7966adb9c548d2c4134d4ee9a78bd2a6a68ec760b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/future/README.md"
+    },
+    {
+      "bytes": 73,
+      "kind": "ordinary_documentation",
+      "path": "papers/paper-0-protocol/README.md",
+      "sha256": "364e54f655050f736cb2f855a80cad365c05a379425645816a859da2e1db531b",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/paper-0-protocol/README.md"
+    },
+    {
+      "bytes": 63,
+      "kind": "ordinary_documentation",
+      "path": "papers/paper-b1/README.md",
+      "sha256": "fb9533513508f2c3f830fc108ec0342a8ba2704ff9fba2cbbcee9463b2c6aa46",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/paper-b1/README.md"
+    },
+    {
+      "bytes": 299,
+      "kind": "ordinary_documentation",
+      "path": "papers/paper-b2/README.md",
+      "sha256": "7191d3efe2ff613e4c10c1233f1228515f2badf5e70138ffa5da48b7cbe89e49",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:papers/paper-b2/README.md"
+    },
+    {
+      "bytes": 117,
+      "kind": "ordinary_documentation",
+      "path": "protocol/README.md",
+      "sha256": "dc18fd671e62bf05345d68dd08caec576a61e266ca8700ce1d4ff5fa35750d2f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/README.md"
+    },
+    {
+      "bytes": 133,
+      "kind": "ordinary_documentation",
+      "path": "protocol/changelog.md",
+      "sha256": "1311a3da8e7577fd7b5f597b1a0d8e3136f17cc865efde79caf6fa1598dffe2d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/changelog.md"
+    },
+    {
+      "bytes": 233,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/README.md",
+      "sha256": "dc43ab695183405465a69208c697d6e377eac0ab650e1f6f3b0ce6f81f3ea0db",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/README.md"
+    },
+    {
+      "bytes": 170,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/decision_rules.md",
+      "sha256": "5f5f89c93e430ffe95113b05e5b7ccaf9c3c8e94bd4d6d01151887a4891fb8c8",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/decision_rules.md"
+    },
+    {
+      "bytes": 3766,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/protocol.md",
+      "sha256": "b77a4d7a7b271cdf29e9b07875671d253051acc5376771765c11ba059007d3af",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/protocol.md"
+    },
+    {
+      "bytes": 110,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/schemas/README.md",
+      "sha256": "6b496bd54b1e107551cac8296aabd1b9657ec28abc94c058e0397f5bd56f54dc",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/schemas/README.md"
+    },
+    {
+      "bytes": 126,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/templates/README.md",
+      "sha256": "7865139351bd79a7b49871768050ab1d489047980b8b4a942a6012933f1c2e8d",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/templates/README.md"
+    },
+    {
+      "bytes": 180,
+      "kind": "ordinary_documentation",
+      "path": "protocol/protocol-v1/terminology.md",
+      "sha256": "a02727288f3926ed58acc5e176cf88e6d3ce41763786e5fea3944f8f217baf29",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:protocol/protocol-v1/terminology.md"
+    },
+    {
+      "bytes": 928,
+      "kind": "ordinary_documentation",
+      "path": "registry/README.md",
+      "sha256": "456be756741ca31ecea4c20d6c28b34838ceb8c9aa03e8af6546cb73a5b672a3",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:registry/README.md"
+    },
+    {
+      "bytes": 97,
+      "kind": "ordinary_documentation",
+      "path": "releases/README.md",
+      "sha256": "8868ced1547f7cb1885a777ac615457bb352ef48b40c55108e1a768d31376fa4",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:releases/README.md"
+    },
+    {
+      "bytes": 1618,
+      "kind": "ordinary_documentation",
+      "path": "releases/b2-minimal-promotion-package-v1.0/README.md",
+      "sha256": "f0d7c309a29fc4cb9f77c0bd16cb7528f09bac56983b0d2dda8b44338539e759",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:releases/b2-minimal-promotion-package-v1.0/README.md"
+    },
+    {
+      "bytes": 2890,
+      "kind": "ordinary_documentation",
+      "path": "releases/b2-publication-v1.0/RELEASE_SUMMARY.md",
+      "sha256": "951d0a47022a6aa3e90947630982d05ffbb0e8e33c41fb07b32b4f0647aa95bb",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:releases/b2-publication-v1.0/RELEASE_SUMMARY.md"
+    },
+    {
+      "bytes": 154,
+      "kind": "ordinary_documentation",
+      "path": "schemas/README.md",
+      "sha256": "bc2d6bfb6b3777981a12ce7f8f22736cb233a97ca78b73b289e97acc4cf24a1e",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:schemas/README.md"
+    },
+    {
+      "bytes": 546,
+      "kind": "ordinary_documentation",
+      "path": "scripts/README.md",
+      "sha256": "c74284a51446ec13e1b13bd3e7c68d3a894c607cc19104472f471af4e75874cb",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:scripts/README.md"
+    },
+    {
+      "bytes": 442,
+      "kind": "ordinary_documentation",
+      "path": "tests/fixtures/minimal_promotion_package_invalid/README.md",
+      "sha256": "89175091cd4404627cb31fbaa1e308636149ca2ceff817117e7f7b73d724be6e",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:tests/fixtures/minimal_promotion_package_invalid/README.md"
+    },
+    {
+      "bytes": 92,
+      "kind": "ordinary_documentation",
+      "path": "validation/README.md",
+      "sha256": "c0b6f0bbc8d6f115009c39ddea656dc4be1351e87d40bf525db988c9934a0b5f",
+      "source": "git:009b87402504ffe305e436d771afe73de30f5169:validation/README.md"
+    },
+    {
+      "bytes": 1278,
+      "kind": "contract_treatment",
+      "sha256": "d4189a504f68853923a6b65d6e08cc80db470b58c7eaf55748c7a7d43c36c355",
+      "source": "contexts/contracts/T1.json"
+    },
+    {
+      "bytes": 566,
+      "kind": "reference_example_treatment",
+      "sha256": "8198bb106d139c7b9d762671f8ccb17d65d37502866a28f8912a2feeb0b68980",
+      "source": "contexts/examples/T1.md"
+    }
+  ],
+  "schema_version": "1.0",
+  "task": "T1"
+}

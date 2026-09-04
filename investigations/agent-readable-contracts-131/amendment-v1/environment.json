@@ -1,0 +1,33 @@
+{
+  "agent_framework": "Codex hosted coding agent",
+  "budget": {
+    "model_output_tokens": 16000,
+    "tool_calls": 80,
+    "wall_clock_seconds": 1800
+  },
+  "captured_at": "2026-09-04T00:00:00Z",
+  "container_image_digest": "NOT_EXPOSED",
+  "credentials": "none",
+  "dependencies": {
+    "installation": "baseline dependency state; no installation during run",
+    "requirements_path": "requirements.txt",
+    "requirements_sha256": "cd1b4a8c0c995c55d9def98332866fc751efbc59760275252aff2eeee5dd7a44"
+  },
+  "filesystem_policy": "fresh detached worktree; writes limited to task allowed surface; append-only evidence recorder outside",
+  "limitation": "The host exposes neither an immutable model/service revision nor runner build/container digest. This identity is insufficient to satisfy the preregistered runner freeze and must remain BLOCKED.",
+  "model_display_name": "GPT-5.6 Sol",
+  "model_revision": "UNAVAILABLE_HOSTED_MUTABLE_SERVICE",
+  "network_policy": "disabled",
+  "os": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "provider": "OpenAI",
+  "python": "3.12.13",
+  "repair": "one agent-initiated repair in the same run; no evaluator feedback",
+  "retry": "none after completed invocation; one logged retry only for pre-invocation infrastructure failure",
+  "runner_build": "NOT_EXPOSED",
+  "schema_version": "1.0",
+  "tools": [
+    "repository read",
+    "allowed-path edit",
+    "offline shell validation"
+  ]
+}

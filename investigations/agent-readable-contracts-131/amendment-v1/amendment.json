@@ -1,0 +1,50 @@
+{
+  "amendment_id": "ISSUE-131-PROSPECTIVE-READINESS-AMENDMENT-001",
+  "authorization": {
+    "existing_object": null,
+    "meaning": "Explicit permission from a legitimate Architectural Boundary Research project/repository authority to invoke the bounded 30-cell research run under the frozen protocol.",
+    "required_human_action": "A repository/project authority must commit or issue an explicit authorization object identifying this amendment and bounded run. Readiness work cannot self-authorize.",
+    "status": "BLOCKED"
+  },
+  "contexts": "contexts/manifests/*.json",
+  "date": "2026-09-04",
+  "determination": "EXPERIMENT_BLOCKED",
+  "environment": "environment.json",
+  "execution": "PROHIBITED_AND_NOT_PERFORMED",
+  "historical_preservation": "The PR #132 preregistration and readiness audit remain unchanged; this amendment supplements them prospectively before any experimental run.",
+  "lineage": {
+    "amendment_parent_commit": "ac46fae62fbd69daf3809c982da5635435f2f747",
+    "original_preregistration": "../preregistration.json",
+    "pr_132_merge_commit": "ac46fae62fbd69daf3809c982da5635435f2f747",
+    "pr_132_tree": "06e80a331132d352068813944869adae5f26ffa3"
+  },
+  "oracles": "evaluator/oracle-manifest.json",
+  "reviewer": {
+    "existing_artifact": null,
+    "required_human_action": "An independent human must accept the role and be named in a committed prospective reviewer-binding artifact before execution.",
+    "requirement": "Preregistration analysis.blinding requires a prospectively named independent reviewer for blinded rubric adjudication.",
+    "status": "BLOCKED"
+  },
+  "schema_version": "1.0",
+  "unchanged": [
+    "research question",
+    "hypotheses",
+    "conditions",
+    "tasks",
+    "outcomes",
+    "thresholds",
+    "analysis",
+    "authority boundaries"
+  ],
+  "upstream": {
+    "artifact_hashes": {},
+    "artifact_paths": [],
+    "commit": "7edce630b063bfd521c7f6e699ef8e7049e85496",
+    "determination": "CANDIDATE_MODEL_READY_FOR_EMPIRICAL_HANDOFF",
+    "handoff": "MS-76-HANDOFF-001",
+    "inspection": "BLOCKED",
+    "limitation": "GitHub commit/repository retrieval was denied by the environment (HTTP 403 / CONNECT tunnel failure); exact immutable tree, paths, and bytes could not be verified. The determination is lineage only, not empirical support.",
+    "repository": "joselunasrt8-creator/MindShift-",
+    "tree": null
+  }
+}

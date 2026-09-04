@@ -1,0 +1,37 @@
+{
+  "accepted_inputs": [
+    "frozen T2 prompt",
+    "ordinary documentation at the bound revision"
+  ],
+  "authority_boundary": "Proposal and offline validation only; no commit, merge, release, credential, network, deployment, or production action.",
+  "contract_id": "issue-131-T2",
+  "evidence_provenance": [
+    "retain ordered context hashes",
+    "retain patch and command events"
+  ],
+  "failure_semantics": {
+    "blocked": "A required input or permission is unavailable.",
+    "null": "No bounded valid transformation can be identified."
+  },
+  "handoff": "Retain candidate and validation evidence without commit.",
+  "invariants_prohibitions": [
+    "current registry remains accepted",
+    "no registry data repair",
+    "no changes outside the allowed surface",
+    "no authority escalation"
+  ],
+  "produced_outputs": [
+    "candidate patch",
+    "offline validation logs"
+  ],
+  "purpose_scope": "Duplicate investigation-ID detection within the two allowed T2 paths.",
+  "repository": {
+    "identity": "joselunasrt8-creator/architecturalboundary-research",
+    "revision": "009b87402504ffe305e436d771afe73de30f5169"
+  },
+  "representation_version": "issue-131-minimum-v1",
+  "valid_transformations": [
+    "deterministic duplicate-ID validation",
+    "focused offline tests"
+  ]
+}

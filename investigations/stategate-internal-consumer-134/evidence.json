@@ -1,0 +1,87 @@
+{
+  "schema_version": "issue-134-audit-v1",
+  "audit_date": "2026-09-08",
+  "classification": "SAME_OWNER_INTERNAL_CONSUMER_EVIDENCE",
+  "repository": "joselunasrt8-creator/architecturalboundary-research",
+  "inspected_state": {
+    "local_branch": "work",
+    "commit": "838163e917d72397e996e179f1cb0484572814c4",
+    "tree": "995f814959cb39fc293d22323e1a5a751390af37",
+    "remote_configured": false,
+    "default_branch": "NOT_VERIFIED",
+    "workflow_target_branch": "main"
+  },
+  "host_audit": {
+    "issue_134": "BLOCKED_HTTP_401_403",
+    "issue_134_dependencies": "NOT_INSPECTED",
+    "stategate_issue_66_rubric": "BLOCKED_HTTP_401_403",
+    "branch_rulesets": "NOT_OBSERVED",
+    "open_and_recent_prs": "NOT_INSPECTED",
+    "github_cli_authentication": "UNAVAILABLE"
+  },
+  "baseline": {
+    "frozen_at_commit": "838163e917d72397e996e179f1cb0484572814c4",
+    "executable_workflows": [
+      ".github/workflows/validate.yml",
+      ".github/workflows/b2-publication-readiness.yml"
+    ],
+    "reference_only_workflows": ["ci/validate.yml"],
+    "native_github_controls": "NOT_OBSERVED",
+    "historical_reconstruction_minutes": "NOT_MEASURED",
+    "historical_review_minutes": "NOT_MEASURED",
+    "historical_rework": "NOT_MEASURED",
+    "historical_merge_latency": "NOT_MEASURED"
+  },
+  "governed_boundary": {
+    "include": [
+      "frozen protocols and preregistrations",
+      "canonical datasets, analyses, retained classifications, and cohort conclusions",
+      "publication-state manifest and publication-bound manuscript sources",
+      "explicitly frozen investigation artifacts"
+    ],
+    "exclude_unless_supporting_an_in_scope_mutation": [
+      "generated PDFs",
+      "ordinary documentation",
+      "tests and implementation scripts",
+      "dependency housekeeping",
+      "workflow maintenance"
+    ]
+  },
+  "stategate": {
+    "preexisting_integration_found": false,
+    "integration_added": false,
+    "immutable_revision": "NOT_AVAILABLE",
+    "canonical_proof_artifact": "NOT_PRODUCED",
+    "reason": "Canonical source, proof contract, and repository-host authority were unavailable; implementing inferred semantics would not be legitimate."
+  },
+  "controlled_semantics": {
+    "valid": "NOT_RUN",
+    "bounded_null": "NOT_RUN",
+    "changed_head_invalidation": "NOT_RUN",
+    "counted_as_workflow_value": false
+  },
+  "natural_workflow_observations": [],
+  "candidate_changes_not_admitted": [121, 124, 125, 128, 132, 133],
+  "measurements": {
+    "incremental_benefit": "NOT_OBSERVED",
+    "added_ci_latency": "NOT_MEASURED",
+    "setup_maintenance_cost": "NOT_MEASURED",
+    "false_blocks": "NOT_MEASURED",
+    "false_allows": "NOT_MEASURED",
+    "merge_delay": "NOT_MEASURED",
+    "duplicated_controls": "NOT_MEASURED",
+    "corrections_or_ambiguity_removed": "NOT_MEASURED"
+  },
+  "counterfactual": {
+    "native_github": "INDETERMINATE_WITHOUT_HOST_CONTROLS_OR_OBSERVATIONS",
+    "simple_export_script": "PLAUSIBLE_BUT_UNTESTED",
+    "unique_stategate_value": "NOT_ESTABLISHED"
+  },
+  "routing": {
+    "target": "joselunasrt8-creator/stategate#66",
+    "posted": false,
+    "reason": "GitHub authentication and network path unavailable"
+  },
+  "terminal_determination": "BLOCKED_BY_REPOSITORY_PERMISSIONS",
+  "additional_internal_testing": "CONDITIONAL_ON_ACCESS_AND_NATURAL_WORK"
+}

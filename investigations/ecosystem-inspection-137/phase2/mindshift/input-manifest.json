@@ -1,0 +1,68 @@
+{
+  "schema_version": "issue137.mindshift-input-manifest.v1",
+  "repository": "joselunasrt8-creator/MindShift-",
+  "commit": "53224ac47d058965280162aa01ef0e6f247104ef",
+  "tree": "e1c8677bebdbeaa4a055965d018fb00ab3f257a7",
+  "artifacts": [
+    {
+      "path": "README.md",
+      "sha256": "a9832a9bff55d9a8fd6bf89994930e24328d21a487beddcec201887a3cf42c1e",
+      "bytes": 7446
+    },
+    {
+      "path": "docs/canon-v1.md",
+      "sha256": "7f16aa51b1afc858ae7f7e61081f80ba0f4ff8bf31c7abc42a668e96a261d6ee",
+      "bytes": 19908
+    },
+    {
+      "path": "docs/research-sequence.md",
+      "sha256": "4dd0f68cceee6db6dd1e64f77a9f690b1ce2793549972157cc7c70966f83e576",
+      "bytes": 10090
+    },
+    {
+      "path": "docs/issue-76/candidate-model.md",
+      "sha256": "32f9f9e977d5ab799cd104cc9ab16e0f05b6092e1b4ca68f101fac1baed958ac",
+      "bytes": 20629
+    },
+    {
+      "path": "docs/issue-76/source-observations.md",
+      "sha256": "f8d28bf8598372a55d70b79780552d216d0db20c1a1f05ca1fdd7ec3049856bc",
+      "bytes": 5710
+    },
+    {
+      "path": "docs/issue-76/empirical-handoff.md",
+      "sha256": "709de03c7722fa3ef1f2d2caa57c33770923e9f189747a6775ea2d701e1587d2",
+      "bytes": 7095
+    },
+    {
+      "path": "docs/issue-79/experiment-record.md",
+      "sha256": "cac0e575d87e010ee7f56f46138e61c989b5cce9686af1fb4eed0f6a1ff25d0a",
+      "bytes": 13671
+    },
+    {
+      "path": "docs/issue-81/protocol.md",
+      "sha256": "ca183c0110c8e699271d099ab976d446927d39eeea323910d025d2eb0f64b58a",
+      "bytes": 14800
+    },
+    {
+      "path": "docs/issue-81/experiment-record.md",
+      "sha256": "a9e36ce3e6c9ea33d20d398c01696218701ce817285185caac8f744a91542fca",
+      "bytes": 4345
+    },
+    {
+      "path": "docs/issue-81/source-manifest.json",
+      "sha256": "39b096402b2f3675cc7f2b0a86439dab96b578a4d2326d686c83ddd32c5386b4",
+      "bytes": 1830
+    },
+    {
+      "path": "docs/issue-81/task-set.json",
+      "sha256": "c39c99ff73c3ebde8a7ebd25d4bf475c28041536b7965164422aaec6c8d889b8",
+      "bytes": 4072
+    },
+    {
+      "path": "docs/issue-81/validate_protocol.py",
+      "sha256": "26cf50c1c3bc1d8d5eadf304daa553c0874e03ab48e79f745dfec6755b4e719a",
+      "bytes": 2313
+    }
+  ]
+}

@@ -18,30 +18,23 @@ def test_issue143_validator_passes():
     )
 
 
-def test_preregistration_precedes_and_excludes_outcomes():
+def test_hosted_lineage_defect_is_preserved_as_invalidity():
     result = load("result.json")
-    commit = result["preregistration"]["commit"]
-    paths = subprocess.run(
-        ["git", "ls-tree", "-r", "--name-only", commit], cwd=ROOT, check=True,
-        text=True, capture_output=True,
-    ).stdout.splitlines()
-    prefix = "investigations/external-generalization-143/"
-    assert prefix + "preregistration.json" in paths
-    assert prefix + "result.json" not in paths
-    assert not any(path.startswith(prefix + "targets/") for path in paths)
+    assert result["preregistration"]["hosted_commit_verified"] is False
+    assert result["preregistration"]["hosted_separation_verified"] is False
+    assert result["cohort_determination"] == "COHORT_INVALID"
+    assert "prospective" in result["decision_rule_applied"].lower()
 
 
-def test_frozen_target_objects_reproduce_locally():
+def test_recorded_targets_remain_bound_without_ephemeral_local_paths():
     prereg = load("preregistration.json")
-    for target in prereg["cohort_selection"]["targets"]:
-        root = Path(target["local_source_root_at_freeze"])
-        observed = subprocess.run(
-            ["git", "rev-parse", "HEAD"], cwd=root, check=True,
-            text=True, capture_output=True,
-        ).stdout.strip()
-        assert observed == target["commit"]
-        kind = subprocess.run(
-            ["git", "cat-file", "-t", target["commit"]], cwd=root, check=True,
-            text=True, capture_output=True,
-        ).stdout.strip()
-        assert kind == "commit"
+    result = load("result.json")
+    frozen = {item["id"]: item["commit"] for item in prereg["cohort_selection"]["targets"]}
+    observed = {item["target_id"]: item["terminal"] for item in result["target_results"]}
+    assert set(observed) == set(frozen)
+    assert all(len(commit) == 40 for commit in frozen.values())
+    assert set(observed.values()) == {"BLOCKED_BY_AUTHORITATIVE_BINDING"}
+    assert all(
+        item["evidence_status"] == "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+        for item in result["target_results"]
+    )

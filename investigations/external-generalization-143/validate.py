@@ -24,11 +24,15 @@ def main():
     result = load(BASE / "result.json")
     assert prereg["object_type"] == "ProspectiveExternalCohortPreregistration"
     assert result["object_type"] == "ExternalGeneralizationCohortResult"
-    assert result["preregistration"]["commit"] != ""
     assert len(result["preregistration"]["commit"]) == 40
+    assert result["preregistration"]["hosted_commit_verified"] is False
+    assert result["preregistration"]["hosted_separation_verified"] is False
+    assert result["cohort_determination"] == "COHORT_INVALID"
+
     frozen = {target["id"]: target for target in prereg["cohort_selection"]["targets"]}
     assert 3 <= len(frozen) <= 5
     assert all(len(target["commit"]) == 40 for target in frozen.values())
+
     records = {path.stem: load(path) for path in sorted((BASE / "targets").glob("*.json"))}
     assert set(records) == set(frozen)
     for target_id, record in records.items():
@@ -38,14 +42,17 @@ def main():
         assert len(record["source_manifest"]) == len(prereg["required_source_classes"])
         assert record["prospective_binding"]["preregistration_commit"] == result["preregistration"]["commit"]
         assert (ROOT / record["authoritative_binding"]["blocking_record"]).is_file()
+
     outcomes = {item["target_id"]: item["terminal"] for item in result["target_results"]}
     assert outcomes == {key: records[key]["terminal_determination"] for key in sorted(records)}
     assert result["cohort_determination"] in COHORT_TERMINALS
-    assert isinstance(result["cohort_determination"], str)
+    assert all(item["evidence_status"] == "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+               for item in result["target_results"])
+
     rerun = load(BASE / "reproducibility/nvm-sh-nvm-rerun.json")
     assert rerun["comparison"]["terminal_reproduced"] is True
     assert rerun["pinned_inputs"]["commit"] == frozen[rerun["target_id"]]["commit"]
-    print("Issue #143 external cohort artifacts: valid")
+    print("Issue #143 external cohort artifacts: valid invalidity record")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,29 @@
+{
+  "schema_version": "issue-143-reproducibility-record-v1",
+  "object_type": "ExternalTargetReproducibilityRecord",
+  "issue": 143,
+  "target_id": "nvm-sh-nvm",
+  "rerun_permitted": true,
+  "selection_rule": "lexicographically first frozen target",
+  "pinned_inputs": {
+    "repository": "https://github.com/nvm-sh/nvm.git",
+    "commit": "ffec9fec724da725013d5b50e763908113983fc3",
+    "tree": "c977a859029f1fdd5c4fc1635bd4ddd059ad76f4",
+    "instrument_version": "1.0.0-candidate.2",
+    "instrument_containing_commit": "0520a5deca3ad1e00cb74095ee74d0f7227d58c7",
+    "instrument_manifest_sha256": "11b7538f063210cc060d9868c4b111a0a25f902021432e085d8d58db81f55a18"
+  },
+  "comparison": {
+    "source_identity_unchanged": true,
+    "execution_path_reproduced": true,
+    "first_run_path": ["target identity preflight", "instrument authoritative binding", "stop"],
+    "rerun_path": ["target identity preflight", "instrument authoritative binding", "stop"],
+    "first_run_terminal": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+    "rerun_terminal": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+    "terminal_reproduced": true,
+    "deterministic_machine_fields_stable": true,
+    "manual_judgment_changed_result": false,
+    "differences": []
+  },
+  "limitation": "This reproduces a pre-execution authority blocker, not a substantive repository result. No target source was interpreted on either pass."
+}

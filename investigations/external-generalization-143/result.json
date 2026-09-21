@@ -1,0 +1,60 @@
+{
+  "schema_version": "issue-143-external-generalization-result-v1",
+  "object_type": "ExternalGeneralizationCohortResult",
+  "issue": 143,
+  "preregistration": {
+    "path": "investigations/external-generalization-143/preregistration.json",
+    "commit": "ccec06a23c0a97b424b0c4729f2e407f62858b26",
+    "commit_scope": "REPORTED_LOCAL_EXECUTION_IDENTITY",
+    "hosted_commit_verified": false,
+    "hosted_separation_verified": false,
+    "audit_finding": "PR #146 hosted history contains one commit with both preregistration and outcome artifacts; prospective separation required by Issue #143 is therefore not verifiable."
+  },
+  "instrument": {
+    "name": "Architectural Investigation Instrument",
+    "version": "1.0.0-candidate.2",
+    "containing_commit": "0520a5deca3ad1e00cb74095ee74d0f7227d58c7",
+    "binding_result": "RECORDED_FAILED_FOR_ALL_TARGETS"
+  },
+  "target_results": [
+    {
+      "target_id": "nvm-sh-nvm",
+      "terminal": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+      "evidence_status": "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+    },
+    {
+      "target_id": "php-build-php-build",
+      "terminal": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+      "evidence_status": "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+    },
+    {
+      "target_id": "pyenv-pyenv",
+      "terminal": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+      "evidence_status": "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+    }
+  ],
+  "reproducibility": {
+    "target_id": "nvm-sh-nvm",
+    "terminal_reproduced": true,
+    "scope": "recorded pre-execution identity and authoritative-binding path only",
+    "evidence_status": "RETAINED_AUDIT_RECORD_NOT_VALID_COHORT_EVIDENCE"
+  },
+  "cross_target": {
+    "instrument_execution_success": "NO_SUBSTANTIVE_EXECUTION_REACHED_IN_RECORDED_ATTEMPTS",
+    "authoritative_binding_success": "RECORDED_0_OF_3",
+    "methodological_transfer": "NOT_VALIDLY_TESTED",
+    "preregistration_integrity": "HOSTED_PROSPECTIVE_SEPARATION_NOT_VERIFIED",
+    "usefulness": "NOT_ESTABLISHED"
+  },
+  "cohort_determination": "COHORT_INVALID",
+  "decision_rule_applied": "Issue #143 requires prospective freeze before outcomes; hosted history does not preserve a preregistration ancestor separate from outcomes.",
+  "interpretation": "The attempted cohort cannot support a generalization determination because the required prospective preregistration/outcome separation is not verifiable in hosted history. Recorded binding blockers are preserved as audit history only.",
+  "non_claims": [
+    "External generalization is neither supported nor refuted by this invalid cohort.",
+    "Recorded blocked execution is not a negative structural finding.",
+    "External target is not external adoption.",
+    "Successful execution is not a useful result.",
+    "Vocabulary fit is not structural truth.",
+    "No usefulness, economic-value, external-user-value, decision-influence, or universal-validity claim is made."
+  ]
+}

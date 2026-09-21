@@ -1,0 +1,180 @@
+{
+  "schema_version": "issue-143-target-execution-record-v1",
+  "object_type": "ExternalTargetExecutionRecord",
+  "issue": 143,
+  "target_id": "nvm-sh-nvm",
+  "prospective_binding": {
+    "preregistration_path": "investigations/external-generalization-143/preregistration.json",
+    "preregistration_commit": "ccec06a23c0a97b424b0c4729f2e407f62858b26"
+  },
+  "repository_identity": {
+    "origin": "https://github.com/nvm-sh/nvm.git",
+    "default_branch": "master",
+    "commit": "ffec9fec724da725013d5b50e763908113983fc3",
+    "tree": "c977a859029f1fdd5c4fc1635bd4ddd059ad76f4",
+    "object_type": "commit",
+    "local_source_root": "/root/.nvm",
+    "origin_match": true,
+    "commit_match": true,
+    "tree_match": true,
+    "default_branch_check": "DEFAULT_BRANCH_CONTEXT_NOT_LOCALLY_REF_BOUND",
+    "source_identity_result": "PINNED_COMMIT_REPRODUCED"
+  },
+  "source_manifest": [
+    {
+      "source_class": "immutable repository identity",
+      "status": "OBSERVED",
+      "evidence": [
+        "origin URL",
+        "commit object",
+        "tree object",
+        "default-branch metadata where locally preserved"
+      ]
+    },
+    {
+      "source_class": "repository documentation",
+      "status": "NOT_REACHED",
+      "reason": "authoritative instrument binding stopped execution before substantive inspection"
+    },
+    {
+      "source_class": "implementation source",
+      "status": "NOT_REACHED",
+      "reason": "authoritative instrument binding stopped execution before substantive inspection"
+    },
+    {
+      "source_class": "tests",
+      "status": "NOT_REACHED",
+      "reason": "authoritative instrument binding stopped execution before substantive inspection"
+    },
+    {
+      "source_class": "automation or workflows when present",
+      "status": "NOT_REACHED",
+      "reason": "authoritative instrument binding stopped execution before substantive inspection"
+    },
+    {
+      "source_class": "release or version metadata when present",
+      "status": "NOT_REACHED",
+      "reason": "authoritative instrument binding stopped execution before substantive inspection"
+    }
+  ],
+  "authoritative_binding": {
+    "instrument": "Architectural Investigation Instrument 1.0.0-candidate.2",
+    "instrument_containing_commit": "0520a5deca3ad1e00cb74095ee74d0f7227d58c7",
+    "manifest_sha256_reproduced": true,
+    "checks": [
+      {
+        "predicate": "immutable instrument identity",
+        "result": "PASS"
+      },
+      {
+        "predicate": "package status is FROZEN",
+        "result": "FAIL",
+        "observed": "UNFROZEN_CANDIDATE"
+      },
+      {
+        "predicate": "readiness is IMPLEMENTATION_READY",
+        "result": "FAIL",
+        "observed": "INSTRUMENT_SPECIFICATION_REVISION_REQUIRED"
+      },
+      {
+        "predicate": "independent calibration complete",
+        "result": "FAIL",
+        "observed": "INCOMPLETE_INDEPENDENT_REVIEW_REQUIRED"
+      },
+      {
+        "predicate": "audit authorization present",
+        "result": "FAIL",
+        "observed": false
+      },
+      {
+        "predicate": "normative exemplar inputs fully bound",
+        "result": "FAIL",
+        "observed": "AII-V1-GAP-008 remains"
+      },
+      {
+        "predicate": "instrument legitimately bindable",
+        "result": "FAIL",
+        "observed": "NOT_LEGITIMATELY_BINDABLE"
+      }
+    ],
+    "result": "FAILED_BEFORE_SUBSTANTIVE_INSPECTION",
+    "blocking_record": "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md"
+  },
+  "execution": {
+    "stages": [
+      {
+        "stage": "target identity preflight",
+        "status": "REACHED"
+      },
+      {
+        "stage": "instrument authoritative binding",
+        "status": "REACHED_BLOCKED"
+      },
+      {
+        "stage": "scope and coverage declaration",
+        "status": "NOT_REACHED"
+      },
+      {
+        "stage": "bounded inspection",
+        "status": "NOT_REACHED"
+      },
+      {
+        "stage": "claim-level evidence ledger",
+        "status": "NOT_REACHED"
+      },
+      {
+        "stage": "boundary-decomposed findings",
+        "status": "NOT_REACHED"
+      },
+      {
+        "stage": "output surfaces",
+        "status": "NOT_REACHED"
+      }
+    ],
+    "pre_execution_stop": "AUTHORITATIVE_INSTRUMENT_BINDING_FAILED",
+    "required_measurements": "NOT_REACHED",
+    "provenance_completeness": "COMPLETE_FOR_REACHED_PREFLIGHT_ONLY",
+    "ambiguous_mappings": [],
+    "forced_fit_observations": [],
+    "methodology_ambiguity_exposed": [
+      "The only directly applicable repository-owned instrument is specified as a candidate but denies its own audit binding; target semantics were therefore never mapped."
+    ],
+    "operator_burden": {
+      "mechanical_binding_predicates_evaluated": 7,
+      "manual_judgments": 1,
+      "substantive_source_classes_reviewed": 0,
+      "wall_clock_duration": "NOT_MEASURED"
+    },
+    "external_repository_mutated": false
+  },
+  "missingness_and_blockers": [
+    {
+      "type": "AUTHORITATIVE_BINDING",
+      "status": "BLOCKING",
+      "detail": "Selected existing instrument is not frozen, implementation-ready, independently calibrated, or authorized."
+    },
+    {
+      "type": "TARGET_SOURCE_CLASSES",
+      "status": "NOT_REACHED",
+      "detail": "Five substantive source classes were not collected because the frozen stopping rule fired; this is not evidence that they are absent."
+    }
+  ],
+  "manual_judgments": [
+    {
+      "id": "nvm-sh-nvm-MJ-001",
+      "question": "May candidate.2 legitimately govern substantive execution on this target?",
+      "available_evidence": [
+        "candidate.2 manifest",
+        "Issue #108 readiness adjudication",
+        "frozen preregistration binding rule"
+      ],
+      "decision": "NO",
+      "rationale": "The repository-owned readiness adjudication explicitly denies frozen status, implementation readiness, completed independent calibration, audit authorization, and legitimate binding.",
+      "uncertainty": "LOW for the recorded checkout; hosted state was not verified",
+      "reasonable_disagreement": "A reviewer might prefer a different existing protocol, but none in the inspected checkout provides a superseding authorized instrument identity.",
+      "effect": "Stop before target semantics, measurements, or findings are inspected."
+    }
+  ],
+  "terminal_determination": "BLOCKED_BY_AUTHORITATIVE_BINDING",
+  "terminal_rationale": "The target identity reproduced, but the selected existing ABR instrument failed mandatory authority/readiness binding before substantive inspection. This is evidence about instrument transferability, not a structural finding about the target."
+}

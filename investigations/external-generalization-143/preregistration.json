@@ -1,0 +1,151 @@
+{
+  "schema_version": "issue-143-external-generalization-preregistration-v1",
+  "object_type": "ProspectiveExternalCohortPreregistration",
+  "issue": 143,
+  "status": "FROZEN_BEFORE_TARGET_OUTCOMES_ON_COMMIT_CONTAINING_THIS_FILE",
+  "repository_baseline": {
+    "available_checkout_branch": "work",
+    "requested_reference_branch": "main",
+    "reference_branch_availability": "NO_LOCAL_OR_FETCHED_MAIN_REF",
+    "bound_commit": "30b9730f04fe0e0902a93af43941a9fa6fa8b7bf",
+    "bound_tree": "56a95d788d30a8c42b0211162de498cdab5f587b",
+    "remote_fetch": "BLOCKED_BY_ENVIRONMENT_CONNECT_TUNNEL_403",
+    "interpretation": "The exact supplied checkout tip is the only available current-main proxy; no claim is made that live hosted main was verified."
+  },
+  "governing_question": "Can the existing Architectural Boundary Research methodology produce valid, bounded, reproducible results on materially different external public repositories without relying on hidden Continufy-specific assumptions?",
+  "cohort_selection": {
+    "selection_time_utc": "2026-09-21T01:25:00Z",
+    "size": 3,
+    "minimum_size_rationale": "Three is the issue minimum and avoids widening an execution already subject to a repository-owned instrument readiness gate.",
+    "eligibility_criteria": [
+      "public Git repository not controlled by joselunasrt8-creator",
+      "locally available immutable Git object and origin identity",
+      "identifiable default branch",
+      "repository material sufficient to attempt a repository-architecture audit if preflight permits",
+      "material heterogeneity in architecture or purpose across the cohort",
+      "selection not based on an expected favorable ABR result"
+    ],
+    "exclusions": [
+      "repositories controlled by joselunasrt8-creator",
+      "the reported historical phpenv/phpenv single-target pilot, to avoid treating prior evidence as a new prospective outcome",
+      "targets lacking a locally reproducible immutable commit at freeze time"
+    ],
+    "targets": [
+      {
+        "id": "nvm-sh-nvm",
+        "repository": "https://github.com/nvm-sh/nvm.git",
+        "owner": "nvm-sh",
+        "default_branch": "master",
+        "commit": "ffec9fec724da725013d5b50e763908113983fc3",
+        "local_source_root_at_freeze": "/root/.nvm",
+        "purpose_architecture": "Node.js version manager implemented primarily as a sourced POSIX-shell function",
+        "eligibility": "ELIGIBLE"
+      },
+      {
+        "id": "pyenv-pyenv",
+        "repository": "https://github.com/pyenv/pyenv.git",
+        "owner": "pyenv",
+        "default_branch": "master",
+        "commit": "0b0335a3786ab5848738559a2e827e1c223adecf",
+        "local_source_root_at_freeze": "/root/.pyenv",
+        "purpose_architecture": "Python version manager using executable shims, shell integration, and a plugin layout",
+        "eligibility": "ELIGIBLE"
+      },
+      {
+        "id": "php-build-php-build",
+        "repository": "https://github.com/php-build/php-build.git",
+        "owner": "php-build",
+        "default_branch": "master",
+        "commit": "8a5e7abbd6b9f096ef46f6545d5f24ff66b24450",
+        "local_source_root_at_freeze": "/root/.phpenv/plugins/php-build",
+        "purpose_architecture": "PHP source-build automation with executable build logic and version-definition recipes",
+        "eligibility": "ELIGIBLE"
+      }
+    ]
+  },
+  "instrument": {
+    "name": "Architectural Investigation Instrument",
+    "version": "1.0.0-candidate.2",
+    "containing_commit": "0520a5deca3ad1e00cb74095ee74d0f7227d58c7",
+    "manifest_path": "instrument/architectural-investigation/v1/candidate-2/instrument-manifest.json",
+    "manifest_sha256": "11b7538f063210cc060d9868c4b111a0a25f902021432e085d8d58db81f55a18",
+    "content_digest": "cf9ac95b2c98fb246c23bffffda16930245d23b11ae0441eef43d4fda72d8624",
+    "readiness_record": "docs/reference-execution/v1.0/architectural-investigation-instrument-v1-readiness-adjudication-issue-108.md",
+    "selection_rationale": "This is the existing repository instrument most directly shaped for cross-repository boundary investigations. No substitute or new stage is introduced.",
+    "known_pre_execution_fact": "The readiness record says the candidate is not frozen, not implementation-ready, and not legitimately bindable; this fact is an instrument-level prerequisite, not a target outcome."
+  },
+  "required_source_classes": [
+    "immutable repository identity",
+    "repository documentation",
+    "implementation source",
+    "tests",
+    "automation or workflows when present",
+    "release or version metadata when present"
+  ],
+  "binding_rules": [
+    "Use only the frozen target commit; branch names are contextual.",
+    "Verify target origin, commit object, and default-branch observation before instrument binding.",
+    "Apply the selected instrument readiness-and-binding rules before substantive target inspection.",
+    "Do not infer audit authorization, frozen status, calibration, or normative dependencies.",
+    "Do not silently substitute a target, instrument version, source class, or commit."
+  ],
+  "stopping_rules": [
+    "Stop before substantive target inspection when authoritative instrument binding fails.",
+    "Stop before inspection when target identity cannot reproduce.",
+    "Do not repair target-specific or instrument-specific blockers during this cohort.",
+    "Once stopped, preserve all later stages and required source classes as NOT_REACHED rather than absent findings."
+  ],
+  "missing_data_semantics": {
+    "NOT_REACHED": "The stopping rule prevented collection; not evidence of nonexistence.",
+    "MISSING_REQUIRED": "A required source class was sought after valid entry and was absent.",
+    "INACCESSIBLE": "The source was identified but could not be read.",
+    "NOT_APPLICABLE": "The frozen protocol does not require the class for that target.",
+    "rule": "Blocked execution is not a negative structural finding."
+  },
+  "adjudication_rules": [
+    "Mechanical checks may verify identities, controlled values, local references, and equality only.",
+    "Manual judgments must record question, evidence, decision, rationale, uncertainty, reasonable disagreement, and effect.",
+    "No vocabulary mapping may be forced; ambiguous or Continufy-specific fit is recorded rather than repaired.",
+    "Exactly one per-target terminal value and one cohort value are required."
+  ],
+  "target_terminal_precedence": [
+    "EXECUTION_INVALID",
+    "METHODOLOGY_FAILURE",
+    "BLOCKED_BY_AUTHORITATIVE_BINDING",
+    "BLOCKED_BY_REQUIRED_MEASUREMENTS",
+    "PREEXECUTION_STOP",
+    "VALID_INDETERMINATE_RESULT",
+    "VALID_DETERMINATE_RESULT"
+  ],
+  "target_terminal_definitions": {
+    "VALID_DETERMINATE_RESULT": "Valid execution completed with a determinate bounded result.",
+    "VALID_INDETERMINATE_RESULT": "Valid execution completed but evidence supports only indeterminacy.",
+    "PREEXECUTION_STOP": "A frozen non-authority entry rule stopped execution before substantive inspection.",
+    "BLOCKED_BY_AUTHORITATIVE_BINDING": "Instrument, authorization, normative dependency, or source-authority binding failed before valid execution.",
+    "BLOCKED_BY_REQUIRED_MEASUREMENTS": "Valid entry occurred but frozen required measurements could not be obtained.",
+    "METHODOLOGY_FAILURE": "The existing methodology cannot express or execute the frozen task without semantic invention.",
+    "EXECUTION_INVALID": "Execution violated a frozen identity, procedure, evidence-chain, or integrity rule."
+  },
+  "cohort_decision_rule": [
+    {"if": "any target is EXECUTION_INVALID or prospective separation is violated", "then": "COHORT_INVALID"},
+    {"if": "all entered executions expose methodology failure or forced semantic invention", "then": "METHODOLOGY_DOES_NOT_TRANSFER"},
+    {"if": "all targets are blocked or stopped before valid substantive execution", "then": "GENERALIZATION_NOT_DEMONSTRATED"},
+    {"if": "valid executions exist but evidence cannot distinguish partial transfer from non-transfer", "then": "COHORT_INDETERMINATE"},
+    {"if": "all targets validly execute, bind authoritatively, reproduce where tested, and show no material forced fit", "then": "EXTERNAL_GENERALIZATION_SUPPORTED_WITHIN_COHORT"},
+    {"if": "at least one target validly executes and transfers but full-cohort support rule is unmet", "then": "EXTERNAL_GENERALIZATION_PARTIALLY_SUPPORTED"}
+  ],
+  "rerun_procedure": [
+    "Choose the lexicographically first target for which the frozen protocol permits a rerun.",
+    "Repeat identity and instrument-binding checks from the same pinned inputs in a clean record.",
+    "Compare source identity, reached stages, terminal classification, machine-readable fields, and manual judgments.",
+    "Record differences without normalization."
+  ],
+  "non_claims": [
+    "External target is not external adoption.",
+    "Successful execution is not a useful result.",
+    "Blocked execution is not a negative structural finding.",
+    "Vocabulary fit is not structural truth.",
+    "Cross-repository generalization is not universal validity.",
+    "This study does not establish usefulness, economic value, or external user value."
+  ]
+}

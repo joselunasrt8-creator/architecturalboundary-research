@@ -1,0 +1,46 @@
+{
+  "schema_version": "issue-143-external-generalization-result-v1",
+  "object_type": "ExternalGeneralizationCohortResult",
+  "issue": 143,
+  "preregistration": {
+    "path": "investigations/external-generalization-143/preregistration.json",
+    "commit": "ccec06a23c0a97b424b0c4729f2e407f62858b26"
+  },
+  "instrument": {
+    "name": "Architectural Investigation Instrument",
+    "version": "1.0.0-candidate.2",
+    "containing_commit": "0520a5deca3ad1e00cb74095ee74d0f7227d58c7",
+    "binding_result": "FAILED_FOR_ALL_TARGETS"
+  },
+  "target_results": [
+    {"target_id":"nvm-sh-nvm","terminal":"BLOCKED_BY_AUTHORITATIVE_BINDING"},
+    {"target_id":"php-build-php-build","terminal":"BLOCKED_BY_AUTHORITATIVE_BINDING"},
+    {"target_id":"pyenv-pyenv","terminal":"BLOCKED_BY_AUTHORITATIVE_BINDING"}
+  ],
+  "reproducibility": {
+    "target_id": "nvm-sh-nvm",
+    "terminal_reproduced": true,
+    "scope": "pre-execution identity and authoritative-binding path only"
+  },
+  "cross_target": {
+    "instrument_execution_success": "NO_SUBSTANTIVE_EXECUTION_REACHED",
+    "authoritative_binding_success": "0_OF_3",
+    "methodological_transfer": "NOT_TESTED_BEYOND_BINDING_GATE",
+    "reproducibility": "PREFLIGHT_BLOCKER_REPRODUCED_1_OF_1",
+    "manual_judgment_burden": "3 recorded eligibility decisions; one per target",
+    "forced_fit_behavior": "NONE_PERFORMED; target vocabulary was not mapped",
+    "missingness": "All substantive source classes and measurements are NOT_REACHED on all targets",
+    "usefulness": "NOT_ESTABLISHED"
+  },
+  "cohort_determination": "GENERALIZATION_NOT_DEMONSTRATED",
+  "decision_rule_applied": "all targets are blocked or stopped before valid substantive execution",
+  "interpretation": "The existing repository-owned instrument could not be authoritatively bound, so this cohort supplies no valid external substantive results. The blocker narrows the present generalization claim to not demonstrated; it is not a negative finding about any target.",
+  "non_claims": [
+    "External target is not external adoption.",
+    "Successful execution is not a useful result.",
+    "Blocked execution is not a negative structural finding.",
+    "Vocabulary fit is not structural truth.",
+    "Cross-repository generalization is not universal validity.",
+    "No usefulness, economic-value, external-user-value, or external-adoption claim is made."
+  ]
+}

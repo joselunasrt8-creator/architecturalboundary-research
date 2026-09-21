@@ -1,112 +1,65 @@
-# Issue #143 — prospective external-cohort execution
+# Issue #143 — external-cohort execution record
 
 ## Bounded determination
 
-This package executes the prospectively frozen cohort in
-[`preregistration.json`](preregistration.json). The freeze is a distinct earlier
-Git commit. It binds the three target identities, the existing Architectural
-Investigation Instrument `1.0.0-candidate.2`, source classes, stopping and
-missingness rules, terminal values, rerun procedure, and cohort decision rule.
-No target was replaced and no rule was amended after execution began.
+This package preserves the attempted Issue #143 external-cohort execution and its observed pre-execution binding blockers. A post-run hosted audit found that the claimed preregistration commit `ccec06a23c0a97b424b0c4729f2e407f62858b26` is not present in the hosted repository and PR #146 contains only one hosted commit, which contains both the preregistration file and outcome artifacts.
 
-The exact supplied repository checkout was bound at
-`30b9730f04fe0e0902a93af43941a9fa6fa8b7bf`. The environment could not fetch
-GitHub (`CONNECT tunnel failed, response 403`), and contained neither a local
-nor remote-tracking `main` ref. The freeze therefore identifies that commit as
-the only available current-main proxy and makes no claim that hosted `main` was
-verified. Issue #143's prompt supplied the operative acceptance criteria; live
-issue text could not be independently acquired in this environment.
-
-## Historical-evidence audit and instrument choice
-
-The inspected checkout contains prior external or cross-system work, including
-the B2 governance cohort, the Structology transfer rehearsal, and instrument
-calibration exemplars. None is rewritten as prospective #143 evidence. The
-reported prior `phpenv/phpenv` single-target pilot was explicitly excluded from
-the cohort to avoid duplication; no artifact for that pilot was present in the
-supplied checkout.
-
-The closest existing instrument is the Architectural Investigation Instrument
-because its specification includes cross-repository boundary investigations.
-Candidate.2 is immutably identifiable, but the repository's Issue #108
-adjudication states that it is not frozen, not implementation-ready, not
-independently calibrated, not audit-authorized, and not legitimately bindable.
-The study preserves this prerequisite failure instead of inventing a replacement
-methodology.
-
-## Frozen cohort and outcomes
-
-| Target | Frozen commit | Identity | Terminal determination |
-| --- | --- | --- | --- |
-| `nvm-sh/nvm` | `ffec9fec724da725013d5b50e763908113983fc3` | sourced-shell Node.js version manager | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
-| `pyenv/pyenv` | `0b0335a3786ab5848738559a2e827e1c223adecf` | shim/plugin Python version manager | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
-| `php-build/php-build` | `8a5e7abbd6b9f096ef46f6545d5f24ff66b24450` | PHP source-build/definition tooling | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
-
-For each target the origin, commit object, and tree reproduced. The same frozen
-binding predicates then failed before substantive inspection. Consequently,
-documentation, implementation, tests, automation, releases, measurements,
-vocabulary mappings, findings, and output surfaces are `NOT_REACHED`, not
-missing or negative. Per-target records preserve the source manifest, binding
-checks, stage path, missingness, judgment, burden, provenance boundary, and
-terminal rationale.
-
-## Reproducibility
-
-The frozen rerun rule selected `nvm-sh-nvm`. Repeating identity and instrument
-binding with the same inputs reproduced the repository commit/tree, execution
-path, machine-readable binding fields, and
-`BLOCKED_BY_AUTHORITATIVE_BINDING` terminal. No manual judgment changed the
-result. This demonstrates reproducibility only of the pre-execution blocker; it
-does not demonstrate a reproducible substantive ABR result.
-
-## Cross-target synthesis
-
-Exactly zero of three targets passed authoritative binding and zero reached
-substantive instrument execution. Methodological transfer was therefore not
-tested beyond the authority gate. No forced fit occurred because no target
-vocabulary was mapped. The frozen rule for all targets blocked before valid
-substantive execution yields exactly:
+Because Issue #143 requires the cohort and rules to be prospectively frozen before outcome observation, hosted history cannot verify the required preregistration/outcome separation. That defect cannot be repaired after outcomes have been observed. The cohort-level terminal determination is therefore:
 
 ```text
-GENERALIZATION_NOT_DEMONSTRATED
+COHORT_INVALID
 ```
 
-This is a legitimate bounded methodology-readiness result. It neither supports
-nor refutes a structural proposition about any target. It says the current
-repository state cannot supply the valid external executions needed to
-demonstrate the generalization claim.
+This invalidates the cohort as evidence for or against external generalization. It does not erase the recorded operational observation that the attempted executions encountered the same instrument authority/readiness blocker.
+
+## Attempted cohort and observed blocker
+
+| Target | Recorded commit | Recorded pre-execution terminal |
+| --- | --- | --- |
+| `nvm-sh/nvm` | `ffec9fec724da725013d5b50e763908113983fc3` | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
+| `pyenv/pyenv` | `0b0335a3786ab5848738559a2e827e1c223adecf` | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
+| `php-build/php-build` | `8a5e7abbd6b9f096ef46f6545d5f24ff66b24450` | `BLOCKED_BY_AUTHORITATIVE_BINDING` |
+
+The records report that Architectural Investigation Instrument `1.0.0-candidate.2` was identifiable but failed the attempted authority/readiness binding gate before substantive target inspection. Documentation, implementation, tests, automation, releases, measurements, vocabulary mappings, findings, and output surfaces therefore remain `NOT_REACHED` in those records.
+
+These per-target records are retained as audit history. Because the prospective freeze is not verifiable in hosted history, they must not be aggregated into a valid Issue #143 generalization result.
+
+## Hosted audit correction
+
+The original execution environment reported two local commits: a preregistration commit followed by an outcome commit. The hosted PR does not preserve that two-commit lineage. Hosted PR #146 has a single commit whose parent is the pre-study base, and that commit contains both preregistration and outcomes.
+
+The correction does not manufacture a replacement preregistration commit. Doing so after observing outcomes would violate the experiment's prospective requirement.
+
+Hosted CI also exposed two portability defects in the original tests:
+
+- the test attempted to inspect the unavailable local preregistration commit;
+- the target-reproduction test depended on Codex-local paths such as `/root/.nvm`.
+
+The corrected tests validate repository-contained evidence and the invalidity disposition without depending on ephemeral external checkouts.
 
 ## Acceptance-criterion reconciliation
 
-| Criterion | Evidence | Status |
-| --- | --- | --- |
-| Prospective 3–5 repository cohort frozen before outcomes | earlier preregistration commit and three immutable target commits | Satisfied |
-| Existing instrument/version and rules frozen | preregistration instrument, binding, stop, missingness, adjudication, terminal, and rerun rules | Satisfied |
-| Same instrument attempted for every frozen target | three records with identical authoritative-binding checks | Satisfied |
-| Required per-target evidence preserved | target JSON source/binding/execution/missingness/judgment/terminal fields | Satisfied to reached preflight boundary |
-| Every target has exactly one legal terminal | three `BLOCKED_BY_AUTHORITATIVE_BINDING` values | Satisfied |
-| At least one legitimate rerun | `nvm-sh-nvm-rerun.json` | Satisfied for permitted preflight scope |
-| Exactly one frozen-rule cohort determination | `result.json`: `GENERALIZATION_NOT_DEMONSTRATED` | Satisfied |
-| Outcomes do not silently redesign or repair methodology | no instrument or external repository changes | Satisfied |
-| Hosted main and live Issue #143 independently inspected | network blocked; exact supplied checkout and prompt criteria used | Not independently satisfied; disclosed limitation |
-| Substantive external ABR result produced | stopped by authoritative binding on all targets | Not reached by design; legitimate blocked outcome |
+| Criterion | Status |
+| --- | --- |
+| 3–5 external repositories recorded | Recorded |
+| Exact target commits recorded | Recorded |
+| Existing methodology used without target-specific invention | Recorded |
+| Binding failures remain visible | Preserved |
+| Missingness remains `NOT_REACHED` | Preserved |
+| Manual judgment recorded | Preserved |
+| Reproducibility attempt recorded | Preserved as attempted preflight reproduction |
+| Prospective freeze verifiably precedes outcomes | **Not satisfied in hosted history** |
+| Exactly one bounded cohort determination | **`COHORT_INVALID`** |
+| External-adoption/usefulness/economic claims avoided | Satisfied |
 
-The experimental acceptance criteria are complete at their frozen stopping
-boundary. The environment limitation prevents a claim of independently
-verifying hosted main or the live issue page, but does not alter the preserved
-terminal result.
+## Non-claims
 
-## Limitations and non-claims
-
-- The repositories were available as pre-existing local Git objects; network
-  state, present hosted ownership, and present hosted default branches were not
-  re-queried. `nvm` lacked a preserved local default-branch symbolic ref, so its
-  `master` label remains contextual while its commit and tree are bound.
-- The cohort is small and concentrated in developer version/build tooling. Its
-  implementations differ, but it does not represent all repository purposes.
+- This package does not demonstrate external ABR generalization.
+- It does not demonstrate that ABR fails to generalize.
+- The recorded binding blocker is not a negative structural finding about any target.
 - External target is not external adoption.
-- Successful execution is not a useful result.
-- Blocked execution is not a negative structural finding.
+- Successful execution is not usefulness.
 - Vocabulary fit is not structural truth.
-- Cross-repository generalization is not universal validity.
-- This study establishes no usefulness, economic value, or external user value.
+- No economic value, external user value, decision influence, or universal validity is established.
+
+A future Issue #143-style run must create and publish a verifiable preregistration identity before any target outcome is generated.
